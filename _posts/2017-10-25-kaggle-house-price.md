@@ -217,7 +217,7 @@ percent = (df_train.isnull().sum()/df_train.isnull().count()).sort_values(ascend
 missing_data = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])
 missing_data.head(20)
 ```
-![](/img/post-house_price-missing.png)
+![](/img/in-post/post-house_price-missing.png)
 
 对于缺失数据我们主要有如下几种方法
 1.当某一种数据缺失率超过15%，我们应该删掉相关变量。在该例中 应该删除( 'PoolQC', 'MiscFeature', 'Alley', etc.)
