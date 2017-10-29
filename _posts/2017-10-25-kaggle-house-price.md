@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "kaggle House Price"
-subtitle:   "kaggle入门(1)"
+subtitle:   "数据预处理"
 date:       2017-10-25 
 author:     "xcTorres"
 header-img: "img/post-bg-ios9-web.jpg"
@@ -126,9 +126,8 @@ data.plot.scatter(x=var, y='SalePrice', ylim=(0,800000));
 ![](https://www.kaggle.io/svf/1630295/90ae958666db7d760b0c0e3185ab0323/__results___files/__results___18_0.png)
 从上图不难发现，在一定范围内，地下室面积与房屋价格似乎呈更强烈的线性相关。
 
----
 种类变量（房屋整体评价，房屋年代）
-
+---
 ```
 #box plot overallqual/saleprice
 var = 'OverallQual'
@@ -229,8 +228,9 @@ df_train = df_train.drop((missing_data[missing_data['Total'] > 1]).index,1)
 df_train = df_train.drop(df_train.loc[df_train['Electrical'].isnull()].index)
 df_train.isnull().sum().max() #just checking that there's no missing data missing...
 ```
-离群点
 
+离群点
+---
 离群点同样应该是我们需要注意的，因为其可能显著的影响模型，并含有有用的信息供我们思考
 
 
