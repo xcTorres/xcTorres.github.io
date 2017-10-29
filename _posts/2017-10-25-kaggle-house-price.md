@@ -13,8 +13,7 @@ tags:
 
 1.在我们每次写一个kenel时，我们首先需要了解问题是什么，分析每个变量的意义以及对该问题的重要性程度。
 
-2.单变量研究，比如我们会关注非独立变量'SalePrice'
-，并且尽可能的了解该变量。
+2.单变量研究，比如我们会关注非独立变量房价'SalePrice'，并且尽可能的了解该变量。
 
 3.多元变量分析。尝试去了解这些独立变量与非独立变量的相关性。
 
@@ -217,7 +216,7 @@ percent = (df_train.isnull().sum()/df_train.isnull().count()).sort_values(ascend
 missing_data = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])
 missing_data.head(20)
 ```
-![](/img/in-post/post-house_price-missing.png)
+![](/img/post-house_price-missing.png)
 
 对于缺失数据我们主要有如下几种方法
 1.当某一种数据缺失率超过15%，我们应该删掉相关变量。在该例中 应该删除( 'PoolQC', 'MiscFeature', 'Alley', etc.)
@@ -230,4 +229,8 @@ df_train = df_train.drop((missing_data[missing_data['Total'] > 1]).index,1)
 df_train = df_train.drop(df_train.loc[df_train['Electrical'].isnull()].index)
 df_train.isnull().sum().max() #just checking that there's no missing data missing...
 ```
+离群点
+
+离群点同样应该是我们需要注意的，因为其可能显著的影响模型，并含有有用的信息供我们思考
+
 
