@@ -1,12 +1,12 @@
 ﻿---
-layout:     post
-title:      "Linear Regression"
-subtitle:   "线性回归"
-date:       2017-10-14 
+layout:		post
+title:      "leaflet Gridlayer"
+subtitle:   "leaflet 前端"
+date:       2017-06-16
 author:     "xcTorres"
 header-img: "img/post-bg-unix-linux.jpg"
 tags:
-	- 机器学习
+	- 前端
 ---
 
 L.GridLayer 是一个一般类，其用于HTML元素的格网切片。它是所有切片层(Tile Layer)的基类，且替换了之前版本的TileLayer.Canvas. GridLayer可以被用于扩展canvas, img 或者 div类型的html元素，支持切片的创建以及动画响应。
