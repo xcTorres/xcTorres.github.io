@@ -1,8 +1,8 @@
 ﻿---
 layout:     post
-title:      "leaflet前端学习"
-subtitle:   " "
-date:       2018-01-18
+title:      "leaflet Gridlayer"
+subtitle:   "leaflet 前端"
+date:       2017-06-16
 author:     "xcTorres"
 header-img: "img/post-bg-unix-linux.jpg"
 tags:
