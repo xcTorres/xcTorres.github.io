@@ -1,0 +1,164 @@
+﻿&nbsp;&nbsp;&nbsp;&nbsp;空间填充曲线是指，一维曲线去包含整个二维甚至多维空间的一种函数曲线。而根据不同的排列规则，可以得到不同的空间填充曲线。
+&nbsp;&nbsp;&nbsp;&nbsp;如Z-order曲线, 如图1(也就是geohash采取的曲线)，Peano曲线如图2,以及本文将介绍的Hilbert曲线如图3。
+![这里写图片描述](http://static.notdot.net/uploads/geohash-order.png)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图1
+
+
+![这里写图片描述](http://img.blog.csdn.net/20170705202109106?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDc5MzIzNg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图2
+
+![这里写图片描述](http://static.notdot.net/uploads/hilbert-order.png)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图3
+
+
+----------
+**&nbsp;&nbsp;&nbsp;&nbsp;Hilbert曲线以及其离散近似表示方法都非常实用，因为其将多维空间转换为一维空间的方法很好地保留了空间邻近性。（x，y）是一个单元方格中的点，d代表该点在Hilbert曲线上的位置，而由于其空间的邻近性，在单元格上近似的点，其对应Hilbert的d值也比较接近。**
+
+&nbsp;&nbsp;&nbsp;&nbsp;正因为这种邻近性，空间填充曲线被广泛用于计算机科学，且在多维数据库索引中，经常用Hilbert曲线取代Z order曲线。接下来我们看如何用代码实现Hilbert算法。
+
+----------
+
+&nbsp;&nbsp;&nbsp;&nbsp;现在假设我们以U字形来访问区域。在每个象限中，我们同样以U字形来访问子象限，但是要调整好U字形的朝向使得和相邻的象限衔接起来。如果我们正确地组织了这些U字形的朝向，我们就能完全消除不连续性，不管我们选择了什么分辨率，都能连续地访问整个区域。
+
+
+![这里写图片描述](http://static.notdot.net/uploads/hilbert-numbering.png)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图4
+
+&nbsp;&nbsp;&nbsp;&nbsp;如图4，在第一层，枚举这些点很简单：选定一个方向和一个起始点，环绕四个象限，用0到3给他们编号。当我们要确定访问子象限的顺序同时维护总体的邻接属性，困难就来了。通过检查我们发现，子象限的曲线是原曲线的简单变换，而且只有四种变换。自然地，这个结论也适用于子子象限等等。对于一个给定的象限，我们在其中画出的曲线是由象限所在大的方形的曲线以及该象限的位置决定的。只需要费一点力，我们就能构建出如下概况所有情况的表
+![这里写图片描述](http://static.notdot.net/uploads/hilbert-table.png)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图5
+
+&nbsp;&nbsp;&nbsp;&nbsp;**假设我们想用这个表来确定某个点在第三层希尔伯特曲线上的位置。在这个例子中，假设点的坐标是(5,2)。** 从第一层级开始，则由上图的第一个方形开始，找到该点所在的象限。在该例中，其在右上方的象限。那么点在希尔伯特曲线上的位置的第一部分是3（5>3,2<3,二进制是11）。接着到第二层级我们进入象限3里面的方块，在这个例子中，它是（图5中的）第二个方块。重复刚才的过程：我们的点应该落在哪个子象限？（这次是左下角，意味着位置的下一部分是1（5<6,2>1,二进制01），我们将进入的小方块又是第二个。最后一次进入第三层级，重复这个过程，可以发现点落在右上角的子象限，因此位置的最后部分是3（5>4,2<=2,二进制11）。把这些位置连接起来，我们得到点在曲线上的位置是二进制的110111，或者十进制的55。
+
+![这里写图片描述](http://img.blog.csdn.net/20170705202949042?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDc5MzIzNg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图6 三阶Hilbert曲线
+
+   更具体的来表达，写出从x, y坐标到希尔伯特曲线位置转换的方法。首先，我们要以计算机看得懂的形式，表达如下：
+   
+
+```
+hilbert_map = {
+    'a': {(0, 0): (0, 'd'), (0, 1): (1, 'a'), (1, 0): (3, 'b'), (1, 1): (2, 'a')},
+    'b': {(0, 0): (2, 'b'), (0, 1): (1, 'b'), (1, 0): (3, 'a'), (1, 1): (0, 'c')},
+    'c': {(0, 0): (2, 'c'), (0, 1): (3, 'd'), (1, 0): (1, 'c'), (1, 1): (0, 'b')},
+    'd': {(0, 0): (0, 'a'), (0, 1): (3, 'c'), (1, 0): (1, 'd'), (1, 1): (2, 'd')},
+}
+```
+&nbsp;&nbsp;&nbsp;&nbsp;上面的代码中，每个hilbert_map的元素对应图5四个方形中的一个。为了容易区分，我用一个字母来标识每个方块：’a’是第一个方块，’b’是第二个，等等。每个方块的值是个字典，将(子)象限的x, y坐标映射到曲线上的位置（元组值的第一部分）以及下一个用到的方块（元组值的第二部分）。下面的python代码展示了怎么用这个来将x, y坐标转换成希尔伯特曲线上的位置：
+
+```
+def point_to_hilbert(x, y, order=16):
+    current_square = 'a'
+    position = 0
+    for i in range(order - 1, -1, -1):
+        position <<= 2
+        quad_x = 1 if x & (1 << i) else 0
+        quad_y = 1 if y & (1 << i) else 0
+        quad_position, current_square = hilbert_map[current_square][(quad_x, quad_y)]
+        position |= quad_position
+    return position
+
+```
+&nbsp;&nbsp;&nbsp;&nbsp;函数的输入是为整数的x, y坐标和曲线的阶。一阶曲线填充2×2的格子，二阶曲线填充4×4的格子，等等。我们的x, y坐标应该先标准化到0到2order-1的区间。这个函数从最高位开始，逐步处理x, y坐标的每个比特位。在每个阶段中，通过测试对应的比特位，可以确定坐标处于哪个（子）象限，还可以从我们之前定义的hilbert_map中取得在曲线上的位置以及下一个要用的方块。在这阶段取得的位置，加入到目前总的位置的最低两位。在下一次循环的开头，总的位置左移两位以便给下一个位置腾出地方。
+&nbsp;&nbsp;&nbsp;&nbsp;再运行一下之前的例子来检验一下函数：
+
+```
+>>> point_to_hilbert(5,2,3)
+55
+```
+再理解了如何编码之后，我们可以根据这个原理来进行解码。则可以得到一个如下映射
+
+```
+un_hilbert_map = {
+    'a': { 0: (0, 0,'d'), 1: (0, 1,'a'), 3: (1, 0,'b'),  2: (1, 1,'a')},
+    'b': { 2: (0, 0,'b'), 1: (0, 1,'b'), 3: (1, 0,'a'),  0: (1, 1,'c')},
+    'c': { 2: (0, 0,'c'), 3: (0, 1,'d'), 1: (1, 0,'c'),  0: (1, 1,'b')},
+    'd': { 0: (0, 0,'a'), 3: (0, 1,'c'), 1: (1, 0,'d'),  2: (1, 1,'d')}
+}
+```
+&nbsp;&nbsp;&nbsp;&nbsp;即如果确定了其在某一层的形状，如‘b’，且它的编码(quad_position)为3，那么就可以得到它的象限位置（	quad_x=1,quad_y=0），且进入下一个子象限的时候，形状应该为‘a’，如下为解码代码。
+```
+def hilbert_to_point( d , order=16):
+    current_square = 'a'
+    x=y=0
+    for i in range(order - 1, -1, -1):
+        //3的二进制为11，然后左移2i倍，与d取按位与后右移2i倍，得到象限编码
+        mask = 3 << (2*i)
+        quad_position = (d & mask) >> (2*i)
+
+        quad_x, quad_y,    
+        current_square=un_hilbert_map[current_square][quad_position]
+        print quad_x,quad_y;
+
+		//不断累加x，y的值，最后总得到解码结果
+        x |= 1 << i if quad_x else 0
+        y |= 1 << i if quad_y else 0
+
+    return x,y
+```
+
+
+----------
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;再验证一下解码函数：
+```
+>>> hilbert_point(55,3)
+5,2
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;如果这个代码看懂了，再回头来看
+https://en.wikipedia.org/wiki/Hilbert_curve上的c语言代码，应该就能看懂了，
+且其定义的象限规则与之前完全相同。
+```
+//convert (x,y) to d
+int xy2d (int n, int x, int y) {
+    int rx, ry, s, d=0;
+for (s=n/2; s>0; s/=2) {
+
+//由于s是2的某次方，即在该位为1，而其他位数全为0，
+//则如果x<s，x&s=0，x>=s ,x&s>0
+        rx = (x & s) > 0;
+        ry = (y & s) > 0;
+        
+//(3 * rx) ^ ry这一块象限排序规则与之前的python代码完全相同
+        d += s * s * ((3 * rx) ^ ry);
+        rot(s, &x, &y, rx, ry);
+    }
+    return d;
+}
+
+//convert d to (x,y)
+void d2xy(int n, int d, int *x, int *y) {
+    int rx, ry, s, t=d;
+    *x = *y = 0;
+    for (s=1; s<n; s*=2) {
+        rx = 1 & (t/2);
+        ry = 1 & (t ^ rx);
+        rot(s, x, y, rx, ry);
+        *x += s * rx;
+        *y += s * ry;
+        t /= 4;
+    }
+}
+
+//旋转象限
+void rot(int n, int *x, int *y, int rx, int ry) {
+    if (ry == 0) {
+        if (rx == 1) {
+            *x = n-1 - *x;
+            *y = n-1 - *y;
+        }
+
+        //Swap x and y
+        int t  = *x;
+        *x = *y;
+        *y = t;
+    }
+}
+
+```
+ [参考文献]
+ (http://blog.notdot.net/2009/11/Damn-Cool-Algorithms-Spatial-indexing-with-Quadtrees-and-Hilbert-Curves)
