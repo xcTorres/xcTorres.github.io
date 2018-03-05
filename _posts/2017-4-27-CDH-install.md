@@ -103,8 +103,8 @@ sudo chmod u+x ./cloudera-manager-installer.bin
 执行(使用root用户)
 
 sudo ./cloudera-manager-installer.bin –-skip_repo_package=1  
-![](/img/in-post/cdh-install/01.png)
-![](/img/in-post/cdh-install/02.png)
+![](/img/in-post/cdh-install/01.PNG)
+![](/img/in-post/cdh-install/02.PNG)
 
 
 一路NEXT+OK即可，最后提示访问http://${ip}:7180/,即CM安装成功
