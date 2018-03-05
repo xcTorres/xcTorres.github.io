@@ -87,11 +87,10 @@ service-worker: true
 # Friends
 friends: [
     # Friends
-friends: [
     {
         title: "loupipalien's Blog",
         href: "http://loupipalien.github.io/"
-    },
+    }
 
 ]
 
