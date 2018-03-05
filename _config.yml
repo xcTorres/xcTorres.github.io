@@ -85,13 +85,11 @@ service-worker: true
 
 
 # Friends
-Friends: [
+friends: [
     # Friends
     {
-        title: "loupipalien's Blog",
+        title: "loupipalien  Blog",
         href: "http://loupipalien.github.io/"
     }
-
-]
 
 ]
