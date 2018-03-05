@@ -85,7 +85,7 @@ service-worker: true
 
 
 # Friends
-friends: [
+Friends: [
     # Friends
     {
         title: "loupipalien's Blog",
