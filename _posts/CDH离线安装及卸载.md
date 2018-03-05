@@ -103,8 +103,8 @@ sudo chmod u+x ./cloudera-manager-installer.bin
 执行(使用root用户)
 
 sudo ./cloudera-manager-installer.bin –-skip_repo_package=1  
-![1](/img/in-post/cdh-install/01.PNG)
-![2](/img/in-post/cdh-install/02.PNG)
+![](/img/in-post/cdh-install/01.PNG)
+![](/img/in-post/cdh-install/02.PNG)
 
 
 一路NEXT+OK即可，最后提示访问http://${ip}:7180/,即CM安装成功
@@ -119,39 +119,39 @@ sudo ./cloudera-manager-installer.bin –-skip_repo_package=1
 
 6.1、登录CM
 http://${ip}:7180/   admin/admin
-![3](/img/in-post/cdh-install/03.PNG)
+![3](/img/in-post/cdh-install/03.png)
 6.2、版本选择（可使用数据集线器试用版60天）
-![4](/img/in-post/cdh-install/04.PNG)
+![](/img/in-post/cdh-install/04.png)
 
 6.3、检测可用机器（配置ssh很关键，不然检测不到其他机器）
-![](/img/in-post/cdh-install/05.PNG)
-![](/img/in-post/cdh-install/06.PNG)
+![](/img/in-post/cdh-install/05.png)
+![](/img/in-post/cdh-install/06.png)
 
 6.4、配置CM和CDH包路径
-![](/img/in-post/cdh-install/07.PNG)
-![](/img/in-post/cdh-install/08.PNG)
+![](/img/in-post/cdh-install/07.png)
+![](/img/in-post/cdh-install/08.png)
 
 
 6.5、安装JDK
 
-![](/img/in-post/cdh-install/09.PNG)
+![](/img/in-post/cdh-install/09.png)
 
 6.7、集群用户模式
 
-![](/img/in-post/cdh-install/10.PNG)
+![](/img/in-post/cdh-install/10.png)
 
 6.8、提供SSH凭据
 
-![](/img/in-post/cdh-install/11.PNG)
+![](/img/in-post/cdh-install/11.png)
 
 6.9、安装cloudera-scm-agent（有可能报错，参考《安装cloudera-manager-agent报错》）
-![](/img/in-post/cdh-install/12.PNG)
+![](/img/in-post/cdh-install/12.png)
 
 6.10、安装CDH的parcel
-![](/img/in-post/cdh-install/13.PNG)
+![](/img/in-post/cdh-install/13.png)
 
 6.11、检查主机正确性（如果机器swap内存不为0,参考《CentOS配置swap》）
-![](/img/in-post/cdh-install/14.PNG)
+![](/img/in-post/cdh-install/14.png)
 
 ---
 
@@ -177,14 +177,14 @@ flush privileges;
 
 
 7.1、配置hive、hue等的外部数据库
-![](/img/in-post/cdh-install/15.PNG)
-![](/img/in-post/cdh-install/16.PNG)
+![](/img/in-post/cdh-install/15.png)
+![](/img/in-post/cdh-install/16.png)
 
 7.2、集群部署
 
 7.3、集群部署成功页面
-![](/img/in-post/cdh-install/17.PNG)
-![](/img/in-post/cdh-install/18.PNG)
+![](/img/in-post/cdh-install/17.png)
+![](/img/in-post/cdh-install/18.png)
 
 ------------------------------------------------------------------
 ## **卸载**
