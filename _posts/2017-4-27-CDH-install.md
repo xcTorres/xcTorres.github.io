@@ -191,18 +191,23 @@ flush privileges;
 
 
 1、记录用户数据路径
-删除用户数据 中列出的用户数据路径 /var/lib/flume-ng /var/lib/hadoop* /var/lib/hue /var/lib/navigator /var/lib/oozie /var/lib/solr /var/lib/sqoop* /var/lib/zookeeper /dfs /mapred /yarn 是默认设置。但是，在某些情况下它们可能已在 Cloudera Manager 中被重新配置。如果要从群集中删除所有用户数据且已更改了路径，那么，在安装 CDH 和托管服务时或在未来某个时间，检查每个服务中的配置并记下路径位置。
+删除用户数据 中列出的用户数据路径 
+/var/lib/flume-ng /var/lib/hadoop* /var/lib/hue /var/lib/navigator /var/lib/oozie /var/lib/solr /var/lib/sqoop* /var/lib/zookeeper /dfs /mapred /yarn 是默认设置。但是，在某些情况下它们可能已在 Cloudera Manager 中被重新配置。如果要从群集中删除所有用户数据且已更改了路径，那么，在安装 CDH 和托管服务时或在未来某个时间，检查每个服务中的配置并记下路径位置。
 
 ---
 
 2、停止所有服务
+
 2.1、停止 Cloudera Manager 管理的每个群集：在主页上，单击群集名称右侧的下拉图标并选择停止。确认单击停止。命令详细信息窗口显示了停止服务的进度。当出现已成功停止所有服务时，则该任务已完成。
+
 2.2、停止 Cloudera Management Service：在主页上，单击 Cloudera Management Service 条目右侧的下拉图标并选择停止。命令详细信息窗口显示了停止服务的进度。当出现已成功停止所有服务时，则该任务已完成。
 
 ---
 
 3、停用并删除 Parcel
+
 3.1、如果安装时使用的是软件包，请跳过此步骤并转到卸载 Cloudera Manager Server；将删除卸载 Cloudera Manager Agent 和托管软件 中的软件包。
+
 3.2、如果安装时使用的是 parcel，请删除它们，如下所示：
           单击主导航栏中的 Parcel 指示符 。
           对于每个激活的 parcel，选择操作 > 停用。完成此操作时，parcel 按钮将更改为激活。
