@@ -6,7 +6,7 @@ date:       2017-4-27
 author:     "xcTorres"
 header-img: "img/post-bg-ios9-web.jpg"
 tags:
-    - 大数据、云平台
+    - 大数据
 ---
 
 时间：2017/4/19
@@ -119,9 +119,7 @@ sudo ./cloudera-manager-installer.bin –-skip_repo_package=1
 
 6.1、登录CM
 http://${ip}:7180/   admin/admin
-
 ![](/img/in-post/cdh-install/03.PNG)
-
 6.2、版本选择（可使用数据集线器试用版60天）
 ![](/img/in-post/cdh-install/04.PNG)
 
