@@ -119,9 +119,9 @@ sudo ./cloudera-manager-installer.bin –-skip_repo_package=1
 
 6.1、登录CM
 http://${ip}:7180/   admin/admin
-![](/img/in-post/cdh-install/03.PNG)
+![3](/img/in-post/cdh-install/03.PNG)
 6.2、版本选择（可使用数据集线器试用版60天）
-![](/img/in-post/cdh-install/04.PNG)
+![4](/img/in-post/cdh-install/04.PNG)
 
 6.3、检测可用机器（配置ssh很关键，不然检测不到其他机器）
 ![](/img/in-post/cdh-install/05.PNG)
