@@ -2,7 +2,7 @@
 layout:     post
 title:      "CDH离线安装及卸载"
 subtitle:   "CDH离线安装及卸载"
-date:       2017-4-27 
+date:       2017-4-27
 author:     "xcTorres"
 header-img: "img/post-bg-ios9-web.jpg"
 tags:
@@ -191,7 +191,7 @@ flush privileges;
 
 
 1、记录用户数据路径
-删除用户数据 中列出的用户数据路径 
+删除用户数据 中列出的用户数据路径
 /var/lib/flume-ng /var/lib/hadoop* /var/lib/hue /var/lib/navigator /var/lib/oozie /var/lib/solr /var/lib/sqoop* /var/lib/zookeeper /dfs /mapred /yarn 是默认设置。但是，在某些情况下它们可能已在 Cloudera Manager 中被重新配置。如果要从群集中删除所有用户数据且已更改了路径，那么，在安装 CDH 和托管服务时或在未来某个时间，检查每个服务中的配置并记下路径位置。
 
 ---
@@ -259,10 +259,9 @@ sudo rm /tmp/.scm_prepare_node.lock
 
 6.4、删除用户数据，此步骤将永久删除所有用户数据。要保留数据，在开始卸载过程之前使用 distcp 命令将其复制到其他群集。在所有 Agent 主机上，请运行以下命令：
 sudo rm -Rf /var/lib/flume-ng /var/lib/hadoop* /var/lib/hue /var/lib/navigator /var/lib/oozie /var/lib/solr /var/lib/sqoop* /var/lib/zookeeper
-sudo rm -Rf /dfs /mapred /yarn 
+sudo rm -Rf /dfs /mapred /yarn
 
 ---
 
 7、停止和删除外部数据库
 如果选择将 Cloudera Manager 或用户数据存储在外部数据库中，则查看数据库供应商文档以了解有关如何删除数据库的详细信息。
-
