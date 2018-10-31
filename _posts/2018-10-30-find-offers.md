@@ -1,10 +1,10 @@
 ---
 layout:     post
 title:      "找工作流水账"
-catalog：   "True"
 date:       2018-10-30
 author:     "xcTorres"
 header-img: "img/post-bg-unix-linux.jpg"
+catalog:    "True"
 tags:
     - 生活
 ---
