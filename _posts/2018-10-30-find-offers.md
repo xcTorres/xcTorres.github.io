@@ -4,7 +4,7 @@ title:      "找工作流水账"
 date:       2018-10-30
 author:     "xcTorres"
 header-img: "img/post-bg-unix-linux.jpg"
-catalog:    "True"
+catalog:    "true"
 tags:
     - 生活
 ---
