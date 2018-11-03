@@ -6,7 +6,7 @@ author:     "xcTorres"
 header-img: "img/in-post/books-crucial-conversations/1.jpg"
 catalog:    true
 tags:
-    - 非工具书籍
+    - 非编程书籍
 ---
 
 # 一、关键对话无处不在且重要非凡
