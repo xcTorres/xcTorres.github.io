@@ -3,7 +3,7 @@ layout:     post
 title:      "《关键对话》读书笔记"
 date:       2018-11-02
 author:     "xcTorres"
-header-img: "img/in-post/books-crucial-conversations/1.jpg"
+header-img: "img/in-post/books.jpg"
 catalog:    true
 tags:
     - 非编程书籍

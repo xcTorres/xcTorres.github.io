@@ -8,7 +8,7 @@ keyword: ""
 url: "https://xctorres.github.io/"              # your host, for absolute URL
  # for example, '/blog' if your blog hosted on 'host/blog'
 
-
+encoding: utf-8
 
 # SNS settings
 RSS: false
@@ -54,7 +54,9 @@ kramdown:
 # Share component is depend on Comment so we can NOT use share only.
 #duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
-
+#GitTalk settings
+gitalk:
+    enable: true
 
 
 # Analytics settings
