@@ -156,12 +156,12 @@ layout: default
 		var gitalk = new Gitalk({
 
 		// gitalk的主要参数
-			clientID: "6c4ed7ef926a76e8447e",
-			clientSecret: "1df8e0efa5331eae417cf604d68fdb150a524a7a",
-			repo: "xctorres.github.io",
-			owner: "xcTorres",
-			admin: ["xcTorres"],
-			id: "{{page.id | truncate: 50, ''}}",
+		clientID: "6c4ed7ef926a76e8447e",
+		clientSecret: "1df8e0efa5331eae417cf604d68fdb150a524a7a",
+		repo: "xctorres.github.io",
+		owner: "xcTorres",
+		admin: "xcTorres",
+		id: "{{page.id | truncate: 50, ''}}",
 		
 		});
 		gitalk.render('gitalk-container'); 
