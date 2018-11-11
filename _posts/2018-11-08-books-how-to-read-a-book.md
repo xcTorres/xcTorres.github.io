@@ -6,7 +6,7 @@ author:     "xcTorres"
 header-img: "img/in-post/books.jpg"
 catalog:    true
 tags:
-    - 生活
+    -  - 非编程书籍
 ---
 
 该读书笔记摘录于知乎，供参考  
