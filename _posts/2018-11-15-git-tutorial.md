@@ -135,3 +135,15 @@ __用法__:
 
 ```
 
+# 常见错误以及解决方案
+
+Please move or remove them before you can merge.  Aborting
+
+
+Please, commit your changes or stash them before you can merge. Aborting
+
+
+How to resolve merge conflicts in Git
+
+
+
