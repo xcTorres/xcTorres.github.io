@@ -11,11 +11,11 @@ url: "https://xctorres.github.io/"              # your host, for absolute URL
 encoding: utf-8
 
 # SNS settings
-RSS: false
+RSS: true
 #weibo_username:     huxpro
 zhihu_username:     cong-zi-64
 github_username:    xcTorres
-linkedin_username： chong-xie-545830157
+linkedin_username: chong-xie-545830157
 #twitter_username:  huxpro
 #facebook_username:  huxpro
 
