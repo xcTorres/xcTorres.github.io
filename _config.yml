@@ -84,15 +84,18 @@ featured-condition-size: 0              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
-        title: "陈澜天",
+        title: "Chen lantian",
         href: "http://loupipalien.github.io"
     },{
-        title: "刘建平",
+        title: "Liu jianping",
         href: "https://www.cnblogs.com/pinard/"
  
     },{
-        title: "关洪礼",
+        title: "honly",
         href: "https://guanhonly.github.io/"
  
+    },{
+        title: "10tiao",
+        href: "http://www.10tiao.com/"
     }
 ]
