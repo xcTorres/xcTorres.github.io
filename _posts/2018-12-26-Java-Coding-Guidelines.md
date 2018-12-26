@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "重新学习Java"
+title:      "《Java代码规范手册》"
 date:       2018-12-06
 author:     "xcTorres"
 header-img: "img/in-post/books.jpg"
