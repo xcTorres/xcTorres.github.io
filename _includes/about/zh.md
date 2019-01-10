@@ -1,7 +1,7 @@
 # 联系方式
 
 - Email：xcwhu2016@gmail.com 
-- wechat：xc_19931112
+- Wechat：xc_19931112
 - Instagram：https://www.instagram.com/xctorres8/
 
 ---
@@ -16,7 +16,3 @@
 
 # 工作经历  
 滴滴实习生（2018年6月 ~ 2018年9月） 参与下车点推荐项目
-
-
-# 模板参考  
-https://github.com/geekcompany/ResumeSample

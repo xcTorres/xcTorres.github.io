@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "《Java代码规范手册》"
+title:      "Java代码规范"
 date:       2018-12-06
 author:     "xcTorres"
-header-img: "img/in-post/books.jpg"
+header-img: "img/in-post/java.jpg"
 catalog:    true
 tags:
     - 编程工具
