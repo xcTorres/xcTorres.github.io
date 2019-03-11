@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "大数据平台运维"
+title:      "HBase性能调优"
 date:       2019-03-03
 author:     "xcTorres"
 header-img: "img/in-post/java.jpg"
