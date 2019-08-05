@@ -8,6 +8,12 @@ catalog:    true
 tags:
     - Linux
 ---
+https://www.cnblogs.com/MacoLee/p/5664306.html
+
+
+1） 查看进程及端口号并删除进程号
+lsof -i tcp:*port*
+kill -9 PID
 
 1）查看磁盘分布
 df -h

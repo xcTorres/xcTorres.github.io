@@ -9,7 +9,24 @@ tags:
     - 工具
 ---
 # Mac
+[苹果官网快捷键介绍](https://support.apple.com/zh-cn/HT201236)
 
+Command-X：剪切所选项并拷贝到剪贴板。  
+Command-C：将所选项拷贝到剪贴板。这同样适用于“访达”中的文件。  
+Command-V：将剪贴板的内容粘贴到当前文稿或应用中。这同样适用于“访达”中的文件。  
+Command-Z：撤销上一个命令。随后您可以按 Shift-Command-Z 来重做，从而反向执行撤销命令。在某些应用中，您可以撤销和重做多个命令。  
+Command-A：全选各项。  
+Command-O：打开所选项，或打开一个对话框以选择要打开的文件。  
+Command-P：打印当前文稿。  
+Command-S：存储当前文稿。  
+Command-T：打开新标签页。  
+Command-W：关闭最前面的窗口。要关闭应用的所有窗口，请按下 Option-Command-W。
+
+
+**Command-Tab：在打开的应用中切换到下一个最近使用的应用。**  
+**Shift+Command+F：打开finder查找文件**  
+
+开启三指拖拽: [https://www.jianshu.com/p/bb5ef602aa62](https://www.jianshu.com/p/bb5ef602aa62)
 
 
 # iterm2
