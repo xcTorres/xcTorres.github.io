@@ -23,7 +23,7 @@ SED command in unix supports regular expression which allows it perform complex 
 #### Replace(command s)  
 command s is to replace chars using regular expression. its usage is like **sed 's/old/new/'**. 
 
-As shown in the following example，in every sentcence of the file the first 'book' string will be replaced by 'books', if you wanna replace all book string in one sentence, you can add **g** to the end of regex. And if you wanna start to replace from the N 'book' string, you can add **Ng** to the end of regex.
+As shown in the following example，in every sentcence of the file the first 'book' string will be replaced by 'books', if you wanna replace all book string in one sentence, you can add **g** to the end of regex. And if you wanna start to replace from the **N**th 'book' string, you can add **Ng** to the end of regex.
 ```ruby
 
     sed -e 's/book/books/' file
