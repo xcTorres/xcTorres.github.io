@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "linux 命令"
+title:      "Linux Process"
 date:       2019-09-07
 author:     "xcTorres"
 header-img: "img/in-post/java.jpg"
@@ -9,18 +9,10 @@ tags:
     - Linux
 ---
 
+## 监控特定端口号的进程。
 
-#### Process  
-1） 查看进程及端口号并删除进程号  
-```bash
-
-    lsof -i tcp:port 
-    kill -9 PID  
-
-```
-
-2) 监控进程并重启
-```bash
+#### 检测进程脚本
+```ruby
 
     FILE_NAME="/var/log/dass/cron.log"
     REDIS_PORT=6379
@@ -46,39 +38,12 @@ tags:
     fi
 
 ```  
-3）查找指定进程
-```bash
-
-    ps -ef  |grep xxx
-
-```
-
-4) 根据PID查看进程内存消耗情况
-```bash 
-
-    top -pid xxx
-
-```
-
-#### Disk  
-1）查看磁盘分布
-```bash
-    
-    df -h
-
-```
-
-2）查看磁盘容量  
-```bash
-    
-    du 命令
-
-```
 
 #### 定时任务
+将检查脚本添加到定时任务  
 crontab -e 编辑  
 crontab -l list  
-```bash
+```ruby
 
     echo "* * * * * root sh ${APP_DIR}/scripts/monitor.sh >> /var/log/dass/cron.log 2>&1 &" >> /etc/cron.d/dass
     echo "* * * * * root sleep 15; sh ${APP_DIR}/scripts/monitor.sh >> /var/log/dass/cron.log 2>&1 &" >> /etc/cron.d/dass
