@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "linux 命令"
-date:       2019-03-03
+date:       2019-09-07
 author:     "xcTorres"
 header-img: "img/in-post/java.jpg"
 catalog:    true
@@ -72,21 +72,6 @@ tags:
 ```bash
     
     du 命令
-
-```
-
-#### 文本命令  
-1）grep 命令:  
-2）awk 命令: [http://www.runoob.com/linux/linux-comm-awk.html](http://www.runoob.com/linux/linux-comm-awk.html)  
-3）sed 命令: [https://man.linuxde.net/sed](https://man.linuxde.net/sed)
-```bash 
-
-    - sed -i '' -e 's/^\(appendonly \).*/\1yes/' ~/Desktop/redis.conf  
-    appendonly no => appendonly yes  
-    # 注释 save 开头的配置 
-    - sed -i '' -e 's/^[[:blank:]]*save/#&/' ~/Desktop/redis.conf 
-    # 取消 save开头的配置
-    - sed -i '' -e 's/^#\([[:blank:]]*save\)/\1/' ~/Desktop/redis.conf  
 
 ```
 
