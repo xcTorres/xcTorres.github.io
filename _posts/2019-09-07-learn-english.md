@@ -20,6 +20,9 @@ plank  平板支撑
 crunch 卷腹  
 dead lift 硬拉  
 bench press 卧推
+barbell raw 杠铃划船  
+dumbbell raw 哑铃划船  
+dips 双杠臂屈伸
 
 #### 肌肉  
 deltoid 三角肌  
