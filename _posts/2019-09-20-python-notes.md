@@ -9,3 +9,10 @@ tags:
     - Python
 ---
 
+
+1、迭代器和生成器  
+https://foofish.net/iterators-vs-generators.html  
+https://www.zhihu.com/question/20829330  
+
+迭代器是用于循环
+

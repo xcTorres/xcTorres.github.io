@@ -1,0 +1,12 @@
+---
+layout:     post
+title:      "Spark Notes"
+date:       2019-10-04
+author:     "xcTorres"
+header-img: "img/in-post/offer.jpg"
+catalog:    true
+tags:
+    - Python
+    - Spark
+---  
+
