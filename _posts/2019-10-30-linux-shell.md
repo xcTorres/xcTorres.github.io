@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "学写Linux脚本"
-date:       2019-10-29
+date:       2019-10-30
 author:     "xcTorres"
 header-img: "img/in-post/sed.gif"
 catalog:    true
