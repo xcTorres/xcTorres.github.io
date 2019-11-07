@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Binary tree"
-date:       2019-10-06
+date:       2019-11-07
 author:     "xcTorres"
 header-img: "img/in-post/leetcode.jpg"
 catalog:    true
@@ -83,6 +83,23 @@ There are different ways to traverse all nodes of binary tree as follows.
                 ret.append(node.val)
                 stack.append(node.right)
                 stack.append(node.left)
+        return ret
+
+            if root is None:
+            return []
+        
+    def preorderTraversal(self, root):
+        stk, ret = [], []
+        node = root
+        while stk or node:
+            while node:
+                ret.append(node.val)
+                stk.append(node)
+                node = node.left
+        
+            node = stk.pop()
+            node = node.right
+        
         return ret
 
 ```
@@ -221,5 +238,31 @@ There are different ways to traverse all nodes of binary tree as follows.
                         stack.append((node, True))
                         stack.append((node.right, False))
                         stack.append((node.left, False))
+
+    class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        
+        if root is None:
+            return []
+        
+        stk,ret = [],[]
+        node, last_visited = root, root
+        
+        while stk or node:
+            while node:
+                stk.append(node)
+                node = node.left
+            
+            node = stk[-1]
+            if node.right is None or last_visited == node.right:
+                ret.append(node.val)
+                last_visited = stk.pop()
+                node = None
+            else:
+                node = node.right
+        
+        return ret
+                
+        
 
 ```
