@@ -21,3 +21,7 @@ tags:
 直接赋值：其实就是对象的引用（别名）。  
 浅拷贝(copy)：拷贝父对象，不会拷贝对象的内部的子对象。  
 深拷贝(deepcopy)： copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。
+
+#### 装饰器到底该怎么用
+[https://www.zhihu.com/question/26930016](https://www.zhihu.com/question/26930016)  
+
