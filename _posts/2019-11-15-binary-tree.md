@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Binary tree"
-date:       2019-11-07
+date:       2019-11-15
 author:     "xcTorres"
 header-img: "img/in-post/leetcode.jpg"
 catalog:    true
@@ -262,7 +262,43 @@ There are different ways to traverse all nodes of binary tree as follows.
                 node = node.right
         
         return ret
-                
-        
 
 ```
+
+### Balanced Binary Tree  
+[https://leetcode.com/problems/balanced-binary-tree/](https://leetcode.com/problems/balanced-binary-tree/)  
+#### Java Solution  
+```java
+
+    /**
+    * Definition for a binary tree node.
+    * public class TreeNode {
+    *     int val;
+    *     TreeNode left;
+    *     TreeNode right;
+    *     TreeNode(int x) { val = x; }
+    * }
+    */
+    class Solution {
+        public boolean isBalanced(TreeNode root) {
+            return helper(root)!=-1;
+        }
+    
+        int helper(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            
+            int leftHeight =  helper(root.left);
+            int rightHeight = helper(root.right);
+            
+            if(leftHeight==-1 || rightHeight==-1 || Math.abs(leftHeight-rightHeight) > 1){
+                return -1;
+            }else{
+                return Math.max(leftHeight, rightHeight)+1;
+            }
+        }
+    }
+
+```
+
