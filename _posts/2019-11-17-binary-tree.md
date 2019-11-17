@@ -17,7 +17,7 @@ There are different ways to traverse all nodes of binary tree as follows.
 ### Preorder traversal
 [https://leetcode.com/problems/binary-tree-preorder-traversal/](https://leetcode.com/problems/binary-tree-preorder-traversal/)
 
-#### java solution
+**java solution**
 ```java
 
     /**
@@ -71,7 +71,7 @@ There are different ways to traverse all nodes of binary tree as follows.
 	}
 
 ```
-#### python solution
+**python solution**
 ```python
 
     def preorderTraversal(self, root):
@@ -105,7 +105,7 @@ There are different ways to traverse all nodes of binary tree as follows.
 ```
 ### Inorder traversal
 [https://leetcode.com/problems/binary-tree-inorder-traversal/](https://leetcode.com/problems/binary-tree-inorder-traversal/)
-#### java solution
+**java solution**
 ```java
 
     /**
@@ -144,7 +144,7 @@ There are different ways to traverse all nodes of binary tree as follows.
     }
 
 ```
-#### python solution
+**python solution**
 ```python
 
     class Solution:
@@ -169,7 +169,7 @@ There are different ways to traverse all nodes of binary tree as follows.
 ### Postorder traversal
 [https://leetcode.com/problems/binary-tree-postorder-traversal/](https://leetcode.com/problems/binary-tree-postorder-traversal/)
 
-#### java solution
+**java solution**
 ```java
 
     /**
@@ -219,7 +219,7 @@ There are different ways to traverse all nodes of binary tree as follows.
 
 ```
 
-#### python solution
+**python solution**
 ```python
 
     class Solution:
@@ -267,7 +267,7 @@ There are different ways to traverse all nodes of binary tree as follows.
 
 ### Balanced Binary Tree  
 [https://leetcode.com/problems/balanced-binary-tree/](https://leetcode.com/problems/balanced-binary-tree/)  
-#### Java Solution  
+**Java Solution** 
 ```java
 
     /**
@@ -304,7 +304,7 @@ There are different ways to traverse all nodes of binary tree as follows.
 
 ### Maximum-Binary-Tree
 [Maximum-Binary-Tree](https://leetcode.com/problems/maximum-binary-tree/)
-#### Java Solution  
+**Java Solution**
 ```java
 
     /**
@@ -346,7 +346,7 @@ There are different ways to traverse all nodes of binary tree as follows.
 ### Lowest Common Ancestor of a Binary Tree
 [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
-#### Java Solution
+**Java Solution**
 ```java
 
     /**
@@ -381,6 +381,6 @@ There are different ways to traverse all nodes of binary tree as follows.
             }
         }
     }
-    
+
 ```
 
