@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Binary tree"
-date:       2019-11-15
+date:       2019-11-17
 author:     "xcTorres"
 header-img: "img/in-post/leetcode.jpg"
 catalog:    true
@@ -300,5 +300,87 @@ There are different ways to traverse all nodes of binary tree as follows.
         }
     }
 
+```
+
+### Maximum-Binary-Tree
+[Maximum-Binary-Tree](https://leetcode.com/problems/maximum-binary-tree/)
+#### Java Solution  
+```java
+
+    /**
+    * Definition for a binary tree node.
+    * public class TreeNode {
+    *     int val;
+    *     TreeNode left;
+    *     TreeNode right;
+    *     TreeNode(int x) { val = x; }
+    * }
+    */
+    class Solution {
+        public TreeNode constructMaximumBinaryTree(int[] nums) {
+            return helper(nums, 0, nums.length - 1);
+        }
+        
+        public TreeNode helper(int[] nums, int start, int end){
+            
+            if(start>end){
+                return null;
+            }
+            
+            int maxIdx = start;
+            for(int i=start ; i<=end ; i++){
+                if(nums[i] > nums[maxIdx]){
+                    maxIdx = i;
+                }
+            }
+            
+            TreeNode root = new TreeNode(nums[maxIdx]);
+            root.left = helper(nums, start, maxIdx-1);
+            root.right = helper(nums, maxIdx+1, end);
+            
+            return root;
+        }
+    }
+```
+
+### Lowest Common Ancestor of a Binary Tree
+[Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+#### Java Solution
+```java
+
+    /**
+    * Definition for a binary tree node.
+    * public class TreeNode {
+    *     int val;
+    *     TreeNode left;
+    *     TreeNode right;
+    *     TreeNode(int x) { val = x; }
+    * }
+    */
+    class Solution {
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            return helper(root, p, q);
+        }
+        
+        public TreeNode helper(TreeNode root, TreeNode p, TreeNode q){
+            
+            if(root==null || root==p || root==q){
+                return root;
+            }
+            
+            TreeNode left = helper(root.left, p, q);
+            TreeNode right = helper(root.right, p, q);
+            
+            if(left != null && right != null){
+                return root;
+            }else if(left != null){
+                return left;
+            }else{
+                return right;
+            }
+        }
+    }
+    
 ```
 
