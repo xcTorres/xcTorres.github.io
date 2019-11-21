@@ -1,13 +1,21 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2019-11-03
+date:       2019-11-21
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
 tags:
     - 学习
 ---
+# 态度
+**学习语言第一点需要端正态度**  
+1)去除恐惧  
+2)不怕出错，不怕被judge  
+**when you speak, don’t focus on yourself. Focus on other people and the result you want to achieve. 
+English is not an art to be mastered.It is just a tool to get the result.** 
+[https://www.youtube.com/watch?v=mwpdffpixBY](https://www.youtube.com/watch?v=mwpdffpixBY)
+
 
 ## 健身
 #### 部位
@@ -115,3 +123,14 @@ What would you like to drink? Green tea or Black tea? Beer or sparking water?
 What do you recommend?  
 Can I have the menu please?  
 Can I have it take away?
+
+## 政治
+正当性 justification  
+暴力 violence  
+策略 tactics  
+罢工 strikes  
+谴责 condemn  
+抗议 protest  
+游行示威 march  
+引渡 extradition
+民主 Democracy
