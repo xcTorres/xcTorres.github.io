@@ -132,5 +132,5 @@ Can I have it take away?
 谴责 condemn  
 抗议 protest  
 游行示威 march  
-引渡 extradition
+引渡 extradition  
 民主 Democracy
