@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "动态规划题目"
-date:       2019-11-24
+date:       2019-11-27
 author:     "xcTorres"
 header-img: "img/in-post/leetcode.jpg"
 catalog:    true
@@ -210,6 +210,36 @@ Dynamic Programming is a method for solving a complex problem by breaking it dow
             }
             
             return start;
+        }
+    }
+
+```
+
+#### 求最长回文子串  
+[https://leetcode.com/problems/longest-palindromic-substring/](https://leetcode.com/problems/longest-palindromic-substring/)  
+
+#### java version 
+解法1： 动态规划O(nlgn)
+```java
+
+    class Solution {
+    public String longestPalindrome(String s) {
+        
+        int length = s.length();
+        boolean[][] dp = new boolean[length][length];
+        
+        String res = null;
+        for(int i=length-1;i>=0;i--){
+            for(int j=i;j<length-1;j++){
+                if( (s.charAt(i) == s.charAt(j)) && (j-i<3 || dp[i+1][j-1])){
+                    dp[i][j] = true;
+                }
+                if(dp[i][j] && (res==null || res.length()<(j-i+1)) ){
+                    res = s.substring(i, j+1);
+                }
+            }
+        }
+        return res;
         }
     }
 
