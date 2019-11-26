@@ -218,7 +218,6 @@ Dynamic Programming is a method for solving a complex problem by breaking it dow
 #### 求最长回文子串  
 [https://leetcode.com/problems/longest-palindromic-substring/](https://leetcode.com/problems/longest-palindromic-substring/)  
 
-#### java version 
 解法1： 动态规划O(nlgn)
 ```java
 
