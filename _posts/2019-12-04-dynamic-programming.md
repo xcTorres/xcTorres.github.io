@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "动态规划题目"
-date:       2019-11-27
+date:       2019-12-04
 author:     "xcTorres"
 header-img: "img/in-post/leetcode.jpg"
 catalog:    true
@@ -241,6 +241,49 @@ Dynamic Programming is a method for solving a complex problem by breaking it dow
         return res;
         }
     }
+
+```
+
+#### 正则表达匹配  
+[https://leetcode.com/problems/regular-expression-matching/](https://leetcode.com/problems/regular-expression-matching/)
+解法一：递归遍历，思路还不是很清楚，需要好好捋一捋
+```java
+
+    class Solution {
+    public boolean isMatch(String s, String p) {
+        
+        if(p.isEmpty())
+            return s.isEmpty();
+        
+        if(p.length() == 1 ){
+            if( !s.isEmpty() && (p.charAt(0)==s.charAt(0) || p.charAt(0)=='.')){
+                return isMatch(s.substring(1), p.substring(1));
+            }else{
+                return false;
+            }
+        }
+        
+        if(p.length()>1 && p.charAt(1) != '*'){
+            
+            if( !s.isEmpty()  && (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.'))
+                return isMatch(s.substring(1), p.substring(1));
+            else
+                return false;
+        }else{
+            while(!s.isEmpty() && (p.charAt(0) == s.charAt(0) ||  p.charAt(0) == '.')){
+                String q = (p.length()>1)?p.substring(2):"";
+                if(isMatch(s, q)){
+                    return true;
+                }
+                s = s.substring(1);
+            }
+            
+            String q = (p.length()>1)?p.substring(2):"";
+            return isMatch(s,q);
+        }
+        
+    }
+}
 
 ```
 
