@@ -108,5 +108,8 @@ friends: [
     },{
         title: "IT技术博客大学习",
         href: "https://blogread.cn/it/"
+    },{
+        title: "V2EX",
+        href: "https://www.v2ex.com/"
     }
 ]

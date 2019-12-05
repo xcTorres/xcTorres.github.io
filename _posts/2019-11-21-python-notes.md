@@ -78,3 +78,8 @@ As explained above we use static methods to create utility functions. In the bel
 #### 魔法方法
 [https://pyzh.readthedocs.io/en/latest/python-magic-methods-guide.html](https://pyzh.readthedocs.io/en/latest/python-magic-methods-guide.html)
 
+
+#### 多进程logging
+https://www.jianshu.com/p/d615bf01e37b
+https://www.cnblogs.com/shizioo/p/python_logging_handler_custom.html
+
