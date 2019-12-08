@@ -40,3 +40,4 @@ tags:
 [https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/](https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/)
 [https://keson96.github.io/2016/08/29/2016-08-29-Assignment-Problem-And-Hungrian-Method/](https://keson96.github.io/2016/08/29/2016-08-29-Assignment-Problem-And-Hungrian-Method/)  
 [https://www.youtube.com/watch?v=rrfFTdO2Z7I](https://www.youtube.com/watch?v=rrfFTdO2Z7I)
+[http://longrm.com/2018/05/05/2018-05-05-KM/](http://longrm.com/2018/05/05/2018-05-05-KM/)
