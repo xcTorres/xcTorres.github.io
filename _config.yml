@@ -111,5 +111,11 @@ friends: [
     },{
         title: "V2EX",
         href: "https://www.v2ex.com/"
+    },{
+        title: "Beyong the Void",
+        href: "https://www.byvoid.com/zhs/blog"
+    },{
+        title: "崔天翼",
+        href: "http://tianyicui.com/"
     }
 ]
