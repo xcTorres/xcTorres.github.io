@@ -163,6 +163,11 @@ tags:
 
 ## 算法库
 
+| :----: | :-----: |
+| scipy  | [https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linear_sum_assignment.html](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linear_sum_assignment.html) |
+| munkres| [https://github.com/bmc/munkres](https://github.com/bmc/munkres) |
+| lapsolver| [https://github.com/cheind/py-lapsolver](https://github.com/cheind/py-lapsolver)|
+|  lap[**Fastest**]  | [https://github.com/gatagat/lap](https://github.com/gatagat/lap) |
 
 ## 参考  
 [https://www.renfei.org/blog/bipartite-matching.html](https://www.renfei.org/blog/bipartite-matching.html)  
