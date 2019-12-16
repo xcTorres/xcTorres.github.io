@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Python Web"
-date:       2019-12-12
+date:       2019-12-17
 author:     "xcTorres"
 header-img: "img/in-post/leetcode.jpg"
 catalog:    true
@@ -32,8 +32,8 @@ Gunciorn又是什么呢，首先Gunicorn是一个WSGI服务器。它不在乎它
 
 ## 参考
 [https://toutiao.io/posts/45fmtc/preview](https://toutiao.io/posts/45fmtc/preview)  
-[gunicorn适用类型](https://medium.com/@genchilu/brief-introduction-about-the-types-of-worker-in-gunicorn-and-respective-suitable-scenario-67b0c0e7bd62)
+[gunicorn适用类型](https://medium.com/@genchilu/brief-introduction-about-the-types-of-worker-in-gunicorn-and-respective-suitable-scenario-67b0c0e7bd62)  
 [https://vsupalov.com/what-is-gunicorn/](https://vsupalov.com/what-is-gunicorn/)  
-[深入理解uwsgi和gunicorn网络模型上](http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/)
-[https://juejin.im/post/5ce8cab8e51d4577523f22f8](https://juejin.im/post/5ce8cab8e51d4577523f22f8)
-
+[深入理解uwsgi和gunicorn网络模型上](http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/)  
+[https://juejin.im/post/5ce8cab8e51d4577523f22f8](https://juejin.im/post/5ce8cab8e51d4577523f22f8)  
+[Flask+Gunicorn(协程)高并发的解决方法探究](https://youyou-tech.com/2019/09/11/Flask%2BGunicorn%28%E5%8D%8F%E7%A8%8B%29%E9%AB%98%E5%B9%B6/)
