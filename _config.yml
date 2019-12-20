@@ -2,7 +2,7 @@
 title: xcTorres Blog
 SEOTitle: 谢聪博客 | xcTorres Blog
 header-img: img/home-bg.jpg
-email: xiechong@whu.edu.cn
+email: xcwhu2016@gmail.com
 description: ""
 keyword: ""
 url: "https://xctorres.github.io/"              # your host, for absolute URL
@@ -126,5 +126,17 @@ friends: [
     },{
         title: "Honly",
         href: "https://guanhonly.github.io/"
+    },{
+        title: "徐靖峰",
+        href: "https://www.cnkirito.moe/about/"
+    },{
+        title: "pycoders",
+        href: "https://pycoders.com/"
+    },{
+        title: "卡瓦邦噶",
+        href: "https://www.kawabangga.com/"
+    },{
+        title: "einverne",
+        href: "http://einverne.github.io/"
     }
 ]
