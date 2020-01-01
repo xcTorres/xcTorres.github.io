@@ -11,7 +11,9 @@ tags:
 --- 
 ## 背景
 由于机器学习，深度学习，数据分析，数据挖掘的兴起，且因为Python脚本语言上手极快，使得Python这门语言非常火热🔥。但其应用场景多在运维，爬虫，以及机器学习数据挖掘方面。现在本人的职位是算法工程师，更希望注重于机器学习深度学习算法的效果及实现，但在项目中不免要给算法做稳定的网络微服务。所以在工作过程中，算法的逻辑和稳定性和后台的稳定性有时候得一把抓。Java的确是一门不错的语言，但其Spring框架比较庞大，且我所在公司使用Go和Python语言，没有Java开发的环境。所以最终打算通过Python作为后台开发语言。  
-每当提及用Python作为后台开发语言，很多技术人士都会嗤之以鼻，担心其过慢的运行效率无法解决高并发问题。但Google搜索引擎的部分代码，Instagram，国内的豆瓣知乎等很多知名互联网企业都是Python语言的后台。这些成功的产品证明，只要处理得当，Python后台完全能处理一定量级的高并发问题。综合考虑打算使用flask，gunicorn，nginx的的方法来实现稳定的后台服务，特写此文用来记录Python后台记录的点点滴滴。  
+每当提及用Python作为后台开发语言，很多技术人士都会嗤之以鼻，担心其过慢的运行效率无法解决高并发问题。但Google搜索引擎的部分代码，Instagram，国内的豆瓣知乎等很多知名互联网企业都是Python语言的后台。这些成功的产品证明，只要处理得当，Python后台完全能处理一定量级的高并发问题。综合考虑打算使用flask，gunicorn，nginx的的方法来实现稳定的后台服务，特写此文用来记录Python后台记录的点点滴滴。
+
+先将代码地址放在此处[https://github.com/xcTorres/python_web](https://github.com/xcTorres/python_web)，欢迎star。
 
 ## Flask
 [flask](https://github.com/pallets/flask)是一个用于创建web应用的微服务框架，其主要由[werkzeug](https://github.com/pallets/werkzeug)作为WSGI网络应用程序, 以及[jinja](https://github.com/pallets/jinja)进行前端渲染，在这二者的帮助下，我们可以用flask做一个业务逻辑的后台系统以及前端渲染的界面。  
