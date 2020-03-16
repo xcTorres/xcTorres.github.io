@@ -5,6 +5,8 @@ date:       2019-12-12
 author:     "xcTorres"
 header-img: "img/in-post/leetcode.jpg"
 catalog:    true
+mathjax: true
+
 tags:
     - algorithms
 ---
@@ -156,13 +158,37 @@ tags:
     """
 
 ```
-#### bfs算法
+#### 数学角度  
+在实际生产环境中，dfs方式还是很少用到，多是转换成矩阵操作那么原理是什么呢。  
+首先匈牙利算法可以抽象成如下数学问题。即代价矩阵C乘以一个特殊矩阵X，其中X中每行或者每一列都是单位向量，即1处在不同行不同列.  
 
-## KM算法
+$$
+    \min z=\sum\limits_{i=1}^n\sum\limits_{j=1}^n c_{ij}x_{ij}
+$$
 
+$$
+    \mathrm{s.t}\begin{cases}\sum\limits_{i=1}^n x_{ij}=1,\quad i=1,2,\cdots,n  \\ \sum\limits_{j=1}^n x_{ij}=1,\quad j=1,2,\cdots,n  \\ x_{ij}=0 或 1, \quad i,j=1,2,\cdots,n  \end{cases}
+$$
 
-## 算法库
+- 定理一  
+从下图可以看出，对一个代价矩阵C，无论是同一行加上同样的值或者是同一列加上同样的值。不会影响最终目标函数$$
+    \min z=\sum\limits_{i=1}^n\sum\limits_{j=1}^n c_{ij}x_{ij}
+$$的优化结果， 因为乘以不同的元素矩阵X得到的组合最后都会生成一个元素总和相同的矩阵。  
+<img src="/img/in-post/hungarian/same.png" width="400" height="400">
 
+- 定理二  
+且对另一个非负矩阵，可以知道其最优解的结果一定大于等于0，若能够找到一组独立的零元素解，则其必定为最优解。其解释如下图。
+<img src="/img/in-post/hungarian/non_negative.png" width="200" height="200">  
+
+在定理一，二的基础上。匈牙利算法则有了以下解法。  
+1） 给定一个代价矩阵  
+2） 通过给行加减相同的值，或者给列相加减相同的值，最优解元素矩阵X不会发生变化    
+3） 一直进行相应操作，直至找到独立零元素的一组解。
+
+这些步骤还存在一些细节，即如何快速找到独立零元素， 如何判定找到的零元素就是独立零元素。 该链接有比较详细的六步走步骤，如果感兴趣的话，可以研究一下哦。[http://csclab.murraystate.edu/~bob.pilgrim/445/munkres.html](http://csclab.murraystate.edu/~bob.pilgrim/445/munkres.html)    
+
+这是从数学的角度来看如何解匈牙利分配问题，也是非常的精妙。且在性能上更高，如下有一些官方的库，供推荐。 
+ 
 | :----: | :-----: |
 | scipy  | [https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linear_sum_assignment.html](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linear_sum_assignment.html) |
 | munkres| [https://github.com/bmc/munkres](https://github.com/bmc/munkres) |
@@ -173,6 +199,6 @@ tags:
 [https://www.renfei.org/blog/bipartite-matching.html](https://www.renfei.org/blog/bipartite-matching.html)  
 [https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/](https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/)
 [https://keson96.github.io/2016/08/29/2016-08-29-Assignment-Problem-And-Hungrian-Method/](https://keson96.github.io/2016/08/29/2016-08-29-Assignment-Problem-And-Hungrian-Method/)  
-[https://www.youtube.com/watch?v=rrfFTdO2Z7I](https://www.youtube.com/watch?v=rrfFTdO2Z7I)
-[http://longrm.com/2018/05/05/2018-05-05-KM/](http://longrm.com/2018/05/05/2018-05-05-KM/)
+[https://www.youtube.com/watch?v=rrfFTdO2Z7I](https://www.youtube.com/watch?v=rrfFTdO2Z7I)  
+[http://longrm.com/2018/05/05/2018-05-05-KM/](http://longrm.com/2018/05/05/2018-05-05-KM/)  
 [https://luzhijun.github.io/2016/10/10/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/](https://luzhijun.github.io/2016/10/10/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/)
