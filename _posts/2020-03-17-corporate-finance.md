@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      ”公司理财“
+title:      公司理财
 date:       2020-03-17
 author:     "xcTorres"
-header-img: "img/in-post/leetcode.jpg"
+header-img: "img/in-post/corporate-finance/background.jpeg"
 catalog:    true
 
 tags:
