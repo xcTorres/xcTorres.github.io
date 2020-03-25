@@ -11,7 +11,7 @@ tags:
     - algorithms
 ---
 ## 背景
-因为入职不久，最近在接手一个外卖的分配问题，即在一个区域同时产生多个订单，且该区域有多个骑手，在只考虑一个骑手只能接一单的情况下，订单与骑手之间到底应该如何分配。在第一版解决方案中我们使用的是匈牙利算法，目前还在测试当中，还没有上线，希望其能有不错的效果。写此博客，专门为了好好了解其基本原理，而不是只会按部就班写个库，跟着去做矩阵运算。  
+因为入职不久，最近在接手一个外卖的分配问题，即在一个区域同时产生多个订单，且该区域有多个骑手，在只考虑一个骑手只能接一单的情况下，订单与骑手之间到底应该如何分配。在第一版解决方案中我们使用的是匈牙利算法，目前还在测试当中，还没有上线，希望其能有不错的效果。写此博客，专门为了好好了解其基本原理，而不是只会按部就班用现成的库，而根本不懂其原理。  
 
 ## 匈牙利算法原理  
 在了解匈牙利算法之前，首先需要掌握几个图论中的基本概念。 
@@ -185,10 +185,8 @@ $$的优化结果， 因为乘以不同的元素矩阵X得到的组合最后都�
 2） 通过给行加减相同的值，或者给列相加减相同的值，最优解元素矩阵X不会发生变化    
 3） 一直进行相应操作，直至找到在保证非负矩阵的前提下独立零元素的一组解。
 
-这些步骤还存在一些细节，即如何快速找到独立零元素， 如何判定找到的零元素就是独立零元素。 该链接有比较详细的六步走步骤，如果感兴趣的话，可以研究一下哦。[http://csclab.murraystate.edu/~bob.pilgrim/445/munkres.html](http://csclab.murraystate.edu/~bob.pilgrim/445/munkres.html)    
+这些步骤还存在一些细节，即如何快速找到独立零元素， 如何判定找到的零元素就是独立零元素。 该链接有比较详细的六步走步骤，如果感兴趣的话，可以研究一下哦。[http://csclab.murraystate.edu/~bob.pilgrim/445/munkres.html](http://csclab.murraystate.edu/~bob.pilgrim/445/munkres.html)。这是从数学的角度来看如何解匈牙利分配问题，也是非常的精妙。且在性能上更高，如下有一些官方的库，供推荐。 
 
-这是从数学的角度来看如何解匈牙利分配问题，也是非常的精妙。且在性能上更高，如下有一些官方的库，供推荐。 
- 
 | :----: | :-----: |
 | scipy  | [https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linear_sum_assignment.html](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linear_sum_assignment.html) |
 | munkres| [https://github.com/bmc/munkres](https://github.com/bmc/munkres) |

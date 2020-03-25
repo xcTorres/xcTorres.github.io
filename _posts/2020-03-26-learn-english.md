@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-03-17
+date:       2020-03-26
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -30,3 +30,21 @@ English is not an art to be mastered.It is just a tool to get the result.**
 
 **Begin date**:  March 6th, 2020  
 **End date**  :  April 6th, 2020
+
+#### 25th March   
+A 35-year-old man have tested positive for the virus.  
+
+More information follows. 后面还显示更多信息   
+
+By now messages like this one are **commonplace** in South Korea.  司空见惯的事  
+
+The result has been **stunning**.
+
+South Korea methods of fighting coronavirus has been **praised** as a model of how to contain the virus.  
+
+It avoids forced restrictions on movement and does not lead to widespread closure of business.  
+
+If South korea is reducing privacy **in exchange for** fighting the virus, many South Koreans seem to accept it happily.  
+
+
+
