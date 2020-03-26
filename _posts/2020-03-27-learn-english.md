@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-03-26
+date:       2020-03-27
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -22,7 +22,7 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - 对我这种基础比较差的泛听是没有什么卵用的。精听才是王道  
 - 如果听力不好，其他听说读写没有一项会好。这些都是一连串的连锁反应。不能再找借口说自己写作和阅读能力不错了。  
 
-为了提高听力，遂从今日3月6日开始，先开启为期一个月的精听模式，再分析学习方法是否适用于我。听力材料为每日英语听力中VOA慢速英语。
+为了提高听力，遂从今日3月6日开始，先开启为期一个月的精听模式，再分析学习方法是否适用于我。听力材料为每日英语听力中VOA慢速英语。  
 1） 先将听到的内容写下来。不会的地方空下来（可以多听几遍）  
 2） 查看答案，并查明空下来单词的原因，是发音的问题还是的确是生词词汇。  
 3） 复听几遍，并跟读，纠正发音才能更好地提高听力。  
@@ -44,7 +44,7 @@ South Korea methods of fighting coronavirus has been **praised** as a model of h
 
 It avoids forced restrictions on movement and does not lead to widespread closure of business.  
 
-If South korea is reducing privacy **in exchange for** fighting the virus, many South Koreans seem to accept it happily.  
+If South korea is reducing privacy **in exchange for** fighting the virus, many South Koreans seem to accept it happily. 
 
 
 
