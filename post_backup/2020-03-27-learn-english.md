@@ -32,19 +32,37 @@ English is not an art to be mastered.It is just a tool to get the result.**
 **End date**  :  April 6th, 2020
 
 #### 25th March   
-A 35-year-old man have tested positive for the virus.  
+- A 35-year-old man have tested positive for the virus.  
+- More information follows. 后面还显示更多信息   
+- By now messages like this one are **commonplace** in South Korea.  司空见惯的事  
+- The result has been **stunning**.
+- South Korea methods of fighting coronavirus has been **praised** as a model of how to contain the virus.  
+- It avoids forced restrictions on movement and does not lead to widespread closure of business.  
+- If South korea is reducing privacy **in exchange for** fighting the virus, many South Koreans seem to accept it happily.   
 
-More information follows. 后面还显示更多信息   
+#### 26th March  
+- The International Olympic Committee has annouced a first-of-its-kind postponement of the Summer Olympics.  
+- Athletes, sports organizations and national Olympic committees had been pressuring the IOC to postpone the games.  
+- The notes that the virus had put serious limitations on traing and qualifying events, as well as efforts to fight the use performance-enhancing drugs.  
+- **becon of hope** 希望的灯塔  
+- Thankful to finally have some clarity regarding the Olympic Games.  
+- **come at a cost** 付出代价  
+- It was becoming increasingly clear that starting on July 24th was no longer a choice.  
+- **reach a decision** 做出决定  
+- **at a later date** 稍后 
 
-By now messages like this one are **commonplace** in South Korea.  司空见惯的事  
+#### 27th March  
 
-The result has been **stunning**.
 
-South Korea methods of fighting coronavirus has been **praised** as a model of how to contain the virus.  
+#### 28th Mar  
+- common expression 常见表达  
+- Specifically, we take a tour of our largest organ: the skin.  
+- They causr itching and great discomfort.    
+- So, to **get under someone's skin** means to annoy them or, better still to bug them.  
+- You have to be careful what you say to **thin skinned** people so as not to hurt their feelings.  
 
-It avoids forced restrictions on movement and does not lead to widespread closure of business.  
 
-If South korea is reducing privacy **in exchange for** fighting the virus, many South Koreans seem to accept it happily. 
+
 
 
 
