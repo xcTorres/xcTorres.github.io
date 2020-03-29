@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-03-29
+date:       2020-03-30
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -54,12 +54,27 @@ English is not an art to be mastered.It is just a tool to get the result.**
 #### 27th March  
 
 
-#### 28th Mar  
+#### 28th March
 - common expression 常见表达  
 - Specifically, we take a tour of our largest organ: the skin.  
 - They causr itching and great discomfort.    
 - So, to **get under someone's skin** means to annoy them or, better still to bug them.  
 - You have to be careful what you say to **thin skinned** people so as not to hurt their feelings.  
+
+#### 29th March  
+- entitled 有权利的，有资格的  
+- Many millennials also are identified as jobless and more likely than other young people to be living with one or both parents.  
+- the Great Recession  大萧条
+- Many are weighed down with debt from student loans.
+- That may be the case 事实的确是这样  
+- What we think is fascinating is that 我们觉得有趣的是...  
+- Scientic study have shown that 科学研究表明...  
+- disinfect 消毒  
+- Avoid rubbing your phone with rough materials that could make small cuts on it.  
+- Most patients experience only mild or moderate symptoms.  
+- However, older people and those with existing health conditions are more likely to develop more severe illness. 
+
+
 
 
 
