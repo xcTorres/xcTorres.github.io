@@ -72,7 +72,16 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - disinfect 消毒  
 - Avoid rubbing your phone with rough materials that could make small cuts on it.  
 - Most patients experience only mild or moderate symptoms.  
-- However, older people and those with existing health conditions are more likely to develop more severe illness. 
+- However, older people and those with existing health conditions are more likely to develop more severe illness.  
+
+#### 30th March  
+- synonyms  同义词  
+- antonyms  反义词  
+- The United States will begin restricting visas to citizens from six other countries on February 21, although critics question the move.  
+- punctuation 标点符号  
+- Superbugs are appearing much more often outside of the hospitals, the CDC report said.  
+- And now for some closing thoughts. 现在做一些总结  
+- Learning to use context clues can take time. Don't pressure yourself to be great at the skill too qiuckly.
 
 
 
