@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-03-30
+date:       2020-03-31
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -81,7 +81,15 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - punctuation 标点符号  
 - Superbugs are appearing much more often outside of the hospitals, the CDC report said.  
 - And now for some closing thoughts. 现在做一些总结  
-- Learning to use context clues can take time. Don't pressure yourself to be great at the skill too qiuckly.
+- Learning to use context clues can take time. Don't pressure yourself to be great at the skill too qiuckly.  
+
+#### 31th March  
+- The remains of a small bird are giving scientists a rare look at eraly ancectors of modern birds.  
+- They say the fossil dates back to right before an asteroid hit the earth, killing off dinosaurs and other creatures.  
+- And the fossil itself shows qualities that have been suggested as helpful for survival.  
+- Be picky about what you are eating.  
+- in the aftermath of 后果余波  
+
 
 
 
