@@ -141,5 +141,8 @@ friends: [
     },{
         title: "lotabout.me",
         href: "https://lotabout.me/"
+    },{
+        title: "开发者头条",
+        href: "https://toutiao.io/"
     }
 ]

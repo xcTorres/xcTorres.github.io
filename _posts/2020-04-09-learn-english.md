@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-03-31
+date:       2020-04-09
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -89,6 +89,14 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - And the fossil itself shows qualities that have been suggested as helpful for survival.  
 - Be picky about what you are eating.  
 - in the aftermath of 后果余波  
+
+#### 2nd April  
+- humanitarian crisis 人道主义危机  
+- appear to 似乎好像  
+- as far as I concerned, 就我而言  
+- the country that were once said to be more secure  
+
+#### 9th April
 
 
 
