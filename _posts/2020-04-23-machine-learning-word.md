@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "学习词汇"
-date:       2020-04-09
+date:       2020-04-23
 author:     "xcTorres"
 header-img: "img/in-post/machine-learning.jpeg"
 catalog:    true
