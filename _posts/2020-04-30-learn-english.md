@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-04-23
+date:       2020-04-30
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -96,8 +96,13 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - as far as I concerned, 就我而言  
 - the country that were once said to be more secure  
 
-#### 9th April
 
+#### 30th April
+The students, ages 14 to 17, **were joined** by 12 experienced crew members.   
+force sb to do sth  迫使某人做某事  
+vegatative state 植物人
+using a cane for support 用拐杖支持
+expert dispute 专家质疑
 
 
 

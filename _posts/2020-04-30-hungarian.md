@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "匈牙利算法介绍"
-date:       2020-03-17
+date:       2020-04-30
 author:     "xcTorres"
 header-img: "img/in-post/leetcode.jpg"
 catalog:    true
@@ -200,3 +200,4 @@ $$的优化结果， 因为乘以不同的元素矩阵X得到的组合最后都�
 [https://www.youtube.com/watch?v=rrfFTdO2Z7I](https://www.youtube.com/watch?v=rrfFTdO2Z7I)  
 [http://longrm.com/2018/05/05/2018-05-05-KM/](http://longrm.com/2018/05/05/2018-05-05-KM/)  
 [https://luzhijun.github.io/2016/10/10/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/](https://luzhijun.github.io/2016/10/10/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/)
+

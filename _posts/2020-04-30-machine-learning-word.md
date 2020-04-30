@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "学习词汇"
-date:       2020-04-23
+date:       2020-04-30
 author:     "xcTorres"
 header-img: "img/in-post/machine-learning.jpeg"
 catalog:    true
@@ -14,6 +14,10 @@ tags:
 过拟合：  overfitting  
 向量化：  vectorization  
 大小、量级：magnitude 
+
+#### 算法
+时间复杂度： time complexity  
+指数级： exponential
 
 #### 演讲  
 as a quick reminder: 顺便提醒一下
