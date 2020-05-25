@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-04-30
+date:       2020-05-26
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -16,6 +16,8 @@ tags:
 English is not an art to be mastered.It is just a tool to get the result.** 
 
 [https://www.youtube.com/watch?v=mwpdffpixBY](https://www.youtube.com/watch?v=mwpdffpixBY)  
+[https://www.youtube.com/watch?v=LtxikccfpaU](https://www.youtube.com/watch?v=LtxikccfpaU)  
+[http://www.elllo.org](http://www.elllo.org)
 
 ## 听力
 在上班的工作中，用英语交流还仍有障碍，为了以后自己职业更好的发展，听力和口语都有待提高。在网上看了一些帖子，得到了一些启发，纠正了自己以往的学习方法。现在才真正明白了以下几个道理。  
@@ -102,10 +104,16 @@ The students, ages 14 to 17, **were joined** by 12 experienced crew members.
 force sb to do sth  迫使某人做某事  
 vegatative state 植物人
 using a cane for support 用拐杖支持
-expert dispute 专家质疑
+expert dispute 专家质疑  
 
 
-
+#### 26th May  
+tremendous 极大的巨大的
+It's personal 针对我的
+single sb out 针对我
+someone shift tone(change narrative) on this issue. 改变观点看法。
+companionship 陪伴
+hassle困难灾难
 
 
 

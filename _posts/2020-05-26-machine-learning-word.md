@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "学习词汇"
-date:       2020-04-30
+date:       2020-05-26
 author:     "xcTorres"
 header-img: "img/in-post/machine-learning.jpeg"
 catalog:    true
@@ -20,7 +20,8 @@ tags:
 指数级： exponential
 
 #### 演讲  
-as a quick reminder: 顺便提醒一下
+as a quick reminder: 顺便提醒一下  
 taken as a very loose analogy: 作为粗略的对照
+I will touch base with you. 我会向你再次确认。
 
 

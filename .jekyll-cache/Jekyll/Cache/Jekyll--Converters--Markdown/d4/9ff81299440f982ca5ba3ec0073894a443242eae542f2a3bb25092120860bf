@@ -1,0 +1,54 @@
+I"�<h1 id="chong-xie-谢冲">Chong Xie (谢冲)</h1>
+
+<h3 id="contact-infomation">Contact Infomation</h3>
+
+<ul>
+  <li>Email：xcwhu2016@gmail.com</li>
+  <li>Wechat：xc_19931112</li>
+  <li>Instagram：xctorres8</li>
+</ul>
+
+<hr />
+
+<h3 id="education">Education</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Master’s degree, Geographic Information Science and Cartography<br />Wuhan University, China</td>
+      <td>Sep 2016 – Jun 2019</td>
+    </tr>
+    <tr>
+      <td>Bachelor’s degree, Photogrammetry and Remote Sensing <br />Wuhan University, China</td>
+      <td>Sep 2012 – Jun 2016</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="work-experience">Work Experience</h3>
+
+<p><strong>Shopee Data Scientist</strong><br />
+Jul 2019 - Present , Singapore</p>
+
+<p><strong>Huawei Wuhan   Intern</strong><br />
+Sep 2018 – Jun 2019 , Wuhan, China</p>
+<ul>
+  <li>Participate in developing a HBase-based spatio-temporal database system for storing vector objects, which is an innovative project of Huawei in the field of IoT.</li>
+  <li>Design the spatio-temporal index and improve the performance of range query and k-NN query, making the average query time under 100 ms.</li>
+</ul>
+
+<p><strong>DiDi   Intern</strong><br />
+Jun 2018 – Sep 2018 , Wuhan, China</p>
+<ul>
+  <li>Participate in utilizing the machine learning model to provide the appropriate drop-off point for the destination, saving passenger’s time and walking cost.</li>
+  <li>Combine the features of POI, passengers, drivers, road, etc. ,and utilize GBDT model to screen out important features, resulting in 10% decrease the MAE of destination deviation.</li>
+</ul>
+
+<hr />
+
+<h3 id="publication">Publication</h3>
+<p><a href="http://www.cjig.cn/jig/ch/reader/view_abstract.aspx?file_no=20190514&amp;flag=1">谢冲, 关雪峰, 周炜轩, et al. MAP-Vis:基于MAP模型的时空点状大数据可视化方案[J]. 中国图象图形学报, 2019(5):816-826.</a></p>
+
+:ET
