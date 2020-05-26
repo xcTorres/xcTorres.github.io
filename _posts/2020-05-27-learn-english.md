@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-05-26
+date:       2020-05-27
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -33,87 +33,73 @@ English is not an art to be mastered.It is just a tool to get the result.**
 **Begin date**:  March 6th, 2020  
 **End date**  :  April 6th, 2020
 
-#### 25th March   
+#### Word and Phrase  
+- **becon of hope** 希望的灯塔  
+- **come at a cost** 付出代价 
+- **reach a decision** 做出决定  
+- **at a later date** 稍后 
+- entitled 有权利的，有资格的  
+- disinfect 消毒  
+- synonyms  同义词  
+- antonyms  反义词  
+- the Great Recession  大萧条  
+- punctuation 标点符号
+- companionship 陪伴  
+- hassle 困难灾难  
+- expert dispute 专家质疑  
+- tremendous 极大的巨大的  
+- in the aftermath of 后果余波  
+- humanitarian crisis 人道主义危机  
+- appear to 似乎好像  
+- as far as I concerned, 就我而言 
+- in any shape or form 以任何形式  
+- detention 留校察看  
+- force sb to do sth  迫使某人做某事  
+- vegatative state 植物人  
+
+
+#### Sentence
 - A 35-year-old man have tested positive for the virus.  
 - More information follows. 后面还显示更多信息   
 - By now messages like this one are **commonplace** in South Korea.  司空见惯的事  
 - The result has been **stunning**.
 - South Korea methods of fighting coronavirus has been **praised** as a model of how to contain the virus.  
 - It avoids forced restrictions on movement and does not lead to widespread closure of business.  
-- If South korea is reducing privacy **in exchange for** fighting the virus, many South Koreans seem to accept it happily.   
-
-#### 26th March  
+- If South korea is reducing privacy **in exchange for** fighting the virus, many South Koreans seem to accept it happily.  
 - The International Olympic Committee has annouced a first-of-its-kind postponement of the Summer Olympics.  
 - Athletes, sports organizations and national Olympic committees had been pressuring the IOC to postpone the games.  
 - The notes that the virus had put serious limitations on traing and qualifying events, as well as efforts to fight the use performance-enhancing drugs.  
-- **becon of hope** 希望的灯塔  
 - Thankful to finally have some clarity regarding the Olympic Games.  
-- **come at a cost** 付出代价  
 - It was becoming increasingly clear that starting on July 24th was no longer a choice.  
-- **reach a decision** 做出决定  
-- **at a later date** 稍后 
-
-#### 27th March  
-
-
-#### 28th March
 - common expression 常见表达  
 - Specifically, we take a tour of our largest organ: the skin.  
 - They causr itching and great discomfort.    
 - So, to **get under someone's skin** means to annoy them or, better still to bug them.  
-- You have to be careful what you say to **thin skinned** people so as not to hurt their feelings.  
-
-#### 29th March  
-- entitled 有权利的，有资格的  
+- You have to be careful what you say to **thin skinned** people so as not to hurt their feelings.   
 - Many millennials also are identified as jobless and more likely than other young people to be living with one or both parents.  
-- the Great Recession  大萧条
 - Many are weighed down with debt from student loans.
 - That may be the case 事实的确是这样  
 - What we think is fascinating is that 我们觉得有趣的是...  
 - Scientic study have shown that 科学研究表明...  
-- disinfect 消毒  
 - Avoid rubbing your phone with rough materials that could make small cuts on it.  
 - Most patients experience only mild or moderate symptoms.  
 - However, older people and those with existing health conditions are more likely to develop more severe illness.  
-
-#### 30th March  
-- synonyms  同义词  
-- antonyms  反义词  
-- The United States will begin restricting visas to citizens from six other countries on February 21, although critics question the move.  
-- punctuation 标点符号  
+- The United States will begin restricting visas to citizens from six other countries on February 21, although critics question the move.    
 - Superbugs are appearing much more often outside of the hospitals, the CDC report said.  
 - And now for some closing thoughts. 现在做一些总结  
 - Learning to use context clues can take time. Don't pressure yourself to be great at the skill too qiuckly.  
-
-#### 31th March  
 - The remains of a small bird are giving scientists a rare look at eraly ancectors of modern birds.  
 - They say the fossil dates back to right before an asteroid hit the earth, killing off dinosaurs and other creatures.  
 - And the fossil itself shows qualities that have been suggested as helpful for survival.  
-- Be picky about what you are eating.  
-- in the aftermath of 后果余波  
-
-#### 2nd April  
-- humanitarian crisis 人道主义危机  
-- appear to 似乎好像  
-- as far as I concerned, 就我而言  
+- Be picky about what you are eating.   
 - the country that were once said to be more secure  
+- The students, ages 14 to 17, **were joined** by 12 experienced crew members.   
+- using a cane for support 用拐杖支持  
+- someone shift tone(change narrative) on this issue. 改变观点看法。  
+- I invite you to take this concept into your own life.
 
 
-#### 30th April
-The students, ages 14 to 17, **were joined** by 12 experienced crew members.   
-force sb to do sth  迫使某人做某事  
-vegatative state 植物人
-using a cane for support 用拐杖支持
-expert dispute 专家质疑  
 
-
-#### 26th May  
-tremendous 极大的巨大的
-It's personal 针对我的
-single sb out 针对我
-someone shift tone(change narrative) on this issue. 改变观点看法。
-companionship 陪伴
-hassle困难灾难
 
 
 
