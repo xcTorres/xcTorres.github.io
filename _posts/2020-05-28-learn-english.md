@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-05-27
+date:       2020-05-28
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -56,6 +56,11 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - detention 留校察看  
 - force sb to do sth  迫使某人做某事  
 - vegatative state 植物人  
+- squire 侍从  
+- the broad massed 广大群众  
+- puberty 青春期  
+- resonate with sb 共鸣  
+- subjective 主观的
 
 
 #### Sentence
@@ -96,7 +101,12 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - The students, ages 14 to 17, **were joined** by 12 experienced crew members.   
 - using a cane for support 用拐杖支持  
 - someone shift tone(change narrative) on this issue. 改变观点看法。  
-- I invite you to take this concept into your own life.
+- I invite you to take this concept into your own life.  
+- I will know where you stand. 你就会知道知道你自己的定位是什么。 
+- This is where you have a clearly-defined purpose in your life.  
+- A massive difference between the knight stage and the prince stage is that the prince possesses a valuable trait called patience.  
+- A prince is not overly concerned with the outcome, but he is very concerned with the process, and he is constantly course-correcting and improving the way he does things.  
+
 
 
 
