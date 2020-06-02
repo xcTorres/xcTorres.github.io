@@ -31,7 +31,7 @@ English is not an art to be mastered.It is just a tool to get the result.**
 4） 第二天再听新听力之前，需重复听几遍前一天的听力，确保都能够听懂。   
 
 **Begin date**:  March 6th, 2020  
-**End date**  :  April 6th, 2020
+**End date**  :  ∞
 
 #### Word and Phrase  
 - **becon of hope** 希望的灯塔  
@@ -60,7 +60,16 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - the broad massed 广大群众  
 - puberty 青春期  
 - resonate with sb 共鸣  
-- subjective 主观的
+- subjective 主观的  
+- authentic 真实的  
+- cocky 骄傲自大的  
+- mindset 心态  
+- humility 谦虚谦逊  
+- cultivate 积累  
+- intimidate  威胁恐吓
+- sloppy  草率的粗心的
+- win-win situation 双赢局面  
+
 
 
 #### Sentence
@@ -106,6 +115,10 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - This is where you have a clearly-defined purpose in your life.  
 - A massive difference between the knight stage and the prince stage is that the prince possesses a valuable trait called patience.  
 - A prince is not overly concerned with the outcome, but he is very concerned with the process, and he is constantly course-correcting and improving the way he does things.  
+- It's more about making other people thinking that you're confident as opposed to actually just being confident, which is why cocky people tend to talk a lot.  
+- A common trait that a lot of cocky people exhibit is being overly loud in certain social situations.  
+- Confident people do not have an inflated view of themselves.  
+
 
 
 
