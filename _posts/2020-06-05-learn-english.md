@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-05-28
+date:       2020-06-05
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -69,7 +69,13 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - intimidate  威胁恐吓
 - sloppy  草率的粗心的
 - win-win situation 双赢局面  
-
+- banal 陈腐的平庸的  
+- subjective to the person 对某人主观  
+- tangible 有形的  
+- subconscious 潜意识的  
+- therapist 治疗专家  
+- psychiatrist 精神科医生
+- psychologist 心理专家  
 
 
 #### Sentence
@@ -118,6 +124,10 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - It's more about making other people thinking that you're confident as opposed to actually just being confident, which is why cocky people tend to talk a lot.  
 - A common trait that a lot of cocky people exhibit is being overly loud in certain social situations.  
 - Confident people do not have an inflated view of themselves.  
+- To some extent, I do agree with this.  
+- The secret of happiness is not found in seeking more, but in developing the capacity to enjoy less.  
+- Where a lot of people get in trouble is when they think happiness is tangible.  
+- No matter what it is people use to escape, it achieves the same goal, which is temporarily blurring all the expectations laid upon you.
 
 
 
