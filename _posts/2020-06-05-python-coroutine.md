@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Python的协程与异步"
-date:       2020-06-02
+date:       2020-06-05
 author:     "xcTorres"
 header-img: "img/in-post/python/python.png"
 catalog:    true
@@ -20,6 +20,7 @@ Python为了克服这个问题，引入了协程Coroutine的概念。协程由�
 [廖雪峰](https://www.liaoxuefeng.com/wiki/1016959663602400/1017968846697824)  
 [https://juejin.im/post/5c13245ee51d455fa5451f33](https://juejin.im/post/5c13245ee51d455fa5451f33)  
 [Python并行编程](https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/)
+[https://ashooter.github.io/2018-11-19/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python%E7%9A%84asyncio%E5%8D%8F%E7%A8%8B/](https://ashooter.github.io/2018-11-19/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python%E7%9A%84asyncio%E5%8D%8F%E7%A8%8B/)
 
 
 

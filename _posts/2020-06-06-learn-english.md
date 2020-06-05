@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-06-05
+date:       2020-06-06
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -60,7 +60,6 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - the broad massed 广大群众  
 - puberty 青春期  
 - resonate with sb 共鸣  
-- subjective 主观的  
 - authentic 真实的  
 - cocky 骄傲自大的  
 - mindset 心态  
