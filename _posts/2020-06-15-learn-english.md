@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-06-06
+date:       2020-06-15
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -75,6 +75,12 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - therapist 治疗专家  
 - psychiatrist 精神科医生
 - psychologist 心理专家  
+- eternalize 使不朽，使永生  
+- on a day-to-day basis 基本上每天  
+- laid back 闲散的  
+- compensate for 弥补补偿  
+- masculine 男性化  feminine 女性化  
+
 
 
 #### Sentence
@@ -126,7 +132,12 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - To some extent, I do agree with this.  
 - The secret of happiness is not found in seeking more, but in developing the capacity to enjoy less.  
 - Where a lot of people get in trouble is when they think happiness is tangible.  
-- No matter what it is people use to escape, it achieves the same goal, which is temporarily blurring all the expectations laid upon you.
+- No matter what it is people use to escape, it achieves the same goal, which is temporarily blurring all the expectations laid upon you.  
+- This is sometime the case， but a lot of times, this is not really the reality. 有时候是这样的, 但大多数情况下确并非如此。  
+- Express your self and unleadsh the beast within you.  
+- You won't reach the state by thinking the way there.  
+
+
 
 
 
