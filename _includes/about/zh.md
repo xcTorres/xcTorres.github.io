@@ -26,7 +26,7 @@ Sep 2018 – Jun 2019 , Wuhan, China
 - Design the spatio-temporal index and improve the performance of range query and k-NN query, making the average query time under 100 ms.  
 
 **DiDi   Intern**  
-Jun 2018 – Sep 2018 , Wuhan, China  
+Jun 2018 – Sep 2018 , Beijing, China  
 - Participate in utilizing the machine learning model to provide the appropriate drop-off point for the destination, saving passenger’s time and walking cost.
 - Combine the features of POI, passengers, drivers, road, etc. ,and utilize GBDT model to screen out important features, resulting in 10% decrease the MAE of destination deviation.
 
