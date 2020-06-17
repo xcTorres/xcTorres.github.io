@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Python Web"
-date:       2019-12-20
+date:       2020-06-16
 author:     "xcTorres"
 header-img: "img/in-post/leetcode.jpg"
 catalog:    true
@@ -88,7 +88,10 @@ Gunciorn又是什么呢，首先Gunicorn是一个WSGI服务器。它不在乎它
 - 多 Nginx + 多 Gunicorn + Flask App = 小型多实例 Web 应用，一般也会给 gunicorn 挂 supervisor
 
 ## Supervisor
-Gunicorn采取的主从模式，即master进程将管理多个子进程，若某个子进程挂了，主进程可以重新启动子进程。那么万一主进程也挂了怎么办，常用的方法是通过[supervisor](https://github.com/Supervisor/supervisor)进行监控。
+Gunicorn采取的主从模式，即master进程将管理多个子进程，若某个子进程挂了，主进程可以重新启动子进程。那么万一主进程也挂了怎么办，常用的方法是通过[supervisor](https://github.com/Supervisor/supervisor)进行监控。 
+
+## Celery
+https://www.distributedpython.com/2018/10/26/celery-execution-pool/
 
 ## 参考
 [https://toutiao.io/posts/45fmtc/preview](https://toutiao.io/posts/45fmtc/preview)  

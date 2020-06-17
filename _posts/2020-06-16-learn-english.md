@@ -81,8 +81,8 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - compensate for 弥补补偿  
 - masculine 男性化  feminine 女性化 
 - drastically 彻底地激烈地  
-- take it with a grain of salt 不全信；对…采取保留态度
-
+- take it with a grain of salt 不全信；对…采取保留态度  
+- live life on your own terms 按照自己的方式生活
 
 
 #### Sentence
@@ -139,9 +139,13 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - Express your self and unleash the beast within you.  
 - You won't reach the state by thinking the way there.   
 - I don't think giving love in a way that is not in your primary love language will grow resentment towards your partner.
-
-
-
+- And this is easier said than done.  
+- There is nothing more attrative to a girl when a man knows exactly what he wants to do in this life.  
+- When a man is on his purpose, it creates a gravitational pull around him.  
+- Like being peer pressured into doing things that you don't want to do  
+- Alpha men will have opinions on topics that they are knowledgeable about and they are not scared to voice their opinions to the people around them.  
+- Something to also note is that you can be both polarizing and respectful at the same time.
+- They do not sit idly by while opportunities and problems pass them by.
 
 
 
