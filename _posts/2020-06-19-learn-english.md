@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-06-17
+date:       2020-06-19
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -82,8 +82,12 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - masculine 男性化  feminine 女性化 
 - drastically 彻底地激烈地  
 - take it with a grain of salt 不全信；对…采取保留态度  
-- live life on your own terms 按照自己的方式生活
-
+- live life on your own terms 按照自己的方式生活  
+- hinge on 取决于  
+- utterly 彻底地完全地  
+- funny and witty 风趣幽默  
+- improv 即兴表演，即兴的  
+- under certain circumstances 在特定情况下
 
 #### Sentence
 - A 35-year-old man have tested positive for the virus.  
@@ -145,7 +149,9 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - Like being peer pressured into doing things that you don't want to do  
 - Alpha men will have opinions on topics that they are knowledgeable about and they are not scared to voice their opinions to the people around them.  
 - Something to also note is that you can be both polarizing and respectful at the same time.
-- They do not sit idly by while opportunities and problems pass them by.
+- They do not sit idly by while opportunities and problems pass them by.  
+- If you want to become that incredibly confident man that everyone admires, the only thing you need to do is...  
+- I am going to change your perspective on what confidence is, and I am gonna share with you the single most impactful thing that skyrocketed my own personal confidence.
 
 
 
