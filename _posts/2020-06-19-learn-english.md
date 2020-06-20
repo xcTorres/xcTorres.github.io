@@ -87,7 +87,8 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - utterly 彻底地完全地  
 - funny and witty 风趣幽默  
 - improv 即兴表演，即兴的  
-- under certain circumstances 在特定情况下
+- under certain circumstances 在特定情况下  
+- gravitational pull 万有引力
 
 #### Sentence
 - A 35-year-old man have tested positive for the virus.  
