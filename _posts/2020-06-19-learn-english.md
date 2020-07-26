@@ -88,7 +88,8 @@ English is not an art to be mastered.It is just a tool to get the result.**
 - funny and witty 风趣幽默  
 - improv 即兴表演，即兴的  
 - under certain circumstances 在特定情况下  
-- gravitational pull 万有引力
+- gravitational pull 万有引力  
+- follow in the steps of 跟随某人的步伐，向某人学习
 
 #### Sentence
 - A 35-year-old man have tested positive for the virus.  

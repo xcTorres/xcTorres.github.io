@@ -144,5 +144,11 @@ friends: [
     },{
         title: "开发者头条",
         href: "https://toutiao.io/"
+    },{
+        title: "rgb24 bits",
+        href: "https://rgb-24bit.github.io/blog/"
+    },{
+        title: "余列冰",
+        href: "https://lb-yu.github.io/"
     }
 ]
