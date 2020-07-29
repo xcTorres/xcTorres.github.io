@@ -93,10 +93,6 @@ friends: [
         href: "https://www.cnblogs.com/pinard/"
  
     },{
-        title: "honly",
-        href: "https://guanhonly.github.io/"
- 
-    },{
         title: "10tiao",
         href: "http://www.10tiao.com/"
     },{
@@ -150,5 +146,8 @@ friends: [
     },{
         title: "余列冰",
         href: "https://lb-yu.github.io/"
+    },{
+        title: "李明亮",
+        href: "https://mthli.xyz/"
     }
 ]
