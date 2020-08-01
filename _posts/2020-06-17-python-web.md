@@ -90,10 +90,6 @@ Gunciorn又是什么呢，首先Gunicorn是一个WSGI服务器。它不在乎它
 ## Supervisor
 Gunicorn采取的主从模式，即master进程将管理多个子进程，若某个子进程挂了，主进程可以重新启动子进程。那么万一主进程也挂了怎么办，常用的方法是通过[supervisor](https://github.com/Supervisor/supervisor)进行监控。 
 
-## Celery
-https://www.distributedpython.com/2018/10/26/celery-execution-pool/  
-https://www.cloudamqp.com/blog/2018-01-19-part4-rabbitmq-13-common-errors.html
-
 ## 参考
 [https://toutiao.io/posts/45fmtc/preview](https://toutiao.io/posts/45fmtc/preview)  
 [gunicorn适用类型](https://medium.com/@genchilu/brief-introduction-about-the-types-of-worker-in-gunicorn-and-respective-suitable-scenario-67b0c0e7bd62)  
