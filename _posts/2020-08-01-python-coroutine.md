@@ -79,7 +79,7 @@ Python为了实现异步的机制，引入了协程Coroutine的概念。协程�
 ```
 
 
-Gevent也是一个出名的协程库，其用法与Asyncio完全不同，Gevent的宗旨是自动将标准库替换为协程库。如下例，虽然我们使用的是标准款的time.sleep()，但是gevent仍然能将其视作协程并自动切换。
+Gevent也是一个出名的协程库，其用法与Asyncio完全不同，Gevent的宗旨是自动将标准库替换为协程库。如下例，虽然我们使用的是标准库的time.sleep()，但是gevent仍然能将其自动切换为协程。
 ```python
 
     from gevent import monkey
@@ -111,7 +111,7 @@ Gevent也是一个出名的协程库，其用法与Asyncio完全不同，Gevent�
 
 ```
 
-patch_all函数则是可以设置需要替换的库名，并最终达到异步的效果。
+patch_all函数则是可以设置需要替换的标准库，并最终达到异步的效果。
 ```python
 
     def patch_all(socket=True, dns=True, time=True, select=True, thread=True,os=True, ssl=True, subprocess=True, sys=False, aggressive=True, Event=True,
