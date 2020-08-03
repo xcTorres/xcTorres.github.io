@@ -26,8 +26,9 @@ Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路
 以上图G4为例，来对迪杰斯特拉进行算法演示(以第4个顶点D为起点)。以下B节点中23应为13。  
 ![sample](/img/in-post/graph/dijkstra-demo-1.png)
 
-- 代码  
-leetcod而有个求网络延迟时间的问题，其中一种解法可以由Dijkstra算法解决。
+**代码**
+
+leetcod而有个求网络延迟时间的问题，可以由Dijkstra算法解决。
 [https://leetcode.com/problems/network-delay-time/submissions/](https://leetcode.com/problems/network-delay-time/submissions/)  
 
 方法一： 邻接图
