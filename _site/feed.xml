@@ -3,10 +3,10 @@
   <channel>
     <title>xcTorres Blog</title>
     <description></description>
-    <link>https://xctorres.github.io//</link>
-    <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 15 Aug 2020 23:27:24 +0800</pubDate>
-    <lastBuildDate>Sat, 15 Aug 2020 23:27:24 +0800</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sat, 15 Aug 2020 23:48:39 +0800</pubDate>
+    <lastBuildDate>Sat, 15 Aug 2020 23:48:39 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -199,8 +199,8 @@
 &lt;a href=&quot;https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/&quot;&gt;https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 04 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/04/shortesr-path-algo/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/04/shortesr-path-algo/</guid>
+        <link>http://localhost:4000/2020/08/04/shortesr-path-algo/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/08/04/shortesr-path-algo/</guid>
         
         <category>graph</category>
         
@@ -327,8 +327,8 @@
 
 </description>
         <pubDate>Sat, 01 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/01/python-coroutine/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/01/python-coroutine/</guid>
+        <link>http://localhost:4000/2020/08/01/python-coroutine/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/08/01/python-coroutine/</guid>
         
         <category>Python</category>
         
@@ -345,8 +345,8 @@
 &lt;a href=&quot;https://www.youtube.com/watch?v=qt9KfpWuRKg&quot;&gt;古人类和现代人的分界点在哪？没有过渡物种吗？每块化石都显得那么突兀【宇宙自然生命简史】&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 20 Jun 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/06/20/universe/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/06/20/universe/</guid>
+        <link>http://localhost:4000/2020/06/20/universe/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/20/universe/</guid>
         
         <category>宇宙</category>
         
@@ -510,8 +510,8 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
 
 </description>
         <pubDate>Fri, 19 Jun 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/06/19/learn-english/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/06/19/learn-english/</guid>
+        <link>http://localhost:4000/2020/06/19/learn-english/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/19/learn-english/</guid>
         
         <category>学习</category>
         
@@ -610,8 +610,8 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
 &lt;a href=&quot;https://blog.csdn.net/huwh_/article/details/80497790&quot;&gt;https://blog.csdn.net/huwh_/article/details/80497790&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 17 Jun 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/06/17/python-web/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/06/17/python-web/</guid>
+        <link>http://localhost:4000/2020/06/17/python-web/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/17/python-web/</guid>
         
         <category>Python</category>
         
@@ -640,8 +640,8 @@ I will touch base with you. 我会向你再次确认。&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 26 May 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/05/26/machine-learning-word/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/05/26/machine-learning-word/</guid>
+        <link>http://localhost:4000/2020/05/26/machine-learning-word/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/26/machine-learning-word/</guid>
         
         <category>学习</category>
         
@@ -679,8 +679,8 @@ I will touch base with you. 我会向你再次确认。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/pinard/p/7243513.html&quot;&gt;刘建平老师&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 25 May 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/05/25/word2vec/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/05/25/word2vec/</guid>
+        <link>http://localhost:4000/2020/05/25/word2vec/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/25/word2vec/</guid>
         
         <category>nlp</category>
         
@@ -904,8 +904,8 @@ I will touch base with you. 我会向你再次确认。&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 30 Apr 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/04/30/hungarian/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/04/30/hungarian/</guid>
+        <link>http://localhost:4000/2020/04/30/hungarian/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/30/hungarian/</guid>
         
         <category>algorithms</category>
         
@@ -963,8 +963,8 @@ I will touch base with you. 我会向你再次确认。&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 26 Mar 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/03/26/corporate-finance/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/03/26/corporate-finance/</guid>
+        <link>http://localhost:4000/2020/03/26/corporate-finance/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/26/corporate-finance/</guid>
         
         <category>金融</category>
         
@@ -1006,8 +1006,8 @@ I will touch base with you. 我会向你再次确认。&lt;/p&gt;
 &lt;p&gt;哈哈，努力努力，但随缘就好~&lt;/p&gt;
 </description>
         <pubDate>Wed, 01 Jan 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/01/01/new-year/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/01/01/new-year/</guid>
+        <link>http://localhost:4000/2020/01/01/new-year/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/01/new-year/</guid>
         
         <category>生活</category>
         
