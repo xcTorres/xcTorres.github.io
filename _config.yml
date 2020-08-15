@@ -33,7 +33,7 @@ anchorjs: false                          # if you want to customize anchor. chec
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-plugins: [jekyll-paginate]
+plugins: [jekyll-paginate, jekyll-gallery-generator]
 
 
 
@@ -79,7 +79,6 @@ sidebar-avatar: /img/avatar-xcTorres.png      # use absolute URL, seeing it's us
 # Featured Tags
 featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 0              # A tag will be featured if the size of it is more than this condition value
-
 
 
 # Friends
@@ -151,3 +150,19 @@ friends: [
         href: "https://mthli.xyz/"
     }
 ]
+
+gallery:
+  dir: gallery               # Path to the gallery
+  symlink: false            # false: copy images into _site. true: create symbolic links (saves disk space)
+  title: "Gallery"           # Title for gallery index page
+  title_prefix: ""  # Title prefix for gallery pages. Gallery title = title_prefix + gallery_name
+  sort_field: "date_time"   # How to sort galleries on the index page.
+                            # Possible values are: title, date_time, best_image
+  thumbnail_size:
+    x: 600                  # max width of thumbnails (in pixels)
+    y: 600                  # max height of thumbnails (in pixels)
+  # The following options are for individual galleries.
+  galleries:
+    lighthouse:
+      name: "Johor Straits Lighthouse(2020/08/10)"
+      best_image: lighthouse_02.jpg  
