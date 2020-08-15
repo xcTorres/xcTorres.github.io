@@ -153,7 +153,7 @@ friends: [
 
 gallery:
   dir: gallery               # Path to the gallery
-  symlink: true            # false: copy images into _site. true: create symbolic links (saves disk space)
+  symlink: false            # false: copy images into _site. true: create symbolic links (saves disk space)
   title: "Gallery"           # Title for gallery index page
   title_prefix: ""  # Title prefix for gallery pages. Gallery title = title_prefix + gallery_name
   sort_field: "date_time"   # How to sort galleries on the index page.
