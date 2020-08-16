@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xcTorres Blog</title>
+    <description></description>
+    <link>https://xctorres.github.io//</link>
+    <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 16 Aug 2020 21:36:27 +0800</pubDate>
+    <lastBuildDate>Sun, 16 Aug 2020 21:36:27 +0800</lastBuildDate>
+    <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>最短路径算法</title>
+        <description>&lt;h4 id=&quot;dijkstra-算法&quot;&gt;Dijkstra 算法&lt;/h4&gt;
+&lt;p&gt;Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路网做路径规划中，也常常用到该算法的变种。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;基本思想
+    &lt;ol&gt;
+      &lt;li&gt;通过Dijkstra计算图G中的最短路径时，需要指定起点s(即从顶点s开始计算)。&lt;/li&gt;
+      &lt;li&gt;此外，引进两个集合S和U。S的作用是记录已求出最短路径的顶点(以及相应的最短路径长度)，而U则是记录还未求出最短路径的顶点(以及该顶点到起点s的距离)。&lt;/li&gt;
+      &lt;li&gt;初始时，S中只有起点s；U中是除s之外的顶点，并且U中顶点的路径是”起点s到该顶点的路径”。然后，从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 然后，再从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 … 重复该操作，直到遍历完所有顶点。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;证明&lt;br /&gt;
+&lt;a href=&quot;https://www.cnblogs.com/jiangshaoyin/p/9954937.html&quot;&gt;https://www.cnblogs.com/jiangshaoyin/p/9954937.html&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Demo&lt;br /&gt;
+&lt;img src=&quot;/img/in-post/graph/dijkstra-demo-0.png&quot; alt=&quot;sample&quot; /&gt;
+以上图G4为例，来对迪杰斯特拉进行算法演示(以第4个顶点D为起点)。以下B节点中23应为13。&lt;br /&gt;
+&lt;img src=&quot;/img/in-post/graph/dijkstra-demo-1.png&quot; alt=&quot;sample&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;代码&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;leetcod而有个求网络延迟时间的问题，可以由Dijkstra算法解决。
+&lt;a href=&quot;https://leetcode.com/problems/network-delay-time/submissions/&quot;&gt;https://leetcode.com/problems/network-delay-time/submissions/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;方法一： 邻接图&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
+        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;networkDelayTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;times&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            
+            &lt;span class=&quot;c1&quot;&gt;# init the graph using matrix
+&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxsize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;times&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;tuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxsize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;sptSet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                
+                &lt;span class=&quot;c1&quot;&gt;# Pick the minimum distance vertex from  
+&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;# the set of vertices not yet processed.  
+&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;# u is always equal to src in first iteration 
+&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;min_dis&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxsize&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_dis&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sptSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+                        &lt;span class=&quot;n&quot;&gt;min_dis&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; 
+                        &lt;span class=&quot;n&quot;&gt;min_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_index&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;sptSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+                
+                &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxsize&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sptSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; 
+                            &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; 
+            
+            &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxsize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;方法二： 优先队列&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;networkDelayTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;times&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            
+                
+            &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;times&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;tuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt;
+            
+            &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;dis&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxsize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;dis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+                
+            &lt;span class=&quot;n&quot;&gt;heapq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heappush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                
+            &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;min_dis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;heapq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heappop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_dis&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
+                    
+                &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;dis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;heapq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heappush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;  
+                            
+                
+            &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxsize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;bellman-ford算法&quot;&gt;Bellman-Ford算法&lt;/h4&gt;
+&lt;p&gt;Bellman-Ford算法同样也是解决单源最短路径问题，但是Dijkstra算法无法解决负权边的问题，而Bellman-Ford可以做到。从Dijkstra算法的证明不难看出其是一种贪心算法。Bellman-Ford基本思想如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;初始化：将除源点外的所有顶点的最短距离估计值 dist[v] ← +∞, dist[s] ←0;&lt;/li&gt;
+  &lt;li&gt;迭代求解：反复对边集E中的每条边进行松弛操作，使得顶点集V中的每个顶点v到s的最短距离最小。在这里需要运行顶点个数v-1次，其原理是每多运行一次，则相当于允许多加一条边的情况下，各个顶点v到s的最短距离。如果一个顶点是从源点可达的，那么最多则相隔v-1条边。即v-1次后，如若没有负权回路则已经收敛。&lt;/li&gt;
+  &lt;li&gt;检验负权回路：判断边集E中的每一条边的两个端点是否收敛。如果存在未收敛的顶点，则算法返回false，表明问题无解；否则算法返回true，并且从源点可达的顶点v的最短距离保存在 dist[v]中。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;代码：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Python3 program for Bellman-Ford's single source 
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# shortest path algorithm. 
+&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Class to represent a graph 
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+
+        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vertices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vertices&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# No. of vertices 
+&lt;/span&gt;            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; 
+
+        &lt;span class=&quot;c1&quot;&gt;# function to add an edge to graph 
+&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addEdge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; 
+            
+        &lt;span class=&quot;c1&quot;&gt;# utility function used to print the solution 
+&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printArr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Vertex Distance from Source&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+                &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{0}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\t\t&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{1}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; 
+        &lt;span class=&quot;c1&quot;&gt;# The main function that finds shortest distances from src to 
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# all other vertices using Bellman-Ford algorithm. The function 
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# also detects negative weight cycle 
+&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;BellmanFord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+
+		&lt;span class=&quot;c1&quot;&gt;# Step 1: Initialize distances from src to all other vertices 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# as INFINITE 
+&lt;/span&gt;		&lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Inf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; 
+		&lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+
+
+		&lt;span class=&quot;c1&quot;&gt;# Step 2: Relax all edges |V| - 1 times. A simple shortest 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# path from src to any other vertex can have at-most |V| - 1 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# edges 
+&lt;/span&gt;		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+            &lt;span class=&quot;c1&quot;&gt;# Update dist value and parent index of the adjacent vertices of 
+&lt;/span&gt;			&lt;span class=&quot;c1&quot;&gt;# the picked vertex. Consider only those vertices which are still in 
+&lt;/span&gt;			&lt;span class=&quot;c1&quot;&gt;# queue 
+&lt;/span&gt;			&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+			    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Inf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; 
+					&lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; 
+
+		&lt;span class=&quot;c1&quot;&gt;# Step 3: check for negative-weight cycles. The above step 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# guarantees shortest distances if graph doesn't contain 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# negative weight cycle. If we get a shorter path, then there 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# is a cycle. 
+&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+			&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Inf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; 
+				&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Graph contains negative weight cycle&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+				&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+						
+		&lt;span class=&quot;c1&quot;&gt;# print all distance 
+&lt;/span&gt;		&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;printArr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;参考&quot;&gt;参考&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/heroacool/article/details/51014824&quot;&gt;https://blog.csdn.net/heroacool/article/details/51014824&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.cnblogs.com/gaochundong/p/bellman_ford_algorithm.html&quot;&gt;https://www.cnblogs.com/gaochundong/p/bellman_ford_algorithm.html&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://zhuanlan.zhihu.com/p/36295603&quot;&gt;https://zhuanlan.zhihu.com/p/36295603&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/&quot;&gt;https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 04 Aug 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/08/04/shortesr-path-algo/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/08/04/shortesr-path-algo/</guid>
+        
+        <category>graph</category>
+        
+        <category>算法</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Python的协程与异步</title>
+        <description>&lt;h2 id=&quot;预备知识&quot;&gt;预备知识&lt;/h2&gt;
+
+&lt;h4 id=&quot;线程与进程&quot;&gt;线程与进程&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/in-post/coroutine/threadvsprocess.png&quot; alt=&quot;图一&quot; /&gt;&lt;br /&gt;
+一个进程中是允许多个线程存在的，且进程与进程之间拥有完全独立的内存空间与数据。而同一进程内部的线程与线程中，虽都拥有独立的寄存器和栈空间，但他们可以共享代码，数据空间。也正因为这样的一个结构，使得线程之间的通信要比进程之间的通信要容易得多。&lt;/p&gt;
+
+&lt;h4 id=&quot;并发与并行&quot;&gt;并发与并行&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/in-post/coroutine/concurrency.png&quot; alt=&quot;图二&quot; /&gt;&lt;br /&gt;
+我们一般写的同步代码，就如同图中的Sequential（顺序执行），一个任务(蓝色圆圈为一个任务)完成了，才会继续运行另一个任务(红色圆圈)。而有时候为了提高效率也会用到并发，并行的机制。&lt;/p&gt;
+
+&lt;p&gt;图中的Concurrent即为并发机制，它是一下接收多个任务，但不要求任务必须要同一时间执行，而是可以执行部分任务A，然后转换到任务B执行一会儿，再跳回任务A如此往复，直至最终任务AB都完成。&lt;/p&gt;
+
+&lt;p&gt;并行就比较容易理解了，就是多个任务同一时间运行。常用的实现方式就是利用计算机多核，同时进行运算。&lt;/p&gt;
+
+&lt;h4 id=&quot;同步和异步&quot;&gt;同步和异步&lt;/h4&gt;
+
+&lt;p&gt;而在计算机概念中，我们经常听到同步和异步两个概念，这两个概念其实跟顺序执行和并发很相似. 同步，可以理解为在执行完一个函数或方法之后，一直等待系统返回值或消息，这时程序是出于阻塞的，只有接收到返回的值或消息后才往下执行其他的命令。异步，执行完函数或方法后，不必阻塞性地等待返回值或消息，只需要向系统委托一个异步过程，那么当系统接收到返回值或消息时，系统会自动触发委托的异步过程，从而完成一个完整的流程。&lt;/p&gt;
+
+&lt;p&gt;所以当需要执行I/O操作时，使用异步操作比使用线程+同步I/O操作更合适。I/O操作不仅包括了直接的文件、网络的读写，还包括数据库操作、Web Service、HttpRequest以及.Net Remoting等跨进程的调用。因为这些任务不需要CPU计算，只需要等待结果，在异步的情况下就能在非阻塞的情况下尽可能处理更多的操作。&lt;/p&gt;
+
+&lt;h2 id=&quot;python-gil&quot;&gt;Python GIL&lt;/h2&gt;
+
+&lt;p&gt;在早期的Python版本中，Python用的Reference count机制来进行垃圾回收。即当一个地址的引用对象个数为0时，即可视作垃圾并进行内存回收。这种机制的好处是，容易实现且容易回收，但也带来了不少缺点。比如处理不了循环引用的情况，还有个缺点是在计算reference count的过程中需要锁住线程，不允许多线程操作。不然主线程算出来某个对象的引用计数可能是1，但与此同时另一个线程把计数变为了0，但是主线程没能回收该对象内存造成内存泄露。所以CPython编译器有个全局解释锁的概念,这样就能保证使用Reference count机制的时候能够保证只有一个线程进行。&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;GIL: 全局解释器锁（英语：Global Interpreter Lock，缩写GIL），是计算机程序设计语言解释器用于同步线程的一种机制，它使得任何时刻仅有一个线程在执行。[1]即便在多核心处理器上，使用 GIL 的解释器也只允许同一时间执行一个线程。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;多进程&quot;&gt;多进程&lt;/h2&gt;
+&lt;p&gt;由于GIL的存在，在Python环境中我们无法通过多线程的方式充分利用多核的性能。但是多进程是一个不错的替代方式，因为每个进程独自存在且使用各自独自的GIL。&lt;/p&gt;
+
+&lt;h2 id=&quot;协程&quot;&gt;协程&lt;/h2&gt;
+&lt;p&gt;Python为了实现异步的机制，引入了协程Coroutine的概念。协程由于由程序主动控制切换，没有线程切换的开销，所以执行效率极高。对于IO密集型任务非常适用。在Python3.4之前，官方没有对协程的支持，存在一些三方库的实现，比如gevent和Tornado。3.4之后就内置了asyncio标准库，官方真正实现了协程这一特性。而Python对协程的支持，是通过Generator实现的，协程是遵循某些规则的生成器，关于生成器Generator的好处可以参考如下介绍&lt;a href=&quot;https://www.programiz.com/python-programming/generator&quot;&gt;https://www.programiz.com/python-programming/generator&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;在Python3.5之前，协程的定义需要修饰器来装饰，但3.5之后则直接用async来代替， yield from则由await来代替。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;time&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;asyncio&lt;/span&gt;
+
+
+    &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;One&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asyncio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Two&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+    &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asyncio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gather&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;perf_counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;asyncio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;elapsed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;perf_counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;f&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__file__&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; executed in &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elapsed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; seconds.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;该代码块运行结果如下,不难发现main函数是要运行三个协程任务，但当每个任务运行到asyncio.sleep的时候便立马切换到其他协程，然后当睡眠1s过后切换回来时，三个任务都依次完成。起到了异步的效果。其总时间只花了1s钟。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;n&quot;&gt;One&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;One&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;One&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Two&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Two&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Two&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coroutine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;executed&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.00&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Gevent也是一个出名的协程库，其用法与Asyncio完全不同，Gevent的宗旨是自动将标准库替换为协程库。如下例，虽然我们使用的是标准库的time.sleep()，但是gevent仍然能将其自动切换为协程。&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;gevent&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;monkey&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;monkey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;patch_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;gevent&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;time&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;eat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'eat food 1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'eat food 2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'play 1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'play 2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;g1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gevent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spawn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;g2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gevent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spawn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gevent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;joinall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'end'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# print result
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# eat food 1
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# play 1
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# play 2
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# eat food 2
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# end
+&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;patch_all函数则是可以设置需要替换的标准库，并最终达到异步的效果。&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;patch_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ssl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subprocess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aggressive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Event&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;builtins&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contextvars&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kwargs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;参考&quot;&gt;参考&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.liaoxuefeng.com/wiki/1016959663602400/1017968846697824&quot;&gt;廖雪峰&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://juejin.im/post/5c13245ee51d455fa5451f33&quot;&gt;https://juejin.im/post/5c13245ee51d455fa5451f33&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/&quot;&gt;Python并行编程&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://ashooter.github.io/2018-11-19/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python%E7%9A%84asyncio%E5%8D%8F%E7%A8%8B/&quot;&gt;https://ashooter.github.io/2018-11-19/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python%E7%9A%84asyncio%E5%8D%8F%E7%A8%8B/&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/AndreLouisCaron/a-tale-of-event-loops&quot;&gt;https://github.com/AndreLouisCaron/a-tale-of-event-loops&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 01 Aug 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/08/01/python-coroutine/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/08/01/python-coroutine/</guid>
+        
+        <category>Python</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>宇宙与意识</title>
+        <description>&lt;p&gt;最近看了Youtuber老高和晓涵哥的一些关于宇宙，UFO，外星人内容的视频，重新激发了我对宇宙的意识的兴趣。世界万物，小到原子分子大到银河系整个宇宙都是由原子分子两字构成。宏观角度，一切仿佛都遵循着爱因斯坦的广义相对论，而微观角度，组成我们的这些量子遵循的是神秘的量子力学。为什么在地球只有人这种生物是有智慧的生物，我们来到这个世界离开这个世界的意义又是什么。带着种种这些疑问，所以想着积累此博客，写一些视频和书籍的观后感。&lt;/p&gt;
+
+&lt;h2 id=&quot;人类简史&quot;&gt;人类简史&lt;/h2&gt;
+&lt;p&gt;对于人类而言，在历史的路上，有三个重要革命。 认知革命，农业革命，和科学革命。在认知革命中，我们人类是由跟黑猩猩🦍同样的祖先的智人进化而来，智人学会了制作工具学会了钻木取火🔥，有强大的学习能力并创造了语言繁衍至今。其中有个疑问是，在十五万年前，我们人类的祖先不过还是跟猴子猩猩其他动物一样只是生态系统的普通角色，为何短短的的时间只有人类有智慧，站在了食物链的顶端。且在我们智人同时期，地球上存在其他一些人种且能与智人通婚，尼安德特人与丹尼索瓦人，他的脑容量比智人还大，也就是说应该比智人更聪明，但是为什么他们都灭绝了而只有智人留了下来。&lt;br /&gt;
+-参考视频： 
+&lt;a href=&quot;https://www.youtube.com/watch?v=qt9KfpWuRKg&quot;&gt;古人类和现代人的分界点在哪？没有过渡物种吗？每块化石都显得那么突兀【宇宙自然生命简史】&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 20 Jun 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/06/20/universe/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/06/20/universe/</guid>
+        
+        <category>宇宙</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Learning English</title>
+        <description>&lt;h1 id=&quot;态度&quot;&gt;态度&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;学习语言第一点需要端正态度&lt;/strong&gt;&lt;br /&gt;
+1)去除恐惧&lt;br /&gt;
+2)不怕出错，不怕被judge&lt;br /&gt;
+&lt;strong&gt;when you speak, don’t focus on yourself. Focus on other people and the result you want to achieve. 
+English is not an art to be mastered.It is just a tool to get the result.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=mwpdffpixBY&quot;&gt;https://www.youtube.com/watch?v=mwpdffpixBY&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=LtxikccfpaU&quot;&gt;https://www.youtube.com/watch?v=LtxikccfpaU&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.elllo.org&quot;&gt;http://www.elllo.org&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;听力&quot;&gt;听力&lt;/h2&gt;
+&lt;p&gt;在上班的工作中，用英语交流还仍有障碍，为了以后自己职业更好的发展，听力和口语都有待提高。在网上看了一些帖子，得到了一些启发，纠正了自己以往的学习方法。现在才真正明白了以下几个道理。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;对我这种基础比较差的泛听是没有什么卵用的。精听才是王道&lt;/li&gt;
+  &lt;li&gt;如果听力不好，其他听说读写没有一项会好。这些都是一连串的连锁反应。不能再找借口说自己写作和阅读能力不错了。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;为了提高听力，遂从今日3月6日开始，先开启为期一个月的精听模式，再分析学习方法是否适用于我。听力材料为每日英语听力中VOA慢速英语。&lt;br /&gt;
+1） 先将听到的内容写下来。不会的地方空下来（可以多听几遍）&lt;br /&gt;
+2） 查看答案，并查明空下来单词的原因，是发音的问题还是的确是生词词汇。&lt;br /&gt;
+3） 复听几遍，并跟读，纠正发音才能更好地提高听力。&lt;br /&gt;
+4） 第二天再听新听力之前，需重复听几遍前一天的听力，确保都能够听懂。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Begin date&lt;/strong&gt;:  March 6th, 2020&lt;br /&gt;
+&lt;strong&gt;End date&lt;/strong&gt;  :  ∞&lt;/p&gt;
+
+&lt;h4 id=&quot;word-and-phrase&quot;&gt;Word and Phrase&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;becon of hope&lt;/strong&gt; 希望的灯塔&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;come at a cost&lt;/strong&gt; 付出代价&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;reach a decision&lt;/strong&gt; 做出决定&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;at a later date&lt;/strong&gt; 稍后&lt;/li&gt;
+  &lt;li&gt;entitled 有权利的，有资格的&lt;/li&gt;
+  &lt;li&gt;disinfect 消毒&lt;/li&gt;
+  &lt;li&gt;synonyms  同义词&lt;/li&gt;
+  &lt;li&gt;antonyms  反义词&lt;/li&gt;
+  &lt;li&gt;the Great Recession  大萧条&lt;/li&gt;
+  &lt;li&gt;punctuation 标点符号&lt;/li&gt;
+  &lt;li&gt;companionship 陪伴&lt;/li&gt;
+  &lt;li&gt;hassle 困难灾难&lt;/li&gt;
+  &lt;li&gt;expert dispute 专家质疑&lt;/li&gt;
+  &lt;li&gt;tremendous 极大的巨大的&lt;/li&gt;
+  &lt;li&gt;in the aftermath of 后果余波&lt;/li&gt;
+  &lt;li&gt;humanitarian crisis 人道主义危机&lt;/li&gt;
+  &lt;li&gt;appear to 似乎好像&lt;/li&gt;
+  &lt;li&gt;as far as I concerned, 就我而言&lt;/li&gt;
+  &lt;li&gt;in any shape or form 以任何形式&lt;/li&gt;
+  &lt;li&gt;detention 留校察看&lt;/li&gt;
+  &lt;li&gt;force sb to do sth  迫使某人做某事&lt;/li&gt;
+  &lt;li&gt;vegatative state 植物人&lt;/li&gt;
+  &lt;li&gt;squire 侍从&lt;/li&gt;
+  &lt;li&gt;the broad massed 广大群众&lt;/li&gt;
+  &lt;li&gt;puberty 青春期&lt;/li&gt;
+  &lt;li&gt;resonate with sb 共鸣&lt;/li&gt;
+  &lt;li&gt;authentic 真实的&lt;/li&gt;
+  &lt;li&gt;cocky 骄傲自大的&lt;/li&gt;
+  &lt;li&gt;mindset 心态&lt;/li&gt;
+  &lt;li&gt;humility 谦虚谦逊&lt;/li&gt;
+  &lt;li&gt;cultivate 积累&lt;/li&gt;
+  &lt;li&gt;intimidate  威胁恐吓&lt;/li&gt;
+  &lt;li&gt;sloppy  草率的粗心的&lt;/li&gt;
+  &lt;li&gt;win-win situation 双赢局面&lt;/li&gt;
+  &lt;li&gt;banal 陈腐的平庸的&lt;/li&gt;
+  &lt;li&gt;subjective to the person 对某人主观&lt;/li&gt;
+  &lt;li&gt;tangible 有形的&lt;/li&gt;
+  &lt;li&gt;subconscious 潜意识的&lt;/li&gt;
+  &lt;li&gt;therapist 治疗专家&lt;/li&gt;
+  &lt;li&gt;psychiatrist 精神科医生&lt;/li&gt;
+  &lt;li&gt;psychologist 心理专家&lt;/li&gt;
+  &lt;li&gt;eternalize 使不朽，使永生&lt;/li&gt;
+  &lt;li&gt;on a day-to-day basis 基本上每天&lt;/li&gt;
+  &lt;li&gt;laid back 闲散的&lt;/li&gt;
+  &lt;li&gt;compensate for 弥补补偿&lt;/li&gt;
+  &lt;li&gt;masculine 男性化  feminine 女性化&lt;/li&gt;
+  &lt;li&gt;drastically 彻底地激烈地&lt;/li&gt;
+  &lt;li&gt;take it with a grain of salt 不全信；对…采取保留态度&lt;/li&gt;
+  &lt;li&gt;live life on your own terms 按照自己的方式生活&lt;/li&gt;
+  &lt;li&gt;hinge on 取决于&lt;/li&gt;
+  &lt;li&gt;utterly 彻底地完全地&lt;/li&gt;
+  &lt;li&gt;funny and witty 风趣幽默&lt;/li&gt;
+  &lt;li&gt;improv 即兴表演，即兴的&lt;/li&gt;
+  &lt;li&gt;under certain circumstances 在特定情况下&lt;/li&gt;
+  &lt;li&gt;gravitational pull 万有引力&lt;/li&gt;
+  &lt;li&gt;follow in the steps of 跟随某人的步伐，向某人学习&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;sentence&quot;&gt;Sentence&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;A 35-year-old man have tested positive for the virus.&lt;/li&gt;
+  &lt;li&gt;More information follows. 后面还显示更多信息&lt;/li&gt;
+  &lt;li&gt;By now messages like this one are &lt;strong&gt;commonplace&lt;/strong&gt; in South Korea.  司空见惯的事&lt;/li&gt;
+  &lt;li&gt;The result has been &lt;strong&gt;stunning&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;South Korea methods of fighting coronavirus has been &lt;strong&gt;praised&lt;/strong&gt; as a model of how to contain the virus.&lt;/li&gt;
+  &lt;li&gt;It avoids forced restrictions on movement and does not lead to widespread closure of business.&lt;/li&gt;
+  &lt;li&gt;If South korea is reducing privacy &lt;strong&gt;in exchange for&lt;/strong&gt; fighting the virus, many South Koreans seem to accept it happily.&lt;/li&gt;
+  &lt;li&gt;The International Olympic Committee has annouced a first-of-its-kind postponement of the Summer Olympics.&lt;/li&gt;
+  &lt;li&gt;Athletes, sports organizations and national Olympic committees had been pressuring the IOC to postpone the games.&lt;/li&gt;
+  &lt;li&gt;The notes that the virus had put serious limitations on traing and qualifying events, as well as efforts to fight the use performance-enhancing drugs.&lt;/li&gt;
+  &lt;li&gt;Thankful to finally have some clarity regarding the Olympic Games.&lt;/li&gt;
+  &lt;li&gt;It was becoming increasingly clear that starting on July 24th was no longer a choice.&lt;/li&gt;
+  &lt;li&gt;common expression 常见表达&lt;/li&gt;
+  &lt;li&gt;Specifically, we take a tour of our largest organ: the skin.&lt;/li&gt;
+  &lt;li&gt;They causr itching and great discomfort.&lt;/li&gt;
+  &lt;li&gt;So, to &lt;strong&gt;get under someone’s skin&lt;/strong&gt; means to annoy them or, better still to bug them.&lt;/li&gt;
+  &lt;li&gt;You have to be careful what you say to &lt;strong&gt;thin skinned&lt;/strong&gt; people so as not to hurt their feelings.&lt;/li&gt;
+  &lt;li&gt;Many millennials also are identified as jobless and more likely than other young people to be living with one or both parents.&lt;/li&gt;
+  &lt;li&gt;Many are weighed down with debt from student loans.&lt;/li&gt;
+  &lt;li&gt;That may be the case 事实的确是这样&lt;/li&gt;
+  &lt;li&gt;What we think is fascinating is that 我们觉得有趣的是…&lt;/li&gt;
+  &lt;li&gt;Scientic study have shown that 科学研究表明…&lt;/li&gt;
+  &lt;li&gt;Avoid rubbing your phone with rough materials that could make small cuts on it.&lt;/li&gt;
+  &lt;li&gt;Most patients experience only mild or moderate symptoms.&lt;/li&gt;
+  &lt;li&gt;However, older people and those with existing health conditions are more likely to develop more severe illness.&lt;/li&gt;
+  &lt;li&gt;The United States will begin restricting visas to citizens from six other countries on February 21, although critics question the move.&lt;/li&gt;
+  &lt;li&gt;Superbugs are appearing much more often outside of the hospitals, the CDC report said.&lt;/li&gt;
+  &lt;li&gt;And now for some closing thoughts. 现在做一些总结&lt;/li&gt;
+  &lt;li&gt;Learning to use context clues can take time. Don’t pressure yourself to be great at the skill too qiuckly.&lt;/li&gt;
+  &lt;li&gt;The remains of a small bird are giving scientists a rare look at eraly ancectors of modern birds.&lt;/li&gt;
+  &lt;li&gt;They say the fossil dates back to right before an asteroid hit the earth, killing off dinosaurs and other creatures.&lt;/li&gt;
+  &lt;li&gt;And the fossil itself shows qualities that have been suggested as helpful for survival.&lt;/li&gt;
+  &lt;li&gt;Be picky about what you are eating.&lt;/li&gt;
+  &lt;li&gt;the country that were once said to be more secure&lt;/li&gt;
+  &lt;li&gt;The students, ages 14 to 17, &lt;strong&gt;were joined&lt;/strong&gt; by 12 experienced crew members.&lt;/li&gt;
+  &lt;li&gt;using a cane for support 用拐杖支持&lt;/li&gt;
+  &lt;li&gt;someone shift tone(change narrative) on this issue. 改变观点看法。&lt;/li&gt;
+  &lt;li&gt;I invite you to take this concept into your own life.&lt;/li&gt;
+  &lt;li&gt;I will know where you stand. 你就会知道知道你自己的定位是什么。&lt;/li&gt;
+  &lt;li&gt;This is where you have a clearly-defined purpose in your life.&lt;/li&gt;
+  &lt;li&gt;A massive difference between the knight stage and the prince stage is that the prince possesses a valuable trait called patience.&lt;/li&gt;
+  &lt;li&gt;A prince is not overly concerned with the outcome, but he is very concerned with the process, and he is constantly course-correcting and improving the way he does things.&lt;/li&gt;
+  &lt;li&gt;It’s more about making other people thinking that you’re confident as opposed to actually just being confident, which is why cocky people tend to talk a lot.&lt;/li&gt;
+  &lt;li&gt;A common trait that a lot of cocky people exhibit is being overly loud in certain social situations.&lt;/li&gt;
+  &lt;li&gt;Confident people do not have an inflated view of themselves.&lt;/li&gt;
+  &lt;li&gt;To some extent, I do agree with this.&lt;/li&gt;
+  &lt;li&gt;The secret of happiness is not found in seeking more, but in developing the capacity to enjoy less.&lt;/li&gt;
+  &lt;li&gt;Where a lot of people get in trouble is when they think happiness is tangible.&lt;/li&gt;
+  &lt;li&gt;No matter what it is people use to escape, it achieves the same goal, which is temporarily blurring all the expectations laid upon you.&lt;/li&gt;
+  &lt;li&gt;This is sometime the case， but a lot of times, this is not really the reality. 有时候是这样的, 但大多数情况下确并非如此。&lt;/li&gt;
+  &lt;li&gt;Express your self and unleash the beast within you.&lt;/li&gt;
+  &lt;li&gt;You won’t reach the state by thinking the way there.&lt;/li&gt;
+  &lt;li&gt;I don’t think giving love in a way that is not in your primary love language will grow resentment towards your partner.&lt;/li&gt;
+  &lt;li&gt;And this is easier said than done.&lt;/li&gt;
+  &lt;li&gt;There is nothing more attrative to a girl when a man knows exactly what he wants to do in this life.&lt;/li&gt;
+  &lt;li&gt;When a man is on his purpose, it creates a gravitational pull around him.&lt;/li&gt;
+  &lt;li&gt;Like being peer pressured into doing things that you don’t want to do&lt;/li&gt;
+  &lt;li&gt;Alpha men will have opinions on topics that they are knowledgeable about and they are not scared to voice their opinions to the people around them.&lt;/li&gt;
+  &lt;li&gt;Something to also note is that you can be both polarizing and respectful at the same time.&lt;/li&gt;
+  &lt;li&gt;They do not sit idly by while opportunities and problems pass them by.&lt;/li&gt;
+  &lt;li&gt;If you want to become that incredibly confident man that everyone admires, the only thing you need to do is…&lt;/li&gt;
+  &lt;li&gt;I am going to change your perspective on what confidence is, and I am gonna share with you the single most impactful thing that skyrocketed my own personal confidence.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Fri, 19 Jun 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/06/19/learn-english/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/06/19/learn-english/</guid>
+        
+        <category>学习</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Python Web</title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+&lt;p&gt;由于机器学习，深度学习，数据分析，数据挖掘的兴起，且因为Python脚本语言上手极快，使得Python这门语言非常火热🔥。但其应用场景多在运维，爬虫，以及机器学习数据挖掘方面。现在本人的职位是算法工程师，更希望注重于机器学习深度学习算法的效果及实现，但在项目中不免要给算法做稳定的网络微服务。所以在工作过程中，算法的逻辑和稳定性和后台的稳定性有时候得一把抓。Java的确是一门不错的语言，但其Spring框架比较庞大，且我所在公司使用Go和Python语言，没有Java开发的环境。所以最终打算通过Python作为后台开发语言。&lt;br /&gt;
+每当提及用Python作为后台开发语言，很多技术人士都会嗤之以鼻，担心其过慢的运行效率无法解决高并发问题。但Google搜索引擎的部分代码，Instagram，国内的豆瓣知乎等很多知名互联网企业都是Python语言的后台。这些成功的产品证明，只要处理得当，Python后台完全能处理一定量级的高并发问题。综合考虑打算使用flask，gunicorn，nginx的的方法来实现稳定的后台服务，特写此文用来记录Python后台记录的点点滴滴。&lt;/p&gt;
+
+&lt;p&gt;先将代码地址放在此处&lt;a href=&quot;https://github.com/xcTorres/python_web&quot;&gt;https://github.com/xcTorres/python_web&lt;/a&gt;，欢迎star。&lt;/p&gt;
+
+&lt;h2 id=&quot;flask&quot;&gt;Flask&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/pallets/flask&quot;&gt;flask&lt;/a&gt;是一个用于创建web应用的微服务框架，其主要由&lt;a href=&quot;https://github.com/pallets/werkzeug&quot;&gt;werkzeug&lt;/a&gt;作为WSGI网络应用程序, 以及&lt;a href=&quot;https://github.com/pallets/jinja&quot;&gt;jinja&lt;/a&gt;进行前端渲染，在这二者的帮助下，我们可以用flask做一个业务逻辑的后台系统以及前端渲染的界面。&lt;/p&gt;
+
+&lt;p&gt;由于工作原因，在我的日常工作中不需要去考虑界面，更多的是做一个能够接受http请求并返回数据的后台，则可以只考虑flask路由的部分。只需简单的几句话，就能跑起来一个web框架。Flask的确是一个轻便的web服务框架。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;f'Hello, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;escape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;!'&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;如在使用flask编写个人博客的时候，该网站需要用户，博客，管理员，默认网页等各个视图。这样一来每个视图都会有其自己的路由函数，所有路由都堆在一起了。使用蓝图可以将其模块化，其组织方式一般有功能式架构和分区式架构。可以看到功能式架构中，所有模板在一起，所有蓝图注册视图函数在views文件夹下。在分区式架构中，按照每一部分所属的蓝图来组织你的应用。管理面板的所有的模板，视图和静态文件放在一个文件夹中，用户控制面板的则放在另一个文件夹中。选择使用哪种架构实际上是一个个人问题。两者间的唯一区别是表达层次性的方式不同 – 你可以使用任意一种方式架构Flask应用 – 所以你所需的就是选择贴近你的需求的那个。如果你的应用是由独立的，仅仅共享模型和配置的各组件组成，分区式将是个好选择。一个例子是允许用户建立网站的SaaS应用。你将会有独立的蓝图用于主页，控制面板，用户网站，和高亮面板。这些组件有着完全不同的静态文件和布局。如果你想要将你的蓝图提取成插件，或用之于别的项目，一个分区式架构将是正确的选择。&lt;/p&gt;
+
+&lt;p&gt;更多关于URL路由详情以及flask扩展可以了解官网&lt;a href=&quot;https://flask.palletsprojects.com/en/1.1.x/&quot;&gt;https://flask.palletsprojects.com/en/1.1.x/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;功能式架构&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;n&quot;&gt;yourapp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;分区式架构&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;n&quot;&gt;yourapp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;guincorn&quot;&gt;Guincorn&lt;/h2&gt;
+
+&lt;p&gt;Gunciorn又是什么呢，首先Gunicorn是一个WSGI服务器。它不在乎它所运行的应用是哪一种，django也好，flask也好都OK，只要你应用的是WSGI接口。其采用的是pre-fork方式，其特点是具有使用非常简单，轻量级的资源消耗，以及高性能等特点。那什么是WSGI呢。其全称Python Web Server Gateway Interface，指定了web服务器和Python web应用或web框架之间的标准接口，以提高web应用在一系列web服务器间的移植性。Gunicorn擅长管理多进程。且命令及其方便，可以使用sync，gevent，gthread等多种进程模式。可以根据不同场景需求选择不同的参数。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Flask 内置 WebServer + Flask App = 弱鸡版本的 Server, 单进程（单 worker) / 失败挂掉 / 不易 Scale&lt;/li&gt;
+  &lt;li&gt;Gunicorn + Flask App = 多进程（多 worker) / 多线程 / 失败自动帮你重启 Worker / 可简单Scale&lt;/li&gt;
+  &lt;li&gt;多 Nginx + 多 Gunicorn + Flask App = 小型多实例 Web 应用，一般也会给 gunicorn 挂 supervisor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;supervisor&quot;&gt;Supervisor&lt;/h2&gt;
+&lt;p&gt;Gunicorn采取的主从模式，即master进程将管理多个子进程，若某个子进程挂了，主进程可以重新启动子进程。那么万一主进程也挂了怎么办，常用的方法是通过&lt;a href=&quot;https://github.com/Supervisor/supervisor&quot;&gt;supervisor&lt;/a&gt;进行监控。&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://toutiao.io/posts/45fmtc/preview&quot;&gt;https://toutiao.io/posts/45fmtc/preview&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://medium.com/@genchilu/brief-introduction-about-the-types-of-worker-in-gunicorn-and-respective-suitable-scenario-67b0c0e7bd62&quot;&gt;gunicorn适用类型&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://vsupalov.com/what-is-gunicorn/&quot;&gt;https://vsupalov.com/what-is-gunicorn/&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/&quot;&gt;深入理解uwsgi和gunicorn网络模型上&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://juejin.im/post/5ce8cab8e51d4577523f22f8&quot;&gt;https://juejin.im/post/5ce8cab8e51d4577523f22f8&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://youyou-tech.com/2019/09/11/Flask%2BGunicorn%28%E5%8D%8F%E7%A8%8B%29%E9%AB%98%E5%B9%B6/&quot;&gt;Flask+Gunicorn(协程)高并发的解决方法探究&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/huwh_/article/details/80497790&quot;&gt;https://blog.csdn.net/huwh_/article/details/80497790&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Jun 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/06/17/python-web/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/06/17/python-web/</guid>
+        
+        <category>Python</category>
+        
+        <category>Web</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>学习词汇</title>
+        <description>&lt;h4 id=&quot;机器学习&quot;&gt;机器学习&lt;/h4&gt;
+&lt;p&gt;后向传播算法： backpropagation algorithms&lt;br /&gt;
+正则化：  regularization&lt;br /&gt;
+过拟合：  overfitting&lt;br /&gt;
+向量化：  vectorization&lt;br /&gt;
+大小、量级：magnitude&lt;/p&gt;
+
+&lt;h4 id=&quot;算法&quot;&gt;算法&lt;/h4&gt;
+&lt;p&gt;时间复杂度： time complexity&lt;br /&gt;
+指数级： exponential&lt;/p&gt;
+
+&lt;h4 id=&quot;演讲&quot;&gt;演讲&lt;/h4&gt;
+&lt;p&gt;as a quick reminder: 顺便提醒一下&lt;br /&gt;
+taken as a very loose analogy: 作为粗略的对照
+I will touch base with you. 我会向你再次确认。&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 26 May 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/05/26/machine-learning-word/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/05/26/machine-learning-word/</guid>
+        
+        <category>学习</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>word2vec</title>
+        <description>&lt;p&gt;当刚开始学习自然语言处理深度学习课程的时候，第一步就是向量化，即如何把一篇文章，一个句子转换成数据输入。而文章段落句子都是由词语单词构成的，如果能把这些最小单元结构向量化,句子自然就可以作为输入了。&lt;/p&gt;
+
+&lt;h2 id=&quot;one-hot表达&quot;&gt;One Hot表达&lt;/h2&gt;
+&lt;p&gt;最简单的方式就是One-Hot独热编码表达。用词向量来表示词并不是word2vec的首创，在很久之前就出现了。最早的词向量是很冗长的，它使用是词向量维度大小为整个词汇表的大小，对于每个具体的词汇表中的词，将对应的位置置为1。比如我们有下面的5个词组成的词汇表，词”Queen”的序号为2， 那么它的词向量就是(0,1,0,0,0)。同样的道理，词”Woman”的词向量就是(0,0,0,1,0)。这种词向量的编码方式我们一般叫做1-of-N representation或者one hot representation。其最大的缺点是当词汇量达到百万级的时候，每个词语都需要百万维度的向量去表达词语，且各个词语之间是正交的，很难直接描述各个词汇之间的相关性。&lt;br /&gt;
+&lt;img src=&quot;/img/in-post/Word2vec/word2vec-one-hot.png&quot; width=&quot;400&quot; height=&quot;400&quot; title=&quot;One Hot Presentation&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;word2vec&quot;&gt;Word2Vec&lt;/h2&gt;
+&lt;p&gt;然后有了神经网络词向量语言模型，其一般有三层，输入层即词向量，隐藏层和输出层(softmax层)，其中最大的问题在于从隐藏层到输出的softmax层的计算量很大，因为要计算所有词的softmax概率，再去找概率最大的值，并通过反向传播来不断更新隐藏层的参数。这个模型如下图所示。其中𝑉是词汇表的大小。即假设输入词向量的维度为M，则输入层可以看成V&lt;em&gt;M，隐藏层参数大小应该为M&lt;/em&gt;P, 如此一来得到的中间结果是V*P,可以理解讲词向量从M降维到P。
+&lt;img src=&quot;/img/in-post/Word2vec/nn.png&quot; width=&quot;400&quot; height=&quot;400&quot; title=&quot;神经网络&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Word2vec原理也是如此，只是为了避免如此大的计算量，原作者做了一些优化来提升速率。第一个优化叫做Hierarchical Softmax。第二个优化叫做Negative Sampling。&lt;/p&gt;
+
+&lt;h4 id=&quot;hierarchical-softmax&quot;&gt;Hierarchical Softmax&lt;/h4&gt;
+&lt;p&gt;首先我们来看一下Hierarchical Softmax。其目的是将这个多分类问题转化为多个2分类问题，从而降低计算成本。第一步即把词汇表按照词频建立一颗霍夫曼二叉树。霍夫曼树的好处是词频越高的词汇层数越浅，越容易被遍历到，越早做分类判断。和之前的神经网络语言模型相比，我霍夫曼树的所有内部节点就类似之前神经网络隐藏层的神经元,其中，&lt;strong&gt;根节点的词向量对应我们的投影后的词向量，而所有叶子节点就类似于之前神经网络softmax输出层的神经元，叶子节点的个数就是词汇表的大小&lt;/strong&gt;。在霍夫曼树中，隐藏层到输出层的softmax映射不是一下子完成的，而是沿着霍夫曼树一步步完成的，因此这种softmax取名为”Hierarchical Softmax”。
+&lt;img src=&quot;/img/in-post/Word2vec/huffman.png&quot; width=&quot;400&quot; height=&quot;400&quot; title=&quot;huffman&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;negative-sampling&quot;&gt;Negative Sampling&lt;/h4&gt;
+&lt;p&gt;既然名字叫Negative Sampling（负采样），那么肯定使用了采样的方法。采样的方法有很多种，比如之前讲到的大名鼎鼎的MCMC。我们这里的Negative Sampling采样方法并没有MCMC那么复杂。&lt;/p&gt;
+
+&lt;p&gt;比如我们有一个训练样本，中心词是𝑤,它周围上下文共有2𝑐个词，记为𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)。由于这个中心词𝑤,的确和𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)相关存在，因此它是一个真实的正例。通过Negative Sampling采样，我们得到neg个和𝑤不同的中心词𝑤𝑖,𝑖=1,2,..𝑛𝑒𝑔，这样𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)和𝑤𝑖就组成了neg个并不真实存在的负例。利用这一个正例和neg个负例，我们进行二元逻辑回归，得到负采样对应每个词𝑤𝑖对应的模型参数𝜃𝑖，和每个词的词向量。&lt;br /&gt;
+从上面的描述可以看出，Negative Sampling由于没有采用霍夫曼树，每次只是通过采样neg个不同的中心词做负例，就可以训练模型，因此整个过程要比Hierarchical Softmax简单。&lt;/p&gt;
+
+&lt;h2 id=&quot;源码分析&quot;&gt;源码分析&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c&quot;&gt;https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/pinard/p/7243513.html&quot;&gt;刘建平老师&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 25 May 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/05/25/word2vec/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/05/25/word2vec/</guid>
+        
+        <category>nlp</category>
+        
+        <category>deep learning</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>匈牙利算法介绍</title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+&lt;p&gt;因为入职不久，最近在接手一个外卖的分配问题，即在一个区域同时产生多个订单，且该区域有多个骑手，在只考虑一个骑手只能接一单的情况下，订单与骑手之间到底应该如何分配。在第一版解决方案中我们使用的是匈牙利算法，目前还在测试当中，还没有上线，希望其能有不错的效果。写此博客，专门为了好好了解其基本原理，而不是只会按部就班用现成的库，而根本不懂其原理。&lt;/p&gt;
+
+&lt;h2 id=&quot;匈牙利算法原理&quot;&gt;匈牙利算法原理&lt;/h2&gt;
+&lt;p&gt;在了解匈牙利算法之前，首先需要掌握几个图论中的基本概念。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;二分图&lt;/strong&gt;：在图论中，二分图是一类特殊的图，又称为双分图、二部图、偶图。二分图的顶点可以分成两个互斥的独立集U和V的图，使得所有边都是连结一个U中的点和一个V中的点。顶点集 U、V 被称为是图的两个部分。等价的，二分图可以被定义成图中所有的环都有偶数个顶点。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/hungarian/Bipartite graph.png&quot; width=&quot;200&quot; height=&quot;200&quot; title=&quot;二分图&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;匹配&lt;/strong&gt;：在图论中，一个「匹配」（matching）是一个边的集合，其中任意两条边都没有公共顶点。例如，图 3、图 4 中红色的边就是图 2 的匹配。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;/img/in-post/hungarian/graph_1.png&quot; width=&quot;100&quot; height=&quot;100&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;/img/in-post/hungarian/graph_2.png&quot; width=&quot;100&quot; height=&quot;100&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;/img/in-post/hungarian/graph_3.png&quot; width=&quot;100&quot; height=&quot;100&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;/img/in-post/hungarian/graph_4.png&quot; width=&quot;100&quot; height=&quot;100&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;我们定义匹配点、匹配边、未匹配点、非匹配边，它们的含义非常显然。例如Fig.3中 1、4、5、7 为匹配点，其他顶点为未匹配点；1-5、4-7为匹配边，其他边为非匹配边。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;最大匹配&lt;/strong&gt;：一个图所有匹配中，所含匹配边数最多的匹配，称为这个图的最大匹配。图 4 是一个最大匹配，它包含 4 条匹配边。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;完美匹配&lt;/strong&gt;：如果一个图的某个匹配中，所有的顶点都是匹配点，那么它就是一个完美匹配。图 4 是一个完美匹配。显然，完美匹配一定是最大匹配（完美匹配的任何一个点都已经匹配，添加一条新的匹配边一定会与已有的匹配边冲突）。但并非每个图都存在完美匹配。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;增广路径&lt;/strong&gt;&lt;br /&gt;
+交替路：从一个未匹配点出发，依次经过非匹配边、匹配边、非匹配边…形成的路径叫交替路。&lt;br /&gt;
+增广路：从一个未匹配点出发，走交替路，如果途径另一个未匹配点（出发的点不算），则这条交替路称为增广路（agumenting path）。例如，图 5 中的一条增广路如图 6 所示（图中的匹配点均用红色标出）：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/hungarian/graph_5.png&quot; width=&quot;200&quot; height=&quot;200&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/img/in-post/hungarian/graph_6.png&quot; width=&quot;300&quot; height=&quot;300&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;增广路有一个重要特点：非匹配边比匹配边多一条。因此，研究增广路的意义是改进匹配。只要把增广路中的匹配边和非匹配边的身份交换即可。由于中间的匹配节点不存在其他相连的匹配边，所以这样做不会破坏匹配的性质。交换后，图中的匹配边数目比原来多了1条。我们可以通过不停地找增广路来增加匹配中的匹配边和匹配点。找不到增广路时，达到最大匹配（这是增广路定理。&lt;/p&gt;
+
+&lt;h4 id=&quot;暴力递归&quot;&gt;暴力递归&lt;/h4&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;brute_force&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'the input array format is not right'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;used&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;helper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;used&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;
+
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;helper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;used&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;global&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;used&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;used&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;used&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;helper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;used&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;used&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brute_force&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;dfs算法&quot;&gt;dfs算法&lt;/h4&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;c1&quot;&gt;# @Time    : 10/12/19 17:05
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# @Author  :  xcTorres
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# @FileName: hungarian.py
+&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Hungarian&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_hungarian&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;# 遍历每个worker
+&lt;/span&gt;            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;#如果相连且该工人还没有访问过，即还没有放入至增广路径
+&lt;/span&gt;                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;visited&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+                    &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;visited&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+                    &lt;span class=&quot;c1&quot;&gt;#若该工人还没有分配到工作， 或者找到增广路径，就分配新的工作给工人。
+&lt;/span&gt;                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hungarian&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}-&amp;gt;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+
+        &lt;span class=&quot;s&quot;&gt;'''
+            arr is 2-d array,
+            of which the size is m*n
+            we can regard row as jobs,
+            col as workers,
+        '''&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'the input numpy array format is not right'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;#每个工人是否分配到任务
+&lt;/span&gt;            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;# 遍历每个job，
+&lt;/span&gt;            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;visited&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'start to match:'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hungarian&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;
+
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;hungarian&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Hungarian&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hungarian&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;solve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        start to match: 0
+        0-&amp;gt;1
+        start to match: 1
+        1-&amp;gt;0
+        start to match: 2
+        0-&amp;gt;2
+        1-&amp;gt;1
+        2-&amp;gt;0
+        start to match: 3
+        3-&amp;gt;3
+        4
+    &quot;&quot;&quot;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;数学角度&quot;&gt;数学角度&lt;/h4&gt;
+&lt;p&gt;在实际生产环境中，dfs方式还是很少用到，多是转换成矩阵操作, 那么其数学原理是什么呢？
+首先匈牙利算法可以抽象成如下数学问题。即代价矩阵C乘以一个特殊矩阵X，其中X中每行或者每一列都是单位向量，即1处在不同行不同列.&lt;/p&gt;
+
+\[\min z=\sum\limits_{i=1}^n\sum\limits_{j=1}^n c_{ij}x_{ij}\]
+
+\[\mathrm{s.t}\begin{cases}\sum\limits_{i=1}^n x_{ij}=1,\quad i=1,2,\cdots,n  \\ \sum\limits_{j=1}^n x_{ij}=1,\quad j=1,2,\cdots,n  \\ x_{ij}=0 或 1, \quad i,j=1,2,\cdots,n  \end{cases}\]
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;定理一&lt;br /&gt;
+从下图可以看出，对一个代价矩阵C，无论是同一行加上同样的值或者是同一列加上同样的值。不会影响最终目标函数\(\min z=\sum\limits_{i=1}^n\sum\limits_{j=1}^n c_{ij}x_{ij}\)的优化结果， 因为乘以不同的元素矩阵X得到的组合最后都会生成一个元素总和相同的矩阵。&lt;br /&gt;
+&lt;img src=&quot;/img/in-post/hungarian/same.png&quot; width=&quot;400&quot; height=&quot;400&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;定理二&lt;br /&gt;
+且对另一个非负矩阵，可以知道其最优解的结果一定大于等于0，若能够找到一组独立的零元素解，则其必定为最优解。其解释如下图。
+&lt;img src=&quot;/img/in-post/hungarian/non_negative.png&quot; width=&quot;200&quot; height=&quot;200&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在定理一，二的基础上。匈牙利算法则有了以下解法。&lt;br /&gt;
+1） 给定一个代价矩阵&lt;br /&gt;
+2） 通过给行加减相同的值，或者给列相加减相同的值，最优解元素矩阵X不会发生变化  &lt;br /&gt;
+3） 一直进行相应操作，直至找到在保证非负矩阵的前提下独立零元素的一组解。&lt;/p&gt;
+
+&lt;p&gt;这些步骤还存在一些细节，即如何快速找到独立零元素， 如何判定找到的零元素就是独立零元素。 该链接有比较详细的六步走步骤，如果感兴趣的话，可以研究一下哦。&lt;a href=&quot;http://csclab.murraystate.edu/~bob.pilgrim/445/munkres.html&quot;&gt;http://csclab.murraystate.edu/~bob.pilgrim/445/munkres.html&lt;/a&gt;。这是从数学的角度来看如何解匈牙利分配问题，也是非常的精妙。且在性能上更高，如下有一些官方的库，供推荐。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;scipy&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linear_sum_assignment.html&quot;&gt;https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linear_sum_assignment.html&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;munkres&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/bmc/munkres&quot;&gt;https://github.com/bmc/munkres&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lapsolver&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/cheind/py-lapsolver&quot;&gt;https://github.com/cheind/py-lapsolver&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lap[&lt;strong&gt;Fastest&lt;/strong&gt;]&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/gatagat/lap&quot;&gt;https://github.com/gatagat/lap&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.renfei.org/blog/bipartite-matching.html&quot;&gt;https://www.renfei.org/blog/bipartite-matching.html&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/&quot;&gt;https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/&lt;/a&gt;
+&lt;a href=&quot;https://keson96.github.io/2016/08/29/2016-08-29-Assignment-Problem-And-Hungrian-Method/&quot;&gt;https://keson96.github.io/2016/08/29/2016-08-29-Assignment-Problem-And-Hungrian-Method/&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=rrfFTdO2Z7I&quot;&gt;https://www.youtube.com/watch?v=rrfFTdO2Z7I&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://longrm.com/2018/05/05/2018-05-05-KM/&quot;&gt;http://longrm.com/2018/05/05/2018-05-05-KM/&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://luzhijun.github.io/2016/10/10/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/&quot;&gt;https://luzhijun.github.io/2016/10/10/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 30 Apr 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/04/30/hungarian/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/04/30/hungarian/</guid>
+        
+        <category>algorithms</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>金融知识</title>
+        <description>&lt;p&gt;一直以来都有想要充实自己金融知识的渴望。这次疫情导致股市遭受了严重的打击，看到朋友圈里朋友们转载的各种新闻，我唯一能体会到的是这次金融危机要来了，且的的确确会影响到我的生活。但是它是如何影响的，其机理是如何的，作为一个理工男，我还是想刨根问底，能够掌握一些基本的常识。宇哥给我推荐的《公司理财》《货币金融学》，一定好好研读。这两本书是国内金融学硕士的考研书籍，但我的目的毕竟不是考研，所以最主要还是宏观了解一些概念知识，不用扣太细。&lt;/p&gt;
+
+&lt;h2 id=&quot;货币金融学&quot;&gt;货币金融学&lt;/h2&gt;
+
+&lt;h4 id=&quot;第一章-为什么研究货币银行与金融市场&quot;&gt;第一章 为什么研究货币、银行与金融市场&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;债券&lt;/strong&gt;： 债券是政府、企业、银行等债务人为筹集资金,按照法定程序发行并向债权人承诺于指定日期还本付息的有价证券。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;利率&lt;/strong&gt;： 利率或利息率，是借款人需向其所借金钱所支付的代价。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;票面利率&lt;/strong&gt;：票面利率是指债券发行者每一年向投资者支付的利息占票面金额的比率，它在数额上等于债券每年应付给债券持有人的利息总额与债券总面值相除的百分比。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;市场利率&lt;/strong&gt;：市场利率是指由资金市场上供求关系决定的利率。市场利率因受到资金市场上的供求变化而经常变化。在市场机制发挥作用的情况下，由于自由竞争，信贷资金的供求会逐渐趋于干衡，经济学家这将种状态的市场利率称为“均衡利率”。与市场利率对应的是官定利率，所谓官定利率是指由货币当局规定的利率。货币当局可以是中央银行，也可以是具有实际金融管理职能的政府部门。&lt;/p&gt;
+
+&lt;p&gt;债券与利率的关系&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;股票&lt;/strong&gt;： 股票是一种有价证券，股份有限公司将其所有权借由这种有价证卷进行分配。因为股份有限公司需要筹措长期资金，因此将股票发给投资者作为公司资本部分所有权的凭证，成为股东以此获得股息（股利），并分享公司成长或交易市场波动带来的利润；但也要共同承担公司运作错误所带来的风险。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;道琼斯指数&lt;/strong&gt;：道琼斯工业平均指数（Dow Jones Industrial Average，DJIA，简称“道指”）是由《华尔街日报》（The Wall Street Journal）和道琼斯公司创建者查尔斯·道创造的几种股票市场指数之一。道琼斯指数的价值不是加权算术平均值，并不代表其组成公司的市值，而是每个组成公司的一股股票价格的总和。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A股&lt;/strong&gt;： 人民币普通股票，它是由我国境内的公司发行,供境内机构、组织或个人(不含台、港、澳投资者)以人民币认购和交易的普通股股票。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;一级市场&lt;/strong&gt;：筹集资金的公司或者政府机构将其发行的股票和债券等证券销售给最初购买者的金融市场。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;二级市场&lt;/strong&gt;: 是交易已经发行的证券的金融市场。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;银行&lt;/strong&gt;：银行是通过存款、贷款、汇兑、储蓄等业务，承担信用中介的金融机构。银行是金融机构之一，而且是最主要的金融机构，它主要的业务范围有吸收公众存款、发放贷款以及办理票据贴现等&lt;/p&gt;
+
+&lt;p&gt;银行为什么要接收非常严格的监管：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;货币&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;通货膨胀&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;如何解释汇率频繁的波动&lt;/p&gt;
+
+&lt;h4 id=&quot;第二章-金融体系概览&quot;&gt;第二章 金融体系概览&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;货币市场工具&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;资本市场工具&lt;/strong&gt;：期限超过一年的债权工具和股权工具。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;金融市场的国际化&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;降准&lt;/strong&gt;：降准就是下调法定存款准备金率，居民或企业（假定为甲）平常在银行（假定为银行A）存钱需要开立存款账户，商业银行在央行存钱同样需要开立存款账户，与我们普通银行存款不同的是，商业银行在央行的存款具有强制性，一般分为法定存款准备金以及超额存款准备金，前者是法律规定商业银行在央行的最低存款限额，后者是当商业银行在央行存款中超过法定存款准备金的那部分资金。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;回购协议&lt;/strong&gt;：&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 26 Mar 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/03/26/corporate-finance/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/03/26/corporate-finance/</guid>
+        
+        <category>金融</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>2020新年</title>
+        <description>&lt;p&gt;不知不觉，到了写2020年博客的时候了。随着年龄的增大，越发感觉时光的流逝。与好友欣赏完好听的交响乐，看完美丽的烟花🎇，给我这个单身狗的凄凉上增添了许多喜悦之情哈哈。&lt;/p&gt;
+
+&lt;p&gt;2019年，对我来说也是奇妙的一年。上半年忙着做项目，搞毕设，兢兢业业忙到毕业~下半年只身前往新加坡，在这个陌生的国度打拼，开启自己新的篇章。第一次领工资，第一次独立完成项目，第一次出差…的确整个2019收获很多，但2019年元旦的博客中立的很多flag很多都没有兑现,实在惭愧。在这里还是希望给2020年的自己立一些flag，成为一个优秀靠谱高效率的人。&lt;/p&gt;
+
+&lt;h2 id=&quot;健身&quot;&gt;健身&lt;/h2&gt;
+&lt;p&gt;健身对我意味着是生活的一部分，我也不想练成夸张的肌肉男，只需要保持自己的身材，增强一些力量，让自己变得自信一些。&lt;/p&gt;
+
+&lt;h2 id=&quot;工作&quot;&gt;工作&lt;/h2&gt;
+&lt;p&gt;工作里面感觉可以细分一些模块。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;首先是数据结构，也就是Leetcode刷题。要学会通过正确的学习方法去总结，第一也是为以后自己面试准备，第二也是给别人面试准备。&lt;/li&gt;
+  &lt;li&gt;在工作中，项目中要学会努力踏实，学会与团队交流，提高效率，少做无用功。&lt;/li&gt;
+  &lt;li&gt;多阅读文献和了解最前沿的算法库。&lt;/li&gt;
+  &lt;li&gt;多积累Python和Java的代码规范和常用算法库。&lt;/li&gt;
+  &lt;li&gt;提高英文口语水平，学会做PPT。敢于在众人面前用英文分享自己的想法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;理财&quot;&gt;理财&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;第一件事就是控制自己，合理消费。明年的目标是能够存20万，有一定的储蓄才能做其他合理的理财。&lt;/li&gt;
+  &lt;li&gt;已经买了人生第一份保险。今年还得把住院险和意外险安排上。&lt;/li&gt;
+  &lt;li&gt;看一些金融相关的书籍，多了解一些金融基本知识。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;旅游&quot;&gt;旅游&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;2019年已经去过了泰国，越南。希望2020能去马来西亚和印尼🇮🇩看看。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;感情&quot;&gt;感情&lt;/h2&gt;
+&lt;p&gt;哈哈，努力努力，但随缘就好~&lt;/p&gt;
+</description>
+        <pubDate>Wed, 01 Jan 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/01/01/new-year/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/01/01/new-year/</guid>
+        
+        <category>生活</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
