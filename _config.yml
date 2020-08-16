@@ -169,3 +169,5 @@ gallery:
     dragonboat:
       name: "2020/07/12 Dragon Boat Session"
       best_image: dragonboat_01.jpg  
+    moon:
+      name: "2020/05/31 Snapshot"
