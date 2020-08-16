@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "匈牙利算法介绍"
-date:       2020-08-16
+date:       2020-08-17
 author:     "xcTorres"
 header-img: "img/in-post/leetcode.jpg"
 catalog:    true
