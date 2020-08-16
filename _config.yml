@@ -156,7 +156,7 @@ gallery:
   symlink: false            # false: copy images into _site. true: create symbolic links (saves disk space)
   title: "Gallery"           # Title for gallery index page
   title_prefix: ""  # Title prefix for gallery pages. Gallery title = title_prefix + gallery_name
-  sort_field: "date_time"   # How to sort galleries on the index page.
+  sort_field: "title"       # How to sort galleries on the index page.
                             # Possible values are: title, date_time, best_image
   thumbnail_size:
     x: 600                  # max width of thumbnails (in pixels)
@@ -164,5 +164,8 @@ gallery:
   # The following options are for individual galleries.
   galleries:
     lighthouse:
-      name: "Johor Straits Lighthouse(2020/08/10)"
+      name: "2020/08/10 Johor Straits Lighthouse"
       best_image: lighthouse_02.jpg  
+    dragonboat:
+      name: "2020/07/12 Dragon Boat Session"
+      best_image: dragonboat_01.jpg  
