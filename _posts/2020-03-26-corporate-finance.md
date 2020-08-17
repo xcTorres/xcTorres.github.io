@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      金融知识
-date:       2020-08-17
+date:       2020-03-26
 author:     "xcTorres"
 header-img: "img/in-post/corporate-finance/background.jpeg"
 catalog:    true

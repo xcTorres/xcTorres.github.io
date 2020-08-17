@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "找工作流水账"
-date:       2020-08-17
+date:       2018-10-30
 author:     "xcTorres"
 header-img: "img/in-post/offer.jpg"
 catalog:    true
