@@ -3,7 +3,7 @@ layout: page
 ---
 <style TYPE="text/css">
 .gallery-wrapper {
-  width: 35em;
+  width: 100%;
   text-align: center;
   padding: 1em 0 4em 0;
 }
@@ -12,6 +12,7 @@ layout: page
 }
 </style>
 {% for gallery in page.galleries %}
+
 <div class="gallery-wrapper">
     <a href="{{ gallery['gallery'] }}">
         <img class="gallery-best-image" src="{{ gallery['gallery'] }}/thumbs/{{ gallery['best_image'] }}">
