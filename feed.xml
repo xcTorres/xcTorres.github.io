@@ -5,50 +5,9 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 18 Aug 2020 15:42:28 +0800</pubDate>
-    <lastBuildDate>Tue, 18 Aug 2020 15:42:28 +0800</lastBuildDate>
+    <pubDate>Tue, 18 Aug 2020 15:44:36 +0800</pubDate>
+    <lastBuildDate>Tue, 18 Aug 2020 15:44:36 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
-    
-      <item>
-        <title>word2vec</title>
-        <description>&lt;p&gt;当刚开始学习自然语言处理深度学习课程的时候，第一步就是向量化，即如何把一篇文章，一个句子转换成数据输入。而文章段落句子都是由词语单词构成的，如果能把这些最小单元结构向量化,句子自然就可以作为输入了。&lt;/p&gt;
-
-&lt;h2 id=&quot;one-hot表达&quot;&gt;One Hot表达&lt;/h2&gt;
-&lt;p&gt;最简单的方式就是One-Hot独热编码表达。用词向量来表示词并不是word2vec的首创，在很久之前就出现了。最早的词向量是很冗长的，它使用是词向量维度大小为整个词汇表的大小，对于每个具体的词汇表中的词，将对应的位置置为1。比如我们有下面的5个词组成的词汇表，词”Queen”的序号为2， 那么它的词向量就是(0,1,0,0,0)。同样的道理，词”Woman”的词向量就是(0,0,0,1,0)。这种词向量的编码方式我们一般叫做1-of-N representation或者one hot representation。其最大的缺点是当词汇量达到百万级的时候，每个词语都需要百万维度的向量去表达词语，且各个词语之间是正交的，很难直接描述各个词汇之间的相关性。&lt;br /&gt;
-&lt;img src=&quot;/img/in-post/Word2vec/word2vec-one-hot.png&quot; width=&quot;400&quot; height=&quot;400&quot; title=&quot;One Hot Presentation&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;word2vec&quot;&gt;Word2Vec&lt;/h2&gt;
-&lt;p&gt;然后有了神经网络词向量语言模型，其一般有三层，输入层即词向量，隐藏层和输出层(softmax层)，其中最大的问题在于从隐藏层到输出的softmax层的计算量很大，因为要计算所有词的softmax概率，再去找概率最大的值，并通过反向传播来不断更新隐藏层的参数。这个模型如下图所示。其中𝑉是词汇表的大小。即假设输入词向量的维度为M，则输入层可以看成V&lt;em&gt;M，隐藏层参数大小应该为M&lt;/em&gt;P, 如此一来得到的中间结果是V*P,可以理解讲词向量从M降维到P。
-&lt;img src=&quot;/img/in-post/Word2vec/nn.png&quot; width=&quot;400&quot; height=&quot;400&quot; title=&quot;神经网络&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Word2vec原理也是如此，只是为了避免如此大的计算量，原作者做了一些优化来提升速率。第一个优化叫做Hierarchical Softmax。第二个优化叫做Negative Sampling。&lt;/p&gt;
-
-&lt;h4 id=&quot;hierarchical-softmax&quot;&gt;Hierarchical Softmax&lt;/h4&gt;
-&lt;p&gt;首先我们来看一下Hierarchical Softmax。其目的是将这个多分类问题转化为多个2分类问题，从而降低计算成本。第一步即把词汇表按照词频建立一颗霍夫曼二叉树。霍夫曼树的好处是词频越高的词汇层数越浅，越容易被遍历到，越早做分类判断。和之前的神经网络语言模型相比，我霍夫曼树的所有内部节点就类似之前神经网络隐藏层的神经元,其中，&lt;strong&gt;根节点的词向量对应我们的投影后的词向量，而所有叶子节点就类似于之前神经网络softmax输出层的神经元，叶子节点的个数就是词汇表的大小&lt;/strong&gt;。在霍夫曼树中，隐藏层到输出层的softmax映射不是一下子完成的，而是沿着霍夫曼树一步步完成的，因此这种softmax取名为”Hierarchical Softmax”。
-&lt;img src=&quot;/img/in-post/Word2vec/huffman.png&quot; width=&quot;400&quot; height=&quot;400&quot; title=&quot;huffman&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;negative-sampling&quot;&gt;Negative Sampling&lt;/h4&gt;
-&lt;p&gt;既然名字叫Negative Sampling（负采样），那么肯定使用了采样的方法。采样的方法有很多种，比如之前讲到的大名鼎鼎的MCMC。我们这里的Negative Sampling采样方法并没有MCMC那么复杂。&lt;/p&gt;
-
-&lt;p&gt;比如我们有一个训练样本，中心词是𝑤,它周围上下文共有2𝑐个词，记为𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)。由于这个中心词𝑤,的确和𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)相关存在，因此它是一个真实的正例。通过Negative Sampling采样，我们得到neg个和𝑤不同的中心词𝑤𝑖,𝑖=1,2,..𝑛𝑒𝑔，这样𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)和𝑤𝑖就组成了neg个并不真实存在的负例。利用这一个正例和neg个负例，我们进行二元逻辑回归，得到负采样对应每个词𝑤𝑖对应的模型参数𝜃𝑖，和每个词的词向量。&lt;br /&gt;
-从上面的描述可以看出，Negative Sampling由于没有采用霍夫曼树，每次只是通过采样neg个不同的中心词做负例，就可以训练模型，因此整个过程要比Hierarchical Softmax简单。&lt;/p&gt;
-
-&lt;h2 id=&quot;源码分析&quot;&gt;源码分析&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c&quot;&gt;https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/pinard/p/7243513.html&quot;&gt;刘建平老师&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 18 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/18/word2vec/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/18/word2vec/</guid>
-        
-        <category>nlp</category>
-        
-        <category>deep learning</category>
-        
-        
-      </item>
     
       <item>
         <title>宇宙与意识</title>
@@ -59,9 +18,9 @@
 -参考视频： 
 &lt;a href=&quot;https://www.youtube.com/watch?v=qt9KfpWuRKg&quot;&gt;古人类和现代人的分界点在哪？没有过渡物种吗？每块化石都显得那么突兀【宇宙自然生命简史】&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 18 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/18/universe/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/18/universe/</guid>
+        <pubDate>Mon, 17 Aug 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/08/17/universe/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/08/17/universe/</guid>
         
         <category>宇宙</category>
         
@@ -257,115 +216,13 @@
 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/36295603&quot;&gt;https://zhuanlan.zhihu.com/p/36295603&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/&quot;&gt;https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 18 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/18/shortesr-path-algo/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/18/shortesr-path-algo/</guid>
+        <pubDate>Tue, 04 Aug 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/08/04/shortesr-path-algo/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/08/04/shortesr-path-algo/</guid>
         
         <category>graph</category>
         
         <category>算法</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Python Web</title>
-        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
-&lt;p&gt;由于机器学习，深度学习，数据分析，数据挖掘的兴起，且因为Python脚本语言上手极快，使得Python这门语言非常火热🔥。但其应用场景多在运维，爬虫，以及机器学习数据挖掘方面。现在本人的职位是算法工程师，更希望注重于机器学习深度学习算法的效果及实现，但在项目中不免要给算法做稳定的网络微服务。所以在工作过程中，算法的逻辑和稳定性和后台的稳定性有时候得一把抓。Java的确是一门不错的语言，但其Spring框架比较庞大，且我所在公司使用Go和Python语言，没有Java开发的环境。所以最终打算通过Python作为后台开发语言。&lt;br /&gt;
-每当提及用Python作为后台开发语言，很多技术人士都会嗤之以鼻，担心其过慢的运行效率无法解决高并发问题。但Google搜索引擎的部分代码，Instagram，国内的豆瓣知乎等很多知名互联网企业都是Python语言的后台。这些成功的产品证明，只要处理得当，Python后台完全能处理一定量级的高并发问题。综合考虑打算使用flask，gunicorn，nginx的的方法来实现稳定的后台服务，特写此文用来记录Python后台记录的点点滴滴。&lt;/p&gt;
-
-&lt;p&gt;先将代码地址放在此处&lt;a href=&quot;https://github.com/xcTorres/python_web&quot;&gt;https://github.com/xcTorres/python_web&lt;/a&gt;，欢迎star。&lt;/p&gt;
-
-&lt;h2 id=&quot;flask&quot;&gt;Flask&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/pallets/flask&quot;&gt;flask&lt;/a&gt;是一个用于创建web应用的微服务框架，其主要由&lt;a href=&quot;https://github.com/pallets/werkzeug&quot;&gt;werkzeug&lt;/a&gt;作为WSGI网络应用程序, 以及&lt;a href=&quot;https://github.com/pallets/jinja&quot;&gt;jinja&lt;/a&gt;进行前端渲染，在这二者的帮助下，我们可以用flask做一个业务逻辑的后台系统以及前端渲染的界面。&lt;/p&gt;
-
-&lt;p&gt;由于工作原因，在我的日常工作中不需要去考虑界面，更多的是做一个能够接受http请求并返回数据的后台，则可以只考虑flask路由的部分。只需简单的几句话，就能跑起来一个web框架。Flask的确是一个轻便的web服务框架。&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;f'Hello, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;escape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;!'&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;如在使用flask编写个人博客的时候，该网站需要用户，博客，管理员，默认网页等各个视图。这样一来每个视图都会有其自己的路由函数，所有路由都堆在一起了。使用蓝图可以将其模块化，其组织方式一般有功能式架构和分区式架构。可以看到功能式架构中，所有模板在一起，所有蓝图注册视图函数在views文件夹下。在分区式架构中，按照每一部分所属的蓝图来组织你的应用。管理面板的所有的模板，视图和静态文件放在一个文件夹中，用户控制面板的则放在另一个文件夹中。选择使用哪种架构实际上是一个个人问题。两者间的唯一区别是表达层次性的方式不同 – 你可以使用任意一种方式架构Flask应用 – 所以你所需的就是选择贴近你的需求的那个。如果你的应用是由独立的，仅仅共享模型和配置的各组件组成，分区式将是个好选择。一个例子是允许用户建立网站的SaaS应用。你将会有独立的蓝图用于主页，控制面板，用户网站，和高亮面板。这些组件有着完全不同的静态文件和布局。如果你想要将你的蓝图提取成插件，或用之于别的项目，一个分区式架构将是正确的选择。&lt;/p&gt;
-
-&lt;p&gt;更多关于URL路由详情以及flask扩展可以了解官网&lt;a href=&quot;https://flask.palletsprojects.com/en/1.1.x/&quot;&gt;https://flask.palletsprojects.com/en/1.1.x/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;功能式架构&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &lt;span class=&quot;n&quot;&gt;yourapp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;分区式架构&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &lt;span class=&quot;n&quot;&gt;yourapp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;guincorn&quot;&gt;Guincorn&lt;/h2&gt;
-
-&lt;p&gt;Gunciorn又是什么呢，首先Gunicorn是一个WSGI服务器。它不在乎它所运行的应用是哪一种，django也好，flask也好都OK，只要你应用的是WSGI接口。其采用的是pre-fork方式，其特点是具有使用非常简单，轻量级的资源消耗，以及高性能等特点。那什么是WSGI呢。其全称Python Web Server Gateway Interface，指定了web服务器和Python web应用或web框架之间的标准接口，以提高web应用在一系列web服务器间的移植性。Gunicorn擅长管理多进程。且命令及其方便，可以使用sync，gevent，gthread等多种进程模式。可以根据不同场景需求选择不同的参数。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Flask 内置 WebServer + Flask App = 弱鸡版本的 Server, 单进程（单 worker) / 失败挂掉 / 不易 Scale&lt;/li&gt;
-  &lt;li&gt;Gunicorn + Flask App = 多进程（多 worker) / 多线程 / 失败自动帮你重启 Worker / 可简单Scale&lt;/li&gt;
-  &lt;li&gt;多 Nginx + 多 Gunicorn + Flask App = 小型多实例 Web 应用，一般也会给 gunicorn 挂 supervisor&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;supervisor&quot;&gt;Supervisor&lt;/h2&gt;
-&lt;p&gt;Gunicorn采取的主从模式，即master进程将管理多个子进程，若某个子进程挂了，主进程可以重新启动子进程。那么万一主进程也挂了怎么办，常用的方法是通过&lt;a href=&quot;https://github.com/Supervisor/supervisor&quot;&gt;supervisor&lt;/a&gt;进行监控。&lt;/p&gt;
-
-&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://toutiao.io/posts/45fmtc/preview&quot;&gt;https://toutiao.io/posts/45fmtc/preview&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://medium.com/@genchilu/brief-introduction-about-the-types-of-worker-in-gunicorn-and-respective-suitable-scenario-67b0c0e7bd62&quot;&gt;gunicorn适用类型&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://vsupalov.com/what-is-gunicorn/&quot;&gt;https://vsupalov.com/what-is-gunicorn/&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/&quot;&gt;深入理解uwsgi和gunicorn网络模型上&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://juejin.im/post/5ce8cab8e51d4577523f22f8&quot;&gt;https://juejin.im/post/5ce8cab8e51d4577523f22f8&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://youyou-tech.com/2019/09/11/Flask%2BGunicorn%28%E5%8D%8F%E7%A8%8B%29%E9%AB%98%E5%B9%B6/&quot;&gt;Flask+Gunicorn(协程)高并发的解决方法探究&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://blog.csdn.net/huwh_/article/details/80497790&quot;&gt;https://blog.csdn.net/huwh_/article/details/80497790&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 18 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/18/python-web/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/18/python-web/</guid>
-        
-        <category>Python</category>
-        
-        <category>Web</category>
         
         
       </item>
@@ -487,123 +344,11 @@
 &lt;a href=&quot;https://github.com/AndreLouisCaron/a-tale-of-event-loops&quot;&gt;https://github.com/AndreLouisCaron/a-tale-of-event-loops&lt;/a&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 18 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/18/python-coroutine/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/18/python-coroutine/</guid>
+        <pubDate>Sat, 01 Aug 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/08/01/python-coroutine/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/08/01/python-coroutine/</guid>
         
         <category>Python</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>2020新年</title>
-        <description>&lt;p&gt;不知不觉，到了写2020年博客的时候了。随着年龄的增大，越发感觉时光的流逝。与好友欣赏完好听的交响乐，看完美丽的烟花🎇，给我这个单身狗的凄凉上增添了许多喜悦之情哈哈。&lt;/p&gt;
-
-&lt;p&gt;2019年，对我来说也是奇妙的一年。上半年忙着做项目，搞毕设，兢兢业业忙到毕业~下半年只身前往新加坡，在这个陌生的国度打拼，开启自己新的篇章。第一次领工资，第一次独立完成项目，第一次出差…的确整个2019收获很多，但2019年元旦的博客中立的很多flag很多都没有兑现,实在惭愧。在这里还是希望给2020年的自己立一些flag，成为一个优秀靠谱高效率的人。&lt;/p&gt;
-
-&lt;h2 id=&quot;健身&quot;&gt;健身&lt;/h2&gt;
-&lt;p&gt;健身对我意味着是生活的一部分，我也不想练成夸张的肌肉男，只需要保持自己的身材，增强一些力量，让自己变得自信一些。&lt;/p&gt;
-
-&lt;h2 id=&quot;工作&quot;&gt;工作&lt;/h2&gt;
-&lt;p&gt;工作里面感觉可以细分一些模块。&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;首先是数据结构，也就是Leetcode刷题。要学会通过正确的学习方法去总结，第一也是为以后自己面试准备，第二也是给别人面试准备。&lt;/li&gt;
-  &lt;li&gt;在工作中，项目中要学会努力踏实，学会与团队交流，提高效率，少做无用功。&lt;/li&gt;
-  &lt;li&gt;多阅读文献和了解最前沿的算法库。&lt;/li&gt;
-  &lt;li&gt;多积累Python和Java的代码规范和常用算法库。&lt;/li&gt;
-  &lt;li&gt;提高英文口语水平，学会做PPT。敢于在众人面前用英文分享自己的想法&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;理财&quot;&gt;理财&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;第一件事就是控制自己，合理消费。明年的目标是能够存20万，有一定的储蓄才能做其他合理的理财。&lt;/li&gt;
-  &lt;li&gt;已经买了人生第一份保险。今年还得把住院险和意外险安排上。&lt;/li&gt;
-  &lt;li&gt;看一些金融相关的书籍，多了解一些金融基本知识。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;旅游&quot;&gt;旅游&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;2019年已经去过了泰国，越南。希望2020能去马来西亚和印尼🇮🇩看看。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;感情&quot;&gt;感情&lt;/h2&gt;
-&lt;p&gt;哈哈，努力努力，但随缘就好~&lt;/p&gt;
-</description>
-        <pubDate>Tue, 18 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/18/new-year/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/18/new-year/</guid>
-        
-        <category>生活</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>2019冲鸭</title>
-        <description>&lt;p&gt;不知不觉，2019年就这么到来了。回顾2018，经历了很多，就不回顾了，就让这一些经历和收获深藏心中。更希望2019能有更美好的未来，还是要立一些Flag的吧哈哈。&lt;/p&gt;
-
-&lt;h4 id=&quot;吉他&quot;&gt;吉他&lt;/h4&gt;
-&lt;p&gt;吉他，哎吉他这件事真的很尴尬啊。上半年是真的没时间学习了，不晓得以后有没有机会坚持下来。希望工作了之后，适应新生活之后，还是报个班，系统的学习。自己学总感觉有点瞎胡闹。还能把乐理好好学学。&lt;/p&gt;
-
-&lt;h4 id=&quot;健身&quot;&gt;健身&lt;/h4&gt;
-&lt;p&gt;希望自己的腿能恢复如初，可以简单的踢踢野球，颠颠球。坚持去健身房锻炼，保持一个好的身材。不管有钱没钱，也要有个强健的体魄和坚强的意志哈哈。&lt;/p&gt;
-
-&lt;h4 id=&quot;写博客&quot;&gt;写博客&lt;/h4&gt;
-&lt;p&gt;不管是生活，技术，还是读书观后感都记得坚持写博客。一是对自己的生活和工作有个记录，二是提高自己的写作能力。&lt;/p&gt;
-
-&lt;h4 id=&quot;多读书&quot;&gt;多读书&lt;/h4&gt;
-&lt;p&gt;可能因为从小生活在一个父母老吵架的家庭，感觉自己也是缺乏安全感，有些浮躁，总感觉自己不能沉下心来。希望自己能真正养成读书的习惯，从书籍中学习到新的知识以及修身养性，不再那么毛躁。
-一年365天，希望自己两周能看一本书。一年也得看30本吧~~&lt;/p&gt;
-
-&lt;h4 id=&quot;英语&quot;&gt;英语&lt;/h4&gt;
-&lt;p&gt;提高阅读能力，也希望上半年报一个口语班，感觉自己有英语天赋，但是从没有系统的学习。希望能够纠正自己的口音。&lt;/p&gt;
-
-&lt;h4 id=&quot;象棋&quot;&gt;象棋&lt;/h4&gt;
-&lt;p&gt;还别说，真想好好系统学习象棋的书，提高自己的象棋技术，掌握一些套路。而不是凭感觉。&lt;/p&gt;
-
-&lt;h4 id=&quot;工作&quot;&gt;工作&lt;/h4&gt;
-&lt;p&gt;下半年就要去新加坡工作了，希望自己能适应新生活，跟同事们把关系搞好。找到工作与生活的节奏。广告推荐这一门学科可不是那么简单的，得沉下来好好学习。&lt;/p&gt;
-
-&lt;h4 id=&quot;对象&quot;&gt;对象&lt;/h4&gt;
-&lt;p&gt;对象这件事已经佛系了。有时候发现自己缺乏安全感占有欲太强，不适合谈恋爱。也希望能够早日碰到有缘人，心中一定要有念想，但是就算单身也不怕，要利用时间去充实自己。还是希望早日脱单哈哈。&lt;/p&gt;
-
-&lt;p&gt;未完待续…&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 18 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/18/new-year-life/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/18/new-year-life/</guid>
-        
-        <category>生活</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>学习词汇</title>
-        <description>&lt;h4 id=&quot;机器学习&quot;&gt;机器学习&lt;/h4&gt;
-&lt;p&gt;后向传播算法： backpropagation algorithms&lt;br /&gt;
-正则化：  regularization&lt;br /&gt;
-过拟合：  overfitting&lt;br /&gt;
-向量化：  vectorization&lt;br /&gt;
-大小、量级：magnitude&lt;/p&gt;
-
-&lt;h4 id=&quot;算法&quot;&gt;算法&lt;/h4&gt;
-&lt;p&gt;时间复杂度： time complexity&lt;br /&gt;
-指数级： exponential&lt;/p&gt;
-
-&lt;h4 id=&quot;演讲&quot;&gt;演讲&lt;/h4&gt;
-&lt;p&gt;as a quick reminder: 顺便提醒一下&lt;br /&gt;
-taken as a very loose analogy: 作为粗略的对照
-I will touch base with you. 我会向你再次确认。&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 18 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/18/machine-learning-word/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/18/machine-learning-word/</guid>
-        
-        <category>学习</category>
         
         
       </item>
@@ -764,11 +509,182 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
 &lt;/ul&gt;
 
 </description>
-        <pubDate>Tue, 18 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/18/learn-english/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/18/learn-english/</guid>
+        <pubDate>Fri, 19 Jun 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/06/19/learn-english/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/06/19/learn-english/</guid>
         
         <category>学习</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Python Web</title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+&lt;p&gt;由于机器学习，深度学习，数据分析，数据挖掘的兴起，且因为Python脚本语言上手极快，使得Python这门语言非常火热🔥。但其应用场景多在运维，爬虫，以及机器学习数据挖掘方面。现在本人的职位是算法工程师，更希望注重于机器学习深度学习算法的效果及实现，但在项目中不免要给算法做稳定的网络微服务。所以在工作过程中，算法的逻辑和稳定性和后台的稳定性有时候得一把抓。Java的确是一门不错的语言，但其Spring框架比较庞大，且我所在公司使用Go和Python语言，没有Java开发的环境。所以最终打算通过Python作为后台开发语言。&lt;br /&gt;
+每当提及用Python作为后台开发语言，很多技术人士都会嗤之以鼻，担心其过慢的运行效率无法解决高并发问题。但Google搜索引擎的部分代码，Instagram，国内的豆瓣知乎等很多知名互联网企业都是Python语言的后台。这些成功的产品证明，只要处理得当，Python后台完全能处理一定量级的高并发问题。综合考虑打算使用flask，gunicorn，nginx的的方法来实现稳定的后台服务，特写此文用来记录Python后台记录的点点滴滴。&lt;/p&gt;
+
+&lt;p&gt;先将代码地址放在此处&lt;a href=&quot;https://github.com/xcTorres/python_web&quot;&gt;https://github.com/xcTorres/python_web&lt;/a&gt;，欢迎star。&lt;/p&gt;
+
+&lt;h2 id=&quot;flask&quot;&gt;Flask&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/pallets/flask&quot;&gt;flask&lt;/a&gt;是一个用于创建web应用的微服务框架，其主要由&lt;a href=&quot;https://github.com/pallets/werkzeug&quot;&gt;werkzeug&lt;/a&gt;作为WSGI网络应用程序, 以及&lt;a href=&quot;https://github.com/pallets/jinja&quot;&gt;jinja&lt;/a&gt;进行前端渲染，在这二者的帮助下，我们可以用flask做一个业务逻辑的后台系统以及前端渲染的界面。&lt;/p&gt;
+
+&lt;p&gt;由于工作原因，在我的日常工作中不需要去考虑界面，更多的是做一个能够接受http请求并返回数据的后台，则可以只考虑flask路由的部分。只需简单的几句话，就能跑起来一个web框架。Flask的确是一个轻便的web服务框架。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;f'Hello, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;escape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;!'&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;如在使用flask编写个人博客的时候，该网站需要用户，博客，管理员，默认网页等各个视图。这样一来每个视图都会有其自己的路由函数，所有路由都堆在一起了。使用蓝图可以将其模块化，其组织方式一般有功能式架构和分区式架构。可以看到功能式架构中，所有模板在一起，所有蓝图注册视图函数在views文件夹下。在分区式架构中，按照每一部分所属的蓝图来组织你的应用。管理面板的所有的模板，视图和静态文件放在一个文件夹中，用户控制面板的则放在另一个文件夹中。选择使用哪种架构实际上是一个个人问题。两者间的唯一区别是表达层次性的方式不同 – 你可以使用任意一种方式架构Flask应用 – 所以你所需的就是选择贴近你的需求的那个。如果你的应用是由独立的，仅仅共享模型和配置的各组件组成，分区式将是个好选择。一个例子是允许用户建立网站的SaaS应用。你将会有独立的蓝图用于主页，控制面板，用户网站，和高亮面板。这些组件有着完全不同的静态文件和布局。如果你想要将你的蓝图提取成插件，或用之于别的项目，一个分区式架构将是正确的选择。&lt;/p&gt;
+
+&lt;p&gt;更多关于URL路由详情以及flask扩展可以了解官网&lt;a href=&quot;https://flask.palletsprojects.com/en/1.1.x/&quot;&gt;https://flask.palletsprojects.com/en/1.1.x/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;功能式架构&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;n&quot;&gt;yourapp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;分区式架构&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;n&quot;&gt;yourapp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;guincorn&quot;&gt;Guincorn&lt;/h2&gt;
+
+&lt;p&gt;Gunciorn又是什么呢，首先Gunicorn是一个WSGI服务器。它不在乎它所运行的应用是哪一种，django也好，flask也好都OK，只要你应用的是WSGI接口。其采用的是pre-fork方式，其特点是具有使用非常简单，轻量级的资源消耗，以及高性能等特点。那什么是WSGI呢。其全称Python Web Server Gateway Interface，指定了web服务器和Python web应用或web框架之间的标准接口，以提高web应用在一系列web服务器间的移植性。Gunicorn擅长管理多进程。且命令及其方便，可以使用sync，gevent，gthread等多种进程模式。可以根据不同场景需求选择不同的参数。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Flask 内置 WebServer + Flask App = 弱鸡版本的 Server, 单进程（单 worker) / 失败挂掉 / 不易 Scale&lt;/li&gt;
+  &lt;li&gt;Gunicorn + Flask App = 多进程（多 worker) / 多线程 / 失败自动帮你重启 Worker / 可简单Scale&lt;/li&gt;
+  &lt;li&gt;多 Nginx + 多 Gunicorn + Flask App = 小型多实例 Web 应用，一般也会给 gunicorn 挂 supervisor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;supervisor&quot;&gt;Supervisor&lt;/h2&gt;
+&lt;p&gt;Gunicorn采取的主从模式，即master进程将管理多个子进程，若某个子进程挂了，主进程可以重新启动子进程。那么万一主进程也挂了怎么办，常用的方法是通过&lt;a href=&quot;https://github.com/Supervisor/supervisor&quot;&gt;supervisor&lt;/a&gt;进行监控。&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://toutiao.io/posts/45fmtc/preview&quot;&gt;https://toutiao.io/posts/45fmtc/preview&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://medium.com/@genchilu/brief-introduction-about-the-types-of-worker-in-gunicorn-and-respective-suitable-scenario-67b0c0e7bd62&quot;&gt;gunicorn适用类型&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://vsupalov.com/what-is-gunicorn/&quot;&gt;https://vsupalov.com/what-is-gunicorn/&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/&quot;&gt;深入理解uwsgi和gunicorn网络模型上&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://juejin.im/post/5ce8cab8e51d4577523f22f8&quot;&gt;https://juejin.im/post/5ce8cab8e51d4577523f22f8&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://youyou-tech.com/2019/09/11/Flask%2BGunicorn%28%E5%8D%8F%E7%A8%8B%29%E9%AB%98%E5%B9%B6/&quot;&gt;Flask+Gunicorn(协程)高并发的解决方法探究&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/huwh_/article/details/80497790&quot;&gt;https://blog.csdn.net/huwh_/article/details/80497790&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Jun 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/06/17/python-web/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/06/17/python-web/</guid>
+        
+        <category>Python</category>
+        
+        <category>Web</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>学习词汇</title>
+        <description>&lt;h4 id=&quot;机器学习&quot;&gt;机器学习&lt;/h4&gt;
+&lt;p&gt;后向传播算法： backpropagation algorithms&lt;br /&gt;
+正则化：  regularization&lt;br /&gt;
+过拟合：  overfitting&lt;br /&gt;
+向量化：  vectorization&lt;br /&gt;
+大小、量级：magnitude&lt;/p&gt;
+
+&lt;h4 id=&quot;算法&quot;&gt;算法&lt;/h4&gt;
+&lt;p&gt;时间复杂度： time complexity&lt;br /&gt;
+指数级： exponential&lt;/p&gt;
+
+&lt;h4 id=&quot;演讲&quot;&gt;演讲&lt;/h4&gt;
+&lt;p&gt;as a quick reminder: 顺便提醒一下&lt;br /&gt;
+taken as a very loose analogy: 作为粗略的对照
+I will touch base with you. 我会向你再次确认。&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 26 May 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/05/26/machine-learning-word/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/05/26/machine-learning-word/</guid>
+        
+        <category>学习</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>word2vec</title>
+        <description>&lt;p&gt;当刚开始学习自然语言处理深度学习课程的时候，第一步就是向量化，即如何把一篇文章，一个句子转换成数据输入。而文章段落句子都是由词语单词构成的，如果能把这些最小单元结构向量化,句子自然就可以作为输入了。&lt;/p&gt;
+
+&lt;h2 id=&quot;one-hot表达&quot;&gt;One Hot表达&lt;/h2&gt;
+&lt;p&gt;最简单的方式就是One-Hot独热编码表达。用词向量来表示词并不是word2vec的首创，在很久之前就出现了。最早的词向量是很冗长的，它使用是词向量维度大小为整个词汇表的大小，对于每个具体的词汇表中的词，将对应的位置置为1。比如我们有下面的5个词组成的词汇表，词”Queen”的序号为2， 那么它的词向量就是(0,1,0,0,0)。同样的道理，词”Woman”的词向量就是(0,0,0,1,0)。这种词向量的编码方式我们一般叫做1-of-N representation或者one hot representation。其最大的缺点是当词汇量达到百万级的时候，每个词语都需要百万维度的向量去表达词语，且各个词语之间是正交的，很难直接描述各个词汇之间的相关性。&lt;br /&gt;
+&lt;img src=&quot;/img/in-post/Word2vec/word2vec-one-hot.png&quot; width=&quot;400&quot; height=&quot;400&quot; title=&quot;One Hot Presentation&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;word2vec&quot;&gt;Word2Vec&lt;/h2&gt;
+&lt;p&gt;然后有了神经网络词向量语言模型，其一般有三层，输入层即词向量，隐藏层和输出层(softmax层)，其中最大的问题在于从隐藏层到输出的softmax层的计算量很大，因为要计算所有词的softmax概率，再去找概率最大的值，并通过反向传播来不断更新隐藏层的参数。这个模型如下图所示。其中𝑉是词汇表的大小。即假设输入词向量的维度为M，则输入层可以看成V&lt;em&gt;M，隐藏层参数大小应该为M&lt;/em&gt;P, 如此一来得到的中间结果是V*P,可以理解讲词向量从M降维到P。
+&lt;img src=&quot;/img/in-post/Word2vec/nn.png&quot; width=&quot;400&quot; height=&quot;400&quot; title=&quot;神经网络&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Word2vec原理也是如此，只是为了避免如此大的计算量，原作者做了一些优化来提升速率。第一个优化叫做Hierarchical Softmax。第二个优化叫做Negative Sampling。&lt;/p&gt;
+
+&lt;h4 id=&quot;hierarchical-softmax&quot;&gt;Hierarchical Softmax&lt;/h4&gt;
+&lt;p&gt;首先我们来看一下Hierarchical Softmax。其目的是将这个多分类问题转化为多个2分类问题，从而降低计算成本。第一步即把词汇表按照词频建立一颗霍夫曼二叉树。霍夫曼树的好处是词频越高的词汇层数越浅，越容易被遍历到，越早做分类判断。和之前的神经网络语言模型相比，我霍夫曼树的所有内部节点就类似之前神经网络隐藏层的神经元,其中，&lt;strong&gt;根节点的词向量对应我们的投影后的词向量，而所有叶子节点就类似于之前神经网络softmax输出层的神经元，叶子节点的个数就是词汇表的大小&lt;/strong&gt;。在霍夫曼树中，隐藏层到输出层的softmax映射不是一下子完成的，而是沿着霍夫曼树一步步完成的，因此这种softmax取名为”Hierarchical Softmax”。
+&lt;img src=&quot;/img/in-post/Word2vec/huffman.png&quot; width=&quot;400&quot; height=&quot;400&quot; title=&quot;huffman&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;negative-sampling&quot;&gt;Negative Sampling&lt;/h4&gt;
+&lt;p&gt;既然名字叫Negative Sampling（负采样），那么肯定使用了采样的方法。采样的方法有很多种，比如之前讲到的大名鼎鼎的MCMC。我们这里的Negative Sampling采样方法并没有MCMC那么复杂。&lt;/p&gt;
+
+&lt;p&gt;比如我们有一个训练样本，中心词是𝑤,它周围上下文共有2𝑐个词，记为𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)。由于这个中心词𝑤,的确和𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)相关存在，因此它是一个真实的正例。通过Negative Sampling采样，我们得到neg个和𝑤不同的中心词𝑤𝑖,𝑖=1,2,..𝑛𝑒𝑔，这样𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)和𝑤𝑖就组成了neg个并不真实存在的负例。利用这一个正例和neg个负例，我们进行二元逻辑回归，得到负采样对应每个词𝑤𝑖对应的模型参数𝜃𝑖，和每个词的词向量。&lt;br /&gt;
+从上面的描述可以看出，Negative Sampling由于没有采用霍夫曼树，每次只是通过采样neg个不同的中心词做负例，就可以训练模型，因此整个过程要比Hierarchical Softmax简单。&lt;/p&gt;
+
+&lt;h2 id=&quot;源码分析&quot;&gt;源码分析&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c&quot;&gt;https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/pinard/p/7243513.html&quot;&gt;刘建平老师&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 25 May 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/05/25/word2vec/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/05/25/word2vec/</guid>
+        
+        <category>nlp</category>
+        
+        <category>deep learning</category>
         
         
       </item>
@@ -987,11 +903,113 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
 &lt;a href=&quot;https://luzhijun.github.io/2016/10/10/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/&quot;&gt;https://luzhijun.github.io/2016/10/10/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/&lt;/a&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 18 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/18/hungarian/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/18/hungarian/</guid>
+        <pubDate>Thu, 30 Apr 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/04/30/hungarian/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/04/30/hungarian/</guid>
         
         <category>algorithms</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>金融知识</title>
+        <description>&lt;p&gt;一直以来都有想要充实自己金融知识的渴望。这次疫情导致股市遭受了严重的打击，看到朋友圈里朋友们转载的各种新闻，我唯一能体会到的是这次金融危机要来了，且的的确确会影响到我的生活。但是它是如何影响的，其机理是如何的，作为一个理工男，我还是想刨根问底，能够掌握一些基本的常识。宇哥给我推荐的《公司理财》《货币金融学》，一定好好研读。这两本书是国内金融学硕士的考研书籍，但我的目的毕竟不是考研，所以最主要还是宏观了解一些概念知识，不用扣太细。&lt;/p&gt;
+
+&lt;h2 id=&quot;货币金融学&quot;&gt;货币金融学&lt;/h2&gt;
+
+&lt;h4 id=&quot;第一章-为什么研究货币银行与金融市场&quot;&gt;第一章 为什么研究货币、银行与金融市场&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;债券&lt;/strong&gt;： 债券是政府、企业、银行等债务人为筹集资金,按照法定程序发行并向债权人承诺于指定日期还本付息的有价证券。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;利率&lt;/strong&gt;： 利率或利息率，是借款人需向其所借金钱所支付的代价。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;票面利率&lt;/strong&gt;：票面利率是指债券发行者每一年向投资者支付的利息占票面金额的比率，它在数额上等于债券每年应付给债券持有人的利息总额与债券总面值相除的百分比。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;市场利率&lt;/strong&gt;：市场利率是指由资金市场上供求关系决定的利率。市场利率因受到资金市场上的供求变化而经常变化。在市场机制发挥作用的情况下，由于自由竞争，信贷资金的供求会逐渐趋于干衡，经济学家这将种状态的市场利率称为“均衡利率”。与市场利率对应的是官定利率，所谓官定利率是指由货币当局规定的利率。货币当局可以是中央银行，也可以是具有实际金融管理职能的政府部门。&lt;/p&gt;
+
+&lt;p&gt;债券与利率的关系&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;股票&lt;/strong&gt;： 股票是一种有价证券，股份有限公司将其所有权借由这种有价证卷进行分配。因为股份有限公司需要筹措长期资金，因此将股票发给投资者作为公司资本部分所有权的凭证，成为股东以此获得股息（股利），并分享公司成长或交易市场波动带来的利润；但也要共同承担公司运作错误所带来的风险。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;道琼斯指数&lt;/strong&gt;：道琼斯工业平均指数（Dow Jones Industrial Average，DJIA，简称“道指”）是由《华尔街日报》（The Wall Street Journal）和道琼斯公司创建者查尔斯·道创造的几种股票市场指数之一。道琼斯指数的价值不是加权算术平均值，并不代表其组成公司的市值，而是每个组成公司的一股股票价格的总和。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A股&lt;/strong&gt;： 人民币普通股票，它是由我国境内的公司发行,供境内机构、组织或个人(不含台、港、澳投资者)以人民币认购和交易的普通股股票。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;一级市场&lt;/strong&gt;：筹集资金的公司或者政府机构将其发行的股票和债券等证券销售给最初购买者的金融市场。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;二级市场&lt;/strong&gt;: 是交易已经发行的证券的金融市场。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;银行&lt;/strong&gt;：银行是通过存款、贷款、汇兑、储蓄等业务，承担信用中介的金融机构。银行是金融机构之一，而且是最主要的金融机构，它主要的业务范围有吸收公众存款、发放贷款以及办理票据贴现等&lt;/p&gt;
+
+&lt;p&gt;银行为什么要接收非常严格的监管：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;货币&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;通货膨胀&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;如何解释汇率频繁的波动&lt;/p&gt;
+
+&lt;h4 id=&quot;第二章-金融体系概览&quot;&gt;第二章 金融体系概览&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;货币市场工具&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;资本市场工具&lt;/strong&gt;：期限超过一年的债权工具和股权工具。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;金融市场的国际化&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;降准&lt;/strong&gt;：降准就是下调法定存款准备金率，居民或企业（假定为甲）平常在银行（假定为银行A）存钱需要开立存款账户，商业银行在央行存钱同样需要开立存款账户，与我们普通银行存款不同的是，商业银行在央行的存款具有强制性，一般分为法定存款准备金以及超额存款准备金，前者是法律规定商业银行在央行的最低存款限额，后者是当商业银行在央行存款中超过法定存款准备金的那部分资金。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;回购协议&lt;/strong&gt;：&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 26 Mar 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/03/26/corporate-finance/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/03/26/corporate-finance/</guid>
+        
+        <category>金融</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>2020新年</title>
+        <description>&lt;p&gt;不知不觉，到了写2020年博客的时候了。随着年龄的增大，越发感觉时光的流逝。与好友欣赏完好听的交响乐，看完美丽的烟花🎇，给我这个单身狗的凄凉上增添了许多喜悦之情哈哈。&lt;/p&gt;
+
+&lt;p&gt;2019年，对我来说也是奇妙的一年。上半年忙着做项目，搞毕设，兢兢业业忙到毕业~下半年只身前往新加坡，在这个陌生的国度打拼，开启自己新的篇章。第一次领工资，第一次独立完成项目，第一次出差…的确整个2019收获很多，但2019年元旦的博客中立的很多flag很多都没有兑现,实在惭愧。在这里还是希望给2020年的自己立一些flag，成为一个优秀靠谱高效率的人。&lt;/p&gt;
+
+&lt;h2 id=&quot;健身&quot;&gt;健身&lt;/h2&gt;
+&lt;p&gt;健身对我意味着是生活的一部分，我也不想练成夸张的肌肉男，只需要保持自己的身材，增强一些力量，让自己变得自信一些。&lt;/p&gt;
+
+&lt;h2 id=&quot;工作&quot;&gt;工作&lt;/h2&gt;
+&lt;p&gt;工作里面感觉可以细分一些模块。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;首先是数据结构，也就是Leetcode刷题。要学会通过正确的学习方法去总结，第一也是为以后自己面试准备，第二也是给别人面试准备。&lt;/li&gt;
+  &lt;li&gt;在工作中，项目中要学会努力踏实，学会与团队交流，提高效率，少做无用功。&lt;/li&gt;
+  &lt;li&gt;多阅读文献和了解最前沿的算法库。&lt;/li&gt;
+  &lt;li&gt;多积累Python和Java的代码规范和常用算法库。&lt;/li&gt;
+  &lt;li&gt;提高英文口语水平，学会做PPT。敢于在众人面前用英文分享自己的想法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;理财&quot;&gt;理财&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;第一件事就是控制自己，合理消费。明年的目标是能够存20万，有一定的储蓄才能做其他合理的理财。&lt;/li&gt;
+  &lt;li&gt;已经买了人生第一份保险。今年还得把住院险和意外险安排上。&lt;/li&gt;
+  &lt;li&gt;看一些金融相关的书籍，多了解一些金融基本知识。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;旅游&quot;&gt;旅游&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;2019年已经去过了泰国，越南。希望2020能去马来西亚和印尼🇮🇩看看。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;感情&quot;&gt;感情&lt;/h2&gt;
+&lt;p&gt;哈哈，努力努力，但随缘就好~&lt;/p&gt;
+</description>
+        <pubDate>Wed, 01 Jan 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/01/01/new-year/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/01/01/new-year/</guid>
+        
+        <category>生活</category>
         
         
       </item>
