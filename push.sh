@@ -26,19 +26,22 @@ function list_files() {
     done
 }
 
-SECONDS_OF_DAY=86400
+SECONDS_OF_HALF_DAY=43200
 function update_post_status() {
     list_files $1
     for post in ${posts[@]};
     do  
         modified_timestamp=`get_last_modified_timestamp $post`
-        time_deltaDays=$[ ($(date +%s) - ${modified_timestamp}) / $SECONDS_OF_DAY]
+        time_deltaDays=$[ ($(date +%s) - ${modified_timestamp}) / $SECONDS_OF_HALF_DAY ]
         update_date=`date -r $modified_timestamp +%Y-%m-%d`
         if [ $time_deltaDays -lt 1 ]
         then
             sed -i '' -e 's/^\(date:[[:space:]]*\).*$/\1'$update_date'/' $post
             new_name=`echo $post | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/'$update_date'/'`
             mv $post $new_name
+            echo $time_deltaDays
+	    echo $post
+
             
         
         fi

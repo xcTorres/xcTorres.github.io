@@ -11,12 +11,15 @@ layout: default
   padding: 1em 0 4em 0;
 }
 .gallery-best-image{
-  height: 300px;
+  height: 350px;
+}
+.gallery{
+  background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3));
 }
 </style>
 
 <!-- Main Content -->
-  <div>
+  <div class="gallery">
     {% assign rows = page.galleries.size | divided_by: 3 %}
     {% assign modulo = page.galleries.size | modulo: 3 %}
     {% assign rows = rows | plus: modulo | minus: 1 %}
@@ -37,10 +40,9 @@ layout: default
                     <h3><a href="{{ gallery['gallery'] }}">{{ gallery["name"] }}</a></h3>
                     {{ gallery["images"] | size }} image{% if gallery["images"].size != 1 %}s{% endif %}
                   </div>
-                </div>
+              </div>
             {% endif %}
           {% endfor %}
-        </div>
       </div>
     {% endfor %}
     </div>
