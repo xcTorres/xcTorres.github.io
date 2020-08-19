@@ -11,26 +11,26 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="2019冲鸭 - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="1. Two Sum - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="不知不觉，2019年就这么到来了。回顾2018，经历了很多，就不回顾了，就让这一些经历和收获深藏心中。更希望2019能有更美好的未来，还是要立一些Flag的吧哈哈。
+    <meta property="og:description" content="```java
 ">
     
-    <meta property="article:published_time" content="2019-01-01T00:00:00Z">
+    <meta property="article:published_time" content="2020-08-19T14:54:22Z">
     
     
     <meta property="article:author" content="xcTorres">
     
     
-    <meta property="article:tag" content="生活">
+    <meta property="article:tag" content="Leetcode">
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2019/01/01/new-year-life/">
+    <meta property="og:url" content="https://xctorres.github.io//leetcode/1.%20Two%20Sum/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>2019冲鸭 - 谢聪博客 | xcTorres Blog</title>
+    <title>1. Two Sum - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2019/01/01/new-year-life/">
+    <link rel="canonical" href="https://xctorres.github.io//leetcode/1.%20Two%20Sum/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -198,7 +198,7 @@
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/in-post/2019.jpg" width="0" height="0"> -->
+<!-- <img src="/img/leetcode.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -207,7 +207,7 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/in-post/2019.jpg');
+        background-image: url('/img/leetcode.jpg');
         background: ;
     }
 
@@ -224,13 +224,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=%E7%94%9F%E6%B4%BB" title="生活">生活</a>
+                        <a class="tag" href="/archive/?tag=Leetcode" title="Leetcode">Leetcode</a>
                         
                     </div>
-                    <h1>2019冲鸭</h1>
+                    <h1>1. Two Sum</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on January 1, 2019</span>
+                    <span class="meta">Posted by xcTorres on August 19, 2020</span>
                 </div>
             </div>
         </div>
@@ -256,54 +256,28 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>不知不觉，2019年就这么到来了。回顾2018，经历了很多，就不回顾了，就让这一些经历和收获深藏心中。更希望2019能有更美好的未来，还是要立一些Flag的吧哈哈。</p>
+				<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">twoSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            
+            <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])){</span>
+                    <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]),</span> <span class="n">i</span><span class="o">};</span>
+                <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+                    <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-<h4 id="吉他">吉他</h4>
-<p>吉他，哎吉他这件事真的很尴尬啊。上半年是真的没时间学习了，不晓得以后有没有机会坚持下来。希望工作了之后，适应新生活之后，还是报个班，系统的学习。自己学总感觉有点瞎胡闹。还能把乐理好好学学。</p>
-
-<h4 id="健身">健身</h4>
-<p>希望自己的腿能恢复如初，可以简单的踢踢野球，颠颠球。坚持去健身房锻炼，保持一个好的身材。不管有钱没钱，也要有个强健的体魄和坚强的意志哈哈。</p>
-
-<h4 id="写博客">写博客</h4>
-<p>不管是生活，技术，还是读书观后感都记得坚持写博客。一是对自己的生活和工作有个记录，二是提高自己的写作能力。</p>
-
-<h4 id="多读书">多读书</h4>
-<p>可能因为从小生活在一个父母老吵架的家庭，感觉自己也是缺乏安全感，有些浮躁，总感觉自己不能沉下心来。希望自己能真正养成读书的习惯，从书籍中学习到新的知识以及修身养性，不再那么毛躁。
-一年365天，希望自己两周能看一本书。一年也得看30本吧~~</p>
-
-<h4 id="英语">英语</h4>
-<p>提高阅读能力，也希望上半年报一个口语班，感觉自己有英语天赋，但是从没有系统的学习。希望能够纠正自己的口音。</p>
-
-<h4 id="象棋">象棋</h4>
-<p>还别说，真想好好系统学习象棋的书，提高自己的象棋技术，掌握一些套路。而不是凭感觉。</p>
-
-<h4 id="工作">工作</h4>
-<p>下半年就要去新加坡工作了，希望自己能适应新生活，跟同事们把关系搞好。找到工作与生活的节奏。广告推荐这一门学科可不是那么简单的，得沉下来好好学习。</p>
-
-<h4 id="对象">对象</h4>
-<p>对象这件事已经佛系了。有时候发现自己缺乏安全感占有欲太强，不适合谈恋爱。也希望能够早日碰到有缘人，心中一定要有念想，但是就算单身也不怕，要利用时间去充实自己。还是希望早日脱单哈哈。</p>
-
-<p>未完待续…</p>
-
+</code></pre></div></div>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2018/10/30/find-offers/" data-toggle="tooltip" data-placement="top" title="找工作流水账">
-                        Previous<br>
-                        <span>找工作流水账</span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2019/11/11/git/" data-toggle="tooltip" data-placement="top" title="git 命令">
-                        Next<br>
-                        <span>git 命令</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -502,7 +476,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2019/01/01/new-year-life",
+		id: "/leetcode/1. Two Sum",
 		
 		});
 		gitalk.render('gitalk-container'); 
