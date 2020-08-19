@@ -1,9 +1,10 @@
 ---
 layout: page
-description: "除了自己的无知，我什么都不懂"
+title: "Leetcode"
 ---
 
-{% for post in site.posts %}
+{% assign sortedPosts = site.leetcode | sort: 'title' %}
+{% for post in sortedPosts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
         <h2 class="post-title">

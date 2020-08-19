@@ -12,12 +12,9 @@ encoding: utf-8
 
 # SNS settings
 RSS: true
-#weibo_username:     huxpro
 zhihu_username:     cong-zi-64
 github_username:    xcTorres
 linkedin_username: chong-xie-545830157
-#twitter_username:  huxpro
-#facebook_username:  huxpro
 
 
 
@@ -80,6 +77,10 @@ sidebar-avatar: /img/avatar-xcTorres.png      # use absolute URL, seeing it's us
 featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 0              # A tag will be featured if the size of it is more than this condition value
 
+
+collections:
+  leetcode:
+    output: true
 
 # Friends
 friends: [
