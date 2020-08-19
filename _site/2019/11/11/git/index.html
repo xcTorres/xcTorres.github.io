@@ -11,26 +11,26 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="1. Two Sum - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="git 命令 - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="```java
+    <meta property="og:description" content="基本操作
 ">
     
-    <meta property="article:published_time" content="2020-08-19T16:05:15Z">
+    <meta property="article:published_time" content="2019-11-11T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
     
     
-    <meta property="article:tag" content="Leetcode">
+    <meta property="article:tag" content="Linux">
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//leetcode/1.%20Two%20Sum/">
+    <meta property="og:url" content="https://xctorres.github.io//2019/11/11/git/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>1. Two Sum - 谢聪博客 | xcTorres Blog</title>
+    <title>git 命令 - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//leetcode/1.%20Two%20Sum/">
+    <link rel="canonical" href="https://xctorres.github.io//2019/11/11/git/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -200,7 +200,7 @@
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/leetcode.jpg" width="0" height="0"> -->
+<!-- <img src="/img/in-post/git.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -209,7 +209,7 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/leetcode.jpg');
+        background-image: url('/img/in-post/git.jpg');
         background: ;
     }
 
@@ -226,13 +226,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Leetcode" title="Leetcode">Leetcode</a>
+                        <a class="tag" href="/archive/?tag=Linux" title="Linux">Linux</a>
                         
                     </div>
-                    <h1>1. Two Sum</h1>
+                    <h1>git 命令</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on August 19, 2020</span>
+                    <span class="meta">Posted by xcTorres on November 11, 2019</span>
                 </div>
             </div>
         </div>
@@ -258,28 +258,137 @@
                 <!-- Multi-Lingual -->
                 
 
-				<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
- <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-        <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">twoSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-            
-            <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])){</span>
-                    <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]),</span> <span class="n">i</span><span class="o">};</span>
-                <span class="o">}</span><span class="k">else</span><span class="o">{</span>
-                    <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-            <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+				<h2 id="基本操作">基本操作</h2>
+
+<h4 id="0-git配置">0) git配置</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">level</span>  <span class="o">--</span><span class="n">files</span>
+
+    <span class="n">Example</span><span class="p">:</span>  
+    <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="n">xxxx</span><span class="o">@</span><span class="n">example</span><span class="p">.</span><span class="n">com</span>
+    
+</code></pre></div></div>
+
+<h4 id="1创建版本库">1）创建版本库</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="n">git</span> <span class="n">clone</span> <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span>     <span class="c1">#克隆远程版本库
+</span>    <span class="n">git</span> <span class="n">init</span>            <span class="c1">#初始化本地版本库
+</span>
+</code></pre></div></div>
+
+<h4 id="2修改和提交">2）修改和提交</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="n">git</span> <span class="n">status</span>          <span class="c1">#查看状态
+</span>    <span class="n">git</span> <span class="n">diff</span>            <span class="c1">#查看变更内容
+</span>    <span class="n">git</span> <span class="n">add</span> <span class="p">.</span>           <span class="c1">#跟踪所有改动过的文件
+</span>    <span class="n">git</span> <span class="n">add</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>      <span class="c1">#跟踪指定的文件
+</span>    <span class="n">git</span> <span class="n">mv</span> <span class="o">&lt;</span><span class="n">old</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">new</span><span class="o">&gt;</span>  <span class="c1">#文件改名
+</span>    <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span><span class="s">"commit message"</span>  
+                        <span class="c1">#提交所有更新过的文件
+</span>
+    <span class="n">git</span> <span class="n">commit</span> <span class="o">--</span><span class="n">amend</span>  <span class="c1">#修改最后一次提交  
+</span>
+</code></pre></div></div>
+
+<h4 id="3查看提交历史">3）查看提交历史</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="n">git</span> <span class="n">log</span>             <span class="c1">#查看提交历史
+</span>    <span class="n">git</span> <span class="n">log</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>   <span class="c1">#查看指定文件的提交历史
+</span>    <span class="n">git</span> <span class="n">blame</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>    <span class="c1">#以列表方式查看指定文件的提交历史
+</span>
+</code></pre></div></div>
+
+<h4 id="4撤销">4）撤销</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="n">HEAD</span>  <span class="c1">#撤销工作目录中所有未提交文件的修改内容  
+</span>    <span class="n">git</span> <span class="n">checkout</span> <span class="n">HEAD</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>  <span class="c1">#撤销指定的未提交文件的修改内容  
+</span>    <span class="n">git</span> <span class="n">revert</span> <span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span> <span class="c1">#撤销指定的提交
+</span>
+</code></pre></div></div>
+
+<h4 id="4分支与标签">4）分支与标签</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="n">git</span> <span class="n">branch</span>           <span class="c1">#显示所有本地分支 
+</span>    <span class="n">git</span> <span class="n">checkout</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">/</span><span class="n">tag</span><span class="o">&gt;</span>                    
+                         <span class="c1">#切换到指定分支或标签
+</span>    <span class="n">git</span> <span class="n">branch</span>  <span class="o">&lt;</span><span class="n">new</span><span class="o">-</span><span class="n">branch</span><span class="o">&gt;</span> <span class="c1">#创建新分支
+</span>    <span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span> <span class="c1">#删除本地分支
+</span>    <span class="n">git</span> <span class="n">tag</span>              <span class="c1">#列出所有本地标签
+</span>    <span class="n">git</span> <span class="n">tag</span>  <span class="o">&lt;</span><span class="n">tagname</span><span class="o">&gt;</span>   <span class="c1"># 基于最新提交创建标签
+</span>    <span class="n">git</span> <span class="n">tag</span>  <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">tagname</span><span class="o">&gt;</span> <span class="c1">#删除标签
+</span>
+</code></pre></div></div>
+<h4 id="5合并与衍合">5）合并与衍合</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+   <span class="n">git</span> <span class="n">merge</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span>    <span class="c1">#合并指定分支到当前分支
+</span>   <span class="n">git</span> <span class="n">rebase</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span>   <span class="c1">#衍合指定分支到当前分支
+</span>
+</code></pre></div></div>
+
+<h4 id="6远程操作">6）远程操作</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+    <span class="n">git</span> <span class="n">remote</span> <span class="o">-</span><span class="n">v</span>        <span class="c1">#查看远程版本库信息
+</span>    <span class="n">git</span> <span class="n">remote</span> <span class="n">show</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span>
+                         <span class="c1">#查看指定远程版本库信息
+</span>    <span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span>
+                         <span class="c1">#添加远程版本库
+</span>    <span class="n">git</span> <span class="n">fetch</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span>   <span class="c1">#从远程库获取代码
+</span>    <span class="n">git</span> <span class="n">pull</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span> 
+                         <span class="c1">#下载代码及快速合并
+</span>    <span class="n">git</span> <span class="n">push</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span>
+                         <span class="c1">#上传代码及快速合并
+</span>    <span class="n">git</span> <span class="n">push</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">&lt;</span><span class="n">branch</span><span class="o">/</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+                         <span class="c1">#删除远程分支或标签
+</span>    <span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="n">tags</span>      <span class="c1">#上传所有标签  
+</span>
+</code></pre></div></div>
+<h2 id="常见问题">常见问题</h2>
+<h4 id="1-编辑冲突">1） 编辑冲突</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="n">HEAD</span><span class="p">:</span><span class="nb">file</span><span class="p">.</span><span class="n">txt</span>  
+
+    <span class="n">Hello</span> <span class="n">world</span>
+
+    <span class="o">=======</span>  
+
+    <span class="n">Goodbye</span>  
+
+    <span class="o">&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="mi">77976</span><span class="n">da35a11db4580b80ae27e8d65caf5208086</span><span class="p">:</span><span class="nb">file</span><span class="p">.</span><span class="n">txt</span>
+</code></pre></div></div>
+
+<p>其中等号是用来区分合并前后两个分支的区别，并且Head为本地当前的分支，而等号之后的为pull下来的分支内容。所需要的做是就是编辑解决冲突，（接着把冲突标识符删掉），再执行add，commit 命令，进行提交。</p>
+
+<h4 id="2-撤销git-add添加的文件">2） 撤销git add添加的文件</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">git</span> <span class="n">reset</span>
 
 </code></pre></div></div>
+
+<h2 id="彩蛋">彩蛋</h2>
+<p><img src="/img/in-post/git-all-commands.png" alt="" /></p>
+
+<h2 id="参考">参考</h2>
+<p><a href="https://nvie.com/posts/a-successful-git-branching-model/">https://nvie.com/posts/a-successful-git-branching-model/</a><br />
+<a href="https://github.com/geeeeeeeeek/git-recipes">https://github.com/geeeeeeeeek/git-recipes</a></p>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2019/01/01/new-year-life/" data-toggle="tooltip" data-placement="top" title="2019冲鸭">
+                        Previous<br>
+                        <span>2019冲鸭</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/01/01/new-year/" data-toggle="tooltip" data-placement="top" title="2020新年">
+                        Next<br>
+                        <span>2020新年</span>
+                        </a>
+                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -478,7 +587,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/leetcode/1. Two Sum",
+		id: "/2019/11/11/git",
 		
 		});
 		gitalk.render('gitalk-container'); 
