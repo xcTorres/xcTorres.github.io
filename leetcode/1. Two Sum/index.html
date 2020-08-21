@@ -14,10 +14,10 @@
     <meta property="og:title" content="1. Two Sum - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="```java
+    <meta property="og:description" content="problem: https://leetcode.com/problems/two-sum/
 ">
     
-    <meta property="article:published_time" content="2020-08-20T18:42:25Z">
+    <meta property="article:published_time" content="2020-08-21T10:48:38Z">
     
     
     <meta property="article:author" content="xcTorres">
@@ -232,7 +232,7 @@
                     <h1>1. Two Sum</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on August 20, 2020</span>
+                    <span class="meta">Posted by xcTorres on August 21, 2020</span>
                 </div>
             </div>
         </div>
@@ -258,23 +258,52 @@
                 <!-- Multi-Lingual -->
                 
 
-				<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
- <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-        <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">twoSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-            
-            <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])){</span>
-                    <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]),</span> <span class="n">i</span><span class="o">};</span>
-                <span class="o">}</span><span class="k">else</span><span class="o">{</span>
-                    <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
+				<p>problem: <a href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a></p>
+
+<h2 id="description">Description</h2>
+<p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
+
+<p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
+
+<p><strong>Example:</strong></p>
+
+<p>Given nums = [2, 7, 11, 15], target = 9,</p>
+
+<p>Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].</p>
+
+<h2 id="solution">Solution</h2>
+
+<h4 id="using-extra-space">Using extra space</h4>
+<p>We could use a map to store the elements, which could improve the searching efficiency.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+            <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">twoSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+                
+                <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+                <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                    <span class="k">if</span><span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])){</span>
+                        <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]),</span> <span class="n">i</span><span class="o">};</span>
+                    <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+                        <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
+                    <span class="o">}</span>
                 <span class="o">}</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
             <span class="o">}</span>
-            <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
         <span class="o">}</span>
-    <span class="o">}</span>
 
 </code></pre></div></div>
+
+<h4 id="no-extra-space">No extra space</h4>
+<p>When we prepare this problem for interview, seems like it is very easy to implement if we could use extra space. If the output requires just the numbers <strong>not the index</strong>, we could solve this without extra space.
+The ideas is as follows:</p>
+<ol>
+  <li>Sort the array(time complexity should be O(nlogn))</li>
+  <li>Binary Seach(time complexity should be also O(logn)) <strong>or</strong> Two Pointers(time complexity should be also O(n))</li>
+</ol>
+
+<p>So totally the timplexity is O(nlogn)</p>
+
 
 
                 <hr style="visibility: hidden;">
