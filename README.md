@@ -4,4 +4,8 @@
 
 Currently I also add some new functions.  
 
-- [x] Gallery
+- [x] Gallery  
+- [x] Visitor Map  
+
+
+
