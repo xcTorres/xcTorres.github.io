@@ -11,16 +11,28 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Math - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="word2vec - 谢聪博客 | xcTorres Blog">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="当刚开始学习自然语言处理深度学习课程的时候，第一步就是向量化，即如何把一篇文章，一个句子转换成数据输入。而文章段落句子都是由词语单词构成的，如果能把这些最小单元结构向量化,句子自然就可以作为输入了。
+">
+    
+    <meta property="article:published_time" content="2020-05-25T00:00:00Z">
+    
+    
+    <meta property="article:author" content="xcTorres">
+    
+    
+    <meta property="article:tag" content="nlp">
+    
+    <meta property="article:tag" content="deep learning">
+    
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//math/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/05/25/word2vec/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>Math - 谢聪博客 | xcTorres Blog</title>
+    <title>word2vec - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +41,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//math/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/05/25/word2vec/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -191,66 +203,156 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- canvas-nest.min.js
+<script type="text/javascript" src="../../../../js/canvas-nest.min.js"></script>-->
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/in-post/Singapore.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/in-post/Singapore.jpg');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header" >
 
-
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>Math</h1>
-          <span class="subheading"></span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=nlp" title="nlp">nlp</a>
+                        
+                        <a class="tag" href="/archive/?tag=deep+learning" title="deep learning">deep learning</a>
+                        
+                    </div>
+                    <h1>word2vec</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by xcTorres on May 25, 2020</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-10 col-lg-offset-0
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>当刚开始学习自然语言处理深度学习课程的时候，第一步就是向量化，即如何把一篇文章，一个句子转换成数据输入。而文章段落句子都是由词语单词构成的，如果能把这些最小单元结构向量化,句子自然就可以作为输入了。</p>
+
+<h2 id="one-hot表达">One Hot表达</h2>
+<p>最简单的方式就是One-Hot独热编码表达。用词向量来表示词并不是word2vec的首创，在很久之前就出现了。最早的词向量是很冗长的，它使用是词向量维度大小为整个词汇表的大小，对于每个具体的词汇表中的词，将对应的位置置为1。比如我们有下面的5个词组成的词汇表，词”Queen”的序号为2， 那么它的词向量就是(0,1,0,0,0)。同样的道理，词”Woman”的词向量就是(0,0,0,1,0)。这种词向量的编码方式我们一般叫做1-of-N representation或者one hot representation。其最大的缺点是当词汇量达到百万级的时候，每个词语都需要百万维度的向量去表达词语，且各个词语之间是正交的，很难直接描述各个词汇之间的相关性。<br />
+<img src="/img/in-post/Word2vec/word2vec-one-hot.png" width="400" height="400" title="One Hot Presentation" /></p>
+
+<h2 id="word2vec">Word2Vec</h2>
+<p>然后有了神经网络词向量语言模型，其一般有三层，输入层即词向量，隐藏层和输出层(softmax层)，其中最大的问题在于从隐藏层到输出的softmax层的计算量很大，因为要计算所有词的softmax概率，再去找概率最大的值，并通过反向传播来不断更新隐藏层的参数。这个模型如下图所示。其中𝑉是词汇表的大小。即假设输入词向量的维度为M，则输入层可以看成V<em>M，隐藏层参数大小应该为M</em>P, 如此一来得到的中间结果是V*P,可以理解讲词向量从M降维到P。
+<img src="/img/in-post/Word2vec/nn.png" width="400" height="400" title="神经网络" /></p>
+
+<p>Word2vec原理也是如此，只是为了避免如此大的计算量，原作者做了一些优化来提升速率。第一个优化叫做Hierarchical Softmax。第二个优化叫做Negative Sampling。</p>
+
+<h4 id="hierarchical-softmax">Hierarchical Softmax</h4>
+<p>首先我们来看一下Hierarchical Softmax。其目的是将这个多分类问题转化为多个2分类问题，从而降低计算成本。第一步即把词汇表按照词频建立一颗霍夫曼二叉树。霍夫曼树的好处是词频越高的词汇层数越浅，越容易被遍历到，越早做分类判断。和之前的神经网络语言模型相比，我霍夫曼树的所有内部节点就类似之前神经网络隐藏层的神经元,其中，<strong>根节点的词向量对应我们的投影后的词向量，而所有叶子节点就类似于之前神经网络softmax输出层的神经元，叶子节点的个数就是词汇表的大小</strong>。在霍夫曼树中，隐藏层到输出层的softmax映射不是一下子完成的，而是沿着霍夫曼树一步步完成的，因此这种softmax取名为”Hierarchical Softmax”。
+<img src="/img/in-post/Word2vec/huffman.png" width="400" height="400" title="huffman" /></p>
+
+<h4 id="negative-sampling">Negative Sampling</h4>
+<p>既然名字叫Negative Sampling（负采样），那么肯定使用了采样的方法。采样的方法有很多种，比如之前讲到的大名鼎鼎的MCMC。我们这里的Negative Sampling采样方法并没有MCMC那么复杂。</p>
+
+<p>比如我们有一个训练样本，中心词是𝑤,它周围上下文共有2𝑐个词，记为𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)。由于这个中心词𝑤,的确和𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)相关存在，因此它是一个真实的正例。通过Negative Sampling采样，我们得到neg个和𝑤不同的中心词𝑤𝑖,𝑖=1,2,..𝑛𝑒𝑔，这样𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)和𝑤𝑖就组成了neg个并不真实存在的负例。利用这一个正例和neg个负例，我们进行二元逻辑回归，得到负采样对应每个词𝑤𝑖对应的模型参数𝜃𝑖，和每个词的词向量。<br />
+从上面的描述可以看出，Negative Sampling由于没有采用霍夫曼树，每次只是通过采样neg个不同的中心词做负例，就可以训练模型，因此整个过程要比Hierarchical Softmax简单。</p>
+
+<h2 id="源码分析">源码分析</h2>
+<p><a href="https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c">https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c</a></p>
+
+<h2 id="参考">参考</h2>
+<p><a href="https://www.cnblogs.com/pinard/p/7243513.html">刘建平老师</a></p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/04/30/hungarian/" data-toggle="tooltip" data-placement="top" title="匈牙利算法介绍">
+                        Previous<br>
+                        <span>匈牙利算法介绍</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/05/26/machine-learning-word/" data-toggle="tooltip" data-placement="top" title="学习词汇">
+                        Next<br>
+                        <span>学习词汇</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+				
+				
+				<div id="gitalk-container"></div>
+                
+				
+
+                
+				
+				
+				
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			
-
-
-<!-- Pager -->
-
-    		</div>
     <!-- Sidebar Container -->
-          <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-                <style>
-    .map{width:300px; min-height:200px} 
-</style>
-
-<div class='map'>
-    <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=m&d=nh0_nGiUfKYf-0GZZH0NA8_vXVCdhkQE_VvoQnHTmZc"></script>
-</div>
-
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
                 <!-- Featured Tags -->
                 
@@ -258,6 +360,8 @@
 
 <section>
 
+    
+        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="/archive/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -330,71 +434,6 @@
 </section>
 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="/about/">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="/img/avatar-xcTorres.png" />
-    
-    
-    <p>慧极必伤，情深不寿，强极必辱，谦谦君子，温润如玉</p>
-    
-    <!-- SNS Link -->
-    
-
-
-<ul class="list-inline">
-
-
-  
-  <li>
-    <a href="/feed.xml">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://www.zhihu.com/people/cong-zi-64">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa  fa-stack-1x fa-inverse">知</i>
-      </span>
-    </a>
-  </li>
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/xcTorres">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  <li>
-    <a target="_blank" href="https://www.linkedin.com/in/chong-xie-545830157">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-</ul>
-  </div>
-</section>
-
                 <!-- Friends Blog -->
                 
 <hr>
@@ -445,10 +484,47 @@
   
 </ul>
 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+		var gitalk = new Gitalk({
+
+		// gitalk的主要参数
+		clientID: "6c4ed7ef926a76e8447e",
+		clientSecret: "1df8e0efa5331eae417cf604d68fdb150a524a7a",
+		repo: "xctorres.github.io",
+		owner: "xcTorres",
+		admin: "xcTorres",
+		id: "/2020/05/25/word2vec",
+		
+		});
+		gitalk.render('gitalk-container'); 
+</script>
+
+
+
+
+
+
+
 
     <!-- Footer -->
 <footer>
@@ -607,6 +683,64 @@
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 
