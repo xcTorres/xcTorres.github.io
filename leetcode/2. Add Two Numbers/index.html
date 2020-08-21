@@ -11,16 +11,27 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="2020/07/12 Dragon Boat Session - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="2. Add Two Numbers - 谢聪博客 | xcTorres Blog">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Link
+problem: https://leetcode.com/problems/add-two-numbers/
+">
+    
+    <meta property="article:published_time" content="2020-08-21T11:16:21Z">
+    
+    
+    <meta property="article:author" content="xcTorres">
+    
+    
+    <meta property="article:tag" content="Leetcode">
+    
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//gallery/dragonboat/">
+    <meta property="og:url" content="https://xctorres.github.io//leetcode/2.%20Add%20Two%20Numbers/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>2020/07/12 Dragon Boat Session - 谢聪博客 | xcTorres Blog</title>
+    <title>2. Add Two Numbers - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +40,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//gallery/dragonboat/">
+    <link rel="canonical" href="https://xctorres.github.io//leetcode/2.%20Add%20Two%20Numbers/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -185,99 +196,182 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- canvas-nest.min.js
+<script type="text/javascript" src="../../../../js/canvas-nest.min.js"></script>-->
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/leetcode.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/leetcode.jpg');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header" >
 
-
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>2020/07/12 Dragon Boat Session</h1>
-          <span class="subheading"></span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Leetcode" title="Leetcode">Leetcode</a>
+                        
+                    </div>
+                    <h1>2. Add Two Numbers</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by xcTorres on August 21, 2020</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-10 col-lg-offset-0
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h2 id="link">Link</h2>
+<p>problem: <a href="https://leetcode.com/problems/add-two-numbers/">https://leetcode.com/problems/add-two-numbers/</a></p>
+
+<h2 id="description">Description</h2>
+
+<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+
+<p><strong>Example:</strong></p>
+
+<p>Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
+Output: 7 -&gt; 0 -&gt; 8
+Explanation: 342 + 465 = 807.</p>
+
+<h2 id="solution">Solution</h2>
+<p>The adding problem is as easy as adding two integers, so we need to calculate remainder and carry.<br />
+But for this problem what we need to pay attention to is that when we traverse the LinkNode, we should check the boundary conditions, such as whether the LinkNode has already been NULL or not.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/**
+    * Definition for singly-linked list.
+    * public class ListNode {
+    *     int val;
+    *     ListNode next;
+    *     ListNode(int x) { val = x; }
+    * }
+    */</span>
+    <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">ListNode</span> <span class="nf">addTwoNumbers</span><span class="o">(</span><span class="nc">ListNode</span> <span class="n">l1</span><span class="o">,</span> <span class="nc">ListNode</span> <span class="n">l2</span><span class="o">)</span> <span class="o">{</span>
+            
+            <span class="nc">ListNode</span> <span class="n">dummy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ListNode</span><span class="o">(-</span><span class="mi">1</span><span class="o">);</span>
+            <span class="nc">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">dummy</span><span class="o">;</span>
+            
+            <span class="kt">int</span> <span class="n">m</span><span class="o">,</span><span class="n">n</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">carry</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="k">while</span><span class="o">(</span><span class="n">l1</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">l2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="n">l1</span><span class="o">==</span><span class="kc">null</span><span class="o">?</span><span class="mi">0</span><span class="o">:</span><span class="n">l1</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+                <span class="n">l1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">==</span><span class="kc">null</span><span class="o">?</span><span class="kc">null</span><span class="o">:</span><span class="n">l1</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="n">l2</span><span class="o">==</span><span class="kc">null</span><span class="o">?</span><span class="mi">0</span><span class="o">:</span><span class="n">l2</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+                <span class="n">l2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">==</span><span class="kc">null</span><span class="o">?</span><span class="kc">null</span><span class="o">:</span><span class="n">l2</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                <span class="n">cur</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ListNode</span><span class="o">((</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="n">carry</span><span class="o">)%</span><span class="mi">10</span><span class="o">);</span>
+                <span class="n">carry</span> <span class="o">=</span> <span class="o">(</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="n">carry</span><span class="o">)</span> <span class="o">/</span> <span class="mi">10</span><span class="o">;</span>
+                <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="o">}</span>
+            
+            <span class="k">if</span><span class="o">(</span><span class="n">carry</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">)</span>
+                <span class="n">cur</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ListNode</span><span class="o">(</span><span class="n">carry</span><span class="o">);</span>
+            
+            <span class="k">return</span> <span class="n">dummy</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/leetcode/1.%20Two%20Sum/" data-toggle="tooltip" data-placement="top" title="1. Two Sum">
+                        Previous<br>
+                        <span>1. Two Sum</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+				
+				
+				<div id="gitalk-container"></div>
+                
+				
+
+                
+				
+				
+				
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			<style TYPE="text/css">
-.gallery-image-wrapper {
-  height: 600px;
-  width: 600px;
-  display: inline-block;
-  margin: 1em;
-  position: relative;
-}
-.gallery-image {
-  margin: auto;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  max-height: 100%;
-  max-width: 100%;
-}
-</style>
-<h1><a href="/gallery">2020/07/12 Dragon Boat Session</a></h1>
-<hr />
-
-    <div class="gallery-image-wrapper">
-        <a name="dragonboat_01.jpg"></a>
-        <a href="dragonboat_01.jpg">
-            <img class="gallery-image" src="thumbs/dragonboat_01.jpg" />
-        </a>
-    </div>
-
-    <div class="gallery-image-wrapper">
-        <a name="dragonboat_02.jpg"></a>
-        <a href="dragonboat_02.jpg">
-            <img class="gallery-image" src="thumbs/dragonboat_02.jpg" />
-        </a>
-    </div>
-
-    <div class="gallery-image-wrapper">
-        <a name="dragonboat_03.jpg"></a>
-        <a href="dragonboat_03.jpg">
-            <img class="gallery-image" src="thumbs/dragonboat_03.jpg" />
-        </a>
-    </div>
-
-    		</div>
     <!-- Sidebar Container -->
-          <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
 
 
 <section>
+    
+        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="/archive/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -350,71 +444,6 @@
 </section>
 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="/about/">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="/img/avatar-xcTorres.png" />
-    
-    
-    <p>慧极必伤，情深不寿，强极必辱，谦谦君子，温润如玉</p>
-    
-    <!-- SNS Link -->
-    
-
-
-<ul class="list-inline">
-
-
-  
-  <li>
-    <a href="/feed.xml">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://www.zhihu.com/people/cong-zi-64">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa  fa-stack-1x fa-inverse">知</i>
-      </span>
-    </a>
-  </li>
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/xcTorres">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  <li>
-    <a target="_blank" href="https://www.linkedin.com/in/chong-xie-545830157">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-</ul>
-  </div>
-</section>
-
                 <!-- Friends Blog -->
                 
 <hr>
@@ -465,31 +494,47 @@
   
 </ul>
 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
 
-<!-- Add support for Mathjax by Voleking-->
-<!-- If you want to see formulars well in post preview, Maybe you should add this.-->
-<!-- However, most of the time formulars may not appear in the post preview, you can delete it.-->
-<!-- <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-    }
-  });
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+		var gitalk = new Gitalk({
+
+		// gitalk的主要参数
+		clientID: "6c4ed7ef926a76e8447e",
+		clientSecret: "1df8e0efa5331eae417cf604d68fdb150a524a7a",
+		repo: "xctorres.github.io",
+		owner: "xcTorres",
+		admin: "xcTorres",
+		id: "/leetcode/2. Add Two Numbers",
+		
+		});
+		gitalk.render('gitalk-container'); 
 </script>
-<script type="text/javascript"
-        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script> -->
+
+
+
+
+
+
+
 
     <!-- Footer -->
 <footer>
@@ -648,6 +693,64 @@
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 
