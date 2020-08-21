@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 21 Aug 2020 16:00:50 +0800</pubDate>
-    <lastBuildDate>Fri, 21 Aug 2020 16:00:50 +0800</lastBuildDate>
+    <pubDate>Sat, 22 Aug 2020 00:02:28 +0800</pubDate>
+    <lastBuildDate>Sat, 22 Aug 2020 00:02:28 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -14,9 +14,11 @@
         <description>&lt;h2 id=&quot;hmm算法&quot;&gt;HMM算法&lt;/h2&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/hmmlearn/hmmlearn&quot;&gt;https://github.com/hmmlearn/hmmlearn&lt;/a&gt;
+&lt;p&gt;&lt;a href=&quot;https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781&quot;&gt;https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/hmmlearn/hmmlearn&quot;&gt;https://github.com/hmmlearn/hmmlearn&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/27907806&quot;&gt;https://zhuanlan.zhihu.com/p/27907806&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://zhuanlan.zhihu.com/p/38343732&quot;&gt;https://zhuanlan.zhihu.com/p/38343732&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;https://zhuanlan.zhihu.com/p/38343732&quot;&gt;https://zhuanlan.zhihu.com/p/38343732&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.cnblogs.com/pinard/p/6945257.html&quot;&gt;https://www.cnblogs.com/pinard/p/6945257.html&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 21 Aug 2020 00:00:00 +0800</pubDate>
