@@ -5,9 +5,30 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 21 Aug 2020 11:34:51 +0800</pubDate>
-    <lastBuildDate>Fri, 21 Aug 2020 11:34:51 +0800</lastBuildDate>
+    <pubDate>Fri, 21 Aug 2020 15:52:49 +0800</pubDate>
+    <lastBuildDate>Fri, 21 Aug 2020 15:52:49 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>隐马尔科夫模型</title>
+        <description>&lt;h2 id=&quot;hmm算法&quot;&gt;HMM算法&lt;/h2&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/hmmlearn/hmmlearn&quot;&gt;https://github.com/hmmlearn/hmmlearn&lt;/a&gt;
+&lt;a href=&quot;https://zhuanlan.zhihu.com/p/27907806&quot;&gt;https://zhuanlan.zhihu.com/p/27907806&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://zhuanlan.zhihu.com/p/38343732&quot;&gt;https://zhuanlan.zhihu.com/p/38343732&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 21 Aug 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/08/21/HMM/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/08/21/HMM/</guid>
+        
+        <category>graph</category>
+        
+        <category>算法</category>
+        
+        
+      </item>
     
       <item>
         <title>宇宙与意识</title>
@@ -967,49 +988,6 @@ I will touch base with you. 我会向你再次确认。&lt;/p&gt;
         <guid isPermaLink="true">https://xctorres.github.io//2020/03/26/corporate-finance/</guid>
         
         <category>金融</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>2020新年</title>
-        <description>&lt;p&gt;不知不觉，到了写2020年博客的时候了。随着年龄的增大，越发感觉时光的流逝。与好友欣赏完好听的交响乐，看完美丽的烟花🎇，给我这个单身狗的凄凉上增添了许多喜悦之情哈哈。&lt;/p&gt;
-
-&lt;p&gt;2019年，对我来说也是奇妙的一年。上半年忙着做项目，搞毕设，兢兢业业忙到毕业~下半年只身前往新加坡，在这个陌生的国度打拼，开启自己新的篇章。第一次领工资，第一次独立完成项目，第一次出差…的确整个2019收获很多，但2019年元旦的博客中立的很多flag很多都没有兑现,实在惭愧。在这里还是希望给2020年的自己立一些flag，成为一个优秀靠谱高效率的人。&lt;/p&gt;
-
-&lt;h2 id=&quot;健身&quot;&gt;健身&lt;/h2&gt;
-&lt;p&gt;健身对我意味着是生活的一部分，我也不想练成夸张的肌肉男，只需要保持自己的身材，增强一些力量，让自己变得自信一些。&lt;/p&gt;
-
-&lt;h2 id=&quot;工作&quot;&gt;工作&lt;/h2&gt;
-&lt;p&gt;工作里面感觉可以细分一些模块。&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;首先是数据结构，也就是Leetcode刷题。要学会通过正确的学习方法去总结，第一也是为以后自己面试准备，第二也是给别人面试准备。&lt;/li&gt;
-  &lt;li&gt;在工作中，项目中要学会努力踏实，学会与团队交流，提高效率，少做无用功。&lt;/li&gt;
-  &lt;li&gt;多阅读文献和了解最前沿的算法库。&lt;/li&gt;
-  &lt;li&gt;多积累Python和Java的代码规范和常用算法库。&lt;/li&gt;
-  &lt;li&gt;提高英文口语水平，学会做PPT。敢于在众人面前用英文分享自己的想法&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;理财&quot;&gt;理财&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;第一件事就是控制自己，合理消费。明年的目标是能够存20万，有一定的储蓄才能做其他合理的理财。&lt;/li&gt;
-  &lt;li&gt;已经买了人生第一份保险。今年还得把住院险和意外险安排上。&lt;/li&gt;
-  &lt;li&gt;看一些金融相关的书籍，多了解一些金融基本知识。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;旅游&quot;&gt;旅游&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;2019年已经去过了泰国，越南。希望2020能去马来西亚和印尼🇮🇩看看。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;感情&quot;&gt;感情&lt;/h2&gt;
-&lt;p&gt;哈哈，努力努力，但随缘就好~&lt;/p&gt;
-</description>
-        <pubDate>Wed, 01 Jan 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/01/01/new-year/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/01/01/new-year/</guid>
-        
-        <category>生活</category>
         
         
       </item>
