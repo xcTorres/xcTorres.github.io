@@ -33,7 +33,7 @@ Jun 2018 – Sep 2018 , Beijing, China
 ---
 
 ### Publication
-[谢冲, 关雪峰, 周炜轩, et al. MAP-Vis:基于MAP模型的时空点状大数据可视化方案[J]. 中国图象图形学报, 2019(5):816-826.](http://www.cjig.cn/jig/ch/reader/view_abstract.aspx?file_no=20190514&flag=1)
+[MAP-Vis: A Distributed Spatio-Temporal Big Data Visualization Framework Based on a MultiDimensional Aggregation Pyramid Model](https://www.mdpi.com/2076-3417/10/2/598/htm)
 
 
 
