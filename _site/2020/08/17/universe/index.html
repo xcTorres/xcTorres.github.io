@@ -11,27 +11,25 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="1. Two Sum - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="宇宙与意识 - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="Link
-problem: https://leetcode.com/problems/two-sum/
-">
+    <meta property="og:description" content="最近看了Youtuber老高和晓涵哥的一些关于宇宙，UFO，外星人内容的视频，重新激发了我对宇宙的意识的兴趣。世界万物，小到原子分子大到银河系整个宇宙都是由原子分子两字构成。宏观角度，一切仿佛都遵循着爱因斯坦的广义相对论，而微观角度，组成我们的这些量子遵循的是神秘的量子力学。为什么在地球只有人这种生物是有智慧的生物，我们来到这个世界离开这个世界的意义又是什么。带着种种这些疑问，所以想着积累此...">
     
-    <meta property="article:published_time" content="2020-08-22T23:25:37Z">
+    <meta property="article:published_time" content="2020-08-17T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
     
     
-    <meta property="article:tag" content="Leetcode">
+    <meta property="article:tag" content="宇宙">
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//leetcode/1.Two%20Sum/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/08/17/universe/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>1. Two Sum - 谢聪博客 | xcTorres Blog</title>
+    <title>宇宙与意识 - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -40,7 +38,7 @@ problem: https://leetcode.com/problems/two-sum/
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//leetcode/1.Two%20Sum/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/08/17/universe/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -207,7 +205,7 @@ problem: https://leetcode.com/problems/two-sum/
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/leetcode.jpg" width="0" height="0"> -->
+<!-- <img src="/img/in-post/universe/universe.jpeg" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -216,7 +214,7 @@ problem: https://leetcode.com/problems/two-sum/
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/leetcode.jpg');
+        background-image: url('/img/in-post/universe/universe.jpeg');
         background: ;
     }
 
@@ -233,13 +231,13 @@ problem: https://leetcode.com/problems/two-sum/
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Leetcode" title="Leetcode">Leetcode</a>
+                        <a class="tag" href="/archive/?tag=%E5%AE%87%E5%AE%99" title="宇宙">宇宙</a>
                         
                     </div>
-                    <h1>1. Two Sum</h1>
+                    <h1>宇宙与意识</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on August 22, 2020</span>
+                    <span class="meta">Posted by xcTorres on August 17, 2020</span>
                 </div>
             </div>
         </div>
@@ -265,63 +263,29 @@ problem: https://leetcode.com/problems/two-sum/
                 <!-- Multi-Lingual -->
                 
 
-				<h2 id="link">Link</h2>
-<p>problem: <a href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a></p>
+				<p>最近看了Youtuber老高和晓涵哥的一些关于宇宙，UFO，外星人内容的视频，重新激发了我对宇宙的意识的兴趣。世界万物，小到原子分子大到银河系整个宇宙都是由原子分子两字构成。宏观角度，一切仿佛都遵循着爱因斯坦的广义相对论，而微观角度，组成我们的这些量子遵循的是神秘的量子力学。为什么在地球只有人这种生物是有智慧的生物，我们来到这个世界离开这个世界的意义又是什么。带着种种这些疑问，所以想着积累此博客，写一些视频和书籍的观后感。</p>
 
-<h2 id="description">Description</h2>
-<p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
-
-<p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
-
-<p><strong>Example:</strong></p>
-
-<p>Given nums = [2, 7, 11, 15], target = 9,</p>
-
-<p>Because nums[0] + nums[1] = 2 + 7 = 9,
-return [0, 1].</p>
-
-<h2 id="solution">Solution</h2>
-
-<h4 id="using-extra-space">Using extra space</h4>
-<p>We could use a map to store the elements, which could improve the searching efficiency.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-            <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">twoSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-                
-                <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-                <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
-                    <span class="k">if</span><span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])){</span>
-                        <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]),</span> <span class="n">i</span><span class="o">};</span>
-                    <span class="o">}</span><span class="k">else</span><span class="o">{</span>
-                        <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
-                    <span class="o">}</span>
-                <span class="o">}</span>
-                <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-
-</code></pre></div></div>
-
-<h4 id="no-extra-space">No extra space</h4>
-<p>When we prepare this problem for interview, seems like it is very easy to implement if we are allowed to use extra space. If the output requires just the numbers <strong>not the index</strong>, we could solve this without extra space.
-The ideas is as follows:</p>
-<ol>
-  <li>Sort the array(time complexity should be O(nlogn))</li>
-  <li>Binary Seach(time complexity should be also O(logn)) <strong>or</strong> Two Pointers(time complexity should be also O(n))</li>
-</ol>
-
-<p>So totally the timplexity is O(nlogn)</p>
-
+<h2 id="人类简史">人类简史</h2>
+<p>对于人类而言，在历史的路上，有三个重要革命。 认知革命，农业革命，和科学革命。在认知革命中，我们人类是由跟黑猩猩🦍同样的祖先的智人进化而来，智人学会了制作工具学会了钻木取火🔥，有强大的学习能力并创造了语言繁衍至今。其中有个疑问是，在十五万年前，我们人类的祖先不过还是跟猴子猩猩其他动物一样只是生态系统的普通角色，为何短短的的时间只有人类有智慧，站在了食物链的顶端。且在我们智人同时期，地球上存在其他一些人种且能与智人通婚，尼安德特人与丹尼索瓦人，他的脑容量比智人还大，也就是说应该比智人更聪明，但是为什么他们都灭绝了而只有智人留了下来。<br />
+-参考视频： 
+<a href="https://www.youtube.com/watch?v=qt9KfpWuRKg">古人类和现代人的分界点在哪？没有过渡物种吗？每块化石都显得那么突兀【宇宙自然生命简史】</a></p>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2020/08/04/shortesr-path-algo/" data-toggle="tooltip" data-placement="top" title="最短路径算法">
+                        Previous<br>
+                        <span>最短路径算法</span>
+                        </a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/leetcode/2.Add%20Two%20Numbers/" data-toggle="tooltip" data-placement="top" title="2. Add Two Numbers">
+                        <a href="/2020/08/21/HMM/" data-toggle="tooltip" data-placement="top" title="隐马尔科夫模型">
                         Next<br>
-                        <span>2. Add Two Numbers</span>
+                        <span>隐马尔科夫模型</span>
                         </a>
                     </li>
                     
@@ -523,7 +487,7 @@ The ideas is as follows:</p>
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/leetcode/1.Two Sum",
+		id: "/2020/08/17/universe",
 		
 		});
 		gitalk.render('gitalk-container'); 

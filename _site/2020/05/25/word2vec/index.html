@@ -11,27 +11,28 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="1. Two Sum - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="word2vec - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="Link
-problem: https://leetcode.com/problems/two-sum/
+    <meta property="og:description" content="当刚开始学习自然语言处理深度学习课程的时候，第一步就是向量化，即如何把一篇文章，一个句子转换成数据输入。而文章段落句子都是由词语单词构成的，如果能把这些最小单元结构向量化,句子自然就可以作为输入了。
 ">
     
-    <meta property="article:published_time" content="2020-08-22T23:25:37Z">
+    <meta property="article:published_time" content="2020-05-25T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
     
     
-    <meta property="article:tag" content="Leetcode">
+    <meta property="article:tag" content="nlp">
+    
+    <meta property="article:tag" content="deep learning">
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//leetcode/1.Two%20Sum/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/05/25/word2vec/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>1. Two Sum - 谢聪博客 | xcTorres Blog</title>
+    <title>word2vec - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -40,7 +41,7 @@ problem: https://leetcode.com/problems/two-sum/
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//leetcode/1.Two%20Sum/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/05/25/word2vec/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -207,7 +208,7 @@ problem: https://leetcode.com/problems/two-sum/
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/leetcode.jpg" width="0" height="0"> -->
+<!-- <img src="/img/in-post/Singapore.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -216,7 +217,7 @@ problem: https://leetcode.com/problems/two-sum/
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/leetcode.jpg');
+        background-image: url('/img/in-post/Singapore.jpg');
         background: ;
     }
 
@@ -233,13 +234,15 @@ problem: https://leetcode.com/problems/two-sum/
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Leetcode" title="Leetcode">Leetcode</a>
+                        <a class="tag" href="/archive/?tag=nlp" title="nlp">nlp</a>
+                        
+                        <a class="tag" href="/archive/?tag=deep+learning" title="deep learning">deep learning</a>
                         
                     </div>
-                    <h1>1. Two Sum</h1>
+                    <h1>word2vec</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on August 22, 2020</span>
+                    <span class="meta">Posted by xcTorres on May 25, 2020</span>
                 </div>
             </div>
         </div>
@@ -265,63 +268,50 @@ problem: https://leetcode.com/problems/two-sum/
                 <!-- Multi-Lingual -->
                 
 
-				<h2 id="link">Link</h2>
-<p>problem: <a href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a></p>
+				<p>当刚开始学习自然语言处理深度学习课程的时候，第一步就是向量化，即如何把一篇文章，一个句子转换成数据输入。而文章段落句子都是由词语单词构成的，如果能把这些最小单元结构向量化,句子自然就可以作为输入了。</p>
 
-<h2 id="description">Description</h2>
-<p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
+<h2 id="one-hot表达">One Hot表达</h2>
+<p>最简单的方式就是One-Hot独热编码表达。用词向量来表示词并不是word2vec的首创，在很久之前就出现了。最早的词向量是很冗长的，它使用是词向量维度大小为整个词汇表的大小，对于每个具体的词汇表中的词，将对应的位置置为1。比如我们有下面的5个词组成的词汇表，词”Queen”的序号为2， 那么它的词向量就是(0,1,0,0,0)。同样的道理，词”Woman”的词向量就是(0,0,0,1,0)。这种词向量的编码方式我们一般叫做1-of-N representation或者one hot representation。其最大的缺点是当词汇量达到百万级的时候，每个词语都需要百万维度的向量去表达词语，且各个词语之间是正交的，很难直接描述各个词汇之间的相关性。<br />
+<img src="/img/in-post/Word2vec/word2vec-one-hot.png" width="400" height="400" title="One Hot Presentation" /></p>
 
-<p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
+<h2 id="word2vec">Word2Vec</h2>
+<p>然后有了神经网络词向量语言模型，其一般有三层，输入层即词向量，隐藏层和输出层(softmax层)，其中最大的问题在于从隐藏层到输出的softmax层的计算量很大，因为要计算所有词的softmax概率，再去找概率最大的值，并通过反向传播来不断更新隐藏层的参数。这个模型如下图所示。其中𝑉是词汇表的大小。即假设输入词向量的维度为M，则输入层可以看成V<em>M，隐藏层参数大小应该为M</em>P, 如此一来得到的中间结果是V*P,可以理解讲词向量从M降维到P。
+<img src="/img/in-post/Word2vec/nn.png" width="400" height="400" title="神经网络" /></p>
 
-<p><strong>Example:</strong></p>
+<p>Word2vec原理也是如此，只是为了避免如此大的计算量，原作者做了一些优化来提升速率。第一个优化叫做Hierarchical Softmax。第二个优化叫做Negative Sampling。</p>
 
-<p>Given nums = [2, 7, 11, 15], target = 9,</p>
+<h4 id="hierarchical-softmax">Hierarchical Softmax</h4>
+<p>首先我们来看一下Hierarchical Softmax。其目的是将这个多分类问题转化为多个2分类问题，从而降低计算成本。第一步即把词汇表按照词频建立一颗霍夫曼二叉树。霍夫曼树的好处是词频越高的词汇层数越浅，越容易被遍历到，越早做分类判断。和之前的神经网络语言模型相比，我霍夫曼树的所有内部节点就类似之前神经网络隐藏层的神经元,其中，<strong>根节点的词向量对应我们的投影后的词向量，而所有叶子节点就类似于之前神经网络softmax输出层的神经元，叶子节点的个数就是词汇表的大小</strong>。在霍夫曼树中，隐藏层到输出层的softmax映射不是一下子完成的，而是沿着霍夫曼树一步步完成的，因此这种softmax取名为”Hierarchical Softmax”。
+<img src="/img/in-post/Word2vec/huffman.png" width="400" height="400" title="huffman" /></p>
 
-<p>Because nums[0] + nums[1] = 2 + 7 = 9,
-return [0, 1].</p>
+<h4 id="negative-sampling">Negative Sampling</h4>
+<p>既然名字叫Negative Sampling（负采样），那么肯定使用了采样的方法。采样的方法有很多种，比如之前讲到的大名鼎鼎的MCMC。我们这里的Negative Sampling采样方法并没有MCMC那么复杂。</p>
 
-<h2 id="solution">Solution</h2>
+<p>比如我们有一个训练样本，中心词是𝑤,它周围上下文共有2𝑐个词，记为𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)。由于这个中心词𝑤,的确和𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)相关存在，因此它是一个真实的正例。通过Negative Sampling采样，我们得到neg个和𝑤不同的中心词𝑤𝑖,𝑖=1,2,..𝑛𝑒𝑔，这样𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)和𝑤𝑖就组成了neg个并不真实存在的负例。利用这一个正例和neg个负例，我们进行二元逻辑回归，得到负采样对应每个词𝑤𝑖对应的模型参数𝜃𝑖，和每个词的词向量。<br />
+从上面的描述可以看出，Negative Sampling由于没有采用霍夫曼树，每次只是通过采样neg个不同的中心词做负例，就可以训练模型，因此整个过程要比Hierarchical Softmax简单。</p>
 
-<h4 id="using-extra-space">Using extra space</h4>
-<p>We could use a map to store the elements, which could improve the searching efficiency.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-            <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">twoSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-                
-                <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-                <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
-                    <span class="k">if</span><span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])){</span>
-                        <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">target</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]),</span> <span class="n">i</span><span class="o">};</span>
-                    <span class="o">}</span><span class="k">else</span><span class="o">{</span>
-                        <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
-                    <span class="o">}</span>
-                <span class="o">}</span>
-                <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
+<h2 id="源码分析">源码分析</h2>
+<p><a href="https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c">https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c</a></p>
 
-</code></pre></div></div>
-
-<h4 id="no-extra-space">No extra space</h4>
-<p>When we prepare this problem for interview, seems like it is very easy to implement if we are allowed to use extra space. If the output requires just the numbers <strong>not the index</strong>, we could solve this without extra space.
-The ideas is as follows:</p>
-<ol>
-  <li>Sort the array(time complexity should be O(nlogn))</li>
-  <li>Binary Seach(time complexity should be also O(logn)) <strong>or</strong> Two Pointers(time complexity should be also O(n))</li>
-</ol>
-
-<p>So totally the timplexity is O(nlogn)</p>
-
+<h2 id="参考">参考</h2>
+<p><a href="https://www.cnblogs.com/pinard/p/7243513.html">刘建平老师</a></p>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2020/04/30/hungarian/" data-toggle="tooltip" data-placement="top" title="匈牙利算法介绍">
+                        Previous<br>
+                        <span>匈牙利算法介绍</span>
+                        </a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/leetcode/2.Add%20Two%20Numbers/" data-toggle="tooltip" data-placement="top" title="2. Add Two Numbers">
+                        <a href="/2020/05/26/machine-learning-word/" data-toggle="tooltip" data-placement="top" title="学习词汇">
                         Next<br>
-                        <span>2. Add Two Numbers</span>
+                        <span>学习词汇</span>
                         </a>
                     </li>
                     
@@ -523,7 +513,7 @@ The ideas is as follows:</p>
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/leetcode/1.Two Sum",
+		id: "/2020/05/25/word2vec",
 		
 		});
 		gitalk.render('gitalk-container'); 
