@@ -162,18 +162,16 @@ tags:
 在实际生产环境中，dfs方式还是很少用到，多是转换成矩阵操作, 那么其数学原理是什么呢？
 首先匈牙利算法可以抽象成如下数学问题。即代价矩阵C乘以一个特殊矩阵X，其中X中每行或者每一列都是单位向量，即1处在不同行不同列.  
 
-$$
-    \min z=\sum\limits_{i=1}^n\sum\limits_{j=1}^n c_{ij}x_{ij}
-$$
+$\min z=\sum\limits_{i=1}^n\sum\limits_{j=1}^n c_{ij}x_{ij}$
 
-$$
-    \mathrm{s.t}\begin{cases}\sum\limits_{i=1}^n x_{ij}=1,\quad i=1,2,\cdots,n  \\ \sum\limits_{j=1}^n x_{ij}=1,\quad j=1,2,\cdots,n  \\ x_{ij}=0 或 1, \quad i,j=1,2,\cdots,n  \end{cases}
-$$
+$
+\mathrm{s.t}\begin{cases}\sum\limits_{i=1}^n x_{ij}=1,\quad i=1,2,\cdots,n  \\\ \sum\limits_{j=1}^n x_{ij}=1,\quad j=1,2,\cdots,n  \\\ x_{ij}=0 或 1, \quad i,j=1,2,\cdots,n  \end{cases}
+$
 
 - 定理一  
-从下图可以看出，对一个代价矩阵C，无论是同一行加上同样的值或者是同一列加上同样的值。不会影响最终目标函数$$
+从下图可以看出，对一个代价矩阵C，无论是同一行加上同样的值或者是同一列加上同样的值。不会影响最终目标函数$
     \min z=\sum\limits_{i=1}^n\sum\limits_{j=1}^n c_{ij}x_{ij}
-$$的优化结果， 因为乘以不同的元素矩阵X得到的组合最后都会生成一个元素总和相同的矩阵。  
+$的优化结果， 因为乘以不同的元素矩阵X得到的组合最后都会生成一个元素总和相同的矩阵。  
 <img src="/img/in-post/hungarian/same.png" width="400" height="400">
 
 - 定理二  
