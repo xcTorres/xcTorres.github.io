@@ -11,11 +11,13 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="6. ZigZag Conversion - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="7. Reverse Integer - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="Link
-problem: https://leetcode.com/problems/zigzag-conversion/
+problem: https://leetcode.com/problems/reverse-integer/
+Description
+Given a 32-bit signed integer, reverse digits of an integer.
 ">
     
     <meta property="article:published_time" content="2020-09-03T00:13:28Z">
@@ -28,10 +30,10 @@ problem: https://leetcode.com/problems/zigzag-conversion/
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//leetcode/6.ZigZag%20Conversion/">
+    <meta property="og:url" content="https://xctorres.github.io//leetcode/7.%20Reverse%20Integer/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>6. ZigZag Conversion - 谢聪博客 | xcTorres Blog</title>
+    <title>7. Reverse Integer - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -40,7 +42,7 @@ problem: https://leetcode.com/problems/zigzag-conversion/
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//leetcode/6.ZigZag%20Conversion/">
+    <link rel="canonical" href="https://xctorres.github.io//leetcode/7.%20Reverse%20Integer/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -238,7 +240,7 @@ problem: https://leetcode.com/problems/zigzag-conversion/
                         <a class="tag" href="/archive/?tag=Leetcode" title="Leetcode">Leetcode</a>
                         
                     </div>
-                    <h1>6. ZigZag Conversion</h1>
+                    <h1>7. Reverse Integer</h1>
                     
                     <h2 class="subheading"></h2>
                     <span class="meta">Posted by xcTorres on September 3, 2020</span>
@@ -268,68 +270,54 @@ problem: https://leetcode.com/problems/zigzag-conversion/
                 
 
 				<h2 id="link">Link</h2>
-<p>problem: <a href="https://leetcode.com/problems/zigzag-conversion/">https://leetcode.com/problems/zigzag-conversion/</a></p>
-
+<p>problem: <a href="https://leetcode.com/problems/reverse-integer/">https://leetcode.com/problems/reverse-integer/</a></p>
 <h2 id="description">Description</h2>
-<p>The string “PAYPALISHIRING” is written in a zigzag pattern on a given number of rows like this: <br />
-(you may want to display this pattern in a fixed font for better legibility)</p>
+<p>Given a 32-bit signed integer, reverse digits of an integer.</p>
 
-<p>P   A   H   N<br />
-A P L S I I G<br />
-Y   I   R<br />
-And then read line by line: “PAHNAPLSIIGYIR”</p>
+<p><strong>Example 1:</strong><br />
+Input: 123<br />
+Output: 321</p>
 
-<p>Write the code that will take a string and make this conversion given a number of rows:</p>
+<p><strong>Example 2:</strong></p>
 
-<p>string convert(string s, int numRows);<br />
-<strong>Example 1:</strong></p>
+<p>Input: -123<br />
+Output: -321</p>
 
-<p>Input: s = “PAYPALISHIRING”, numRows = 3<br />
-Output: “PAHNAPLSIIGYIR”</p>
+<p><strong>Example 3:</strong></p>
 
-<p><strong>Example 2:</strong><br />
-Input: s = “PAYPALISHIRING”, numRows = 4<br />
-Output: “PINALSIGYAHRPI”<br />
-Explanation:</p>
+<p>Input: 120<br />
+Output: 21</p>
 
-<p>P     I    N<br />
-A   L S  I G<br />
-Y A   H R<br />
-P     I</p>
+<p><strong>Note:</strong>
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [$ −2^{31} $,  $ 2^{31}−1 $]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.</p>
 
 <h2 id="solution">Solution</h2>
-<ol>
-  <li>First, we need to process the corner cases when numRows equals 1 or size of s is larger than numRows</li>
-  <li>We could define a flag <strong>is_down</strong> to control the order.</li>
-</ol>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">numRows</span><span class="p">):</span>
-            <span class="s">"""
-            :type s: str
-            :type numRows: int
-            :rtype: str
-            """</span>
-            <span class="k">if</span> <span class="n">numRows</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">numRows</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">s</span>
+        <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
             
-            <span class="n">refer</span> <span class="o">=</span> <span class="p">[</span><span class="s">''</span><span class="p">]</span> <span class="o">*</span> <span class="n">numRows</span>
-            <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">is_down</span> <span class="o">=</span> <span class="bp">True</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+            <span class="s">"""
+            :type x: int
+            :rtype: int
+            """</span>
+            <span class="n">neg_multiply</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">neg_multiply</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span>
+            
+            <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">x</span><span class="p">:</span>
+                <span class="n">remainder</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">10</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="mi">10</span>
                 
-                <span class="n">refer</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                
-                <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">is_down</span> <span class="o">=</span> <span class="bp">True</span>
-                <span class="k">elif</span> <span class="n">row</span> <span class="o">==</span> <span class="n">numRows</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                    <span class="n">is_down</span> <span class="o">=</span> <span class="bp">False</span>
-                
-                <span class="n">row</span> <span class="o">=</span> <span class="n">row</span><span class="o">+</span><span class="mi">1</span> <span class="k">if</span> <span class="n">is_down</span> <span class="k">else</span> <span class="n">row</span><span class="o">-</span><span class="mi">1</span>
-                
-            <span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">refer</span><span class="p">))</span>
-                
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">remainder</span>
+            
+            <span class="k">if</span> <span class="n">res</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">31</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">neg_multiply</span> <span class="o">*</span> <span class="n">res</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+
 </code></pre></div></div>
 
 
@@ -337,19 +325,12 @@ P     I</p>
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/leetcode/5.Longest%20Palindromic%20Substring/" data-toggle="tooltip" data-placement="top" title="5. Longest Palindromic Substring">
+                        <a href="/leetcode/6.ZigZag%20Conversion/" data-toggle="tooltip" data-placement="top" title="6. ZigZag Conversion">
                         Previous<br>
-                        <span>5. Longest Palindromic Substring</span>
+                        <span>6. ZigZag Conversion</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/leetcode/7.%20Reverse%20Integer/" data-toggle="tooltip" data-placement="top" title="7. Reverse Integer">
-                        Next<br>
-                        <span>7. Reverse Integer</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -597,7 +578,7 @@ P     I</p>
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/leetcode/6.ZigZag Conversion",
+		id: "/leetcode/7. Reverse Integer",
 		
 		});
 		gitalk.render('gitalk-container'); 
