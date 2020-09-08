@@ -24,18 +24,17 @@ tags:
 
 - **Node**  
 
-一个Node通过经纬度代表地球表面上的一个特定节点，其最少包含一个id，还有经纬度字段。Node既可以用来定义某个单一点要素，比如某个公园长凳，某个水井，多个Node也可以用来定义一条路的形状。当其用来表示路时，通常节点是不需要Tag来添加属性的。但有时候也会给路上的特定节点添加属性，比如交通信号灯🚥，比如高压电线塔等等。
+一个Node通过经纬度代表地球表面上的一个特定节点，其最少包含一个id，还有经纬度字段。Node既可以用来定义某个单一点要素，比如某个公园长凳，某个水井，多个Node也可以用来定义一条路的形状。当其用来表示路时，通常节点是不需要Tag来添加属性的。但有时候也会给路上的特定节点添加属性，比如交通信号灯🚥，高压电线塔等等。
 
 - **Way**   
 
-Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作**closed_way**，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个面要素并用Relation关联起来。
+Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作**closed_way**，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个Way要素并用Relation关联起来。
 
 - **Relation**  
 
 Relation是一种能够同时记录两个或多个Nodes，Ways等元素关系的这样一种数据结构。  
 在**route relation**中， 其可以表示多个路的关系，比如多条路组成一条高速公路🛣，一条自行车🚲路，或一条公交车🚌路线。  
 在**turn restriction**中，其表示从一条路直接进入另一条路是不被允许的。
- that says you can't turn from one way into another way.  
 在**multipolygon**中，其可以用来表示polygon之间的关系，比如是内含还是外包。  
 从以上示例中不难发现，Relation可以表示很多不一样的关系，而这个关系是通过Tag中的type来定义的。
 
@@ -58,7 +57,7 @@ Relation是一种能够同时记录两个或多个Nodes，Ways等元素关系的
 
 ![Osm2pgsql database design](/img/in-post/osm/osm2pgsql.png)
 
-[osm2pgsql](https://wiki.openstreetmap.org/wiki/Osm2pgsql)是OpenStreetMap的官方工具库，下面先看看它是如何把原始的OSM转化成Postgresql数据库中的各个数据表。不难看出如果选择slim模式其仍能够保存OSM原始的Node，Way，Relation三要素，且除此之外该工具已经帮我们提炼出来planet_osm_point, planet_osm_line， planet_osm_polygon三大要素集合。此外还有一个planet_osm_roads数据表，其所有数据都是重复的，是planet_osm_line有的。其保存了一些更粗粒度的geometry，用于地图渲染用途，因为渲染时无需处理所有细小的Geometry[(https://github.com/openstreetmap/osm2pgsql/issues/610)](https://github.com/openstreetmap/osm2pgsql/issues/610)。
+[osm2pgsql](https://wiki.openstreetmap.org/wiki/Osm2pgsql)是OpenStreetMap的官方工具库，下面先看看它是如何把原始的OSM转化成Postgresql数据库中的各个数据表。不难看出如果选择slim模式其仍能够保存OSM原始的Node，Way，Relation三要素，且除此之外该工具已经帮我们提炼出来planet_osm_point, planet_osm_line， planet_osm_polygon点线面要素集合。此外还有一个planet_osm_roads数据表，其所有数据都是重复的，是planet_osm_line有的。其保存了一些更粗粒度的geometry，用于地图渲染用途，因为渲染时无需处理所有细小的Geometry[(https://github.com/openstreetmap/osm2pgsql/issues/610)](https://github.com/openstreetmap/osm2pgsql/issues/610)。
 
 
 
