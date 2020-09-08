@@ -5,9 +5,82 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 03 Sep 2020 00:17:09 +0800</pubDate>
-    <lastBuildDate>Thu, 03 Sep 2020 00:17:09 +0800</lastBuildDate>
+    <pubDate>Tue, 08 Sep 2020 18:39:34 +0800</pubDate>
+    <lastBuildDate>Tue, 08 Sep 2020 18:39:34 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>OSM数据格式</title>
+        <description>&lt;p&gt;有着地图界的维基百科之称的OpenStreetMap（OSM）为我们打开了一扇通往新世界的大门，包含了丰富的地理数据，给予了地理、规划以及对空间句法、空间分析、空间规划感兴趣的人提供了许多便利, 也让我们得以在商业发展初期可以有这样好的地理数据做基础。&lt;/p&gt;
+
+&lt;h2 id=&quot;数据&quot;&gt;数据&lt;/h2&gt;
+&lt;h4 id=&quot;格式&quot;&gt;格式&lt;/h4&gt;
+&lt;p&gt;两种主要使用的格式分别是XML文件以及PBF文件。XML文件好处是可读，但所占内存很大。而PBF指protoBuf文件，是一种高压缩文件。关于格式的细节可在wiki上查找。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/PBF_Format&quot;&gt;https://wiki.openstreetmap.org/wiki/PBF_Format&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/OSM_XML&quot;&gt;https://wiki.openstreetmap.org/wiki/OSM_XML&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;内容&quot;&gt;内容&lt;/h4&gt;
+&lt;p&gt;无论是采用XML还是PBF的数据格式，只是数据的组织和解析不同，内容都是一致的。OpenStreetMap有三种元素，分别是Node， Way，还有Relation，并通过Tag给不同的元素添加属性。有了这些元素，就可以用来表示地图上的所有特征了。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Node&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一个Node通过经纬度代表地球表面上的一个特定节点，其最少包含一个id，还有经纬度字段。Node既可以用来定义某个单一点要素，比如某个公园长凳，某个水井，多个Node也可以用来定义一条路的形状。当其用来表示路时，通常节点是不需要Tag来添加属性的。但有时候也会给路上的特定节点添加属性，比如交通信号灯🚥，比如高压电线塔等等。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Way&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作&lt;strong&gt;closed_way&lt;/strong&gt;，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个面要素并用Relation关联起来。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Relation&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Relation是一种能够同时记录两个或多个Nodes，Ways等元素关系的这样一种数据结构。&lt;br /&gt;
+在&lt;strong&gt;route relation&lt;/strong&gt;中， 其可以表示多个路的关系，比如多条路组成一条高速公路🛣，一条自行车🚲路，或一条公交车🚌路线。&lt;br /&gt;
+在&lt;strong&gt;turn restriction&lt;/strong&gt;中，其表示从一条路直接进入另一条路是不被允许的。
+ that says you can’t turn from one way into another way.&lt;br /&gt;
+在&lt;strong&gt;multipolygon&lt;/strong&gt;中，其可以用来表示polygon之间的关系，比如是内含还是外包。&lt;br /&gt;
+从以上示例中不难发现，Relation可以表示很多不一样的关系，而这个关系是通过Tag中的type来定义的。&lt;/p&gt;
+
+&lt;h4 id=&quot;下载&quot;&gt;下载&lt;/h4&gt;
+
+&lt;p&gt;可以通过该网站下载世界各地的OpenStreetMap地图矢量数据
+&lt;a href=&quot;http://download.geofabrik.de/&quot;&gt;http://download.geofabrik.de/&lt;/a&gt;&lt;br /&gt;
+该网站中包含了各个大陆以及国家的OSM数据，可以先下载下来再用其他相应的工具根据Boundingbox切割。如以&lt;a href=&quot;https://github.com/osmcode/osmium-tool&quot;&gt;osmium&lt;/a&gt;为例，可用以下命令切割,拿到印尼首都雅加达的数据。&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    # &lt;span class=&quot;nb&quot;&gt;extract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;bounding&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;box&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;osmium&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;extract&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-b &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;106&lt;/span&gt;.6360&lt;span class=&quot;o&quot;&gt;,-&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;.3644&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;107&lt;/span&gt;.0927&lt;span class=&quot;o&quot;&gt;,-&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;.0794 &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/Desktop/indonesia-latest&lt;/span&gt;.osm.pbf &lt;span class=&quot;na&quot;&gt;-o &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/Desktop/jakarta&lt;/span&gt;.osm.pbf
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;postgisqgis&quot;&gt;POSTGIS+QGIS&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.qgis.org/2.14/en/docs/user_manual/working_with_ogc/ogc_client_support.html&quot;&gt;QGIS&lt;/a&gt;是一个开源的功能齐全的地图编辑软件，其本身就支持直接打开OSM文件，但是当OSM文件较大时，在QGIS加载就会变的很卡很慢，甚至加载不出来。&lt;/p&gt;
+
+&lt;p&gt;一种比较好的组合方式是通过Osm2pgsql工具先将OSM文件导入到PostgreSQL数据库中，并且可以根据需要在PostGIS中添加空间索引，用于之后提高空间查询效率。之所以选用PostgreSQL的原因是其是一个开源的功能齐全的关系型数据库，且有非常好的地理支撑（PostGIS），且OpenStreetMap本身也是将数据存在PostgreSQL数据库中的，有足够多的开源工具能够一键从OSM文件导入到数据库中。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/osm/osm2pgsql.png&quot; alt=&quot;Osm2pgsql database design&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql&quot;&gt;osm2pgsql&lt;/a&gt;是OpenStreetMap的官方工具库，下面先看看它是如何把原始的OSM转化成Postgresql数据库中的各个数据表。不难看出如果选择slim模式其仍能够保存OSM原始的Node，Way，Relation三要素，且除此之外该工具已经帮我们提炼出来planet_osm_point, planet_osm_line， planet_osm_polygon三大要素集合。此外还有一个planet_osm_roads数据表，其所有数据都是重复的，是planet_osm_line有的。其保存了一些更粗粒度的geometry，用于地图渲染用途，因为渲染时无需处理所有细小的Geometry&lt;a href=&quot;https://github.com/openstreetmap/osm2pgsql/issues/610&quot;&gt;(https://github.com/openstreetmap/osm2pgsql/issues/610)&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Elements&quot;&gt;https://wiki.openstreetmap.org/wiki/Elements&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Map_Features&quot;&gt;https://wiki.openstreetmap.org/wiki/Map_Features&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql/schema&quot;&gt;https://wiki.openstreetmap.org/wiki/Osm2pgsql/schema&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 03 Sep 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/09/03/OSM-format/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/09/03/OSM-format/</guid>
+        
+        <category>GIS</category>
+        
+        
+      </item>
     
       <item>
         <title>隐马尔科夫模型</title>
@@ -434,135 +507,28 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
 3） 复听几遍，并跟读，纠正发音才能更好地提高听力。&lt;br /&gt;
 4） 第二天再听新听力之前，需重复听几遍前一天的听力，确保都能够听懂。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Begin date&lt;/strong&gt;:  March 6th, 2020&lt;br /&gt;
-&lt;strong&gt;End date&lt;/strong&gt;  :  ∞&lt;/p&gt;
+&lt;h2 id=&quot;words&quot;&gt;Words&lt;/h2&gt;
+&lt;h4 id=&quot;机器学习&quot;&gt;机器学习&lt;/h4&gt;
+&lt;p&gt;后向传播算法： backpropagation algorithms&lt;br /&gt;
+正则化：  regularization&lt;br /&gt;
+过拟合：  overfitting&lt;br /&gt;
+向量化：  vectorization&lt;br /&gt;
+大小、量级：magnitude&lt;/p&gt;
 
-&lt;h4 id=&quot;word-and-phrase&quot;&gt;Word and Phrase&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;becon of hope&lt;/strong&gt; 希望的灯塔&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;come at a cost&lt;/strong&gt; 付出代价&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;reach a decision&lt;/strong&gt; 做出决定&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;at a later date&lt;/strong&gt; 稍后&lt;/li&gt;
-  &lt;li&gt;entitled 有权利的，有资格的&lt;/li&gt;
-  &lt;li&gt;disinfect 消毒&lt;/li&gt;
-  &lt;li&gt;synonyms  同义词&lt;/li&gt;
-  &lt;li&gt;antonyms  反义词&lt;/li&gt;
-  &lt;li&gt;the Great Recession  大萧条&lt;/li&gt;
-  &lt;li&gt;punctuation 标点符号&lt;/li&gt;
-  &lt;li&gt;companionship 陪伴&lt;/li&gt;
-  &lt;li&gt;hassle 困难灾难&lt;/li&gt;
-  &lt;li&gt;expert dispute 专家质疑&lt;/li&gt;
-  &lt;li&gt;tremendous 极大的巨大的&lt;/li&gt;
-  &lt;li&gt;in the aftermath of 后果余波&lt;/li&gt;
-  &lt;li&gt;humanitarian crisis 人道主义危机&lt;/li&gt;
-  &lt;li&gt;appear to 似乎好像&lt;/li&gt;
-  &lt;li&gt;as far as I concerned, 就我而言&lt;/li&gt;
-  &lt;li&gt;in any shape or form 以任何形式&lt;/li&gt;
-  &lt;li&gt;detention 留校察看&lt;/li&gt;
-  &lt;li&gt;force sb to do sth  迫使某人做某事&lt;/li&gt;
-  &lt;li&gt;vegatative state 植物人&lt;/li&gt;
-  &lt;li&gt;squire 侍从&lt;/li&gt;
-  &lt;li&gt;the broad massed 广大群众&lt;/li&gt;
-  &lt;li&gt;puberty 青春期&lt;/li&gt;
-  &lt;li&gt;resonate with sb 共鸣&lt;/li&gt;
-  &lt;li&gt;authentic 真实的&lt;/li&gt;
-  &lt;li&gt;cocky 骄傲自大的&lt;/li&gt;
-  &lt;li&gt;mindset 心态&lt;/li&gt;
-  &lt;li&gt;humility 谦虚谦逊&lt;/li&gt;
-  &lt;li&gt;cultivate 积累&lt;/li&gt;
-  &lt;li&gt;intimidate  威胁恐吓&lt;/li&gt;
-  &lt;li&gt;sloppy  草率的粗心的&lt;/li&gt;
-  &lt;li&gt;win-win situation 双赢局面&lt;/li&gt;
-  &lt;li&gt;banal 陈腐的平庸的&lt;/li&gt;
-  &lt;li&gt;subjective to the person 对某人主观&lt;/li&gt;
-  &lt;li&gt;tangible 有形的&lt;/li&gt;
-  &lt;li&gt;subconscious 潜意识的&lt;/li&gt;
-  &lt;li&gt;therapist 治疗专家&lt;/li&gt;
-  &lt;li&gt;psychiatrist 精神科医生&lt;/li&gt;
-  &lt;li&gt;psychologist 心理专家&lt;/li&gt;
-  &lt;li&gt;eternalize 使不朽，使永生&lt;/li&gt;
-  &lt;li&gt;on a day-to-day basis 基本上每天&lt;/li&gt;
-  &lt;li&gt;laid back 闲散的&lt;/li&gt;
-  &lt;li&gt;compensate for 弥补补偿&lt;/li&gt;
-  &lt;li&gt;masculine 男性化  feminine 女性化&lt;/li&gt;
-  &lt;li&gt;drastically 彻底地激烈地&lt;/li&gt;
-  &lt;li&gt;take it with a grain of salt 不全信；对…采取保留态度&lt;/li&gt;
-  &lt;li&gt;live life on your own terms 按照自己的方式生活&lt;/li&gt;
-  &lt;li&gt;hinge on 取决于&lt;/li&gt;
-  &lt;li&gt;utterly 彻底地完全地&lt;/li&gt;
-  &lt;li&gt;funny and witty 风趣幽默&lt;/li&gt;
-  &lt;li&gt;improv 即兴表演，即兴的&lt;/li&gt;
-  &lt;li&gt;under certain circumstances 在特定情况下&lt;/li&gt;
-  &lt;li&gt;gravitational pull 万有引力&lt;/li&gt;
-  &lt;li&gt;follow in the steps of 跟随某人的步伐，向某人学习&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h4 id=&quot;算法&quot;&gt;算法&lt;/h4&gt;
+&lt;p&gt;时间复杂度： time complexity&lt;br /&gt;
+指数级： exponential&lt;/p&gt;
 
-&lt;h4 id=&quot;sentence&quot;&gt;Sentence&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;A 35-year-old man have tested positive for the virus.&lt;/li&gt;
-  &lt;li&gt;More information follows. 后面还显示更多信息&lt;/li&gt;
-  &lt;li&gt;By now messages like this one are &lt;strong&gt;commonplace&lt;/strong&gt; in South Korea.  司空见惯的事&lt;/li&gt;
-  &lt;li&gt;The result has been &lt;strong&gt;stunning&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;South Korea methods of fighting coronavirus has been &lt;strong&gt;praised&lt;/strong&gt; as a model of how to contain the virus.&lt;/li&gt;
-  &lt;li&gt;It avoids forced restrictions on movement and does not lead to widespread closure of business.&lt;/li&gt;
-  &lt;li&gt;If South korea is reducing privacy &lt;strong&gt;in exchange for&lt;/strong&gt; fighting the virus, many South Koreans seem to accept it happily.&lt;/li&gt;
-  &lt;li&gt;The International Olympic Committee has annouced a first-of-its-kind postponement of the Summer Olympics.&lt;/li&gt;
-  &lt;li&gt;Athletes, sports organizations and national Olympic committees had been pressuring the IOC to postpone the games.&lt;/li&gt;
-  &lt;li&gt;The notes that the virus had put serious limitations on traing and qualifying events, as well as efforts to fight the use performance-enhancing drugs.&lt;/li&gt;
-  &lt;li&gt;Thankful to finally have some clarity regarding the Olympic Games.&lt;/li&gt;
-  &lt;li&gt;It was becoming increasingly clear that starting on July 24th was no longer a choice.&lt;/li&gt;
-  &lt;li&gt;common expression 常见表达&lt;/li&gt;
-  &lt;li&gt;Specifically, we take a tour of our largest organ: the skin.&lt;/li&gt;
-  &lt;li&gt;They causr itching and great discomfort.&lt;/li&gt;
-  &lt;li&gt;So, to &lt;strong&gt;get under someone’s skin&lt;/strong&gt; means to annoy them or, better still to bug them.&lt;/li&gt;
-  &lt;li&gt;You have to be careful what you say to &lt;strong&gt;thin skinned&lt;/strong&gt; people so as not to hurt their feelings.&lt;/li&gt;
-  &lt;li&gt;Many millennials also are identified as jobless and more likely than other young people to be living with one or both parents.&lt;/li&gt;
-  &lt;li&gt;Many are weighed down with debt from student loans.&lt;/li&gt;
-  &lt;li&gt;That may be the case 事实的确是这样&lt;/li&gt;
-  &lt;li&gt;What we think is fascinating is that 我们觉得有趣的是…&lt;/li&gt;
-  &lt;li&gt;Scientic study have shown that 科学研究表明…&lt;/li&gt;
-  &lt;li&gt;Avoid rubbing your phone with rough materials that could make small cuts on it.&lt;/li&gt;
-  &lt;li&gt;Most patients experience only mild or moderate symptoms.&lt;/li&gt;
-  &lt;li&gt;However, older people and those with existing health conditions are more likely to develop more severe illness.&lt;/li&gt;
-  &lt;li&gt;The United States will begin restricting visas to citizens from six other countries on February 21, although critics question the move.&lt;/li&gt;
-  &lt;li&gt;Superbugs are appearing much more often outside of the hospitals, the CDC report said.&lt;/li&gt;
-  &lt;li&gt;And now for some closing thoughts. 现在做一些总结&lt;/li&gt;
-  &lt;li&gt;Learning to use context clues can take time. Don’t pressure yourself to be great at the skill too qiuckly.&lt;/li&gt;
-  &lt;li&gt;The remains of a small bird are giving scientists a rare look at eraly ancectors of modern birds.&lt;/li&gt;
-  &lt;li&gt;They say the fossil dates back to right before an asteroid hit the earth, killing off dinosaurs and other creatures.&lt;/li&gt;
-  &lt;li&gt;And the fossil itself shows qualities that have been suggested as helpful for survival.&lt;/li&gt;
-  &lt;li&gt;Be picky about what you are eating.&lt;/li&gt;
-  &lt;li&gt;the country that were once said to be more secure&lt;/li&gt;
-  &lt;li&gt;The students, ages 14 to 17, &lt;strong&gt;were joined&lt;/strong&gt; by 12 experienced crew members.&lt;/li&gt;
-  &lt;li&gt;using a cane for support 用拐杖支持&lt;/li&gt;
-  &lt;li&gt;someone shift tone(change narrative) on this issue. 改变观点看法。&lt;/li&gt;
-  &lt;li&gt;I invite you to take this concept into your own life.&lt;/li&gt;
-  &lt;li&gt;I will know where you stand. 你就会知道知道你自己的定位是什么。&lt;/li&gt;
-  &lt;li&gt;This is where you have a clearly-defined purpose in your life.&lt;/li&gt;
-  &lt;li&gt;A massive difference between the knight stage and the prince stage is that the prince possesses a valuable trait called patience.&lt;/li&gt;
-  &lt;li&gt;A prince is not overly concerned with the outcome, but he is very concerned with the process, and he is constantly course-correcting and improving the way he does things.&lt;/li&gt;
-  &lt;li&gt;It’s more about making other people thinking that you’re confident as opposed to actually just being confident, which is why cocky people tend to talk a lot.&lt;/li&gt;
-  &lt;li&gt;A common trait that a lot of cocky people exhibit is being overly loud in certain social situations.&lt;/li&gt;
-  &lt;li&gt;Confident people do not have an inflated view of themselves.&lt;/li&gt;
-  &lt;li&gt;To some extent, I do agree with this.&lt;/li&gt;
-  &lt;li&gt;The secret of happiness is not found in seeking more, but in developing the capacity to enjoy less.&lt;/li&gt;
-  &lt;li&gt;Where a lot of people get in trouble is when they think happiness is tangible.&lt;/li&gt;
-  &lt;li&gt;No matter what it is people use to escape, it achieves the same goal, which is temporarily blurring all the expectations laid upon you.&lt;/li&gt;
-  &lt;li&gt;This is sometime the case， but a lot of times, this is not really the reality. 有时候是这样的, 但大多数情况下确并非如此。&lt;/li&gt;
-  &lt;li&gt;Express your self and unleash the beast within you.&lt;/li&gt;
-  &lt;li&gt;You won’t reach the state by thinking the way there.&lt;/li&gt;
-  &lt;li&gt;I don’t think giving love in a way that is not in your primary love language will grow resentment towards your partner.&lt;/li&gt;
-  &lt;li&gt;And this is easier said than done.&lt;/li&gt;
-  &lt;li&gt;There is nothing more attrative to a girl when a man knows exactly what he wants to do in this life.&lt;/li&gt;
-  &lt;li&gt;When a man is on his purpose, it creates a gravitational pull around him.&lt;/li&gt;
-  &lt;li&gt;Like being peer pressured into doing things that you don’t want to do&lt;/li&gt;
-  &lt;li&gt;Alpha men will have opinions on topics that they are knowledgeable about and they are not scared to voice their opinions to the people around them.&lt;/li&gt;
-  &lt;li&gt;Something to also note is that you can be both polarizing and respectful at the same time.&lt;/li&gt;
-  &lt;li&gt;They do not sit idly by while opportunities and problems pass them by.&lt;/li&gt;
-  &lt;li&gt;If you want to become that incredibly confident man that everyone admires, the only thing you need to do is…&lt;/li&gt;
-  &lt;li&gt;I am going to change your perspective on what confidence is, and I am gonna share with you the single most impactful thing that skyrocketed my own personal confidence.&lt;/li&gt;
-&lt;/ul&gt;
-
+&lt;h2 id=&quot;口语&quot;&gt;口语&lt;/h2&gt;
+&lt;h4 id=&quot;讨论&quot;&gt;讨论&lt;/h4&gt;
+&lt;p&gt;As a quick reminder: 顺便提醒一下&lt;br /&gt;
+Taken as a very loose analogy: 作为粗略的对照&lt;br /&gt;
+I will touch base with you. 我会向你再次确认。&lt;br /&gt;
+Got it/ Roger that / Consider it done/ Sure thing 好的收到&lt;br /&gt;
+With that being said 说完这些 &lt;br /&gt;
+What’s the Engilish word for this?&lt;br /&gt;
+From where I stand/ From my point of view&lt;br /&gt;
+Judging from what I have heard/read.&lt;/p&gt;
 </description>
         <pubDate>Fri, 19 Jun 2020 00:00:00 +0800</pubDate>
         <link>https://xctorres.github.io//2020/06/19/learn-english/</link>
@@ -671,34 +637,6 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
         <category>Python</category>
         
         <category>Web</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>学习词汇</title>
-        <description>&lt;h4 id=&quot;机器学习&quot;&gt;机器学习&lt;/h4&gt;
-&lt;p&gt;后向传播算法： backpropagation algorithms&lt;br /&gt;
-正则化：  regularization&lt;br /&gt;
-过拟合：  overfitting&lt;br /&gt;
-向量化：  vectorization&lt;br /&gt;
-大小、量级：magnitude&lt;/p&gt;
-
-&lt;h4 id=&quot;算法&quot;&gt;算法&lt;/h4&gt;
-&lt;p&gt;时间复杂度： time complexity&lt;br /&gt;
-指数级： exponential&lt;/p&gt;
-
-&lt;h4 id=&quot;演讲&quot;&gt;演讲&lt;/h4&gt;
-&lt;p&gt;as a quick reminder: 顺便提醒一下&lt;br /&gt;
-taken as a very loose analogy: 作为粗略的对照
-I will touch base with you. 我会向你再次确认。&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 26 May 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/05/26/machine-learning-word/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/05/26/machine-learning-word/</guid>
-        
-        <category>学习</category>
         
         
       </item>
