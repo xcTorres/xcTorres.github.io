@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 08 Sep 2020 18:39:34 +0800</pubDate>
-    <lastBuildDate>Tue, 08 Sep 2020 18:39:34 +0800</lastBuildDate>
+    <pubDate>Wed, 09 Sep 2020 19:12:23 +0800</pubDate>
+    <lastBuildDate>Wed, 09 Sep 2020 19:12:23 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -17,23 +17,73 @@
 &lt;h4 id=&quot;格式&quot;&gt;格式&lt;/h4&gt;
 &lt;p&gt;两种主要使用的格式分别是XML文件以及PBF文件。XML文件好处是可读，但所占内存很大。而PBF指protoBuf文件，是一种高压缩文件。关于格式的细节可在wiki上查找。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/PBF_Format&quot;&gt;https://wiki.openstreetmap.org/wiki/PBF_Format&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/OSM_XML&quot;&gt;https://wiki.openstreetmap.org/wiki/OSM_XML&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/PBF_Format&quot;&gt;https://wiki.openstreetmap.org/wiki/PBF_Format&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/OSM_XML&quot;&gt;https://wiki.openstreetmap.org/wiki/OSM_XML&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;内容&quot;&gt;内容&lt;/h4&gt;
-&lt;p&gt;无论是采用XML还是PBF的数据格式，只是数据的组织和解析不同，内容都是一致的。OpenStreetMap有三种元素，分别是Node， Way，还有Relation，并通过Tag给不同的元素添加属性。有了这些元素，就可以用来表示地图上的所有特征了。&lt;/p&gt;
+&lt;p&gt;无论是采用XML还是PBF的数据格式，只是数据的组织和解析不同，内容都是一致的。OpenStreetMap有三种元素，分别是Node， Way，还有Relation，并通过Tag给不同的元素添加属性。有了这些元素，就可以用来表示地图上的所有特征了。如下是三类元素的树状图。&lt;/p&gt;
 
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changeset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_sid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;latitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;way&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changeset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_sid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodeId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;relation&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changeset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_sid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;members&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;role&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Node&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;一个Node通过经纬度代表地球表面上的一个特定节点，其最少包含一个id，还有经纬度字段。Node既可以用来定义某个单一点要素，比如某个公园长凳，某个水井，多个Node也可以用来定义一条路的形状。当其用来表示路时，通常节点是不需要Tag来添加属性的。但有时候也会给路上的特定节点添加属性，比如交通信号灯🚥，比如高压电线塔等等。&lt;/p&gt;
+&lt;p&gt;一个Node通过经纬度代表地球表面上的一个特定节点，其最少包含一个id，还有经纬度字段。Node既可以用来定义某个单一点要素，比如某个公园长凳，某个水井，多个Node也可以用来定义一条路的形状。当其用来表示路时，通常节点是不需要Tag来添加属性的。但有时候也会给路上的特定节点添加属性，比如交通信号灯🚥，高压电线塔等等。&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Way&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作&lt;strong&gt;closed_way&lt;/strong&gt;，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个面要素并用Relation关联起来。&lt;/p&gt;
+&lt;p&gt;Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作&lt;strong&gt;closed_way&lt;/strong&gt;，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个Way要素并用Relation关联起来。&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Relation&lt;/strong&gt;&lt;/li&gt;
@@ -42,7 +92,6 @@
 &lt;p&gt;Relation是一种能够同时记录两个或多个Nodes，Ways等元素关系的这样一种数据结构。&lt;br /&gt;
 在&lt;strong&gt;route relation&lt;/strong&gt;中， 其可以表示多个路的关系，比如多条路组成一条高速公路🛣，一条自行车🚲路，或一条公交车🚌路线。&lt;br /&gt;
 在&lt;strong&gt;turn restriction&lt;/strong&gt;中，其表示从一条路直接进入另一条路是不被允许的。
- that says you can’t turn from one way into another way.&lt;br /&gt;
 在&lt;strong&gt;multipolygon&lt;/strong&gt;中，其可以用来表示polygon之间的关系，比如是内含还是外包。&lt;br /&gt;
 从以上示例中不难发现，Relation可以表示很多不一样的关系，而这个关系是通过Tag中的type来定义的。&lt;/p&gt;
 
@@ -57,20 +106,61 @@
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;postgisqgis&quot;&gt;POSTGIS+QGIS&lt;/h2&gt;
+&lt;h2 id=&quot;postgisqgis&quot;&gt;PostGIS+QGIS&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://docs.qgis.org/2.14/en/docs/user_manual/working_with_ogc/ogc_client_support.html&quot;&gt;QGIS&lt;/a&gt;是一个开源的功能齐全的地图编辑软件，其本身就支持直接打开OSM文件，但是当OSM文件较大时，在QGIS加载就会变的很卡很慢，甚至加载不出来。&lt;/p&gt;
 
 &lt;p&gt;一种比较好的组合方式是通过Osm2pgsql工具先将OSM文件导入到PostgreSQL数据库中，并且可以根据需要在PostGIS中添加空间索引，用于之后提高空间查询效率。之所以选用PostgreSQL的原因是其是一个开源的功能齐全的关系型数据库，且有非常好的地理支撑（PostGIS），且OpenStreetMap本身也是将数据存在PostgreSQL数据库中的，有足够多的开源工具能够一键从OSM文件导入到数据库中。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/in-post/osm/osm2pgsql.png&quot; alt=&quot;Osm2pgsql database design&quot; /&gt;&lt;/p&gt;
+&lt;h4 id=&quot;postgis&quot;&gt;PostGIS&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;http://postgis.net/workshops/postgis-intro/&quot;&gt;PostGIS&lt;/a&gt;是在关系型数据库PostgreSQL的基础上添加的地理支持，从而我们用SQL语言就能实现复杂的空间查询等功能。正因为PostGIS的存在，使得PostgreSQL开始应用在空间数据，LBS服务场景。在非生产环境下，我们可以使用Docker镜像来熟悉PostGIS的功能。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql&quot;&gt;osm2pgsql&lt;/a&gt;是OpenStreetMap的官方工具库，下面先看看它是如何把原始的OSM转化成Postgresql数据库中的各个数据表。不难看出如果选择slim模式其仍能够保存OSM原始的Node，Way，Relation三要素，且除此之外该工具已经帮我们提炼出来planet_osm_point, planet_osm_line， planet_osm_polygon三大要素集合。此外还有一个planet_osm_roads数据表，其所有数据都是重复的，是planet_osm_line有的。其保存了一些更粗粒度的geometry，用于地图渲染用途，因为渲染时无需处理所有细小的Geometry&lt;a href=&quot;https://github.com/openstreetmap/osm2pgsql/issues/610&quot;&gt;(https://github.com/openstreetmap/osm2pgsql/issues/610)&lt;/a&gt;。&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+   # 下载PostgreSQL与PostGIS
+   &lt;span class=&quot;kd&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;my&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-postgis -e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;POSTGRES_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;123321&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-v &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/postgresql&lt;/span&gt;_data:/var/lib/postgresql/data &lt;span class=&quot;na&quot;&gt;-p &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5432&lt;/span&gt;:5432 &lt;span class=&quot;na&quot;&gt;-d &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgis&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/postgis
+
+   &lt;/span&gt;# 下载PgAdmin
+   &lt;span class=&quot;kd&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-d -p &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5433&lt;/span&gt;:80 &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;pgadmin4&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;PGADMIN_DEFAULT_EMAIL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;test&lt;/span&gt;@123.com &lt;span class=&quot;na&quot;&gt;-e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;PGADMIN_DEFAULT_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;123456&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;dpage&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/pgadmin&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;
+
+   # 输入SQL命令
+   &lt;span class=&quot;kd&quot;&gt;sudo&lt;/span&gt;  &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-it &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-link &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;my&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-postgis&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;:postgres&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-rm &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgres&lt;/span&gt;     &lt;span class=&quot;kd&quot;&gt;sh&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-c &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'exec psql -h &quot;$POSTGRES_PORT_5432_TCP_ADDR&quot; -p &quot;$POSTGRES_PORT_5432_TCP_PORT&quot; -U postgres'&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;osm2pgsql&quot;&gt;Osm2pgsql&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/in-post/osm/osm2pgsql.png&quot; width=&quot;600&quot; height=&quot;500&quot; title=&quot;Osm2pgsql database design&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql&quot;&gt;osm2pgsql&lt;/a&gt;是OpenStreetMap的官方工具库，下面先看看它是如何把原始的OSM转化成Postgresql数据库中的各个数据表。不难看出如果选择slim模式其仍能够保存OSM原始的Node，Way，Relation三要素，且除此之外该工具已经帮我们提炼出来planet_osm_point, planet_osm_line， planet_osm_polygon点线面要素集合。此外还有一个planet_osm_roads数据表，其所有数据都是重复的，是planet_osm_line有的。其保存了一些更粗粒度的geometry，用于地图渲染用途，因为渲染时无需处理所有细小的Geometry&lt;a href=&quot;https://github.com/openstreetmap/osm2pgsql/issues/610&quot;&gt;(https://github.com/openstreetmap/osm2pgsql/issues/610)&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;通过如下命令就可以直接将osm文件导入到PostgreSQL。&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;kd&quot;&gt;osm2pgsql&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-s -U &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgres&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-H &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;127&lt;/span&gt;.0.0.1 &lt;span class=&quot;na&quot;&gt;-P &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5432&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-W -d &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgres&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/Desktop/jakarta&lt;/span&gt;.osm.pbf
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;通过pgAdmin网页控制台可视化可以发现，在database下共用8个table，除了上面的七个表，还多了个一个空间参考表，其中存储了各个空间参考系统下的投影参数。
+&lt;img src=&quot;/img/in-post/osm/pgAdmin.jpg&quot; width=&quot;700&quot; height=&quot;600&quot; title=&quot;pgAdmin&quot; /&gt;&lt;/p&gt;
+&lt;h4 id=&quot;qgis&quot;&gt;QGIS&lt;/h4&gt;
+&lt;p&gt;从QGIS展示PostGIS的数据主要有以下几种方法，当然这些方法都需要做的第一步就是输入PostgreSQL的Hostname，Port，账号，密码，以及想连的数据库。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;方法一：&lt;br /&gt;
+如图直接连接PostGIS图层就可以展示了，这种方法简单快捷，适合数据表中数据量比较少的情况下，并且可以看到数据的全貌。示例中图层的数据只是雅加达地区的全部数据，所以单机还是能够应付的。当数据量非常大比如是整个印尼数据的情况下，该方法肯定就不能用了。
+&lt;img src=&quot;/img/in-post/osm/qgis_postGIS_layer.png&quot; width=&quot;700&quot; height=&quot;600&quot; title=&quot;Qgis+postGIS+layer&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;方法二：
+DB manager&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;-&lt;/p&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Elements&quot;&gt;https://wiki.openstreetmap.org/wiki/Elements&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Map_Features&quot;&gt;https://wiki.openstreetmap.org/wiki/Map_Features&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql/schema&quot;&gt;https://wiki.openstreetmap.org/wiki/Osm2pgsql/schema&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql/schema&quot;&gt;https://wiki.openstreetmap.org/wiki/Osm2pgsql/schema&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://postgis.net/&quot;&gt;https://postgis.net/&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 03 Sep 2020 00:00:00 +0800</pubDate>
