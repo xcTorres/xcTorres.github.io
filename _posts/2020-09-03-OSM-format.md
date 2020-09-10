@@ -85,7 +85,7 @@ Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个�
 
 Relation是一种能够同时记录两个或多个Nodes，Ways等元素关系的这样一种数据结构。  
 在**route relation**中， 其可以表示多个路的关系，比如多条路组成一条高速公路🛣，一条自行车🚲路，或一条公交车🚌路线。  
-在**turn restriction**中，其表示从一条路直接进入另一条路是不被允许的。
+在**turn restriction**中，其表示从一条路直接进入另一条路是不被允许的。  
 在**multipolygon**中，其可以用来表示polygon之间的关系，比如是内含还是外包。  
 从以上示例中不难发现，Relation可以表示很多不一样的关系，而这个关系是通过Tag中的type来定义的。
 
@@ -135,23 +135,32 @@ Relation是一种能够同时记录两个或多个Nodes，Ways等元素关系的
 
 ```
 通过pgAdmin网页控制台可视化可以发现，在database下共用8个table，除了上面的七个表，还多了个一个空间参考表，其中存储了各个空间参考系统下的投影参数。
-<img src="/img/in-post/osm/pgAdmin.jpg" width="700" height="600" title="pgAdmin">  
+<img src="/img/in-post/osm/pgAdmin.jpg" width="700" height="600" title="pgAdmin"> 
+ 
 #### QGIS
 从QGIS展示PostGIS的数据主要有以下几种方法，当然这些方法都需要做的第一步就是输入PostgreSQL的Hostname，Port，账号，密码，以及想连的数据库。
 
 - 方法一：  
 如图直接连接PostGIS图层就可以展示了，这种方法简单快捷，适合数据表中数据量比较少的情况下，并且可以看到数据的全貌。示例中图层的数据只是雅加达地区的全部数据，所以单机还是能够应付的。当数据量非常大比如是整个印尼数据的情况下，该方法肯定就不能用了。
-<img src="/img/in-post/osm/qgis_postGIS_layer.png" width="700" height="600" title="Qgis+postGIS+layer">  
+<img src="/img/in-post/osm/qgis-postGIS-layer.png" width="700" height="600" title="Qgis+postGIS+layer">  
 
-- 方法二：
-DB manager
+- 方法二：  
+在工具栏中我们选择 DataBase -> DB manager, 然后连接PostGIS数据库即可。之后点击SQL Window窗口就可以通过SQL语句筛选数据并加载到图层中进行可视化。如下图是在雅加达地区对planet_osm_line中先筛选出道路，并筛选在规定的BoundingBox范围内数据。  
 
+```SQL
 
--
+    select osm_id, highway, name, way 
+    from planet_osm_line  
+    where highway is not null and way && ST_Transform(ST_MakeEnvelope(106.7459, -6.2276, 106.8394, -6.1650, 4326), 3857)
 
+```
 
+<img src="/img/in-post/osm/db-manager.png" width="700" height="600" title="db_manager"> 
 
+<img src="/img/in-post/osm/boundingbox.png" width="700" height="600" title="Qgis+postGIS+layer"> 
 
+## 总结
+到此，关于OSM数据到PostGIS的存储以及QGIS的可视化都算是讲完了，至于如何使用PostGIS的SQL功能来进行空间分析，则将单另一个章节去介绍。
 
 
 
@@ -170,5 +179,5 @@ DB manager
 [https://wiki.openstreetmap.org/wiki/Elements](https://wiki.openstreetmap.org/wiki/Elements)  
 [https://wiki.openstreetmap.org/wiki/Map_Features](https://wiki.openstreetmap.org/wiki/Map_Features)  
 [https://wiki.openstreetmap.org/wiki/Osm2pgsql/schema](https://wiki.openstreetmap.org/wiki/Osm2pgsql/schema)  
-[https://postgis.net/](https://postgis.net/)
-
+[https://postgis.net/](https://postgis.net/)  
+[http://www.volkerschatz.com/net/osm/osm2pgsql-db.html](http://www.volkerschatz.com/net/osm/osm2pgsql-db.html)
