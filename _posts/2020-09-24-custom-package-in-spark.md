@@ -12,14 +12,14 @@ tags:
 
 Sometimes when we  use Spark to do the data analysis job, we want to use our own python package. We know the Spark cluster has the driver node  and executor nodes. Usually driver is our own server so we have the permission to install the python package, but we don't have the permission to install the package on hundreds of executor nodes. When we directly run our pySpark code, it will report **"Import Error"**.  
 
-There are two ways to let the executor nodes find the target python packages.  
+There are two ways to let the executor nodes find out the target python packages.  
  1) Upload  certain custom python package to Spark.    
  2) Upload an entire python environment to Spark and make it as executor python environment. 
 
 ## Upload certain python package  
 
 1. Enter into you python env directory, and find the package that you want to upload. For example, the package is **shapely**.  
-```bash
+```bat
 
     cd ~/.conda/envs/foody/lib/python3.6/site-packages
 ```
@@ -27,7 +27,7 @@ There are two ways to let the executor nodes find the target python packages.
 2. Upload the local package file to hdfs system, so that executors are able to download the file from hdfs system.
 If you are not familiar with the hadoop fs command, you could refer to this guide.
 Your hdfs path should be **/user/your_name/**, for example, my hdfs directory is **/user/chong.xie/**.  you could use following command to check the path exists or not.
-```bash
+```bat
     
     ## create dir in hdfs system
     hadoop fs -ls /user/chong.xie/ 
@@ -55,7 +55,7 @@ Your hdfs path should be **/user/your_name/**, for example, my hdfs directory is
 Now we have a way to upload custom packages, but sometimes the packages that we are going to use have many third-party dependencies, and it is very redundant to upload all of the dependencies.  Under the circumstances, the simplest way is to upload the entire python environment and let the executor servers use our own python env.
 
 1. Create a new python environment and install your required packages. For example, the env name is geocoding.
-```bash
+```bat
 
     conda create --name geocoding python=3.6
     
@@ -65,7 +65,7 @@ Now we have a way to upload custom packages, but sometimes the packages that we 
 ```
 
 2. Compress your python into a tgz file
-```bash
+```bat
 
     cd ~/.conda/envs
     tar -zcf python-3.6.tgz ./geocoding/*
