@@ -77,9 +77,37 @@ tags:
 
 一个Node通过经纬度代表地球表面上的一个特定节点，其最少包含一个id，还有经纬度字段。Node既可以用来定义某个单一点要素，比如某个公园长凳，某个水井，多个Node也可以用来定义一条路的形状。当其用来表示路时，通常节点是不需要Tag来添加属性的。但有时候也会给路上的特定节点添加属性，比如交通信号灯🚥，高压电线塔等等。
 
+Example:
+```html
+
+    <node id="25496583" lat="51.5173639" lon="-0.140043" version="1" changeset="203496" user="80n" uid="1238" visible="true" timestamp="2007-01-28T11:40:26Z">
+    <tag k="highway" v="traffic_signals"/>
+    </node>
+
+```
+
 - **Way**   
 
-Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作**closed_way**，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个Way要素并用Relation关联起来。
+Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作**closed_way**，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个Way要素并用Relation关联起来。  
+Example:
+```html
+
+    <way id="5090250" visible="true" timestamp="2009-01-19T19:07:25Z" version="8" changeset="816806" user="Blumpsy" uid="64226">
+        <nd ref="822403"/>
+        <nd ref="21533912"/>
+        <nd ref="821601"/>
+        <nd ref="21533910"/>
+        <nd ref="135791608"/>
+        <nd ref="333725784"/>
+        <nd ref="333725781"/>
+        <nd ref="333725774"/>
+        <nd ref="333725776"/>
+        <nd ref="823771"/>
+        <tag k="highway" v="residential"/>
+        <tag k="name" v="Clipstone Street"/>
+        <tag k="oneway" v="yes"/>
+    </way>
+```
 
 - **Relation**  
 

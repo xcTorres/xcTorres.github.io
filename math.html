@@ -1,9 +1,9 @@
 ---
 layout: page
-title: "Math"
+title: "Paper"
 ---
 
-{% assign sortedPosts = site.math | sort: 'title' %}
+{% assign sortedPosts = site.paper | sort: 'title' %}
 {% for post in sortedPosts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">

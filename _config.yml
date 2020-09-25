@@ -81,7 +81,7 @@ featured-condition-size: 0              # A tag will be featured if the size of 
 collections:
   leetcode:
     output: true  
-  math:
+  paper:
     output: true
 
 # Friends
