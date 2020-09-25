@@ -5,13 +5,13 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 25 Sep 2020 11:25:10 +0800</pubDate>
-    <lastBuildDate>Fri, 25 Sep 2020 11:25:10 +0800</lastBuildDate>
+    <pubDate>Fri, 25 Sep 2020 22:50:11 +0800</pubDate>
+    <lastBuildDate>Fri, 25 Sep 2020 22:50:11 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
         <title>How to use custom packages in spark cluster</title>
-        <description>&lt;p&gt;Sometimes when we  use Spark to do the data analysis job, we want to use our own python package. We know the Spark cluster has the driver node  and executor nodes. Usually driver is our own server so we have the permission to install the python package, but we don’t have the permission to install the package on hundreds of executor nodes. When we directly run our pySpark code, it will report &lt;strong&gt;“Import Error”&lt;/strong&gt;.&lt;/p&gt;
+        <description>&lt;p&gt;Sometimes when we use Spark to do the data analysis job, we want to use our own python package. We know the Spark cluster has the driver node  and executor nodes. Usually driver is our own server so we have the permission to install the python package, but we don’t have the permission to install the package on hundreds of executor nodes. When we directly run our pySpark code, it will report &lt;strong&gt;“Import Error”&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;There are two ways to let the executor nodes find out the target python packages.&lt;br /&gt;
  1) Upload  certain custom python package to Spark.  &lt;br /&gt;
@@ -19,72 +19,74 @@
 
 &lt;h2 id=&quot;upload-certain-python-package&quot;&gt;Upload certain python package&lt;/h2&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Enter into you python env directory, and find the package that you want to upload. For example, the package is &lt;strong&gt;shapely&lt;/strong&gt;.
-    &lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
- &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;/.conda/envs/foody/lib/python3.6/site&lt;span class=&quot;na&quot;&gt;-packages
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Upload the local package file to hdfs system, so that executors are able to download the file from hdfs system.
+&lt;p&gt;1） Enter into you python env directory, and find the package that you want to upload. For example, the package is &lt;strong&gt;shapely&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;/.conda/envs/foody/lib/python3.6/site&lt;span class=&quot;na&quot;&gt;-packages
+
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;2) Upload the local package file to hdfs system, so that executors are able to download the file from hdfs system.
 If you are not familiar with the hadoop fs command, you could refer to this guide.
-Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for example, my hdfs directory is &lt;strong&gt;/user/chong.xie/&lt;/strong&gt;.  you could use following command to check the path exists or not.
-    &lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
- ## &lt;span class=&quot;kd&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dir&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;hdfs&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;system&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;hadoop&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-ls /user/chong&lt;/span&gt;.xie/ 
- &lt;span class=&quot;kd&quot;&gt;hadoop&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-mkdir /user/chong&lt;/span&gt;.xie/gecoding_thrid_packages/ 
+Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for example, my hdfs directory is &lt;strong&gt;/user/chong.xie/&lt;/strong&gt;.  you could use following command to check the path exists or not.&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
+    ## &lt;span class=&quot;kd&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dir&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;hdfs&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;system&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;hadoop&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-ls /user/chong&lt;/span&gt;.xie/ 
+    &lt;span class=&quot;kd&quot;&gt;hadoop&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-mkdir /user/chong&lt;/span&gt;.xie/gecoding_thrid_packages/ 
 
 
- ## &lt;span class=&quot;kd&quot;&gt;upload&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;hdfs&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;system&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;hadoop&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-copyFromLocal  &lt;/span&gt;./shapely/  &lt;span class=&quot;na&quot;&gt;/user/chong&lt;/span&gt;.xie/gecoding_thrid_packages/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Before we run the pySpark code, do remember to add file path to Spark.
-    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
- &lt;span class=&quot;n&quot;&gt;sc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'hdfs:///user/chong.xie/gecoding_thrid_packages/shapely'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;import the package just like the code is run on local server.
-    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
- &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;geopandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gpd&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+    ## &lt;span class=&quot;kd&quot;&gt;upload&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;hdfs&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;system&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;hadoop&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-copyFromLocal  &lt;/span&gt;./shapely/  &lt;span class=&quot;na&quot;&gt;/user/chong&lt;/span&gt;.xie/gecoding_thrid_packages/
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;3) Before we run the pySpark code, do remember to add file path to Spark.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
+    &lt;span class=&quot;n&quot;&gt;sc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'hdfs:///user/chong.xie/gecoding_thrid_packages/shapely'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;4) import the package just like the code is run on local server.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;geopandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gpd&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;upload-entire-python-environment&quot;&gt;Upload entire python environment&lt;/h2&gt;
 
 &lt;p&gt;Now we have a way to upload custom packages, but sometimes the packages that we are going to use have many third-party dependencies, and it is very redundant to upload all of the dependencies.  Under the circumstances, the simplest way is to upload the entire python environment and let the executor servers use our own python env.&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Create a new python environment and install your required packages. For example, the env name is geocoding.
-    &lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
- &lt;span class=&quot;kd&quot;&gt;conda&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;geocoding&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.6
+&lt;p&gt;1) Create a new python environment and install your required packages. For example, the env name is geocoding.&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;kd&quot;&gt;conda&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;geocoding&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.6
     
- &lt;span class=&quot;kd&quot;&gt;conda&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;activate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;geocoding&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;geopandas&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;shapely&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Compress your python into a tgz file
-    &lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
- &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;/.conda/envs
- &lt;span class=&quot;kd&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-zcf &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.6.tgz ./geocoding/&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;When we set the spark conf, don’t forget to set &lt;strong&gt;spark.yarn.dist.archives&lt;/strong&gt;, which will distribute your python compression file to the working directory of every executor servers, and uncompress it to the Newname after #.  Here Newname is python-3.6.
-    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
- &lt;span class=&quot;n&quot;&gt;SPARK_CONF&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SparkConf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(...)&lt;/span&gt; \
-                         &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;spark.yarn.dist.archives&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file:/ldap_home/chong.xie/.conda/envs/python-3.6.tgz#python-3.6&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;And then you need to set the python environment. PYSPARK_DRIVER_PYTHON is your driver python path, it should be only local path.  PYSPARK_PYTHON is the executor python path, so the configuration should be ./Newname/env_name/bin/python.
-    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
- &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;PYSPARK_PYTHON&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'./python-3.6/geocoding/bin/python'&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;PYSPARK_DRIVER_PYTHON&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/ldap_home/chong.xie/.conda/envs/geocoding/bin/python'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Run the pySpark code. If there is no any error, it means it is using your own python environment.&lt;/li&gt;
-&lt;/ol&gt;
+    &lt;span class=&quot;kd&quot;&gt;conda&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;activate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;geocoding&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;geopandas&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;shapely&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;2) Compress your python into a tgz file&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;/.conda/envs
+    &lt;span class=&quot;kd&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-zcf &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.6.tgz ./geocoding/&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;3) When we set the spark conf, don’t forget to set &lt;strong&gt;spark.yarn.dist.archives&lt;/strong&gt;, which will distribute your python compression file to the working directory of every executor servers, and uncompress it to the Newname after #.  Here Newname is python-3.6.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;n&quot;&gt;SPARK_CONF&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SparkConf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(...)&lt;/span&gt; \
+                            &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;spark.yarn.dist.archives&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file:/ldap_home/chong.xie/.conda/envs/python-3.6.tgz#python-3.6&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;4) And then you need to set the python environment. PYSPARK_DRIVER_PYTHON is your driver python path, it should be only local path.  PYSPARK_PYTHON is the executor python path, so the configuration should be ./Newname/env_name/bin/python.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;PYSPARK_PYTHON&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'./python-3.6/geocoding/bin/python'&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;PYSPARK_DRIVER_PYTHON&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/ldap_home/chong.xie/.conda/envs/geocoding/bin/python'&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;5) Run the pySpark code. If there is no any error, it means it is using your own python environment.&lt;/p&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://hadoop.apache.org/docs/r1.0.4/cn/hdfs_shell.html&quot;&gt;https://hadoop.apache.org/docs/r1.0.4/cn/hdfs_shell.html&lt;/a&gt;&lt;br /&gt;
@@ -183,11 +185,37 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
 
 &lt;p&gt;一个Node通过经纬度代表地球表面上的一个特定节点，其最少包含一个id，还有经纬度字段。Node既可以用来定义某个单一点要素，比如某个公园长凳，某个水井，多个Node也可以用来定义一条路的形状。当其用来表示路时，通常节点是不需要Tag来添加属性的。但有时候也会给路上的特定节点添加属性，比如交通信号灯🚥，高压电线塔等等。&lt;/p&gt;
 
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;node&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;25496583&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lat=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;51.5173639&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lon=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-0.140043&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;changeset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;203496&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;user=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;80n&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uid=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1238&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;visible=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timestamp=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2007-01-28T11:40:26Z&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;highway&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;traffic_signals&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/node&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Way&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作&lt;strong&gt;closed_way&lt;/strong&gt;，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个Way要素并用Relation关联起来。&lt;/p&gt;
+&lt;p&gt;Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作&lt;strong&gt;closed_way&lt;/strong&gt;，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个Way要素并用Relation关联起来。&lt;br /&gt;
+Example:&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;way&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;5090250&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;visible=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timestamp=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2009-01-19T19:07:25Z&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;changeset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;816806&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;user=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Blumpsy&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uid=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;64226&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;822403&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;21533912&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;821601&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;21533910&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;135791608&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725784&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725781&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725774&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725776&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;823771&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;highway&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;residential&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Clipstone Street&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;oneway&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yes&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/way&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Relation&lt;/strong&gt;&lt;/li&gt;

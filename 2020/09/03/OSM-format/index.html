@@ -118,7 +118,7 @@
                     
                     
                     <li>
-                        <a href="/math/">Math</a>
+                        <a href="/math/">Paper</a>
                     </li>
                     
                     
@@ -334,11 +334,37 @@
 
 <p>一个Node通过经纬度代表地球表面上的一个特定节点，其最少包含一个id，还有经纬度字段。Node既可以用来定义某个单一点要素，比如某个公园长凳，某个水井，多个Node也可以用来定义一条路的形状。当其用来表示路时，通常节点是不需要Tag来添加属性的。但有时候也会给路上的特定节点添加属性，比如交通信号灯🚥，高压电线塔等等。</p>
 
+<p>Example:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="nt">&lt;node</span> <span class="na">id=</span><span class="s">"25496583"</span> <span class="na">lat=</span><span class="s">"51.5173639"</span> <span class="na">lon=</span><span class="s">"-0.140043"</span> <span class="na">version=</span><span class="s">"1"</span> <span class="na">changeset=</span><span class="s">"203496"</span> <span class="na">user=</span><span class="s">"80n"</span> <span class="na">uid=</span><span class="s">"1238"</span> <span class="na">visible=</span><span class="s">"true"</span> <span class="na">timestamp=</span><span class="s">"2007-01-28T11:40:26Z"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"highway"</span> <span class="na">v=</span><span class="s">"traffic_signals"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/node&gt;</span>
+
+</code></pre></div></div>
+
 <ul>
   <li><strong>Way</strong></li>
 </ul>
 
-<p>Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作<strong>closed_way</strong>，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个Way要素并用Relation关联起来。</p>
+<p>Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作<strong>closed_way</strong>，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个Way要素并用Relation关联起来。<br />
+Example:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="nt">&lt;way</span> <span class="na">id=</span><span class="s">"5090250"</span> <span class="na">visible=</span><span class="s">"true"</span> <span class="na">timestamp=</span><span class="s">"2009-01-19T19:07:25Z"</span> <span class="na">version=</span><span class="s">"8"</span> <span class="na">changeset=</span><span class="s">"816806"</span> <span class="na">user=</span><span class="s">"Blumpsy"</span> <span class="na">uid=</span><span class="s">"64226"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"822403"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"21533912"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"821601"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"21533910"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"135791608"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"333725784"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"333725781"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"333725774"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"333725776"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"823771"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"highway"</span> <span class="na">v=</span><span class="s">"residential"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"name"</span> <span class="na">v=</span><span class="s">"Clipstone Street"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"oneway"</span> <span class="na">v=</span><span class="s">"yes"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/way&gt;</span>
+</code></pre></div></div>
 
 <ul>
   <li><strong>Relation</strong></li>
