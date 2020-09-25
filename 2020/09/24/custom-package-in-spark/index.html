@@ -267,7 +267,7 @@
 
 				<p>Sometimes when we  use Spark to do the data analysis job, we want to use our own python package. We know the Spark cluster has the driver node  and executor nodes. Usually driver is our own server so we have the permission to install the python package, but we don’t have the permission to install the package on hundreds of executor nodes. When we directly run our pySpark code, it will report <strong>“Import Error”</strong>.</p>
 
-<p>There are two ways to let the executor nodes find the target python packages.<br />
+<p>There are two ways to let the executor nodes find out the target python packages.<br />
  1) Upload  certain custom python package to Spark.  <br />
  2) Upload an entire python environment to Spark and make it as executor python environment.</p>
 
@@ -275,21 +275,21 @@
 
 <ol>
   <li>Enter into you python env directory, and find the package that you want to upload. For example, the package is <strong>shapely</strong>.
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
- <span class="nb">cd</span> ~/.conda/envs/foody/lib/python3.6/site-packages
-</code></pre></div>    </div>
+    <div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ <span class="nb">cd</span> <span class="o">~</span>/.conda/envs/foody/lib/python3.6/site<span class="na">-packages
+</span></code></pre></div>    </div>
   </li>
   <li>Upload the local package file to hdfs system, so that executors are able to download the file from hdfs system.
 If you are not familiar with the hadoop fs command, you could refer to this guide.
 Your hdfs path should be <strong>/user/your_name/</strong>, for example, my hdfs directory is <strong>/user/chong.xie/</strong>.  you could use following command to check the path exists or not.
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
- <span class="c">## create dir in hdfs system</span>
- hadoop fs <span class="nt">-ls</span> /user/chong.xie/ 
- hadoop fs <span class="nt">-mkdir</span> /user/chong.xie/gecoding_thrid_packages/ 
+    <div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+ ## <span class="kd">create</span> <span class="nb">dir</span> <span class="k">in</span> <span class="kd">hdfs</span> <span class="kd">system</span>
+ <span class="kd">hadoop</span> <span class="kd">fs</span> <span class="na">-ls /user/chong</span>.xie/ 
+ <span class="kd">hadoop</span> <span class="kd">fs</span> <span class="na">-mkdir /user/chong</span>.xie/gecoding_thrid_packages/ 
 
 
- <span class="c">## upload the local package to hdfs system</span>
- hadoop fs <span class="nt">-copyFromLocal</span>  ./shapely/  /user/chong.xie/gecoding_thrid_packages/
+ ## <span class="kd">upload</span> <span class="kd">the</span> <span class="kd">local</span> <span class="kd">package</span> <span class="kd">to</span> <span class="kd">hdfs</span> <span class="kd">system</span>
+ <span class="kd">hadoop</span> <span class="kd">fs</span> <span class="na">-copyFromLocal  </span>./shapely/  <span class="na">/user/chong</span>.xie/gecoding_thrid_packages/
 </code></pre></div>    </div>
   </li>
   <li>Before we run the pySpark code, do remember to add file path to Spark.
@@ -310,18 +310,18 @@ Your hdfs path should be <strong>/user/your_name/</strong>, for example, my hdfs
 
 <ol>
   <li>Create a new python environment and install your required packages. For example, the env name is geocoding.
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
- conda create <span class="nt">--name</span> geocoding <span class="nv">python</span><span class="o">=</span>3.6
+    <div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ <span class="kd">conda</span> <span class="kd">create</span> <span class="o">-</span><span class="na">-name </span><span class="kd">geocoding</span> <span class="kd">python</span><span class="o">=</span><span class="m">3</span>.6
     
- conda activate geocoding
- pip <span class="nb">install </span>geopandas
- pip <span class="nb">install </span>shapely
+ <span class="kd">conda</span> <span class="kd">activate</span> <span class="kd">geocoding</span>
+ <span class="kd">pip</span> <span class="kd">install</span> <span class="kd">geopandas</span>
+ <span class="kd">pip</span> <span class="kd">install</span> <span class="kd">shapely</span>
 </code></pre></div>    </div>
   </li>
   <li>Compress your python into a tgz file
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
- <span class="nb">cd</span> ~/.conda/envs
- <span class="nb">tar</span> <span class="nt">-zcf</span> python-3.6.tgz ./geocoding/<span class="k">*</span>
+    <div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ <span class="nb">cd</span> <span class="o">~</span>/.conda/envs
+ <span class="kd">tar</span> <span class="na">-zcf </span><span class="kd">python</span><span class="o">-</span><span class="m">3</span>.6.tgz ./geocoding/<span class="o">*</span>
 </code></pre></div>    </div>
   </li>
   <li>When we set the spark conf, don’t forget to set <strong>spark.yarn.dist.archives</strong>, which will distribute your python compression file to the working directory of every executor servers, and uncompress it to the Newname after #.  Here Newname is python-3.6.

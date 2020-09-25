@@ -5,15 +5,15 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 25 Sep 2020 01:01:27 +0800</pubDate>
-    <lastBuildDate>Fri, 25 Sep 2020 01:01:27 +0800</lastBuildDate>
+    <pubDate>Fri, 25 Sep 2020 11:25:10 +0800</pubDate>
+    <lastBuildDate>Fri, 25 Sep 2020 11:25:10 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
         <title>How to use custom packages in spark cluster</title>
         <description>&lt;p&gt;Sometimes when we  use Spark to do the data analysis job, we want to use our own python package. We know the Spark cluster has the driver node  and executor nodes. Usually driver is our own server so we have the permission to install the python package, but we don’t have the permission to install the package on hundreds of executor nodes. When we directly run our pySpark code, it will report &lt;strong&gt;“Import Error”&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;There are two ways to let the executor nodes find the target python packages.&lt;br /&gt;
+&lt;p&gt;There are two ways to let the executor nodes find out the target python packages.&lt;br /&gt;
  1) Upload  certain custom python package to Spark.  &lt;br /&gt;
  2) Upload an entire python environment to Spark and make it as executor python environment.&lt;/p&gt;
 
@@ -21,21 +21,21 @@
 
 &lt;ol&gt;
   &lt;li&gt;Enter into you python env directory, and find the package that you want to upload. For example, the package is &lt;strong&gt;shapely&lt;/strong&gt;.
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
- &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/.conda/envs/foody/lib/python3.6/site-packages
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;/.conda/envs/foody/lib/python3.6/site&lt;span class=&quot;na&quot;&gt;-packages
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;Upload the local package file to hdfs system, so that executors are able to download the file from hdfs system.
 If you are not familiar with the hadoop fs command, you could refer to this guide.
 Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for example, my hdfs directory is &lt;strong&gt;/user/chong.xie/&lt;/strong&gt;.  you could use following command to check the path exists or not.
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
- &lt;span class=&quot;c&quot;&gt;## create dir in hdfs system&lt;/span&gt;
- hadoop fs &lt;span class=&quot;nt&quot;&gt;-ls&lt;/span&gt; /user/chong.xie/ 
- hadoop fs &lt;span class=&quot;nt&quot;&gt;-mkdir&lt;/span&gt; /user/chong.xie/gecoding_thrid_packages/ 
+    &lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
+ ## &lt;span class=&quot;kd&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dir&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;hdfs&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;system&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;hadoop&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-ls /user/chong&lt;/span&gt;.xie/ 
+ &lt;span class=&quot;kd&quot;&gt;hadoop&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-mkdir /user/chong&lt;/span&gt;.xie/gecoding_thrid_packages/ 
 
 
- &lt;span class=&quot;c&quot;&gt;## upload the local package to hdfs system&lt;/span&gt;
- hadoop fs &lt;span class=&quot;nt&quot;&gt;-copyFromLocal&lt;/span&gt;  ./shapely/  /user/chong.xie/gecoding_thrid_packages/
+ ## &lt;span class=&quot;kd&quot;&gt;upload&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;hdfs&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;system&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;hadoop&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-copyFromLocal  &lt;/span&gt;./shapely/  &lt;span class=&quot;na&quot;&gt;/user/chong&lt;/span&gt;.xie/gecoding_thrid_packages/
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;Before we run the pySpark code, do remember to add file path to Spark.
@@ -56,18 +56,18 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
 
 &lt;ol&gt;
   &lt;li&gt;Create a new python environment and install your required packages. For example, the env name is geocoding.
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
- conda create &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; geocoding &lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3.6
+    &lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+ &lt;span class=&quot;kd&quot;&gt;conda&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;geocoding&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.6
     
- conda activate geocoding
- pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;geopandas
- pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;shapely
+ &lt;span class=&quot;kd&quot;&gt;conda&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;activate&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;geocoding&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;geopandas&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;shapely&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;Compress your python into a tgz file
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
- &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/.conda/envs
- &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zcf&lt;/span&gt; python-3.6.tgz ./geocoding/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+    &lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;/.conda/envs
+ &lt;span class=&quot;kd&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-zcf &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.6.tgz ./geocoding/&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;When we set the spark conf, don’t forget to set &lt;strong&gt;spark.yarn.dist.archives&lt;/strong&gt;, which will distribute your python compression file to the working directory of every executor servers, and uncompress it to the Newname after #.  Here Newname is python-3.6.
