@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 26 Sep 2020 18:01:48 +0800</pubDate>
-    <lastBuildDate>Sat, 26 Sep 2020 18:01:48 +0800</lastBuildDate>
+    <pubDate>Mon, 28 Sep 2020 00:34:45 +0800</pubDate>
+    <lastBuildDate>Mon, 28 Sep 2020 00:34:45 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -305,7 +305,33 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
     
       <item>
         <title>PostGIS SQL使用</title>
-        <description>
+        <description>&lt;h2 id=&quot;tbd&quot;&gt;TBD&lt;/h2&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    docker network create
+    docker-compose build
+    docker-compose up
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    docker run &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--network&lt;/span&gt; postgis &lt;span class=&quot;nt&quot;&gt;--link&lt;/span&gt; postgis_postgis_1 &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; postgres  sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'exec psql -h postgis -p &quot;$POSTGRES_PORT_5432_TCP_PORT&quot; -U postgres'&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    osm2pgsql &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-U&lt;/span&gt; postgres &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; 127.0.0.1 &lt;span class=&quot;nt&quot;&gt;-P&lt;/span&gt; 5432 &lt;span class=&quot;nt&quot;&gt;-W&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; postgres ~/Desktop/jakarta.osm.pbf
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    docker run &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; postgres  &lt;span class=&quot;nt&quot;&gt;--network&lt;/span&gt; postgis sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'exec psql -h postgres -p &quot;$POSTGRES_PORT_5432_TCP_PORT&quot; -U postgres'&lt;/span&gt;
+
+    CREATE EXTENSION IF NOT EXISTS postgis&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    CREATE EXTENSION IF NOT EXISTS postgis_topology&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Thu, 10 Sep 2020 00:00:00 +0800</pubDate>
         <link>https://xctorres.github.io//2020/09/10/PostGIS/</link>
@@ -449,13 +475,13 @@ Example:&lt;/p&gt;
 
 &lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
    # 下载PostgreSQL与PostGIS
-   &lt;span class=&quot;kd&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;my&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-postgis -e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;POSTGRES_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;123321&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-v &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/postgresql&lt;/span&gt;_data:/var/lib/postgresql/data &lt;span class=&quot;na&quot;&gt;-p &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5432&lt;/span&gt;:5432 &lt;span class=&quot;na&quot;&gt;-d &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgis&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/postgis
+    &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;my&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-postgis -e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;POSTGRES_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;123321&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-v &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/postgresql&lt;/span&gt;_data:/var/lib/postgresql/data &lt;span class=&quot;na&quot;&gt;-p &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5432&lt;/span&gt;:5432 &lt;span class=&quot;na&quot;&gt;-d &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgis&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/postgis
 
    &lt;/span&gt;# 下载PgAdmin
-   &lt;span class=&quot;kd&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-d -p &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5433&lt;/span&gt;:80 &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;pgadmin4&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;PGADMIN_DEFAULT_EMAIL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;test&lt;/span&gt;@123.com &lt;span class=&quot;na&quot;&gt;-e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;PGADMIN_DEFAULT_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;123456&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;dpage&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/pgadmin&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-d -p &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5433&lt;/span&gt;:80 &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;pgadmin4&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;PGADMIN_DEFAULT_EMAIL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;test&lt;/span&gt;@123.com &lt;span class=&quot;na&quot;&gt;-e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;PGADMIN_DEFAULT_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;123456&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;dpage&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/pgadmin&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;
 
    # 输入SQL命令
-   &lt;span class=&quot;kd&quot;&gt;sudo&lt;/span&gt;  &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-it &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-link &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;my&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-postgis&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;:postgres&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-rm &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgres&lt;/span&gt;     &lt;span class=&quot;kd&quot;&gt;sh&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-c &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'exec psql -h &quot;$POSTGRES_PORT_5432_TCP_ADDR&quot; -p &quot;$POSTGRES_PORT_5432_TCP_PORT&quot; -U postgres'&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-it &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-link &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgis_post&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-gis&lt;/span&gt;_1 &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-rm &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgres&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-network &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgis&lt;/span&gt;   &lt;span class=&quot;kd&quot;&gt;sh&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-c &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'exec psql -h postgres -p &quot;$POSTGRES_PORT_5432_TCP_PORT&quot; -U postgres'&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -471,7 +497,6 @@ Example:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;通过pgAdmin网页控制台可视化可以发现，在database下共用8个table，除了上面的七个表，还多了个一个空间参考表，其中存储了各个空间参考系统下的投影参数。
 &lt;img src=&quot;/img/in-post/osm/pgAdmin.jpg&quot; width=&quot;700&quot; height=&quot;600&quot; title=&quot;pgAdmin&quot; /&gt;&lt;/p&gt;
-
 &lt;h4 id=&quot;qgis&quot;&gt;QGIS&lt;/h4&gt;
 &lt;p&gt;从QGIS展示PostGIS的数据主要有以下几种方法，当然这些方法都需要做的第一步就是输入PostgreSQL的Hostname，Port，账号，密码，以及想连的数据库。&lt;/p&gt;
 
@@ -937,13 +962,24 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
   &lt;li&gt;如果听力不好，其他听说读写没有一项会好。这些都是一连串的连锁反应。不能再找借口说自己写作和阅读能力不错了。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;为了提高听力，遂从今日3月6日开始，先开启为期一个月的精听模式，再分析学习方法是否适用于我。听力材料为每日英语听力中VOA慢速英语。&lt;br /&gt;
-1） 先将听到的内容写下来。不会的地方空下来（可以多听几遍）&lt;br /&gt;
-2） 查看答案，并查明空下来单词的原因，是发音的问题还是的确是生词词汇。&lt;br /&gt;
-3） 复听几遍，并跟读，纠正发音才能更好地提高听力。&lt;br /&gt;
-4） 第二天再听新听力之前，需重复听几遍前一天的听力，确保都能够听懂。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Date&lt;/th&gt;
+      &lt;th&gt;Link&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;28th Sep&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV13A411J7kD&quot;&gt;https://www.bilibili.com/video/BV13A411J7kD&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;又骗我生女儿？陈冠希谈育女经；这个老爸也太酷了吧？&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-&lt;h2 id=&quot;words&quot;&gt;Words&lt;/h2&gt;
+&lt;h2 id=&quot;专业术语&quot;&gt;专业术语&lt;/h2&gt;
 &lt;h4 id=&quot;机器学习&quot;&gt;机器学习&lt;/h4&gt;
 &lt;p&gt;后向传播算法： backpropagation algorithms&lt;br /&gt;
 正则化：  regularization&lt;br /&gt;

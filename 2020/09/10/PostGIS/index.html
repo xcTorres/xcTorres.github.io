@@ -14,7 +14,7 @@
     <meta property="og:title" content="PostGIS SQL使用 - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="
+    <meta property="og:description" content="TBD
 ">
     
     <meta property="article:published_time" content="2020-09-10T00:00:00Z">
@@ -266,7 +266,33 @@
                 <!-- Multi-Lingual -->
                 
 
-				
+				<h2 id="tbd">TBD</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    docker network create
+    docker-compose build
+    docker-compose up
+
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    docker run <span class="nt">-it</span> <span class="nt">--network</span> postgis <span class="nt">--link</span> postgis_postgis_1 <span class="nt">--rm</span> postgres  sh <span class="nt">-c</span> <span class="s1">'exec psql -h postgis -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres'</span>
+
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    osm2pgsql <span class="nt">-s</span> <span class="nt">-U</span> postgres <span class="nt">-H</span> 127.0.0.1 <span class="nt">-P</span> 5432 <span class="nt">-W</span> <span class="nt">-d</span> postgres ~/Desktop/jakarta.osm.pbf
+
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    docker run <span class="nt">-it</span> <span class="nt">--rm</span> postgres  <span class="nt">--network</span> postgis sh <span class="nt">-c</span> <span class="s1">'exec psql -h postgres -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres'</span>
+
+    CREATE EXTENSION IF NOT EXISTS postgis<span class="p">;</span>
+    CREATE EXTENSION IF NOT EXISTS postgis_topology<span class="p">;</span>
+
+
+</code></pre></div></div>
 
 
                 <hr style="visibility: hidden;">
