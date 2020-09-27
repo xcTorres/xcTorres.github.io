@@ -141,13 +141,13 @@ Relation是一种能够同时记录两个或多个Nodes，Ways等元素关系的
 ```bat
 
    # 下载PostgreSQL与PostGIS
-   sudo docker run --name my-postgis -e POSTGRES_PASSWORD=123321 -v ~/postgresql_data:/var/lib/postgresql/data -p 5432:5432 -d postgis/postgis
+    docker run --name my-postgis -e POSTGRES_PASSWORD=123321 -v ~/postgresql_data:/var/lib/postgresql/data -p 5432:5432 -d postgis/postgis
 
    # 下载PgAdmin
-   sudo docker run -d -p 5433:80 --name pgadmin4 -e PGADMIN_DEFAULT_EMAIL=test@123.com -e PGADMIN_DEFAULT_PASSWORD=123456 dpage/pgadmin4
+    docker run -d -p 5433:80 --name pgadmin4 -e PGADMIN_DEFAULT_EMAIL=test@123.com -e PGADMIN_DEFAULT_PASSWORD=123456 dpage/pgadmin4
 
    # 输入SQL命令
-   sudo  docker run -it --link my-postgis:postgres --rm postgres     sh -c 'exec psql -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres'
+    docker run -it --link postgis_post-gis_1 --rm postgres  --network postgis   sh -c 'exec psql -h postgres -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres'
 
 ```
 
@@ -164,7 +164,6 @@ Relation是一种能够同时记录两个或多个Nodes，Ways等元素关系的
 ```
 通过pgAdmin网页控制台可视化可以发现，在database下共用8个table，除了上面的七个表，还多了个一个空间参考表，其中存储了各个空间参考系统下的投影参数。
 <img src="/img/in-post/osm/pgAdmin.jpg" width="700" height="600" title="pgAdmin"> 
- 
 #### QGIS
 从QGIS展示PostGIS的数据主要有以下几种方法，当然这些方法都需要做的第一步就是输入PostgreSQL的Hostname，Port，账号，密码，以及想连的数据库。
 
@@ -189,7 +188,6 @@ Relation是一种能够同时记录两个或多个Nodes，Ways等元素关系的
 
 ## 总结
 到此，关于OSM数据到PostGIS的存储以及QGIS的可视化都算是讲完了，至于如何使用PostGIS的SQL功能来进行空间分析，则将单另一个章节去介绍。
-
 
 
 
