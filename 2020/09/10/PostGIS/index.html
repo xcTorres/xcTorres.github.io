@@ -11,10 +11,11 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="PostGIS SQL使用 - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="PostGIS - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="TBD
+    <meta property="og:description" content="Overview
+From OSM data introduction, we are more familiar with the original OSM data. But if we want to apply it to more scenarios, it is necessary to manage the map data in database.
 ">
     
     <meta property="article:published_time" content="2020-09-10T00:00:00Z">
@@ -30,7 +31,7 @@
     <meta property="og:url" content="https://xctorres.github.io//2020/09/10/PostGIS/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>PostGIS SQL使用 - 谢聪博客 | xcTorres Blog</title>
+    <title>PostGIS - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -237,7 +238,7 @@
                         <a class="tag" href="/archive/?tag=GIS" title="GIS">GIS</a>
                         
                     </div>
-                    <h1>PostGIS SQL使用</h1>
+                    <h1>PostGIS</h1>
                     
                     <h2 class="subheading"></h2>
                     <span class="meta">Posted by xcTorres on September 10, 2020</span>
@@ -266,42 +267,153 @@
                 <!-- Multi-Lingual -->
                 
 
-				<h2 id="tbd">TBD</h2>
+				<h1 id="overview">Overview</h1>
+<p>From OSM data introduction, we are more familiar with the original OSM data. But if we want to apply it to more scenarios, it is necessary to manage the map data in database.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    docker network create
-    docker-compose build
-    docker-compose up
+<p>Besides all kinds of attributes, the map data have an important geometry feature. In our scenarios, we will have a lot of spatial queries. For example, query all of the records within certain bounding box, query the nearest points or polygons of certain point, etc. So compared to general query, we need a database which support spatial extension so that it is efficient to retrieve the data in spatial query.</p>
+
+<p>There are some databases that support spatial extension. PostGIS is an extension of the powerful PostgreSQL, one of the most reliable open source DBMS available, which has spent a lot of time on the market, but what makes it such a good platform for PostGIS is the fact that it implements something called Generic Index Structure (GIST), which allows it to build indexes in almost any kind of data type. It is an open source, many other open source is very easy to be compatible with it.</p>
+
+<p>The whole world OSM data itself in <a href="https://www.openstreetmap.org/">https://www.openstreetmap.org/</a> is also stored in postgreSQL and postGIS.</p>
+
+<p>From my point of view,  there are  2 stages to manage the map data.</p>
+<ul>
+  <li>Just query the data</li>
+  <li>Support the update, insert and delete operation.</li>
+</ul>
+
+<p>Update, insert and delete are more hard to implement, because it is complicated to consider both geometry and topology factors. So in current stage, we only focus on query the map data.</p>
+
+<h1 id="deploy-postgis">Deploy PostGIS</h1>
+<p>It is very easy to deploy the PostGIS using docker image. We could use docker-compose file because it could combine pgAdmin and postGIS together. Here is the docker-compose.yml file. The two service share an external network and the postGIS data is stored in mount volumes.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+    <span class="na">services</span><span class="pi">:</span>
+    <span class="na">postgis</span><span class="pi">:</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgis/postgis"</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">5432:5432"</span>
+        <span class="na">environment</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">POSTGRES_PASSWORD=123456</span>
+        <span class="na">networks</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">postgis</span>
+        <span class="na">volumes</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">postgres-data:/var/lib/postgresql/data</span>
+
+    <span class="na">pgAdmin</span><span class="pi">:</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">dpage/pgadmin4"</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">5433:80"</span>
+        <span class="na">environment</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">PGADMIN_DEFAULT_EMAIL=test@123.com</span>
+        <span class="pi">-</span> <span class="s">PGADMIN_DEFAULT_PASSWORD=123456</span>
+        <span class="na">networks</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">postgis</span>
+
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="na">postgres-data</span><span class="pi">:</span>
+
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">postgis</span><span class="pi">:</span>
+        <span class="c1"># Use a custom driver</span>
+        <span class="na">external</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">postgis</span>
+
+</code></pre></div></div>
+<p>And then we could use following command to deploy.</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+    <span class="kd">docker</span> <span class="kd">network</span> <span class="kd">create</span> <span class="kd">postgis</span>
+    <span class="kd">docker</span><span class="na">-compose </span><span class="kd">build</span>
+    <span class="kd">docker</span><span class="na">-compose </span><span class="kd">up</span>
 
 </code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    docker run <span class="nt">-it</span> <span class="nt">--network</span> postgis <span class="nt">--link</span> postgis_postgis_1 <span class="nt">--rm</span> postgres  sh <span class="nt">-c</span> <span class="s1">'exec psql -h postgis -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres'</span>
+<h1 id="data-ingestion">Data ingestion</h1>
+
+<p>In production environment, the map data format of Point, Line, Polygon is more understandable and more easy to transfer. (Osm2pgsql)[https://wiki.openstreetmap.org/wiki/Osm2pgsql] is a mature tool to ingest osm data into postgresSQL database. It will create origin node, way, relation table from OSM data, and extract the point, line, polygon. One last table is roads table, which is a subset of line table and is used for rendering to map tile.</p>
+
+<p><img src="/img/in-post/osm/osm2pgsql.png" width="600" height="500" title="Osm2pgsql database design" /></p>
+
+<p>Before we upload the osm data, we need to use psql command to create a database and add spatial extention accordingly.</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    ## <span class="kd">Enter</span> <span class="kd">into</span> <span class="kd">the</span> <span class="kd">psql</span> <span class="kd">command</span>
+    <span class="kd">docker</span> <span class="nb">run</span> <span class="na">-it </span><span class="o">-</span><span class="na">-network </span><span class="kd">postgis</span> <span class="o">-</span><span class="na">-link </span><span class="kd">postgis_postgis_1</span> <span class="o">-</span><span class="na">-rm </span><span class="kd">postgres</span>  <span class="kd">sh</span> <span class="na">-c </span><span class="s1">'exec psql -h postgis -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres'</span>
+
+
+    <span class="m">1</span>. \l  #list <span class="kd">the</span> <span class="kd">datbase</span>
+    <span class="m">2</span>. <span class="kd">CREATE</span> <span class="kd">DATABASE</span> <span class="kd">test</span><span class="o">;</span>
+    <span class="m">3</span>. \connect <span class="kd">test</span>
+    <span class="m">4</span>. <span class="kd">CREATE</span> <span class="kd">EXTENSION</span> <span class="kd">IF</span> <span class="kd">NOT</span> <span class="kd">EXISTS</span> <span class="kd">postgis</span><span class="o">;</span>
+    <span class="m">5</span>. <span class="kd">CREATE</span> <span class="kd">EXTENSION</span> <span class="kd">IF</span> <span class="kd">NOT</span> <span class="kd">EXISTS</span> <span class="kd">hstore</span><span class="o">;</span>
 
 </code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    osm2pgsql <span class="nt">-s</span> <span class="nt">-U</span> postgres <span class="nt">-H</span> 127.0.0.1 <span class="nt">-P</span> 5432 <span class="nt">-W</span> <span class="nt">-d</span> postgres ~/Desktop/jakarta.osm.pbf
-
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    docker run <span class="nt">-it</span> <span class="nt">--rm</span> postgres  <span class="nt">--network</span> postgis sh <span class="nt">-c</span> <span class="s1">'exec psql -h postgres -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres'</span>
-
-    CREATE EXTENSION IF NOT EXISTS postgis<span class="p">;</span>
-    CREATE EXTENSION IF NOT EXISTS postgis_topology<span class="p">;</span>
-
+<p>Upload the data, there are many options, plz refer to this <a href="https://wiki.openstreetmap.org/wiki/Osm2pgsql">guide</a>.</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="kd">osm2pgsql</span> <span class="na">-s -U </span><span class="kd">postgres</span> <span class="na">-H </span><span class="m">127</span>.0.0.1 <span class="na">-P </span><span class="m">5432</span> <span class="na">-W -d </span><span class="kd">test</span> <span class="o">~</span><span class="na">/jakarta</span>.osm.pbf
 
 </code></pre></div></div>
+<p>After completing the upload, you will see these table exists. And for point, line, polygon tables, they all have the extra spatial index.</p>
+
+<p><img src="/img/in-post/osm/pgAdmin.jpg" width="700" height="700" title="pgAdmin" /></p>
+
+<h1 id="spatial-query">Spatial Query</h1>
+
+<ul>
+  <li>Query all of the data in certain bounding box</li>
+</ul>
+
+<pre><code class="language-SQL">
+    select * 
+    from planet_osm_line 
+    where way &amp;&amp; ST_MakeEnvelope(106.620651, 10.73265, 106.725327, 10.8422, 4326)
+
+</code></pre>
+
+<ul>
+  <li>KNN Query</li>
+</ul>
+
+<pre><code class="language-SQL">
+    select *, st_distance(
+    st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857),
+    way)
+    from planet_osm_line
+    order by way &lt;-&gt; st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857)
+    limit 5
+
+</code></pre>
+
+<ul>
+  <li>Get the distance, remember that st_distance function doesn’t use gist spatial index</li>
+</ul>
+
+<pre><code class="language-SQL">
+   select *, st_distance(
+        ST_GeomFromText('SRID=4326;Point(106.620651 10.73265)')::geometry,
+        way
+    )
+    from ho_chi_ming_way
+    order by st_distance(
+        ST_GeomFromText('SRID=4326;Point(106.620651 10.73265)')::geometry,
+        way
+    )
+    limit 10
+
+</code></pre>
+
+<h1 id="reference">Reference</h1>
+<p><a href="https://wiki.openstreetmap.org/wiki/Osm2pgsql">https://wiki.openstreetmap.org/wiki/Osm2pgsql</a><br />
+<a href="https://blog.csdn.net/qq_35732147/article/details/88219928#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%80%E8%BF%91%E9%82%BB%E5%9F%9F%E6%90%9C%E7%B4%A2%EF%BC%9F">https://blog.csdn.net/qq_35732147/article/details/88219928#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%80%E8%BF%91%E9%82%BB%E5%9F%9F%E6%90%9C%E7%B4%A2%EF%BC%9F</a></p>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/09/03/OSM-format/" data-toggle="tooltip" data-placement="top" title="OSM数据格式">
+                        <a href="/2020/08/21/HMM/" data-toggle="tooltip" data-placement="top" title="隐马尔科夫模型">
                         Previous<br>
-                        <span>OSM数据格式</span>
+                        <span>隐马尔科夫模型</span>
                         </a>
                     </li>
                     
@@ -374,20 +486,25 @@
                     title="生活"
                     rel="3">生活</a>
         
-                <a data-sort="0014" 
-                    href="/archive/?tag=GIS"
-                    title="GIS"
-                    rel="3">GIS</a>
-        
                 <a data-sort="0015" 
                     href="/archive/?tag=%E7%AE%97%E6%B3%95"
                     title="算法"
                     rel="2">算法</a>
         
                 <a data-sort="0015" 
+                    href="/archive/?tag=GIS"
+                    title="GIS"
+                    rel="2">GIS</a>
+        
+                <a data-sort="0015" 
                     href="/archive/?tag=Python"
                     title="Python"
                     rel="2">Python</a>
+        
+                <a data-sort="0015" 
+                    href="/archive/?tag=Spark"
+                    title="Spark"
+                    rel="2">Spark</a>
         
                 <a data-sort="0016" 
                     href="/archive/?tag=%E5%AD%A6%E4%B9%A0"
@@ -408,11 +525,6 @@
                     href="/archive/?tag=Linux"
                     title="Linux"
                     rel="1">Linux</a>
-        
-                <a data-sort="0016" 
-                    href="/archive/?tag=Spark"
-                    title="Spark"
-                    rel="1">Spark</a>
         
                 <a data-sort="0016" 
                     href="/archive/?tag=Web"
@@ -489,6 +601,8 @@
   <li><a href="https://lb-yu.github.io/">余列冰</a></li>
   
   <li><a href="https://mthli.xyz/">李明亮</a></li>
+  
+  <li><a href="https://billtian.github.io/digoal.blog/2018/04/16/02.html">Digoal.zhou</a></li>
   
 </ul>
 

@@ -267,7 +267,7 @@
                 <!-- Multi-Lingual -->
                 
 
-				<h2 id="算法简介">算法简介</h2>
+				<h1 id="算法简介">算法简介</h1>
 <p>网上有很多隐马尔科夫算法模型的介绍，内容都非常详实，如果大家感兴趣可在Reference中查阅相关link。本文的目的是对隐马尔科夫模型做一个简单的概括， 并尝试探索其如何应用到<strong>语言领域</strong>和<strong>地图匹配领域</strong>。</p>
 
 <p>首先最重要的有两个集合</p>
@@ -285,21 +285,24 @@
 
 <p>HMM算法主要可以解决一下三类问题</p>
 
-<h4 id="评估观察序列概率">评估观察序列概率</h4>
+<h2 id="评估观察序列概率">评估观察序列概率</h2>
 <p>即给定模型𝜆=(𝐴,𝐵,Π)和观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，计算在模型𝜆下观测序列𝑂出现的概率
 $ P \left( O |\lambda \right) $。这个问题的求解需要用到前向后向算法。</p>
 
 <p>前向后向算法用到的是动态规划算法，即可以用递推来存储中间结果，从而将计算量数量级从$ TN^{T}$ 降到了$ TN^{2} $</p>
 
-<h4 id="模型参数学习问题">模型参数学习问题</h4>
+<h2 id="模型参数学习问题">模型参数学习问题</h2>
 <p>即给定观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，估计模型𝜆=(𝐴,𝐵,Π)的参数，使该模型下观测序列的条件概率
 $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM算法的鲍姆-韦尔奇算法，这个问题是HMM模型三个问题中最复杂的。</p>
 
-<h4 id="预测问题也称为解码问题">预测问题，也称为解码问题</h4>
+<h2 id="预测问题也称为解码问题">预测问题，也称为解码问题</h2>
 <p>即给定模型𝜆=(𝐴,𝐵,Π)和观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，求给定观测序列条件下，最可能出现的对应的状态序列，这个问题的求解需要用到基于动态规划的维特比算法。</p>
 
 <p>关于HMM算法的介绍可参照该link:
 <a href="https://github.com/xcTorres/machine_learning/blob/master/HMM.ipynb">https://github.com/xcTorres/machine_learning/blob/master/HMM.ipynb</a>,其中有维特比算法的代码。</p>
+
+<h1 id="应用">应用</h1>
+<h2 id="地图匹配">地图匹配</h2>
 
 <h2 id="reference">Reference</h2>
 <p><a href="https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781">https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781</a><br />
@@ -308,7 +311,8 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
 <a href="https://zhuanlan.zhihu.com/p/27907806">https://zhuanlan.zhihu.com/p/27907806</a><br />
 <a href="https://zhuanlan.zhihu.com/p/38343732">https://zhuanlan.zhihu.com/p/38343732</a><br />
 <a href="https://www.cnblogs.com/pinard/p/6945257.html">https://www.cnblogs.com/pinard/p/6945257.html</a><br />
-<a href="https://www.cnblogs.com/mindpuzzle/p/3653043.html">https://www.cnblogs.com/mindpuzzle/p/3653043.html</a></p>
+<a href="https://www.cnblogs.com/mindpuzzle/p/3653043.html">https://www.cnblogs.com/mindpuzzle/p/3653043.html</a> <br />
+<a href="https://github.com/jagodki/Offline-MapMatching">https://github.com/jagodki/Offline-MapMatching</a></p>
 
 
 
@@ -324,9 +328,9 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
                     
                     
                     <li class="next">
-                        <a href="/2020/09/03/OSM-format/" data-toggle="tooltip" data-placement="top" title="OSM数据格式">
+                        <a href="/2020/09/10/PostGIS/" data-toggle="tooltip" data-placement="top" title="PostGIS">
                         Next<br>
-                        <span>OSM数据格式</span>
+                        <span>PostGIS</span>
                         </a>
                     </li>
                     
@@ -391,20 +395,25 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
                     title="生活"
                     rel="3">生活</a>
         
-                <a data-sort="0014" 
-                    href="/archive/?tag=GIS"
-                    title="GIS"
-                    rel="3">GIS</a>
-        
                 <a data-sort="0015" 
                     href="/archive/?tag=%E7%AE%97%E6%B3%95"
                     title="算法"
                     rel="2">算法</a>
         
                 <a data-sort="0015" 
+                    href="/archive/?tag=GIS"
+                    title="GIS"
+                    rel="2">GIS</a>
+        
+                <a data-sort="0015" 
                     href="/archive/?tag=Python"
                     title="Python"
                     rel="2">Python</a>
+        
+                <a data-sort="0015" 
+                    href="/archive/?tag=Spark"
+                    title="Spark"
+                    rel="2">Spark</a>
         
                 <a data-sort="0016" 
                     href="/archive/?tag=%E5%AD%A6%E4%B9%A0"
@@ -425,11 +434,6 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
                     href="/archive/?tag=Linux"
                     title="Linux"
                     rel="1">Linux</a>
-        
-                <a data-sort="0016" 
-                    href="/archive/?tag=Spark"
-                    title="Spark"
-                    rel="1">Spark</a>
         
                 <a data-sort="0016" 
                     href="/archive/?tag=Web"
@@ -506,6 +510,8 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
   <li><a href="https://lb-yu.github.io/">余列冰</a></li>
   
   <li><a href="https://mthli.xyz/">李明亮</a></li>
+  
+  <li><a href="https://billtian.github.io/digoal.blog/2018/04/16/02.html">Digoal.zhou</a></li>
   
 </ul>
 

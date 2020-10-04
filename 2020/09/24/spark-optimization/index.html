@@ -11,27 +11,26 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="8. String to Integer (atoi) - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="Spark optimization - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="Link
-problem: https://leetcode.com/problems/string-to-integer-atoi/
+    <meta property="og:description" content="
 ">
     
-    <meta property="article:published_time" content="2020-10-04T20:28:44Z">
+    <meta property="article:published_time" content="2020-09-24T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
     
     
-    <meta property="article:tag" content="Leetcode">
+    <meta property="article:tag" content="Spark">
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//leetcode/8.String%20to%20Integer%20(atoi)/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/09/24/spark-optimization/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>8. String to Integer (atoi) - 谢聪博客 | xcTorres Blog</title>
+    <title>Spark optimization - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -40,7 +39,7 @@ problem: https://leetcode.com/problems/string-to-integer-atoi/
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//leetcode/8.String%20to%20Integer%20(atoi)/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/09/24/spark-optimization/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -209,7 +208,7 @@ problem: https://leetcode.com/problems/string-to-integer-atoi/
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/leetcode.jpg" width="0" height="0"> -->
+<!-- <img src="/img/in-post/pyspark-custom-package/Apache_Spark_logo.svg.png" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -218,7 +217,7 @@ problem: https://leetcode.com/problems/string-to-integer-atoi/
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/leetcode.jpg');
+        background-image: url('/img/in-post/pyspark-custom-package/Apache_Spark_logo.svg.png');
         background: ;
     }
 
@@ -235,13 +234,13 @@ problem: https://leetcode.com/problems/string-to-integer-atoi/
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Leetcode" title="Leetcode">Leetcode</a>
+                        <a class="tag" href="/archive/?tag=Spark" title="Spark">Spark</a>
                         
                     </div>
-                    <h1>8. String to Integer (atoi)</h1>
+                    <h1>Spark optimization</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on October 4, 2020</span>
+                    <span class="meta">Posted by xcTorres on September 24, 2020</span>
                 </div>
             </div>
         </div>
@@ -267,96 +266,26 @@ problem: https://leetcode.com/problems/string-to-integer-atoi/
                 <!-- Multi-Lingual -->
                 
 
-				<h2 id="link">Link</h2>
-<p>problem: <a href="https://leetcode.com/problems/string-to-integer-atoi/">https://leetcode.com/problems/string-to-integer-atoi/</a></p>
-
-<h2 id="description">Description</h2>
-<p>implement atoi which converts a string to an integer.</p>
-
-<p>The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.</p>
-
-<p>The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.</p>
-
-<p>If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.</p>
-
-<p>If no valid conversion could be performed, a zero value is returned.</p>
-
-<p><strong>Note:</strong></p>
-
-<p>Only the space character ‘ ‘ is considered as whitespace character.
-Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. If the numerical value is out of the range of representable values, INT_MAX (231 − 1) or INT_MIN (−231) is returned.</p>
-
-<p><strong>Example 1:</strong></p>
-
-<p>Input: “42”
-Output: 42</p>
-
-<p><strong>Example 2:</strong></p>
-
-<p>Input: “   -42”
-Output: -42
-Explanation: The first non-whitespace character is ‘-‘, which is the minus sign.
-             Then take as many numerical digits as possible, which gets 42.</p>
-
-<p><strong>Example 3:</strong></p>
-
-<p>Input: “4193 with words”
-Output: 4193
-Explanation: Conversion stops at digit ‘3’ as the next character is not a numerical digit.</p>
-
-<p><strong>Example 4:</strong></p>
-
-<p>Input: “words and 987”
-Output: 0
-Explanation: The first non-whitespace character is ‘w’, which is not a numerical 
-             digit or a +/- sign. Therefore no valid conversion could be performed.</p>
-
-<p><strong>Example 5:</strong></p>
-
-<p>Input: “-91283472332”
-Output: -2147483648
-Explanation: The number “-91283472332” is out of the range of a 32-bit signed integer.
-             Thefore INT_MIN (−231) is returned.</p>
-
-<h2 id="solution">Solution</h2>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">myAtoi</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
-                <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-            <span class="kt">int</span> <span class="n">sign</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-            <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="sc">' '</span><span class="o">)</span>
-                <span class="n">i</span><span class="o">++;</span>
-            <span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">())</span>
-                <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-                
-            <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="sc">'-'</span> <span class="o">||</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="sc">'+'</span><span class="o">)</span>
-                <span class="n">sign</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">++)</span> <span class="o">==</span> <span class="sc">'-'</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span><span class="o">;</span>
-
-            <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">&gt;=</span> <span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="sc">'9'</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">base</span> <span class="o">&gt;</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">||</span> 
-                <span class="o">(</span><span class="n">base</span> <span class="o">==</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">-</span> <span class="sc">'0'</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="o">))</span> <span class="o">{</span>
-                    <span class="k">return</span> <span class="o">(</span><span class="n">sign</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">?</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">:</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
-                <span class="o">}</span>
-                <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">base</span> <span class="o">+</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">++)</span> <span class="o">-</span> <span class="sc">'0'</span><span class="o">);</span>
-            <span class="o">}</span>
-            <span class="k">return</span> <span class="n">base</span> <span class="o">*</span> <span class="n">sign</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    
-</code></pre></div></div>
+				
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/leetcode/7.Reverse%20Integer/" data-toggle="tooltip" data-placement="top" title="7. Reverse Integer">
+                        <a href="/2020/09/24/custom-package-in-spark/" data-toggle="tooltip" data-placement="top" title="How to use custom packages in spark cluster">
                         Previous<br>
-                        <span>7. Reverse Integer</span>
+                        <span>How to use custom packages in spark cluster</span>
                         </a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2020/09/26/OSM-data-introduction/" data-toggle="tooltip" data-placement="top" title="OSM data introduction">
+                        Next<br>
+                        <span>OSM data introduction</span>
+                        </a>
+                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -616,7 +545,7 @@ Explanation: The number “-91283472332” is out of the range of a 32-bit signe
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/leetcode/8.String to Integer (atoi)",
+		id: "/2020/09/24/spark-optimization",
 		
 		});
 		gitalk.render('gitalk-container'); 

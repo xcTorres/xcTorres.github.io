@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 28 Sep 2020 00:34:45 +0800</pubDate>
-    <lastBuildDate>Mon, 28 Sep 2020 00:34:45 +0800</lastBuildDate>
+    <pubDate>Sun, 04 Oct 2020 20:28:44 +0800</pubDate>
+    <lastBuildDate>Sun, 04 Oct 2020 20:28:44 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -211,6 +211,19 @@ Each variation of a bus route itinerary is represented by a relation with type=r
       </item>
     
       <item>
+        <title>Spark optimization</title>
+        <description>
+</description>
+        <pubDate>Thu, 24 Sep 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/09/24/spark-optimization/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/09/24/spark-optimization/</guid>
+        
+        <category>Spark</category>
+        
+        
+      </item>
+    
+      <item>
         <title>How to use custom packages in spark cluster</title>
         <description>&lt;p&gt;Sometimes when we use Spark to do the data analysis job, we want to use our own python package. We know the Spark cluster has the driver node  and executor nodes. Usually driver is our own server so we have the permission to install the python package, but we don’t have the permission to install the package on hundreds of executor nodes. When we directly run our pySpark code, it will report &lt;strong&gt;“Import Error”&lt;/strong&gt;.&lt;/p&gt;
 
@@ -304,34 +317,145 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
       </item>
     
       <item>
-        <title>PostGIS SQL使用</title>
-        <description>&lt;h2 id=&quot;tbd&quot;&gt;TBD&lt;/h2&gt;
+        <title>PostGIS</title>
+        <description>&lt;h1 id=&quot;overview&quot;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;From OSM data introduction, we are more familiar with the original OSM data. But if we want to apply it to more scenarios, it is necessary to manage the map data in database.&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    docker network create
-    docker-compose build
-    docker-compose up
+&lt;p&gt;Besides all kinds of attributes, the map data have an important geometry feature. In our scenarios, we will have a lot of spatial queries. For example, query all of the records within certain bounding box, query the nearest points or polygons of certain point, etc. So compared to general query, we need a database which support spatial extension so that it is efficient to retrieve the data in spatial query.&lt;/p&gt;
+
+&lt;p&gt;There are some databases that support spatial extension. PostGIS is an extension of the powerful PostgreSQL, one of the most reliable open source DBMS available, which has spent a lot of time on the market, but what makes it such a good platform for PostGIS is the fact that it implements something called Generic Index Structure (GIST), which allows it to build indexes in almost any kind of data type. It is an open source, many other open source is very easy to be compatible with it.&lt;/p&gt;
+
+&lt;p&gt;The whole world OSM data itself in &lt;a href=&quot;https://www.openstreetmap.org/&quot;&gt;https://www.openstreetmap.org/&lt;/a&gt; is also stored in postgreSQL and postGIS.&lt;/p&gt;
+
+&lt;p&gt;From my point of view,  there are  2 stages to manage the map data.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Just query the data&lt;/li&gt;
+  &lt;li&gt;Support the update, insert and delete operation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Update, insert and delete are more hard to implement, because it is complicated to consider both geometry and topology factors. So in current stage, we only focus on query the map data.&lt;/p&gt;
+
+&lt;h1 id=&quot;deploy-postgis&quot;&gt;Deploy PostGIS&lt;/h1&gt;
+&lt;p&gt;It is very easy to deploy the PostGIS using docker image. We could use docker-compose file because it could combine pgAdmin and postGIS together. Here is the docker-compose.yml file. The two service share an external network and the postGIS data is stored in mount volumes.&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3'&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;postgis&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;postgis/postgis&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;5432:5432&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;POSTGRES_PASSWORD=123456&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;postgis&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;postgres-data:/var/lib/postgresql/data&lt;/span&gt;
+
+    &lt;span class=&quot;na&quot;&gt;pgAdmin&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;dpage/pgadmin4&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;5433:80&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;PGADMIN_DEFAULT_EMAIL=test@123.com&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;PGADMIN_DEFAULT_PASSWORD=123456&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;postgis&lt;/span&gt;
+
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;postgres-data&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+
+    &lt;span class=&quot;na&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;postgis&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# Use a custom driver&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;postgis&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;And then we could use following command to deploy.&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 
+    &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;network&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;postgis&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-compose &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;build&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-compose &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;up&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    docker run &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--network&lt;/span&gt; postgis &lt;span class=&quot;nt&quot;&gt;--link&lt;/span&gt; postgis_postgis_1 &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; postgres  sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'exec psql -h postgis -p &quot;$POSTGRES_PORT_5432_TCP_PORT&quot; -U postgres'&lt;/span&gt;
+&lt;h1 id=&quot;data-ingestion&quot;&gt;Data ingestion&lt;/h1&gt;
+
+&lt;p&gt;In production environment, the map data format of Point, Line, Polygon is more understandable and more easy to transfer. (Osm2pgsql)[https://wiki.openstreetmap.org/wiki/Osm2pgsql] is a mature tool to ingest osm data into postgresSQL database. It will create origin node, way, relation table from OSM data, and extract the point, line, polygon. One last table is roads table, which is a subset of line table and is used for rendering to map tile.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/osm/osm2pgsql.png&quot; width=&quot;600&quot; height=&quot;500&quot; title=&quot;Osm2pgsql database design&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Before we upload the osm data, we need to use psql command to create a database and add spatial extention accordingly.&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    ## &lt;span class=&quot;kd&quot;&gt;Enter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;into&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;psql&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;command&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-it &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-network &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgis&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-link &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgis_postgis_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-rm &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgres&lt;/span&gt;  &lt;span class=&quot;kd&quot;&gt;sh&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-c &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'exec psql -h postgis -p &quot;$POSTGRES_PORT_5432_TCP_PORT&quot; -U postgres'&lt;/span&gt;
+
+
+    &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;. \l  #list &lt;span class=&quot;kd&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;datbase&lt;/span&gt;
+    &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;. &lt;span class=&quot;kd&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;DATABASE&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;. \connect &lt;span class=&quot;kd&quot;&gt;test&lt;/span&gt;
+    &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;. &lt;span class=&quot;kd&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;EXTENSION&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;EXISTS&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;postgis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;. &lt;span class=&quot;kd&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;EXTENSION&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;EXISTS&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;hstore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    osm2pgsql &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-U&lt;/span&gt; postgres &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; 127.0.0.1 &lt;span class=&quot;nt&quot;&gt;-P&lt;/span&gt; 5432 &lt;span class=&quot;nt&quot;&gt;-W&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; postgres ~/Desktop/jakarta.osm.pbf
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    docker run &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; postgres  &lt;span class=&quot;nt&quot;&gt;--network&lt;/span&gt; postgis sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'exec psql -h postgres -p &quot;$POSTGRES_PORT_5432_TCP_PORT&quot; -U postgres'&lt;/span&gt;
-
-    CREATE EXTENSION IF NOT EXISTS postgis&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    CREATE EXTENSION IF NOT EXISTS postgis_topology&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
+&lt;p&gt;Upload the data, there are many options, plz refer to this &lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql&quot;&gt;guide&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &lt;span class=&quot;kd&quot;&gt;osm2pgsql&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-s -U &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgres&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-H &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;127&lt;/span&gt;.0.0.1 &lt;span class=&quot;na&quot;&gt;-P &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5432&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-W -d &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/jakarta&lt;/span&gt;.osm.pbf
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;After completing the upload, you will see these table exists. And for point, line, polygon tables, they all have the extra spatial index.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/osm/pgAdmin.jpg&quot; width=&quot;700&quot; height=&quot;700&quot; title=&quot;pgAdmin&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;spatial-query&quot;&gt;Spatial Query&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Query all of the data in certain bounding box&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-SQL&quot;&gt;
+    select * 
+    from planet_osm_line 
+    where way &amp;amp;&amp;amp; ST_MakeEnvelope(106.620651, 10.73265, 106.725327, 10.8422, 4326)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;KNN Query&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-SQL&quot;&gt;
+    select *, st_distance(
+    st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857),
+    way)
+    from planet_osm_line
+    order by way &amp;lt;-&amp;gt; st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857)
+    limit 5
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Get the distance, remember that st_distance function doesn’t use gist spatial index&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-SQL&quot;&gt;
+   select *, st_distance(
+        ST_GeomFromText('SRID=4326;Point(106.620651 10.73265)')::geometry,
+        way
+    )
+    from ho_chi_ming_way
+    order by st_distance(
+        ST_GeomFromText('SRID=4326;Point(106.620651 10.73265)')::geometry,
+        way
+    )
+    limit 10
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql&quot;&gt;https://wiki.openstreetmap.org/wiki/Osm2pgsql&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/qq_35732147/article/details/88219928#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%80%E8%BF%91%E9%82%BB%E5%9F%9F%E6%90%9C%E7%B4%A2%EF%BC%9F&quot;&gt;https://blog.csdn.net/qq_35732147/article/details/88219928#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%80%E8%BF%91%E9%82%BB%E5%9F%9F%E6%90%9C%E7%B4%A2%EF%BC%9F&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 10 Sep 2020 00:00:00 +0800</pubDate>
         <link>https://xctorres.github.io//2020/09/10/PostGIS/</link>
@@ -343,209 +467,8 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
       </item>
     
       <item>
-        <title>OSM数据格式</title>
-        <description>&lt;p&gt;有着地图界的维基百科之称的OpenStreetMap（OSM）为我们打开了一扇通往新世界的大门，包含了丰富的地理数据，给予了地理、规划以及对空间句法、空间分析、空间规划感兴趣的人提供了许多便利, 也让我们得以在商业发展初期可以有这样好的地理数据做基础。&lt;/p&gt;
-
-&lt;h2 id=&quot;数据&quot;&gt;数据&lt;/h2&gt;
-&lt;h4 id=&quot;格式&quot;&gt;格式&lt;/h4&gt;
-&lt;p&gt;两种主要使用的格式分别是XML文件以及PBF文件。XML文件好处是可读，但所占内存很大。而PBF指protoBuf文件，是一种高压缩文件。关于格式的细节可在wiki上查找。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/PBF_Format&quot;&gt;https://wiki.openstreetmap.org/wiki/PBF_Format&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/OSM_XML&quot;&gt;https://wiki.openstreetmap.org/wiki/OSM_XML&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;内容&quot;&gt;内容&lt;/h4&gt;
-&lt;p&gt;无论是采用XML还是PBF的数据格式，只是数据的组织和解析不同，内容都是一致的。OpenStreetMap有三种元素，分别是Node， Way，还有Relation，并通过Tag给不同的元素添加属性。有了这些元素，就可以用来表示地图上的所有特征了。如下是三类元素的树状图。&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changeset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_sid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;latitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;way&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changeset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_sid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodeId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;relation&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changeset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_sid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;members&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;long&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;role&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|--&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Node&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;一个Node通过经纬度代表地球表面上的一个特定节点，其最少包含一个id，还有经纬度字段。Node既可以用来定义某个单一点要素，比如某个公园长凳，某个水井，多个Node也可以用来定义一条路的形状。当其用来表示路时，通常节点是不需要Tag来添加属性的。但有时候也会给路上的特定节点添加属性，比如交通信号灯🚥，高压电线塔等等。&lt;/p&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;node&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;25496583&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lat=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;51.5173639&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lon=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-0.140043&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;changeset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;203496&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;user=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;80n&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uid=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1238&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;visible=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timestamp=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2007-01-28T11:40:26Z&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;highway&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;traffic_signals&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/node&amp;gt;&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Way&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Way是地图数据中非常重要的一环，是由2-2000个Node组成的一个点序列，通常被用来定义线性要素比如道路和河流。Way也能用来表示封闭区域，比如建筑物🏠，森林。在封闭区域中，点序列是首尾相连的，被称作&lt;strong&gt;closed_way&lt;/strong&gt;，所以这个字段非常重要，我们可以用来区分Way是否是封闭区域。对于一些带洞的面要素或者超过2000节点的面要素，不能被一条Way来表示，OSM所采取的办法就是分成多个Way要素并用Relation关联起来。&lt;br /&gt;
-Example:&lt;/p&gt;
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;way&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;5090250&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;visible=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timestamp=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2009-01-19T19:07:25Z&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;changeset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;816806&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;user=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Blumpsy&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uid=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;64226&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;822403&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;21533912&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;821601&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;21533910&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;135791608&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725784&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725781&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725774&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725776&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;823771&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;highway&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;residential&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Clipstone Street&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;oneway&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yes&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/way&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Relation&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Relation是一种能够同时记录两个或多个Nodes，Ways等元素关系的这样一种数据结构。&lt;br /&gt;
-在&lt;strong&gt;route relation&lt;/strong&gt;中， 其可以表示多个路的关系，比如多条路组成一条高速公路🛣，一条自行车🚲路，或一条公交车🚌路线。&lt;br /&gt;
-在&lt;strong&gt;turn restriction&lt;/strong&gt;中，其表示从一条路直接进入另一条路是不被允许的。&lt;br /&gt;
-在&lt;strong&gt;multipolygon&lt;/strong&gt;中，其可以用来表示polygon之间的关系，比如是内含还是外包。&lt;br /&gt;
-从以上示例中不难发现，Relation可以表示很多不一样的关系，而这个关系是通过Tag中的type来定义的。&lt;/p&gt;
-
-&lt;h4 id=&quot;下载&quot;&gt;下载&lt;/h4&gt;
-
-&lt;p&gt;可以通过该网站下载世界各地的OpenStreetMap地图矢量数据
-&lt;a href=&quot;http://download.geofabrik.de/&quot;&gt;http://download.geofabrik.de/&lt;/a&gt;&lt;br /&gt;
-该网站中包含了各个大陆以及国家的OSM数据，可以先下载下来再用其他相应的工具根据Boundingbox切割。如以&lt;a href=&quot;https://github.com/osmcode/osmium-tool&quot;&gt;osmium&lt;/a&gt;为例，可用以下命令切割,拿到印尼首都雅加达的数据。&lt;/p&gt;
-&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    # &lt;span class=&quot;nb&quot;&gt;extract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;bounding&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;box&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;osmium&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;extract&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-b &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;106&lt;/span&gt;.6360&lt;span class=&quot;o&quot;&gt;,-&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;.3644&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;107&lt;/span&gt;.0927&lt;span class=&quot;o&quot;&gt;,-&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;.0794 &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/Desktop/indonesia-latest&lt;/span&gt;.osm.pbf &lt;span class=&quot;na&quot;&gt;-o &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/Desktop/jakarta&lt;/span&gt;.osm.pbf
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;postgisqgis&quot;&gt;PostGIS+QGIS&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://docs.qgis.org/2.14/en/docs/user_manual/working_with_ogc/ogc_client_support.html&quot;&gt;QGIS&lt;/a&gt;是一个开源的功能齐全的地图编辑软件，其本身就支持直接打开OSM文件，但是当OSM文件较大时，在QGIS加载就会变的很卡很慢，甚至加载不出来。&lt;/p&gt;
-
-&lt;p&gt;一种比较好的组合方式是通过Osm2pgsql工具先将OSM文件导入到PostgreSQL数据库中，并且可以根据需要在PostGIS中添加空间索引，用于之后提高空间查询效率。之所以选用PostgreSQL的原因是其是一个开源的功能齐全的关系型数据库，且有非常好的地理支撑（PostGIS），且OpenStreetMap本身也是将数据存在PostgreSQL数据库中的，有足够多的开源工具能够一键从OSM文件导入到数据库中。&lt;/p&gt;
-
-&lt;h4 id=&quot;postgis&quot;&gt;PostGIS&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;http://postgis.net/workshops/postgis-intro/&quot;&gt;PostGIS&lt;/a&gt;是在关系型数据库PostgreSQL的基础上添加的地理支持，从而我们用SQL语言就能实现复杂的空间查询等功能。正因为PostGIS的存在，使得PostgreSQL开始应用在空间数据，LBS服务场景。在非生产环境下，我们可以使用Docker镜像来熟悉PostGIS的功能。&lt;/p&gt;
-
-&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-   # 下载PostgreSQL与PostGIS
-    &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;my&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-postgis -e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;POSTGRES_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;123321&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-v &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/postgresql&lt;/span&gt;_data:/var/lib/postgresql/data &lt;span class=&quot;na&quot;&gt;-p &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5432&lt;/span&gt;:5432 &lt;span class=&quot;na&quot;&gt;-d &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgis&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/postgis
-
-   &lt;/span&gt;# 下载PgAdmin
-    &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-d -p &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5433&lt;/span&gt;:80 &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-name &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;pgadmin4&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;PGADMIN_DEFAULT_EMAIL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;test&lt;/span&gt;@123.com &lt;span class=&quot;na&quot;&gt;-e &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;PGADMIN_DEFAULT_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;123456&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;dpage&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/pgadmin&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;
-
-   # 输入SQL命令
-    &lt;span class=&quot;kd&quot;&gt;docker&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-it &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-link &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgis_post&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-gis&lt;/span&gt;_1 &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-rm &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgres&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;-network &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgis&lt;/span&gt;   &lt;span class=&quot;kd&quot;&gt;sh&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-c &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'exec psql -h postgres -p &quot;$POSTGRES_PORT_5432_TCP_PORT&quot; -U postgres'&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;osm2pgsql&quot;&gt;Osm2pgsql&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/in-post/osm/osm2pgsql.png&quot; width=&quot;600&quot; height=&quot;500&quot; title=&quot;Osm2pgsql database design&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql&quot;&gt;osm2pgsql&lt;/a&gt;是OpenStreetMap的官方工具库，下面先看看它是如何把原始的OSM转化成Postgresql数据库中的各个数据表。不难看出如果选择slim模式其仍能够保存OSM原始的Node，Way，Relation三要素，且除此之外该工具已经帮我们提炼出来planet_osm_point, planet_osm_line， planet_osm_polygon点线面要素集合。此外还有一个planet_osm_roads数据表，其所有数据都是重复的，是planet_osm_line有的。其保存了一些更粗粒度的geometry，用于地图渲染用途，因为渲染时无需处理所有细小的Geometry&lt;a href=&quot;https://github.com/openstreetmap/osm2pgsql/issues/610&quot;&gt;(https://github.com/openstreetmap/osm2pgsql/issues/610)&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;通过如下命令就可以直接将osm文件导入到PostgreSQL。&lt;/p&gt;
-&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &lt;span class=&quot;kd&quot;&gt;osm2pgsql&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-s -U &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgres&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-H &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;127&lt;/span&gt;.0.0.1 &lt;span class=&quot;na&quot;&gt;-P &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5432&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-W -d &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;postgres&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;/Desktop/jakarta&lt;/span&gt;.osm.pbf
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;通过pgAdmin网页控制台可视化可以发现，在database下共用8个table，除了上面的七个表，还多了个一个空间参考表，其中存储了各个空间参考系统下的投影参数。
-&lt;img src=&quot;/img/in-post/osm/pgAdmin.jpg&quot; width=&quot;700&quot; height=&quot;600&quot; title=&quot;pgAdmin&quot; /&gt;&lt;/p&gt;
-&lt;h4 id=&quot;qgis&quot;&gt;QGIS&lt;/h4&gt;
-&lt;p&gt;从QGIS展示PostGIS的数据主要有以下几种方法，当然这些方法都需要做的第一步就是输入PostgreSQL的Hostname，Port，账号，密码，以及想连的数据库。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;方法一：&lt;br /&gt;
-如图直接连接PostGIS图层就可以展示了，这种方法简单快捷，适合数据表中数据量比较少的情况下，并且可以看到数据的全貌。示例中图层的数据只是雅加达地区的全部数据，所以单机还是能够应付的。当数据量非常大比如是整个印尼数据的情况下，该方法肯定就不能用了。
-&lt;img src=&quot;/img/in-post/osm/qgis-postGIS-layer.png&quot; width=&quot;700&quot; height=&quot;600&quot; title=&quot;Qgis+postGIS+layer&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;方法二：&lt;br /&gt;
-在工具栏中我们选择 DataBase -&amp;gt; DB manager, 然后连接PostGIS数据库即可。之后点击SQL Window窗口就可以通过SQL语句筛选数据并加载到图层中进行可视化。如下图是在雅加达地区对planet_osm_line中先筛选出道路，并筛选在规定的BoundingBox范围内数据。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-SQL&quot;&gt;
-    select osm_id, highway, name, way 
-    from planet_osm_line  
-    where highway is not null and way &amp;amp;&amp;amp; ST_Transform(ST_MakeEnvelope(106.7459, -6.2276, 106.8394, -6.1650, 4326), 3857)
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/osm/db-manager.png&quot; width=&quot;700&quot; height=&quot;600&quot; title=&quot;db_manager&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/osm/boundingbox.png&quot; width=&quot;700&quot; height=&quot;600&quot; title=&quot;Qgis+postGIS+layer&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
-&lt;p&gt;到此，关于OSM数据到PostGIS的存储以及QGIS的可视化都算是讲完了，至于如何使用PostGIS的SQL功能来进行空间分析，则将单另一个章节去介绍。&lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Elements&quot;&gt;https://wiki.openstreetmap.org/wiki/Elements&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Map_Features&quot;&gt;https://wiki.openstreetmap.org/wiki/Map_Features&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql/schema&quot;&gt;https://wiki.openstreetmap.org/wiki/Osm2pgsql/schema&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://postgis.net/&quot;&gt;https://postgis.net/&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://www.volkerschatz.com/net/osm/osm2pgsql-db.html&quot;&gt;http://www.volkerschatz.com/net/osm/osm2pgsql-db.html&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 03 Sep 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/09/03/OSM-format/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/09/03/OSM-format/</guid>
-        
-        <category>GIS</category>
-        
-        
-      </item>
-    
-      <item>
         <title>隐马尔科夫模型</title>
-        <description>&lt;h2 id=&quot;算法简介&quot;&gt;算法简介&lt;/h2&gt;
+        <description>&lt;h1 id=&quot;算法简介&quot;&gt;算法简介&lt;/h1&gt;
 &lt;p&gt;网上有很多隐马尔科夫算法模型的介绍，内容都非常详实，如果大家感兴趣可在Reference中查阅相关link。本文的目的是对隐马尔科夫模型做一个简单的概括， 并尝试探索其如何应用到&lt;strong&gt;语言领域&lt;/strong&gt;和&lt;strong&gt;地图匹配领域&lt;/strong&gt;。&lt;/p&gt;
 
 &lt;p&gt;首先最重要的有两个集合&lt;/p&gt;
@@ -563,21 +486,24 @@ Example:&lt;/p&gt;
 
 &lt;p&gt;HMM算法主要可以解决一下三类问题&lt;/p&gt;
 
-&lt;h4 id=&quot;评估观察序列概率&quot;&gt;评估观察序列概率&lt;/h4&gt;
+&lt;h2 id=&quot;评估观察序列概率&quot;&gt;评估观察序列概率&lt;/h2&gt;
 &lt;p&gt;即给定模型𝜆=(𝐴,𝐵,Π)和观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，计算在模型𝜆下观测序列𝑂出现的概率
 $ P \left( O |\lambda \right) $。这个问题的求解需要用到前向后向算法。&lt;/p&gt;
 
 &lt;p&gt;前向后向算法用到的是动态规划算法，即可以用递推来存储中间结果，从而将计算量数量级从$ TN^{T}$ 降到了$ TN^{2} $&lt;/p&gt;
 
-&lt;h4 id=&quot;模型参数学习问题&quot;&gt;模型参数学习问题&lt;/h4&gt;
+&lt;h2 id=&quot;模型参数学习问题&quot;&gt;模型参数学习问题&lt;/h2&gt;
 &lt;p&gt;即给定观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，估计模型𝜆=(𝐴,𝐵,Π)的参数，使该模型下观测序列的条件概率
 $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM算法的鲍姆-韦尔奇算法，这个问题是HMM模型三个问题中最复杂的。&lt;/p&gt;
 
-&lt;h4 id=&quot;预测问题也称为解码问题&quot;&gt;预测问题，也称为解码问题&lt;/h4&gt;
+&lt;h2 id=&quot;预测问题也称为解码问题&quot;&gt;预测问题，也称为解码问题&lt;/h2&gt;
 &lt;p&gt;即给定模型𝜆=(𝐴,𝐵,Π)和观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，求给定观测序列条件下，最可能出现的对应的状态序列，这个问题的求解需要用到基于动态规划的维特比算法。&lt;/p&gt;
 
 &lt;p&gt;关于HMM算法的介绍可参照该link:
 &lt;a href=&quot;https://github.com/xcTorres/machine_learning/blob/master/HMM.ipynb&quot;&gt;https://github.com/xcTorres/machine_learning/blob/master/HMM.ipynb&lt;/a&gt;,其中有维特比算法的代码。&lt;/p&gt;
+
+&lt;h1 id=&quot;应用&quot;&gt;应用&lt;/h1&gt;
+&lt;h2 id=&quot;地图匹配&quot;&gt;地图匹配&lt;/h2&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781&quot;&gt;https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781&lt;/a&gt;&lt;br /&gt;
@@ -586,7 +512,8 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/27907806&quot;&gt;https://zhuanlan.zhihu.com/p/27907806&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/38343732&quot;&gt;https://zhuanlan.zhihu.com/p/38343732&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://www.cnblogs.com/pinard/p/6945257.html&quot;&gt;https://www.cnblogs.com/pinard/p/6945257.html&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.cnblogs.com/mindpuzzle/p/3653043.html&quot;&gt;https://www.cnblogs.com/mindpuzzle/p/3653043.html&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;https://www.cnblogs.com/mindpuzzle/p/3653043.html&quot;&gt;https://www.cnblogs.com/mindpuzzle/p/3653043.html&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;https://github.com/jagodki/Offline-MapMatching&quot;&gt;https://github.com/jagodki/Offline-MapMatching&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 21 Aug 2020 00:00:00 +0800</pubDate>
