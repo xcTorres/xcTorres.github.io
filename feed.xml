@@ -5,9 +5,83 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 04 Oct 2020 20:28:44 +0800</pubDate>
-    <lastBuildDate>Sun, 04 Oct 2020 20:28:44 +0800</lastBuildDate>
+    <pubDate>Wed, 07 Oct 2020 00:58:06 +0800</pubDate>
+    <lastBuildDate>Wed, 07 Oct 2020 00:58:06 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>Learning English</title>
+        <description>&lt;h1 id=&quot;态度&quot;&gt;态度&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;学习语言第一点需要端正态度&lt;/strong&gt;&lt;br /&gt;
+1)去除恐惧&lt;br /&gt;
+2)不怕出错，不怕被judge&lt;br /&gt;
+&lt;strong&gt;when you speak, don’t focus on yourself. Focus on other people and the result you want to achieve. 
+English is not an art to be mastered.It is just a tool to get the result.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=mwpdffpixBY&quot;&gt;https://www.youtube.com/watch?v=mwpdffpixBY&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=LtxikccfpaU&quot;&gt;https://www.youtube.com/watch?v=LtxikccfpaU&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.elllo.org&quot;&gt;http://www.elllo.org&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;听力&quot;&gt;听力&lt;/h1&gt;
+&lt;p&gt;在上班的工作中，用英语交流还仍有障碍，为了以后自己职业更好的发展，听力和口语都有待提高。在网上看了一些帖子，得到了一些启发，纠正了自己以往的学习方法。现在才真正明白了以下几个道理。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;对我这种基础比较差的泛听是没有什么卵用的。精听才是王道&lt;/li&gt;
+  &lt;li&gt;如果听力不好，其他听说读写没有一项会好。这些都是一连串的连锁反应。不能再找借口说自己写作和阅读能力不错了。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Date&lt;/th&gt;
+      &lt;th&gt;Link&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;28th Sep&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV13A411J7kD&quot;&gt;https://www.bilibili.com/video/BV13A411J7kD&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;又骗我生女儿？陈冠希谈育女经；这个老爸也太酷了吧？&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;7th Oct&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1VV411r7Xv?p=1&quot;&gt;https://www.bilibili.com/video/BV1VV411r7Xv?p=1&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;How do our brains process speech - Gareth Gaskell&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&quot;口语&quot;&gt;口语&lt;/h1&gt;
+&lt;h3 id=&quot;讨论&quot;&gt;讨论&lt;/h3&gt;
+&lt;p&gt;As a quick reminder: 顺便提醒一下&lt;br /&gt;
+Taken as a very loose analogy: 作为粗略的对照&lt;br /&gt;
+I will touch base with you. 我会向你再次确认。&lt;br /&gt;
+Got it/ Roger that / Consider it done/ Sure thing 好的收到&lt;br /&gt;
+With that being said 说完这些 &lt;br /&gt;
+What’s the Engilish word for this?&lt;br /&gt;
+From where I stand / From my point of view / Judging from what I have heard/read.&lt;br /&gt;
+For example / For instance / Suppose that / Imagine / To illustrate / To give you an idea / To show you what I mean / Let’s say / Something is a case in point   举例，比如&lt;/p&gt;
+
+&lt;h1 id=&quot;专业术语&quot;&gt;专业术语&lt;/h1&gt;
+&lt;h3 id=&quot;机器学习&quot;&gt;机器学习&lt;/h3&gt;
+&lt;p&gt;后向传播算法： backpropagation algorithms&lt;br /&gt;
+正则化：  regularization&lt;br /&gt;
+过拟合：  overfitting&lt;br /&gt;
+向量化：  vectorization&lt;br /&gt;
+大小、量级：magnitude&lt;/p&gt;
+
+&lt;h3 id=&quot;算法&quot;&gt;算法&lt;/h3&gt;
+&lt;p&gt;时间复杂度： time complexity&lt;br /&gt;
+指数级： exponential&lt;/p&gt;
+</description>
+        <pubDate>Wed, 07 Oct 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/10/07/learn-english/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/10/07/learn-english/</guid>
+        
+        <category>学习</category>
+        
+        
+      </item>
     
       <item>
         <title>OSM data introduction</title>
@@ -211,6 +285,19 @@ Each variation of a bus route itinerary is represented by a relation with type=r
       </item>
     
       <item>
+        <title>C++</title>
+        <description>
+</description>
+        <pubDate>Thu, 24 Sep 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/09/24/c++/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/09/24/c++/</guid>
+        
+        <category>C++</category>
+        
+        
+      </item>
+    
+      <item>
         <title>Spark optimization</title>
         <description>
 </description>
@@ -382,7 +469,7 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
 
 &lt;h1 id=&quot;data-ingestion&quot;&gt;Data ingestion&lt;/h1&gt;
 
-&lt;p&gt;In production environment, the map data format of Point, Line, Polygon is more understandable and more easy to transfer. (Osm2pgsql)[https://wiki.openstreetmap.org/wiki/Osm2pgsql] is a mature tool to ingest osm data into postgresSQL database. It will create origin node, way, relation table from OSM data, and extract the point, line, polygon. One last table is roads table, which is a subset of line table and is used for rendering to map tile.&lt;/p&gt;
+&lt;p&gt;In production environment, the map data format of Point, Line, Polygon is more understandable and more easy to transfer. &lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql&quot;&gt;Osm2pgsql&lt;/a&gt; is a mature tool to ingest osm data into postgresSQL database. It will create origin node, way, relation table from OSM data, and extract the point, line, polygon. One last table is roads table, which is a subset of line table and is used for rendering to map tile.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/in-post/osm/osm2pgsql.png&quot; width=&quot;600&quot; height=&quot;500&quot; title=&quot;Osm2pgsql database design&quot; /&gt;&lt;/p&gt;
 
@@ -454,8 +541,7 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql&quot;&gt;https://wiki.openstreetmap.org/wiki/Osm2pgsql&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://blog.csdn.net/qq_35732147/article/details/88219928#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%80%E8%BF%91%E9%82%BB%E5%9F%9F%E6%90%9C%E7%B4%A2%EF%BC%9F&quot;&gt;https://blog.csdn.net/qq_35732147/article/details/88219928#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%80%E8%BF%91%E9%82%BB%E5%9F%9F%E6%90%9C%E7%B4%A2%EF%BC%9F&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Osm2pgsql&quot;&gt;https://wiki.openstreetmap.org/wiki/Osm2pgsql&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 10 Sep 2020 00:00:00 +0800</pubDate>
         <link>https://xctorres.github.io//2020/09/10/PostGIS/</link>
@@ -865,177 +951,6 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
         <guid isPermaLink="true">https://xctorres.github.io//2020/08/01/python-coroutine/</guid>
         
         <category>Python</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Learning English</title>
-        <description>&lt;h1 id=&quot;态度&quot;&gt;态度&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;学习语言第一点需要端正态度&lt;/strong&gt;&lt;br /&gt;
-1)去除恐惧&lt;br /&gt;
-2)不怕出错，不怕被judge&lt;br /&gt;
-&lt;strong&gt;when you speak, don’t focus on yourself. Focus on other people and the result you want to achieve. 
-English is not an art to be mastered.It is just a tool to get the result.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=mwpdffpixBY&quot;&gt;https://www.youtube.com/watch?v=mwpdffpixBY&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.youtube.com/watch?v=LtxikccfpaU&quot;&gt;https://www.youtube.com/watch?v=LtxikccfpaU&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://www.elllo.org&quot;&gt;http://www.elllo.org&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;听力&quot;&gt;听力&lt;/h2&gt;
-&lt;p&gt;在上班的工作中，用英语交流还仍有障碍，为了以后自己职业更好的发展，听力和口语都有待提高。在网上看了一些帖子，得到了一些启发，纠正了自己以往的学习方法。现在才真正明白了以下几个道理。&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;对我这种基础比较差的泛听是没有什么卵用的。精听才是王道&lt;/li&gt;
-  &lt;li&gt;如果听力不好，其他听说读写没有一项会好。这些都是一连串的连锁反应。不能再找借口说自己写作和阅读能力不错了。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Date&lt;/th&gt;
-      &lt;th&gt;Link&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;28th Sep&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV13A411J7kD&quot;&gt;https://www.bilibili.com/video/BV13A411J7kD&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;又骗我生女儿？陈冠希谈育女经；这个老爸也太酷了吧？&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;专业术语&quot;&gt;专业术语&lt;/h2&gt;
-&lt;h4 id=&quot;机器学习&quot;&gt;机器学习&lt;/h4&gt;
-&lt;p&gt;后向传播算法： backpropagation algorithms&lt;br /&gt;
-正则化：  regularization&lt;br /&gt;
-过拟合：  overfitting&lt;br /&gt;
-向量化：  vectorization&lt;br /&gt;
-大小、量级：magnitude&lt;/p&gt;
-
-&lt;h4 id=&quot;算法&quot;&gt;算法&lt;/h4&gt;
-&lt;p&gt;时间复杂度： time complexity&lt;br /&gt;
-指数级： exponential&lt;/p&gt;
-
-&lt;h2 id=&quot;口语&quot;&gt;口语&lt;/h2&gt;
-&lt;h4 id=&quot;讨论&quot;&gt;讨论&lt;/h4&gt;
-&lt;p&gt;As a quick reminder: 顺便提醒一下&lt;br /&gt;
-Taken as a very loose analogy: 作为粗略的对照&lt;br /&gt;
-I will touch base with you. 我会向你再次确认。&lt;br /&gt;
-Got it/ Roger that / Consider it done/ Sure thing 好的收到&lt;br /&gt;
-With that being said 说完这些 &lt;br /&gt;
-What’s the Engilish word for this?&lt;br /&gt;
-From where I stand/ From my point of view&lt;br /&gt;
-Judging from what I have heard/read.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 19 Jun 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/06/19/learn-english/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/06/19/learn-english/</guid>
-        
-        <category>学习</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Python Web</title>
-        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
-&lt;p&gt;由于机器学习，深度学习，数据分析，数据挖掘的兴起，且因为Python脚本语言上手极快，使得Python这门语言非常火热🔥。但其应用场景多在运维，爬虫，以及机器学习数据挖掘方面。现在本人的职位是算法工程师，更希望注重于机器学习深度学习算法的效果及实现，但在项目中不免要给算法做稳定的网络微服务。所以在工作过程中，算法的逻辑和稳定性和后台的稳定性有时候得一把抓。Java的确是一门不错的语言，但其Spring框架比较庞大，且我所在公司使用Go和Python语言，没有Java开发的环境。所以最终打算通过Python作为后台开发语言。&lt;br /&gt;
-每当提及用Python作为后台开发语言，很多技术人士都会嗤之以鼻，担心其过慢的运行效率无法解决高并发问题。但Google搜索引擎的部分代码，Instagram，国内的豆瓣知乎等很多知名互联网企业都是Python语言的后台。这些成功的产品证明，只要处理得当，Python后台完全能处理一定量级的高并发问题。综合考虑打算使用flask，gunicorn，nginx的的方法来实现稳定的后台服务，特写此文用来记录Python后台记录的点点滴滴。&lt;/p&gt;
-
-&lt;p&gt;先将代码地址放在此处&lt;a href=&quot;https://github.com/xcTorres/python_web&quot;&gt;https://github.com/xcTorres/python_web&lt;/a&gt;，欢迎star。&lt;/p&gt;
-
-&lt;h2 id=&quot;flask&quot;&gt;Flask&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/pallets/flask&quot;&gt;flask&lt;/a&gt;是一个用于创建web应用的微服务框架，其主要由&lt;a href=&quot;https://github.com/pallets/werkzeug&quot;&gt;werkzeug&lt;/a&gt;作为WSGI网络应用程序, 以及&lt;a href=&quot;https://github.com/pallets/jinja&quot;&gt;jinja&lt;/a&gt;进行前端渲染，在这二者的帮助下，我们可以用flask做一个业务逻辑的后台系统以及前端渲染的界面。&lt;/p&gt;
-
-&lt;p&gt;由于工作原因，在我的日常工作中不需要去考虑界面，更多的是做一个能够接受http请求并返回数据的后台，则可以只考虑flask路由的部分。只需简单的几句话，就能跑起来一个web框架。Flask的确是一个轻便的web服务框架。&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;f'Hello, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;escape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;!'&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;如在使用flask编写个人博客的时候，该网站需要用户，博客，管理员，默认网页等各个视图。这样一来每个视图都会有其自己的路由函数，所有路由都堆在一起了。使用蓝图可以将其模块化，其组织方式一般有功能式架构和分区式架构。可以看到功能式架构中，所有模板在一起，所有蓝图注册视图函数在views文件夹下。在分区式架构中，按照每一部分所属的蓝图来组织你的应用。管理面板的所有的模板，视图和静态文件放在一个文件夹中，用户控制面板的则放在另一个文件夹中。选择使用哪种架构实际上是一个个人问题。两者间的唯一区别是表达层次性的方式不同 – 你可以使用任意一种方式架构Flask应用 – 所以你所需的就是选择贴近你的需求的那个。如果你的应用是由独立的，仅仅共享模型和配置的各组件组成，分区式将是个好选择。一个例子是允许用户建立网站的SaaS应用。你将会有独立的蓝图用于主页，控制面板，用户网站，和高亮面板。这些组件有着完全不同的静态文件和布局。如果你想要将你的蓝图提取成插件，或用之于别的项目，一个分区式架构将是正确的选择。&lt;/p&gt;
-
-&lt;p&gt;更多关于URL路由详情以及flask扩展可以了解官网&lt;a href=&quot;https://flask.palletsprojects.com/en/1.1.x/&quot;&gt;https://flask.palletsprojects.com/en/1.1.x/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;功能式架构&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &lt;span class=&quot;n&quot;&gt;yourapp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;分区式架构&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &lt;span class=&quot;n&quot;&gt;yourapp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;control_panel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;guincorn&quot;&gt;Guincorn&lt;/h2&gt;
-
-&lt;p&gt;Gunciorn又是什么呢，首先Gunicorn是一个WSGI服务器。它不在乎它所运行的应用是哪一种，django也好，flask也好都OK，只要你应用的是WSGI接口。其采用的是pre-fork方式，其特点是具有使用非常简单，轻量级的资源消耗，以及高性能等特点。那什么是WSGI呢。其全称Python Web Server Gateway Interface，指定了web服务器和Python web应用或web框架之间的标准接口，以提高web应用在一系列web服务器间的移植性。Gunicorn擅长管理多进程。且命令及其方便，可以使用sync，gevent，gthread等多种进程模式。可以根据不同场景需求选择不同的参数。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Flask 内置 WebServer + Flask App = 弱鸡版本的 Server, 单进程（单 worker) / 失败挂掉 / 不易 Scale&lt;/li&gt;
-  &lt;li&gt;Gunicorn + Flask App = 多进程（多 worker) / 多线程 / 失败自动帮你重启 Worker / 可简单Scale&lt;/li&gt;
-  &lt;li&gt;多 Nginx + 多 Gunicorn + Flask App = 小型多实例 Web 应用，一般也会给 gunicorn 挂 supervisor&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;supervisor&quot;&gt;Supervisor&lt;/h2&gt;
-&lt;p&gt;Gunicorn采取的主从模式，即master进程将管理多个子进程，若某个子进程挂了，主进程可以重新启动子进程。那么万一主进程也挂了怎么办，常用的方法是通过&lt;a href=&quot;https://github.com/Supervisor/supervisor&quot;&gt;supervisor&lt;/a&gt;进行监控。&lt;/p&gt;
-
-&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://toutiao.io/posts/45fmtc/preview&quot;&gt;https://toutiao.io/posts/45fmtc/preview&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://medium.com/@genchilu/brief-introduction-about-the-types-of-worker-in-gunicorn-and-respective-suitable-scenario-67b0c0e7bd62&quot;&gt;gunicorn适用类型&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://vsupalov.com/what-is-gunicorn/&quot;&gt;https://vsupalov.com/what-is-gunicorn/&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/&quot;&gt;深入理解uwsgi和gunicorn网络模型上&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://juejin.im/post/5ce8cab8e51d4577523f22f8&quot;&gt;https://juejin.im/post/5ce8cab8e51d4577523f22f8&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://youyou-tech.com/2019/09/11/Flask%2BGunicorn%28%E5%8D%8F%E7%A8%8B%29%E9%AB%98%E5%B9%B6/&quot;&gt;Flask+Gunicorn(协程)高并发的解决方法探究&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://blog.csdn.net/huwh_/article/details/80497790&quot;&gt;https://blog.csdn.net/huwh_/article/details/80497790&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 17 Jun 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/06/17/python-web/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/06/17/python-web/</guid>
-        
-        <category>Python</category>
-        
-        <category>Web</category>
         
         
       </item>
