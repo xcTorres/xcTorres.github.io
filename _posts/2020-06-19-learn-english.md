@@ -30,15 +30,20 @@ English is not an art to be mastered.It is just a tool to get the result.**
 | 28th Sep |[https://www.bilibili.com/video/BV13A411J7kD](https://www.bilibili.com/video/BV13A411J7kD)|  又骗我生女儿？陈冠希谈育女经；这个老爸也太酷了吧？  |
 | 7th Oct |[https://www.bilibili.com/video/BV1VV411r7Xv?p=1](https://www.bilibili.com/video/BV1VV411r7Xv?p=1)|  How do our brains process speech - Gareth Gaskell |
 | 8th Oct |[https://www.youtube.com/watch?v=KewojU5bsq8](https://www.youtube.com/watch?v=KewojU5bsq8)|  25句做Presentation必用英文 再也不用紧张！留学、商务英语 |
+| 9th Oct |[https://www.bilibili.com/video/BV1df4y1S7VW](https://www.bilibili.com/video/BV1df4y1S7VW)|  川普私密音频曝光！亲承瞒报疫情严重性，误导美国民众 |
 
 # 口语  
-### 交谈
+### 日常
+Vibe 印象， He gave a good vibe on me.  
+A hint of 一点点  
+What's the Engilish word for this?  
+
+### 工作交谈
 As a quick reminder: 顺便提醒一下  
 Taken as a very loose analogy: 作为粗略的对照  
 I will touch base with you. 我会向你再次确认。  
 Got it/ Roger that / Consider it done/ Sure thing 好的收到  
 With that being said 说完这些   
-What's the Engilish word for this?  
 
 ### Presentation
 From where I stand / From my point of view / Judging from what I have heard/read.  
@@ -47,7 +52,7 @@ It's great to be here with you today/ Thanks for having me today. 很荣幸站�
 Let me briefly introduce myself. 请允许我简单介绍  
 Today, I'd like to talk to you about/ My topic today is 今天我打算讲讲  
 This presentation is divided into four parts. Let me direct your attention to the screen  
-I want to begin with/ and then I'll move on to/ next we're talking about/That concludes my presentation/That's from me, thanks for your presention  PPT逻辑
+I want to begin with/ and then I'll move on to/ next we're talking about/That concludes my presentation/That's from me, thanks for your attention  PPT逻辑
 
 
 
