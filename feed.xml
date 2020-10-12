@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 09 Oct 2020 01:22:30 +0800</pubDate>
-    <lastBuildDate>Fri, 09 Oct 2020 01:22:30 +0800</lastBuildDate>
+    <pubDate>Mon, 12 Oct 2020 14:27:48 +0800</pubDate>
+    <lastBuildDate>Mon, 12 Oct 2020 14:27:48 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -516,6 +516,8 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
 
 &lt;p&gt;&lt;img src=&quot;/img/in-post/osm/pgAdmin.jpg&quot; width=&quot;700&quot; height=&quot;700&quot; title=&quot;pgAdmin&quot; /&gt;&lt;/p&gt;
 
+&lt;p&gt;&lt;img src=&quot;/img/in-post/osm/qgis-postGIS-layer.png&quot; width=&quot;700&quot; height=&quot;700&quot; title=&quot;pgAdmin&quot; /&gt;&lt;/p&gt;
+
 &lt;h1 id=&quot;spatial-query&quot;&gt;Spatial Query&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -534,12 +536,17 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
 &lt;/ul&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-SQL&quot;&gt;
-    select *, st_distance(
-    st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857),
-    way)
-    from planet_osm_line
-    order by way &amp;lt;-&amp;gt; st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857)
-    limit 5
+    SELECT
+    *
+    FROM
+    (
+        SELECT *, st_distance(
+            st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857),
+            way) AS d
+        FROM planet_osm_line
+        ORDER BY way &amp;lt;-&amp;gt; st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857) 
+    ) as innerTable
+    WHERE d &amp;lt; 100
 
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -552,7 +559,7 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
         ST_GeomFromText('SRID=4326;Point(106.620651 10.73265)')::geometry,
         way
     )
-    from ho_chi_ming_way
+    from ho_chi_minh_way
     order by st_distance(
         ST_GeomFromText('SRID=4326;Point(106.620651 10.73265)')::geometry,
         way

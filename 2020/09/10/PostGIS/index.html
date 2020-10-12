@@ -357,6 +357,8 @@ From OSM data introduction, we are more familiar with the original OSM data. But
 
 <p><img src="/img/in-post/osm/pgAdmin.jpg" width="700" height="700" title="pgAdmin" /></p>
 
+<p><img src="/img/in-post/osm/qgis-postGIS-layer.png" width="700" height="700" title="pgAdmin" /></p>
+
 <h1 id="spatial-query">Spatial Query</h1>
 
 <ul>
@@ -375,12 +377,17 @@ From OSM data introduction, we are more familiar with the original OSM data. But
 </ul>
 
 <pre><code class="language-SQL">
-    select *, st_distance(
-    st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857),
-    way)
-    from planet_osm_line
-    order by way &lt;-&gt; st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857)
-    limit 5
+    SELECT
+    *
+    FROM
+    (
+        SELECT *, st_distance(
+            st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857),
+            way) AS d
+        FROM planet_osm_line
+        ORDER BY way &lt;-&gt; st_transform(ST_GeomFromText('SRID=4326;Point(106.66169 10.75114)')::geometry, 3857) 
+    ) as innerTable
+    WHERE d &lt; 100
 
 </code></pre>
 
@@ -393,7 +400,7 @@ From OSM data introduction, we are more familiar with the original OSM data. But
         ST_GeomFromText('SRID=4326;Point(106.620651 10.73265)')::geometry,
         way
     )
-    from ho_chi_ming_way
+    from ho_chi_minh_way
     order by st_distance(
         ST_GeomFromText('SRID=4326;Point(106.620651 10.73265)')::geometry,
         way
