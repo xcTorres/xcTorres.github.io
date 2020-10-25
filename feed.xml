@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 12 Oct 2020 14:27:48 +0800</pubDate>
-    <lastBuildDate>Mon, 12 Oct 2020 14:27:48 +0800</lastBuildDate>
+    <pubDate>Sun, 25 Oct 2020 23:39:40 +0800</pubDate>
+    <lastBuildDate>Sun, 25 Oct 2020 23:39:40 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -57,6 +57,16 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
       &lt;td&gt;9th Oct&lt;/td&gt;
       &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1df4y1S7VW&quot;&gt;https://www.bilibili.com/video/BV1df4y1S7VW&lt;/a&gt;&lt;/td&gt;
       &lt;td&gt;川普私密音频曝光！亲承瞒报疫情严重性，误导美国民众&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;12th Oct&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1Jp4y1Y7su?p=3&quot;&gt;https://www.bilibili.com/video/BV1Jp4y1Y7su?p=3&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;詹姆斯总决赛MVP发言完整版：我想获得那该死的尊重&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;25th Oct&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1Mi4y177Po?p=1&quot;&gt;https://www.bilibili.com/video/BV1Mi4y177Po?p=1&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;民主党最后的王牌？奥巴马最新热血演讲：川普，总统不是这么当的&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -616,7 +626,9 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
 &lt;p&gt;关于HMM算法的介绍可参照该link:
 &lt;a href=&quot;https://github.com/xcTorres/machine_learning/blob/master/HMM.ipynb&quot;&gt;https://github.com/xcTorres/machine_learning/blob/master/HMM.ipynb&lt;/a&gt;,其中有维特比算法的代码。&lt;/p&gt;
 
-&lt;h1 id=&quot;应用&quot;&gt;应用&lt;/h1&gt;
+&lt;h1 id=&quot;算法库&quot;&gt;算法库&lt;/h1&gt;
+&lt;p&gt;Hmmlearn是一个比较成熟的算法库，&lt;/p&gt;
+
 &lt;h2 id=&quot;地图匹配&quot;&gt;地图匹配&lt;/h2&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
