@@ -31,6 +31,8 @@ English is not an art to be mastered.It is just a tool to get the result.**
 | 7th Oct |[https://www.bilibili.com/video/BV1VV411r7Xv?p=1](https://www.bilibili.com/video/BV1VV411r7Xv?p=1)|  How do our brains process speech - Gareth Gaskell |
 | 8th Oct |[https://www.youtube.com/watch?v=KewojU5bsq8](https://www.youtube.com/watch?v=KewojU5bsq8)|  25句做Presentation必用英文 再也不用紧张！留学、商务英语 |
 | 9th Oct |[https://www.bilibili.com/video/BV1df4y1S7VW](https://www.bilibili.com/video/BV1df4y1S7VW)|  川普私密音频曝光！亲承瞒报疫情严重性，误导美国民众 |
+| 12th Oct |[https://www.bilibili.com/video/BV1Jp4y1Y7su?p=3](https://www.bilibili.com/video/BV1Jp4y1Y7su?p=3)|  詹姆斯总决赛MVP发言完整版：我想获得那该死的尊重 |
+| 25th Oct |[https://www.bilibili.com/video/BV1Mi4y177Po?p=1](https://www.bilibili.com/video/BV1Mi4y177Po?p=1)|  民主党最后的王牌？奥巴马最新热血演讲：川普，总统不是这么当的 |
 
 # 口语  
 ### 日常
