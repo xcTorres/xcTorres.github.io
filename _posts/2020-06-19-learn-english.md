@@ -33,6 +33,7 @@ English is not an art to be mastered.It is just a tool to get the result.**
 | 9th Oct |[https://www.bilibili.com/video/BV1df4y1S7VW](https://www.bilibili.com/video/BV1df4y1S7VW)|  川普私密音频曝光！亲承瞒报疫情严重性，误导美国民众 |
 | 12th Oct |[https://www.bilibili.com/video/BV1Jp4y1Y7su?p=3](https://www.bilibili.com/video/BV1Jp4y1Y7su?p=3)|  詹姆斯总决赛MVP发言完整版：我想获得那该死的尊重 |
 | 25th Oct |[https://www.bilibili.com/video/BV1Mi4y177Po?p=1](https://www.bilibili.com/video/BV1Mi4y177Po?p=1)|  民主党最后的王牌？奥巴马最新热血演讲：川普，总统不是这么当的 |
+| 2nd Nov |[https://dict.eudic.net/webting/desktopplay?id=3c018d6d-1b12-11eb-8659-00505686c5e6&token=QYN+eyJ0b2tlbiI6IiIsInVzZXJpZCI6IiIsInVybHNpZ24iOiJ1RFdGQys0R0pCMEVxWXRtcm0wVFZPb1lSOEU9IiwidCI6IkFCSU1UWXlOREV3TmpNeU9RPT0ifQ%3D%3D](https://dict.eudic.net/webting/desktopplay?id=3c018d6d-1b12-11eb-8659-00505686c5e6&token=QYN+eyJ0b2tlbiI6IiIsInVzZXJpZCI6IiIsInVybHNpZ24iOiJ1RFdGQys0R0pCMEVxWXRtcm0wVFZPb1lSOEU9IiwidCI6IkFCSU1UWXlOREV3TmpNeU9RPT0ifQ%3D%3D)|  并非所有水力发电设施都有利于环保 |
 
 # 口语  
 ### 日常
