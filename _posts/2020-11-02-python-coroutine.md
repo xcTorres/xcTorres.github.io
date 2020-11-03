@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Python的协程与异步"
-date:       2020-08-01
+date:       2020-11-02
 author:     "xcTorres"
 header-img: "img/in-post/python/python.png"
 catalog:    true
@@ -29,15 +29,15 @@ tags:
 
 所以当需要执行I/O操作时，使用异步操作比使用线程+同步I/O操作更合适。I/O操作不仅包括了直接的文件、网络的读写，还包括数据库操作、Web Service、HttpRequest以及.Net Remoting等跨进程的调用。因为这些任务不需要CPU计算，只需要等待结果，在异步的情况下就能在非阻塞的情况下尽可能处理更多的操作。  
 
-## Python GIL
+#### Python GIL
 
 在早期的Python版本中，Python用的Reference count机制来进行垃圾回收。即当一个地址的引用对象个数为0时，即可视作垃圾并进行内存回收。这种机制的好处是，容易实现且容易回收，但也带来了不少缺点。比如处理不了循环引用的情况，还有个缺点是在计算reference count的过程中需要锁住线程，不允许多线程操作。不然主线程算出来某个对象的引用计数可能是1，但与此同时另一个线程把计数变为了0，但是主线程没能回收该对象内存造成内存泄露。所以CPython编译器有个全局解释锁的概念,这样就能保证使用Reference count机制的时候能够保证只有一个线程进行。
 > GIL: 全局解释器锁（英语：Global Interpreter Lock，缩写GIL），是计算机程序设计语言解释器用于同步线程的一种机制，它使得任何时刻仅有一个线程在执行。[1]即便在多核心处理器上，使用 GIL 的解释器也只允许同一时间执行一个线程。  
 
-## 多进程
+#### 多进程
 由于GIL的存在，在Python环境中我们无法通过多线程的方式充分利用多核的性能。但是多进程是一个不错的替代方式，因为每个进程独自存在且使用各自独自的GIL。
 
-## 协程
+#### 协程
 Python为了实现异步的机制，引入了协程Coroutine的概念。协程由于由程序主动控制切换，没有线程切换的开销，所以执行效率极高。对于IO密集型任务非常适用。在Python3.4之前，官方没有对协程的支持，存在一些三方库的实现，比如gevent和Tornado。3.4之后就内置了asyncio标准库，官方真正实现了协程这一特性。而Python对协程的支持，是通过Generator实现的，协程是遵循某些规则的生成器，关于生成器Generator的好处可以参考如下介绍[https://www.programiz.com/python-programming/generator](https://www.programiz.com/python-programming/generator)。
 
 在Python3.5之前，协程的定义需要修饰器来装饰，但3.5之后则直接用async来代替， yield from则由await来代替。 
@@ -119,7 +119,107 @@ patch_all函数则是可以设置需要替换的标准库，并最终达到异�
 
 ```
 
-#### 参考  
+## 并发发送请求 
+#### Asyncio
+```python
+
+    import asyncio
+    import requests
+    from aiohttp import ClientSession, TCPConnector
+
+    async def create_session():
+        """Create session
+        """
+        conn = TCPConnector(limit=100)
+        session = ClientSession(connector=conn)
+        return session
+
+    async def async_request(session, request_url, params):
+        """Async route engine request"""
+        async with session.get(request_url, params=params) as response:
+            return await response.json(content_type=None)
+
+    async def gather_tasks(tasks):
+        """Gather tasks"""
+        return await asyncio.gather(*tasks)
+
+    def send(batch_requests):
+        task_list = []
+        loop = asyncio.new_event_loop()
+        session = loop.run_until_complete(create_session())
+        for request in batch_requests:
+            task = async_request(session, request['request_url'], request['params'])
+            task_list.append(task)
+        # call route engine asynchronously
+        response = loop.run_until_complete(gather_tasks(task_list))
+        loop.run_until_complete(session.close())
+        loop.close()
+        return response
+
+```
+
+#### Asyncio + Multi-processing
+```python
+
+    import asyncio
+    import requests
+    from aiohttp import ClientSession, TCPConnector
+    from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+
+    async def create_session():
+        """Create session
+        """
+        conn = TCPConnector(limit=100)
+        session = ClientSession(connector=conn)
+        return session
+
+    async def async_request(session, request_url, params):
+        """Async route engine request"""
+        async with session.get(request_url, params=params) as response:
+            return await response.json(content_type=None)
+
+        
+    def gather_tasks(batch):
+        """Gather tasks"""
+        task_list = []
+        loop = asyncio.new_event_loop()
+        session = None
+        try:
+            asyncio.set_event_loop(loop)
+            session = loop.run_until_complete(create_session())
+            for request in batch:
+                task = async_request(session, request['request_url'], request['params'])
+                task_list.append(task)
+            # call route engine asynchronously
+            return loop.run_until_complete(asyncio.gather(*task_list))
+        finally:
+            loop.run_until_complete(session.close())
+            loop.close()
+        
+        
+    async def join(request_batch, PAGE_SIZE=1000):
+        """Gather tasks"""
+        loop = asyncio.get_event_loop()
+        executor = ProcessPoolExecutor(max_workers=10)
+        futures = []
+        for i in range(0, len(request_batch), PAGE_SIZE):
+            future = loop.run_in_executor(executor, gather_tasks, request_batch[i:i+PAGE_SIZE])
+            futures.append(future)
+        return await asyncio.gather(*futures)
+        
+        
+    def send(batch_requests):
+        task_list = []
+        loop = asyncio.new_event_loop()
+        # call route engine asynchronously
+        response = loop.run_until_complete(join(batch_requests))
+        loop.close()
+        return response
+
+```
+
+
+## 参考  
 [廖雪峰](https://www.liaoxuefeng.com/wiki/1016959663602400/1017968846697824)  
 [https://juejin.im/post/5c13245ee51d455fa5451f33](https://juejin.im/post/5c13245ee51d455fa5451f33)  
 [Python并行编程](https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/)  
