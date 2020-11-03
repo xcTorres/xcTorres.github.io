@@ -17,7 +17,7 @@
     <meta property="og:description" content="预备知识
 ">
     
-    <meta property="article:published_time" content="2020-08-01T00:00:00Z">
+    <meta property="article:published_time" content="2020-11-02T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
@@ -27,7 +27,7 @@
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2020/08/01/python-coroutine/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/11/02/python-coroutine/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
     <title>Python的协程与异步 - 谢聪博客 | xcTorres Blog</title>
@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2020/08/01/python-coroutine/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/11/02/python-coroutine/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -240,7 +240,7 @@
                     <h1>Python的协程与异步</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on August 1, 2020</span>
+                    <span class="meta">Posted by xcTorres on November 2, 2020</span>
                 </div>
             </div>
         </div>
@@ -286,17 +286,17 @@
 
 <p>所以当需要执行I/O操作时，使用异步操作比使用线程+同步I/O操作更合适。I/O操作不仅包括了直接的文件、网络的读写，还包括数据库操作、Web Service、HttpRequest以及.Net Remoting等跨进程的调用。因为这些任务不需要CPU计算，只需要等待结果，在异步的情况下就能在非阻塞的情况下尽可能处理更多的操作。</p>
 
-<h2 id="python-gil">Python GIL</h2>
+<h4 id="python-gil">Python GIL</h4>
 
 <p>在早期的Python版本中，Python用的Reference count机制来进行垃圾回收。即当一个地址的引用对象个数为0时，即可视作垃圾并进行内存回收。这种机制的好处是，容易实现且容易回收，但也带来了不少缺点。比如处理不了循环引用的情况，还有个缺点是在计算reference count的过程中需要锁住线程，不允许多线程操作。不然主线程算出来某个对象的引用计数可能是1，但与此同时另一个线程把计数变为了0，但是主线程没能回收该对象内存造成内存泄露。所以CPython编译器有个全局解释锁的概念,这样就能保证使用Reference count机制的时候能够保证只有一个线程进行。</p>
 <blockquote>
   <p>GIL: 全局解释器锁（英语：Global Interpreter Lock，缩写GIL），是计算机程序设计语言解释器用于同步线程的一种机制，它使得任何时刻仅有一个线程在执行。[1]即便在多核心处理器上，使用 GIL 的解释器也只允许同一时间执行一个线程。</p>
 </blockquote>
 
-<h2 id="多进程">多进程</h2>
+<h4 id="多进程">多进程</h4>
 <p>由于GIL的存在，在Python环境中我们无法通过多线程的方式充分利用多核的性能。但是多进程是一个不错的替代方式，因为每个进程独自存在且使用各自独自的GIL。</p>
 
-<h2 id="协程">协程</h2>
+<h4 id="协程">协程</h4>
 <p>Python为了实现异步的机制，引入了协程Coroutine的概念。协程由于由程序主动控制切换，没有线程切换的开销，所以执行效率极高。对于IO密集型任务非常适用。在Python3.4之前，官方没有对协程的支持，存在一些三方库的实现，比如gevent和Tornado。3.4之后就内置了asyncio标准库，官方真正实现了协程这一特性。而Python对协程的支持，是通过Generator实现的，协程是遵循某些规则的生成器，关于生成器Generator的好处可以参考如下介绍<a href="https://www.programiz.com/python-programming/generator">https://www.programiz.com/python-programming/generator</a>。</p>
 
 <p>在Python3.5之前，协程的定义需要修饰器来装饰，但3.5之后则直接用async来代替， yield from则由await来代替。</p>
@@ -373,7 +373,104 @@
 
 </code></pre></div></div>
 
-<h4 id="参考">参考</h4>
+<h2 id="并发发送请求">并发发送请求</h2>
+<h4 id="asyncio">Asyncio</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="kn">import</span> <span class="nn">asyncio</span>
+    <span class="kn">import</span> <span class="nn">requests</span>
+    <span class="kn">from</span> <span class="nn">aiohttp</span> <span class="kn">import</span> <span class="n">ClientSession</span><span class="p">,</span> <span class="n">TCPConnector</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">create_session</span><span class="p">():</span>
+        <span class="s">"""Create session
+        """</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">TCPConnector</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">ClientSession</span><span class="p">(</span><span class="n">connector</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">session</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">async_request</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="s">"""Async route engine request"""</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">gather_tasks</span><span class="p">(</span><span class="n">tasks</span><span class="p">):</span>
+        <span class="s">"""Gather tasks"""</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="n">batch_requests</span><span class="p">):</span>
+        <span class="n">task_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">new_event_loop</span><span class="p">()</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">create_session</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="n">batch_requests</span><span class="p">:</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">async_request</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">request</span><span class="p">[</span><span class="s">'request_url'</span><span class="p">],</span> <span class="n">request</span><span class="p">[</span><span class="s">'params'</span><span class="p">])</span>
+            <span class="n">task_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+        <span class="c1"># call route engine asynchronously
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">gather_tasks</span><span class="p">(</span><span class="n">task_list</span><span class="p">))</span>
+        <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">close</span><span class="p">())</span>
+        <span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+</code></pre></div></div>
+
+<h4 id="asyncio--multi-processing">Asyncio + Multi-processing</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="kn">import</span> <span class="nn">asyncio</span>
+    <span class="kn">import</span> <span class="nn">requests</span>
+    <span class="kn">from</span> <span class="nn">aiohttp</span> <span class="kn">import</span> <span class="n">ClientSession</span><span class="p">,</span> <span class="n">TCPConnector</span>
+    <span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ProcessPoolExecutor</span><span class="p">,</span> <span class="n">ThreadPoolExecutor</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">create_session</span><span class="p">():</span>
+        <span class="s">"""Create session
+        """</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">TCPConnector</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">ClientSession</span><span class="p">(</span><span class="n">connector</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">session</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">async_request</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="s">"""Async route engine request"""</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+        
+    <span class="k">def</span> <span class="nf">gather_tasks</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+        <span class="s">"""Gather tasks"""</span>
+        <span class="n">task_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">new_event_loop</span><span class="p">()</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">asyncio</span><span class="p">.</span><span class="n">set_event_loop</span><span class="p">(</span><span class="n">loop</span><span class="p">)</span>
+            <span class="n">session</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">create_session</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
+                <span class="n">task</span> <span class="o">=</span> <span class="n">async_request</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">request</span><span class="p">[</span><span class="s">'request_url'</span><span class="p">],</span> <span class="n">request</span><span class="p">[</span><span class="s">'params'</span><span class="p">])</span>
+                <span class="n">task_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+            <span class="c1"># call route engine asynchronously
+</span>            <span class="k">return</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">task_list</span><span class="p">))</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">close</span><span class="p">())</span>
+            <span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+        
+        
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">join</span><span class="p">(</span><span class="n">request_batch</span><span class="p">,</span> <span class="n">PAGE_SIZE</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="s">"""Gather tasks"""</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+        <span class="n">executor</span> <span class="o">=</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">request_batch</span><span class="p">),</span> <span class="n">PAGE_SIZE</span><span class="p">):</span>
+            <span class="n">future</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_in_executor</span><span class="p">(</span><span class="n">executor</span><span class="p">,</span> <span class="n">gather_tasks</span><span class="p">,</span> <span class="n">request_batch</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">PAGE_SIZE</span><span class="p">])</span>
+            <span class="n">futures</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">futures</span><span class="p">)</span>
+        
+        
+    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="n">batch_requests</span><span class="p">):</span>
+        <span class="n">task_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">new_event_loop</span><span class="p">()</span>
+        <span class="c1"># call route engine asynchronously
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">batch_requests</span><span class="p">))</span>
+        <span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
 <p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017968846697824">廖雪峰</a><br />
 <a href="https://juejin.im/post/5c13245ee51d455fa5451f33">https://juejin.im/post/5c13245ee51d455fa5451f33</a><br />
 <a href="https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/">Python并行编程</a><br />
@@ -386,19 +483,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/06/17/python-web/" data-toggle="tooltip" data-placement="top" title="Python Web">
+                        <a href="/2020/11/02/HMM/" data-toggle="tooltip" data-placement="top" title="隐马尔科夫模型">
                         Previous<br>
-                        <span>Python Web</span>
+                        <span>隐马尔科夫模型</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/08/04/shortesr-path-algo/" data-toggle="tooltip" data-placement="top" title="最短路径算法">
-                        Next<br>
-                        <span>最短路径算法</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -617,7 +707,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2020/08/01/python-coroutine",
+		id: "/2020/11/02/python-coroutine",
 		
 		});
 		gitalk.render('gitalk-container'); 

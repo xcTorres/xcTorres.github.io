@@ -18,7 +18,7 @@
 网上有很多隐马尔科夫算法模型的介绍，内容都非常详实，如果大家感兴趣可在Reference中查阅相关link。本文的目的是对隐马尔科夫模型做一个简单的概括， 并尝试探索其如何应用到语言领域和地图匹配领域。
 ">
     
-    <meta property="article:published_time" content="2020-08-21T00:00:00Z">
+    <meta property="article:published_time" content="2020-11-02T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
@@ -28,7 +28,7 @@
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2020/08/21/HMM/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/11/02/HMM/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
     <title>隐马尔科夫模型 - 谢聪博客 | xcTorres Blog</title>
@@ -40,7 +40,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2020/08/21/HMM/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/11/02/HMM/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -241,7 +241,7 @@
                     <h1>隐马尔科夫模型</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on August 21, 2020</span>
+                    <span class="meta">Posted by xcTorres on November 2, 2020</span>
                 </div>
             </div>
         </div>
@@ -285,26 +285,58 @@
 
 <p>HMM算法主要可以解决一下三类问题</p>
 
-<h2 id="评估观察序列概率">评估观察序列概率</h2>
+<h3 id="评估观察序列概率">评估观察序列概率</h3>
 <p>即给定模型𝜆=(𝐴,𝐵,Π)和观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，计算在模型𝜆下观测序列𝑂出现的概率
 $ P \left( O |\lambda \right) $。这个问题的求解需要用到前向后向算法。</p>
 
 <p>前向后向算法用到的是动态规划算法，即可以用递推来存储中间结果，从而将计算量数量级从$ TN^{T}$ 降到了$ TN^{2} $</p>
 
-<h2 id="模型参数学习问题">模型参数学习问题</h2>
+<h3 id="模型参数学习问题">模型参数学习问题</h3>
 <p>即给定观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，估计模型𝜆=(𝐴,𝐵,Π)的参数，使该模型下观测序列的条件概率
 $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM算法的鲍姆-韦尔奇算法，这个问题是HMM模型三个问题中最复杂的。</p>
 
-<h2 id="预测问题也称为解码问题">预测问题，也称为解码问题</h2>
+<h3 id="预测问题也称为解码问题">预测问题，也称为解码问题</h3>
 <p>即给定模型𝜆=(𝐴,𝐵,Π)和观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，求给定观测序列条件下，最可能出现的对应的状态序列，这个问题的求解需要用到基于动态规划的维特比算法。</p>
 
 <p>关于HMM算法的介绍可参照该link:
 <a href="https://github.com/xcTorres/machine_learning/blob/master/HMM.ipynb">https://github.com/xcTorres/machine_learning/blob/master/HMM.ipynb</a>,其中有维特比算法的代码。</p>
 
-<h1 id="算法库">算法库</h1>
-<p>Hmmlearn是一个比较成熟的算法库，</p>
+<h1 id="具体应用">具体应用</h1>
 
-<h2 id="地图匹配">地图匹配</h2>
+<h3 id="算法库">算法库</h3>
+<p><a href="https://hmmlearn.readthedocs.io/en/latest/">Hmmlearn</a>是一个比较成熟的算法库，以维特比算法为例，我们要做的就是填好转化概率transform probability matrix以及发射概率emission probability matrix。如下为demo代码示例，隐藏状态为天气情况，下雨☔️或者晴天🌞，而观测状态为人的行为，徒步，购物，或者在家打扫卫生。再定义完转化概率以及发射概率，以及初始概率之后，给定一个观察序列-人的行为，用维特比算法就能得到概率最大的隐藏序列-天气状况。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+    <span class="kn">from</span> <span class="nn">hmmlearn</span> <span class="kn">import</span> <span class="n">hmm</span>
+
+    <span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Rainy"</span><span class="p">,</span> <span class="s">"Sunny"</span><span class="p">]</span>
+    <span class="n">n_states</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+
+    <span class="n">observations</span> <span class="o">=</span> <span class="p">[</span><span class="s">"walk"</span><span class="p">,</span> <span class="s">"shop"</span><span class="p">,</span> <span class="s">"clean"</span><span class="p">]</span>
+    <span class="n">n_observations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">hmm</span><span class="p">.</span><span class="n">MultinomialHMM</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_states</span><span class="p">,</span> <span class="n">init_params</span><span class="o">=</span><span class="s">""</span><span class="p">)</span>
+    <span class="n">model</span><span class="p">.</span><span class="n">startprob_</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">])</span>
+    <span class="n">model</span><span class="p">.</span><span class="n">transprob_</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
+    <span class="p">])</span>
+    <span class="n">model</span><span class="p">.</span><span class="n">emissionprob_</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
+    <span class="p">])</span>
+
+    <span class="c1"># predict a sequence of hidden states based on visible states
+</span>    <span class="n">bob_says</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]).</span><span class="n">T</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">bob_says</span><span class="p">)</span>
+    <span class="n">logprob</span><span class="p">,</span> <span class="n">alice_hears</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">bob_says</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">"viterbi"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Bob says:"</span><span class="p">,</span> <span class="s">", "</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">observations</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">bob_says</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Alice hears:"</span><span class="p">,</span> <span class="s">", "</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">states</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">alice_hears</span><span class="p">)))</span>
+
+</code></pre></div></div>
+
+<h3 id="地图匹配">地图匹配</h3>
 
 <h2 id="reference">Reference</h2>
 <p><a href="https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781">https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781</a><br />
@@ -322,17 +354,17 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/08/17/universe/" data-toggle="tooltip" data-placement="top" title="宇宙与意识">
+                        <a href="/2020/10/07/learn-english/" data-toggle="tooltip" data-placement="top" title="Learning English">
                         Previous<br>
-                        <span>宇宙与意识</span>
+                        <span>Learning English</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2020/09/10/PostGIS/" data-toggle="tooltip" data-placement="top" title="PostGIS">
+                        <a href="/2020/11/02/python-coroutine/" data-toggle="tooltip" data-placement="top" title="Python的协程与异步">
                         Next<br>
-                        <span>PostGIS</span>
+                        <span>Python的协程与异步</span>
                         </a>
                     </li>
                     
@@ -601,7 +633,7 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2020/08/21/HMM",
+		id: "/2020/11/02/HMM",
 		
 		});
 		gitalk.render('gitalk-container'); 
