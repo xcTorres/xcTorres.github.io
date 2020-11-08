@@ -5,9 +5,37 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 03 Nov 2020 12:25:48 +0800</pubDate>
-    <lastBuildDate>Tue, 03 Nov 2020 12:25:48 +0800</lastBuildDate>
+    <pubDate>Mon, 09 Nov 2020 00:24:22 +0800</pubDate>
+    <lastBuildDate>Mon, 09 Nov 2020 00:24:22 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>宇宙与意识</title>
+        <description>&lt;p&gt;最近看了Youtuber老高和晓涵哥的一些关于宇宙，UFO，外星人内容的视频，重新激发了我对宇宙的意识的兴趣。世界万物，小到原子分子大到银河系整个宇宙都是由原子分子两字构成。宏观角度，一切仿佛都遵循着爱因斯坦的广义相对论，而微观角度，组成我们的这些量子遵循的是神秘的量子力学。为什么在地球只有人这种生物是有智慧的生物，我们来到这个世界离开这个世界的意义又是什么。带着种种这些疑问，所以想着积累此博客，写一些视频和书籍的观后感。&lt;/p&gt;
+
+&lt;h2 id=&quot;人类简史&quot;&gt;人类简史&lt;/h2&gt;
+&lt;p&gt;对于人类而言，在历史的路上，有三个重要革命。 认知革命，农业革命，和科学革命。在认知革命中，我们人类是由跟黑猩猩🦍同样的祖先的智人进化而来，智人学会了制作工具学会了钻木取火🔥，有强大的学习能力并创造了语言繁衍至今。其中有个疑问是，在十五万年前，我们人类的祖先不过还是跟猴子猩猩其他动物一样只是生态系统的普通角色，为何短短的的时间只有人类有智慧，站在了食物链的顶端。且在我们智人同时期，地球上存在其他一些人种且能与智人通婚，尼安德特人与丹尼索瓦人，他的脑容量比智人还大，也就是说应该比智人更聪明，但是为什么他们都灭绝了而只有智人留了下来。&lt;br /&gt;
+-参考视频： 
+&lt;a href=&quot;https://www.youtube.com/watch?v=qt9KfpWuRKg&quot;&gt;古人类和现代人的分界点在哪？没有过渡物种吗？每块化石都显得那么突兀【宇宙自然生命简史】&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;生命简史&quot;&gt;生命简史&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=GPYn1vJh1Q0&quot;&gt;寻秘自然01： 生命起源（上） 这个著名试验，试图再现生命创生的伟大时刻&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;黑洞&quot;&gt;黑洞&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=XI9UtfDlENU&quot;&gt;2020 诺贝尔物理学奖公布，“黑洞奖”颁奖词暗藏玄机&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/channel/UCUBhobCkTLhgfUNRAgHSYmw&quot;&gt;科学声音&lt;/a&gt;，个人最喜欢的频道,严谨的科学频道&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UCMUnInmOkrWN4gof9KlhNmQ&quot;&gt;老高與小茉 Mr &amp;amp; Mrs Gao&lt;/a&gt;， 科普+脑洞都有，听老高讲故事&lt;/p&gt;
+</description>
+        <pubDate>Sun, 08 Nov 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/11/08/universe/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/11/08/universe/</guid>
+        
+        <category>宇宙</category>
+        
+        
+      </item>
     
       <item>
         <title>Python的协程与异步</title>
@@ -271,7 +299,7 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
 &lt;h1 id=&quot;具体应用&quot;&gt;具体应用&lt;/h1&gt;
 
 &lt;h3 id=&quot;算法库&quot;&gt;算法库&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://hmmlearn.readthedocs.io/en/latest/&quot;&gt;Hmmlearn&lt;/a&gt;是一个比较成熟的算法库，以维特比算法为例，我们要做的就是填好转化概率transform probability matrix以及发射概率emission probability matrix。如下为demo代码示例，隐藏状态为天气情况，下雨☔️或者晴天🌞，而观测状态为人的行为，徒步，购物，或者在家打扫卫生。再定义完转化概率以及发射概率，以及初始概率之后，给定一个观察序列-人的行为，用维特比算法就能得到概率最大的隐藏序列-天气状况。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://hmmlearn.readthedocs.io/en/latest/&quot;&gt;Hmmlearn&lt;/a&gt;是一个比较成熟的算法库，以维特比算法为例，我们要做的就是填好转化概率transform probability matrix以及发射概率emission probability matrix。如下为demo代码示例，隐藏状态为天气情况，下雨☔️或者晴天🌞，而观测状态为人的行为，徒步，购物，或者在家打扫卫生。在定义完转化概率以及发射概率，以及初始概率之后，给定一个观察序列-人的行为，用维特比算法就能得到概率最大的隐藏序列-天气状况。&lt;/p&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
     &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
     &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hmmlearn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hmm&lt;/span&gt;
@@ -304,6 +332,17 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;地图匹配&quot;&gt;地图匹配&lt;/h3&gt;
+&lt;p&gt;在我们收集行车或者骑手GPS序列的数据时，由于GPS数据的误差，这些点都不一定能是刚好在路上的。 而用基于HMM的地图匹配算法我们可以得到映射在路网上的真实轨迹。  如下图可以看出,原始的GPS 1，2，3点都不在路上，他们都有一定概率映射在其附近的道路上，但由于1,2，3点是GPS时间序列，那么他们之间也就产生了联系。所以用HMM算法来解决地图匹配问题就理所当然了。
+&lt;img src=&quot;/img/in-post/hmm/hmm-1.png&quot; width=&quot;200&quot; height=&quot;200&quot; title=&quot;hmm-1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在地图匹配问题中，我们可以理解为隐变量是GPS真实的在其附近候选路上的点序列TracePoint， 那么观察变量就是我们收集的原始的GPS轨迹。接下来就是如何描述发射概率和转换概率：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;发射概率，即各个路上的TracePoint到其对应的原始GPS的概率，这个可以由$\beta$分布来表达，而$\beta$分布的自变量即是TracePoint到Raw GPS的球面距离，距离越近则该表明TracePoint为此时刻真实路上的GPS点的概率越大。&lt;/li&gt;
+  &lt;li&gt;转换概率， 即各个候选路上的TracePoint之间的概率，可以用正态分布来表达这个概率，自变量即是各个TracePoint的network distance即路网距离减去球面距离的差的绝对值。绝对值越小的情况下则代表，两个TracePoint越有可能同在一条路上或相近路上，有很大的概率进行转换。&lt;br /&gt;
+&lt;img src=&quot;/img/in-post/hmm/hmm-2.png&quot; width=&quot;200&quot; height=&quot;200&quot; title=&quot;hmm-2&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这些就是HMM应用在地图匹配中的算法原理，在实现过程中，我们所需要的两个API是nearest API（给定一个点，用于寻找其附近的道路，并得到该点在各个道路上的投影点）， route API（给定起点和终点，返回两点之间的路网距离而非球面距离）。有了这两个API就能实现一版简易版本的地图匹配算法了。如下为地图匹配的demo, &lt;a href=&quot;https://github.com/xcTorres/machine_learning/tree/master/hmm_demo&quot;&gt;https://github.com/xcTorres/machine_learning/tree/master/hmm_demo&lt;/a&gt;。&lt;/p&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781&quot;&gt;https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781&lt;/a&gt;&lt;br /&gt;
@@ -907,24 +946,6 @@ Your hdfs path should be &lt;strong&gt;/user/your_name/&lt;/strong&gt;, for exam
         <guid isPermaLink="true">https://xctorres.github.io//2020/09/10/PostGIS/</guid>
         
         <category>GIS</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>宇宙与意识</title>
-        <description>&lt;p&gt;最近看了Youtuber老高和晓涵哥的一些关于宇宙，UFO，外星人内容的视频，重新激发了我对宇宙的意识的兴趣。世界万物，小到原子分子大到银河系整个宇宙都是由原子分子两字构成。宏观角度，一切仿佛都遵循着爱因斯坦的广义相对论，而微观角度，组成我们的这些量子遵循的是神秘的量子力学。为什么在地球只有人这种生物是有智慧的生物，我们来到这个世界离开这个世界的意义又是什么。带着种种这些疑问，所以想着积累此博客，写一些视频和书籍的观后感。&lt;/p&gt;
-
-&lt;h2 id=&quot;人类简史&quot;&gt;人类简史&lt;/h2&gt;
-&lt;p&gt;对于人类而言，在历史的路上，有三个重要革命。 认知革命，农业革命，和科学革命。在认知革命中，我们人类是由跟黑猩猩🦍同样的祖先的智人进化而来，智人学会了制作工具学会了钻木取火🔥，有强大的学习能力并创造了语言繁衍至今。其中有个疑问是，在十五万年前，我们人类的祖先不过还是跟猴子猩猩其他动物一样只是生态系统的普通角色，为何短短的的时间只有人类有智慧，站在了食物链的顶端。且在我们智人同时期，地球上存在其他一些人种且能与智人通婚，尼安德特人与丹尼索瓦人，他的脑容量比智人还大，也就是说应该比智人更聪明，但是为什么他们都灭绝了而只有智人留了下来。&lt;br /&gt;
--参考视频： 
-&lt;a href=&quot;https://www.youtube.com/watch?v=qt9KfpWuRKg&quot;&gt;古人类和现代人的分界点在哪？没有过渡物种吗？每块化石都显得那么突兀【宇宙自然生命简史】&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 17 Aug 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/08/17/universe/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/08/17/universe/</guid>
-        
-        <category>宇宙</category>
         
         
       </item>
