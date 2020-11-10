@@ -17,7 +17,7 @@
     <meta property="og:description" content="预备知识
 ">
     
-    <meta property="article:published_time" content="2020-11-02T00:00:00Z">
+    <meta property="article:published_time" content="2020-11-08T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
@@ -27,7 +27,7 @@
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2020/11/02/python-coroutine/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/11/08/python-coroutine/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
     <title>Python的协程与异步 - 谢聪博客 | xcTorres Blog</title>
@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2020/11/02/python-coroutine/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/11/08/python-coroutine/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -240,7 +240,7 @@
                     <h1>Python的协程与异步</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on November 2, 2020</span>
+                    <span class="meta">Posted by xcTorres on November 8, 2020</span>
                 </div>
             </div>
         </div>
@@ -374,6 +374,7 @@
 </code></pre></div></div>
 
 <h2 id="并发发送请求">并发发送请求</h2>
+<p>需要注意的是，无论是否并发发送请求，使用session以及TCP连接池都是提升性能的必需选择。</p>
 <h4 id="asyncio">Asyncio</h4>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="kn">import</span> <span class="nn">asyncio</span>
@@ -470,6 +471,32 @@
 
 </code></pre></div></div>
 
+<h4 id="gevent--pool">Gevent + Pool</h4>
+<p>尽管我们使用的是requests同步库，但是patch_socket可以自动将socket切换为异步协程grequests库。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="kn">import</span> <span class="nn">time</span>
+    <span class="kn">import</span> <span class="nn">requests</span>
+    <span class="kn">import</span> <span class="nn">gevent</span> 
+    <span class="kn">import</span> <span class="nn">gevent.monkey</span>
+    <span class="n">gevent</span><span class="p">.</span><span class="n">monkey</span><span class="p">.</span><span class="n">patch_socket</span><span class="p">()</span>
+
+    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="n">adapter</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">adapters</span><span class="p">.</span><span class="n">HTTPAdapter</span><span class="p">(</span><span class="n">pool_connections</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">pool_maxsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">.</span><span class="n">mount</span><span class="p">(</span><span class="s">'http://'</span><span class="p">,</span> <span class="n">adapter</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">gevent</span><span class="p">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">post</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="s">'request_url'</span><span class="p">],</span> <span class="n">json</span><span class="o">=</span><span class="n">i</span><span class="p">[</span><span class="s">'params'</span><span class="p">])</span>
+            <span class="n">tasks</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">gevent</span><span class="p">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'{}th, request_num: {},  time_cost: {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span> <span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">))</span>
+        
+    <span class="n">session</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+</code></pre></div></div>
+
 <h2 id="参考">参考</h2>
 <p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017968846697824">廖雪峰</a><br />
 <a href="https://juejin.im/post/5c13245ee51d455fa5451f33">https://juejin.im/post/5c13245ee51d455fa5451f33</a><br />
@@ -483,7 +510,7 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/11/02/HMM/" data-toggle="tooltip" data-placement="top" title="隐马尔科夫模型">
+                        <a href="/2020/11/08/HMM/" data-toggle="tooltip" data-placement="top" title="隐马尔科夫模型">
                         Previous<br>
                         <span>隐马尔科夫模型</span>
                         </a>
@@ -491,9 +518,9 @@
                     
                     
                     <li class="next">
-                        <a href="/2020/11/08/universe/" data-toggle="tooltip" data-placement="top" title="宇宙与意识">
+                        <a href="/2020/11/08/spark-optimization/" data-toggle="tooltip" data-placement="top" title="Spark optimization">
                         Next<br>
-                        <span>宇宙与意识</span>
+                        <span>Spark optimization</span>
                         </a>
                     </li>
                     
@@ -639,6 +666,8 @@
   
   <li><a href="http://loupipalien.github.io">Chen lantian</a></li>
   
+  <li><a href="https://medium.com/">medium</a></li>
+  
   <li><a href="https://www.cnblogs.com/pinard/">Liu jianping</a></li>
   
   <li><a href="http://www.10tiao.com/">10tiao</a></li>
@@ -714,7 +743,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2020/11/02/python-coroutine",
+		id: "/2020/11/08/python-coroutine",
 		
 		});
 		gitalk.render('gitalk-container'); 

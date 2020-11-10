@@ -18,7 +18,7 @@
 网上有很多隐马尔科夫算法模型的介绍，内容都非常详实，如果大家感兴趣可在Reference中查阅相关link。本文的目的是对隐马尔科夫模型做一个简单的概括， 并尝试探索其如何应用到语言领域和地图匹配领域。
 ">
     
-    <meta property="article:published_time" content="2020-11-02T00:00:00Z">
+    <meta property="article:published_time" content="2020-11-08T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
@@ -28,7 +28,7 @@
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2020/11/02/HMM/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/11/08/HMM/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
     <title>隐马尔科夫模型 - 谢聪博客 | xcTorres Blog</title>
@@ -40,7 +40,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2020/11/02/HMM/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/11/08/HMM/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -241,7 +241,7 @@
                     <h1>隐马尔科夫模型</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on November 2, 2020</span>
+                    <span class="meta">Posted by xcTorres on November 8, 2020</span>
                 </div>
             </div>
         </div>
@@ -338,13 +338,13 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
 
 <h3 id="地图匹配">地图匹配</h3>
 <p>在我们收集行车或者骑手GPS序列的数据时，由于GPS数据的误差，这些点都不一定能是刚好在路上的。 而用基于HMM的地图匹配算法我们可以得到映射在路网上的真实轨迹。  如下图可以看出,原始的GPS 1，2，3点都不在路上，他们都有一定概率映射在其附近的道路上，但由于1,2，3点是GPS时间序列，那么他们之间也就产生了联系。所以用HMM算法来解决地图匹配问题就理所当然了。
-<img src="/img/in-post/HMM/hmm-1.png" width="200" height="200" title="hmm-1" /></p>
+<img src="/img/in-post/HMM/hmm-1.png" width="300" height="300" title="hmm-1" /></p>
 
 <p>在地图匹配问题中，我们可以理解为隐变量是GPS真实的在其附近候选路上的点序列TracePoint， 那么观察变量就是我们收集的原始的GPS轨迹。接下来就是如何描述发射概率和转换概率：</p>
 <ul>
   <li>发射概率，即各个路上的TracePoint到其对应的原始GPS的概率，这个可以由$\beta$分布来表达，而$\beta$分布的自变量即是TracePoint到Raw GPS的球面距离，距离越近则该表明TracePoint为此时刻真实路上的GPS点的概率越大。</li>
   <li>转换概率， 即各个候选路上的TracePoint之间的概率，可以用正态分布来表达这个概率，自变量即是各个TracePoint的network distance即路网距离减去球面距离的差的绝对值。绝对值越小的情况下则代表，两个TracePoint越有可能同在一条路上或相近路上，有很大的概率进行转换。<br />
-<img src="/img/in-post/HMM/hmm-2.png" width="200" height="200" title="hmm-2" /></li>
+<img src="/img/in-post/HMM/hmm-2.png" width="400" height="400" title="hmm-2" /></li>
 </ul>
 
 <p>这些就是HMM应用在地图匹配中的算法原理，在实现过程中，我们所需要的两个API是nearest API（给定一个点，用于寻找其附近的道路，并得到该点在各个道路上的投影点）， route API（给定起点和终点，返回两点之间的路网距离而非球面距离）。有了这两个API就能实现一版简易版本的地图匹配算法了。如下为地图匹配的demo, <a href="https://github.com/xcTorres/machine_learning/tree/master/hmm_demo">https://github.com/xcTorres/machine_learning/tree/master/hmm_demo</a>。</p>
@@ -373,7 +373,7 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
                     
                     
                     <li class="next">
-                        <a href="/2020/11/02/python-coroutine/" data-toggle="tooltip" data-placement="top" title="Python的协程与异步">
+                        <a href="/2020/11/08/python-coroutine/" data-toggle="tooltip" data-placement="top" title="Python的协程与异步">
                         Next<br>
                         <span>Python的协程与异步</span>
                         </a>
@@ -521,6 +521,8 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
   
   <li><a href="http://loupipalien.github.io">Chen lantian</a></li>
   
+  <li><a href="https://medium.com/">medium</a></li>
+  
   <li><a href="https://www.cnblogs.com/pinard/">Liu jianping</a></li>
   
   <li><a href="http://www.10tiao.com/">10tiao</a></li>
@@ -644,7 +646,7 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2020/11/02/HMM",
+		id: "/2020/11/08/HMM",
 		
 		});
 		gitalk.render('gitalk-container'); 
