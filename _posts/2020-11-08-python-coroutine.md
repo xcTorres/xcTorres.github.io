@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Python的协程与异步"
-date:       2020-11-02
+date:       2020-11-08
 author:     "xcTorres"
 header-img: "img/in-post/python/python.png"
 catalog:    true
@@ -119,7 +119,8 @@ patch_all函数则是可以设置需要替换的标准库，并最终达到异�
 
 ```
 
-## 并发发送请求 
+## 并发发送请求
+需要注意的是，无论是否并发发送请求，使用session以及TCP连接池都是提升性能的必需选择。 
 #### Asyncio
 ```python
 
@@ -215,6 +216,33 @@ patch_all函数则是可以设置需要替换的标准库，并最终达到异�
         response = loop.run_until_complete(join(batch_requests))
         loop.close()
         return response
+
+```
+
+#### Gevent + Pool
+尽管我们使用的是requests同步库，但是patch_socket可以自动将socket切换为异步协程grequests库。
+```python
+
+    import time
+    import requests
+    import gevent 
+    import gevent.monkey
+    gevent.monkey.patch_socket()
+
+    session = requests.Session()
+    adapter = requests.adapters.HTTPAdapter(pool_connections=10, pool_maxsize=10)
+    session.mount('http://', adapter)
+    for j,d in enumerate(data):
+        tasks = []
+        for i in d:
+            g = gevent.spawn(session.post, i['request_url'], json=i['params'])
+            tasks.append(g)
+        start = time.time()
+        gevent.joinall(tasks)
+        end = time.time()
+        print('{}th, request_num: {},  time_cost: {}'.format(j, len(data[j]), end-start))
+        
+    session.close()
 
 ```
 
