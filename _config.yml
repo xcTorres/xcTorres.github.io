@@ -177,6 +177,9 @@ gallery:
     y: 600                  # max height of thumbnails (in pixels)
   # The following options are for individual galleries.
   galleries:
+    big sale:
+      name:  "2020/11/11 Big Sale"
+      best_image: 1111_1.jpg  
     lighthouse:
       name: "2020/08/10 Johor Straits Lighthouse"
       best_image: lighthouse_02.jpg  
