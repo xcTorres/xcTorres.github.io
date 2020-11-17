@@ -276,15 +276,27 @@
 <h2 id="upload-certain-python-package">Upload certain python package</h2>
 
 <p>1） Enter into you python env directory, and find the package that you want to upload. For example, the package is <strong>shapely</strong>.</p>
-<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>
     <span class="nb">cd</span> <span class="o">~</span>/.conda/envs/foody/lib/python3.6/site<span class="na">-packages
 
-</span></code></pre></div></div>
+</span></pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>2) Upload the local package file to hdfs system, so that executors are able to download the file from hdfs system.
 If you are not familiar with the hadoop fs command, you could refer to this guide.
 Your hdfs path should be <strong>/user/your_name/</strong>, for example, my hdfs directory is <strong>/user/chong.xie/</strong>.  you could use following command to check the path exists or not.</p>
-<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>    
     ## <span class="kd">create</span> <span class="nb">dir</span> <span class="k">in</span> <span class="kd">hdfs</span> <span class="kd">system</span>
     <span class="kd">hadoop</span> <span class="kd">fs</span> <span class="na">-ls /user/chong</span>.xie/ 
     <span class="kd">hadoop</span> <span class="kd">fs</span> <span class="na">-mkdir /user/chong</span>.xie/gecoding_thrid_packages/ 
@@ -293,54 +305,80 @@ Your hdfs path should be <strong>/user/your_name/</strong>, for example, my hdfs
     ## <span class="kd">upload</span> <span class="kd">the</span> <span class="kd">local</span> <span class="kd">package</span> <span class="kd">to</span> <span class="kd">hdfs</span> <span class="kd">system</span>
     <span class="kd">hadoop</span> <span class="kd">fs</span> <span class="na">-copyFromLocal  </span>./shapely/  <span class="na">/user/chong</span>.xie/gecoding_thrid_packages/
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>3) Before we run the pySpark code, do remember to add file path to Spark.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>    
     <span class="n">sc</span><span class="p">.</span><span class="n">addFile</span><span class="p">(</span><span class="s">'hdfs:///user/chong.xie/gecoding_thrid_packages/shapely'</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>4) import the package just like the code is run on local server.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>
     <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="n">gpd</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="upload-entire-python-environment">Upload entire python environment</h2>
 
 <p>Now we have a way to upload custom packages, but sometimes the packages that we are going to use have many third-party dependencies, and it is very redundant to upload all of the dependencies.  Under the circumstances, the simplest way is to upload the entire python environment and let the executor servers use our own python env.</p>
 
 <p>1) Create a new python environment and install your required packages. For example, the env name is geocoding.</p>
-<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>
     <span class="kd">conda</span> <span class="kd">create</span> <span class="o">-</span><span class="na">-name </span><span class="kd">geocoding</span> <span class="kd">python</span><span class="o">=</span><span class="m">3</span>.6
     
     <span class="kd">conda</span> <span class="kd">activate</span> <span class="kd">geocoding</span>
     <span class="kd">pip</span> <span class="kd">install</span> <span class="kd">geopandas</span>
     <span class="kd">pip</span> <span class="kd">install</span> <span class="kd">shapely</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>2) Compress your python into a tgz file</p>
-<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
     <span class="nb">cd</span> <span class="o">~</span>/.conda/envs
     <span class="kd">tar</span> <span class="na">-zcf </span><span class="kd">python</span><span class="o">-</span><span class="m">3</span>.6.tgz ./geocoding/<span class="o">*</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>3) When we set the spark conf, don’t forget to set <strong>spark.yarn.dist.archives</strong>, which will distribute your python compression file to the working directory of every executor servers, and uncompress it to the Newname after #.  Here Newname is python-3.6.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
     <span class="n">SPARK_CONF</span> <span class="o">=</span> <span class="n">SparkConf</span><span class="p">().</span><span class="nb">set</span><span class="p">(...)</span> \
                             <span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">"spark.yarn.dist.archives"</span><span class="p">,</span><span class="s">"file:/ldap_home/chong.xie/.conda/envs/python-3.6.tgz#python-3.6"</span><span class="p">)</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <p>4) And then you need to set the python environment. PYSPARK_DRIVER_PYTHON is your driver python path, it should be only local path.  PYSPARK_PYTHON is the executor python path, so the configuration should be ./Newname/env_name/bin/python.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"PYSPARK_PYTHON"</span><span class="p">]</span> <span class="o">=</span> <span class="s">'./python-3.6/geocoding/bin/python'</span>
     <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"PYSPARK_DRIVER_PYTHON"</span><span class="p">]</span> <span class="o">=</span> <span class="s">'/ldap_home/chong.xie/.conda/envs/geocoding/bin/python'</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>5) Run the pySpark code. If there is no any error, it means it is using your own python environment.</p>
 
@@ -362,9 +400,9 @@ Your hdfs path should be <strong>/user/your_name/</strong>, for example, my hdfs
                     
                     
                     <li class="next">
-                        <a href="/2020/09/24/c++/" data-toggle="tooltip" data-placement="top" title="C++">
+                        <a href="/2020/09/26/OSM-data-introduction/" data-toggle="tooltip" data-placement="top" title="OSM data introduction">
                         Next<br>
-                        <span>C++</span>
+                        <span>OSM data introduction</span>
                         </a>
                     </li>
                     

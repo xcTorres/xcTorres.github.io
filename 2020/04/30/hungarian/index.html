@@ -309,7 +309,45 @@
 
 <h4 id="暴力递归">暴力递归</h4>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+</pre></td><td class="rouge-code"><pre>
     <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">def</span> <span class="nf">brute_force</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
 
@@ -347,11 +385,82 @@
         <span class="n">res</span> <span class="o">=</span> <span class="n">brute_force</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="dfs算法">dfs算法</h4>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+</pre></td><td class="rouge-code"><pre>
     <span class="c1"># @Time    : 10/12/19 17:05
 </span>    <span class="c1"># @Author  :  xcTorres
 </span>    <span class="c1"># @FileName: hungarian.py
@@ -422,7 +531,7 @@
         4
     """</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <h4 id="数学角度">数学角度</h4>
 <p>在实际生产环境中，dfs方式还是很少用到，多是转换成矩阵操作, 那么其数学原理是什么呢？
 首先匈牙利算法可以抽象成如下数学问题。即代价矩阵C乘以一个特殊矩阵X，其中X中每行或者每一列都是单位向量，即1处在不同行不同列.</p>

@@ -14,10 +14,10 @@
     <meta property="og:title" content="C++ - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="
+    <meta property="og:description" content="因为目前用的地图引擎是用C++写的，现在也要适当的回顾一下C++源码了。由于C++ 14新特性，现在学习C++的感觉没有像读书时期那样繁琐了, 也不需要自己新建内存空间再手动delete空间，跟Java很相似。
 ">
     
-    <meta property="article:published_time" content="2020-09-24T00:00:00Z">
+    <meta property="article:published_time" content="2020-11-17T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
@@ -27,7 +27,7 @@
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2020/09/24/c++/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/11/17/c++/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
     <title>C++ - 谢聪博客 | xcTorres Blog</title>
@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2020/09/24/c++/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/11/17/c++/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -242,7 +242,7 @@
                     <h1>C++</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on September 24, 2020</span>
+                    <span class="meta">Posted by xcTorres on November 17, 2020</span>
                 </div>
             </div>
         </div>
@@ -268,26 +268,189 @@
                 <!-- Multi-Lingual -->
                 
 
-				
+				<p>因为目前用的地图引擎是用C++写的，现在也要适当的回顾一下C++源码了。由于C++ 14新特性，现在学习C++的感觉没有像读书时期那样繁琐了, 也不需要自己新建内存空间再手动delete空间，跟Java很相似。</p>
+
+<h2 id="new-traits">New Traits</h2>
+<h4 id="auto"><a href="https://www.geeksforgeeks.org/type-inference-in-c-auto-and-decltype/">auto</a></h4>
+<p>过去的C++必须声明每个变量的类型，而有了auto关键字之后，编译器可以根据初始化自动推理变量的类型，这样在编写代码的过程中就省了不少时间，而在编译过程中的确会变得更慢，但是变慢的时间非常小。</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre>
+    <span class="c1">// C++ program to demonstrate that we can use auto to</span>
+    <span class="c1">// save time when creating iterators</span>
+    <span class="cp">#include &lt;bits/stdc++.h&gt;
+</span>    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a set of strings</span>
+        <span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">st</span><span class="p">;</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">insert</span><span class="p">({</span> <span class="s">"geeks"</span><span class="p">,</span> <span class="s">"for"</span><span class="p">,</span> 
+                <span class="s">"geeks"</span><span class="p">,</span> <span class="s">"org"</span> <span class="p">});</span>
+
+        <span class="c1">// 'it' evaluates to iterator to set of string</span>
+        <span class="c1">// type automatically</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> 
+            <span class="n">it</span> <span class="o">!=</span> <span class="n">st</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">it</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">it</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="stdmove"><a href="https://en.cppreference.com/w/cpp/utility/move">std::move</a></h4>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;iostream&gt;
+#include &lt;utility&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+</span> 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>
+ 
+    <span class="c1">// uses the push_back(const T&amp;) overload, which means </span>
+    <span class="c1">// we'll incur the cost of copying str</span>
+    <span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"After copy, str is </span><span class="se">\"</span><span class="s">"</span> <span class="o">&lt;&lt;</span> <span class="n">str</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"\n</span><span class="s">"</span><span class="p">;</span>
+ 
+    <span class="c1">// uses the rvalue reference push_back(T&amp;&amp;) overload, </span>
+    <span class="c1">// which means no strings will be copied; instead, the contents</span>
+    <span class="c1">// of str will be moved into the vector.  This is less</span>
+    <span class="c1">// expensive, but also means str might now be empty.</span>
+    <span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">str</span><span class="p">));</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"After move, str is </span><span class="se">\"</span><span class="s">"</span> <span class="o">&lt;&lt;</span> <span class="n">str</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"\n</span><span class="s">"</span><span class="p">;</span>
+ 
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"The contents of the vector are </span><span class="se">\"</span><span class="s">"</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                                         <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"</span><span class="s">, </span><span class="se">\"</span><span class="s">"</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="stdtransform"><a href="https://en.cppreference.com/w/cpp/algorithm/transform">std::transform</a></h4>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;algorithm&gt;
+#include &lt;cctype&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+</span>    
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s</span><span class="p">(</span><span class="s">"hello"</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span>
+                <span class="p">[](</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">toupper</span><span class="p">(</span><span class="n">c</span><span class="p">);</span> <span class="p">});</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">ordinals</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">ordinals</span><span class="p">),</span>
+                <span class="p">[](</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="p">{</span> <span class="k">return</span> <span class="n">c</span><span class="p">;</span> <span class="p">});</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="sc">':'</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">ord</span> <span class="o">:</span> <span class="n">ordinals</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span> <span class="o">&lt;&lt;</span> <span class="n">ord</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">ordinals</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span> <span class="n">ordinals</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span> <span class="n">ordinals</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span>
+                <span class="n">ordinals</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;&gt;</span><span class="p">{});</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">ord</span> <span class="o">:</span> <span class="n">ordinals</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ord</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="vector">Vector</h2>
+<p>使用一门语言，除了最基本的int, float, string类型，再了解一下数组和字典就可以干活了。在C++中，常用的数组是Vector</p>
+
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/09/24/custom-package-in-spark/" data-toggle="tooltip" data-placement="top" title="How to use custom packages in spark cluster">
+                        <a href="/2020/11/12/learn-english/" data-toggle="tooltip" data-placement="top" title="Learning English">
                         Previous<br>
-                        <span>How to use custom packages in spark cluster</span>
+                        <span>Learning English</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/09/26/OSM-data-introduction/" data-toggle="tooltip" data-placement="top" title="OSM data introduction">
-                        Next<br>
-                        <span>OSM data introduction</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -561,7 +724,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2020/09/24/c++",
+		id: "/2020/11/17/c++",
 		
 		});
 		gitalk.render('gitalk-container'); 

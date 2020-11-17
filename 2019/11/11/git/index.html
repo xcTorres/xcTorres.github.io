@@ -271,23 +271,44 @@
 				<h2 id="基本操作">基本操作</h2>
 
 <h4 id="0-git配置">0) git配置</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>
     <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">level</span>  <span class="o">--</span><span class="n">files</span>
 
     <span class="n">Example</span><span class="p">:</span>  
     <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="n">xxxx</span><span class="o">@</span><span class="n">example</span><span class="p">.</span><span class="n">com</span>
     
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="1创建版本库">1）创建版本库</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
     <span class="n">git</span> <span class="n">clone</span> <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span>     <span class="c1">#克隆远程版本库
 </span>    <span class="n">git</span> <span class="n">init</span>            <span class="c1">#初始化本地版本库
 </span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="2修改和提交">2）修改和提交</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre>
     <span class="n">git</span> <span class="n">status</span>          <span class="c1">#查看状态
 </span>    <span class="n">git</span> <span class="n">diff</span>            <span class="c1">#查看变更内容
 </span>    <span class="n">git</span> <span class="n">add</span> <span class="p">.</span>           <span class="c1">#跟踪所有改动过的文件
@@ -298,26 +319,46 @@
 </span>
     <span class="n">git</span> <span class="n">commit</span> <span class="o">--</span><span class="n">amend</span>  <span class="c1">#修改最后一次提交  
 </span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="3查看提交历史">3）查看提交历史</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>
     <span class="n">git</span> <span class="n">log</span>             <span class="c1">#查看提交历史
 </span>    <span class="n">git</span> <span class="n">log</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>   <span class="c1">#查看指定文件的提交历史
 </span>    <span class="n">git</span> <span class="n">blame</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>    <span class="c1">#以列表方式查看指定文件的提交历史
 </span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="4撤销">4）撤销</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>
     <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="n">HEAD</span>  <span class="c1">#撤销工作目录中所有未提交文件的修改内容  
 </span>    <span class="n">git</span> <span class="n">checkout</span> <span class="n">HEAD</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>  <span class="c1">#撤销指定的未提交文件的修改内容  
 </span>    <span class="n">git</span> <span class="n">revert</span> <span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span> <span class="c1">#撤销指定的提交
 </span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="4分支与标签">4）分支与标签</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>
     <span class="n">git</span> <span class="n">branch</span>           <span class="c1">#显示所有本地分支 
 </span>    <span class="n">git</span> <span class="n">checkout</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">/</span><span class="n">tag</span><span class="o">&gt;</span>                    
                          <span class="c1">#切换到指定分支或标签
@@ -327,16 +368,35 @@
 </span>    <span class="n">git</span> <span class="n">tag</span>  <span class="o">&lt;</span><span class="n">tagname</span><span class="o">&gt;</span>   <span class="c1"># 基于最新提交创建标签
 </span>    <span class="n">git</span> <span class="n">tag</span>  <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">tagname</span><span class="o">&gt;</span> <span class="c1">#删除标签
 </span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <h4 id="5合并与衍合">5）合并与衍合</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
    <span class="n">git</span> <span class="n">merge</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span>    <span class="c1">#合并指定分支到当前分支
 </span>   <span class="n">git</span> <span class="n">rebase</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span>   <span class="c1">#衍合指定分支到当前分支
 </span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="6远程操作">6）远程操作</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>    
     <span class="n">git</span> <span class="n">remote</span> <span class="o">-</span><span class="n">v</span>        <span class="c1">#查看远程版本库信息
 </span>    <span class="n">git</span> <span class="n">remote</span> <span class="n">show</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span>
                          <span class="c1">#查看指定远程版本库信息
@@ -351,11 +411,20 @@
                          <span class="c1">#删除远程分支或标签
 </span>    <span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="n">tags</span>      <span class="c1">#上传所有标签  
 </span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <h2 id="常见问题">常见问题</h2>
 <h4 id="1-编辑冲突">1） 编辑冲突</h4>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="n">HEAD</span><span class="p">:</span><span class="nb">file</span><span class="p">.</span><span class="n">txt</span>  
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>    <span class="o">&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="n">HEAD</span><span class="p">:</span><span class="nb">file</span><span class="p">.</span><span class="n">txt</span>  
 
     <span class="n">Hello</span> <span class="n">world</span>
 
@@ -364,15 +433,18 @@
     <span class="n">Goodbye</span>  
 
     <span class="o">&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="mi">77976</span><span class="n">da35a11db4580b80ae27e8d65caf5208086</span><span class="p">:</span><span class="nb">file</span><span class="p">.</span><span class="n">txt</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>其中等号是用来区分合并前后两个分支的区别，并且Head为本地当前的分支，而等号之后的为pull下来的分支内容。所需要的做是就是编辑解决冲突，（接着把冲突标识符删掉），再执行add，commit 命令，进行提交。</p>
 
 <h4 id="2-撤销git-add添加的文件">2） 撤销git add添加的文件</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>    
     <span class="n">git</span> <span class="n">reset</span>
     
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="彩蛋">彩蛋</h2>
 <p><img src="/img/in-post/git-all-commands.png" alt="" /></p>

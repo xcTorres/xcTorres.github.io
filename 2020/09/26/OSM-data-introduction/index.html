@@ -335,12 +335,17 @@ Many nodes form part of one or more ways, defining the shape or “path” of th
 
 <h4 id="example">Example</h4>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>
     <span class="nt">&lt;node</span> <span class="na">id=</span><span class="s">"25496583"</span> <span class="na">lat=</span><span class="s">"51.5173639"</span> <span class="na">lon=</span><span class="s">"-0.140043"</span> <span class="na">version=</span><span class="s">"1"</span> <span class="na">changeset=</span><span class="s">"203496"</span> <span class="na">user=</span><span class="s">"80n"</span> <span class="na">uid=</span><span class="s">"1238"</span> <span class="na">visible=</span><span class="s">"true"</span> <span class="na">timestamp=</span><span class="s">"2007-01-28T11:40:26Z"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"highway"</span> <span class="na">v=</span><span class="s">"traffic_signals"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/node&gt;</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <p>Visualization: <a href="https://www.openstreetmap.org/node/25496583#map=19/51.52092/-0.14281">https://www.openstreetmap.org/node/25496583#map=19/51.52092/-0.14281</a></p>
 
 <h3 id="way">Way</h3>
@@ -381,7 +386,24 @@ For example, a closed way defining a roundabout surrounding a grassy area might 
 highway=primary + junction=roundabout, both being interpreted as a polyline along the closed way, and landuse=grass, interpreted on the area enclosed by the way.</p>
 
 <h4 id="example-1">Example</h4>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre>
     <span class="nt">&lt;way</span> <span class="na">id=</span><span class="s">"5090250"</span> <span class="na">visible=</span><span class="s">"true"</span> <span class="na">timestamp=</span><span class="s">"2009-01-19T19:07:25Z"</span> <span class="na">version=</span><span class="s">"8"</span> <span class="na">changeset=</span><span class="s">"816806"</span> <span class="na">user=</span><span class="s">"Blumpsy"</span> <span class="na">uid=</span><span class="s">"64226"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"822403"</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"21533912"</span><span class="nt">/&gt;</span>
@@ -398,7 +420,7 @@ highway=primary + junction=roundabout, both being interpreted as a polyline alon
         <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"oneway"</span> <span class="na">v=</span><span class="s">"yes"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/way&gt;</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <p>Visualization: <a href="https://www.openstreetmap.org/way/5090250">https://www.openstreetmap.org/way/5090250</a></p>
 
 <h3 id="relation">Relation</h3>
@@ -421,7 +443,17 @@ Each variation of a bus route itinerary is represented by a relation with type=r
 
 <h4 id="example-2">Example</h4>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>
     <span class="nt">&lt;relation</span> <span class="na">id=</span><span class="s">"13"</span> <span class="na">visible=</span><span class="s">"true"</span> <span class="na">version=</span><span class="s">"25"</span> <span class="na">changeset=</span><span class="s">"74363810"</span> <span class="na">timestamp=</span><span class="s">"2019-09-11T16:30:55Z"</span> <span class="na">user=</span><span class="s">"Ferdinand0101"</span> <span class="na">uid=</span><span class="s">"9080271"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;member</span> <span class="na">type=</span><span class="s">"way"</span> <span class="na">ref=</span><span class="s">"2907748"</span> <span class="na">role=</span><span class="s">"outer"</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;member</span> <span class="na">type=</span><span class="s">"way"</span> <span class="na">ref=</span><span class="s">"8125203"</span> <span class="na">role=</span><span class="s">"inner"</span><span class="nt">/&gt;</span>
@@ -431,7 +463,7 @@ Each variation of a bus route itinerary is represented by a relation with type=r
         <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"wikidata"</span> <span class="na">v=</span><span class="s">"Q7349363"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/relation&gt;</span>
     
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <p>Visualization: <a href="https://www.openstreetmap.org/relation/13">https://www.openstreetmap.org/relation/13</a></p>
 
 <h1 id="data-format">Data format</h1>
@@ -463,9 +495,9 @@ Each variation of a bus route itinerary is represented by a relation with type=r
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/09/24/c++/" data-toggle="tooltip" data-placement="top" title="C++">
+                        <a href="/2020/09/24/custom-package-in-spark/" data-toggle="tooltip" data-placement="top" title="How to use custom packages in spark cluster">
                         Previous<br>
-                        <span>C++</span>
+                        <span>How to use custom packages in spark cluster</span>
                         </a>
                     </li>
                     

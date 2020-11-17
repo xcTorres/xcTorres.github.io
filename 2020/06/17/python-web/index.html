@@ -283,7 +283,15 @@
 
 <p>由于工作原因，在我的日常工作中不需要去考虑界面，更多的是做一个能够接受http请求并返回数据的后台，则可以只考虑flask路由的部分。只需简单的几句话，就能跑起来一个web框架。Flask的确是一个轻便的web服务框架。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>
     <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
     <span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
@@ -291,14 +299,29 @@
         <span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="s">"World"</span><span class="p">)</span>
         <span class="k">return</span> <span class="s">f'Hello, </span><span class="si">{</span><span class="n">escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s">!'</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>如在使用flask编写个人博客的时候，该网站需要用户，博客，管理员，默认网页等各个视图。这样一来每个视图都会有其自己的路由函数，所有路由都堆在一起了。使用蓝图可以将其模块化，其组织方式一般有功能式架构和分区式架构。可以看到功能式架构中，所有模板在一起，所有蓝图注册视图函数在views文件夹下。在分区式架构中，按照每一部分所属的蓝图来组织你的应用。管理面板的所有的模板，视图和静态文件放在一个文件夹中，用户控制面板的则放在另一个文件夹中。选择使用哪种架构实际上是一个个人问题。两者间的唯一区别是表达层次性的方式不同 – 你可以使用任意一种方式架构Flask应用 – 所以你所需的就是选择贴近你的需求的那个。如果你的应用是由独立的，仅仅共享模型和配置的各组件组成，分区式将是个好选择。一个例子是允许用户建立网站的SaaS应用。你将会有独立的蓝图用于主页，控制面板，用户网站，和高亮面板。这些组件有着完全不同的静态文件和布局。如果你想要将你的蓝图提取成插件，或用之于别的项目，一个分区式架构将是正确的选择。</p>
 
 <p>更多关于URL路由详情以及flask扩展可以了解官网<a href="https://flask.palletsprojects.com/en/1.1.x/">https://flask.palletsprojects.com/en/1.1.x/</a></p>
 
 <p><strong>功能式架构</strong></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>
     <span class="n">yourapp</span><span class="o">/</span>
     <span class="n">__init__</span><span class="p">.</span><span class="n">py</span>
     <span class="n">static</span><span class="o">/</span>
@@ -313,11 +336,31 @@
         <span class="n">admin</span><span class="p">.</span><span class="n">py</span>
     <span class="n">models</span><span class="p">.</span><span class="n">py</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><strong>分区式架构</strong></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre>
     <span class="n">yourapp</span><span class="o">/</span>
         <span class="n">__init__</span><span class="p">.</span><span class="n">py</span>
         <span class="n">admin</span><span class="o">/</span>
@@ -337,7 +380,7 @@
             <span class="n">templates</span><span class="o">/</span>
         <span class="n">models</span><span class="p">.</span><span class="n">py</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="guincorn">Guincorn</h2>
 

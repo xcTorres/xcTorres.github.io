@@ -271,7 +271,34 @@
 
 <h2 id="spark-init">Spark Init</h2>
 <h4 id="jupyter">Jupyter</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="rouge-code"><pre>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"SPARK_HOME"</span><span class="p">]</span> <span class="o">=</span> <span class="s">'/usr/share/spark-2.4'</span>  <span class="c1"># add this before "import findspark" if you cannot find pyspark
 </span>    <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"PYSPARK_PYTHON"</span><span class="p">]</span> <span class="o">=</span> <span class="s">'./python-3.6/pyarrow/bin/python'</span>
@@ -298,7 +325,7 @@
         <span class="p">.</span><span class="n">enableHiveSupport</span><span class="p">()</span> \
         <span class="p">.</span><span class="n">getOrCreate</span><span class="p">()</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <p>Here are some configuration we need to notice.</p>
 
 <ul>
@@ -310,27 +337,43 @@
 
 <h4 id="command">Command</h4>
 <p>We could also use pyspark-submit to run the Spark job.</p>
-<pre><code class="language-linux">
-    spark-submit --conf spark.pyspark.python=/usr/share/miniconda2/envs/py36/bin/python \
-                 --conf spark.pyspark.driver.python=/ldap_home/chong.xie/.conda/envs/foody/bin/python \
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>
+    spark-submit <span class="nt">--conf</span> spark.pyspark.python<span class="o">=</span>/usr/share/miniconda2/envs/py36/bin/python <span class="se">\</span>
+                 <span class="nt">--conf</span> spark.pyspark.driver.python<span class="o">=</span>/ldap_home/chong.xie/.conda/envs/foody/bin/python <span class="se">\</span>
                  ./feature/merchant_features.py  
 
-</code></pre>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="read--write">Read &amp; Write</h2>
 <h4 id="from-json">From json</h4>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>    
     <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">json</span><span class="p">(</span><span class="s">"path"</span><span class="p">)</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="from-csv"><strong>From csv</strong></h4>
 <h4 id="from-hdfs"><strong>From hdfs</strong></h4>
 
 <h4 id="from-parquet"><strong>From parquet</strong></h4>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>
     <span class="c1"># Read
 </span>    <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="s">'path'</span><span class="p">)</span>
 
@@ -338,14 +381,29 @@
 </span>    <span class="n">df</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">'overwrite'</span><span class="p">)</span> <span class="c1"># Overwrite
 </span>    <span class="n">df</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">'append'</span><span class="p">)</span> <span class="c1"># Append
 </span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="from-kafka-streaming"><strong>From kafka streaming</strong></h4>
 <ul>
   <li><strong>Stream</strong></li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>
     <span class="n">topic</span> <span class="o">=</span> <span class="s">'topic'</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">readStream</span> \
             <span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="s">"kafka"</span><span class="p">)</span> \
@@ -360,12 +418,24 @@
               <span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="s">'console'</span><span class="p">)</span>\
               <span class="p">.</span><span class="n">start</span><span class="p">()</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <ul>
   <li><strong>Batch query</strong></li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre>
     <span class="n">topic</span> <span class="o">=</span> <span class="s">'topic'</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">read</span> \
             <span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="s">"kafka"</span><span class="p">)</span> \
@@ -377,12 +447,21 @@
             <span class="p">.</span><span class="n">load</span><span class="p">()</span> \
             <span class="p">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s">"CAST(value AS STRING)"</span><span class="p">)</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="spark-dataframe">Spark DataFrame</h2>
 
 <h4 id="filter-value">Filter value</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># Filter null value
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>    <span class="c1"># Filter null value
 </span>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s">"dt_mvmt"</span><span class="p">).</span><span class="n">isNull</span><span class="p">())</span>  
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">na</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s">"dt_mvmt"</span><span class="p">])</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s">"dt_mvmt"</span><span class="p">).</span><span class="n">isNull</span><span class="p">())</span>
@@ -391,10 +470,34 @@
 </span>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s">"col"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="s">'col &gt; 2'</span><span class="p">)</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="get-statistic-data">Get Statistic data</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="rouge-code"><pre>
     <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">'origin_speed'</span><span class="p">).</span><span class="n">summary</span><span class="p">().</span><span class="n">show</span><span class="p">()</span>
 
     <span class="c1"># +-------+------------------+
@@ -418,20 +521,32 @@
 </span>    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="s">'create_time'</span><span class="p">))).</span><span class="n">show</span><span class="p">()</span>
     <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="s">'create_time'</span><span class="p">))).</span><span class="n">show</span><span class="p">()</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="mappartition">mapPartition</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>
 
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="groupby">GroupBy</h4>
 
 <h2 id="spark-sql">Spark SQL</h2>
 
 <h4 id="select--from">select &amp; from</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>
     <span class="n">sql</span> <span class="o">=</span>  <span class="s">'''
                 select * 
                 from {} 
@@ -440,16 +555,20 @@
            '''</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">time_from</span><span class="p">,</span> <span class="n">time_to</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="unix_timestamp">unix_timestamp</h4>
 <p>Convert time string with given pattern (<strong>‘yyyy-MM-dd HH:mm:ss’</strong>, by default) to Unix time stamp (in seconds), using the default timezone and the default locale, return null if fail.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
     <span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="n">F</span> 
     <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">unix_timestamp</span><span class="p">(</span><span class="s">'dt'</span><span class="p">,</span> <span class="s">'yyyy-MM-dd'</span><span class="p">).</span><span class="n">alias</span><span class="p">(</span><span class="s">'unix_time'</span><span class="p">))</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="optimization">Optimization</h2>
 

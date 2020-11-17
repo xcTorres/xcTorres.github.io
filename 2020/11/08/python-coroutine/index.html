@@ -303,7 +303,27 @@
 
 <p>在Python3.5之前，协程的定义需要修饰器来装饰，但3.5之后则直接用async来代替， yield from则由await来代替。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre>
     <span class="kn">import</span> <span class="nn">time</span>
     <span class="kn">import</span> <span class="nn">asyncio</span>
 
@@ -323,10 +343,19 @@
         <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">s</span>
         <span class="k">print</span><span class="p">(</span><span class="s">f"</span><span class="si">{</span><span class="n">__file__</span><span class="si">}</span><span class="s"> executed in </span><span class="si">{</span><span class="n">elapsed</span><span class="p">:</span><span class="mf">0.2</span><span class="n">f</span><span class="si">}</span><span class="s"> seconds."</span><span class="p">)</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <p>该代码块运行结果如下,不难发现main函数是要运行三个协程任务，但当每个任务运行到asyncio.sleep的时候便立马切换到其他协程，然后当睡眠1s过后切换回来时，三个任务都依次完成。起到了异步的效果。其总时间只花了1s钟。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>
     <span class="n">One</span>
     <span class="n">One</span>
     <span class="n">One</span>
@@ -335,10 +364,38 @@
     <span class="n">Two</span>
     <span class="p">.</span><span class="o">/</span><span class="n">coroutine</span><span class="p">.</span><span class="n">py</span> <span class="n">executed</span> <span class="ow">in</span> <span class="mf">1.00</span> <span class="n">seconds</span><span class="p">.</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Gevent也是一个出名的协程库，其用法与Asyncio完全不同，Gevent的宗旨是自动将标准库替换为协程库。如下例，虽然我们使用的是标准库的time.sleep()，但是gevent仍然能将其自动切换为协程。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="rouge-code"><pre>
     <span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">monkey</span>
     <span class="n">monkey</span><span class="p">.</span><span class="n">patch_all</span><span class="p">()</span>
 
@@ -366,19 +423,57 @@
 </span>    <span class="c1"># eat food 2
 </span>    <span class="c1"># end
 </span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>patch_all函数则是可以设置需要替换的标准库，并最终达到异步的效果。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
     <span class="k">def</span> <span class="nf">patch_all</span><span class="p">(</span><span class="n">socket</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dns</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">thread</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">os</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">subprocess</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">sys</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">aggressive</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">Event</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
     <span class="n">builtins</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="n">queue</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">contextvars</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="并发发送请求">并发发送请求</h2>
 <p>需要注意的是，无论是否并发发送请求，使用session以及TCP连接池都是提升性能的必需选择。</p>
 <h4 id="asyncio">Asyncio</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre></td><td class="rouge-code"><pre>
     <span class="kn">import</span> <span class="nn">asyncio</span>
     <span class="kn">import</span> <span class="nn">requests</span>
     <span class="kn">from</span> <span class="nn">aiohttp</span> <span class="kn">import</span> <span class="n">ClientSession</span><span class="p">,</span> <span class="n">TCPConnector</span>
@@ -412,10 +507,66 @@
         <span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">response</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="asyncio--multi-processing">Asyncio + Multi-processing</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+</pre></td><td class="rouge-code"><pre>
     <span class="kn">import</span> <span class="nn">asyncio</span>
     <span class="kn">import</span> <span class="nn">requests</span>
     <span class="kn">from</span> <span class="nn">aiohttp</span> <span class="kn">import</span> <span class="n">ClientSession</span><span class="p">,</span> <span class="n">TCPConnector</span>
@@ -471,11 +622,33 @@
         <span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">response</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="gevent--pool">Gevent + Pool</h4>
 <p>尽管我们使用的是requests同步库，但是patch_socket可以自动将socket切换为异步协程grequests库。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre>
     <span class="kn">import</span> <span class="nn">time</span>
     <span class="kn">import</span> <span class="nn">requests</span>
     <span class="kn">import</span> <span class="nn">gevent</span> 
@@ -497,7 +670,7 @@
         
     <span class="n">session</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="参考">参考</h2>
 <p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017968846697824">廖雪峰</a><br />
