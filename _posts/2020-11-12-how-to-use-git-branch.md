@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "git branching model"
+title:      "Git branching model"
 date:       2020-11-12
 author:     "xcTorres"
 header-img: "img/in-post/git.jpg"

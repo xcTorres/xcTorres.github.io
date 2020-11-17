@@ -52,7 +52,7 @@ Here are some configuration we need to notice.
 
 #### Command
 We could also use pyspark-submit to run the Spark job.
-```linux
+```bash
 
     spark-submit --conf spark.pyspark.python=/usr/share/miniconda2/envs/py36/bin/python \
                  --conf spark.pyspark.driver.python=/ldap_home/chong.xie/.conda/envs/foody/bin/python \

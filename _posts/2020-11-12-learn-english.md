@@ -35,12 +35,16 @@ English is not an art to be mastered.It is just a tool to get the result.**
 | 25th Oct |[https://www.bilibili.com/video/BV1Mi4y177Po?p=1](https://www.bilibili.com/video/BV1Mi4y177Po?p=1)|  民主党最后的王牌？奥巴马最新热血演讲：川普，总统不是这么当的 |
 | 2nd Nov |[并非所有水力发电设施都有利于环保](https://dict.eudic.net/webting/desktopplay?id=3c018d6d-1b12-11eb-8659-00505686c5e6&token=QYN+eyJ0b2tlbiI6IiIsInVzZXJpZCI6IiIsInVybHNpZ24iOiJ1RFdGQys0R0pCMEVxWXRtcm0wVFZPb1lSOEU9IiwidCI6IkFCSU1UWXlOREV3TmpNeU9RPT0ifQ%3D%3D)|  并非所有水力发电设施都有利于环保 |
 | 12th Nov |[https://www.bilibili.com/video/BV1JK411V77G?p=1](https://www.bilibili.com/video/BV1JK411V77G?p=1)|  Improving your memory - 6 Minute English |
+| 18th Nov |[https://www.bilibili.com/video/BV1JK411V77G?p=3](https://www.bilibili.com/video/BV1JK411V77G?p=3)|  What makes you happy 6 Minute English |
 
 # 口语  
 ### 日常
 Vibe 印象， He gave a good vibe on me.  
 A hint of 一点点  
 What's the Engilish word for this?  
+down in the dumps 垂头丧气  
+millennials 千禧一代  
+regulate 调节，控制
 
 ### 工作交谈
 As a quick reminder: 顺便提醒一下  
