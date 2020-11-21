@@ -296,10 +296,7 @@
 23
 24
 25
-26
-27
-</pre></td><td class="rouge-code"><pre>
-    <span class="kn">import</span> <span class="nn">os</span>
+</pre></td><td class="rouge-code"><pre>    <span class="kn">import</span> <span class="nn">os</span>
     <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"SPARK_HOME"</span><span class="p">]</span> <span class="o">=</span> <span class="s">'/usr/share/spark-2.4'</span>  <span class="c1"># add this before "import findspark" if you cannot find pyspark
 </span>    <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"PYSPARK_PYTHON"</span><span class="p">]</span> <span class="o">=</span> <span class="s">'./python-3.6/pyarrow/bin/python'</span>
     <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"PYSPARK_DRIVER_PYTHON"</span><span class="p">]</span> <span class="o">=</span> <span class="s">'/ldap_home/chong.xie/.conda/envs/foody/bin/python'</span>
@@ -324,30 +321,39 @@
     <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="p">.</span><span class="n">builder</span> \
         <span class="p">.</span><span class="n">enableHiveSupport</span><span class="p">()</span> \
         <span class="p">.</span><span class="n">getOrCreate</span><span class="p">()</span>
-
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>Here are some configuration we need to notice.</p>
-
-<ul>
-  <li>spark.executor.instances</li>
-  <li>spark.executor.cores</li>
-  <li>spark.executor.memory</li>
-  <li>spark.sql.session.timeZone</li>
-</ul>
 
 <h4 id="command">Command</h4>
 <p>We could also use pyspark-submit to run the Spark job.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-4
-5
-</pre></td><td class="rouge-code"><pre>
-    spark-submit <span class="nt">--conf</span> spark.pyspark.python<span class="o">=</span>/usr/share/miniconda2/envs/py36/bin/python <span class="se">\</span>
-                 <span class="nt">--conf</span> spark.pyspark.driver.python<span class="o">=</span>/ldap_home/chong.xie/.conda/envs/foody/bin/python <span class="se">\</span>
-                 ./feature/merchant_features.py  
-
+</pre></td><td class="rouge-code"><pre>spark-submit <span class="nt">--conf</span> spark.pyspark.python<span class="o">=</span>/usr/share/miniconda2/envs/py36/bin/python <span class="se">\</span>
+             <span class="nt">--conf</span> spark.pyspark.driver.python<span class="o">=</span>/ldap_home/chong.xie/.conda/envs/foody/bin/python <span class="se">\</span>
+             ./feature/merchant_features.py  
 </pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="configuration">Configuration</h4>
+<p>Here are some configurations we need to notice.</p>
+
+<ul>
+  <li>
+    <p><strong>spark.executor.instances</strong><br />
+configuration property controls the number of executors requested</p>
+  </li>
+  <li>
+    <p><strong>spark.executor.cores</strong> <br />
+configuration property controls the number of concurrent tasks an executor can run</p>
+  </li>
+  <li>
+    <p><strong>spark.executor.memory</strong><br />
+configuration property controls the heap size</p>
+  </li>
+  <li>
+    <p><strong>spark.sql.session.timeZone</strong><br />
+The session time zone is set with the configuration ‘spark.sql.session.timeZone’ and will default to the JVM system local time zone if not set.</p>
+  </li>
+</ul>
 
 <h2 id="read--write">Read &amp; Write</h2>
 <h4 id="from-json">From json</h4>
@@ -355,9 +361,27 @@
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
+4
+5
+6
+7
+8
+9
+10
+11
+12
 </pre></td><td class="rouge-code"><pre>    
-    <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">json</span><span class="p">(</span><span class="s">"path"</span><span class="p">)</span>
+    <span class="c1"># A JSON dataset is pointed to by path.
+</span>    <span class="c1"># The path can be either a single text file or a directory storing text files
+</span>    <span class="n">path</span> <span class="o">=</span> <span class="s">"examples/src/main/resources/people.json"</span>
+    <span class="n">peopleDF</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">json</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
+    <span class="c1"># The inferred schema can be visualized using the printSchema() method
+</span>    <span class="n">peopleDF</span><span class="p">.</span><span class="n">printSchema</span><span class="p">()</span>
+    <span class="c1"># root
+</span>    <span class="c1">#  |-- age: long (nullable = true)
+</span>    <span class="c1">#  |-- name: string (nullable = true)
+</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="from-csv"><strong>From csv</strong></h4>
@@ -371,17 +395,13 @@
 4
 5
 6
-7
-8
-</pre></td><td class="rouge-code"><pre>
-    <span class="c1"># Read
+</pre></td><td class="rouge-code"><pre>    <span class="c1"># Read
 </span>    <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="s">'path'</span><span class="p">)</span>
 
     <span class="c1"># Write
 </span>    <span class="n">df</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">'overwrite'</span><span class="p">)</span> <span class="c1"># Overwrite
 </span>    <span class="n">df</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">'append'</span><span class="p">)</span> <span class="c1"># Append
-</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</span></pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="from-kafka-streaming"><strong>From kafka streaming</strong></h4>
 <ul>
@@ -402,12 +422,11 @@
 12
 13
 14
-15
-</pre></td><td class="rouge-code"><pre>
-    <span class="n">topic</span> <span class="o">=</span> <span class="s">'topic'</span>
+</pre></td><td class="rouge-code"><pre>    <span class="n">topic</span> <span class="o">=</span> <span class="s">'topic'</span>
+    <span class="n">servers</span><span class="o">=</span><span class="s">"ip:port"</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">readStream</span> \
             <span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="s">"kafka"</span><span class="p">)</span> \
-            <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"kafka.bootstrap.servers"</span><span class="p">,</span> <span class="s">"10.70.15.78:9092"</span><span class="p">)</span> \
+            <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"kafka.bootstrap.servers"</span><span class="p">,</span> <span class="n">servers</span><span class="p">)</span> \
             <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"subscribe"</span><span class="p">,</span> <span class="n">topic</span><span class="p">)</span> \
             <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"startingOffsets"</span><span class="p">,</span> <span class="s">"latest"</span><span class="p">)</span> \
             <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"failOnDataLoss"</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span> \
@@ -417,7 +436,6 @@
     <span class="n">query</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">writeStream</span>\
               <span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="s">'console'</span><span class="p">)</span>\
               <span class="p">.</span><span class="n">start</span><span class="p">()</span>
-
 </pre></td></tr></tbody></table></code></pre></div></div>
 <ul>
   <li><strong>Batch query</strong></li>
@@ -434,22 +452,58 @@
 9
 10
 11
-12
-</pre></td><td class="rouge-code"><pre>
-    <span class="n">topic</span> <span class="o">=</span> <span class="s">'topic'</span>
+</pre></td><td class="rouge-code"><pre>    <span class="n">topic</span> <span class="o">=</span> <span class="s">'topic'</span>
+    <span class="n">servers</span><span class="o">=</span><span class="s">"ip:port"</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">read</span> \
             <span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="s">"kafka"</span><span class="p">)</span> \
-            <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"kafka.bootstrap.servers"</span><span class="p">,</span> <span class="s">"10.70.15.78:9092"</span><span class="p">)</span> \
+            <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"kafka.bootstrap.servers"</span><span class="p">,</span> <span class="n">servers</span><span class="p">)</span> \
             <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"subscribe"</span><span class="p">,</span> <span class="n">topic</span><span class="p">)</span> \
             <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"startingOffsets"</span><span class="p">,</span> <span class="s">"earlist"</span><span class="p">)</span> \
             <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"endingOffsets"</span><span class="p">,</span> <span class="s">"earliest"</span><span class="p">)</span> \
             <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">"failOnDataLoss"</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span> \
             <span class="p">.</span><span class="n">load</span><span class="p">()</span> \
             <span class="p">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s">"CAST(value AS STRING)"</span><span class="p">)</span>
-
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="spark-dataframe">Spark DataFrame</h2>
+
+<h4 id="select--from">Select &amp; from</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>
+    <span class="n">sql</span> <span class="o">=</span>  <span class="s">'''
+                select * 
+                from {} 
+                where create_time &gt;= unix_timestamp('{}')
+                and create_time &lt; unix_timestamp('{}')
+           '''</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">time_from</span><span class="p">,</span> <span class="n">time_to</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="function-unix_timestamp">Function unix_timestamp</h4>
+<p>Convert time string with given pattern (<strong>‘yyyy-MM-dd HH:mm:ss’</strong>, by default) to Unix time stamp (in seconds), using the default timezone and the default locale, return null if fail.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>    <span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="n">F</span> 
+    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">unix_timestamp</span><span class="p">(</span><span class="s">'dt'</span><span class="p">,</span> <span class="s">'yyyy-MM-dd'</span><span class="p">).</span><span class="n">alias</span><span class="p">(</span><span class="s">'unix_time'</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="function-from_unixtime">Function from_unixtime</h4>
+<p>Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a string representing the timestamp of that moment in the current system time zone in the given format.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>    <span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="n">F</span>
+    <span class="kn">import</span> <span class="nn">pyspark.sql.types</span> <span class="k">as</span> <span class="n">T</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s">'date_time'</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">from_unixtime</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="s">'timestamp'</span><span class="p">)))</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="filter-value">Filter value</h4>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
@@ -461,6 +515,8 @@
 7
 8
 9
+10
+11
 </pre></td><td class="rouge-code"><pre>    <span class="c1"># Filter null value
 </span>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s">"dt_mvmt"</span><span class="p">).</span><span class="n">isNull</span><span class="p">())</span>  
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">na</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s">"dt_mvmt"</span><span class="p">])</span>
@@ -470,9 +526,52 @@
 </span>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s">"col"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="s">'col &gt; 2'</span><span class="p">)</span>
 
+    <span class="c1">#  Multi conditions
+</span>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="s">'(col&gt;2) and (col&lt;34)'</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<h4 id="get-statistic-data">Get Statistic data</h4>
+<h4 id="get-summary">Get summary</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre>    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">'origin_speed'</span><span class="p">).</span><span class="n">summary</span><span class="p">().</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># +-------+------------------+
+</span>    <span class="c1"># |summary|      origin_speed|
+</span>    <span class="c1"># +-------+------------------+
+</span>    <span class="c1"># |  count|           7066188|
+</span>    <span class="c1"># |   mean|4.3542590483886805|
+</span>    <span class="c1"># | stddev| 4.069686621970696|
+</span>    <span class="c1"># |    min|              -2.0|
+</span>    <span class="c1"># |    25%|        0.55032253|
+</span>    <span class="c1"># |    50%|         3.6093123|
+</span>    <span class="c1"># |    75%|          7.272925|
+</span>    <span class="c1"># |    max|             210.0|
+</span>    <span class="c1"># +-------+------------------+
+</span>
+    <span class="c1"># min, max, avg
+</span>    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="s">'create_time'</span><span class="p">)).</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="s">'create_time'</span><span class="p">))).</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">avg</span><span class="p">(</span><span class="s">'create_time'</span><span class="p">)).</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="get-quantile">Get quantile</h4>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -497,33 +596,40 @@
 22
 23
 24
-</pre></td><td class="rouge-code"><pre>
-    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">'origin_speed'</span><span class="p">).</span><span class="n">summary</span><span class="p">().</span><span class="n">show</span><span class="p">()</span>
-
-    <span class="c1"># +-------+------------------+
-</span>    <span class="c1"># |summary|      origin_speed|
-</span>    <span class="c1"># +-------+------------------+
-</span>    <span class="c1"># |  count|           7066188|
-</span>    <span class="c1"># |   mean|4.3542590483886805|
-</span>    <span class="c1"># | stddev| 4.069686621970696|
-</span>    <span class="c1"># |    min|              -2.0|
-</span>    <span class="c1"># |    25%|        0.55032253|
-</span>    <span class="c1"># |    50%|         3.6093123|
-</span>    <span class="c1"># |    75%|          7.272925|
-</span>    <span class="c1"># |    max|             210.0|
-</span>    <span class="c1"># +-------+------------------+
-</span>
-    <span class="c1"># Quantile
+</pre></td><td class="rouge-code"><pre>    <span class="c1"># Quantile
 </span>    <span class="n">df</span><span class="p">.</span><span class="n">approxQuantile</span><span class="p">(</span><span class="s">"origin_speed"</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.995</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
     <span class="c1"># [8.28824234008789, 10.089457511901855, 11.575858116149902, 14.782051086425781, 16.42580223083496]
 </span>
-    <span class="c1">#min, max
-</span>    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="s">'create_time'</span><span class="p">))).</span><span class="n">show</span><span class="p">()</span>
-    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="s">'create_time'</span><span class="p">))).</span><span class="n">show</span><span class="p">()</span>
+    <span class="c1"># Spark SQL
+</span>    <span class="n">sql</span> <span class="o">=</span> <span class="s">'''
+            select 
+                experiment_group,
+                count(*),
+                percentile_approx(CreatedOnToConfirm, 0.25) as CreatedOnToConfirmQuantile25,
+                percentile_approx(CreatedOnToConfirm, 0.5) as CreatedOnToConfirmQuantile50,
+                percentile_approx(CreatedOnToConfirm, 0.75) as CreatedOnToConfirmQuantile75,
+                
+            from order_complete_info
+            group by experiment_group
+    
+          '''</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
 
+    <span class="n">sql</span> <span class="o">=</span> <span class="s">'''
+            select percentile_approx(create_time, array(0.25,0.5,0.75)) as create_quantile
+            from tmp
+          '''</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<h4 id="mappartition">mapPartition</h4>
+<h4 id="get-nan-value-count">Get nan value count</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>    <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">isnan</span><span class="p">,</span> <span class="n">when</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">col</span>
+    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">([</span><span class="n">count</span><span class="p">(</span><span class="n">when</span><span class="p">(</span><span class="n">isnan</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">c</span><span class="p">)).</span><span class="n">alias</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'create_time'</span><span class="p">]]).</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="mappartition">MapPartition</h4>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -533,41 +639,10 @@
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="groupby">GroupBy</h4>
-
-<h2 id="spark-sql">Spark SQL</h2>
-
-<h4 id="select--from">select &amp; from</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="rouge-code"><pre>
-    <span class="n">sql</span> <span class="o">=</span>  <span class="s">'''
-                select * 
-                from {} 
-                where create_time &gt;= unix_timestamp('{}')
-                and create_time &lt; unix_timestamp('{}')
-           '''</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">time_from</span><span class="p">,</span> <span class="n">time_to</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
-
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h4 id="unix_timestamp">unix_timestamp</h4>
-<p>Convert time string with given pattern (<strong>‘yyyy-MM-dd HH:mm:ss’</strong>, by default) to Unix time stamp (in seconds), using the default timezone and the default locale, return null if fail.</p>
+<p>Groups the DataFrame using the specified columns, so we can run aggregation on them. See GroupedData for all the available aggregate functions.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
 </pre></td><td class="rouge-code"><pre>
-    <span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="n">F</span> 
-    <span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">unix_timestamp</span><span class="p">(</span><span class="s">'dt'</span><span class="p">,</span> <span class="s">'yyyy-MM-dd'</span><span class="p">).</span><span class="n">alias</span><span class="p">(</span><span class="s">'unix_time'</span><span class="p">))</span>
-
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="optimization">Optimization</h2>
@@ -907,16 +982,6 @@
   
   
   
-  <li>
-    <a target="_blank" href="https://www.zhihu.com/people/cong-zi-64">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa  fa-stack-1x fa-inverse">知</i>
-      </span>
-    </a>
-  </li>
-  
-  
   
   
   <li>
@@ -934,6 +999,26 @@
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://xcwhu2016.medium.com">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.zhihu.com/people/cong-zi-64">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa  fa-stack-1x fa-inverse">知</i>
       </span>
     </a>
   </li>
