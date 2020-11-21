@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Git branching model"
+title:      "Git Branching Model"
 date:       2020-11-12
 author:     "xcTorres"
 header-img: "img/in-post/git.jpg"
@@ -9,4 +9,5 @@ tags:
     - git
 ---  
 
-[https://nvie.com/posts/a-successful-git-branching-model/](https://nvie.com/posts/a-successful-git-branching-model/)
+[https://nvie.com/posts/a-successful-git-branching-model/](https://nvie.com/posts/a-successful-git-branching-model/)  
+

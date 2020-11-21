@@ -18,7 +18,7 @@ There are two ways to let the executor nodes find out the target python packages
 
 ## Upload certain python package  
 
-1） Enter into you python env directory, and find the package that you want to upload. For example, the package is **shapely**.  
+1） Enter into your python env directory, and find the package that you want to upload. For example, the package is **shapely**.  
 ```bat
 
     cd ~/.conda/envs/foody/lib/python3.6/site-packages

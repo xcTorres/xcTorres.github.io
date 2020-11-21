@@ -15,7 +15,6 @@ Since I was a postgraduate in college, I have been using Spark cluster for 4 yea
 ## Spark Init
 #### Jupyter
 ```python
-
     import os
     os.environ["SPARK_HOME"] = '/usr/share/spark-2.4'  # add this before "import findspark" if you cannot find pyspark
     os.environ["PYSPARK_PYTHON"] = './python-3.6/pyarrow/bin/python'
@@ -41,31 +40,47 @@ Since I was a postgraduate in college, I have been using Spark cluster for 4 yea
     spark = SparkSession.builder \
         .enableHiveSupport() \
         .getOrCreate()
-
 ```
-Here are some configuration we need to notice.
-
-- spark.executor.instances
-- spark.executor.cores  
-- spark.executor.memory  
-- spark.sql.session.timeZone
 
 #### Command
 We could also use pyspark-submit to run the Spark job.
 ```bash
-
-    spark-submit --conf spark.pyspark.python=/usr/share/miniconda2/envs/py36/bin/python \
-                 --conf spark.pyspark.driver.python=/ldap_home/chong.xie/.conda/envs/foody/bin/python \
-                 ./feature/merchant_features.py  
-
+spark-submit --conf spark.pyspark.python=/usr/share/miniconda2/envs/py36/bin/python \
+             --conf spark.pyspark.driver.python=/ldap_home/chong.xie/.conda/envs/foody/bin/python \
+             ./feature/merchant_features.py  
 ```
+
+#### Configuration
+Here are some configurations we need to notice.
+
+- **spark.executor.instances**  
+configuration property controls the number of executors requested
+
+- **spark.executor.cores**   
+configuration property controls the number of concurrent tasks an executor can run
+
+- **spark.executor.memory**  
+configuration property controls the heap size
+
+- **spark.sql.session.timeZone**  
+The session time zone is set with the configuration ‘spark.sql.session.timeZone’ and will default to the JVM system local time zone if not set.
+
 
 ## Read & Write
 #### From json
 
 ```python
     
-    df = spark.read.json("path")
+    # A JSON dataset is pointed to by path.
+    # The path can be either a single text file or a directory storing text files
+    path = "examples/src/main/resources/people.json"
+    peopleDF = spark.read.json(path)
+
+    # The inferred schema can be visualized using the printSchema() method
+    peopleDF.printSchema()
+    # root
+    #  |-- age: long (nullable = true)
+    #  |-- name: string (nullable = true)
 
 ```
 
@@ -75,25 +90,23 @@ We could also use pyspark-submit to run the Spark job.
 #### **From parquet**
 
 ```python
-
     # Read
     df = spark.read.parquet('path')
 
     # Write
     df.write.parquet(path, mode='overwrite') # Overwrite
     df.write.parquet(path, mode='append') # Append
-
 ```
 
 #### **From kafka streaming**  
 - **Stream** 
 
 ```python
-
     topic = 'topic'
+    servers="ip:port"
     df = spark.readStream \
             .format("kafka") \
-            .option("kafka.bootstrap.servers", "10.70.15.78:9092") \
+            .option("kafka.bootstrap.servers", servers) \
             .option("subscribe", topic) \
             .option("startingOffsets", "latest") \
             .option("failOnDataLoss", False) \
@@ -103,26 +116,53 @@ We could also use pyspark-submit to run the Spark job.
     query = df.writeStream\
               .format('console')\
               .start()
-
 ```  
 - **Batch query**   
 
 ```python
-
     topic = 'topic'
+    servers="ip:port"
     df = spark.read \
             .format("kafka") \
-            .option("kafka.bootstrap.servers", "10.70.15.78:9092") \
+            .option("kafka.bootstrap.servers", servers) \
             .option("subscribe", topic) \
             .option("startingOffsets", "earlist") \
             .option("endingOffsets", "earliest") \
             .option("failOnDataLoss", False) \
             .load() \
             .selectExpr("CAST(value AS STRING)")
-
 ```
 
 ## Spark DataFrame
+
+#### Select & from
+```python
+
+    sql =  '''
+                select * 
+                from {} 
+                where create_time >= unix_timestamp('{}')
+                and create_time < unix_timestamp('{}')
+           '''.format(table, time_from, time_to)
+    df = spark.sql(sql)
+```
+
+#### Function unix_timestamp
+Convert time string with given pattern (**‘yyyy-MM-dd HH:mm:ss’**, by default) to Unix time stamp (in seconds), using the default timezone and the default locale, return null if fail.
+
+```python
+    import pyspark.sql.functions as F 
+    df.select(F.unix_timestamp('dt', 'yyyy-MM-dd').alias('unix_time'))
+```
+
+#### Function from_unixtime
+Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a string representing the timestamp of that moment in the current system time zone in the given format.
+```python
+    import pyspark.sql.functions as F
+    import pyspark.sql.types as T
+    df = df.withColumn('date_time', F.from_unixtime(F.col('timestamp')))
+```
+
 
 #### Filter value
 ```python 
@@ -135,11 +175,12 @@ We could also use pyspark-submit to run the Spark job.
     df = df.filter(col("col") > 2)
     df = df.filter('col > 2')
 
+    #  Multi conditions
+    df = df.filter('(col>2) and (col<34)')
 ```
 
-#### Get Statistic data
+#### Get summary
 ```python
-
     df.select('origin_speed').summary().show()
 
     # +-------+------------------+
@@ -155,17 +196,48 @@ We could also use pyspark-submit to run the Spark job.
     # |    max|             210.0|
     # +-------+------------------+
 
+    # min, max, avg
+    df.select(F.min('create_time')).show()
+    df.select(F.max('create_time'))).show()
+    df.select(F.avg('create_time')).show()
+```
+
+#### Get quantile  
+``` python
     # Quantile
     df.approxQuantile("origin_speed", [0.80, 0.90, 0.95, 0.99, 0.995, 0.999], 0)
     # [8.28824234008789, 10.089457511901855, 11.575858116149902, 14.782051086425781, 16.42580223083496]
 
-    #min, max
-    df.select(F.min(F.col('create_time'))).show()
-    df.select(F.max(F.col('create_time'))).show()
+    # Spark SQL
+    sql = '''
+            select 
+                experiment_group,
+                count(*),
+                percentile_approx(CreatedOnToConfirm, 0.25) as CreatedOnToConfirmQuantile25,
+                percentile_approx(CreatedOnToConfirm, 0.5) as CreatedOnToConfirmQuantile50,
+                percentile_approx(CreatedOnToConfirm, 0.75) as CreatedOnToConfirmQuantile75,
+                
+            from order_complete_info
+            group by experiment_group
+    
+          '''
+    a = spark.sql(sql)
 
+    sql = '''
+            select percentile_approx(create_time, array(0.25,0.5,0.75)) as create_quantile
+            from tmp
+          '''
+    a = spark.sql(sql)
 ```
 
-#### mapPartition  
+
+#### Get nan value count
+```python
+    from pyspark.sql.functions import isnan, when, count, col
+    df.select([count(when(isnan(c), c)).alias(c) for c in ['create_time']]).show()
+```
+
+#### MapPartition  
 ```
 
 
@@ -174,31 +246,11 @@ We could also use pyspark-submit to run the Spark job.
 
 
 #### GroupBy
-
-## Spark SQL
-
-#### select & from
-```python
-
-    sql =  '''
-                select * 
-                from {} 
-                where create_time >= unix_timestamp('{}')
-                and create_time < unix_timestamp('{}')
-           '''.format(table, time_from, time_to)
-    df = spark.sql(sql)
-
-```
-
-#### unix_timestamp
-Convert time string with given pattern (**‘yyyy-MM-dd HH:mm:ss’**, by default) to Unix time stamp (in seconds), using the default timezone and the default locale, return null if fail.
+Groups the DataFrame using the specified columns, so we can run aggregation on them. See GroupedData for all the available aggregate functions.
 
 ```python
-
-    import pyspark.sql.functions as F 
-    df.select(F.unix_timestamp('dt', 'yyyy-MM-dd').alias('unix_time'))
-
 ```
+
 
 ## Optimization
 

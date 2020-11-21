@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "最短路径算法"
+title:      "Dijkstra Algo"
 date:       2020-08-04
 author:     "xcTorres"
 header-img: "img/in-post/graph/graph.png"
