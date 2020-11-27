@@ -147,7 +147,21 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
     df = spark.sql(sql)
 ```
 
-#### Function unix_timestamp
+#### udf
+```python
+    @F.udf(returnType=T.BooleanType())
+    def filter_no_delivered_traj(segment):
+        no_delivered_flag = True
+        for pt in segment:
+            if not pt.order_info:
+                no_delivered_flag = False
+                break
+        return no_delivered_flag
+
+    filter_df = df.withColumn('is_delivery', filter_no_delivered_traj('segment'))
+```
+
+#### unix_timestamp
 Convert time string with given pattern (**‘yyyy-MM-dd HH:mm:ss’**, by default) to Unix time stamp (in seconds), using the default timezone and the default locale, return null if fail.
 
 ```python
@@ -155,7 +169,7 @@ Convert time string with given pattern (**‘yyyy-MM-dd HH:mm:ss’**, by defaul
     df.select(F.unix_timestamp('dt', 'yyyy-MM-dd').alias('unix_time'))
 ```
 
-#### Function from_unixtime
+#### from_unixtime
 Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a string representing the timestamp of that moment in the current system time zone in the given format.
 ```python
     import pyspark.sql.functions as F
@@ -164,7 +178,7 @@ Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a st
 ```
 
 
-#### Filter value
+#### filter value
 ```python 
     # Filter null value
     df = df.where(col("dt_mvmt").isNull())  
@@ -179,7 +193,7 @@ Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a st
     df = df.filter('(col>2) and (col<34)')
 ```
 
-#### Get summary
+#### summary
 ```python
     df.select('origin_speed').summary().show()
 
@@ -202,7 +216,7 @@ Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a st
     df.select(F.avg('create_time')).show()
 ```
 
-#### Get quantile  
+#### quantile  
 ``` python
     # Quantile
     df.approxQuantile("origin_speed", [0.80, 0.90, 0.95, 0.99, 0.995, 0.999], 0)
@@ -231,13 +245,13 @@ Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a st
 ```
 
 
-#### Get nan value count
+#### nan value count
 ```python
     from pyspark.sql.functions import isnan, when, count, col
     df.select([count(when(isnan(c), c)).alias(c) for c in ['create_time']]).show()
 ```
 
-#### MapPartition  
+#### mapPartition  
 ```
 
 
@@ -245,11 +259,15 @@ Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a st
 ```
 
 
-#### GroupBy
+#### groupBy
 Groups the DataFrame using the specified columns, so we can run aggregation on them. See GroupedData for all the available aggregate functions.
 
 ```python
 ```
+
+#### explode
+
+
 
 
 ## Optimization
@@ -263,7 +281,3 @@ Groups the DataFrame using the specified columns, so we can run aggregation on t
 [https://medium.com/@ch.nabarun/apache-spark-optimization-techniques-54864d4fdc0c](https://medium.com/@ch.nabarun/apache-spark-optimization-techniques-54864d4fdc0c)  
 [https://stackoverflow.com/questions/47669895/how-to-add-multiple-columns-using-udf/51908455](https://stackoverflow.com/questions/47669895/how-to-add-multiple-columns-using-udf/51908455)
 [https://spark.apache.org/docs/2.2.0/structured-streaming-kafka-integration.html](https://spark.apache.org/docs/2.2.0/structured-streaming-kafka-integration.html)
-
-
-
-

@@ -17,7 +17,9 @@ English is not an art to be mastered.It is just a tool to get the result.**
 
 [https://www.youtube.com/watch?v=mwpdffpixBY](https://www.youtube.com/watch?v=mwpdffpixBY)  
 [https://www.youtube.com/watch?v=LtxikccfpaU](https://www.youtube.com/watch?v=LtxikccfpaU)  
-[http://www.elllo.org](http://www.elllo.org)
+[http://www.elllo.org](http://www.elllo.org)  
+[https://www.bilibili.com/video/BV1KJ411r7Tn?p=1](https://www.bilibili.com/video/BV1KJ411r7Tn)  
+[https://www.bilibili.com/video/BV1JK411V77G](https://www.bilibili.com/video/BV1JK411V77G)
 
 # 听力
 在上班的工作中，用英语交流还仍有障碍，为了以后自己职业更好的发展，听力和口语都有待提高。在网上看了一些帖子，得到了一些启发，纠正了自己以往的学习方法。现在才真正明白了以下几个道理。  
@@ -36,6 +38,8 @@ English is not an art to be mastered.It is just a tool to get the result.**
 | 2nd Nov |[并非所有水力发电设施都有利于环保](https://dict.eudic.net/webting/desktopplay?id=3c018d6d-1b12-11eb-8659-00505686c5e6&token=QYN+eyJ0b2tlbiI6IiIsInVzZXJpZCI6IiIsInVybHNpZ24iOiJ1RFdGQys0R0pCMEVxWXRtcm0wVFZPb1lSOEU9IiwidCI6IkFCSU1UWXlOREV3TmpNeU9RPT0ifQ%3D%3D)|  并非所有水力发电设施都有利于环保 |
 | 12th Nov |[https://www.bilibili.com/video/BV1JK411V77G?p=1](https://www.bilibili.com/video/BV1JK411V77G?p=1)|  Improving your memory - 6 Minute English |
 | 18th Nov |[https://www.bilibili.com/video/BV1JK411V77G?p=3](https://www.bilibili.com/video/BV1JK411V77G?p=3)|  What makes you happy 6 Minute English |
+| 24th Nov |[https://www.bilibili.com/video/BV1C54y1z7MG?p=3](https://www.bilibili.com/video/BV1C54y1z7MG?p=3)|  美国总统的家庭地位是怎样的？奥巴马：我真的好卑微 |
+
 
 # 口语  
 ### 日常
