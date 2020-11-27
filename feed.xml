@@ -5,15 +5,16 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 21 Nov 2020 23:58:55 +0800</pubDate>
-    <lastBuildDate>Sat, 21 Nov 2020 23:58:55 +0800</lastBuildDate>
+    <pubDate>Sat, 28 Nov 2020 00:22:59 +0800</pubDate>
+    <lastBuildDate>Sat, 28 Nov 2020 00:22:59 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
         <title>设计模式</title>
-        <description>&lt;p&gt;设计模式一直是很玄学的一个东西，但如果我们开始维护迭代大型项目的时候，才会愈发知道设计模式的威力。首先我们来看一下设计模式的定义&lt;/p&gt;
+        <description>&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;设计模式一直是很玄学的一个东西，但如果我们开始维护迭代大型项目的时候，才会愈发知道设计模式的威力。首先我们来看一下设计模式的定义&lt;/p&gt;
 
-&lt;p&gt;定义&lt;/p&gt;
+&lt;h4 id=&quot;定义&quot;&gt;定义&lt;/h4&gt;
 &lt;blockquote&gt;
   &lt;p&gt;设计模式（Design Pattern）是一套被反复使用、多数人知晓的、经过分类的、代码设计经验的总结。使用设计模式的目的：为了代码可重用性、让代码更容易被他人理解、保证代码可靠性。 设计模式使代码编写真正工程化；设计模式是软件工程的基石脉络，如同大厦的结构一样。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -22,14 +23,32 @@
 杂，⾯向对象依然能够使得程序结构良好，⽽⾯向过程却会导致程序越来越臃肿。
 让⾯向对象保持结构良好的秘诀就是 &lt;strong&gt;设计模式&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;设计模式基于六⼤原则：
-• 开闭原则：⼀个软件实体如类、模块和函数应该对修改封闭，对扩展开放。
-• 单⼀职责原则：⼀个类只做⼀件事，⼀个类应该只有⼀个引起它修改的原因。
-• ⾥⽒替换原则：⼦类应该可以完全替换⽗类。也就是说在使⽤继承时，只扩展新功能，⽽不要破
-坏⽗类原有的功能。
-• 依赖倒置原则：细节应该依赖于抽象，抽象不应依赖于细节。把抽象层放在程序设计的⾼层，并
-保持稳定，程序的细节变化由低层的实现层来完成。&lt;/p&gt;
+&lt;h4 id=&quot;原则&quot;&gt;原则&lt;/h4&gt;
+&lt;p&gt;1、开闭原则（Open Close Principle）&lt;/p&gt;
 
+&lt;p&gt;开闭原则的意思是：对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。简言之，是为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。&lt;/p&gt;
+
+&lt;p&gt;2、里氏代换原则（Liskov Substitution Principle）&lt;/p&gt;
+
+&lt;p&gt;里氏代换原则是面向对象设计的基本原则之一。 里氏代换原则中说，任何基类可以出现的地方，子类一定可以出现。LSP 是继承复用的基石，只有当派生类可以替换掉基类，且软件单位的功能不受到影响时，基类才能真正被复用，而派生类也能够在基类的基础上增加新的行为。里氏代换原则是对开闭原则的补充。实现开闭原则的关键步骤就是抽象化，而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。&lt;/p&gt;
+
+&lt;p&gt;3、依赖倒转原则（Dependence Inversion Principle）&lt;/p&gt;
+
+&lt;p&gt;这个原则是开闭原则的基础，具体内容：针对接口编程，依赖于抽象而不依赖于具体。&lt;/p&gt;
+
+&lt;p&gt;4、接口隔离原则（Interface Segregation Principle）&lt;/p&gt;
+
+&lt;p&gt;这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。它还有另外一个意思是：降低类之间的耦合度。由此可见，其实设计模式就是从大型软件架构出发、便于升级和维护的软件设计思想，它强调降低依赖，降低耦合。&lt;/p&gt;
+
+&lt;p&gt;5、迪米特法则，又称最少知道原则（Demeter Principle）&lt;/p&gt;
+
+&lt;p&gt;最少知道原则是指：一个实体应当尽量少地与其他实体之间发生相互作用，使得系统功能模块相对独立。&lt;/p&gt;
+
+&lt;p&gt;6、合成复用原则（Composite Reuse Principle）&lt;/p&gt;
+
+&lt;p&gt;合成复用原则是指：尽量使用合成/聚合的方式，而不是使用继承。&lt;/p&gt;
+
+&lt;h4 id=&quot;分类&quot;&gt;分类&lt;/h4&gt;
 &lt;p&gt;所有的设计模式都是为了程序能更好的满足这六大原则。这些模式可以分为三大类：创建型模式（Creational Patterns）、结构型模式（Structural Patterns）、行为型模式（Behavioral Patterns）。而在创建模式中，主要可以分为一下几种&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;工厂模式（Factory Pattern）&lt;/li&gt;
@@ -39,7 +58,148 @@
   &lt;li&gt;原型模式（Prototype Pattern）&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h1 id=&quot;创建者模式&quot;&gt;创建者模式&lt;/h1&gt;
 &lt;h4 id=&quot;工厂模式&quot;&gt;工厂模式&lt;/h4&gt;
+&lt;p&gt;一般也称为简单工厂模式&lt;/p&gt;
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Created by Xie Chong on 22/11/20.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
+
+&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;memory&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/**
+ * The Product interface declares the operations that all concrete products must
+ * implement.
+ */&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Product&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;nl&quot;&gt;public:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;virtual&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){};&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;virtual&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Operation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/**
+ * Concrete Products provide various implementations of the Product interface.
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConcreteProduct1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Product&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;public:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Operation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{Result of the ConcreteProduct1}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConcreteProduct2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Product&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;public:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Operation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{Result of the ConcreteProduct2}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Factory&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;public:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;virtual&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){};&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared_ptr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared_ptr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ConcreteProduct1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared_ptr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ConcreteProduct2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+            &lt;span class=&quot;nl&quot;&gt;default:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nullptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;App: Launched with the ConcreteCreator1.&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Operation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Operation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;输出&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    App: Launched with the factory.
+    {Result of the ConcreteProduct1}
+    {Result of the ConcreteProduct2}
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;h4 id=&quot;抽象工厂模式&quot;&gt;抽象工厂模式&lt;/h4&gt;
 &lt;h4 id=&quot;单例模式&quot;&gt;单例模式&lt;/h4&gt;
 &lt;h4 id=&quot;建造者模式&quot;&gt;建造者模式&lt;/h4&gt;
@@ -48,6 +208,7 @@
 &lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&quot;https://refactoring.guru/design-patterns/factory-method/cpp/example&quot;&gt;https://refactoring.guru/design-patterns/factory-method/cpp/example&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://www.runoob.com/design-pattern/design-pattern-intro.html&quot;&gt;https://www.runoob.com/design-pattern/design-pattern-intro.html&lt;/a&gt;&lt;/p&gt;
+
 </description>
         <pubDate>Thu, 19 Nov 2020 00:00:00 +0800</pubDate>
         <link>https://xctorres.github.io//2020/11/19/design-pattern/</link>
@@ -63,6 +224,15 @@
         <description>&lt;p&gt;因为目前用的地图引擎是用C++写的，现在也要适当的回顾一下C++源码了。由于C++ 14新特性，现在学习C++的感觉没有像读书时期那样繁琐了, 也不需要自己新建内存空间再手动delete空间，跟Java很相似。&lt;/p&gt;
 
 &lt;h2 id=&quot;new-traits&quot;&gt;New Traits&lt;/h2&gt;
+&lt;h4 id=&quot;leftright-value&quot;&gt;&lt;a href=&quot;https://www.internalpointers.com/post/understanding-meaning-lvalues-and-rvalues-c#:~:text=In%20C%2B%2B%20an%20lvalue%20is,since%20they%20exist%20as%20variables.&amp;amp;text=A%20variable%20has%20a%20specific%20memory%20location%2C%20so%20its%20an%20lvalue.&quot;&gt;left&amp;amp;right value&lt;/a&gt;&lt;/h4&gt;
+
+&lt;h4 id=&quot;smart-pointer&quot;&gt;smart pointer&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;shared_ptr&lt;/li&gt;
+  &lt;li&gt;weak_ptr&lt;/li&gt;
+  &lt;li&gt;unique_ptr&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h4 id=&quot;auto&quot;&gt;&lt;a href=&quot;https://www.geeksforgeeks.org/type-inference-in-c-auto-and-decltype/&quot;&gt;auto&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;过去的C++必须声明每个变量的类型，而有了auto关键字之后，编译器可以根据初始化自动推理变量的类型，这样在编写代码的过程中就省了不少时间，而在编译过程中的确会变得更慢，但是变慢的时间非常小。&lt;/p&gt;
 
@@ -165,6 +335,15 @@
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
+&lt;p&gt;&lt;strong&gt;输出&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;n&quot;&gt;After&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;After&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;move&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;are&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello&quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;h4 id=&quot;stdtransform&quot;&gt;&lt;a href=&quot;https://en.cppreference.com/w/cpp/algorithm/transform&quot;&gt;std::transform&lt;/a&gt;&lt;/h4&gt;
 &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -228,8 +407,6 @@
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;unique_ptrshared_ptr-and-weak_ptr&quot;&gt;unique_ptr、shared_ptr and weak_ptr&lt;/h4&gt;
-
 &lt;h2 id=&quot;vector&quot;&gt;Vector&lt;/h2&gt;
 &lt;p&gt;使用一门语言，除了最基本的int, float, string类型，再了解一下数组和字典就可以干活了。在C++中，常用的数组是Vector&lt;/p&gt;
 
@@ -254,7 +431,9 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
 
 &lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=mwpdffpixBY&quot;&gt;https://www.youtube.com/watch?v=mwpdffpixBY&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://www.youtube.com/watch?v=LtxikccfpaU&quot;&gt;https://www.youtube.com/watch?v=LtxikccfpaU&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://www.elllo.org&quot;&gt;http://www.elllo.org&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;http://www.elllo.org&quot;&gt;http://www.elllo.org&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bilibili.com/video/BV1KJ411r7Tn&quot;&gt;https://www.bilibili.com/video/BV1KJ411r7Tn?p=1&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bilibili.com/video/BV1JK411V77G&quot;&gt;https://www.bilibili.com/video/BV1JK411V77G&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;听力&quot;&gt;听力&lt;/h1&gt;
 &lt;p&gt;在上班的工作中，用英语交流还仍有障碍，为了以后自己职业更好的发展，听力和口语都有待提高。在网上看了一些帖子，得到了一些启发，纠正了自己以往的学习方法。现在才真正明白了以下几个道理。&lt;/p&gt;
@@ -316,6 +495,11 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
       &lt;td&gt;18th Nov&lt;/td&gt;
       &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1JK411V77G?p=3&quot;&gt;https://www.bilibili.com/video/BV1JK411V77G?p=3&lt;/a&gt;&lt;/td&gt;
       &lt;td&gt;What makes you happy 6 Minute English&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;24th Nov&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1C54y1z7MG?p=3&quot;&gt;https://www.bilibili.com/video/BV1C54y1z7MG?p=3&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;美国总统的家庭地位是怎样的？奥巴马：我真的好卑微&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -399,7 +583,7 @@ I want to begin with/ and then I’ll move on to/ next we’re talking about/Tha
 &lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.youtube.com/channel/UCUBhobCkTLhgfUNRAgHSYmw&quot;&gt;科学声音&lt;/a&gt;，个人最喜欢的频道,严谨的科学频道&lt;br /&gt;
 &lt;a href=&quot;https://www.youtube.com/channel/UCMUnInmOkrWN4gof9KlhNmQ&quot;&gt;老高與小茉 Mr &amp;amp; Mrs Gao&lt;/a&gt;， 科普+脑洞都有，听老高讲故事&lt;br /&gt;
-&lt;a href=&quot;youtube.com/channel/UCvoBl4rnVsetDKA_Tdk-jeA&quot;&gt;晓涵哥来了&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;https://www.youtube.com/channel/UCvoBl4rnVsetDKA_Tdk-jeA&quot;&gt;晓涵哥来了&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 08 Nov 2020 00:00:00 +0800</pubDate>
         <link>https://xctorres.github.io//2020/11/08/universe/</link>
@@ -631,7 +815,30 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
     &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;function-unix_timestamp&quot;&gt;Function unix_timestamp&lt;/h4&gt;
+&lt;h4 id=&quot;udf&quot;&gt;udf&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;udf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;returnType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BooleanType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;filter_no_delivered_traj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;segment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;no_delivered_flag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pt&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;segment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;order_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;no_delivered_flag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;no_delivered_flag&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;filter_df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;withColumn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'is_delivery'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filter_no_delivered_traj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'segment'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;unix_timestamp&quot;&gt;unix_timestamp&lt;/h4&gt;
 &lt;p&gt;Convert time string with given pattern (&lt;strong&gt;‘yyyy-MM-dd HH:mm:ss’&lt;/strong&gt;, by default) to Unix time stamp (in seconds), using the default timezone and the default locale, return null if fail.&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
@@ -640,7 +847,7 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
     &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unix_timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'dt'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'yyyy-MM-dd'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alias&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'unix_time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;function-from_unixtime&quot;&gt;Function from_unixtime&lt;/h4&gt;
+&lt;h4 id=&quot;from_unixtime&quot;&gt;from_unixtime&lt;/h4&gt;
 &lt;p&gt;Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a string representing the timestamp of that moment in the current system time zone in the given format.&lt;/p&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -650,7 +857,7 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
     &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;withColumn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'date_time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_unixtime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'timestamp'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;filter-value&quot;&gt;Filter value&lt;/h4&gt;
+&lt;h4 id=&quot;filter-value&quot;&gt;filter value&lt;/h4&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
@@ -675,7 +882,7 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
 &lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'(col&amp;gt;2) and (col&amp;lt;34)'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;get-summary&quot;&gt;Get summary&lt;/h4&gt;
+&lt;h4 id=&quot;summary&quot;&gt;summary&lt;/h4&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
@@ -716,7 +923,7 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
     &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;avg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'create_time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;get-quantile&quot;&gt;Get quantile&lt;/h4&gt;
+&lt;h4 id=&quot;quantile&quot;&gt;quantile&lt;/h4&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
@@ -767,14 +974,14 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
     &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;get-nan-value-count&quot;&gt;Get nan value count&lt;/h4&gt;
+&lt;h4 id=&quot;nan-value-count&quot;&gt;nan value count&lt;/h4&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pyspark.sql.functions&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isnan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;when&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;when&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isnan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alias&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'create_time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;mappartition&quot;&gt;MapPartition&lt;/h4&gt;
+&lt;h4 id=&quot;mappartition&quot;&gt;mapPartition&lt;/h4&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
@@ -783,12 +990,14 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
 
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;groupby&quot;&gt;GroupBy&lt;/h4&gt;
+&lt;h4 id=&quot;groupby&quot;&gt;groupBy&lt;/h4&gt;
 &lt;p&gt;Groups the DataFrame using the specified columns, so we can run aggregation on them. See GroupedData for all the available aggregate functions.&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;explode&quot;&gt;explode&lt;/h4&gt;
 
 &lt;h2 id=&quot;optimization&quot;&gt;Optimization&lt;/h2&gt;
 
@@ -797,7 +1006,6 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
 &lt;a href=&quot;https://medium.com/@ch.nabarun/apache-spark-optimization-techniques-54864d4fdc0c&quot;&gt;https://medium.com/@ch.nabarun/apache-spark-optimization-techniques-54864d4fdc0c&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://stackoverflow.com/questions/47669895/how-to-add-multiple-columns-using-udf/51908455&quot;&gt;https://stackoverflow.com/questions/47669895/how-to-add-multiple-columns-using-udf/51908455&lt;/a&gt;
 &lt;a href=&quot;https://spark.apache.org/docs/2.2.0/structured-streaming-kafka-integration.html&quot;&gt;https://spark.apache.org/docs/2.2.0/structured-streaming-kafka-integration.html&lt;/a&gt;&lt;/p&gt;
-
 </description>
         <pubDate>Sun, 08 Nov 2020 00:00:00 +0800</pubDate>
         <link>https://xctorres.github.io//2020/11/08/spark-cheat-sheet/</link>
