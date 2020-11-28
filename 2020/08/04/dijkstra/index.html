@@ -299,7 +299,8 @@ Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路
 <p>leetcod而有个求网络延迟时间的问题，可以由Dijkstra算法解决。
 <a href="https://leetcode.com/problems/network-delay-time/submissions/">https://leetcode.com/problems/network-delay-time/submissions/</a></p>
 
-<p>方法一： 邻接图</p>
+<p>方法一： 邻接图<br />
+Time Complexity: $O(V^2)$</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -341,10 +342,7 @@ Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路
 39
 40
 41
-42
-43
-</pre></td><td class="rouge-code"><pre>
-    <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>    
+</pre></td><td class="rouge-code"><pre>    <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>    
         <span class="k">def</span> <span class="nf">networkDelayTime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">N</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">K</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
             
             <span class="c1"># init the graph using matrix
@@ -385,10 +383,10 @@ Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路
                 <span class="n">res</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
                 
             <span class="k">return</span> <span class="n">res</span>
-
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p>方法二： 优先队列</p>
+<p>方法二： 优先队列
+Time Complexity: $O(V + E\; log\; V)$</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -447,7 +445,7 @@ Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路
                 
             <span class="k">while</span> <span class="n">h</span><span class="p">:</span>
                 <span class="n">min_dis</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">heapq</span><span class="p">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">dis</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_dis</span> <span class="ow">or</span> <span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
                     <span class="k">continue</span>
                     
                 <span class="k">for</span> <span class="n">end</span><span class="p">,</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">items</span><span class="p">():</span>
@@ -692,6 +690,54 @@ Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路
 
 <!-- add support for mathjax by voleking-->
 
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
 
 
 
