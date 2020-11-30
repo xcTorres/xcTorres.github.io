@@ -193,6 +193,9 @@ gallery:
     y: 600                  # max height of thumbnails (in pixels)
   # The following options are for individual galleries.
   galleries:
+    debut:
+        name: "2020/11/29 Dragon Boat Debut"
+        best_image: SHP00492.jpg
     big sale:
       name:  "2020/11/11 Big Sale"
       best_image: 1111_1.jpg  
