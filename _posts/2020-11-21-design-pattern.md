@@ -96,12 +96,12 @@ class Factory {
   public:
     virtual ~Factory(){};
 
-    std::shared_ptr<Product> create(int type) {
+    std::unique_ptr<Product> create(int type) {
         switch(type){
             case 1:
-                return std::shared_ptr<Product>(new ConcreteProduct1());
+                return std::make_unique<Product>(new ConcreteProduct1());
             case 2:
-                return std::shared_ptr<Product>(new ConcreteProduct2());
+                return std::make_unique<Product>(new ConcreteProduct2());
             default:
                 break;
         }
