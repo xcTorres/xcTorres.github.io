@@ -262,24 +262,15 @@
 <div class="post-preview">
     <a href="/2020/11/17/c++/">
         <h2 class="post-title">
-            C++
+            C++ (01) 智能指针
         </h2>
         
         <div class="post-content-preview">
             
-                因为目前用的地图引擎是用C++写的，现在也要适当的回顾一下C++源码了。由于C++ 14新特性，现在学习C++的感觉没有像读书时期那样繁琐了, 也不需要自己新建内存空间再手动delete空间，跟Java很相似。
+                因为目前用的地图引擎是用C++写的，现在也要适当的回顾一下C++语言了。
 
-New Traits
-left&amp;right value
-
-smart pointer
-
-  shared_ptr
-  weak_ptr
-  unique_ptr
-
-
-aut...
+智能指针
+在智能指针出现之前，C++ create一个对象用的new返回的是一个指针对象，但C++不帮忙收回内存即使这个函数已经结束了，所以得每次手动delete释放内存。但有了智能指针之后，C++就像Java一样，不需要自己主动回收了。所以只要写的是C++11之后的代码，所有指针当然习惯使用智能指针了。不要再自己d...
             
         </div>
     </a>
