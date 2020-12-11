@@ -140,6 +140,8 @@
                     
                     
                     
+                    
+                    
                     <li>
                         <a href="/gallery/">Gallery</a>
                     </li>
@@ -667,7 +669,17 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
 <p>Groups the DataFrame using the specified columns, so we can run aggregation on them. See GroupedData for all the available aggregate functions.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>    <span class="c1"># groupBy one or multi column and use min or max or other functionn
+</span>    <span class="n">df</span><span class="p">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s">'order_id'</span><span class="p">,</span> <span class="s">'shipper_id'</span><span class="p">).</span><span class="n">agg</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="s">'time'</span><span class="p">),</span> <span class="n">F</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="s">'time'</span><span class="p">))</span>
+
+    <span class="c1"># groupBy and collect all of the records into one array
+</span>    <span class="n">group_orders</span> <span class="o">=</span> <span class="n">stack_orders</span><span class="p">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s">'group_id'</span><span class="p">).</span><span class="n">agg</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">collect_list</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">struct</span><span class="p">(</span><span class="s">'*'</span><span class="p">)).</span><span class="n">alias</span><span class="p">(</span><span class="s">'records'</span><span class="p">))</span> 
+
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="explode">explode</h4>

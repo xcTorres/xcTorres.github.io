@@ -141,6 +141,8 @@
                     
                     
                     
+                    
+                    
                     <li>
                         <a href="/gallery/">Gallery</a>
                     </li>
@@ -273,7 +275,7 @@
 				<p>因为目前用的地图引擎是用C++写的，现在也要适当的回顾一下C++语言了。</p>
 
 <h1 id="智能指针">智能指针</h1>
-<p>在智能指针出现之前，C++ create一个对象用的new返回的是一个指针对象，但C++不帮忙收回内存即使这个函数已经结束了，所以得每次手动delete释放内存。但有了智能指针之后，C++就像Java一样，不需要自己主动回收了。所以只要写的是C++11之后的代码，所有指针当然习惯使用智能指针了。不要再自己delete了。常用的智能指针有unique_ptr, shared_ptr,以及weak_ptr。</p>
+<p>在智能指针出现之前，C++ create一个对象用的new返回的是一个指针对象，即使这个函数已经结束了，C++也不会主动帮忙回收该内存。所以得用代码每次手动delete释放内存。但有了智能指针之后，C++就像Java一样，不需要自己手动回收内存了了。所以只要写的是C++11之后的代码，所有指针当然还是要习惯使用智能指针了，不要再自己delete了，以免内存泄露。常用的智能指针有unique_ptr, shared_ptr, 以及weak_ptr。</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -326,7 +328,7 @@
 
 <p><a href="https://docs.microsoft.com/en-us/cpp/cpp/how-to-create-and-use-unique-ptr-instances?view=msvc-160">How to: Create and use unique_ptr instances</a></p>
 
-<p>unique顾名思义，该指针只能有一个owner，所以该对象允许move操作并移交ownership给新的unique_ptr并重置旧的unique_ptr。而且不允许拷贝操作。</p>
+<p>unique顾名思义，该指针只能有一个owner，所以unique_ptr不允许拷贝操作。unique_ptr指针指向的对象，允许用户进行move操作并移交ownership给新的unique_ptr, 而旧的unique_ptr则被重置，指向null。</p>
 
 <h4 id="shared_ptr">shared_ptr</h4>
 <p>Reference-counted smart pointer. Use when you want to assign one raw pointer to multiple owners, for example, when you return a copy of a pointer from a container but want to keep the original. The raw pointer is not deleted until all shared_ptr owners have gone out of scope or have otherwise given up ownership. The size is two pointers; one for the object and one for the shared control block that contains the reference count. Header file:  &lt;memory&gt;. <br />
