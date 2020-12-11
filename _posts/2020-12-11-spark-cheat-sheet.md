@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Spark Cheat Sheet"
-date:       2020-11-08
+date:       2020-12-11
 author:     "xcTorres"
 header-img: "img/in-post/pyspark-custom-package/Apache_Spark_logo.svg.png"
 catalog:    true
@@ -83,9 +83,6 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
     #  |-- name: string (nullable = true)
 
 ```
-
-#### **From csv**
-#### **From hdfs** 
 
 #### **From parquet**
 
@@ -250,12 +247,27 @@ Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a st
     from pyspark.sql.functions import isnan, when, count, col
     df.select([count(when(isnan(c), c)).alias(c) for c in ['create_time']]).show()
 ```
+#### repartition
 
-#### mapPartition  
+Sometimes you need the records in one partition in some constraints. For example, all records of some certain user_id must be in one single partion so that you are allowed to use groupBy function in mapPartition function.
+
+```
+    stages_time_df = raw_order_status_log_df\
+    .repartition('order_id') \
+    .rdd \
+    .mapPartitions(calculate_stages_time).toDF(sampleRatio=0.1)
 ```
 
+#### mapPartition  
+It will run the function in each partition, so you are allowed to set global variable for each partition. For example, if you want to send http requests and it is more efficient to maintain the http connection pool for each partition. 
 
+```
+    SCHEMA_RESPONSE = sdf.schema.add(
+        T.StructField("mm_response", T.StringType(), True)
+    )
 
+    # Here map_matching maintain a connection pool for all of the records within partitions.
+    mm_df = sdf.rdd.mapPartitions(map_matching).toDF(schema=SCHEMA_RESPONSE)
 ```
 
 
@@ -263,10 +275,65 @@ Converts the number of seconds from unix epoch (1970-01-01 00:00:00 UTC) to a st
 Groups the DataFrame using the specified columns, so we can run aggregation on them. See GroupedData for all the available aggregate functions.
 
 ```python
+    values = [(1, 2.0), (1, 4.0), (2, 0.0), (2, 100.0), (3, 5.0)]
+    columns = ['id', 'count']
+    df = spark.createDataFrame(values, columns)
+    df.show()
+
+    +---+-----+
+    | id|count|
+    +---+-----+
+    |  1|  2.0|
+    |  1|  4.0|
+    |  2|  0.0|
+    |  2|100.0|
+    |  3|  5.0|
+    +---+-----+
+
+    df.groupBy('id').agg(F.mean('count').alias('count_mean')).show()
+    +---+----------+
+    | id|count_mean|
+    +---+----------+
+    |  1|       3.0|
+    |  3|       5.0|
+    |  2|      50.0|
+    +---+----------+
+
+    # groupBy and collect all of the records into one array
+    df.groupBy('id').agg(F.collect_list('count').alias('count_list')).show()
+    +---+------------+
+    | id|  count_list|
+    +---+------------+
+    |  1|  [4.0, 2.0]|
+    |  3|       [5.0]|
+    |  2|[0.0, 100.0]| 
 ```
 
 #### explode
+If the type of one column is an array and you want to explode all of elementa of array into multi Rows, explode fucntion could meet this demand.
 
+```python
+
+    values = [(1, [2,3,4])]
+    columns = ['id', 'array']
+    df = spark.createDataFrame(values, columns)
+    df.show()
+
+    +---+---------+
+    | id|    array|
+    +---+---------+
+    |  1|[2, 3, 4]|
+    +---+---------+
+
+    df.select('id', F.explode('array').alias('element')).show()
+    +---+-------+
+    | id|element|
+    +---+-------+
+    |  1|      2|
+    |  1|      3|
+    |  1|      4|
+    +---+-------+
+```
 
 
 
