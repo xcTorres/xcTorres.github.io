@@ -5,9 +5,152 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 11 Dec 2020 23:50:36 +0800</pubDate>
-    <lastBuildDate>Fri, 11 Dec 2020 23:50:36 +0800</lastBuildDate>
+    <pubDate>Thu, 17 Dec 2020 01:07:38 +0800</pubDate>
+    <lastBuildDate>Thu, 17 Dec 2020 01:07:38 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>C++ (02) 智能指针</title>
+        <description>&lt;p&gt;因为目前用的地图引擎是用C++写的，现在也要适当的回顾一下C++语言了。&lt;/p&gt;
+
+&lt;h1 id=&quot;智能指针&quot;&gt;智能指针&lt;/h1&gt;
+&lt;p&gt;在智能指针出现之前，C++ create一个对象用的new返回的是一个指针对象，即使这个函数已经结束了，C++也不会主动帮忙回收该内存。所以得用代码每次手动delete释放内存。但有了智能指针之后，C++就像Java一样，不需要自己手动回收内存了了。所以只要写的是C++11之后的代码，所有指针当然还是要习惯使用智能指针了，不要再自己delete了，以免内存泄露。常用的智能指针有unique_ptr, shared_ptr, 以及weak_ptr。&lt;/p&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UseRawPointer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Using a raw pointer -- not recommended.&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pSong&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;L&quot;Nothing on You&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;L&quot;Bruno Mars&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+
+    &lt;span class=&quot;c1&quot;&gt;// Use pSong...&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Don't forget to delete!&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pSong&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UseSmartPointer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Declare a smart pointer on stack and pass it the raw pointer.&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;unique_ptr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;song2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;L&quot;Nothing on You&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;L&quot;Bruno Mars&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Use song2...&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wstring&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;song2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;duration_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// song2 is deleted automatically here.&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;unique_ptr&quot;&gt;unique_ptr&lt;/h4&gt;
+&lt;p&gt;Allows exactly one owner of the underlying pointer. Use as the default choice for POCO unless you know for certain that you require a shared_ptr. Can be moved to a new owner, but not copied or shared. Replaces auto_ptr, which is deprecated. Compare to boost::scoped_ptr. unique_ptr is small and efficient; the size is one pointer and it supports rvalue references for fast insertion and retrieval from C++ Standard Library collections. Header file:  &amp;lt;memory&amp;gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/cpp/cpp/how-to-create-and-use-unique-ptr-instances?view=msvc-160&quot;&gt;How to: Create and use unique_ptr instances&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;unique顾名思义，该指针只能有一个owner，所以unique_ptr不允许拷贝操作。unique_ptr指针指向的对象，允许用户进行move操作并移交ownership给新的unique_ptr, 而旧的unique_ptr则被重置，指向null。&lt;/p&gt;
+
+&lt;h4 id=&quot;shared_ptr&quot;&gt;shared_ptr&lt;/h4&gt;
+&lt;p&gt;Reference-counted smart pointer. Use when you want to assign one raw pointer to multiple owners, for example, when you return a copy of a pointer from a container but want to keep the original. The raw pointer is not deleted until all shared_ptr owners have gone out of scope or have otherwise given up ownership. The size is two pointers; one for the object and one for the shared control block that contains the reference count. Header file:  &amp;lt;memory&amp;gt;. &lt;br /&gt;
+shared顾名思义，也是只一个对象指针允许有多个owner， shared_ptr会有一个专门的指针控制reference count。所以当shared_ptr指向的对象reference count=0的时候才会delete原对象。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/cpp/cpp/how-to-create-and-use-shared-ptr-instances?view=msvc-160&quot;&gt;How to: Create and Use shared_ptr instances&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;weak_ptr&quot;&gt;weak_ptr&lt;/h4&gt;
+&lt;p&gt;Special-case smart pointer for use in conjunction with shared_ptr. A weak_ptr provides access to an object that is owned by one or more shared_ptr instances, but does not participate in reference counting. Use when you want to observe an object, but do not require it to remain alive. Required in some cases to break circular references between shared_ptr instances. Header file: &amp;lt;memory&amp;gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/cpp/cpp/how-to-create-and-use-weak-ptr-instances?view=msvc-160&quot;&gt;How to: Create and use weak_ptr instances&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;weak_ptr是对shared_ptr的一个补充，其目的也是想能够访问shared_ptr共享的对象，但是不占用其referene count。&lt;/p&gt;
+
+&lt;h1 id=&quot;referennce&quot;&gt;Referennce&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-160&quot;&gt;https://docs.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-160&lt;/a&gt;
+&lt;a href=&quot;https://www.geeksforgeeks.org/smart-pointers-cpp/&quot;&gt;https://www.geeksforgeeks.org/smart-pointers-cpp/&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 17 Dec 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/12/17/c++-02/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/12/17/c++-02/</guid>
+        
+        <category>C++</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>C++ (00) include 头文件与source源文件</title>
+        <description>&lt;p&gt;在编写C++程序文件的时候，我们会定义头文件在.h / .hpp / .hxx， 源文件.cpp / .cxx / .cc，那他们的区别是什么呢？这也是我长期以来的一个疑问。在查阅资料之后有了一定的了解。&lt;/p&gt;
+
+&lt;p&gt;首先得回顾一下一个C程序或者C++程序从代码到能运行需要进行的几个步骤。如下是一个简单的hello world命令，而gcc在将其编译成可执行代码时，需要进行四个步骤， 预处理 -&amp;gt; 编译 -&amp;gt; 汇编 -&amp;gt; 链接。&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;// hello.c&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;iostream&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello, World!&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt; g++ &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; test.out main.cpp &lt;span class=&quot;c&quot;&gt;# 编译&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./test.out &lt;span class=&quot;c&quot;&gt;# 执行&lt;/span&gt;
+Hello world!
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;其中预处理用于将所有的#include头文件以及宏定义替换成其真正的内容，预处理之后得到的仍然是文本文件，但文件体积会大很多。&lt;/li&gt;
+  &lt;li&gt;这里的编译不是指程序从源文件到二进制程序的全部过程，而是指将经过预处理之后的程序转换成特定汇编代码(assembly code)的过程。&lt;/li&gt;
+  &lt;li&gt;汇编过程将上一步的汇编代码转换成机器码(machine code)，这一步产生的文件叫做目标文件，是二进制格式&lt;/li&gt;
+  &lt;li&gt;链接过程将多个目标文以及所需的库文件(.so等)链接成最终的可执行文件(executable file)。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在一个C++项目中，如果所有的代码都写在一个源文件中，任何一次细小甚微的代码改动都需要重新编译所有的代码。这样的效率是及其低下的。所以我们会发现成熟的project中，会将代码匀给多个源文件cpp中，这样也有利于提高代码的可读性。&lt;/p&gt;
+
+&lt;p&gt;那么为什么还有头文件的存在呢？有时候某个定义的函数func可能被多个源文件使用，如果没有头文件，这个函数func只能手动在各个源文件中被定义和声明多次。而有了头文件func.h，则只需将该函数声明在头文件中声明和定义。&lt;/p&gt;
+
+&lt;p&gt;但是在预处理过程中，在包含该头文件的源文件中，该头文件的代码都要被添加进来。这样还是相当于这个函数在各个源文件中被定义和声明以及编译多次，所以目前使用的一般方法是头文件只负责声明函数，包括参数以及返回类型，但具体内容在同名的源文件func.cpp中补充，这样一来，其他源文件使用该函数的时候只需要链接func.cpp生成的目标文件func.o。&lt;/p&gt;
+
+&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.toptal.com/c-plus-plus/c-plus-plus-understanding-compilation#:~:text=The%20first%20step%20that%20the,are%20included%20from%20source%20files.&quot;&gt;https://www.toptal.com/c-plus-plus/c-plus-plus-understanding-compilation#:~:text=The%20first%20step%20that%20the,are%20included%20from%20source%20files.&lt;/a&gt;
+&lt;a href=&quot;https://www.cplusplus.com/articles/Gw6AC542/#:~:text=So%20what's%20the%20difference%20between,%2C%20but%20you%20shouldn't.&quot;&gt;https://www.cplusplus.com/articles/Gw6AC542/#:~:text=So%20what’s%20the%20difference%20between,%2C%20but%20you%20shouldn’t.&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.cnblogs.com/CarpenterLee/p/5994681.html&quot;&gt;https://www.cnblogs.com/CarpenterLee/p/5994681.html&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 16 Dec 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/12/16/c++-00/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/12/16/c++-00/</guid>
+        
+        <category>C++</category>
+        
+        
+      </item>
     
       <item>
         <title>Spark Cheat Sheet</title>
@@ -765,92 +908,6 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
       </item>
     
       <item>
-        <title>C++ (01) 智能指针</title>
-        <description>&lt;p&gt;因为目前用的地图引擎是用C++写的，现在也要适当的回顾一下C++语言了。&lt;/p&gt;
-
-&lt;h1 id=&quot;智能指针&quot;&gt;智能指针&lt;/h1&gt;
-&lt;p&gt;在智能指针出现之前，C++ create一个对象用的new返回的是一个指针对象，即使这个函数已经结束了，C++也不会主动帮忙回收该内存。所以得用代码每次手动delete释放内存。但有了智能指针之后，C++就像Java一样，不需要自己手动回收内存了了。所以只要写的是C++11之后的代码，所有指针当然还是要习惯使用智能指针了，不要再自己delete了，以免内存泄露。常用的智能指针有unique_ptr, shared_ptr, 以及weak_ptr。&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UseRawPointer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Using a raw pointer -- not recommended.&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pSong&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;L&quot;Nothing on You&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;L&quot;Bruno Mars&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
-
-    &lt;span class=&quot;c1&quot;&gt;// Use pSong...&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Don't forget to delete!&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pSong&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-
-&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UseSmartPointer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Declare a smart pointer on stack and pass it the raw pointer.&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;unique_ptr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;song2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;L&quot;Nothing on You&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;L&quot;Bruno Mars&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Use song2...&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;wstring&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;song2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;duration_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// song2 is deleted automatically here.&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;unique_ptr&quot;&gt;unique_ptr&lt;/h4&gt;
-&lt;p&gt;Allows exactly one owner of the underlying pointer. Use as the default choice for POCO unless you know for certain that you require a shared_ptr. Can be moved to a new owner, but not copied or shared. Replaces auto_ptr, which is deprecated. Compare to boost::scoped_ptr. unique_ptr is small and efficient; the size is one pointer and it supports rvalue references for fast insertion and retrieval from C++ Standard Library collections. Header file:  &amp;lt;memory&amp;gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/cpp/cpp/how-to-create-and-use-unique-ptr-instances?view=msvc-160&quot;&gt;How to: Create and use unique_ptr instances&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;unique顾名思义，该指针只能有一个owner，所以unique_ptr不允许拷贝操作。unique_ptr指针指向的对象，允许用户进行move操作并移交ownership给新的unique_ptr, 而旧的unique_ptr则被重置，指向null。&lt;/p&gt;
-
-&lt;h4 id=&quot;shared_ptr&quot;&gt;shared_ptr&lt;/h4&gt;
-&lt;p&gt;Reference-counted smart pointer. Use when you want to assign one raw pointer to multiple owners, for example, when you return a copy of a pointer from a container but want to keep the original. The raw pointer is not deleted until all shared_ptr owners have gone out of scope or have otherwise given up ownership. The size is two pointers; one for the object and one for the shared control block that contains the reference count. Header file:  &amp;lt;memory&amp;gt;. &lt;br /&gt;
-shared顾名思义，也是只一个对象指针允许有多个owner， shared_ptr会有一个专门的指针控制reference count。所以当shared_ptr指向的对象reference count=0的时候才会delete原对象。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/cpp/cpp/how-to-create-and-use-shared-ptr-instances?view=msvc-160&quot;&gt;How to: Create and Use shared_ptr instances&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;weak_ptr&quot;&gt;weak_ptr&lt;/h4&gt;
-&lt;p&gt;Special-case smart pointer for use in conjunction with shared_ptr. A weak_ptr provides access to an object that is owned by one or more shared_ptr instances, but does not participate in reference counting. Use when you want to observe an object, but do not require it to remain alive. Required in some cases to break circular references between shared_ptr instances. Header file: &amp;lt;memory&amp;gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/cpp/cpp/how-to-create-and-use-weak-ptr-instances?view=msvc-160&quot;&gt;How to: Create and use weak_ptr instances&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;weak_ptr是对shared_ptr的一个补充，其目的也是想能够访问shared_ptr共享的对象，但是不占用其referene count。&lt;/p&gt;
-
-&lt;h1 id=&quot;referennce&quot;&gt;Referennce&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-160&quot;&gt;https://docs.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-160&lt;/a&gt;
-&lt;a href=&quot;https://www.geeksforgeeks.org/smart-pointers-cpp/&quot;&gt;https://www.geeksforgeeks.org/smart-pointers-cpp/&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 17 Nov 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/11/17/c++-01/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/11/17/c++-01/</guid>
-        
-        <category>C++</category>
-        
-        
-      </item>
-    
-      <item>
         <title>Learning English</title>
         <description>&lt;h1 id=&quot;态度&quot;&gt;态度&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;学习语言第一点需要端正态度&lt;/strong&gt;&lt;br /&gt;
@@ -990,36 +1047,6 @@ I want to begin with/ and then I’ll move on to/ next we’re talking about/Tha
         <guid isPermaLink="true">https://xctorres.github.io//2020/11/12/how-to-use-git-branch/</guid>
         
         <category>git</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>宇宙与意识</title>
-        <description>&lt;p&gt;最近看了Youtuber老高和晓涵哥的一些关于宇宙，UFO，外星人内容的视频，重新激发了我对宇宙的意识的兴趣。世界万物，小到原子分子大到银河系整个宇宙都是由原子分子两字构成。宏观角度，一切仿佛都遵循着爱因斯坦的广义相对论，而微观角度，组成我们的这些量子遵循的是神秘的量子力学。为什么在地球只有人这种生物是有智慧的生物，我们来到这个世界离开这个世界的意义又是什么。带着种种这些疑问，所以想着积累此博客，写一些视频和书籍的观后感。&lt;/p&gt;
-
-&lt;h2 id=&quot;人类简史&quot;&gt;人类简史&lt;/h2&gt;
-&lt;p&gt;对于人类而言，在历史的路上，有三个重要革命。 认知革命，农业革命，和科学革命。在认知革命中，我们人类是由跟黑猩猩🦍同样的祖先的智人进化而来，智人学会了制作工具学会了钻木取火🔥，有强大的学习能力并创造了语言繁衍至今。其中有个疑问是，在十五万年前，我们人类的祖先不过还是跟猴子猩猩其他动物一样只是生态系统的普通角色，为何短短的的时间只有人类有智慧，站在了食物链的顶端。且在我们智人同时期，地球上存在其他一些人种且能与智人通婚，尼安德特人与丹尼索瓦人，他的脑容量比智人还大，也就是说应该比智人更聪明，但是为什么他们都灭绝了而只有智人留了下来。&lt;br /&gt;
--参考视频： 
-&lt;a href=&quot;https://www.youtube.com/watch?v=qt9KfpWuRKg&quot;&gt;古人类和现代人的分界点在哪？没有过渡物种吗？每块化石都显得那么突兀【宇宙自然生命简史】&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;生命简史&quot;&gt;生命简史&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=GPYn1vJh1Q0&quot;&gt;寻秘自然01： 生命起源（上） 这个著名试验，试图再现生命创生的伟大时刻&lt;/a&gt;
-&lt;a href=&quot;https://www.youtube.com/watch?v=MWFvQ1S-ROI&quot;&gt;土衛2上到底存在什麼，會被NASA認為最有可能存在生命？「曉涵哥來了」&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;黑洞&quot;&gt;黑洞&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=XI9UtfDlENU&quot;&gt;2020 诺贝尔物理学奖公布，“黑洞奖”颁奖词暗藏玄机&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/channel/UCUBhobCkTLhgfUNRAgHSYmw&quot;&gt;科学声音&lt;/a&gt;，个人最喜欢的频道,严谨的科学频道&lt;br /&gt;
-&lt;a href=&quot;https://www.youtube.com/channel/UCMUnInmOkrWN4gof9KlhNmQ&quot;&gt;老高與小茉 Mr &amp;amp; Mrs Gao&lt;/a&gt;， 科普+脑洞都有，听老高讲故事&lt;br /&gt;
-&lt;a href=&quot;https://www.youtube.com/channel/UCvoBl4rnVsetDKA_Tdk-jeA&quot;&gt;晓涵哥来了&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 08 Nov 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/11/08/universe/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/11/08/universe/</guid>
-        
-        <category>宇宙</category>
         
         
       </item>
