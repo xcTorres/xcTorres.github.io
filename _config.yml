@@ -103,10 +103,6 @@ collections:
 # Friends
 friends: [
     {
-        title: "Chen lantian",
-        href: "http://loupipalien.github.io"
-
-    },{
         title: "medium",
         href: "https://medium.com/"
     },
