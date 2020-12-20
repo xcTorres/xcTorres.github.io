@@ -6,15 +6,19 @@
 - Wechat：xc_19931112
 - Instagram：xctorres8
 
----
 
 ### Education
 
 | Master’s degree, Geographic Information Science and Cartography<br>Wuhan University, China| Sep 2016 – Jun 2019 |
 | Bachelor’s degree, Photogrammetry and Remote Sensing <br>Wuhan University, China | Sep 2012 – Jun 2016 |
 
----
+
+### Course  
+
+| Course | Certificate| Time |  
+| [Udemy  Graph Theory Algorithms](https://www.udemy.com/course/graph-theory-algorithms/) |(Doing)| Dec 2020 |
  
+
 ### Work Experience  
 
 **Shopee Data Scientist**  
