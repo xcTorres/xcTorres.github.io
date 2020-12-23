@@ -5,12 +5,12 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 24 Dec 2020 00:16:15 +0800</pubDate>
-    <lastBuildDate>Thu, 24 Dec 2020 00:16:15 +0800</lastBuildDate>
+    <pubDate>Thu, 24 Dec 2020 00:51:11 +0800</pubDate>
+    <lastBuildDate>Thu, 24 Dec 2020 00:51:11 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
-        <title>C++ (01) makefile</title>
+        <title>C++ (01) Makefile文件编写规范</title>
         <description>&lt;p&gt;在编译C++工程的时候，最常见的就是make编译，以及cmake编译。一直以来也没有专门学习过make以及cmake的规则，但是最近研究一个C++源码，代码是09年写的，需要调整makefile或者cmake文件，所以借此机会好好学习一下make和cmake。&lt;/p&gt;
 
 &lt;h1 id=&quot;makefile&quot;&gt;Makefile&lt;/h1&gt;
@@ -31,7 +31,6 @@
 10
 11
 12
-13
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;// Created by Xie Chong on 23/12/20.&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
@@ -44,8 +43,7 @@
 
 
 &lt;span class=&quot;cp&quot;&gt;#endif //MAKE_HELLO_WORLD_H
-&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;hello_world.cpp&lt;/li&gt;
@@ -78,7 +76,9 @@
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;此时如果我们有一个main.cpp就可以调用hello_world的print方法了。&lt;/p&gt;
+
+&lt;p&gt;此时如果我们有一个main.cpp,在引入hello_world.h就可以调用hello_world的print方法了。&lt;/p&gt;
+
 &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
@@ -92,20 +92,25 @@
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;当没有Makefile文件的时候，我们可以直接用g++命令来进行编译，其中-I.指引入当前路径为头文件路径，这样hello_world.h就被引入了。&lt;/p&gt;
+
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;g++ &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; hellomake main.cpp hello_world.cpp &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;这样就可以生成可执行文件hellomake，当我们调用./hellomake时，则可以打印出hello world来了。&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;./hellomake
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hellomake&lt;/span&gt;
 
-// will print out hello world
-// hello world
+&lt;span class=&quot;c1&quot;&gt;// will print out hello world&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// hello world&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;假如一个工程中需要编译很多个文件的时候，如果没有Makefile文件，就要不断的编写多个g++ -o语句，一旦某个文件更新，则要重复一步步手动编译，非常麻烦。这样就有了make的存在的原因。&lt;/p&gt;
 
 &lt;h4 id=&quot;makefile_1&quot;&gt;Makefile_1&lt;/h4&gt;
@@ -119,8 +124,7 @@
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;makefile_2&quot;&gt;Makefile_2&lt;/h4&gt;
-&lt;p&gt;但是如此一来有个问题，一旦有一个cpp文件进行修改，Makefile_1的整个编译命令得全部重新进行非常繁琐。
-接下来可以对Makefile_1进行下一步改进解耦，首先是将编译器定义变量CC，以及编译参数定义变量CXXFLAGS，如此一来有利于修改编译器类型以及添加新的C++编译参数；其次是hellomake所依赖的文件可以直接由.cpp替换成.o文件，make命令会根据.o的前缀名先自动独立编译其对应的.cpp文件，这样以来各个.o文件的编译不会互相影响，如果只有一个cpp文件修改，其他无关的可执行文件无需重新编译。&lt;/p&gt;
+&lt;p&gt;但是如此一来有个问题，一旦有一个cpp文件进行修改，Makefile_1的整个编译命令得全部重新进行非常繁琐。 接下来可以对Makefile_1进行下一步改进解耦，首先是将编译器定义变量CC，以及编译参数定义变量CXXFLAGS，如此一来有利于修改编译器类型以及添加新的C++编译参数；其次是hellomake所依赖的文件可以直接由.cpp替换成.o文件，make命令会根据.o的前缀名先自动独立编译其对应的.cpp文件，这样以来各个.o文件的编译不会互相影响，如果只有一个cpp文件修改，其他无关的可执行文件无需重新编译。&lt;/p&gt;
 
 &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -135,7 +139,8 @@
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;makefile_3&quot;&gt;Makefile_3&lt;/h4&gt;
-&lt;p&gt;但是Makefile_2中，会出现这样一个问题，假如hello_world.h有了新的改动，.o文件不会随之重新编译。这样新的改动就无法生效。此时就得提前将.o文件与相应的头文件关联起来。如Makefile_3所示：其中DEPS可以把头文件的宏放置其中，%.o: %.c $(DEPS)中的 %.o: %.c 是指编译当前路径下所有的cpp文件并生成相应的可执行文件.o，但与此同时改步骤都会依赖后面的DEPS，这样头文件改动，重新编译时可执行文件也会跟着更新。而改行下面其实就是相应的g++命令， $@指的其实就是 %.o对应的文件， $&amp;lt;指的是一系列参数里面的第一个，也就是%.c。&lt;/p&gt;
+&lt;p&gt;但是Makefile_2中，会出现这样一个问题，假如hello_world.h有了新的改动，.o文件不会随之重新编译。这样新的改动就无法生效。此时就得提前将.o文件与相应的头文件关联起来。如Makefile_3所示：其中DEPS可以把头文件的宏放置其中，%.o: %.c 
+中的\$@指的其实就是 %.o对应的文件， \$&amp;lt;指的是一系列参数里面的第一个，也就是%.c。&lt;/p&gt;
 
 &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -161,14 +166,10 @@
 
 &lt;h4 id=&quot;makefile_4&quot;&gt;Makefile_4&lt;/h4&gt;
 &lt;h4 id=&quot;makefile_5&quot;&gt;Makefile_5&lt;/h4&gt;
-
-&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/&quot;&gt;https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.hahack.com/codes/cmake/&quot;&gt;https://www.hahack.com/codes/cmake/&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 17 Dec 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/12/17/c++-01/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/12/17/c++-01/</guid>
+        <pubDate>Thu, 24 Dec 2020 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2020/12/24/c++-01/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2020/12/24/c++-01/</guid>
         
         <category>C++</category>
         

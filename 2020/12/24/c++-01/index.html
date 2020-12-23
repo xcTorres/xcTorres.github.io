@@ -11,13 +11,13 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="C++ (01) makefile - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="C++ (01) Makefile文件编写规范 - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="在编译C++工程的时候，最常见的就是make编译，以及cmake编译。一直以来也没有专门学习过make以及cmake的规则，但是最近研究一个C++源码，代码是09年写的，需要调整makefile或者cmake文件，所以借此机会好好学习一下make和cmake。
 ">
     
-    <meta property="article:published_time" content="2020-12-17T00:00:00Z">
+    <meta property="article:published_time" content="2020-12-24T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
@@ -27,10 +27,10 @@
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2020/12/17/c++-01/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/12/24/c++-01/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>C++ (01) makefile - 谢聪博客 | xcTorres Blog</title>
+    <title>C++ (01) Makefile文件编写规范 - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2020/12/17/c++-01/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/12/24/c++-01/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -249,10 +249,10 @@
                         <a class="tag" href="/archive/?tag=C%2B%2B" title="C++">C++</a>
                         
                     </div>
-                    <h1>C++ (01) makefile</h1>
+                    <h1>C++ (01) Makefile文件编写规范</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on December 17, 2020</span>
+                    <span class="meta">Posted by xcTorres on December 24, 2020</span>
                 </div>
             </div>
         </div>
@@ -298,7 +298,6 @@
 10
 11
 12
-13
 </pre></td><td class="rouge-code"><pre><span class="c1">//</span>
 <span class="c1">// Created by Xie Chong on 23/12/20.</span>
 <span class="c1">//</span>
@@ -311,8 +310,7 @@
 
 
 <span class="cp">#endif //MAKE_HELLO_WORLD_H
-</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</span></pre></td></tr></tbody></table></code></pre></div></div>
 
 <ul>
   <li>hello_world.cpp</li>
@@ -345,7 +343,9 @@
     <span class="k">return</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>此时如果我们有一个main.cpp就可以调用hello_world的print方法了。</p>
+
+<p>此时如果我们有一个main.cpp,在引入hello_world.h就可以调用hello_world的print方法了。</p>
+
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -359,20 +359,25 @@
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
+
 <p>当没有Makefile文件的时候，我们可以直接用g++命令来进行编译，其中-I.指引入当前路径为头文件路径，这样hello_world.h就被引入了。</p>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>g++ <span class="nt">-o</span> hellomake main.cpp hello_world.cpp <span class="nt">-I</span> <span class="nb">.</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
+
 <p>这样就可以生成可执行文件hellomake，当我们调用./hellomake时，则可以打印出hello world来了。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
-</pre></td><td class="rouge-code"><pre>./hellomake
+</pre></td><td class="rouge-code"><pre><span class="p">.</span><span class="o">/</span><span class="n">hellomake</span>
 
-// will print out hello world
-// hello world
+<span class="c1">// will print out hello world</span>
+<span class="c1">// hello world</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
+
 <p>假如一个工程中需要编译很多个文件的时候，如果没有Makefile文件，就要不断的编写多个g++ -o语句，一旦某个文件更新，则要重复一步步手动编译，非常麻烦。这样就有了make的存在的原因。</p>
 
 <h4 id="makefile_1">Makefile_1</h4>
@@ -386,8 +391,7 @@
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="makefile_2">Makefile_2</h4>
-<p>但是如此一来有个问题，一旦有一个cpp文件进行修改，Makefile_1的整个编译命令得全部重新进行非常繁琐。
-接下来可以对Makefile_1进行下一步改进解耦，首先是将编译器定义变量CC，以及编译参数定义变量CXXFLAGS，如此一来有利于修改编译器类型以及添加新的C++编译参数；其次是hellomake所依赖的文件可以直接由.cpp替换成.o文件，make命令会根据.o的前缀名先自动独立编译其对应的.cpp文件，这样以来各个.o文件的编译不会互相影响，如果只有一个cpp文件修改，其他无关的可执行文件无需重新编译。</p>
+<p>但是如此一来有个问题，一旦有一个cpp文件进行修改，Makefile_1的整个编译命令得全部重新进行非常繁琐。 接下来可以对Makefile_1进行下一步改进解耦，首先是将编译器定义变量CC，以及编译参数定义变量CXXFLAGS，如此一来有利于修改编译器类型以及添加新的C++编译参数；其次是hellomake所依赖的文件可以直接由.cpp替换成.o文件，make命令会根据.o的前缀名先自动独立编译其对应的.cpp文件，这样以来各个.o文件的编译不会互相影响，如果只有一个cpp文件修改，其他无关的可执行文件无需重新编译。</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -402,7 +406,8 @@
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="makefile_3">Makefile_3</h4>
-<p>但是Makefile_2中，会出现这样一个问题，假如hello_world.h有了新的改动，.o文件不会随之重新编译。这样新的改动就无法生效。此时就得提前将.o文件与相应的头文件关联起来。如Makefile_3所示：其中DEPS可以把头文件的宏放置其中，%.o: %.c $(DEPS)中的 %.o: %.c 是指编译当前路径下所有的cpp文件并生成相应的可执行文件.o，但与此同时改步骤都会依赖后面的DEPS，这样头文件改动，重新编译时可执行文件也会跟着更新。而改行下面其实就是相应的g++命令， $@指的其实就是 %.o对应的文件， $&lt;指的是一系列参数里面的第一个，也就是%.c。</p>
+<p>但是Makefile_2中，会出现这样一个问题，假如hello_world.h有了新的改动，.o文件不会随之重新编译。这样新的改动就无法生效。此时就得提前将.o文件与相应的头文件关联起来。如Makefile_3所示：其中DEPS可以把头文件的宏放置其中，%.o: %.c 
+中的\$@指的其实就是 %.o对应的文件， \$&lt;指的是一系列参数里面的第一个，也就是%.c。</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -428,10 +433,6 @@
 
 <h4 id="makefile_4">Makefile_4</h4>
 <h4 id="makefile_5">Makefile_5</h4>
-
-<h1 id="reference">Reference</h1>
-<p><a href="https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/">https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/</a><br />
-<a href="https://www.hahack.com/codes/cmake/">https://www.hahack.com/codes/cmake/</a></p>
 
 
                 <hr style="visibility: hidden;">
@@ -710,7 +711,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2020/12/17/c++-01",
+		id: "/2020/12/24/c++-01",
 		
 		});
 		gitalk.render('gitalk-container'); 
