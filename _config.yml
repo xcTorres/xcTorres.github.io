@@ -99,6 +99,8 @@ collections:
     output: true  
   paper:
     output: true
+  books:
+    output: false
 
 # Friends
 friends: [

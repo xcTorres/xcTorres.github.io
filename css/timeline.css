@@ -1,0 +1,47 @@
+.item_1 {
+padding-top:100px;
+min-height:150px;
+position:relative
+}
+.item_1:before,.last-item_1:after {
+background:#fff;
+border:8px solid #000;
+border-radius:50%;
+width:40px;
+height:40px;
+display:inline-block;
+content:"";
+margin-left:1rem;
+position:relative;
+z-index:1;
+left:calc(2% - 36px)
+}
+.vertical-line {
+width:8px;
+background-color:#000;
+position:absolute;
+left:calc(2% - 5px);
+top:0;
+bottom:0
+}
+.item_1 .card-panel {
+margin:0;
+margin:2rem 0 0 3rem
+}
+.item_1-date {
+margin-top:-60px;
+margin-left:4rem
+}
+.cv-title {
+margin-bottom:0;
+margin-left:calc(2% - 5px);
+line-height:190%
+}
+.cv-title span {
+padding:1rem
+}
+.last-item_1{
+padding-top:80px;
+height:70px;
+position:relative
+}

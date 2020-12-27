@@ -1,0 +1,27 @@
+---
+layout: page
+title: "Book"
+---
+
+<div class="post-preview">
+    <!-- <h1 class="cv-title"><span class="black white-text">{{ site.title }}</span></h1> -->
+    {% assign sorted = site.books | sort: 'date' | reverse %}
+    {% assign books = sorted %}
+    {% for book in books %}
+    <div class="item_1">
+        <i class="vertical-line"></i>
+        <h2 class="item_1-date">{{ book.date | date: '%Y-%m' }}</h2>
+        <div class="card-panel">
+            <h3 class="card-title">
+                {{ book.title }}
+            </h3>
+            <p>
+                {{ book.content }}
+            </p>
+    </div>
+</div>
+    {% endfor %}
+    <div class="last-item_1">
+        <i class="vertical-line"></i>
+    </div>
+</div>
