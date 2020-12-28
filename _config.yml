@@ -11,7 +11,7 @@ url: "https://xctorres.github.io/"              # your host, for absolute URL
 encoding: utf-8
 
 # SNS settings
-RSS: true
+RSS: false
 zhihu_username:     cong-zi-64
 github_username:    xcTorres
 linkedin_username: chong-xie-545830157
@@ -113,29 +113,17 @@ friends: [
         href: "https://www.cnblogs.com/pinard/"
  
     },{
-        title: "10tiao",
-        href: "http://www.10tiao.com/"
-    },{
         title: "滴滴:李海波",
         href: "http://www.semocean.com/"
     },{
         title: "liam",
         href: "https://liam.page/"
     },{
-        title: "IT技术博客大学习",
-        href: "https://blogread.cn/it/"
-    },{
         title: "V2EX",
         href: "https://www.v2ex.com/"
     },{
-        title: "Beyong the Void",
-        href: "https://www.byvoid.com/zhs/blog"
-    },{
         title: "崔天翼",
         href: "http://tianyicui.com/"
-    },{
-        title: "晓晨Master",
-        href: "https://www.cnblogs.com/stulzq/"
     },{
         title: "峰云就她了",
         href: "http://xiaorui.cc/"
