@@ -41,5 +41,3 @@
 
 [MAP-Vis: A Distributed Spatio-Temporal Big Data Visualization Framework Based on a MultiDimensional Aggregation Pyramid Model](https://www.mdpi.com/2076-3417/10/2/598/htm)
 
-
-
