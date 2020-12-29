@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 29 Dec 2020 00:49:36 +0800</pubDate>
-    <lastBuildDate>Tue, 29 Dec 2020 00:49:36 +0800</lastBuildDate>
+    <pubDate>Wed, 30 Dec 2020 01:23:19 +0800</pubDate>
+    <lastBuildDate>Wed, 30 Dec 2020 01:23:19 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -1769,7 +1769,7 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
         <link>https://xctorres.github.io//2020/11/08/HMM/</link>
         <guid isPermaLink="true">https://xctorres.github.io//2020/11/08/HMM/</guid>
         
-        <category>算法</category>
+        <category>algorithms</category>
         
         
       </item>
