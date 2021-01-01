@@ -5,9 +5,97 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 30 Dec 2020 18:11:02 +0800</pubDate>
-    <lastBuildDate>Wed, 30 Dec 2020 18:11:02 +0800</lastBuildDate>
+    <pubDate>Fri, 01 Jan 2021 13:49:22 +0800</pubDate>
+    <lastBuildDate>Fri, 01 Jan 2021 13:49:22 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>2021新年</title>
+        <description>&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
+&lt;p&gt;不知不觉，2020年都过完了。这一年因为疫情的影响，没有什么旅行和活动，主要的精力都聚焦在提升自己的工作能力和培养良好的习惯。能够持续性地学习专业、工作相关的知识，有规律的健身，持续性的撰写博客，英语有了比较明显的进步，这四点感觉是自己整个2020年最大的财富~&lt;/p&gt;
+
+&lt;h1 id=&quot;flag&quot;&gt;Flag&lt;/h1&gt;
+&lt;p&gt;回顾2020，2019写的新年展望博客有很多未完成的愿望，感觉很重要的一个原因是因为根本没有取量化。今年写的展望得少写点哈哈，再加一些量化指标，不整虚头巴脑的。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;当一个合格的铲屎官&lt;/strong&gt; &lt;br /&gt;
+马上也是要当铲屎官的人了，第一个愿望就是以后能做一个负责任的养猫人。学会使用iMovie剪辑一些视频，当一个宠物区up主。以后有能力的话再上传一些日常学习编程以及英语的视频，扩展成为一个兼宠物区、学习区的up主。&lt;br /&gt;
+&lt;br /&gt;
+量化指标：假设保守估计每两周更新一次自己能力范围内的高质量视频，就得更新52/2=26个视频，fans数量暂时不做额外要求。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;养成一个读书的习惯&lt;/strong&gt; &lt;br /&gt;
+这个Flag不知道立了几年了，一直没能养成习惯，势必今年要拿下这个Flag。博客专区专门开了个Book系列，记录一些读书笔记，并激励自己多读书、读好书。&lt;br /&gt;
+&lt;br /&gt;
+量化指标：认真读完30本书，并更新读书笔记。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;养成一个吃早饭的习惯&lt;/strong&gt;&lt;br /&gt;
+虽然有锻炼，午饭和晚饭吃的都挺不错。但是从来不吃早饭的习惯一定要改。
+&lt;br /&gt;
+量化指标：坚持吃早饭。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;提升英语能力&lt;/strong&gt;
+每周听一个Ted演讲。总结一些工作中常用的词汇与搭配。&lt;br /&gt;
+每两日听同一个短听力，并尝试默写内容&lt;br /&gt;
+&lt;br /&gt;
+量化指标：52个Ted或类似长视频。 150+短听力训练。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;持续性建设自己的博客内容&lt;/strong&gt; &lt;br /&gt;
+将其作为自己一个人生的记录，决不能停更。博客中的质量和细节都尽量做到最好，包括排版，格式，错别字之类。&lt;br /&gt;
+&lt;br /&gt;
+量化指标：无需追求博客数量，只追求质量。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;提升刷题能力&lt;/strong&gt; &lt;br /&gt;
+刷题是一个程序员的基本素养😝。其实工作这一年多来，也刷了不少题目。现在回头看来，能力是应该有所提升的，面试的时候给候选人出题也算得心应手。但是感觉还是缺乏系统性，效率不够高。1道，1道地去刷题过一段时间感觉很容易遗忘，新的目标是将博客中的Leetcode题海战术改为归纳系列。给每一系列添加详细的分析，讲解，去追求质量；而不是追求数量，刷了多少多少道题目。
+&lt;br /&gt;&lt;br /&gt;
+量化指标：同上，无需追求系列数量，只追求质量。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;阅读源码&lt;/strong&gt;  &lt;br /&gt;
+不同于提升刷题能力，这个不是单纯的数据结构和算法，是同时包含算法，设计模式，系统架构的一个宏观把握。
+&lt;br /&gt;&lt;br /&gt;
+量化指标：可以多看些Python的源码库，一个月1个的话就是12个；C++的源码库暂时就继续看OSRM-backend这一个就好了。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;提升理财能力&lt;/strong&gt;&lt;br /&gt;
+了解一些股票，基金的知识。在了解清楚的情况下，选择一个基金定投。除了自己公司发股票分红，其他股票目前一律不碰。
+&lt;br /&gt;
+量化指标：基金定投&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 01 Jan 2021 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2021/01/01/new-year-life/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/01/01/new-year-life/</guid>
+        
+        <category>生活</category>
+        
+        
+      </item>
     
       <item>
         <title>C++ (01) Makefile文件编写规范</title>
@@ -1770,239 +1858,6 @@ $P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM�
         <guid isPermaLink="true">https://xctorres.github.io//2020/11/08/HMM/</guid>
         
         <category>algorithms</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>OSM data introduction</title>
-        <description>&lt;h1 id=&quot;overview&quot;&gt;Overview&lt;/h1&gt;
-
-&lt;p&gt;OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world. In this page, I want to introduce the structure of OSM data and how to use OSM data into our business.&lt;/p&gt;
-
-&lt;h1 id=&quot;data-content&quot;&gt;Data content&lt;/h1&gt;
-&lt;h2 id=&quot;elements&quot;&gt;Elements&lt;/h2&gt;
-&lt;p&gt;Elements are the basic components of OpenStreetMap’s conceptual data model of the physical world. They consist of&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Node&quot;&gt;nodes&lt;/a&gt; (defining points in space).&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Way&quot;&gt;ways&lt;/a&gt; (defining linear features and area boundaries), and&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Relation&quot;&gt;relations&lt;/a&gt; (which are sometimes used to explain how other elements work together).
-All of the above can have one or more associated tags (which describe the meaning of a particular element).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;node&quot;&gt;Node&lt;/h3&gt;
-&lt;p&gt;A node is one of the core elements in the OpenStreetMap data model. It consists of a single point in space defined by its latitude, longitude and node id.&lt;br /&gt;
-Nodes can be used to define standalone point features, but are more often used to define the shape or “path” of a way.&lt;br /&gt;
-As of September 2020, OpenStreetMap contains over 6 billion nodes.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Point features&lt;br /&gt;
-Nodes can be used on their own to define point features. When used in this way, a node will normally have at least one tag to define its purpose. Nodes may have multiple tags and/or be part of a relation. For example, a telephone box may be tagged simply with amenity=telephone.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Nodes on Ways&lt;br /&gt;
-Many nodes form part of one or more ways, defining the shape or “path” of the way.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Structure&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;name&lt;/th&gt;
-      &lt;th&gt;value&lt;/th&gt;
-      &lt;th&gt;description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;id&lt;/td&gt;
-      &lt;td&gt;64-bit integer number≥ 1&lt;/td&gt;
-      &lt;td&gt;Node ids are unique between nodes. (However, a way or a relation can have the same id number as a node.) Editors may temporarily save node ids as negative to denote ids that haven’t yet been saved to the server. Node ids on the server are persistent, meaning that the assigned id of an existing node will remain unchanged each time data are added or corrected. Deleted node ids must not be reused, unless a former node is now undeleted.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lat&lt;/td&gt;
-      &lt;td&gt;decimal number ≥ −90.0000000 and ≤ 90.0000000 with 7 decimal places&lt;/td&gt;
-      &lt;td&gt;Latitude coordinate in degrees (North of equator is positive) using the standard WGS84 projection. Some applications may not accept latitudes above/below ±85 degrees for some projections.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lon&lt;/td&gt;
-      &lt;td&gt;decimal number ≥ −180.0000000 and ≤ 180.0000000 with 7 decimal places&lt;/td&gt;
-      &lt;td&gt;Longitude coordinate in degrees (East of Greenwich is positive) using the standard WGS84 projection. Note that the geographic poles will be exactly at latitude ±90 degrees but in that case the longitude will be set to an arbitrary value within this range.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;A set of key/value pairs, with unique key&lt;/td&gt;
-      &lt;td&gt;See &lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Map_Features&quot;&gt;Map Features&lt;/a&gt; for tagging guidelines.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h4 id=&quot;example&quot;&gt;Example&lt;/h4&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;node&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;25496583&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lat=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;51.5173639&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lon=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-0.140043&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;changeset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;203496&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;user=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;80n&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uid=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1238&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;visible=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timestamp=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2007-01-28T11:40:26Z&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;highway&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;traffic_signals&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/node&amp;gt;&lt;/span&gt;
-
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Visualization: &lt;a href=&quot;https://www.openstreetmap.org/node/25496583#map=19/51.52092/-0.14281&quot;&gt;https://www.openstreetmap.org/node/25496583#map=19/51.52092/-0.14281&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;way&quot;&gt;Way&lt;/h3&gt;
-&lt;p&gt;A way is an ordered list of nodes which normally also has at least one tag or is included within a Relation. A way can have between 2 and 2,000 nodes, although it’s possible that faulty ways with zero or a single node exist. A way can be open or closed. A closed way is one whose last node on the way is also the first on that way. A closed way may be interpreted either as a closed polyline, or an area, or both.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Open way (Open polyline) way&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;An open way is way describing a linear feature which does not share a first and last node. Many roads, streams and railway lines are open ways. Identifying the direction of a ‘way’.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Closed way (Closed polyline) closed way&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;A closed way is a way where the last node of the way is shared with the first node with suitable tagging. A closed way that also has a area=yes tag should be interpreted as an area (but the tag is not required most of the time, see section below).&lt;br /&gt;
-The following closed way would be interpreted as closed polylines:&lt;br /&gt;
-highway=* Closed ways are used to define roundabouts and circular walks&lt;br /&gt;
-barrier=* Closed ways are used to define barriers, such as hedges and walls, that go completely round a property.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Area area&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;An area (also polygon) is an enclosed filled area of territory defined as a closed way. Most closed ways are considered to be areas even without an area=yes tag (see above for some exceptions). Examples of areas defined as closed ways include:&lt;br /&gt;
-leisure=park to define the perimeter of a park&lt;br /&gt;
-amenity=school to define the outline of a school&lt;br /&gt;
-For tags which can be used to define closed polylines it is necessary to also add an area=yes if an area is desired. Examples include:&lt;br /&gt;
-highway=pedestrian + area=yes to define a pedestrian square or plaza.&lt;br /&gt;
-Areas can also be described using one or more ways which are associated with a multipolygon relation.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Combined closed-polyline and area&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It is possible for a closed way to be tagged in a way that it should be interpreted both as a closed-polylines and also as an area.&lt;br /&gt;
-For example, a closed way defining a roundabout surrounding a grassy area might be tagged simultaneously as :&lt;br /&gt;
-highway=primary + junction=roundabout, both being interpreted as a polyline along the closed way, and landuse=grass, interpreted on the area enclosed by the way.&lt;/p&gt;
-
-&lt;h4 id=&quot;example-1&quot;&gt;Example&lt;/h4&gt;
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;way&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;5090250&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;visible=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timestamp=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2009-01-19T19:07:25Z&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;changeset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;816806&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;user=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Blumpsy&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uid=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;64226&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;822403&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;21533912&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;821601&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;21533910&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;135791608&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725784&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725781&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725774&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;333725776&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;823771&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;highway&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;residential&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Clipstone Street&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;oneway&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yes&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/way&amp;gt;&lt;/span&gt;
-
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Visualization: &lt;a href=&quot;https://www.openstreetmap.org/way/5090250&quot;&gt;https://www.openstreetmap.org/way/5090250&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;relation&quot;&gt;Relation&lt;/h3&gt;
-
-&lt;p&gt;A relation is a group of elements. To be more exact it is one of the core data elements that consists of one or more tags and also an ordered list of one or more nodes, ways and/or relations as members which is used to define logical or geographic relationships between other elements. A member of a relation can optionally have a role which describes the part that a particular feature plays within a relation.&lt;/p&gt;
-
-&lt;p&gt;Main article: &lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Types_of_relation&quot;&gt;Types of relation&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Multipolygon&lt;br /&gt;
-Multipolygons are one of two methods to represent area areas in OpenStreetMap. While most areas are represented as a single closed way closed way, almost all area features can also be mapped using multipolygon relations. This is needed when the area needs to exclude inner rings (holes), has multiple outer areas (exclaves), or uses more than ~2000 nodes.&lt;br /&gt;
-In the multipolygon relation, the inner and outer roles are used to specify whether a member way forms the inner or outer part of that polygon enclosing an area. For example, an inner way could define an island in a lake (which is mapped as relation).&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Bus route&lt;br /&gt;
-Each variation of a bus route itinerary is represented by a relation with type=route, route=bus and ref=* and operator=* tags. The first members in the route relation are the nodes representing the stops. These are ordered in the way the vehicles travel along them. Then the ways are added. In PT v2 the ways form an ordered sequence, along the stop nodes. The ways don’t get roles. If they form a continuous sequence this is apparent from the continuous line along them (in JOSM’s relation editor).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;example-2&quot;&gt;Example&lt;/h4&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;relation&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;13&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;visible=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;25&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;changeset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;74363810&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;timestamp=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2019-09-11T16:30:55Z&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;user=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ferdinand0101&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uid=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;9080271&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;member&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;way&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2907748&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;outer&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;member&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;way&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8125203&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;inner&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;landuse&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;reservoir&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Swithland Reservoir&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;type&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;multipolygon&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;k=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wikidata&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Q7349363&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/relation&amp;gt;&lt;/span&gt;
-    
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Visualization: &lt;a href=&quot;https://www.openstreetmap.org/relation/13&quot;&gt;https://www.openstreetmap.org/relation/13&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;data-format&quot;&gt;Data format&lt;/h1&gt;
-
-&lt;p&gt;The most important formats are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PBF Format – highly compressed, optimized binary format similar to the API, recommended for data processing&lt;/li&gt;
-  &lt;li&gt;OSM XML – XML format provided by the API. Please use PBF if you can.&lt;/li&gt;
-  &lt;li&gt;OSM JSON - JSON format provided by the API, based on Overpass API JSON format.&lt;/li&gt;
-  &lt;li&gt;o5m – for high-speed processing, uses PBF coding, has same structure as XML format, limited support by appliations&lt;/li&gt;
-  &lt;li&gt;Overpass JSON – JSON variant of OSM XML, used by Overpass API&lt;/li&gt;
-  &lt;li&gt;Level0L – more human readable OSM XML without &amp;lt;&amp;gt; and lowered redundancy&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The most two popular formats are XML and PBF format. XML format is easy to parse and readable. PBF format is a highly compressed file, so it is commonly used because the map data size is very huge in production environment .&lt;/p&gt;
-
-&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Elements&quot;&gt;https://wiki.openstreetmap.org/wiki/Elements&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Elements&quot;&gt;https://wiki.openstreetmap.org/wiki/Node&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Elements&quot;&gt;https://wiki.openstreetmap.org/wiki/Way&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Relation&quot;&gt;https://wiki.openstreetmap.org/wiki/Relation&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/Tags&quot;&gt;https://wiki.openstreetmap.org/wiki/Tags&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://wiki.openstreetmap.org/wiki/OSM_file_formats&quot;&gt;https://wiki.openstreetmap.org/wiki/OSM_file_formats&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 26 Sep 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/09/26/OSM-data-introduction/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/09/26/OSM-data-introduction/</guid>
-        
-        <category>GIS</category>
         
         
       </item>
