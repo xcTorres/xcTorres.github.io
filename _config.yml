@@ -182,6 +182,9 @@ gallery:
     y: 600                  # max height of thumbnails (in pixels)
   # The following options are for individual galleries.
   galleries:
+    cats:
+      name: "2020/12/31 British Short Hair"
+      best_image: 51609562960_.pic_hd.jpg
     debut:
         name: "2020/11/29 Dragon Boat Debut"
         best_image: SHP00492.jpg
@@ -216,4 +219,4 @@ gallery:
       best_image: 2018-10-06 095528.jpg
     batchelor graduation:
       name: "2016/06  Batchelor graduation"
-      best_image: IMG_20160607_095624.jpg
+      best_image: IMG_20160607_095624.jpg  
