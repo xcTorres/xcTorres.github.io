@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2020-11-12
+date:       2021-01-05
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -38,24 +38,19 @@ English is not an art to be mastered.It is just a tool to get the result.**
 | 2nd Nov |[并非所有水力发电设施都有利于环保](https://dict.eudic.net/webting/desktopplay?id=3c018d6d-1b12-11eb-8659-00505686c5e6&token=QYN+eyJ0b2tlbiI6IiIsInVzZXJpZCI6IiIsInVybHNpZ24iOiJ1RFdGQys0R0pCMEVxWXRtcm0wVFZPb1lSOEU9IiwidCI6IkFCSU1UWXlOREV3TmpNeU9RPT0ifQ%3D%3D)|  并非所有水力发电设施都有利于环保 |
 | 12th Nov |[https://www.bilibili.com/video/BV1JK411V77G?p=1](https://www.bilibili.com/video/BV1JK411V77G?p=1)|  Improving your memory - 6 Minute English |
 | 18th Nov |[https://www.bilibili.com/video/BV1JK411V77G?p=3](https://www.bilibili.com/video/BV1JK411V77G?p=3)|  What makes you happy 6 Minute English |
-| 24th Nov |[https://www.bilibili.com/video/BV1C54y1z7MG?p=3](https://www.bilibili.com/video/BV1C54y1z7MG?p=3)|  美国总统的家庭地位是怎样的？奥巴马：我真的好卑微 |
+| 24th Nov |[https://www.bilibili.com/video/BV1C54y1z7MG?p=3](https://www.bilibili.com/video/BV1C54y1z7MG?p=3)|  美国总统的家庭地位是怎样的？奥巴马：我真的好卑微 |  
+| 5th Jan 2021|[https://www.bilibili.com/video/BV1vz4y1z7eQ?p=3](https://www.bilibili.com/video/BV1vz4y1z7eQ?p=3)|  如何做出完美的课堂展示？澳洲展示大赛冠军小姐姐教给你 | 
 
 
 # 口语  
-### 日常
-Vibe 印象， He gave a good vibe on me.  
-A hint of 一点点  
-What's the Engilish word for this?  
-down in the dumps 垂头丧气  
-millennials 千禧一代  
-regulate 调节，控制
 
 ### 工作交谈
 As a quick reminder: 顺便提醒一下  
 Taken as a very loose analogy: 作为粗略的对照  
 I will touch base with you. 我会向你再次确认。  
 Got it/ Roger that / Consider it done/ Sure thing 好的收到  
-With that being said 说完这些   
+With that being said 说完这些  
+It occurs at hight rate  出现比例很高
 
 ### Presentation
 From where I stand / From my point of view / Judging from what I have heard/read.  
