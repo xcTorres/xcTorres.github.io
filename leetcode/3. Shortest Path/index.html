@@ -11,10 +11,10 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="1. Palindrome Series - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="3. Shortest Path Series - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="A palindrome is a word, number, phrase, or other sequence of characters which reads the same backward as forward, such as madam, racecar.
+    <meta property="og:description" content="
 ">
     
     <meta property="article:published_time" content="2021-01-09T12:17:44Z">
@@ -27,10 +27,10 @@
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//leetcode/1.%20Palindrome/">
+    <meta property="og:url" content="https://xctorres.github.io//leetcode/3.%20Shortest%20Path/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>1. Palindrome Series - 谢聪博客 | xcTorres Blog</title>
+    <title>3. Shortest Path Series - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//leetcode/1.%20Palindrome/">
+    <link rel="canonical" href="https://xctorres.github.io//leetcode/3.%20Shortest%20Path/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -266,7 +266,7 @@
                         <a class="tag" href="/archive/?tag=Leetcode" title="Leetcode">Leetcode</a>
                         
                     </div>
-                    <h1>1. Palindrome Series</h1>
+                    <h1>3. Shortest Path Series</h1>
                     
                     <h2 class="subheading"></h2>
                     <span class="meta">Posted by xcTorres on January 9, 2021</span>
@@ -295,166 +295,19 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>A palindrome is a word, number, phrase, or other sequence of characters which reads the same backward as forward, such as madam, racecar.</p>
-
-<p>There are several related problems in Leetcode.</p>
-
-<h2 id="125-valid-palindrome"><a href="https://leetcode.com/problems/valid-palindrome/">125. Valid Palindrome</a></h2>
-<p>This question is easy. The first step is to filter out all of the non-alpha and non-num characters. The second step is to use two pointers and compare the characters one by one.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">isPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">i</span><span class="p">.</span><span class="n">isalnum</span><span class="p">()])</span>
-        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-        <span class="k">while</span> <span class="n">start</span><span class="o">&lt;</span><span class="n">end</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">start</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">end</span><span class="p">].</span><span class="n">lower</span><span class="p">():</span>
-                <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">end</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">False</span>
-        <span class="k">return</span> <span class="bp">True</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h2 id="680-valid-palindrome-ii"><a href="https://leetcode.com/problems/valid-palindrome-ii/">680. Valid Palindrome II</a></h2>
-
-<p>We can use the standard two-pointer approach that starts at the left and right of the string and move inwards. Whenever there is a mismatch, we can either exclude the character at the left or the right pointer. We then take the two remaining substrings and compare against its reversed and see if either one is a palindrome</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">validPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-                <span class="n">delete_i</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-                <span class="n">delete_j</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_isPalindrome</span><span class="p">(</span><span class="n">delete_i</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="p">.</span><span class="n">_isPalindrome</span><span class="p">(</span><span class="n">delete_j</span><span class="p">)</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    
-    <span class="k">def</span> <span class="nf">_isPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">s</span> <span class="o">==</span> <span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h2 id="5-longest-palindromic-substring"><a href="https://leetcode.com/problems/longest-palindromic-substring/">5. Longest Palindromic Substring</a></h2>
-
-<h4 id="two-pointers">Two Pointers</h4>
-<p>Palindrome could have the even length, so we need to skip the duplicates before we further check the characters.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">longestPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">s</span>
-        
-        <span class="n">res</span> <span class="o">=</span> <span class="s">''</span>
-        <span class="k">for</span> <span class="n">center</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
-            <span class="n">i</span> <span class="o">=</span> <span class="n">center</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="n">center</span>
-            <span class="k">while</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="n">j</span><span class="o">+=</span><span class="mi">1</span>
-            <span class="k">while</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-                <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
-                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
-                <span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">res</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h4 id="dynamic-programming">Dynamic Programming</h4>
-<p>The dynamic programming euqation is as follows:</p>
-
-<p>$ dp[i][j] = dp[i+1][j-1] &amp; (s[i]==s[j]) (i-j&gt;2) $</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">longestPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">s</span>
-        
-        <span class="n">res</span> <span class="o">=</span> <span class="s">''</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">False</span><span class="p">]</span><span class="o">*</span><span class="n">n</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span> <span class="ow">or</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-                    <span class="k">if</span> <span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
-                        <span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">res</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h2 id="132-palindrome-partitioning-ii"><a href="https://leetcode.com/problems/palindrome-partitioning-ii/">132. Palindrome Partitioning II</a></h2>
-
+				
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
-                    
-                    <li class="next">
+                    <li class="previous">
                         <a href="/leetcode/2.%20Binary%20Tree_1/" data-toggle="tooltip" data-placement="top" title="2. Binary Tree Traversal Series">
-                        Next<br>
+                        Previous<br>
                         <span>2. Binary Tree Traversal Series</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -640,54 +493,6 @@
 
 <!-- add support for mathjax by voleking-->
 
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    SVG: {
-      scale: 90
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-    }
-  });
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
-</script>
-
-
-
-
-
-
-
-
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    SVG: {
-      scale: 90
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-    }
-  });
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
-</script>
 
 
 
@@ -727,7 +532,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/leetcode/1. Palindrome",
+		id: "/leetcode/3. Shortest Path",
 		
 		});
 		gitalk.render('gitalk-container'); 

@@ -5,9 +5,152 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 06 Jan 2021 01:01:15 +0800</pubDate>
-    <lastBuildDate>Wed, 06 Jan 2021 01:01:15 +0800</lastBuildDate>
+    <pubDate>Sat, 09 Jan 2021 12:17:44 +0800</pubDate>
+    <lastBuildDate>Sat, 09 Jan 2021 12:17:44 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>Bellman ford算法</title>
+        <description>&lt;p&gt;Bellman-Ford算法同样也是解决单源最短路径问题，从Dijkstra算法的证明不难看出其是一种贪心算法。，因为其有一个大前提-所有边为非负边。所以Dijkstra算法无法解决负权边的问题，而Bellman-Ford可以做到。Bellman-Ford基本思想如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;初始化：将除源点外的所有顶点的最短距离估计值 dist[v] ← +∞, dist[s] ←0;&lt;/li&gt;
+  &lt;li&gt;迭代求解：反复对边集E中的每条边进行松弛操作，使得顶点集V中的每个顶点v到s的最短距离最小。在这里需要运行顶点个数v-1次。因为如果一个顶点是从源点可达的，那么最多则相隔v-1条边。即v-1次后，如若没有负权回路则已经收敛。&lt;/li&gt;
+  &lt;li&gt;检验负权回路：判断边集E中的每一条边的两个端点是否收敛。如果存在未收敛的顶点，则算法返回false，表明问题无解；否则算法返回true，并且从源点可达的顶点v的最短距离保存在 dist[v]中。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;不难看出其时间复杂度为 $ O(EV) $。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;代码：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Python3 program for Bellman-Ford's single source 
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# shortest path algorithm. 
+&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Class to represent a graph 
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+
+        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vertices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vertices&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# No. of vertices 
+&lt;/span&gt;            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; 
+
+        &lt;span class=&quot;c1&quot;&gt;# function to add an edge to graph 
+&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addEdge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; 
+            
+        &lt;span class=&quot;c1&quot;&gt;# utility function used to print the solution 
+&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printArr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Vertex Distance from Source&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+                &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{0}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\t\t&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{1}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; 
+        &lt;span class=&quot;c1&quot;&gt;# The main function that finds shortest distances from src to 
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# all other vertices using Bellman-Ford algorithm. The function 
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# also detects negative weight cycle 
+&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;BellmanFord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+
+		&lt;span class=&quot;c1&quot;&gt;# Step 1: Initialize distances from src to all other vertices 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# as INFINITE 
+&lt;/span&gt;		&lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Inf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; 
+		&lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+
+
+		&lt;span class=&quot;c1&quot;&gt;# Step 2: Relax all edges |V| - 1 times. A simple shortest 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# path from src to any other vertex can have at-most |V| - 1 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# edges 
+&lt;/span&gt;		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+            &lt;span class=&quot;c1&quot;&gt;# Update dist value and parent index of the adjacent vertices of 
+&lt;/span&gt;			&lt;span class=&quot;c1&quot;&gt;# the picked vertex. Consider only those vertices which are still in 
+&lt;/span&gt;			&lt;span class=&quot;c1&quot;&gt;# queue 
+&lt;/span&gt;			&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+			    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Inf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; 
+					&lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; 
+
+		&lt;span class=&quot;c1&quot;&gt;# Step 3: check for negative-weight cycles. The above step 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# guarantees shortest distances if graph doesn't contain 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# negative weight cycle. If we get a shorter path, then there 
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# is a cycle. 
+&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+			&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Inf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; 
+				&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Graph contains negative weight cycle&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+				&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+						
+		&lt;span class=&quot;c1&quot;&gt;# print all distance 
+&lt;/span&gt;		&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;printArr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;参考&quot;&gt;参考&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/gaochundong/p/bellman_ford_algorithm.html&quot;&gt;https://www.cnblogs.com/gaochundong/p/bellman_ford_algorithm.html&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://zhuanlan.zhihu.com/p/36295603&quot;&gt;https://zhuanlan.zhihu.com/p/36295603&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/&quot;&gt;https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 09 Jan 2021 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2021/01/09/bellman-ford/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/01/09/bellman-ford/</guid>
+        
+        <category>graph</category>
+        
+        <category>algorithms</category>
+        
+        
+      </item>
     
       <item>
         <title>Learning English</title>
@@ -133,7 +276,7 @@ I want to begin with/ and then I’ll move on to/ next we’re talking about/Tha
         <link>https://xctorres.github.io//2021/01/05/learn-english/</link>
         <guid isPermaLink="true">https://xctorres.github.io//2021/01/05/learn-english/</guid>
         
-        <category>学习</category>
+        <category>Skill</category>
         
         
       </item>
@@ -221,7 +364,7 @@ I want to begin with/ and then I’ll move on to/ next we’re talking about/Tha
         <link>https://xctorres.github.io//2021/01/01/new-year-life/</link>
         <guid isPermaLink="true">https://xctorres.github.io//2021/01/01/new-year-life/</guid>
         
-        <category>生活</category>
+        <category>Life</category>
         
         
       </item>
@@ -1724,139 +1867,6 @@ The session time zone is set with the configuration ‘spark.sql.session.timeZon
         <guid isPermaLink="true">https://xctorres.github.io//2020/11/08/python-coroutine/</guid>
         
         <category>Python</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>隐马尔科夫模型</title>
-        <description>&lt;h1 id=&quot;算法简介&quot;&gt;算法简介&lt;/h1&gt;
-&lt;p&gt;网上有很多隐马尔科夫算法模型的介绍，内容都非常详实，如果大家感兴趣可在Reference中查阅相关link。本文的目的是对隐马尔科夫模型做一个简单的概括， 并尝试探索其如何应用到&lt;strong&gt;语言领域&lt;/strong&gt;和&lt;strong&gt;地图匹配领域&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;首先最重要的有两个集合&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;隐藏状态集合&lt;/li&gt;
-  &lt;li&gt;观测状态集合&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;有三个输入&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;初始状态分布 $ \Pi $&lt;/li&gt;
-  &lt;li&gt;状态转移概率分布概率  $ A $&lt;/li&gt;
-  &lt;li&gt;观测状态概率矩阵 $ B $&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;HMM算法主要可以解决一下三类问题&lt;/p&gt;
-
-&lt;h3 id=&quot;评估观察序列概率&quot;&gt;评估观察序列概率&lt;/h3&gt;
-&lt;p&gt;即给定模型𝜆=(𝐴,𝐵,Π)和观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，计算在模型𝜆下观测序列𝑂出现的概率
-$ P \left( O |\lambda \right) $。这个问题的求解需要用到前向后向算法。&lt;/p&gt;
-
-&lt;p&gt;前向后向算法用到的是动态规划算法，即可以用递推来存储中间结果，从而将计算量数量级从$ TN^{T}$ 降到了$ TN^{2} $&lt;/p&gt;
-
-&lt;h3 id=&quot;模型参数学习问题&quot;&gt;模型参数学习问题&lt;/h3&gt;
-&lt;p&gt;即给定观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，估计模型𝜆=(𝐴,𝐵,Π)的参数，使该模型下观测序列的条件概率
-$P \left( O |\lambda \right)$最大。这个问题的求解需要用到基于EM算法的鲍姆-韦尔奇算法，这个问题是HMM模型三个问题中最复杂的。&lt;/p&gt;
-
-&lt;h3 id=&quot;预测问题也称为解码问题&quot;&gt;预测问题，也称为解码问题&lt;/h3&gt;
-&lt;p&gt;即给定模型𝜆=(𝐴,𝐵,Π)和观测序列𝑂={𝑜1,𝑜2,…𝑜𝑇}，求给定观测序列条件下，最可能出现的对应的状态序列，这个问题的求解需要用到基于动态规划的维特比算法。&lt;/p&gt;
-
-&lt;p&gt;关于HMM算法的介绍可参照该link:
-&lt;a href=&quot;https://github.com/xcTorres/machine_learning/blob/master/HMM.ipynb&quot;&gt;https://github.com/xcTorres/machine_learning/blob/master/HMM.ipynb&lt;/a&gt;,其中有维特比算法的代码。&lt;/p&gt;
-
-&lt;h1 id=&quot;具体应用&quot;&gt;具体应用&lt;/h1&gt;
-
-&lt;h3 id=&quot;算法库&quot;&gt;算法库&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://hmmlearn.readthedocs.io/en/latest/&quot;&gt;Hmmlearn&lt;/a&gt;是一个比较成熟的算法库，以维特比算法为例，我们要做的就是填好转化概率transform probability matrix以及发射概率emission probability matrix。如下为demo代码示例，隐藏状态为天气情况，下雨☔️或者晴天🌞，而观测状态为人的行为，徒步，购物，或者在家打扫卫生。在定义完转化概率以及发射概率，以及初始概率之后，给定一个观察序列-人的行为，用维特比算法就能得到概率最大的隐藏序列-天气状况。&lt;/p&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;
-    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hmmlearn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hmm&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;states&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Rainy&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Sunny&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;n_states&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;states&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;observations&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;walk&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;shop&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;clean&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;n_observations&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;observations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hmm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MultinomialHMM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_components&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_states&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;init_params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;startprob_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transprob_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emissionprob_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;# predict a sequence of hidden states based on visible states
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;bob_says&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bob_says&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;logprob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alice_hears&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bob_says&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viterbi&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Bob says:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;observations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bob_says&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Alice hears:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;states&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alice_hears&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;地图匹配&quot;&gt;地图匹配&lt;/h3&gt;
-&lt;p&gt;在我们收集行车或者骑手GPS序列的数据时，由于GPS数据的误差，这些点都不一定能是刚好在路上的。 而用基于HMM的地图匹配算法我们可以得到映射在路网上的真实轨迹。  如下图可以看出,原始的GPS 1，2，3点都不在路上，他们都有一定概率映射在其附近的道路上，但由于1,2，3点是GPS时间序列，那么他们之间也就产生了联系。所以用HMM算法来解决地图匹配问题就理所当然了。
-&lt;img src=&quot;/img/in-post/HMM/hmm-1.png&quot; width=&quot;300&quot; height=&quot;300&quot; title=&quot;hmm-1&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在地图匹配问题中，我们可以理解为隐变量是GPS真实的在其附近候选路上的点序列TracePoint， 那么观察变量就是我们收集的原始的GPS轨迹。接下来就是如何描述发射概率和转换概率：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;发射概率，即各个路上的TracePoint到其对应的原始GPS的概率，这个可以由$\beta$分布来表达，而$\beta$分布的自变量即是TracePoint到Raw GPS的球面距离，距离越近则该表明TracePoint为此时刻真实路上的GPS点的概率越大。&lt;/li&gt;
-  &lt;li&gt;转换概率， 即各个候选路上的TracePoint之间的概率，可以用正态分布来表达这个概率，自变量即是各个TracePoint的network distance即路网距离减去球面距离的差的绝对值。绝对值越小的情况下则代表，两个TracePoint越有可能同在一条路上或相近路上，有很大的概率进行转换。&lt;br /&gt;
-&lt;img src=&quot;/img/in-post/HMM/hmm-2.png&quot; width=&quot;400&quot; height=&quot;400&quot; title=&quot;hmm-2&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这些就是HMM应用在地图匹配中的算法原理，在实现过程中，我们所需要的两个API是nearest API（给定一个点，用于寻找其附近的道路，并得到该点在各个道路上的投影点）， route API（给定起点和终点，返回两点之间的路网距离而非球面距离）。有了这两个API就能实现一版简易版本的地图匹配算法了。如下为地图匹配的demo, &lt;a href=&quot;https://github.com/xcTorres/machine_learning/tree/master/hmm_demo&quot;&gt;https://github.com/xcTorres/machine_learning/tree/master/hmm_demo&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781&quot;&gt;https://towardsdatascience.com/introduction-to-hidden-markov-models-cd2c93e6b781&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://medium.com/@postsanjay/hidden-markov-models-simplified-c3f58728caab&quot;&gt;https://medium.com/@postsanjay/hidden-markov-models-simplified-c3f58728caab&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://github.com/hmmlearn/hmmlearn&quot;&gt;https://github.com/hmmlearn/hmmlearn&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://zhuanlan.zhihu.com/p/27907806&quot;&gt;https://zhuanlan.zhihu.com/p/27907806&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://zhuanlan.zhihu.com/p/38343732&quot;&gt;https://zhuanlan.zhihu.com/p/38343732&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.cnblogs.com/pinard/p/6945257.html&quot;&gt;https://www.cnblogs.com/pinard/p/6945257.html&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.cnblogs.com/mindpuzzle/p/3653043.html&quot;&gt;https://www.cnblogs.com/mindpuzzle/p/3653043.html&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;https://github.com/jagodki/Offline-MapMatching&quot;&gt;https://github.com/jagodki/Offline-MapMatching&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 08 Nov 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/11/08/HMM/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/11/08/HMM/</guid>
-        
-        <category>algorithms</category>
         
         
       </item>
