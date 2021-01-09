@@ -6,7 +6,7 @@ author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
 tags:
-    - 学习
+    - Skill
 ---
 # 态度
 **学习语言第一点需要端正态度**  

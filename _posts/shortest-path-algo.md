@@ -190,7 +190,4 @@ Bellman-Ford算法同样也是解决单源最短路径问题，但是Dijkstra算
 ```
 
 #### 参考  
-[https://blog.csdn.net/heroacool/article/details/51014824](https://blog.csdn.net/heroacool/article/details/51014824)  
-[https://www.cnblogs.com/gaochundong/p/bellman_ford_algorithm.html](https://www.cnblogs.com/gaochundong/p/bellman_ford_algorithm.html)  
-[https://zhuanlan.zhihu.com/p/36295603](https://zhuanlan.zhihu.com/p/36295603)  
-[https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/](https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/)
+[https://blog.csdn.net/heroacool/article/details/51014824](https://blog.csdn.net/heroacool/article/details/51014824)

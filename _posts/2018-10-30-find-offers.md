@@ -6,7 +6,7 @@ author:     "xcTorres"
 header-img: "img/in-post/offer.jpg"
 catalog:    true
 tags:
-    - 生活
+    - Life
 ---
 
 ## 基本情况 

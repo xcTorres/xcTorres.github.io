@@ -6,7 +6,7 @@ author:     "xcTorres"
 header-img: "img/in-post/2019.jpg"
 catalog:    true
 tags:
-    - 生活
+    - Life
 ---
 
 不知不觉，2019年就这么到来了。回顾2018，经历了很多，就不回顾了，就让这一些经历和收获深藏心中。更希望2019能有更美好的未来，还是要立一些Flag的吧哈哈。  
