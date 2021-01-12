@@ -22,12 +22,15 @@
 ### Work Experience
 **Jul 2019 - Present , Singapore**  
 **Shopee Data Scientist**
-- The batch assignment is a project of Foody, which is used to assign the orders to shippers in global optimization(one shipper is allowed to accept one order only). In v1, the mean of Single assign successfully rate is increased from 95.29% to 97.15%, the average of Assign ignore rate has been reduced from 24.36% to 13.67%, the average of time from auto-assign to last-in charge has been reduced from 17.05s to 13.75s. In v2, we add a machine learning model(xgboost) to predict the shipper ignore rate instead of using the historical statistics data. As a result, in v2 the mean of Single assign ignore rate has been reduced from 13% to 10%.
-
+- **Batch assignment project**  
+The batch assignment is used to assign the orders to shippers in global optimization(one shipper is allowed to accept one order only). We use hungarian algorithms and machine learning model(xgboost) to optimize the assignment. As a result, the mean of single assign successfully rate is increased from 95.29% to 97.15%, the average of assign ignore rate has been reduced from 24.36% to 10%, the average of time from auto-assign to last in-charge has been reduced from 17.05s to 13.75s.  
+<br>
+- **Route engine service**  
+In logistics and assignment business, it is of great importance to have a API service of getting the routing distance between coordinates. Before our own route engine service is born, Shopee uses google map service, but it costs hundreds of thousands of dollars per month. Based on open-source osrm-backend, we provide our own route and table API, which could serve for all of the business that needs to calculate the routing distance and it could save great expense. 
 
 **Sep 2018 – Jun 2019 , Wuhan, China**  
 **Huawei Wuhan   Intern**
-- Participate in developing a HBase-based spatio-temporal database system for storing vector objects, which is an innovative project of Huawei in the field of IoT.  
+- Participate in developing a spatio-temporal database system based on HBase, which is an innovative project of Huawei in the field of IoT.
 - Design the spatio-temporal index and improve the performance of range query and k-NN query, making the average query time under 100 ms.  
 
 **Jun 2018 – Sep 2018 , Beijing, China**  
