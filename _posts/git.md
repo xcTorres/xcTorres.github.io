@@ -132,4 +132,7 @@ tags:
 
 ## 参考  
 [https://nvie.com/posts/a-successful-git-branching-model/](https://nvie.com/posts/a-successful-git-branching-model/)  
-[https://github.com/geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes)
+[https://github.com/geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes)  
+
+
+https://www.atlassian.com/git/tutorials/git-subtree
