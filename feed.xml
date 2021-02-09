@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 04 Feb 2021 01:06:22 +0800</pubDate>
-    <lastBuildDate>Thu, 04 Feb 2021 01:06:22 +0800</lastBuildDate>
+    <pubDate>Wed, 10 Feb 2021 01:09:36 +0800</pubDate>
+    <lastBuildDate>Wed, 10 Feb 2021 01:09:36 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -21,8 +21,19 @@
 &lt;p&gt;做多是股票、期货等市场的一种操作模式。一般的市场只能做多，就是说先买进，有货才能卖出。这种模式只有在价格上涨的波段中才能盈利。即先低位买进再高位卖出。&lt;/p&gt;
 
 &lt;h3 id=&quot;做空short&quot;&gt;做空(Short)&lt;/h3&gt;
-&lt;p&gt;做空是一种股票期货等投资术语：就是比如说当你预期某一股票未来会跌，就在当期价位高时卖出你的股票，再在股价跌到一定程度时买进，这样差价就是你的利润。其特点为先卖后买的交易行为。&lt;br /&gt;
-做空是股票、期货等市场的一种操作模式。指出做空和做多是反的，理论上是先将货卖出，然后再买进归还。一般正规的做空市场是有一个中立仓提供借货的平台。&lt;/p&gt;
+&lt;p&gt;就是比如说当你预期某一股票未来会跌，就在当期价位高时卖出你的股票，再在股价跌到一定程度时买进，这样差价就是你的利润。其特点为先卖后买的交易行为。&lt;br /&gt;
+做空是股票、期货等市场的一种操作模式。指出做空和做多是反的，理论上是先将货卖出，然后再买进归还，是一种没有持仓的情况下的卖出行为。一般正规的做空市场是有一个中立仓提供借货的平台。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;无法做空的情况&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;借不到券，做空比例太高的股票经常借不到券。&lt;/li&gt;
+  &lt;li&gt;日跌幅达到10%， 交易所临时关闭做空，避免非理性下跌。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;做空的风险&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Margin Call: 做空的股票一直上涨， 保证金不足。&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;期权option&quot;&gt;期权(Option):&lt;/h3&gt;
 &lt;p&gt;期权交易是指在未来一定时期可以买卖的权利，是买方向卖方支付一定数量的权利金后拥有的在未来一段时间内或未来某一特定日期以事先商定的价格向卖方购买或出售一定数量标的物的权利，但不负有必须买进或卖出的义务。&lt;/p&gt;
@@ -39,11 +50,29 @@
 &lt;h3 id=&quot;看跌期权put-option&quot;&gt;看跌期权(Put Option):&lt;/h3&gt;
 &lt;p&gt;期权买方按事先约定的价格向期权卖方卖出一定数量的期权合约规定的特定商品的权利，但不负有必须卖出的义务。而期权卖方有义务在期权规定的有效期内，应期权买方的要求，以期权合约事先规定的价格买入期权合约规定的特定商品。&lt;/p&gt;
 
+&lt;p&gt;看跌期权：1月1日，铜期货的执行价格为1750美元/吨，A买入这个权利．付出5美元；B卖出这个权利，收入5美元。2月1日，铜价跌至1695美元/吨，看跌期权的价格涨至55美元/吨。此时，A可采取两个策略：
+行使权利——A可以按1695美元/吨的中价从市场上买入铜，而以1750美元/吨的价格卖给B，B必须接受，A从中获利50美元/吨（1750—1695—5），B损失50美元/吨。
+售出权利——A可以55美元的价格售出看跌期权。A获利50美元/吨（55一5）。
+如果铜期货价格上涨，A就会放弃这个权利而损失5美元权利金，B则净赚5美元。&lt;/p&gt;
+
 &lt;h3 id=&quot;常用指数&quot;&gt;常用指数&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;道琼斯指数&lt;/li&gt;
-  &lt;li&gt;纳斯达克指数&lt;/li&gt;
-  &lt;li&gt;标普500指数&lt;/li&gt;
+  &lt;li&gt;道琼斯指数&lt;br /&gt;
+30只股票&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;纳斯达克综合指数&lt;br /&gt;
+覆盖所有纳斯达克交易所的公司，约有2500多家公司。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;标普500指数
+标准普尔，是一个公司，它把美国股市所有的上市公司里边，市值最大的500家公司，挑出来，然后把他们的市值加在一起，算出了这么一个指数。&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>
