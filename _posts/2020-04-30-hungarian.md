@@ -191,6 +191,11 @@ $的优化结果， 因为乘以不同的元素矩阵X得到的组合最后都�
 | lapsolver| [https://github.com/cheind/py-lapsolver](https://github.com/cheind/py-lapsolver)|
 |  lap[**Fastest**]  | [https://github.com/gatagat/lap](https://github.com/gatagat/lap) |
 
+**补充：**  
+scipy库的最新的linear_sum_assignment根据新论文更新了算法，效率得到了显著提升，不亚于lapsolver和lap。可直接使用。
+[ttps://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html ](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html) 
+
+
 ## 参考  
 [https://www.renfei.org/blog/bipartite-matching.html](https://www.renfei.org/blog/bipartite-matching.html)  
 [https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/](https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/)

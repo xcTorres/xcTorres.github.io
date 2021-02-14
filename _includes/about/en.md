@@ -20,10 +20,14 @@
 
 
 ### Work Experience
-**Jul 2019 - Present , Singapore**  
+**Jan 2021 - Present , Singapore**  
+**Senior Data Scientist**   
+Work on route engine service and map data management.   
+
+**Jul 2019 - Jan 2021 , Singapore**  
 **Shopee Data Scientist**
 - **Batch assignment project**  
-The batch assignment is used to assign the orders to shippers in global optimization(one shipper is allowed to accept one order only). We use hungarian algorithms and machine learning model(xgboost) to optimize the assignment. As a result, the mean of single assign successfully rate is increased from 95.29% to 97.15%, the average of assign ignore rate has been reduced from 24.36% to 10%, the average of time from auto-assign to last in-charge has been reduced from 17.05s to 13.75s.  
+The batch assignment is used to assign the orders to shippers in global optimization(one shipper is allowed to accept one order only). We use hungarian algorithms and machine learning model(lightGBM) to optimize the assignment. As a result, the mean of single assign successfully rate is increased from 95.29% to 97.15%, the average of assign ignore rate has been reduced from 24.36% to 10%, the average of time from auto-assign to last in-charge has been reduced from 17.05s to 13.75s.  
 <br>
 - **Route engine service**  
 In logistics and assignment business, it is of great importance to have a API service of getting the routing distance between coordinates. Before our own route engine service is born, Shopee uses google map service, but it costs hundreds of thousands of dollars per month. Based on open-source osrm-backend, we provide our own route and table API, which could serve for all of the business that needs to calculate the routing distance and it could save great expense. 
