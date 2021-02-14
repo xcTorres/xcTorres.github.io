@@ -193,7 +193,7 @@ $的优化结果， 因为乘以不同的元素矩阵X得到的组合最后都�
 
 **补充：**  
 scipy库的最新的linear_sum_assignment根据新论文更新了算法，效率得到了显著提升，不亚于lapsolver和lap。可直接使用。
-[ttps://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html ](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html) 
+[https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html ](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html) 
 
 
 ## 参考  
