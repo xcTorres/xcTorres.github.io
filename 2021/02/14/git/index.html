@@ -14,7 +14,7 @@
     <meta property="og:title" content="git 命令 - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="git是程序员日常生活中常用的工具。本人按照平时使用的经验，认为git学习的内容分为两类。一是日常的一些基本用法，网上已经有很多不错的tutorial，如本文最后参考中的链接，本文将记录一些使用频率更高的命令。二是在live环境中应该有哪些分支来进行管理，从而确保线上项目正常安全运行。
+    <meta property="og:description" content="git是程序员日常生活中常用的工具。本人按照平时使用的经验，认为git学习的内容分为两类。一是日常的一些基本用法，网上已经有很多不错的tutorial，如本文最后参考中的链接，本文将记录一些使用频率更高的命令。二是在生产环境中应该一个项目应该有哪些分支来进行管理，从而确保线上项目正常安全运行。
 ">
     
     <meta property="article:published_time" content="2021-02-14T00:00:00Z">
@@ -295,11 +295,11 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>git是程序员日常生活中常用的工具。本人按照平时使用的经验，认为git学习的内容分为两类。一是日常的一些基本用法，网上已经有很多不错的tutorial，如本文最后<strong>参考</strong>中的链接，本文将记录一些使用频率更高的命令。二是在live环境中应该有哪些分支来进行管理，从而确保线上项目正常安全运行。</p>
+				<p>git是程序员日常生活中常用的工具。本人按照平时使用的经验，认为git学习的内容分为两类。一是日常的一些基本用法，网上已经有很多不错的tutorial，如本文最后<strong>参考</strong>中的链接，本文将记录一些使用频率更高的命令。二是在生产环境中应该一个项目应该有哪些分支来进行管理，从而确保线上项目正常安全运行。</p>
 
 <h2 id="基本用法">基本用法</h2>
 
-<h4 id="1修改和提交">1）修改和提交</h4>
+<h3 id="1修改和提交">1）修改和提交</h3>
 <p>在将所更改的文件添加到缓冲区之前，可以根据如下命令确认有哪些被更新的文件。</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -319,49 +319,57 @@
 </pre></td><td class="rouge-code"><pre>    git push origin your-branch
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<h4 id="2撤销">2）撤销</h4>
-<p>这里应该区分开来，两种撤销。1是当我们把一些文件用add命令加入到缓存区但还没有commit的时候，我们可以撤销缓冲区中已经添加的一些文件。
-2是当我们已经commit了之后，这时候只能。</p>
+<h3 id="2撤销">2）撤销</h3>
+<p>这里应该区分开来，两种撤销。1是当我们把一些文件用add命令加入到缓存区但还没有commit的时候，我们可以撤销暂存区中已经添加的一些文件。2是当我们已经commit了之后，这时候只能撤销或者回退commit。</p>
 
-<p>从缓存区移除特定文件，但不改变工作目录。它会取消这个文件的缓存，而不覆盖任何更改。</p>
+<p><strong>撤销暂存区</strong>
+从缓存区移除特定文件，但不改变工作目录。它会取消这个文件的缓存，而不覆盖任何更改。</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="n">git</span> <span class="n">reset</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>
+</pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">reset</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p>重设缓冲区，匹配最近的一次提交，但工作目录不变。它会取消 所有 文件的缓存，而不会覆盖任何修改，给你了一个重设缓存快照的机会。</p>
+<p>同样的我们也可以使用如下命令撤销缓存区的单个文件，但其也会同样覆盖工作区的文件更改。</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="n">git</span> <span class="n">reset</span>
+</pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">checkout</span> <span class="o">--</span> <span class="n">filename</span><span class="p">.</span><span class="n">txt</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>如果你使用的git版本是大于2.23.0的，则可以直接使用如下命令，其等同于git checkout命令。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>    git restore filename.txt
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>重设暂存区，匹配最近的一次提交，但工作目录不变。它会取消所有文件的缓存，而不会覆盖任何修改，给你了一个重设缓存快照的机会。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">reset</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>重设缓冲区和工作目录，匹配最近的一次提交。除了取消缓存之外，–hard 标记告诉 Git 还要重写所有工作目录中的更改。换句话说：它清除了所有未提交的更改，所以在使用前确定你想扔掉你所有本地的开发。</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span>
+</pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
+
 <p>将当前分支的末端移到 <commit>，将缓存区重设到这个提交，但不改变工作目录。所有 <commit> 之后的更改会保留在工作目录中，这允许你用更干净、原子性的快照重新提交项目历史。</commit></commit></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="n">git</span> <span class="n">reset</span> <span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span>
+</pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">reset</span> <span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>将当前分支的末端移到 <commit>，将缓存区和工作目录都重设到这个提交。它不仅清除了未提交的更改，同时还清除了 <commit> 之后的所有提交。</commit></commit></p>
+
+<p><strong>撤销commit</strong>
+将当前分支的末端移到 <commit>，将缓存区和工作目录都重设到这个提交。它不仅清除了未提交的更改，同时还清除了 <commit> 之后的所有提交。</commit></commit></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span>
+</pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>git revert 命令用来撤销一个已经提交的快照。但是，它是通过搞清楚如何撤销这个提交引入的更改，然后在最后加上一个撤销了更改的新提交，而不是从项目历史中移除这个提交。这避免了Git丢失项目历史，这一点对于你的版本历史和协作的可靠性来说是很重要的。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">revert</span> <span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="3查看提交历史">3）查看提交历史</h4>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-</pre></td><td class="rouge-code"><pre><span class="n">git</span> <span class="n">log</span>             <span class="c1">#查看提交历史
-</span><span class="n">git</span> <span class="n">log</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>   <span class="c1">#查看指定文件的提交历史
-</span><span class="n">git</span> <span class="n">blame</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>    <span class="c1">#以列表方式查看指定文件的提交历史
-</span></pre></td></tr></tbody></table></code></pre></div></div>
-
-<h4 id="4撤销">4）撤销</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre><span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="n">HEAD</span>  <span class="c1">#撤销工作目录中所有未提交文件的修改内容  
-</span><span class="n">git</span> <span class="n">checkout</span> <span class="n">HEAD</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>  <span class="c1">#撤销指定的未提交文件的修改内容  
-</span><span class="n">git</span> <span class="n">revert</span> <span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span> <span class="c1">#撤销指定的提交
+</pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">log</span>             <span class="c1">#查看提交历史
+</span>    <span class="n">git</span> <span class="n">log</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>   <span class="c1">#查看指定文件的提交历史
+</span>    <span class="n">git</span> <span class="n">blame</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>    <span class="c1">#以列表方式查看指定文件的提交历史
 </span></pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="4分支与标签">4）分支与标签</h4>
@@ -453,15 +461,6 @@
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>其中等号是用来区分合并前后两个分支的区别，并且Head为本地当前的分支，而等号之后的为pull下来的分支内容。所需要的做是就是编辑解决冲突，（接着把冲突标识符删掉），再执行add，commit 命令，进行提交。</p>
-
-<h4 id="2-撤销git-add添加的文件">2） 撤销git add添加的文件</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>    
-    <span class="n">git</span> <span class="n">reset</span>
-    
-</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="参考">参考</h2>
 <p><a href="https://nvie.com/posts/a-successful-git-branching-model/">https://nvie.com/posts/a-successful-git-branching-model/</a><br />
