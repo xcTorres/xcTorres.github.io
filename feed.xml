@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 17 Feb 2021 01:13:50 +0800</pubDate>
-    <lastBuildDate>Wed, 17 Feb 2021 01:13:50 +0800</lastBuildDate>
+    <pubDate>Thu, 25 Feb 2021 16:57:19 +0800</pubDate>
+    <lastBuildDate>Thu, 25 Feb 2021 16:57:19 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -153,37 +153,14 @@
 &lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;git&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;#上传所有标签  
 &lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;常见问题&quot;&gt;常见问题&lt;/h2&gt;
-&lt;h3 id=&quot;1-编辑冲突&quot;&gt;1） 编辑冲突&lt;/h3&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HEAD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt;  
-
-    &lt;span class=&quot;n&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;world&lt;/span&gt;
-
-    &lt;span class=&quot;o&quot;&gt;=======&lt;/span&gt;  
-
-    &lt;span class=&quot;n&quot;&gt;Goodbye&lt;/span&gt;  
-
-    &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;77976&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;da35a11db4580b80ae27e8d65caf5208086&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;其中等号是用来区分合并前后两个分支的区别，并且Head为本地当前的分支，而等号之后的为pull下来的分支内容。所需要的做是就是编辑解决冲突，（接着把冲突标识符删掉），再执行add，commit 命令，进行提交。&lt;/p&gt;
+&lt;h2 id=&quot;git-branching-model&quot;&gt;Git branching Model&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/img/in-post/git/git-model.png&quot; height=&quot;500&quot; width=&quot;500&quot; title=&quot;git branching model&quot; /&gt;
+&lt;!-- ![git branching model](/img/in-post/git/git-model.png =200x200) --&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://nvie.com/posts/a-successful-git-branching-model/&quot;&gt;https://nvie.com/posts/a-successful-git-branching-model/&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html&quot;&gt;https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html&lt;/a&gt;
-&lt;a href=&quot;https://github.com/geeeeeeeeek/git-recipes&quot;&gt;https://github.com/geeeeeeeeek/git-recipes&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;https://www.atlassian.com/git/tutorials/git-subtree&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html&quot;&gt;https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html&lt;/a&gt;
+&lt;a href=&quot;https://github.com/geeeeeeeeek/git-recipes&quot;&gt;https://github.com/geeeeeeeeek/git-recipes&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;https://nvie.com/posts/a-successful-git-branching-model/&quot;&gt;https://nvie.com/posts/a-successful-git-branching-model/&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 14 Feb 2021 00:00:00 +0800</pubDate>
         <link>https://xctorres.github.io//2021/02/14/git/</link>
