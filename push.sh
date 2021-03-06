@@ -26,21 +26,20 @@ function list_files() {
     done
 }
 
-SECONDS_OF_HALF_DAY=43200
+SECONDS_OF_HALF_DAY=$((3600))
 function update_post_status() {
     list_files $1
     for post in ${posts[@]};
     do  
         modified_timestamp=`get_last_modified_timestamp $post`
-        time_deltaDays=$[ ($(date +%s) - ${modified_timestamp}) / $SECONDS_OF_HALF_DAY ]
+        time_deltaSeconds=$[ ($(date +%s) - ${modified_timestamp})]
         update_date=`date -r $modified_timestamp +%Y-%m-%d`
-        if [ $time_deltaDays -lt 1 ]
+        if [ $time_deltaSeconds -lt $SECONDS_OF_HALF_DAY ]
         then
-            # sed -i '' -e 's/^\(date:[[:space:]]*\).*$/\1'$update_date'/' $post
-            # new_name=`echo $post | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/'$update_date'/'`
-            # mv $post $new_name
-            # echo $time_deltaDays
-	    echo $post
+            sed -i '' -e 's/^\(date:[[:space:]]*\).*$/\1'$update_date'/' $post
+            new_name=`echo $post | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/'$update_date'/'`
+            mv $post $new_name
+	        echo "change name from $post to $new_name"
 
             
         
@@ -55,6 +54,3 @@ update_post_status $POST_DIR
 git add .
 git commit -m"update on '$update_date'"
 git push origin master
-
-
-
