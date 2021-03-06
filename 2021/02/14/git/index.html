@@ -237,7 +237,7 @@
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/in-post/git.jpg" width="0" height="0"> -->
+<!-- <img src="/img/in-post/git/git.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -246,7 +246,7 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/in-post/git.jpg');
+        background-image: url('/img/in-post/git/git.jpg');
         background: ;
     }
 
@@ -300,13 +300,13 @@
 <h2 id="基本用法">基本用法</h2>
 
 <h3 id="1修改和提交">1）修改和提交</h3>
-<p>在将所更改的文件添加到缓冲区之前，可以根据如下命令确认有哪些被更新的文件。</p>
+<p>在将所更改的文件添加到暂存区之前，可以根据如下命令确认有哪些被更新的文件。</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="rouge-code"><pre>    git status          <span class="c">#查看状态</span>
     git diff            <span class="c">#查看变更内容 </span>
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>接下来我们便可以使用add和commit的组合，add命令可以将要上传的文件加入到缓存区，而commit命令是缓存区的文件真正加入新的分支。</p>
+<p>接下来我们便可以使用add和commit的组合，add命令可以将要上传的文件加入到暂存区，而commit命令是暂存区的文件真正加入新的分支。</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -320,15 +320,15 @@
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="2撤销">2）撤销</h3>
-<p>这里应该区分开来，两种撤销。1是当我们把一些文件用add命令加入到缓存区但还没有commit的时候，我们可以撤销暂存区中已经添加的一些文件。2是当我们已经commit了之后，这时候只能撤销或者回退commit。</p>
+<p>这里应该区分开来，两种撤销。1是当我们把一些文件用add命令加入到暂存区但还没有commit的时候，我们可以撤销暂存区中已经添加的一些文件。2是当我们已经commit了之后，这时候只能撤销或者回退commit。</p>
 
 <p><strong>撤销暂存区</strong>
-从缓存区移除特定文件，但不改变工作目录。它会取消这个文件的缓存，而不覆盖任何更改。</p>
+从暂存区移除特定文件，但不改变工作目录。它会取消这个文件的缓存，而不覆盖任何更改，即对该文件的修改还是存在于工作目录。</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">reset</span> <span class="o">&lt;</span><span class="nb">file</span><span class="o">&gt;</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p>同样的我们也可以使用如下命令撤销缓存区的单个文件，但其也会同样覆盖工作区的文件更改。</p>
+<p>同样的我们也可以使用如下命令撤销暂存区的单个文件，但其也会同样覆盖工作区的文件更改。即在工作目录中的该文件已指向最近一次commit，改commit之后所做的修改都将消失。</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">checkout</span> <span class="o">--</span> <span class="n">filename</span><span class="p">.</span><span class="n">txt</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
@@ -342,18 +342,18 @@
 </pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">reset</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p>重设缓冲区和工作目录，匹配最近的一次提交。除了取消缓存之外，–hard 标记告诉 Git 还要重写所有工作目录中的更改。换句话说：它清除了所有未提交的更改，所以在使用前确定你想扔掉你所有本地的开发。</p>
+<p>重设暂存区和工作目录，匹配最近的一次提交。除了取消缓存之外，–hard 标记告诉 Git 还要重写所有工作目录中的更改。换句话说：它清除了所有未提交的更改，所以在使用前确定你想扔掉你所有本地的开发。</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p>将当前分支的末端移到 <commit>，将缓存区重设到这个提交，但不改变工作目录。所有 <commit> 之后的更改会保留在工作目录中，这允许你用更干净、原子性的快照重新提交项目历史。</commit></commit></p>
+<p>将当前分支的末端移到 <commit>，将暂存区重设到这个提交，但不改变工作目录。所有 <commit> 之后的更改会保留在工作目录中，这允许你用更干净、原子性的快照重新提交项目历史。</commit></commit></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">reset</span> <span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><strong>撤销commit</strong>
-将当前分支的末端移到 <commit>，将缓存区和工作目录都重设到这个提交。它不仅清除了未提交的更改，同时还清除了 <commit> 之后的所有提交。</commit></commit></p>
+将当前分支的末端移到 <commit>，将暂存区和工作目录都重设到这个提交。它不仅清除了未提交的更改，同时还清除了 <commit> 之后的所有提交。</commit></commit></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
@@ -381,10 +381,7 @@
 6
 7
 8
-9
-10
-</pre></td><td class="rouge-code"><pre>
-    <span class="n">git</span> <span class="n">branch</span>           <span class="c1">#显示所有本地分支 
+</pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">branch</span>           <span class="c1">#显示所有本地分支 
 </span>    <span class="n">git</span> <span class="n">checkout</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">/</span><span class="n">tag</span><span class="o">&gt;</span>                    
                          <span class="c1">#切换到指定分支或标签
 </span>    <span class="n">git</span> <span class="n">branch</span>  <span class="o">&lt;</span><span class="n">new</span><span class="o">-</span><span class="n">branch</span><span class="o">&gt;</span> <span class="c1">#创建新分支
@@ -392,18 +389,13 @@
 </span>    <span class="n">git</span> <span class="n">tag</span>              <span class="c1">#列出所有本地标签
 </span>    <span class="n">git</span> <span class="n">tag</span>  <span class="o">&lt;</span><span class="n">tagname</span><span class="o">&gt;</span>   <span class="c1"># 基于最新提交创建标签
 </span>    <span class="n">git</span> <span class="n">tag</span>  <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">tagname</span><span class="o">&gt;</span> <span class="c1">#删除标签
-</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</span></pre></td></tr></tbody></table></code></pre></div></div>
 <h3 id="5合并与衍合">5）合并与衍合</h3>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-3
-4
-</pre></td><td class="rouge-code"><pre>
-   <span class="n">git</span> <span class="n">merge</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span>    <span class="c1">#合并指定分支到当前分支
+</pre></td><td class="rouge-code"><pre>   <span class="n">git</span> <span class="n">merge</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span>    <span class="c1">#合并指定分支到当前分支
 </span>   <span class="n">git</span> <span class="n">rebase</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span>   <span class="c1">#衍合指定分支到当前分支
-</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</span></pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="6远程操作">6）远程操作</h3>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
@@ -419,10 +411,7 @@
 11
 12
 13
-14
-15
-</pre></td><td class="rouge-code"><pre>    
-    <span class="n">git</span> <span class="n">remote</span> <span class="o">-</span><span class="n">v</span>        <span class="c1">#查看远程版本库信息
+</pre></td><td class="rouge-code"><pre>    <span class="n">git</span> <span class="n">remote</span> <span class="o">-</span><span class="n">v</span>        <span class="c1">#查看远程版本库信息
 </span>    <span class="n">git</span> <span class="n">remote</span> <span class="n">show</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span>
                          <span class="c1">#查看指定远程版本库信息
 </span>    <span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span>
@@ -435,16 +424,33 @@
 </span>    <span class="n">git</span> <span class="n">push</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">&lt;</span><span class="n">branch</span><span class="o">/</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
                          <span class="c1">#删除远程分支或标签
 </span>    <span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="n">tags</span>      <span class="c1">#上传所有标签  
-</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</span></pre></td></tr></tbody></table></code></pre></div></div>
 <h2 id="git-branching-model">Git branching Model</h2>
 <p><img src="/img/in-post/git/git-model.png" height="500" width="500" title="git branching model" />
-<!-- ![git branching model](/img/in-post/git/git-model.png =200x200) --></p>
+<!-- ![git branching model](/img/in-post/git/git-model.png =200x200) -->  <br />
+首先有<strong>master</strong>分支和<strong>develop</strong>分支，这两个分支的生命周期是无限的。master分支大家都不陌生，它应该是一个储存处于可部署状态的最稳定代码的分支。而所有准备release的新更新的代码，不是直接合并到master，而是先合并到develop分支下，若develop分支下的所有代码都已经足够稳定且ready to be released，这时候才适合最终合并至master分支。</p>
+
+<p>为了支持团队间的并行开发，还需要有一些其他分支的支持。而如下三种分支也有其各自的用途。</p>
+<ul>
+  <li>Feature branches</li>
+  <li>Release branches</li>
+  <li>Hotfix branches</li>
+</ul>
+
+<p><strong>Feature branches</strong>：必须从develop分支来，并最终合并到develop分支，其一般用于新开发一个新feature时所用，且可能开发时间比较长久。</p>
+
+<p><strong>Release branches</strong>：当develop合并到了足够多的feature，足以merge到master生成环境时，这时候可以生成一个release分支，其好处是标记好release版本号，标记新加的一些feature并生成快照。如此一来团队成员可以继续在develop分支上开发新的feature，而这些新feature不会加入到当前的release分支。</p>
+
+<p><strong>Hotfix branches</strong>: 顾名思义，hotfix分支是为了快速fix生产环境的bug，其直接基于master分支，而不是develop分支。一旦bug解决，其应该被同时合并至master分支以及develop分支。且master分支需要打上新的tag。</p>
+
+<h2 id="彩蛋">彩蛋</h2>
+<p><img src="/img/in-post/git/git-all-commands.png" alt="git-all-commands" /></p>
 
 <h2 id="参考">参考</h2>
-<p><a href="https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a>
-<a href="https://github.com/geeeeeeeeek/git-recipes">https://github.com/geeeeeeeeek/git-recipes</a> <br />
-<a href="https://nvie.com/posts/a-successful-git-branching-model/">https://nvie.com/posts/a-successful-git-branching-model/</a></p>
+<p><a href="https://github.com/geeeeeeeeek/git-recipes">https://github.com/geeeeeeeeek/git-recipes</a> <br />
+<a href="https://nvie.com/posts/a-successful-git-branching-model/">https://nvie.com/posts/a-successful-git-branching-model/</a><br />
+<a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow">https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow</a><br />
+<a href="https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a></p>
 
 
                 <hr style="visibility: hidden;">
