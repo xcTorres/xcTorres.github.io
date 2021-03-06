@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="How to use custom packages in spark cluster - 谢聪博客 | xcTorres Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Sometimes when we use Spark to do the data analysis job, we want to use our own python package. We know the Spark cluster has the driver node  and executor nodes. Usually driver is our own server s...">
+    
+    <meta property="article:published_time" content="2020-09-24T00:00:00Z">
+    
+    
+    <meta property="article:author" content="xcTorres">
+    
+    
+    <meta property="article:tag" content="Spark">
+    
+    
+    <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
+    <meta property="og:url" content="https://xctorres.github.io//2020/09/24/custom-package-in-spark/">
+    <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
+    
+    <title>How to use custom packages in spark cluster - 谢聪博客 | xcTorres Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://xctorres.github.io//2020/09/24/custom-package-in-spark/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link href="/css/timeline.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">xcTorres Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/book/">Book</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/leetcode/">Leetcode</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/music/">Music</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/paper/">Paper</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/gallery/">Gallery</a>
+                    </li>
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- canvas-nest.min.js
+<script type="text/javascript" src="../../../../js/canvas-nest.min.js"></script>-->
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/in-post/pyspark-custom-package/Apache_Spark_logo.svg.png" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/in-post/pyspark-custom-package/Apache_Spark_logo.svg.png');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Spark" title="Spark">Spark</a>
+                        
+                    </div>
+                    <h1>How to use custom packages in spark cluster</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by xcTorres on September 24, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-10 col-lg-offset-0
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>Sometimes when we use Spark to do the data analysis job, we want to use our own python package. We know the Spark cluster has the driver node  and executor nodes. Usually driver is our own server so we have the permission to install the python package, but we don’t have the permission to install the package on hundreds of executor nodes. When we directly run our pySpark code, it will report <strong>“Import Error”</strong>.</p>
+
+<p>There are two ways to let the executor nodes find out the target python packages.<br />
+ 1) Upload  certain custom python package to Spark.  <br />
+ 2) Upload an entire python environment to Spark and make it as executor python environment.</p>
+
+<h2 id="upload-certain-python-package">Upload certain python package</h2>
+
+<p>1） Enter into your python env directory, and find the package that you want to upload. For example, the package is <strong>shapely</strong>.</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>
+    <span class="nb">cd</span> <span class="o">~</span>/.conda/envs/foody/lib/python3.6/site<span class="na">-packages
+
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>2) Upload the local package file to hdfs system, so that executors are able to download the file from hdfs system.
+If you are not familiar with the hadoop fs command, you could refer to this guide.
+Your hdfs path should be <strong>/user/your_name/</strong>, for example, my hdfs directory is <strong>/user/chong.xie/</strong>.  you could use following command to check the path exists or not.</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>    
+    ## <span class="kd">create</span> <span class="nb">dir</span> <span class="k">in</span> <span class="kd">hdfs</span> <span class="kd">system</span>
+    <span class="kd">hadoop</span> <span class="kd">fs</span> <span class="na">-ls /user/chong</span>.xie/ 
+    <span class="kd">hadoop</span> <span class="kd">fs</span> <span class="na">-mkdir /user/chong</span>.xie/gecoding_thrid_packages/ 
+
+
+    ## <span class="kd">upload</span> <span class="kd">the</span> <span class="kd">local</span> <span class="kd">package</span> <span class="kd">to</span> <span class="kd">hdfs</span> <span class="kd">system</span>
+    <span class="kd">hadoop</span> <span class="kd">fs</span> <span class="na">-copyFromLocal  </span>./shapely/  <span class="na">/user/chong</span>.xie/gecoding_thrid_packages/
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>3) Before we run the pySpark code, do remember to add file path to Spark.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>    
+    <span class="n">sc</span><span class="p">.</span><span class="n">addFile</span><span class="p">(</span><span class="s">'hdfs:///user/chong.xie/gecoding_thrid_packages/shapely'</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>4) import the package just like the code is run on local server.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>
+    <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="n">gpd</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="upload-entire-python-environment">Upload entire python environment</h2>
+
+<p>Now we have a way to upload custom packages, but sometimes the packages that we are going to use have many third-party dependencies, and it is very redundant to upload all of the dependencies.  Under the circumstances, the simplest way is to upload the entire python environment and let the executor servers use our own python env.</p>
+
+<p>1) Create a new python environment and install your required packages. For example, the env name is geocoding.</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>
+    <span class="kd">conda</span> <span class="kd">create</span> <span class="o">-</span><span class="na">-name </span><span class="kd">geocoding</span> <span class="kd">python</span><span class="o">=</span><span class="m">3</span>.6
+    
+    <span class="kd">conda</span> <span class="kd">activate</span> <span class="kd">geocoding</span>
+    <span class="kd">pip</span> <span class="kd">install</span> <span class="kd">geopandas</span>
+    <span class="kd">pip</span> <span class="kd">install</span> <span class="kd">shapely</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>2) Compress your python into a tgz file</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
+    <span class="nb">cd</span> <span class="o">~</span>/.conda/envs
+    <span class="kd">tar</span> <span class="na">-zcf </span><span class="kd">python</span><span class="o">-</span><span class="m">3</span>.6.tgz ./geocoding/<span class="o">*</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>3) When we set the spark conf, don’t forget to set <strong>spark.yarn.dist.archives</strong>, which will distribute your python compression file to the working directory of every executor servers, and uncompress it to the Newname after #.  Here Newname is python-3.6.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
+    <span class="n">SPARK_CONF</span> <span class="o">=</span> <span class="n">SparkConf</span><span class="p">().</span><span class="nb">set</span><span class="p">(...)</span> \
+                            <span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">"spark.yarn.dist.archives"</span><span class="p">,</span><span class="s">"file:/ldap_home/chong.xie/.conda/envs/python-3.6.tgz#python-3.6"</span><span class="p">)</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>4) And then you need to set the python environment. PYSPARK_DRIVER_PYTHON is your driver python path, it should be only local path.  PYSPARK_PYTHON is the executor python path, so the configuration should be ./Newname/env_name/bin/python.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"PYSPARK_PYTHON"</span><span class="p">]</span> <span class="o">=</span> <span class="s">'./python-3.6/geocoding/bin/python'</span>
+    <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"PYSPARK_DRIVER_PYTHON"</span><span class="p">]</span> <span class="o">=</span> <span class="s">'/ldap_home/chong.xie/.conda/envs/geocoding/bin/python'</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>5) Run the pySpark code. If there is no any error, it means it is using your own python environment.</p>
+
+<h2 id="reference">Reference</h2>
+<p><a href="https://hadoop.apache.org/docs/r1.0.4/cn/hdfs_shell.html">https://hadoop.apache.org/docs/r1.0.4/cn/hdfs_shell.html</a><br />
+<a href="https://www.jianshu.com/p/d77e16008957">https://www.jianshu.com/p/d77e16008957</a></p>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/10/PostGIS/" data-toggle="tooltip" data-placement="top" title="PostGIS">
+                        Previous<br>
+                        <span>PostGIS</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/09/26/OSM-data-introduction/" data-toggle="tooltip" data-placement="top" title="OSM data introduction">
+                        Next<br>
+                        <span>OSM data introduction</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+				
+				
+				<div id="gitalk-container"></div>
+                
+				
+
+                
+				
+				
+				
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0018" 
+                    href="/archive/?tag=Life"
+                    title="Life"
+                    rel="4">Life</a>
+        
+                <a data-sort="0018" 
+                    href="/archive/?tag=algorithms"
+                    title="algorithms"
+                    rel="4">algorithms</a>
+        
+                <a data-sort="0019" 
+                    href="/archive/?tag=C%2B%2B"
+                    title="C++"
+                    rel="3">C++</a>
+        
+                <a data-sort="0020" 
+                    href="/archive/?tag=GIS"
+                    title="GIS"
+                    rel="2">GIS</a>
+        
+                <a data-sort="0020" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="2">Python</a>
+        
+                <a data-sort="0020" 
+                    href="/archive/?tag=Spark"
+                    title="Spark"
+                    rel="2">Spark</a>
+        
+                <a data-sort="0020" 
+                    href="/archive/?tag=graph"
+                    title="graph"
+                    rel="2">graph</a>
+        
+                <a data-sort="0021" 
+                    href="/archive/?tag=Design+Pattern"
+                    title="Design Pattern"
+                    rel="1">Design Pattern</a>
+        
+                <a data-sort="0021" 
+                    href="/archive/?tag=Finance"
+                    title="Finance"
+                    rel="1">Finance</a>
+        
+                <a data-sort="0021" 
+                    href="/archive/?tag=Linux"
+                    title="Linux"
+                    rel="1">Linux</a>
+        
+                <a data-sort="0021" 
+                    href="/archive/?tag=Skill"
+                    title="Skill"
+                    rel="1">Skill</a>
+        
+                <a data-sort="0021" 
+                    href="/archive/?tag=Web"
+                    title="Web"
+                    rel="1">Web</a>
+        
+                <a data-sort="0021" 
+                    href="/archive/?tag=deep+learning"
+                    title="deep learning"
+                    rel="1">deep learning</a>
+        
+                <a data-sort="0021" 
+                    href="/archive/?tag=nlp"
+                    title="nlp"
+                    rel="1">nlp
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://medium.com/">medium</a></li>
+  
+  <li><a href="https://www.cnblogs.com/pinard/">Liu jianping</a></li>
+  
+  <li><a href="http://www.semocean.com/">滴滴:李海波</a></li>
+  
+  <li><a href="https://liam.page/">liam</a></li>
+  
+  <li><a href="https://www.v2ex.com/">V2EX</a></li>
+  
+  <li><a href="http://tianyicui.com/">崔天翼</a></li>
+  
+  <li><a href="http://xiaorui.cc/">峰云就她了</a></li>
+  
+  <li><a href="https://guanhonly.github.io/">Honly</a></li>
+  
+  <li><a href="https://www.cnkirito.moe/about/">徐靖峰</a></li>
+  
+  <li><a href="https://pycoders.com/">pycoders</a></li>
+  
+  <li><a href="https://www.kawabangga.com/">卡瓦邦噶</a></li>
+  
+  <li><a href="http://einverne.github.io/">einverne</a></li>
+  
+  <li><a href="https://lotabout.me/">lotabout.me</a></li>
+  
+  <li><a href="https://toutiao.io/">开发者头条</a></li>
+  
+  <li><a href="https://rgb-24bit.github.io/blog/">rgb24 bits</a></li>
+  
+  <li><a href="https://lb-yu.github.io/">余列冰</a></li>
+  
+  <li><a href="https://mthli.xyz/">李明亮</a></li>
+  
+  <li><a href="https://billtian.github.io/digoal.blog/2018/04/16/02.html">Digoal.zhou</a></li>
+  
+  <li><a href="https://github.com/halfrost">halfrost</a></li>
+  
+  <li><a href="https://www.barretlee.com/entry/">小胡子哥</a></li>
+  
+  <li><a href="http://www.ityouknow.com/">纯洁的微笑</a></li>
+  
+  <li><a href="https://www.desgard.com/">一片瓜田</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
+
+
+
+
+
+<!-- <!-- Start Collapse.html -->
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = document.getElementById(this.id+"data");
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+</script>
+<!-- End Collapse.html --> -->
+
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+		var gitalk = new Gitalk({
+
+		// gitalk的主要参数
+		clientID: "6c4ed7ef926a76e8447e",
+		clientSecret: "1df8e0efa5331eae417cf604d68fdb150a524a7a",
+		repo: "xctorres.github.io",
+		owner: "xcTorres",
+		admin: "xcTorres",
+		id: "/2020/09/24/custom-package-in-spark",
+		
+		});
+		gitalk.render('gitalk-container'); 
+</script>
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/xcTorres">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/chong-xie-545830157">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://xcwhu2016.medium.com">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.zhihu.com/people/cong-zi-64">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa  fa-stack-1x fa-inverse">知</i>
+      </span>
+    </a>
+  </li>
+  
+</ul>
+		
+                <p class="copyright text-muted">
+		
+					<span class="site-uv" title="总点击人数">
+						<img src="/img/vendor/octicons/svg/person.svg" width="10" height="16">
+						<span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+						<span class="site-pv" title="总点击量">
+						<img src="/img/vendor/octicons/svg/eye.svg" width="16" height="16">
+						<span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+						<span class="page-pv"title="本页面点击人数">
+						<img src="/img/vendor/octicons/svg/file-text.svg" width="12" height="16">
+					<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span>
+                    <br>
+                    Copyright &copy; xcTorres Blog 2021
+                    <br>
+                    Powered by <a href="http://xcTorres.github.io">xcTorres Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=xcTorres&repo=xcTorres.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!--  busuanzi count-->
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+</body>
+
+</html>
