@@ -26,7 +26,7 @@ function list_files() {
     done
 }
 
-SECONDS_OF_HALF_DAY=$((3600))
+SECONDS_OF_HALF_DAY=$((3600*1200))
 function update_post_status() {
     list_files $1
     for post in ${posts[@]};
