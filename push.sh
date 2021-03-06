@@ -36,10 +36,10 @@ function update_post_status() {
         update_date=`date -r $modified_timestamp +%Y-%m-%d`
         if [ $time_deltaDays -lt 1 ]
         then
-            sed -i '' -e 's/^\(date:[[:space:]]*\).*$/\1'$update_date'/' $post
-            new_name=`echo $post | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/'$update_date'/'`
-            mv $post $new_name
-            echo $time_deltaDays
+            # sed -i '' -e 's/^\(date:[[:space:]]*\).*$/\1'$update_date'/' $post
+            # new_name=`echo $post | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/'$update_date'/'`
+            # mv $post $new_name
+            # echo $time_deltaDays
 	    echo $post
 
             
