@@ -175,6 +175,9 @@ friends: [
     },{
       title: "pymotw",
       href: "https://pymotw.com/2/contents.html"
+    },{
+      title: "feiyang233",
+      href: "https://feiyang233.club/"
     }
 
 ]

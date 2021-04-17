@@ -22,7 +22,9 @@
 ### Work Experience
 **Jan 2021 - Present , Singapore**  
 **Senior Data Scientist**   
-Work on route engine service and map data management.   
+- **Map database**
+
+- **Device positioning service**
 
 **Jul 2019 - Jan 2021 , Singapore**  
 **Shopee Data Scientist**

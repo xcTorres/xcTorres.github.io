@@ -7,12 +7,9 @@
 # Machine learning
 
 [XGBoost A Scalable Tree Boosting System.pdf](https://github.com/xcTorres/books/blob/main/paper/maching%20learning/XGBoost%20A%20Scalable%20Tree%20Boosting%20System.pdf)  
-
-#### Cluster Algorithms  
-[Clustering by fast search and find of density peaks](https://github.com/xcTorres/books/blob/main/paper/clustering%20algo/Clustering%20by%20fast%20search%20and%20find%20of%20density%20peaks.pdf)  
-[Modern hierarchical, agglomerative clustering algorithms](https://github.com/xcTorres/books/blob/main/paper/clustering%20algo/Modern%20hierarchical%2C%20agglomerative%20clustering%20algorithms.pdf)
-
-# Deep learning
+[DeepFM](https://github.com/xcTorres/books/blob/main/paper/rank/%5BDeepFM%5D%20A%20Factorization-Machine%20based%20Neural%20Network%20for%20CTR%20Prediction%20(HIT-Huawei%202017).pdf)  
 [Word2Vec](https://github.com/xcTorres/books/blob/main/paper/NLP/Word2vec.pdf)
+
+
 
 
