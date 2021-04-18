@@ -11,10 +11,20 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Commonly Used Linux Command - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="Commonly Used Script - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="Network
+1）lsof
+2）netstat
+Process
+1）https://man7.org/linux/man-pages/man1/ps.1.html
+Text Utility
+1）grep
+2）awk
+3）sed
+Tmux
+Tmux tutorial
 ">
     
     <meta property="article:published_time" content="2021-03-23T00:00:00Z">
@@ -27,10 +37,10 @@
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2021/03/23/linux-command/">
+    <meta property="og:url" content="https://xctorres.github.io//2021/03/23/linux-script/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>Commonly Used Linux Command - 谢聪博客 | xcTorres Blog</title>
+    <title>Commonly Used Script - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -39,7 +49,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2021/03/23/linux-command/">
+    <link rel="canonical" href="https://xctorres.github.io//2021/03/23/linux-script/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -268,7 +278,7 @@
                         <a class="tag" href="/archive/?tag=Linux" title="Linux">Linux</a>
                         
                     </div>
-                    <h1>Commonly Used Linux Command</h1>
+                    <h1>Commonly Used Script</h1>
                     
                     <h2 class="subheading"></h2>
                     <span class="meta">Posted by xcTorres on March 23, 2021</span>
@@ -297,59 +307,17 @@
                 <!-- Multi-Lingual -->
                 
 
-				<h1 id="network">Network</h1>
-
-<h3 id="lsof">lsof</h3>
-
-<p><strong>Reference</strong>: <a href="https://man7.org/linux/man-pages/man8/lsof.8.html">https://man7.org/linux/man-pages/man8/lsof.8.html</a></p>
-
-<p>lsof meaning ‘List Open Files’ is used to find out which files are open by which process.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="rouge-code"><pre>    <span class="c"># List User Specific Opened Files</span>
-    lsof <span class="nt">-u</span> tecmint
-
-    <span class="c"># Find Processes running on Specific Port</span>
-    lsof <span class="nt">-i</span> TCP:22
-
-    <span class="c"># Exclude User with ‘^’ Character</span>
-    lsof <span class="nt">-i</span> <span class="nt">-u</span>^root
-
-    <span class="c"># List all Network Connections</span>
-    lsof <span class="nt">-i</span>
-
-    <span class="c"># Search by PID</span>
-    lsof <span class="nt">-p</span> 1
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h3 id="netstat">netstat</h3>
-
-<p><strong>Reference</strong>: <a href="https://man7.org/linux/man-pages/man8/netstat.8.html">https://man7.org/linux/man-pages/man8/netstat.8.html</a></p>
-
-<p>netstat means network statistics</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>    netstats <span class="nt">-nltp</span> | <span class="nb">grep </span>8089
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h1 id="command-line-utility">Command Line Utility</h1>
-
-<h3 id="grep">grep</h3>
-
-<h3 id="awk">awk</h3>
-
-<h3 id="sed">sed</h3>
+				<h4 id="network">Network</h4>
+<p>1）<a href="https://man7.org/linux/man-pages/man8/lsof.8.html">lsof</a><br />
+2）<a href="https://man7.org/linux/man-pages/man8/netstat.8.html">netstat</a></p>
+<h4 id="process">Process</h4>
+<p>1）<a href="https://man7.org/linux/man-pages/man1/ps.1.html">https://man7.org/linux/man-pages/man1/ps.1.html</a></p>
+<h4 id="text-utility">Text Utility</h4>
+<p>1）<a href="https://www.runoob.com/linux/linux-comm-grep.html">grep</a><br />
+2）<a href="https://www.runoob.com/linux/linux-comm-awk.html">awk</a><br />
+3）<a href="https://www.runoob.com/linux/linux-comm-sed.html">sed</a></p>
+<h4 id="tmux">Tmux</h4>
+<p><a href="http://louiszhai.github.io/2017/09/30/tmux/#%E4%BC%9A%E8%AF%9D">Tmux tutorial</a></p>
 
 
                 <hr style="visibility: hidden;">
@@ -589,7 +557,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2021/03/23/linux-command",
+		id: "/2021/03/23/linux-script",
 		
 		});
 		gitalk.render('gitalk-container'); 

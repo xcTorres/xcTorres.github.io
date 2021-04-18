@@ -5,69 +5,27 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 17 Apr 2021 19:09:58 +0800</pubDate>
-    <lastBuildDate>Sat, 17 Apr 2021 19:09:58 +0800</lastBuildDate>
+    <pubDate>Mon, 19 Apr 2021 00:17:41 +0800</pubDate>
+    <lastBuildDate>Mon, 19 Apr 2021 00:17:41 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
-        <title>Commonly Used Linux Command</title>
-        <description>&lt;h1 id=&quot;network&quot;&gt;Network&lt;/h1&gt;
-
-&lt;h3 id=&quot;lsof&quot;&gt;lsof&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;: &lt;a href=&quot;https://man7.org/linux/man-pages/man8/lsof.8.html&quot;&gt;https://man7.org/linux/man-pages/man8/lsof.8.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;lsof meaning ‘List Open Files’ is used to find out which files are open by which process.&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;c&quot;&gt;# List User Specific Opened Files&lt;/span&gt;
-    lsof &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; tecmint
-
-    &lt;span class=&quot;c&quot;&gt;# Find Processes running on Specific Port&lt;/span&gt;
-    lsof &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; TCP:22
-
-    &lt;span class=&quot;c&quot;&gt;# Exclude User with ‘^’ Character&lt;/span&gt;
-    lsof &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt;^root
-
-    &lt;span class=&quot;c&quot;&gt;# List all Network Connections&lt;/span&gt;
-    lsof &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;# Search by PID&lt;/span&gt;
-    lsof &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 1
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;netstat&quot;&gt;netstat&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;: &lt;a href=&quot;https://man7.org/linux/man-pages/man8/netstat.8.html&quot;&gt;https://man7.org/linux/man-pages/man8/netstat.8.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;netstat means network statistics&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    netstats &lt;span class=&quot;nt&quot;&gt;-nltp&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;8089
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;command-line-utility&quot;&gt;Command Line Utility&lt;/h1&gt;
-
-&lt;h3 id=&quot;grep&quot;&gt;grep&lt;/h3&gt;
-
-&lt;h3 id=&quot;awk&quot;&gt;awk&lt;/h3&gt;
-
-&lt;h3 id=&quot;sed&quot;&gt;sed&lt;/h3&gt;
+        <title>Commonly Used Script</title>
+        <description>&lt;h4 id=&quot;network&quot;&gt;Network&lt;/h4&gt;
+&lt;p&gt;1）&lt;a href=&quot;https://man7.org/linux/man-pages/man8/lsof.8.html&quot;&gt;lsof&lt;/a&gt;&lt;br /&gt;
+2）&lt;a href=&quot;https://man7.org/linux/man-pages/man8/netstat.8.html&quot;&gt;netstat&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;process&quot;&gt;Process&lt;/h4&gt;
+&lt;p&gt;1）&lt;a href=&quot;https://man7.org/linux/man-pages/man1/ps.1.html&quot;&gt;https://man7.org/linux/man-pages/man1/ps.1.html&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;text-utility&quot;&gt;Text Utility&lt;/h4&gt;
+&lt;p&gt;1）&lt;a href=&quot;https://www.runoob.com/linux/linux-comm-grep.html&quot;&gt;grep&lt;/a&gt;&lt;br /&gt;
+2）&lt;a href=&quot;https://www.runoob.com/linux/linux-comm-awk.html&quot;&gt;awk&lt;/a&gt;&lt;br /&gt;
+3）&lt;a href=&quot;https://www.runoob.com/linux/linux-comm-sed.html&quot;&gt;sed&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;tmux&quot;&gt;Tmux&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;http://louiszhai.github.io/2017/09/30/tmux/#%E4%BC%9A%E8%AF%9D&quot;&gt;Tmux tutorial&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 23 Mar 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/03/23/linux-command/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/03/23/linux-command/</guid>
+        <link>https://xctorres.github.io//2021/03/23/linux-script/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/03/23/linux-script/</guid>
         
         <category>Linux</category>
         
@@ -164,6 +122,11 @@ English is not an art to be mastered.It is just a tool to get the result.&lt;/st
       &lt;td&gt;9th Mar 2021&lt;/td&gt;
       &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1Vv411h7tW?p=3&quot;&gt;https://www.bilibili.com/video/BV1Vv411h7tW?p=3&lt;/a&gt;&lt;/td&gt;
       &lt;td&gt;颜值不是一切，相信我，我是个模特&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;19th Apr 2021&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1eK4y1o7kR?p=1&quot;&gt;https://www.bilibili.com/video/BV1eK4y1o7kR?p=1&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;TED演讲：努力之外，运气也很重要！&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
