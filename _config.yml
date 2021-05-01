@@ -178,13 +178,22 @@ friends: [
     },{
       title: "feiyang233",
       href: "https://feiyang233.club/"
+    },{
+      title: "蘑菇先生学习记",
+      href: "http://xtf615.com/"
+    },{
+      title: "alanzucconi",
+      href: "https://www.alanzucconi.com"
+    },{
+      title: "jqpeng的技术记事本",
+      href: "https://www.cnblogs.com/xiaoqi/"
     }
 
 ]
 
 gallery:
   dir: gallery               # Path to the gallery
-  symlink: false            # false: copy images into _site. true: create symbolic links (saves disk space)
+  symlink: false             # false: copy images into _site. true: create symbolic links (saves disk space)
   title: "Gallery"           # Title for gallery index page
   title_prefix: ""  # Title prefix for gallery pages. Gallery title = title_prefix + gallery_name
   sort_field: "title"       # How to sort galleries on the index page.
