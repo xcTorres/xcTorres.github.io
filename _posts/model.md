@@ -1,0 +1,1 @@
+https://www.sicara.ai/blog/en/optimize-response-time-api

@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2021-03-09
+date:       2021-05-18
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true
@@ -42,6 +42,7 @@ English is not an art to be mastered.It is just a tool to get the result.**
 | 5th Jan 2021|[https://www.bilibili.com/video/BV1vz4y1z7eQ?p=3](https://www.bilibili.com/video/BV1vz4y1z7eQ?p=3)|  如何做出完美的课堂展示？澳洲展示大赛冠军小姐姐教给你 |   
 | 9th Mar 2021 |[https://www.bilibili.com/video/BV1Vv411h7tW?p=3](https://www.bilibili.com/video/BV1Vv411h7tW?p=3)|颜值不是一切，相信我，我是个模特|
 | 19th Apr 2021 |[https://www.bilibili.com/video/BV1eK4y1o7kR?p=1](https://www.bilibili.com/video/BV1eK4y1o7kR?p=1)|TED演讲：努力之外，运气也很重要！|
+| 18th May 2021 |[https://www.bilibili.com/video/BV11A41137jW?p=3](https://www.bilibili.com/video/BV11A41137jW?p=3)|一招欲擒故纵拿下比尔·盖茨？盖茨老婆回忆二人爱情故事|
 
 
 # 口语  
