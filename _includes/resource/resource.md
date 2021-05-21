@@ -1,20 +1,22 @@
 ## Docker  
-```shell
-# Remove useless images
-docker image rm $(docker image ls | awk '{if ($1="<none>") print $3}')
-
-docker ps
-
-docker stats
-```
+[Cheat Sheet](https://gist.github.com/xcTorres/2bb0cac7ac71bc7a071845c243b233f1)
 
 ## Java
+[Effective Java](https://github.com/xcTorres/books/blob/main/java/Effective%20Java%20(2017%2C%20Addison-Wesley).pdf)  
+[Java核心技术卷一基础知识第10版.pdf](https://github.com/xcTorres/books/blob/main/java/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B7%E4%B8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%AC%AC10%E7%89%88.pdf)  
+[Java并发编程的艺术.pdf](https://github.com/xcTorres/books/blob/main/java/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF.pdf)  
 
-## C++
+
+## C++  
+[C++ Primer Plus 6th Edition.pdf](https://github.com/xcTorres/books/blob/main/c%2B%2B/C%2B%2B%20Primer%20Plus%206th%20Edition.pdf)  
+[Effective_Modern_C__.pdf](https://github.com/xcTorres/books/blob/main/c%2B%2B/Effective_Modern_C__.pdf)  
+[The C++Standard Library - 2nd Edition.pdf](https://github.com/xcTorres/books/blob/main/c%2B%2B/The%20C%2B%2BStandard%20Library%20-%202nd%20Edition.pdf)
 
 ## Go
 [Go语言圣经](https://www.kancloud.cn/hartnett/gopl-zh/126049)  
 [https://gobyexample.com/](https://gobyexample.com/)  
 [https://github.com/golang/example](https://github.com/golang/example)
 
-## Python
+## Python  
+[Effective Python](https://github.com/xcTorres/books/blob/main/python/Effective%20Python%20By%20Brett%20Slatkin%202015%20Addison%20Wesly.pdf)   
+[Fluent Python](https://github.com/xcTorres/books/blob/main/python/Fluent%20Python%20Clear%20Concise%20and%20Effective%20Programming.pdf)
