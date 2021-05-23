@@ -26,4 +26,6 @@
 ## Python  
 [Effective Python](https://github.com/xcTorres/books/blob/main/python/Effective%20Python%20By%20Brett%20Slatkin%202015%20Addison%20Wesly.pdf)   
 [Fluent Python](https://github.com/xcTorres/books/blob/main/python/Fluent%20Python%20Clear%20Concise%20and%20Effective%20Programming.pdf)  
-[编写高质量代码 改善Python程序的91个建议](https://github.com/xcTorres/books/blob/main/python/%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81%20%E6%94%B9%E5%96%84Python%E7%A8%8B%E5%BA%8F%E7%9A%8491%E4%B8%AA%E5%BB%BA%E8%AE%AE.pdf)
+[编写高质量代码 改善Python程序的91个建议](https://github.com/xcTorres/books/blob/main/python/%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81%20%E6%94%B9%E5%96%84Python%E7%A8%8B%E5%BA%8F%E7%9A%8491%E4%B8%AA%E5%BB%BA%E8%AE%AE.pdf)  
+
+## Machine Learning
