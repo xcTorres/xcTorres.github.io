@@ -4,7 +4,9 @@
 ## Computer Architecture & Network
 [Stanford CS144](https://www.bilibili.com/video/BV137411Z7LR?p=1)  
 [TCP/IP详解 卷1](https://github.com/xcTorres/books/blob/main/network/TCP.pdf)  
-[TCP协议的三次握手和四次分手](https://github.com/jawil/blog/issues/14)  
+[TCP协议的三次握手和四次分手](https://github.com/jawil/blog/issues/14) 
+[Stack VS Heap](https://www.guru99.com/stack-vs-heap.html#:~:text=Stack%20is%20a%20linear%20data,you%20to%20access%20variables%20globally)   
+[float、double在内存中如何存储](https://cloud.tencent.com/developer/article/1473541)
 [Computer Architecture](https://www.bilibili.com/video/BV1fC4y147iZ?p=1)
 
 ## Java
