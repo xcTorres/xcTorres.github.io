@@ -1,13 +1,21 @@
 <!-- ## Docker  
 [Cheat Sheet](https://gist.github.com/xcTorres/2bb0cac7ac71bc7a071845c243b233f1) -->
 
+## Math
+[Linear Algebra](https://www.bilibili.com/video/BV1zx411g7gq)
+
+
 ## Computer Architecture & Network
+#### Video & Book
 [Stanford CS144](https://www.bilibili.com/video/BV137411Z7LR?p=1)  
 [TCP/IP详解 卷1](https://github.com/xcTorres/books/blob/main/network/TCP.pdf)  
-[TCP协议的三次握手和四次分手](https://github.com/jawil/blog/issues/14) 
+[Computer Architecture](https://www.bilibili.com/video/BV1fC4y147iZ?p=1)
+
+#### Tips
+[TCP协议的三次握手和四次分手](https://github.com/jawil/blog/issues/14)   
 [Stack VS Heap](https://www.guru99.com/stack-vs-heap.html#:~:text=Stack%20is%20a%20linear%20data,you%20to%20access%20variables%20globally)   
 [float、double在内存中如何存储](https://cloud.tencent.com/developer/article/1473541)
-[Computer Architecture](https://www.bilibili.com/video/BV1fC4y147iZ?p=1)
+
 
 ## Java
 [Effective Java](https://github.com/xcTorres/books/blob/main/java/Effective%20Java%20(2017%2C%20Addison-Wesley).pdf)  
@@ -31,3 +39,9 @@
 [编写高质量代码 改善Python程序的91个建议](https://github.com/xcTorres/books/blob/main/python/%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81%20%E6%94%B9%E5%96%84Python%E7%A8%8B%E5%BA%8F%E7%9A%8491%E4%B8%AA%E5%BB%BA%E8%AE%AE.pdf)  
 
 ## Machine Learning
+[李宏毅2020机器学习深度学习](https://www.bilibili.com/video/BV1JE411g7XF?from=search&seid=573333289741543765)  
+[Stanford CS224N: NLP with Deep Learning | Winter 2019](https://www.youtube.com/watch?v=8rXD5-xhemo)
+
+
+
+
