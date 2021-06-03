@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "GIS in Python"
-date:       2021-06-02
+date:       2021-06-03
 author:     "xcTorres"
 header-img: "img/in-post/2019.jpg"
 catalog:    true
@@ -113,11 +113,29 @@ b'\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x
 ```
 
 #### Rtree
-When we use contain, intersect, within and other spatial function, if there are a great number of the polygons, it will be very slow if we use for loop to check one by one. Using Rtree will be very fast. 
+When we use contain, intersect, within and other spatial function while there are a great number of the polygons, it will be very slow if we use for loop to check one by one. Using Rtree will be very fast. But even we get the result of query function, it just means the bounding box of polygons in the result intersects the geometry of our input. Because when building R tree, it is using the bounding box. **So if you want to get the precise result, you need to use contain, within, touches functions in next step.** 
 ```python
 from shapely.strtree import STRtree
 
 # polygon_list
+r_tree = STRtree(polygon_list)
+
+pt = Point(0, 0)
+target = None
+candidate_result = r_tree.query(pt)
+for polygon in candidate_result:
+    if polygon.touches(pt):
+        target = polygon
+```
+When we use query function of STRtree, it will return the geometry itself, not the index. So sometimes if we have the polygons with some properties, it is hard to get the properties together. Here is an alternative way to do so.
+
+```python
+from shapely.strtree import STRtree
+
+# polygon_list
+# attribute_list 
+# The length and order is the same 
+
 polygon_id_list = [id(i) for i in polygon_list]
 r_tree = STRtree(polygon_list)
 
@@ -127,6 +145,9 @@ candidate_result = r_tree.query(pt)
 for polygon in candidate_result:
     if polygon.touches(pt):
         target = polygon
+        idx = polygon_id_list.index(id(target))
+
+        attribute =  attribute_list[idx]
 ```
 
 # Geopandas  
@@ -187,5 +208,36 @@ df
 ```
 
 #### Spatial Join
+[sindex](https://geopandas.org/docs/reference/sindex.html):  **GeoSeries.sindex: Generate the spatial index**  
+
+GeoPandas offers built-in support for spatial indexing using an R-Tree algorithm. Depending on the ability to import pygeos, GeoPandas will either use pygeos.STRtree or rtree.index.Index. The main interface for both is the same and follows the pygeos model.
+
+1) Directly use sindex 
+```python
+gprtree_index = polygon_geometry_series.sindex
+
+line = LineString([(0, 0), (1, 1)])
+candidate_index = gprtree_index.query(line)
+for index in targets_index:
+    if polygon_geometry_series[index].contains(line):
+        target = polygon_geometry_series[index]
+        break
+```
+2) Use [sjoin](https://geopandas.org/gallery/spatial_joins.html)  
+
+It is much convenient to spatial join in geopandas. But it only reserves the geoemtry of left dataframe and drop the right one. If you want to keep both geometries, you could use pd.merge function to get the geometry of right dataframe
 
 
+```python
+from geopandas.tools import sjoin
+
+join_left_df = sjoin(pointdf, polydf, how="left", op="within")
+# If you want to get the geometry of right one.
+df  = join_left_df.merge(tab_df, on='id', how='left')
+gdf = gpd.GeoDataFrame(df)
+```
+
+
+# Reference  
+[Spatial index - How to boost spatial queries](https://automating-gis-processes.github.io/site/notebooks/L3/spatial_index.html)  
+[R-tree Spatial Indexing with Python](https://geoffboeing.com/2016/10/r-tree-spatial-index-python/)
