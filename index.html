@@ -270,25 +270,43 @@
             ">
     			
 <div class="post-preview">
-    <a href="/2021/06/03/gis-in-python/">
+    <a href="/2021/06/22/python-gist/">
         <h2 class="post-title">
-            GIS in Python
+            Python Commonly Used Code
         </h2>
         
         <div class="post-content-preview">
             
-                In the daily work, we often use python to do the data analysis job. Currently, there are more and more spatial python packages, which makes it also very easy for us to do the GIS analysis. In the b...
+                Create the dicectory
+pathlib is more convenient to use than os module.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+import pathlib
+
+p = pathlib.Path("temp/")
+p.mkdir(parents=True, exist_ok=True)
+
+fn = "test.txt"
+filepath ...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by xcTorres on June 3, 2021
+        Posted by xcTorres on June 22, 2021
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2021/05/21/personal-finance-plan/">
+    <a href="/2021/06/22/personal-finance-plan/">
         <h2 class="post-title">
             个人理财计划
         </h2>
@@ -303,13 +321,13 @@
         </div>
     </a>
     <p class="post-meta">
-        Posted by xcTorres on May 21, 2021
+        Posted by xcTorres on June 22, 2021
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2021/05/21/learn-english/">
+    <a href="/2021/06/21/learn-english/">
         <h2 class="post-title">
             Learning English
         </h2>
@@ -326,7 +344,25 @@ English is not an art to be mastered.It is just a tool to...
         </div>
     </a>
     <p class="post-meta">
-        Posted by xcTorres on May 21, 2021
+        Posted by xcTorres on June 21, 2021
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/06/03/gis-in-python/">
+        <h2 class="post-title">
+            GIS in Python
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                In the daily work, we often use python to do the data analysis job. Currently, there are more and more spatial python packages, which makes it also very easy for us to do the GIS analysis. In the b...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by xcTorres on June 3, 2021
     </p>
 </div>
 <hr>
@@ -477,29 +513,6 @@ Makefile
     </a>
     <p class="post-meta">
         Posted by xcTorres on December 16, 2020
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2020/11/19/design-pattern/">
-        <h2 class="post-title">
-            设计模式
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                Introduction
-设计模式一直是很玄学的一个东西，但如果我们开始维护迭代大型项目的时候，才会愈发知道设计模式的威力。首先我们来看一下设计模式的定义
-
-定义
-
-  设计模式（Design Pattern）是一套被反复使用、多数人知晓的、经过分类的、代码设计经验的总结。使用设计模式的目的：为了代码可重用性、让代码更容易被他人理解、保证代码可靠性。 设计模式使代码编写真正工程化；设计模式是...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by xcTorres on November 19, 2020
     </p>
 </div>
 <hr>
@@ -784,6 +797,11 @@ One Hot表达
                     rel="4">Life</a>
         
                 <a data-sort="0017" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="4">Python</a>
+        
+                <a data-sort="0017" 
                     href="/archive/?tag=algorithms"
                     title="algorithms"
                     rel="4">algorithms</a>
@@ -792,16 +810,6 @@ One Hot表达
                     href="/archive/?tag=C%2B%2B"
                     title="C++"
                     rel="3">C++</a>
-        
-                <a data-sort="0019" 
-                    href="/archive/?tag=Finance"
-                    title="Finance"
-                    rel="2">Finance</a>
-        
-                <a data-sort="0019" 
-                    href="/archive/?tag=Python"
-                    title="Python"
-                    rel="2">Python</a>
         
                 <a data-sort="0019" 
                     href="/archive/?tag=Spark"
@@ -814,9 +822,14 @@ One Hot表达
                     rel="2">graph</a>
         
                 <a data-sort="0020" 
-                    href="/archive/?tag=Design+Pattern"
-                    title="Design Pattern"
-                    rel="1">Design Pattern</a>
+                    href="/archive/?tag=Finance"
+                    title="Finance"
+                    rel="1">Finance</a>
+        
+                <a data-sort="0020" 
+                    href="/archive/?tag=GIS"
+                    title="GIS"
+                    rel="1">GIS</a>
         
                 <a data-sort="0020" 
                     href="/archive/?tag=Linux"

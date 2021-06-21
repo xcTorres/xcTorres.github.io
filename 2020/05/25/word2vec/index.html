@@ -329,11 +329,59 @@
 <p>比如我们有一个训练样本，中心词是𝑤,它周围上下文共有2𝑐个词，记为𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)。由于这个中心词𝑤,的确和𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)相关存在，因此它是一个真实的正例。通过Negative Sampling采样，我们得到neg个和𝑤不同的中心词𝑤𝑖,𝑖=1,2,..𝑛𝑒𝑔，这样𝑐𝑜𝑛𝑡𝑒𝑥𝑡(𝑤)和𝑤𝑖就组成了neg个并不真实存在的负例。利用这一个正例和neg个负例，我们进行二元逻辑回归，得到负采样对应每个词𝑤𝑖对应的模型参数𝜃𝑖，和每个词的词向量。<br />
 从上面的描述可以看出，Negative Sampling由于没有采用霍夫曼树，每次只是通过采样neg个不同的中心词做负例，就可以训练模型，因此整个过程要比Hierarchical Softmax简单。</p>
 
+<h2 id="genism">Genism</h2>
+<p>Gensim是一个用于机器学习和深度学习的开源库，其也有Word2vec的支持。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">read_input</span><span class="p">(</span><span class="n">input_file</span><span class="p">):</span>
+    <span class="s">"""This method reads the input file which is in gzip format"""</span>
+    
+    <span class="n">logging</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">"reading file {0}...this may take a while"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">input_file</span><span class="p">))</span>
+    
+    <span class="k">with</span> <span class="n">gzip</span><span class="p">.</span><span class="nb">open</span> <span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span> <span class="p">(</span><span class="n">f</span><span class="p">):</span> 
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">10000</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+                <span class="n">logging</span><span class="p">.</span><span class="n">info</span> <span class="p">(</span><span class="s">"read {0} reviews"</span><span class="p">.</span><span class="nb">format</span> <span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="c1"># do some pre-processing and return a list of words for each review text
+</span>            <span class="k">yield</span> <span class="n">gensim</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">simple_preprocess</span> <span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="c1"># read the tokenized reviews into a list
+# each review item becomes a serries of words
+# so this becomes a list of lists
+</span><span class="n">documents</span> <span class="o">=</span> <span class="nb">list</span> <span class="p">(</span><span class="n">read_input</span> <span class="p">(</span><span class="n">data_file</span><span class="p">))</span>
+<span class="n">logging</span><span class="p">.</span><span class="n">info</span> <span class="p">(</span><span class="s">"Done reading data file"</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">gensim</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">Word2Vec</span><span class="p">(</span><span class="n">documents</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">model</span><span class="p">.</span><span class="n">train</span><span class="p">(</span><span class="n">documents</span><span class="p">,</span><span class="n">total_examples</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">documents</span><span class="p">),</span><span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
 <h2 id="源码分析">源码分析</h2>
 <p><a href="https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c">https://github.com/chenbjin/RepresentationLearning/blob/master/Word2vec/word2vec.c</a></p>
 
 <h2 id="参考">参考</h2>
-<p><a href="https://www.cnblogs.com/pinard/p/7243513.html">刘建平老师</a></p>
+<p><a href="https://www.cnblogs.com/pinard/p/7243513.html">刘建平老师</a>
+<a href="https://github.com/kavgan/nlp-in-practice">nlp-in-practice</a>
+<a href="https://radimrehurek.com/gensim/models/word2vec.html">genium-word2vec</a></p>
 
 
                 <hr style="visibility: hidden;">
@@ -416,6 +464,11 @@
                     rel="4">Life</a>
         
                 <a data-sort="0017" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="4">Python</a>
+        
+                <a data-sort="0017" 
                     href="/archive/?tag=algorithms"
                     title="algorithms"
                     rel="4">algorithms</a>
@@ -424,16 +477,6 @@
                     href="/archive/?tag=C%2B%2B"
                     title="C++"
                     rel="3">C++</a>
-        
-                <a data-sort="0019" 
-                    href="/archive/?tag=Finance"
-                    title="Finance"
-                    rel="2">Finance</a>
-        
-                <a data-sort="0019" 
-                    href="/archive/?tag=Python"
-                    title="Python"
-                    rel="2">Python</a>
         
                 <a data-sort="0019" 
                     href="/archive/?tag=Spark"
@@ -446,9 +489,14 @@
                     rel="2">graph</a>
         
                 <a data-sort="0020" 
-                    href="/archive/?tag=Design+Pattern"
-                    title="Design Pattern"
-                    rel="1">Design Pattern</a>
+                    href="/archive/?tag=Finance"
+                    title="Finance"
+                    rel="1">Finance</a>
+        
+                <a data-sort="0020" 
+                    href="/archive/?tag=GIS"
+                    title="GIS"
+                    rel="1">GIS</a>
         
                 <a data-sort="0020" 
                     href="/archive/?tag=Linux"

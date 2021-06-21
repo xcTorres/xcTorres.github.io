@@ -5,9 +5,296 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 03 Jun 2021 17:43:22 +0800</pubDate>
-    <lastBuildDate>Thu, 03 Jun 2021 17:43:22 +0800</lastBuildDate>
+    <pubDate>Tue, 22 Jun 2021 00:41:27 +0800</pubDate>
+    <lastBuildDate>Tue, 22 Jun 2021 00:41:27 +0800</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>Python Commonly Used Code</title>
+        <description>&lt;h4 id=&quot;create-the-dicectory&quot;&gt;Create the dicectory&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.python.org/3/library/pathlib.html&quot;&gt;pathlib&lt;/a&gt; is more convenient to use than os module.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pathlib&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathlib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temp/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mkdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parents&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exist_ok&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;test.txt&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;filepath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fn&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filepath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;w&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;traverse-the-files&quot;&gt;Traverse the files&lt;/h4&gt;
+
+&lt;h4 id=&quot;multiprocessing&quot;&gt;Multiprocessing&lt;/h4&gt;
+
+&lt;h4 id=&quot;subprocess&quot;&gt;Subprocess&lt;/h4&gt;
+
+&lt;h4 id=&quot;asyncio&quot;&gt;Asyncio&lt;/h4&gt;
+
+&lt;h4 id=&quot;pendulum&quot;&gt;Pendulum&lt;/h4&gt;
+</description>
+        <pubDate>Tue, 22 Jun 2021 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2021/06/22/python-gist/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/06/22/python-gist/</guid>
+        
+        <category>Python</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>个人理财计划</title>
+        <description>&lt;h1 id=&quot;background&quot;&gt;Background&lt;/h1&gt;
+&lt;p&gt;随着年龄的增长，逐渐有了理财的意识。但是好巧不巧，今年二月份入股美市第二天，美股就开始各种各种动荡。庆幸自己有自知之明，总共投了2000多美金还好，亏的不多，300多美金。我个人目前的理财计划还是会投入几千美金到美股市场，但只会买一些长期股票。也不寄希望能够从美股市场挣大钱。&lt;/p&gt;
+
+&lt;p&gt;此外2019年，我买了一份重疾30W新币，死亡赔付50W新币的重疾险， 需要每个月支付320新币，支付25年, 当然这个钱以后也是可以取出来的，属于理财产品。因为我是一个低风险的人，买这样一份保险也算是以防万一，对意外事故有个保障。&lt;/p&gt;
+
+&lt;p&gt;近日2021年4月，又买了一份基金plan，需每年定投12000新币。这个plan的好处是比较灵活，我自己可以调整各个基金的占比。里面有很多基金也还不了解我也不确定能有多少的回报率，希望以此做个记录，每年的利率的1.5%差不多是手续费，算是收支平衡，当然希望年利率回报越高越好咯。新加坡的银行利率只有可怜的0.5%，放在银行里着实是有点太保守了。&lt;br /&gt;
+目前持有的基金有如下几个&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://am.jpmorgan.com/lu/en/asset-management/per/products/jpm-greater-china-a-acc-usd-lu0210526801#/portfolio&quot;&gt;&lt;strong&gt;JP Morgon Great China&lt;/strong&gt;&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;从官网中我们可以看到，目前JP摩根 Great China持有的Top10有&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;台积电&lt;/li&gt;
+  &lt;li&gt;腾讯&lt;/li&gt;
+  &lt;li&gt;阿里&lt;/li&gt;
+  &lt;li&gt;美团&lt;/li&gt;
+  &lt;li&gt;平安保险&lt;/li&gt;
+  &lt;li&gt;平安银行&lt;/li&gt;
+  &lt;li&gt;中国工商银行&lt;/li&gt;
+  &lt;li&gt;无锡制药&lt;/li&gt;
+  &lt;li&gt;香港交易所&lt;/li&gt;
+  &lt;li&gt;以及碧桂园&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;总体来说还是科技股为主，金融业为辅。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.franklintempleton.com.sg/investor/products/overview/4916/Z/franklin-technology-fund&quot;&gt;&lt;strong&gt;Franklin Technology Fund&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+Franklin Top 10一眼晃去，全是科技股和金融支付。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;AMAZON.COM INC&lt;/li&gt;
+  &lt;li&gt;MICROSOFT CORP&lt;/li&gt;
+  &lt;li&gt;APPLE INC&lt;/li&gt;
+  &lt;li&gt;VISA INC&lt;/li&gt;
+  &lt;li&gt;PAYPAL HOLDINGS INC&lt;/li&gt;
+  &lt;li&gt;MASTERCARD INC&lt;/li&gt;
+  &lt;li&gt;APPLIED MATERIALS INC&lt;/li&gt;
+  &lt;li&gt;NVIDIA CORP&lt;/li&gt;
+  &lt;li&gt;ALPHABET INC&lt;/li&gt;
+  &lt;li&gt;ALIBABA GROUP HOLDING LTD&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.robeco.com/sg/funds/prof-sg-en-11/robeco-global-consumer-trends-d-eur-lu0187079347.html#!#allocationtop10&quot;&gt;&lt;strong&gt;Robeco Global Consumer Trends&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+Top 10:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Paypal&lt;/li&gt;
+  &lt;li&gt;Netflix&lt;/li&gt;
+  &lt;li&gt;Facebook&lt;/li&gt;
+  &lt;li&gt;Visa&lt;/li&gt;
+  &lt;li&gt;Adyen Nv(荷兰支付创业公司)&lt;/li&gt;
+  &lt;li&gt;Nestle Sa(雀巢)&lt;/li&gt;
+  &lt;li&gt;Mastercard&lt;/li&gt;
+  &lt;li&gt;Alphabet Inc (Class A)（Google公司）&lt;/li&gt;
+  &lt;li&gt;Meituan&lt;/li&gt;
+  &lt;li&gt;Mercadolibre（阿根廷电商公司）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;支付行业占比比较高&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 22 Jun 2021 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2021/06/22/personal-finance-plan/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/06/22/personal-finance-plan/</guid>
+        
+        <category>Finance</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Learning English</title>
+        <description>&lt;h1 id=&quot;态度&quot;&gt;态度&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;学习语言第一点需要端正态度&lt;/strong&gt;&lt;br /&gt;
+1)去除恐惧&lt;br /&gt;
+2)不怕出错，不怕被judge&lt;br /&gt;
+&lt;strong&gt;when you speak, don’t focus on yourself. Focus on other people and the result you want to achieve. 
+English is not an art to be mastered.It is just a tool to get the result.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=mwpdffpixBY&quot;&gt;https://www.youtube.com/watch?v=mwpdffpixBY&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=LtxikccfpaU&quot;&gt;https://www.youtube.com/watch?v=LtxikccfpaU&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.elllo.org&quot;&gt;http://www.elllo.org&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bilibili.com/video/BV1KJ411r7Tn&quot;&gt;https://www.bilibili.com/video/BV1KJ411r7Tn?p=1&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bilibili.com/video/BV1JK411V77G&quot;&gt;https://www.bilibili.com/video/BV1JK411V77G&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;听力&quot;&gt;听力&lt;/h1&gt;
+&lt;p&gt;在上班的工作中，用英语交流还仍有障碍，为了以后自己职业更好的发展，听力和口语都有待提高。在网上看了一些帖子，得到了一些启发，纠正了自己以往的学习方法。现在才真正明白了以下几个道理。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;对我这种基础比较差的泛听是没有什么卵用的。精听才是王道&lt;/li&gt;
+  &lt;li&gt;如果听力不好，其他听说读写没有一项会好。这些都是一连串的连锁反应。不能再找借口说自己写作和阅读能力不错了。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Date&lt;/th&gt;
+      &lt;th&gt;Link&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;28th Sep&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV13A411J7kD&quot;&gt;https://www.bilibili.com/video/BV13A411J7kD&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;又骗我生女儿？陈冠希谈育女经；这个老爸也太酷了吧？&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;7th Oct&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1VV411r7Xv?p=1&quot;&gt;https://www.bilibili.com/video/BV1VV411r7Xv?p=1&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;How do our brains process speech - Gareth Gaskell&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;8th Oct&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=KewojU5bsq8&quot;&gt;https://www.youtube.com/watch?v=KewojU5bsq8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;25句做Presentation必用英文 再也不用紧张！留学、商务英语&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;9th Oct&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1df4y1S7VW&quot;&gt;https://www.bilibili.com/video/BV1df4y1S7VW&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;川普私密音频曝光！亲承瞒报疫情严重性，误导美国民众&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;12th Oct&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1Jp4y1Y7su?p=3&quot;&gt;https://www.bilibili.com/video/BV1Jp4y1Y7su?p=3&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;詹姆斯总决赛MVP发言完整版：我想获得那该死的尊重&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;25th Oct&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1Mi4y177Po?p=1&quot;&gt;https://www.bilibili.com/video/BV1Mi4y177Po?p=1&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;民主党最后的王牌？奥巴马最新热血演讲：川普，总统不是这么当的&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2nd Nov&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://dict.eudic.net/webting/desktopplay?id=3c018d6d-1b12-11eb-8659-00505686c5e6&amp;amp;token=QYN+eyJ0b2tlbiI6IiIsInVzZXJpZCI6IiIsInVybHNpZ24iOiJ1RFdGQys0R0pCMEVxWXRtcm0wVFZPb1lSOEU9IiwidCI6IkFCSU1UWXlOREV3TmpNeU9RPT0ifQ%3D%3D&quot;&gt;并非所有水力发电设施都有利于环保&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;并非所有水力发电设施都有利于环保&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;12th Nov&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1JK411V77G?p=1&quot;&gt;https://www.bilibili.com/video/BV1JK411V77G?p=1&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Improving your memory - 6 Minute English&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;18th Nov&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1JK411V77G?p=3&quot;&gt;https://www.bilibili.com/video/BV1JK411V77G?p=3&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;What makes you happy 6 Minute English&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;24th Nov&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1C54y1z7MG?p=3&quot;&gt;https://www.bilibili.com/video/BV1C54y1z7MG?p=3&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;美国总统的家庭地位是怎样的？奥巴马：我真的好卑微&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5th Jan 2021&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1vz4y1z7eQ?p=3&quot;&gt;https://www.bilibili.com/video/BV1vz4y1z7eQ?p=3&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;如何做出完美的课堂展示？澳洲展示大赛冠军小姐姐教给你&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;9th Mar 2021&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1Vv411h7tW?p=3&quot;&gt;https://www.bilibili.com/video/BV1Vv411h7tW?p=3&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;颜值不是一切，相信我，我是个模特&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;19th Apr 2021&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1eK4y1o7kR?p=1&quot;&gt;https://www.bilibili.com/video/BV1eK4y1o7kR?p=1&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;TED演讲：努力之外，运气也很重要！&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;18th May 2021&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV11A41137jW?p=3&quot;&gt;https://www.bilibili.com/video/BV11A41137jW?p=3&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;一招欲擒故纵拿下比尔·盖茨？盖茨老婆回忆二人爱情故事&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;20th May 2021&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=CDV0i660brM&quot;&gt;https://www.youtube.com/watch?v=CDV0i660brM&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;The future of flying is electrifying Cory Combs&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;如下是自己翻译并制作的双字幕视频&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Date&lt;/th&gt;
+      &lt;th&gt;Link&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6th Jun 2021&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1cq4y177sj/&quot;&gt;https://www.bilibili.com/video/BV1cq4y177sj/&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;The death of universe&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;20th Jun 2021&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1xM4y1u7DM/&quot;&gt;https://www.bilibili.com/video/BV1xM4y1u7DM/&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Mark Selbey&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&quot;口语&quot;&gt;口语&lt;/h1&gt;
+
+&lt;h3 id=&quot;工作交谈&quot;&gt;工作交谈&lt;/h3&gt;
+&lt;p&gt;As a quick reminder: 顺便提醒一下&lt;br /&gt;
+Taken as a very loose analogy: 作为粗略的对照&lt;br /&gt;
+I will touch base with you. 我会向你再次确认。&lt;br /&gt;
+Got it/ Roger that / Consider it done/ Sure thing 好的收到&lt;br /&gt;
+With that being said 说完这些&lt;br /&gt;
+It occurs at hight rate  出现比例很高&lt;/p&gt;
+
+&lt;h3 id=&quot;presentation&quot;&gt;Presentation&lt;/h3&gt;
+&lt;p&gt;From where I stand / From my point of view / Judging from what I have heard/read.&lt;br /&gt;
+For example / For instance / Suppose that / Imagine / To illustrate / To give you an idea / To show you what I mean / Let’s say / Something is a case in point   举例，比如&lt;br /&gt;
+It’s great to be here with you today/ Thanks for having me today. 很荣幸站在这里&lt;br /&gt;
+Let me briefly introduce myself. 请允许我简单介绍&lt;br /&gt;
+Today, I’d like to talk to you about/ My topic today is 今天我打算讲讲&lt;br /&gt;
+This presentation is divided into four parts. Let me direct your attention to the screen&lt;br /&gt;
+I want to begin with/ and then I’ll move on to/ next we’re talking about/That concludes my presentation/That’s from me, thanks for your attention  PPT逻辑&lt;/p&gt;
+
+&lt;h1 id=&quot;专业术语&quot;&gt;专业术语&lt;/h1&gt;
+&lt;h3 id=&quot;机器学习&quot;&gt;机器学习&lt;/h3&gt;
+&lt;p&gt;后向传播算法： backpropagation algorithms&lt;br /&gt;
+正则化：  regularization&lt;br /&gt;
+过拟合：  overfitting&lt;br /&gt;
+向量化：  vectorization&lt;br /&gt;
+大小、量级：magnitude&lt;/p&gt;
+
+&lt;h3 id=&quot;算法&quot;&gt;算法&lt;/h3&gt;
+&lt;p&gt;时间复杂度： time complexity&lt;br /&gt;
+指数级： exponential&lt;/p&gt;
+</description>
+        <pubDate>Mon, 21 Jun 2021 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2021/06/21/learn-english/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/06/21/learn-english/</guid>
+        
+        <category>Skill</category>
+        
+        
+      </item>
     
       <item>
         <title>GIS in Python</title>
@@ -398,219 +685,9 @@ Here are many functions in its &lt;a href=&quot;https://shapely.readthedocs.io/e
         <link>https://xctorres.github.io//2021/06/03/gis-in-python/</link>
         <guid isPermaLink="true">https://xctorres.github.io//2021/06/03/gis-in-python/</guid>
         
-        <category>Finance</category>
+        <category>GIS</category>
         
-        
-      </item>
-    
-      <item>
-        <title>个人理财计划</title>
-        <description>&lt;h1 id=&quot;background&quot;&gt;Background&lt;/h1&gt;
-&lt;p&gt;随着年龄的增长，逐渐有了理财的意识。但是好巧不巧，今年二月份入股美市第二天，美股就开始各种各种动荡。庆幸自己有自知之明，总共投了2000多美金还好，亏的不多，300多美金。我个人目前的理财计划还是会投入几千美金到美股市场，但只会买一些长期股票。也不寄希望能够从美股市场挣大钱。&lt;/p&gt;
-
-&lt;p&gt;此外2019年，我买了一份重疾30W新币，死亡赔付50W新币的重疾险， 需要每个月支付320新币，支付25年, 当然这个钱以后也是可以取出来的，属于理财产品。因为我是一个低风险的人，买这样一份保险也算是以防万一，对意外事故有个保障。&lt;/p&gt;
-
-&lt;p&gt;近日2021年4月，又买了一份基金plan，需每年定投12000新币。这个plan的好处是比较灵活，我自己可以调整各个基金的占比。里面有很多基金也还不了解我也不确定能有多少的回报率，希望以此做个记录，每年的利率的1.5%差不多是手续费，算是收支平衡，当然希望年利率回报越高越好咯。新加坡的银行利率只有可怜的0.5%，放在银行里着实是有点太保守了。&lt;br /&gt;
-目前持有的基金有如下几个&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://am.jpmorgan.com/lu/en/asset-management/per/products/jpm-greater-china-a-acc-usd-lu0210526801#/portfolio&quot;&gt;&lt;strong&gt;JP Morgon Great China&lt;/strong&gt;&lt;/a&gt;:&lt;/p&gt;
-
-&lt;p&gt;从官网中我们可以看到，目前JP摩根 Great China持有的Top10有台积电，腾讯，阿里，美团，平安保险，平安银行，中国工商银行，无锡制药，香港交易所，以及碧桂园。总体来说还是科技股为主，金融业为辅。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.franklintempleton.com.sg/investor/products/overview/4916/Z/franklin-technology-fund&quot;&gt;&lt;strong&gt;Franklin Technology Fund&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
-Franklin Top 10一眼晃去，全是科技股和金融支付。&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;AMAZON.COM INC&lt;/li&gt;
-  &lt;li&gt;MICROSOFT CORP&lt;/li&gt;
-  &lt;li&gt;APPLE INC&lt;/li&gt;
-  &lt;li&gt;VISA INC&lt;/li&gt;
-  &lt;li&gt;PAYPAL HOLDINGS INC&lt;/li&gt;
-  &lt;li&gt;MASTERCARD INC&lt;/li&gt;
-  &lt;li&gt;APPLIED MATERIALS INC&lt;/li&gt;
-  &lt;li&gt;NVIDIA CORP&lt;/li&gt;
-  &lt;li&gt;ALPHABET INC&lt;/li&gt;
-  &lt;li&gt;ALIBABA GROUP HOLDING LTD&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.robeco.com/sg/funds/prof-sg-en-11/robeco-global-consumer-trends-d-eur-lu0187079347.html#!#allocationtop10&quot;&gt;&lt;strong&gt;Robeco Global Consumer Trends&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
-Top 10:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Paypal&lt;/li&gt;
-  &lt;li&gt;Netflix&lt;/li&gt;
-  &lt;li&gt;Facebook&lt;/li&gt;
-  &lt;li&gt;Visa&lt;/li&gt;
-  &lt;li&gt;Adyen Nv(荷兰支付创业公司)&lt;/li&gt;
-  &lt;li&gt;Nestle Sa(雀巢)&lt;/li&gt;
-  &lt;li&gt;Mastercard&lt;/li&gt;
-  &lt;li&gt;Alphabet Inc (Class A)（Google公司）&lt;/li&gt;
-  &lt;li&gt;Meituan&lt;/li&gt;
-  &lt;li&gt;Mercadolibre（阿根廷电商公司）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;支付行业占比比较高&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;其他待定的以后可以更换的有基金有：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.fundsmith.co.uk/fund-factsheet&quot;&gt;&lt;strong&gt;Fund Smith&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
-Fund Smith里科技公司是Micro Soft以及Facebook，金融相关的Paypal，财务软件公司Intuit；化妆品相关的有Estée Lauder（雅诗兰黛），L’Oréal（巴黎欧莱雅）；制药公司IDEXX， 医疗器械公司Stryker，以及Novo Nordisk生物制药。仅从Top 10来看，Fund Smith不像JP Morgon China那样互联网行业占比很大，反而多了一些医药和化妆品行业，覆盖面更广风险相对更分散。&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 21 May 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/05/21/personal-finance-plan/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/05/21/personal-finance-plan/</guid>
-        
-        <category>Finance</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Learning English</title>
-        <description>&lt;h1 id=&quot;态度&quot;&gt;态度&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;学习语言第一点需要端正态度&lt;/strong&gt;&lt;br /&gt;
-1)去除恐惧&lt;br /&gt;
-2)不怕出错，不怕被judge&lt;br /&gt;
-&lt;strong&gt;when you speak, don’t focus on yourself. Focus on other people and the result you want to achieve. 
-English is not an art to be mastered.It is just a tool to get the result.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=mwpdffpixBY&quot;&gt;https://www.youtube.com/watch?v=mwpdffpixBY&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.youtube.com/watch?v=LtxikccfpaU&quot;&gt;https://www.youtube.com/watch?v=LtxikccfpaU&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://www.elllo.org&quot;&gt;http://www.elllo.org&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.bilibili.com/video/BV1KJ411r7Tn&quot;&gt;https://www.bilibili.com/video/BV1KJ411r7Tn?p=1&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.bilibili.com/video/BV1JK411V77G&quot;&gt;https://www.bilibili.com/video/BV1JK411V77G&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;听力&quot;&gt;听力&lt;/h1&gt;
-&lt;p&gt;在上班的工作中，用英语交流还仍有障碍，为了以后自己职业更好的发展，听力和口语都有待提高。在网上看了一些帖子，得到了一些启发，纠正了自己以往的学习方法。现在才真正明白了以下几个道理。&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;对我这种基础比较差的泛听是没有什么卵用的。精听才是王道&lt;/li&gt;
-  &lt;li&gt;如果听力不好，其他听说读写没有一项会好。这些都是一连串的连锁反应。不能再找借口说自己写作和阅读能力不错了。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Date&lt;/th&gt;
-      &lt;th&gt;Link&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;28th Sep&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV13A411J7kD&quot;&gt;https://www.bilibili.com/video/BV13A411J7kD&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;又骗我生女儿？陈冠希谈育女经；这个老爸也太酷了吧？&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;7th Oct&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1VV411r7Xv?p=1&quot;&gt;https://www.bilibili.com/video/BV1VV411r7Xv?p=1&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;How do our brains process speech - Gareth Gaskell&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;8th Oct&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=KewojU5bsq8&quot;&gt;https://www.youtube.com/watch?v=KewojU5bsq8&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;25句做Presentation必用英文 再也不用紧张！留学、商务英语&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;9th Oct&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1df4y1S7VW&quot;&gt;https://www.bilibili.com/video/BV1df4y1S7VW&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;川普私密音频曝光！亲承瞒报疫情严重性，误导美国民众&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;12th Oct&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1Jp4y1Y7su?p=3&quot;&gt;https://www.bilibili.com/video/BV1Jp4y1Y7su?p=3&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;詹姆斯总决赛MVP发言完整版：我想获得那该死的尊重&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;25th Oct&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1Mi4y177Po?p=1&quot;&gt;https://www.bilibili.com/video/BV1Mi4y177Po?p=1&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;民主党最后的王牌？奥巴马最新热血演讲：川普，总统不是这么当的&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;2nd Nov&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://dict.eudic.net/webting/desktopplay?id=3c018d6d-1b12-11eb-8659-00505686c5e6&amp;amp;token=QYN+eyJ0b2tlbiI6IiIsInVzZXJpZCI6IiIsInVybHNpZ24iOiJ1RFdGQys0R0pCMEVxWXRtcm0wVFZPb1lSOEU9IiwidCI6IkFCSU1UWXlOREV3TmpNeU9RPT0ifQ%3D%3D&quot;&gt;并非所有水力发电设施都有利于环保&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;并非所有水力发电设施都有利于环保&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;12th Nov&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1JK411V77G?p=1&quot;&gt;https://www.bilibili.com/video/BV1JK411V77G?p=1&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;Improving your memory - 6 Minute English&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;18th Nov&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1JK411V77G?p=3&quot;&gt;https://www.bilibili.com/video/BV1JK411V77G?p=3&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;What makes you happy 6 Minute English&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;24th Nov&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1C54y1z7MG?p=3&quot;&gt;https://www.bilibili.com/video/BV1C54y1z7MG?p=3&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;美国总统的家庭地位是怎样的？奥巴马：我真的好卑微&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;5th Jan 2021&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1vz4y1z7eQ?p=3&quot;&gt;https://www.bilibili.com/video/BV1vz4y1z7eQ?p=3&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;如何做出完美的课堂展示？澳洲展示大赛冠军小姐姐教给你&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;9th Mar 2021&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1Vv411h7tW?p=3&quot;&gt;https://www.bilibili.com/video/BV1Vv411h7tW?p=3&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;颜值不是一切，相信我，我是个模特&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;19th Apr 2021&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1eK4y1o7kR?p=1&quot;&gt;https://www.bilibili.com/video/BV1eK4y1o7kR?p=1&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;TED演讲：努力之外，运气也很重要！&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;18th May 2021&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV11A41137jW?p=3&quot;&gt;https://www.bilibili.com/video/BV11A41137jW?p=3&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;一招欲擒故纵拿下比尔·盖茨？盖茨老婆回忆二人爱情故事&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;20th May 2021&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=CDV0i660brM&quot;&gt;https://www.youtube.com/watch?v=CDV0i660brM&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;The future of flying is electrifying Cory Combs&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h1 id=&quot;口语&quot;&gt;口语&lt;/h1&gt;
-
-&lt;h3 id=&quot;工作交谈&quot;&gt;工作交谈&lt;/h3&gt;
-&lt;p&gt;As a quick reminder: 顺便提醒一下&lt;br /&gt;
-Taken as a very loose analogy: 作为粗略的对照&lt;br /&gt;
-I will touch base with you. 我会向你再次确认。&lt;br /&gt;
-Got it/ Roger that / Consider it done/ Sure thing 好的收到&lt;br /&gt;
-With that being said 说完这些&lt;br /&gt;
-It occurs at hight rate  出现比例很高&lt;/p&gt;
-
-&lt;h3 id=&quot;presentation&quot;&gt;Presentation&lt;/h3&gt;
-&lt;p&gt;From where I stand / From my point of view / Judging from what I have heard/read.&lt;br /&gt;
-For example / For instance / Suppose that / Imagine / To illustrate / To give you an idea / To show you what I mean / Let’s say / Something is a case in point   举例，比如&lt;br /&gt;
-It’s great to be here with you today/ Thanks for having me today. 很荣幸站在这里&lt;br /&gt;
-Let me briefly introduce myself. 请允许我简单介绍&lt;br /&gt;
-Today, I’d like to talk to you about/ My topic today is 今天我打算讲讲&lt;br /&gt;
-This presentation is divided into four parts. Let me direct your attention to the screen&lt;br /&gt;
-I want to begin with/ and then I’ll move on to/ next we’re talking about/That concludes my presentation/That’s from me, thanks for your attention  PPT逻辑&lt;/p&gt;
-
-&lt;h1 id=&quot;专业术语&quot;&gt;专业术语&lt;/h1&gt;
-&lt;h3 id=&quot;机器学习&quot;&gt;机器学习&lt;/h3&gt;
-&lt;p&gt;后向传播算法： backpropagation algorithms&lt;br /&gt;
-正则化：  regularization&lt;br /&gt;
-过拟合：  overfitting&lt;br /&gt;
-向量化：  vectorization&lt;br /&gt;
-大小、量级：magnitude&lt;/p&gt;
-
-&lt;h3 id=&quot;算法&quot;&gt;算法&lt;/h3&gt;
-&lt;p&gt;时间复杂度： time complexity&lt;br /&gt;
-指数级： exponential&lt;/p&gt;
-</description>
-        <pubDate>Fri, 21 May 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/05/21/learn-english/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/05/21/learn-english/</guid>
-        
-        <category>Skill</category>
+        <category>Python</category>
         
         
       </item>
@@ -1767,63 +1844,6 @@ shared顾名思义，也是只一个对象指针允许有多个owner， shared_p
         <pubDate>Thu, 17 Dec 2020 00:00:00 +0800</pubDate>
         <link>https://xctorres.github.io//2020/12/17/c++-02/</link>
         <guid isPermaLink="true">https://xctorres.github.io//2020/12/17/c++-02/</guid>
-        
-        <category>C++</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>C++ (00) include 头文件与source源文件</title>
-        <description>&lt;p&gt;在编写C++程序文件的时候，我们会定义头文件在.h / .hpp / .hxx， 源文件.cpp / .cxx / .cc，那他们的区别是什么呢？这也是我长期以来的一个疑问。在查阅资料之后有了一定的了解。&lt;/p&gt;
-
-&lt;p&gt;首先得回顾一下一个C程序或者C++程序从代码到能运行需要进行的几个步骤。如下是一个简单的hello world命令，而gcc在将其编译成可执行代码时，需要进行四个步骤， 预处理 -&amp;gt; 编译 -&amp;gt; 汇编 -&amp;gt; 链接。&lt;/p&gt;
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;// hello.c&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;iostream&amp;gt;
-&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello, World!&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt; g++ &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; test.out main.cpp &lt;span class=&quot;c&quot;&gt;# 编译&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./test.out &lt;span class=&quot;c&quot;&gt;# 执行&lt;/span&gt;
-Hello world!
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;其中预处理用于将所有的#include头文件以及宏定义替换成其真正的内容，预处理之后得到的仍然是文本文件，但文件体积会大很多。&lt;/li&gt;
-  &lt;li&gt;这里的编译不是指程序从源文件到二进制程序的全部过程，而是指将经过预处理之后的程序转换成特定汇编代码(assembly code)的过程。&lt;/li&gt;
-  &lt;li&gt;汇编过程将上一步的汇编代码转换成机器码(machine code)，这一步产生的文件叫做目标文件，是二进制格式&lt;/li&gt;
-  &lt;li&gt;链接过程将多个目标文以及所需的库文件(.so等)链接成最终的可执行文件(executable file)。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;在一个C++项目中，如果所有的代码都写在一个源文件中，任何一次细小甚微的代码改动都需要重新编译所有的代码。这样的效率是及其低下的。所以我们会发现成熟的project中，会将代码匀给多个源文件cpp中，这样也有利于提高代码的可读性。&lt;/p&gt;
-
-&lt;p&gt;那么为什么还有头文件的存在呢？有时候某个定义的函数func可能被多个源文件使用，如果没有头文件，这个函数func只能手动在各个源文件中被定义和声明多次。而有了头文件func.h，则只需将该函数声明在头文件中声明和定义。&lt;/p&gt;
-
-&lt;p&gt;但是在预处理过程中，在包含该头文件的源文件中，该头文件的代码都要被添加进来。这样还是相当于这个函数在各个源文件中被定义和声明以及编译多次，所以目前使用的一般方法是头文件只负责声明函数，包括参数以及返回类型，但具体内容在同名的源文件func.cpp中补充，这样一来，其他源文件使用该函数的时候只需要链接func.cpp生成的目标文件func.o。&lt;/p&gt;
-
-&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.toptal.com/c-plus-plus/c-plus-plus-understanding-compilation#:~:text=The%20first%20step%20that%20the,are%20included%20from%20source%20files.&quot;&gt;https://www.toptal.com/c-plus-plus/c-plus-plus-understanding-compilation#:~:text=The%20first%20step%20that%20the,are%20included%20from%20source%20files.&lt;/a&gt;
-&lt;a href=&quot;https://www.cplusplus.com/articles/Gw6AC542/#:~:text=So%20what's%20the%20difference%20between,%2C%20but%20you%20shouldn't.&quot;&gt;https://www.cplusplus.com/articles/Gw6AC542/#:~:text=So%20what’s%20the%20difference%20between,%2C%20but%20you%20shouldn’t.&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.cnblogs.com/CarpenterLee/p/5994681.html&quot;&gt;https://www.cnblogs.com/CarpenterLee/p/5994681.html&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 16 Dec 2020 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2020/12/16/c++-00/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2020/12/16/c++-00/</guid>
         
         <category>C++</category>
         
