@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "个人理财计划"
-date:       2021-05-21
+date:       2021-06-22
 author:     "xcTorres"
 header-img: "img/in-post/2019.jpg"
 catalog:    true
@@ -19,7 +19,19 @@ tags:
 
 [**JP Morgon Great China**](https://am.jpmorgan.com/lu/en/asset-management/per/products/jpm-greater-china-a-acc-usd-lu0210526801#/portfolio):  
 
-从官网中我们可以看到，目前JP摩根 Great China持有的Top10有台积电，腾讯，阿里，美团，平安保险，平安银行，中国工商银行，无锡制药，香港交易所，以及碧桂园。总体来说还是科技股为主，金融业为辅。
+从官网中我们可以看到，目前JP摩根 Great China持有的Top10有 
+- 台积电  
+- 腾讯  
+- 阿里  
+- 美团  
+- 平安保险  
+- 平安银行  
+- 中国工商银行  
+- 无锡制药  
+- 香港交易所  
+- 以及碧桂园  
+
+总体来说还是科技股为主，金融业为辅。
 
 
 [**Franklin Technology Fund**](https://www.franklintempleton.com.sg/investor/products/overview/4916/Z/franklin-technology-fund)  
@@ -49,11 +61,3 @@ Top 10:
 - Mercadolibre（阿根廷电商公司）   
 
 **支付行业占比比较高**
- 
----
-
-其他待定的以后可以更换的有基金有：
-
-[**Fund Smith**](https://www.fundsmith.co.uk/fund-factsheet)  
-Fund Smith里科技公司是Micro Soft以及Facebook，金融相关的Paypal，财务软件公司Intuit；化妆品相关的有Estée Lauder（雅诗兰黛），L'Oréal（巴黎欧莱雅）；制药公司IDEXX， 医疗器械公司Stryker，以及Novo Nordisk生物制药。仅从Top 10来看，Fund Smith不像JP Morgon China那样互联网行业占比很大，反而多了一些医药和化妆品行业，覆盖面更广风险相对更分散。
-

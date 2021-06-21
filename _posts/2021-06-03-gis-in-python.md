@@ -6,7 +6,8 @@ author:     "xcTorres"
 header-img: "img/in-post/2019.jpg"
 catalog:    true
 tags:
-    - Finance
+    - GIS
+    - Python
 ---  
 
 In the daily work, we often use python to do the data analysis job. Currently, there are more and more spatial python packages, which makes it also very easy for us to do the GIS analysis. In the blog, I would like to introduce some basic usages.
