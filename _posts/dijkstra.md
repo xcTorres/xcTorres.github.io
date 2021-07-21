@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Dijkstra 算法"
-date:       2020-08-04
+date:       2021-07-22
 author:     "xcTorres"
 header-img: "img/in-post/graph/graph.png"
 mathjax: true
