@@ -332,11 +332,126 @@ import pathlib
 
 <h4 id="traverse-the-files">Traverse the files</h4>
 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">dir_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s">'dir'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">old_dir</span><span class="p">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">r</span><span class="s">'**/*'</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">path</span><span class="p">.</span><span class="n">suffix</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'.geojson'</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
 <h4 id="multiprocessing">Multiprocessing</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">multiprocessing</span>
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">a</span>
+<span class="k">with</span> <span class="n">multiprocessing</span><span class="p">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">pool</span><span class="p">.</span><span class="nb">map</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="subprocess">Subprocess</h4>
+<ul>
+  <li>Block</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="n">subprocess</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="s">"bash.sh"</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>Non-Block</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="n">subprocess</span><span class="p">.</span><span class="n">Popen</span><span class="p">([</span><span class="s">"hadoop"</span><span class="p">,</span> <span class="s">"fs"</span><span class="p">,</span> <span class="s">"-copyToLocal"</span><span class="p">,</span> <span class="s">"-f"</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="s">'./'</span><span class="p">],</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">PIPE</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="asyncio">Asyncio</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">aiohttp</span> <span class="kn">import</span> <span class="n">ClientSession</span><span class="p">,</span> <span class="n">TCPConnector</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">create_session</span><span class="p">():</span>
+    <span class="s">"""Create session
+    """</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">TCPConnector</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">ClientSession</span><span class="p">(</span><span class="n">connector</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">session</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">async_request</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="s">"""Async request"""</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">request_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">gather_tasks</span><span class="p">(</span><span class="n">tasks</span><span class="p">):</span>
+    <span class="s">"""Gather tasks"""</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="n">batch_requests</span><span class="p">):</span>
+    <span class="n">task_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">new_event_loop</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">create_session</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="n">batch_requests</span><span class="p">:</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">async_request</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">request</span><span class="p">[</span><span class="s">'request_url'</span><span class="p">],</span> <span class="n">request</span><span class="p">[</span><span class="s">'params'</span><span class="p">])</span>
+        <span class="n">task_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="c1"># send requests asynchronously
+</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">gather_tasks</span><span class="p">(</span><span class="n">task_list</span><span class="p">))</span>
+    <span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">close</span><span class="p">())</span>
+    <span class="n">loop</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">response</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="pendulum">Pendulum</h4>
 
