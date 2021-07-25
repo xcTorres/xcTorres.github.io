@@ -657,7 +657,7 @@ Configures the number of partitions that are used when shuffling data for joins 
 
 <p>Sometimes you need the records in one partition in some constraints. For example, all records of some certain user_id must be in one single partion so that you are allowed to use groupBy function in mapPartition function.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -787,7 +787,7 @@ Configures the number of partitions that are used when shuffling data for joins 
 
 <h4 id="explode-to-multi-columns">explode to multi columns</h4>
 <p>Sometimes one column type is StructType, but we want to explode this column into multi columns and make every StructField become one column. We could use .* operation.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>    df = df.select('order.*')
 </pre></td></tr></tbody></table></code></pre></div></div>
 

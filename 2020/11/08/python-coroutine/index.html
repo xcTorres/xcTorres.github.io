@@ -376,7 +376,7 @@
         <span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">perf_counter</span><span class="p">()</span>
         <span class="n">asyncio</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
         <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">s</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">f"</span><span class="si">{</span><span class="n">__file__</span><span class="si">}</span><span class="s"> executed in </span><span class="si">{</span><span class="n">elapsed</span><span class="p">:</span><span class="mf">0.2</span><span class="n">f</span><span class="si">}</span><span class="s"> seconds."</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">__file__</span><span class="si">}</span><span class="s"> executed in </span><span class="si">{</span><span class="n">elapsed</span><span class="p">:</span><span class="mf">0.2</span><span class="n">f</span><span class="si">}</span><span class="s"> seconds."</span><span class="p">)</span>
 
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p>该代码块运行结果如下,不难发现main函数是要运行三个协程任务，但当每个任务运行到asyncio.sleep的时候便立马切换到其他协程，然后当睡眠1s过后切换回来时，三个任务都依次完成。起到了异步的效果。其总时间只花了1s钟。</p>
