@@ -12,10 +12,11 @@ encoding: utf-8
 
 # SNS settings
 RSS: false
-zhihu_username:     cong-zi-64
+# zhihu_username:     cong-zi-64
 github_username:    xcTorres
 linkedin_username: chong-xie-545830157
 medium_username: xcwhu2016
+bilibili_username: 337843131
 
 
 
@@ -187,6 +188,9 @@ friends: [
     },{
       title: "jqpeng的技术记事本",
       href: "https://www.cnblogs.com/xiaoqi/"
+    },{
+      title: "面向信仰编程",
+      href: "https://draveness.me/"
     }
 
 ]

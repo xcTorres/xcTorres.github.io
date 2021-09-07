@@ -175,7 +175,7 @@ patch_all函数则是可以设置需要替换的标准库，并最终达到异�
         return session
 
     async def async_request(session, request_url, params):
-        """Async route engine request"""
+        """Async request"""
         async with session.get(request_url, params=params) as response:
             return await response.json(content_type=None)
 
@@ -191,7 +191,7 @@ patch_all函数则是可以设置需要替换的标准库，并最终达到异�
             for request in batch:
                 task = async_request(session, request['request_url'], request['params'])
                 task_list.append(task)
-            # call route engine asynchronously
+            # Send requests asynchronously
             return loop.run_until_complete(asyncio.gather(*task_list))
         finally:
             loop.run_until_complete(session.close())
@@ -212,7 +212,6 @@ patch_all函数则是可以设置需要替换的标准库，并最终达到异�
     def send(batch_requests):
         task_list = []
         loop = asyncio.new_event_loop()
-        # call route engine asynchronously
         response = loop.run_until_complete(join(batch_requests))
         loop.close()
         return response

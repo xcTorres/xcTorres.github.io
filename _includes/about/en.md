@@ -21,18 +21,29 @@
 
 ### Work Experience
 **Jan 2021 - Present , Singapore**  
-**Senior Data Scientist**   
-- **Map database**
+**Senior Data Scientist**  
 
-- **Device positioning service**
+- **EAT improvement**  
+The project is to improve the ETA prediciton of routing service using drivers' trajectories. First we collect the trajectories, which includes the GPS location, speed, direction and etc. And then we use Hidden Markov algorithm to map the raw GPS point onto the road segments, set the threshold to update the speed of segments,and calculate the speeds according to different way types. After improvement，MAPE of our solution is 26.28% while the MAPE of google is 41.83%.
+<br>
+
+- **Device positioning service**  
+The project is to predict the user location given WIFI macAddress. In the training data, it calculates geoohashes of each WIFI, and group the counts by signal bins under each geohash grid. All of WIFI and according geohash counts are stored in Redis cluster. In order to reduce the memory, we redesign the schema and compress the data, as a result, it saves half memory. In the prediction part, we use Bayesian model. The median of distance difference is 43 meter, and the 90 percentile is 598 meter.
+<br>
+
+- **Map database**  
+MapDB is a database to manage map data, including point(POI), linestring(roads), and polygons(admin division and AOI). Using PostGIS, the database supports spatial query, and join the admin table and other tables in order to add admin division attribute to them.
+<br>
 
 **Jul 2019 - Jan 2021 , Singapore**  
 **Shopee Data Scientist**
 - **Batch assignment project**  
 The batch assignment is used to assign the orders to shippers in global optimization(one shipper is allowed to accept one order only). We use hungarian algorithms and machine learning model(lightGBM) to optimize the assignment. As a result, the mean of single assign successfully rate is increased from 95.29% to 97.15%, the average of assign ignore rate has been reduced from 24.36% to 10%, the average of time from auto-assign to last in-charge has been reduced from 17.05s to 13.75s.  
 <br>
-- **Route engine service**  
-In logistics and assignment business, it is of great importance to have a API service of getting the routing distance between coordinates. Before our own route engine service is born, Shopee uses google map service, but it costs hundreds of thousands of dollars per month. Based on open-source osrm-backend, we provide our own route and table API, which could serve for all of the business that needs to calculate the routing distance and it could save great expense. 
+
+- **Route engine service**    
+In logistics and assignment business, it is of great importance to have a API service of getting the routing distance between coordinates. Before our own route engine service is born, Shopee uses google map service, but it costs hundreds of thousands of dollars per month. Based on open-source data, we provide our own direction and maxtrix API using Contraction Hierarchies algorithm.   
+
 
 **Sep 2018 – Jun 2019 , Wuhan, China**  
 **Huawei Wuhan   Intern**
@@ -45,6 +56,10 @@ In logistics and assignment business, it is of great importance to have a API se
 - Combine the features of POI, passengers, drivers, road, etc. ,and utilize GBDT model to screen out important features, resulting in 10% decrease the MAE of destination deviation.
 
 ---
+
+### Skill  
+**Programming Language:** Python, Java, C++  
+**Other Skills:** Spark, Redis, Airflow
 
 ### Publication  
 
