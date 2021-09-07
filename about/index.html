@@ -329,23 +329,37 @@
 <h3 id="work-experience">Work Experience</h3>
 <p><strong>Jan 2021 - Present , Singapore</strong><br />
 <strong>Senior Data Scientist</strong></p>
+
 <ul>
   <li>
-    <p><strong>Map database</strong></p>
+    <p><strong>EAT improvement</strong><br />
+The project is to improve the ETA prediciton of routing service using drivers’ trajectories. First we collect the trajectories, which includes the GPS location, speed, direction and etc. And then we use Hidden Markov algorithm to map the raw GPS point onto the road segments, set the threshold to update the speed of segments,and calculate the speeds according to different way types. After improvement，MAPE of our solution is 26.28% while the MAPE of google is 41.83%.
+<br /></p>
   </li>
   <li>
-    <p><strong>Device positioning service</strong></p>
+    <p><strong>Device positioning service</strong><br />
+The project is to predict the user location given WIFI macAddress. In the training data, it calculates geoohashes of each WIFI, and group the counts by signal bins under each geohash grid. All of WIFI and according geohash counts are stored in Redis cluster. In order to reduce the memory, we redesign the schema and compress the data, as a result, it saves half memory. In the prediction part, we use Bayesian model. The median of distance difference is 43 meter, and the 90 percentile is 598 meter.
+<br /></p>
+  </li>
+  <li>
+    <p><strong>Map database</strong><br />
+MapDB is a database to manage map data, including point(POI), linestring(roads), and polygons(admin division and AOI). Using PostGIS, the database supports spatial query, and join the admin table and other tables in order to add admin division attribute to them.
+<br /></p>
   </li>
 </ul>
 
 <p><strong>Jul 2019 - Jan 2021 , Singapore</strong><br />
 <strong>Shopee Data Scientist</strong></p>
 <ul>
-  <li><strong>Batch assignment project</strong><br />
+  <li>
+    <p><strong>Batch assignment project</strong><br />
 The batch assignment is used to assign the orders to shippers in global optimization(one shipper is allowed to accept one order only). We use hungarian algorithms and machine learning model(lightGBM) to optimize the assignment. As a result, the mean of single assign successfully rate is increased from 95.29% to 97.15%, the average of assign ignore rate has been reduced from 24.36% to 10%, the average of time from auto-assign to last in-charge has been reduced from 17.05s to 13.75s.<br />
-<br /></li>
-  <li><strong>Route engine service</strong><br />
-In logistics and assignment business, it is of great importance to have a API service of getting the routing distance between coordinates. Before our own route engine service is born, Shopee uses google map service, but it costs hundreds of thousands of dollars per month. Based on open-source osrm-backend, we provide our own route and table API, which could serve for all of the business that needs to calculate the routing distance and it could save great expense.</li>
+<br /></p>
+  </li>
+  <li>
+    <p><strong>Route engine service</strong>  <br />
+In logistics and assignment business, it is of great importance to have a API service of getting the routing distance between coordinates. Before our own route engine service is born, Shopee uses google map service, but it costs hundreds of thousands of dollars per month. Based on open-source data, we provide our own direction and maxtrix API using Contraction Hierarchies algorithm.</p>
+  </li>
 </ul>
 
 <p><strong>Sep 2018 – Jun 2019 , Wuhan, China</strong><br />
@@ -363,6 +377,10 @@ In logistics and assignment business, it is of great importance to have a API se
 </ul>
 
 <hr />
+
+<h3 id="skill">Skill</h3>
+<p><strong>Programming Language:</strong> Python, Java, C++<br />
+<strong>Other Skills:</strong> Spark, Redis, Airflow</p>
 
 <h3 id="publication">Publication</h3>
 
@@ -405,67 +423,67 @@ In logistics and assignment business, it is of great importance to have a API se
         </a>
         
         
-                <a data-sort="0017" 
+                <a data-sort="0018" 
                     href="/archive/?tag=Life"
                     title="Life"
                     rel="4">Life</a>
         
-                <a data-sort="0017" 
+                <a data-sort="0018" 
                     href="/archive/?tag=Python"
                     title="Python"
                     rel="4">Python</a>
         
-                <a data-sort="0017" 
+                <a data-sort="0018" 
                     href="/archive/?tag=algorithms"
                     title="algorithms"
                     rel="4">algorithms</a>
         
-                <a data-sort="0018" 
+                <a data-sort="0019" 
                     href="/archive/?tag=C%2B%2B"
                     title="C++"
                     rel="3">C++</a>
         
-                <a data-sort="0019" 
+                <a data-sort="0020" 
                     href="/archive/?tag=Spark"
                     title="Spark"
                     rel="2">Spark</a>
         
-                <a data-sort="0019" 
+                <a data-sort="0020" 
                     href="/archive/?tag=graph"
                     title="graph"
                     rel="2">graph</a>
         
-                <a data-sort="0020" 
+                <a data-sort="0021" 
                     href="/archive/?tag=Finance"
                     title="Finance"
                     rel="1">Finance</a>
         
-                <a data-sort="0020" 
+                <a data-sort="0021" 
                     href="/archive/?tag=GIS"
                     title="GIS"
                     rel="1">GIS</a>
         
-                <a data-sort="0020" 
+                <a data-sort="0021" 
                     href="/archive/?tag=Linux"
                     title="Linux"
                     rel="1">Linux</a>
         
-                <a data-sort="0020" 
+                <a data-sort="0021" 
                     href="/archive/?tag=Skill"
                     title="Skill"
                     rel="1">Skill</a>
         
-                <a data-sort="0020" 
+                <a data-sort="0021" 
                     href="/archive/?tag=Web"
                     title="Web"
                     rel="1">Web</a>
         
-                <a data-sort="0020" 
+                <a data-sort="0021" 
                     href="/archive/?tag=deep+learning"
                     title="deep learning"
                     rel="1">deep learning</a>
         
-                <a data-sort="0020" 
+                <a data-sort="0021" 
                     href="/archive/?tag=nlp"
                     title="nlp"
                     rel="1">nlp
@@ -526,11 +544,12 @@ In logistics and assignment business, it is of great importance to have a API se
   </li>
   
   
+  
   <li>
-    <a target="_blank" href="https://www.zhihu.com/people/cong-zi-64">
+    <a target="_blank" href="https://space.bilibili.com/337843131">
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa  fa-stack-1x fa-inverse">知</i>
+        <i class="fa fa-stack-1x fa-inverse">bili</i>
       </span>
     </a>
   </li>
@@ -599,6 +618,8 @@ In logistics and assignment business, it is of great importance to have a API se
   
   <li><a href="https://www.cnblogs.com/xiaoqi/">jqpeng的技术记事本</a></li>
   
+  <li><a href="https://draveness.me/">面向信仰编程</a></li>
+  
 </ul>
 
     		</div>
@@ -655,11 +676,12 @@ In logistics and assignment business, it is of great importance to have a API se
   </li>
   
   
+  
   <li>
-    <a target="_blank" href="https://www.zhihu.com/people/cong-zi-64">
+    <a target="_blank" href="https://space.bilibili.com/337843131">
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa  fa-stack-1x fa-inverse">知</i>
+        <i class="fa fa-stack-1x fa-inverse">bili</i>
       </span>
     </a>
   </li>
