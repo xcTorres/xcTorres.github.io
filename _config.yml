@@ -207,6 +207,12 @@ gallery:
     y: 600                  # max height of thumbnails (in pixels)
   # The following options are for individual galleries.
   galleries:
+    lucky:
+      name: "2021/09  Lucky"
+      best_image: 41632047279_.pic_hd.jpg  
+    home:
+      name: "2021/08 Home"
+      best_image: 131632047534_.pic_hd.jpg  
     cats:
       name: "2020/12/31 British Short Hair"
       best_image: 51609562960_.pic_hd.jpg

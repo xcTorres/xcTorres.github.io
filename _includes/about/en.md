@@ -24,11 +24,11 @@
 **Senior Data Scientist**  
 
 - **EAT improvement**  
-The project is to improve the ETA prediciton of routing service using drivers' trajectories. First we collect the trajectories, which includes the GPS location, speed, direction and etc. And then we use Hidden Markov algorithm to map the raw GPS point onto the road segments, set the threshold to update the speed of segments,and calculate the speeds according to different way types. After improvement，MAPE of our solution is 26.28% while the MAPE of google is 41.83%.
+The project is to improve the accuracy of ETA using drivers' trajectories. First We collect the GPS records using Kafka, which includes the GPS location, speed, direction and etc. And It groups the GPS records into trajectory segments by driver ID and time buckets. We snap the raw trajectory segments onto the road links. And then we update the speed for the road links whose count are greater than certain threshold. For the road links whose count are less than the threshold, we update the speed by regions and road types. As a result,
 <br>
 
 - **Device positioning service**  
-The project is to predict the user location given WIFI macAddress. In the training data, it calculates geoohashes of each WIFI, and group the counts by signal bins under each geohash grid. All of WIFI and according geohash counts are stored in Redis cluster. In order to reduce the memory, we redesign the schema and compress the data, as a result, it saves half memory. In the prediction part, we use Bayesian model. The median of distance difference is 43 meter, and the 90 percentile is 598 meter.
+The project is to predict the user location given WIFI macAddress using Bayesian model. In the training data, it calculates geoohashes of each WIFI, and group the counts by signal bins under each geohash grid. All of WIFI and according geohash counts are stored in Redis cluster. In order to reduce the memory, we redesign the schema and compress the data, as a result, it saves the memory from 180GB to 85GB. In the prediction part, we use Bayesian model，and add higher priority to the probability of geohash grid. As a result, the median of distance difference is 43 meter, and the 90 percentile is 598 meter.
 <br>
 
 - **Map database**  
