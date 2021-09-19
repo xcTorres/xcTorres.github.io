@@ -5,14 +5,33 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 07 Sep 2021 10:56:21 +0800</pubDate>
-    <lastBuildDate>Tue, 07 Sep 2021 10:56:21 +0800</lastBuildDate>
+    <pubDate>Sun, 19 Sep 2021 21:57:33 +0800</pubDate>
+    <lastBuildDate>Sun, 19 Sep 2021 21:57:33 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
-        <title>Backend Interview</title>
-        <description>
-&lt;h2 id=&quot;network&quot;&gt;Network&lt;/h2&gt;
+        <title>Machine Learning Interview Questions</title>
+        <description>&lt;ol&gt;
+  &lt;li&gt;Supervised VS unsupervised&lt;/li&gt;
+  &lt;li&gt;Generative and discriminative models&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/amusi/Deep-Learning-Interview-Book&quot;&gt;https://github.com/amusi/Deep-Learning-Interview-Book&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms&quot;&gt;https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 07 Sep 2021 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2021/09/07/machine-learning-interview/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/09/07/machine-learning-interview/</guid>
+        
+        <category>Python</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Backend Interview Questions</title>
+        <description>&lt;h2 id=&quot;network&quot;&gt;Network&lt;/h2&gt;
 &lt;p&gt;网络层
 TCP协议，三次握手四次挥手
 Close_wait and Time_wait
@@ -20,17 +39,29 @@ Http 的Keep-alive
 ICMP协议与Ping命令
 TCP滑动窗口，增加吞吐&lt;/p&gt;
 
-&lt;p&gt;IO多路复用 Epoll
-Redis的应用场景
-Redis回收使用的是什么算法&lt;/p&gt;
-
 &lt;h2 id=&quot;redis&quot;&gt;Redis&lt;/h2&gt;
-&lt;p&gt;String、Hash、List、Set、SortedSet
-https://juejin.cn/post/6844903982066827277&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Data Structure: String、Hash、List、Set、ZSet&lt;/li&gt;
+  &lt;li&gt;skipList and ziplist&lt;/li&gt;
+  &lt;li&gt;Single thread but I/O multiplexing&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;Message queue&lt;/p&gt;
+&lt;h2 id=&quot;kafka&quot;&gt;Kafka&lt;/h2&gt;
 
-&lt;h2 id=&quot;计算机&quot;&gt;计算机&lt;/h2&gt;
+&lt;h2 id=&quot;operation-system&quot;&gt;Operation System&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Difference between process and thread&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.guru99.com/difference-between-multiprocessing-and-multithreading.html&quot;&gt;Difference between multiprocessing and multithreading&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;I/O Bound VS CPU Bound&lt;/li&gt;
+  &lt;li&gt;I/O multiplexing&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;python&quot;&gt;Python&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;What are decorators in Python?&lt;/li&gt;
+  &lt;li&gt;Shallow copy and Deep copy?&lt;/li&gt;
+  &lt;li&gt;What is the difference between xrange and range in Python?&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h2 id=&quot;algorithm&quot;&gt;Algorithm&lt;/h2&gt;
 &lt;p&gt;BloomFilter
@@ -49,9 +80,11 @@ https://github.com/AobingJava/JavaFamily&lt;/p&gt;
 
 &lt;p&gt;https://github.com/DarLiner/Algorithm_Interview_Notes-Chinese&lt;/p&gt;
 </description>
-        <pubDate>Mon, 09 Aug 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/08/09/backend-interview/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/08/09/backend-interview/</guid>
+        <pubDate>Tue, 07 Sep 2021 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2021/09/07/backend-interview/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/09/07/backend-interview/</guid>
+        
+        <category>Python</category>
         
         
       </item>
@@ -1745,94 +1778,6 @@ Configures the number of partitions that are used when shuffling data for joins 
         <category>graph</category>
         
         <category>algorithms</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>2021新年</title>
-        <description>&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
-&lt;p&gt;不知不觉，2020年都过完了。这一年因为疫情的影响，没有什么旅行和活动，主要的精力都聚焦在提升自己的工作能力和培养良好的习惯。能够持续性地学习专业、工作相关的知识，有规律的健身，持续性的撰写博客，英语有了比较明显的进步，这四点感觉是自己整个2020年最大的财富~&lt;/p&gt;
-
-&lt;h1 id=&quot;flag&quot;&gt;Flag&lt;/h1&gt;
-&lt;p&gt;回顾2020，2019写的新年展望博客有很多未完成的愿望，感觉很重要的一个原因是因为根本没有量化。今年写的展望得少写点哈哈，再加一些量化指标，不整虚头巴脑的。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;当一个合格的铲屎官&lt;/strong&gt; &lt;br /&gt;
-马上也是要当铲屎官的人了，第一个愿望就是以后能做一个负责任的养猫人。学会使用iMovie剪辑一些视频，当一个宠物区up主。以后有能力的话再上传一些日常学习编程以及英语的视频，扩展成为一个兼宠物区、学习区的up主。&lt;br /&gt;
-&lt;br /&gt;
-量化指标：假设保守估计每两周更新一次自己能力范围内的高质量视频，就得更新52/2=26个视频，fans数量暂时不做额外要求。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;养成一个读书的习惯&lt;/strong&gt; &lt;br /&gt;
-这个Flag不知道立了几年了，一直没能养成习惯，势必今年要拿下这个Flag。博客专区专门开了个Book系列，记录一些读书笔记，并激励自己多读书、读好书。&lt;br /&gt;
-&lt;br /&gt;
-量化指标：认真读完30本书，并更新读书笔记。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;养成一个吃早饭的习惯&lt;/strong&gt;&lt;br /&gt;
-虽然有锻炼，午饭和晚饭吃的都挺不错。但是从来不吃早饭的习惯一定要改。
-&lt;br /&gt;
-量化指标：坚持吃早饭。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;提升英语能力&lt;/strong&gt;
-每周听一个Ted演讲。总结一些工作中常用的词汇与搭配。&lt;br /&gt;
-每两日听同一个短听力，并尝试默写内容&lt;br /&gt;
-&lt;br /&gt;
-量化指标：52个Ted或类似长视频。 150+短听力训练。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;持续性建设自己的博客内容&lt;/strong&gt; &lt;br /&gt;
-将其作为自己一个人生的记录，决不能停更。博客中的质量和细节都尽量做到最好，包括排版，格式，错别字之类。&lt;br /&gt;
-&lt;br /&gt;
-量化指标：无需追求博客数量，只追求质量。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;提升刷题能力&lt;/strong&gt; &lt;br /&gt;
-刷题是一个程序员的基本素养😝。其实工作这一年多来，也刷了不少题目。现在回头看来，能力是应该有所提升的，面试的时候给候选人出题也算得心应手。但是感觉还是缺乏系统性，效率不够高。1道，1道地去刷题过一段时间感觉很容易遗忘，新的目标是将博客中的Leetcode题海战术改为归纳系列。给每一系列添加详细的分析，讲解，去追求质量；而不是追求数量，刷了多少多少道题目。
-&lt;br /&gt;&lt;br /&gt;
-量化指标：同上，无需追求系列数量，只追求质量。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;阅读源码&lt;/strong&gt;  &lt;br /&gt;
-不同于提升刷题能力，这个不是单纯的数据结构和算法，是同时包含算法，设计模式，系统架构的一个宏观把握。
-&lt;br /&gt;&lt;br /&gt;
-量化指标：可以多看些Python的源码库，一个月1个的话就是12个；C++的源码库暂时就继续看OSRM-backend这一个就好了。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;提升理财能力&lt;/strong&gt;&lt;br /&gt;
-了解一些股票，基金的知识。在了解清楚的情况下，选择一个基金定投。除了自己公司发股票分红，其他股票目前一律不碰。
-&lt;br /&gt;
-量化指标：基金定投&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 01 Jan 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/01/01/new-year-life/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/01/01/new-year-life/</guid>
-        
-        <category>Life</category>
         
         
       </item>
