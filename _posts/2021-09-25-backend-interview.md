@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Backend Interview Questions"
-date:       2021-09-07
+date:       2021-09-25
 author:     "xcTorres"
 header-img: "img/in-post/python-logo.png"
 catalog:    true
@@ -9,12 +9,12 @@ tags:
     - Python
 ---  
 ## Network
-网络层
-TCP协议，三次握手四次挥手
-Close_wait and Time_wait
-Http 的Keep-alive
-ICMP协议与Ping命令
-TCP滑动窗口，增加吞吐
+1. 网络层
+2. TCP协议，三次握手四次挥手
+3. Close_wait and Time_wait
+4. Http 的Keep-alive
+5. ICMP协议与Ping命令
+6. TCP滑动窗口，增加吞吐
 
 
 ## Redis  
@@ -44,16 +44,11 @@ LRU Algorithm
 
 
 
-## Reference  
-[CS-144](https://www.bilibili.com/video/BV137411Z7LR)
+# Reference  
+[CS-144](https://www.bilibili.com/video/BV137411Z7LR)  
 [腾讯linux C++后台开发面试题](https://zhuanlan.zhihu.com/p/103027724)  
-https://github.com/AobingJava/JavaFamily
-
-https://github.com/Snailclimb/JavaGuide
-
-https://zhuanlan.zhihu.com/p/224595048
-
-https://notes.shichao.io/unp/ch6/
-
-
-https://github.com/DarLiner/Algorithm_Interview_Notes-Chinese
+[https://github.com/AobingJava/JavaFamily](https://github.com/AobingJava/JavaFamily)  
+[https://github.com/Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide)  
+[https://zhuanlan.zhihu.com/p/224595048](https://github.com/Snailclimb/JavaGuide)  
+[https://notes.shichao.io/unp/ch6/](https://github.com/Snailclimb/JavaGuide)  
+[https://github.com/DarLiner/Algorithm_Interview_Notes-Chinese](https://github.com/DarLiner/Algorithm_Interview_Notes-Chinese)  
