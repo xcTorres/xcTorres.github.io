@@ -11,19 +11,20 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Backend Interview Questions - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="Machine Learning Interview Questions - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="Network
-网络层
-TCP协议，三次握手四次挥手
-Close_wait and Time_wait
-Http 的Keep-alive
-ICMP协议与Ping命令
-TCP滑动窗口，增加吞吐
-">
+    <meta property="og:description" content="
+  Supervised VS Unsupervised
+  Generative and Discriminative Models
+  What is naive in Bayesian Model
+  Logistic Regression Model
+  Support Vector Machine
+  CART Tree
+  GBDT VS Random Forest
+  Xgb...">
     
-    <meta property="article:published_time" content="2021-09-07T00:00:00Z">
+    <meta property="article:published_time" content="2021-09-25T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
@@ -33,10 +34,10 @@ TCP滑动窗口，增加吞吐
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2021/09/07/backend-interview/">
+    <meta property="og:url" content="https://xctorres.github.io//2021/09/25/machine-learning-interview/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>Backend Interview Questions - 谢聪博客 | xcTorres Blog</title>
+    <title>Machine Learning Interview Questions - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -45,7 +46,7 @@ TCP滑动窗口，增加吞吐
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2021/09/07/backend-interview/">
+    <link rel="canonical" href="https://xctorres.github.io//2021/09/25/machine-learning-interview/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -243,7 +244,7 @@ TCP滑动窗口，增加吞吐
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/in-post/python-logo.png" width="0" height="0"> -->
+<!-- <img src="/img/in-post/machine-learning.jpeg" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -252,7 +253,7 @@ TCP滑动窗口，增加吞吐
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/in-post/python-logo.png');
+        background-image: url('/img/in-post/machine-learning.jpeg');
         background: ;
     }
 
@@ -272,10 +273,10 @@ TCP滑动窗口，增加吞吐
                         <a class="tag" href="/archive/?tag=Python" title="Python">Python</a>
                         
                     </div>
-                    <h1>Backend Interview Questions</h1>
+                    <h1>Machine Learning Interview Questions</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on September 7, 2021</span>
+                    <span class="meta">Posted by xcTorres on September 25, 2021</span>
                 </div>
             </div>
         </div>
@@ -301,73 +302,42 @@ TCP滑动窗口，增加吞吐
                 <!-- Multi-Lingual -->
                 
 
-				<h2 id="network">Network</h2>
-<p>网络层
-TCP协议，三次握手四次挥手
-Close_wait and Time_wait
-Http 的Keep-alive
-ICMP协议与Ping命令
-TCP滑动窗口，增加吞吐</p>
-
-<h2 id="redis">Redis</h2>
-<ol>
-  <li>Data Structure: String、Hash、List、Set、ZSet</li>
-  <li>skipList and ziplist</li>
-  <li>Single thread but I/O multiplexing</li>
+				<ol>
+  <li>Supervised VS Unsupervised</li>
+  <li>Generative and Discriminative Models</li>
+  <li>What is naive in Bayesian Model</li>
+  <li><a href="https://zhuanlan.zhihu.com/p/74874291">Logistic Regression Model</a></li>
+  <li>Support Vector Machine</li>
+  <li><a href="https://towardsdatascience.com/cart-classification-and-regression-trees-for-clean-but-powerful-models-cc89e60b7a85">CART Tree</a></li>
+  <li>GBDT VS Random Forest</li>
+  <li>Xgboost</li>
+  <li>Overfit</li>
+  <li>Condition Random Field</li>
+  <li>Hidden Markov Model</li>
+  <li>TF-IDF、Edit Distance</li>
+  <li>Word2vec</li>
+  <li><a href="https://towardsdatascience.com/probability-concepts-explained-maximum-likelihood-estimation-c7b4342fdbb1">Maximum Likelihood Estimation</a></li>
+  <li>Regularization, L1 and L2</li>
+  <li><a href="https://www.cnblogs.com/pinard/p/6093948.html">Maximum Entropy Model</a></li>
+  <li>Factorization Machine, Field-aware Factorization Machine</li>
+  <li><a href="https://arxiv.org/abs/1703.04247">DeepFM</a></li>
 </ol>
-
-<h2 id="kafka">Kafka</h2>
-
-<h2 id="operation-system">Operation System</h2>
-<ol>
-  <li>Difference between process and thread</li>
-  <li><a href="https://www.guru99.com/difference-between-multiprocessing-and-multithreading.html">Difference between multiprocessing and multithreading</a></li>
-  <li>I/O Bound VS CPU Bound</li>
-  <li>I/O multiplexing</li>
-</ol>
-
-<h2 id="python">Python</h2>
-<ol>
-  <li>What are decorators in Python?</li>
-  <li>Shallow copy and Deep copy?</li>
-  <li>What is the difference between xrange and range in Python?</li>
-</ol>
-
-<h2 id="algorithm">Algorithm</h2>
-<p>BloomFilter
-LRU Algorithm</p>
 
 <h2 id="reference">Reference</h2>
-<p><a href="https://www.bilibili.com/video/BV137411Z7LR">CS-144</a>
-<a href="https://zhuanlan.zhihu.com/p/103027724">腾讯linux C++后台开发面试题</a><br />
-https://github.com/AobingJava/JavaFamily</p>
-
-<p>https://github.com/Snailclimb/JavaGuide</p>
-
-<p>https://zhuanlan.zhihu.com/p/224595048</p>
-
-<p>https://notes.shichao.io/unp/ch6/</p>
-
-<p>https://github.com/DarLiner/Algorithm_Interview_Notes-Chinese</p>
+<p><a href="https://github.com/amusi/Deep-Learning-Interview-Book">https://github.com/amusi/Deep-Learning-Interview-Book</a><br />
+<a href="https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms">https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms</a></p>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2021/07/25/dijkstra/" data-toggle="tooltip" data-placement="top" title="Dijkstra 算法">
+                        <a href="/2021/09/25/backend-interview/" data-toggle="tooltip" data-placement="top" title="Backend Interview Questions">
                         Previous<br>
-                        <span>Dijkstra 算法</span>
+                        <span>Backend Interview Questions</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2021/09/07/machine-learning-interview/" data-toggle="tooltip" data-placement="top" title="Machine Learning Interview Questions">
-                        Next<br>
-                        <span>Machine Learning Interview Questions</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -603,7 +573,7 @@ https://github.com/AobingJava/JavaFamily</p>
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2021/09/07/backend-interview",
+		id: "/2021/09/25/machine-learning-interview",
 		
 		});
 		gitalk.render('gitalk-container'); 

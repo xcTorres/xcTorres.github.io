@@ -11,29 +11,33 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Machine Learning Interview Questions - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="Linked List - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="
-  Supervised VS unsupervised
-  Generative and discriminative models
+    <meta property="og:description" content="Easy
 
-">
+  Merge Two Sorted Lists
+  Remove Duplicates from Sorted List
+  Linked List Cycle
+  Intersection of Two Linked Lists
+  Remove Linked List Elements
+  Reverse Linked List
+  Palindrome Linked Li...">
     
-    <meta property="article:published_time" content="2021-09-07T00:00:00Z">
+    <meta property="article:published_time" content="2021-09-25T21:44:17Z">
     
     
     <meta property="article:author" content="xcTorres">
     
     
-    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Leetcode">
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2021/09/07/machine-learning-interview/">
+    <meta property="og:url" content="https://xctorres.github.io//leetcode/2.%20Linkded%20List/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>Machine Learning Interview Questions - 谢聪博客 | xcTorres Blog</title>
+    <title>Linked List - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -42,7 +46,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2021/09/07/machine-learning-interview/">
+    <link rel="canonical" href="https://xctorres.github.io//leetcode/2.%20Linkded%20List/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -240,7 +244,7 @@
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/in-post/python-logo.png" width="0" height="0"> -->
+<!-- <img src="/img/leetcode.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -249,7 +253,7 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/in-post/python-logo.png');
+        background-image: url('/img/leetcode.jpg');
         background: ;
     }
 
@@ -266,13 +270,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Python" title="Python">Python</a>
+                        <a class="tag" href="/archive/?tag=Leetcode" title="Leetcode">Leetcode</a>
                         
                     </div>
-                    <h1>Machine Learning Interview Questions</h1>
+                    <h1>Linked List</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on September 7, 2021</span>
+                    <span class="meta">Posted by xcTorres on September 25, 2021</span>
                 </div>
             </div>
         </div>
@@ -298,23 +302,30 @@
                 <!-- Multi-Lingual -->
                 
 
-				<ol>
-  <li>Supervised VS unsupervised</li>
-  <li>Generative and discriminative models</li>
+				<h2 id="easy">Easy</h2>
+<ol>
+  <li>Merge Two Sorted Lists</li>
+  <li>Remove Duplicates from Sorted List</li>
+  <li>Linked List Cycle</li>
+  <li>Intersection of Two Linked Lists</li>
+  <li>Remove Linked List Elements</li>
+  <li>Reverse Linked List</li>
+  <li>Palindrome Linked List*</li>
+  <li>Middle of the Linked List</li>
 </ol>
 
-<h2 id="reference">Reference</h2>
-<p><a href="https://github.com/amusi/Deep-Learning-Interview-Book">https://github.com/amusi/Deep-Learning-Interview-Book</a><br />
-<a href="https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms">https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms</a></p>
+<h2 id="medium">Medium</h2>
+
+<h2 id="hard">Hard</h2>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2021/09/07/backend-interview/" data-toggle="tooltip" data-placement="top" title="Backend Interview Questions">
+                        <a href="/leetcode/1.%20Binary%20Tree/" data-toggle="tooltip" data-placement="top" title="Binary Tree Series">
                         Previous<br>
-                        <span>Backend Interview Questions</span>
+                        <span>Binary Tree Series</span>
                         </a>
                     </li>
                     
@@ -514,6 +525,54 @@
 
 <!-- add support for mathjax by voleking-->
 
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
 
 
 
@@ -553,7 +612,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2021/09/07/machine-learning-interview",
+		id: "/leetcode/2. Linkded List",
 		
 		});
 		gitalk.render('gitalk-container'); 

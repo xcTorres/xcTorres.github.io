@@ -5,24 +5,40 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 19 Sep 2021 21:57:33 +0800</pubDate>
-    <lastBuildDate>Sun, 19 Sep 2021 21:57:33 +0800</lastBuildDate>
+    <pubDate>Sat, 25 Sep 2021 21:44:17 +0800</pubDate>
+    <lastBuildDate>Sat, 25 Sep 2021 21:44:17 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>Machine Learning Interview Questions</title>
         <description>&lt;ol&gt;
-  &lt;li&gt;Supervised VS unsupervised&lt;/li&gt;
-  &lt;li&gt;Generative and discriminative models&lt;/li&gt;
+  &lt;li&gt;Supervised VS Unsupervised&lt;/li&gt;
+  &lt;li&gt;Generative and Discriminative Models&lt;/li&gt;
+  &lt;li&gt;What is naive in Bayesian Model&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/74874291&quot;&gt;Logistic Regression Model&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Support Vector Machine&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://towardsdatascience.com/cart-classification-and-regression-trees-for-clean-but-powerful-models-cc89e60b7a85&quot;&gt;CART Tree&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;GBDT VS Random Forest&lt;/li&gt;
+  &lt;li&gt;Xgboost&lt;/li&gt;
+  &lt;li&gt;Overfit&lt;/li&gt;
+  &lt;li&gt;Condition Random Field&lt;/li&gt;
+  &lt;li&gt;Hidden Markov Model&lt;/li&gt;
+  &lt;li&gt;TF-IDF、Edit Distance&lt;/li&gt;
+  &lt;li&gt;Word2vec&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://towardsdatascience.com/probability-concepts-explained-maximum-likelihood-estimation-c7b4342fdbb1&quot;&gt;Maximum Likelihood Estimation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Regularization, L1 and L2&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/pinard/p/6093948.html&quot;&gt;Maximum Entropy Model&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Factorization Machine, Field-aware Factorization Machine&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1703.04247&quot;&gt;DeepFM&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/amusi/Deep-Learning-Interview-Book&quot;&gt;https://github.com/amusi/Deep-Learning-Interview-Book&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms&quot;&gt;https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 07 Sep 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/09/07/machine-learning-interview/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/09/07/machine-learning-interview/</guid>
+        <pubDate>Sat, 25 Sep 2021 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2021/09/25/machine-learning-interview/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/09/25/machine-learning-interview/</guid>
         
         <category>Python</category>
         
@@ -32,12 +48,14 @@
       <item>
         <title>Backend Interview Questions</title>
         <description>&lt;h2 id=&quot;network&quot;&gt;Network&lt;/h2&gt;
-&lt;p&gt;网络层
-TCP协议，三次握手四次挥手
-Close_wait and Time_wait
-Http 的Keep-alive
-ICMP协议与Ping命令
-TCP滑动窗口，增加吞吐&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;网络层&lt;/li&gt;
+  &lt;li&gt;TCP协议，三次握手四次挥手&lt;/li&gt;
+  &lt;li&gt;Close_wait and Time_wait&lt;/li&gt;
+  &lt;li&gt;Http 的Keep-alive&lt;/li&gt;
+  &lt;li&gt;ICMP协议与Ping命令&lt;/li&gt;
+  &lt;li&gt;TCP滑动窗口，增加吞吐&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h2 id=&quot;redis&quot;&gt;Redis&lt;/h2&gt;
 &lt;ol&gt;
@@ -67,22 +85,18 @@ TCP滑动窗口，增加吞吐&lt;/p&gt;
 &lt;p&gt;BloomFilter
 LRU Algorithm&lt;/p&gt;
 
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV137411Z7LR&quot;&gt;CS-144&lt;/a&gt;
+&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV137411Z7LR&quot;&gt;CS-144&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/103027724&quot;&gt;腾讯linux C++后台开发面试题&lt;/a&gt;&lt;br /&gt;
-https://github.com/AobingJava/JavaFamily&lt;/p&gt;
-
-&lt;p&gt;https://github.com/Snailclimb/JavaGuide&lt;/p&gt;
-
-&lt;p&gt;https://zhuanlan.zhihu.com/p/224595048&lt;/p&gt;
-
-&lt;p&gt;https://notes.shichao.io/unp/ch6/&lt;/p&gt;
-
-&lt;p&gt;https://github.com/DarLiner/Algorithm_Interview_Notes-Chinese&lt;/p&gt;
+&lt;a href=&quot;https://github.com/AobingJava/JavaFamily&quot;&gt;https://github.com/AobingJava/JavaFamily&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/Snailclimb/JavaGuide&quot;&gt;https://github.com/Snailclimb/JavaGuide&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/Snailclimb/JavaGuide&quot;&gt;https://zhuanlan.zhihu.com/p/224595048&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/Snailclimb/JavaGuide&quot;&gt;https://notes.shichao.io/unp/ch6/&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/DarLiner/Algorithm_Interview_Notes-Chinese&quot;&gt;https://github.com/DarLiner/Algorithm_Interview_Notes-Chinese&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 07 Sep 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/09/07/backend-interview/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/09/07/backend-interview/</guid>
+        <pubDate>Sat, 25 Sep 2021 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2021/09/25/backend-interview/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/09/25/backend-interview/</guid>
         
         <category>Python</category>
         
