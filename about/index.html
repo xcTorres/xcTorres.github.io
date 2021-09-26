@@ -284,18 +284,46 @@
   <li>Email：xcwhu2016@gmail.com</li>
   <li>Wechat：xc_19931112</li>
   <li>Instagram：xctorres8</li>
+  <li><a href="https://www.linkedin.com/in/chong-xie-545830157/">LinkedIn</a></li>
 </ul>
+
+<h3 id="work-experience">Work Experience</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Jan 2021 - Present, Singapore</td>
+      <td>Shopee</td>
+      <td>Senior Data Scientist</td>
+    </tr>
+    <tr>
+      <td>Jul 2019 - Jan 2021, Singapore</td>
+      <td>Shopee</td>
+      <td>Data Scientist</td>
+    </tr>
+    <tr>
+      <td>Sep 2018 – Jun 2019, Wuhan, China</td>
+      <td>Huawei</td>
+      <td>Intern</td>
+    </tr>
+    <tr>
+      <td>Jun 2018 – Sep 2018</td>
+      <td>DiDi</td>
+      <td>Intern</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="education">Education</h3>
 
 <table>
   <tbody>
     <tr>
-      <td>Master’s degree, Geographic Information Science and Cartography<br />Wuhan University, China</td>
+      <td>Master’s degree<br />Geographic Information Science and Cartography<br />Wuhan University, China</td>
       <td>Sep 2016 – Jun 2019</td>
     </tr>
     <tr>
-      <td>Bachelor’s degree, Photogrammetry and Remote Sensing <br />Wuhan University, China</td>
+      <td>Bachelor’s degree<br />Photogrammetry and Remote Sensing <br />Wuhan University, China</td>
       <td>Sep 2012 – Jun 2016</td>
     </tr>
   </tbody>
@@ -318,61 +346,12 @@
   </tbody>
 </table>
 
-<h3 id="work-experience">Work Experience</h3>
-<p><strong>Jan 2021 - Present , Singapore</strong><br />
-<strong>Senior Data Scientist</strong></p>
-
-<ul>
-  <li>
-    <p><strong>EAT improvement</strong><br />
-The project is to improve the accuracy of ETA using drivers’ trajectories. First We collect the GPS records using Kafka, which includes the GPS location, speed, direction and etc. And It groups the GPS records into trajectory segments by driver ID and time buckets. We snap the raw trajectory segments onto the road links. And then we update the speed for the road links whose count are greater than certain threshold. For the road links whose count are less than the threshold, we update the speed by regions and road types. As a result,
-<br /></p>
-  </li>
-  <li>
-    <p><strong>Device positioning service</strong><br />
-The project is to predict the user location given WIFI macAddress using Bayesian model. In the training data, it calculates geoohashes of each WIFI, and group the counts by signal bins under each geohash grid. All of WIFI and according geohash counts are stored in Redis cluster. In order to reduce the memory, we redesign the schema and compress the data, as a result, it saves the memory from 180GB to 85GB. In the prediction part, we use Bayesian model，and add higher priority to the probability of geohash grid. As a result, the median of distance difference is 43 meter, and the 90 percentile is 598 meter.
-<br /></p>
-  </li>
-  <li>
-    <p><strong>Map database</strong><br />
-MapDB is a database to manage map data, including point(POI), linestring(roads), and polygons(admin division and AOI). Using PostGIS, the database supports spatial query, and join the admin table and other tables in order to add admin division attribute to them.
-<br /></p>
-  </li>
-</ul>
-
-<p><strong>Jul 2019 - Jan 2021 , Singapore</strong><br />
-<strong>Shopee Data Scientist</strong></p>
-<ul>
-  <li>
-    <p><strong>Batch assignment project</strong><br />
-The batch assignment is used to assign the orders to shippers in global optimization(one shipper is allowed to accept one order only). We use hungarian algorithms and machine learning model(lightGBM) to optimize the assignment. As a result, the mean of single assign successfully rate is increased from 95.29% to 97.15%, the average of assign ignore rate has been reduced from 24.36% to 10%, the average of time from auto-assign to last in-charge has been reduced from 17.05s to 13.75s.<br />
-<br /></p>
-  </li>
-  <li>
-    <p><strong>Route engine service</strong>  <br />
-In logistics and assignment business, it is of great importance to have a API service of getting the routing distance between coordinates. Before our own route engine service is born, Shopee uses google map service, but it costs hundreds of thousands of dollars per month. Based on open-source data, we provide our own direction and maxtrix API using Contraction Hierarchies algorithm.</p>
-  </li>
-</ul>
-
-<p><strong>Sep 2018 – Jun 2019 , Wuhan, China</strong><br />
-<strong>Huawei Wuhan   Intern</strong></p>
-<ul>
-  <li>Participate in developing a spatio-temporal database system based on HBase, which is an innovative project of Huawei in the field of IoT.</li>
-  <li>Design the spatio-temporal index and improve the performance of range query and k-NN query, making the average query time under 100 ms.</li>
-</ul>
-
-<p><strong>Jun 2018 – Sep 2018 , Beijing, China</strong><br />
-<strong>DiDi   Intern</strong></p>
-<ul>
-  <li>Participate in utilizing the machine learning model to provide the appropriate drop-off point for the destination, saving passenger’s time and walking cost.</li>
-  <li>Combine the features of POI, passengers, drivers, road, etc. ,and utilize GBDT model to screen out important features, resulting in 10% decrease the MAE of destination deviation.</li>
-</ul>
-
 <hr />
 
 <h3 id="skill">Skill</h3>
 <p><strong>Programming Language:</strong> Python, Java, C++<br />
-<strong>Other Skills:</strong> Spark, Redis, Airflow</p>
+<strong>Machine Learning</strong>: GBDT, Pytorch<br />
+<strong>Other Skills:</strong> Spark, Redis, Postgres</p>
 
 <h3 id="publication">Publication</h3>
 
