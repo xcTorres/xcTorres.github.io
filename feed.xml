@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 26 Sep 2021 17:14:17 +0800</pubDate>
-    <lastBuildDate>Sun, 26 Sep 2021 17:14:17 +0800</lastBuildDate>
+    <pubDate>Fri, 01 Oct 2021 01:17:58 +0800</pubDate>
+    <lastBuildDate>Fri, 01 Oct 2021 01:17:58 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -30,6 +30,7 @@
   &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/pinard/p/6093948.html&quot;&gt;Maximum Entropy Model&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Factorization Machine, Field-aware Factorization Machine&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1703.04247&quot;&gt;DeepFM&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.eecs.qmul.ac.uk/~norman/BBNs/Independence_and_conditional_independence.htm&quot;&gt;Independent &amp;amp; Conditional Independent&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
@@ -40,38 +41,29 @@
         <link>https://xctorres.github.io//2021/09/25/machine-learning-interview/</link>
         <guid isPermaLink="true">https://xctorres.github.io//2021/09/25/machine-learning-interview/</guid>
         
-        <category>Python</category>
+        <category>Interview</category>
         
         
       </item>
     
       <item>
         <title>Backend Interview Questions</title>
-        <description>&lt;h2 id=&quot;network&quot;&gt;Network&lt;/h2&gt;
-&lt;ol&gt;
+        <description>&lt;ol&gt;
   &lt;li&gt;网络层&lt;/li&gt;
   &lt;li&gt;TCP协议，三次握手四次挥手&lt;/li&gt;
   &lt;li&gt;Close_wait and Time_wait&lt;/li&gt;
   &lt;li&gt;Http 的Keep-alive&lt;/li&gt;
   &lt;li&gt;ICMP协议与Ping命令&lt;/li&gt;
   &lt;li&gt;TCP滑动窗口，增加吞吐&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;redis&quot;&gt;Redis&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;Data Structure: String、Hash、List、Set、ZSet&lt;/li&gt;
-  &lt;li&gt;skipList and ziplist&lt;/li&gt;
+  &lt;li&gt;Redis Data Structure: String、Hash、List、Set、ZSet&lt;/li&gt;
+  &lt;li&gt;RedisskipList and ziplist&lt;/li&gt;
   &lt;li&gt;Single thread but I/O multiplexing&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;kafka&quot;&gt;Kafka&lt;/h2&gt;
-
-&lt;h2 id=&quot;operation-system&quot;&gt;Operation System&lt;/h2&gt;
-&lt;ol&gt;
   &lt;li&gt;Difference between process and thread&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.guru99.com/difference-between-multiprocessing-and-multithreading.html&quot;&gt;Difference between multiprocessing and multithreading&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;I/O Bound VS CPU Bound&lt;/li&gt;
   &lt;li&gt;I/O multiplexing&lt;/li&gt;
+  &lt;li&gt;BloomFilter&lt;/li&gt;
+  &lt;li&gt;LRU Algorithm&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;python&quot;&gt;Python&lt;/h2&gt;
@@ -80,10 +72,6 @@
   &lt;li&gt;Shallow copy and Deep copy?&lt;/li&gt;
   &lt;li&gt;What is the difference between xrange and range in Python?&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;h2 id=&quot;algorithm&quot;&gt;Algorithm&lt;/h2&gt;
-&lt;p&gt;BloomFilter
-LRU Algorithm&lt;/p&gt;
 
 &lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV137411Z7LR&quot;&gt;CS-144&lt;/a&gt;&lt;br /&gt;
@@ -98,7 +86,7 @@ LRU Algorithm&lt;/p&gt;
         <link>https://xctorres.github.io//2021/09/25/backend-interview/</link>
         <guid isPermaLink="true">https://xctorres.github.io//2021/09/25/backend-interview/</guid>
         
-        <category>Python</category>
+        <category>Interview</category>
         
         
       </item>
