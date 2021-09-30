@@ -28,7 +28,7 @@ The project is to improve the accuracy of ETA using drivers' trajectories. First
 <br>
 
 - **Device positioning service**  
-The project is to predict the user location given WIFI macAddress using Bayesian model. In the training data, it calculates geoohashes of each WIFI, and group the counts by signal bins under each geohash grid. All of WIFI and according geohash counts are stored in Redis cluster. In order to reduce the memory, we redesign the schema and compress the data, as a result, it saves the memory from 180GB to 85GB. In the prediction part, we use Bayesian model，and add higher priority to the probability of geohash grid. As a result, the median of distance difference is 43 meter, and the 90 percentile is 598 meter.
+The project is to predict the user location given WIFI macAddress using Bayesian model. In the training data, it calculates geoohashes of each WIFI, and group the counts by signal bins under each geohash grid. All of WIFI and according geohash counts are stored in Redis cluster. In order to reduce the memory, we redesign the schema and compress the data, as a result, it saves half memory. In the prediction part, we use Bayesian model，and add higher priority to the probability of geohash grid. As a result, the median of distance difference is 43 meter, and the 90 percentile is 598 meter.
 <br>
 
 - **Map database**  
@@ -42,7 +42,7 @@ The batch assignment is used to assign the orders to shippers in global optimiza
 <br>
 
 - **Route engine service**    
-In logistics and assignment business, it is of great importance to have a API service of getting the routing distance between coordinates. Before our own route engine service is born, Shopee uses google map service, but it costs hundreds of thousands of dollars per month. Based on open-source data, we provide our own direction and maxtrix API using Contraction Hierarchies algorithm.   
+In logistics and assignment business, it is of great importance to have a API service of getting the routing distance between coordinates. Before our own route engine service is born, Shopee uses google map service, but it costs hundreds of thousands of dollars per month. Based on open-source data, we provide our own direction and matrix API using Contraction Hierarchies algorithm.   
 
 
 **Sep 2018 – Jun 2019 , Wuhan, China**  

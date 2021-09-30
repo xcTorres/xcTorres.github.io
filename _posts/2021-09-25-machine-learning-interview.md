@@ -6,7 +6,7 @@ author:     "xcTorres"
 header-img: "img/in-post/machine-learning.jpeg"
 catalog:    true
 tags:
-    - Python
+    - Interview
 ---  
 
 1. Supervised VS Unsupervised   
@@ -26,7 +26,8 @@ tags:
 15. Regularization, L1 and L2  
 16. [Maximum Entropy Model](https://www.cnblogs.com/pinard/p/6093948.html)  
 17. Factorization Machine, Field-aware Factorization Machine  
-18. [DeepFM](https://arxiv.org/abs/1703.04247) 
+18. [DeepFM](https://arxiv.org/abs/1703.04247)  
+19. [Independent & Conditional Independent](https://www.eecs.qmul.ac.uk/~norman/BBNs/Independence_and_conditional_independence.htm)
 
 
 

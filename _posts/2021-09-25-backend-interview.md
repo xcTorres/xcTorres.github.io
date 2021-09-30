@@ -6,42 +6,29 @@ author:     "xcTorres"
 header-img: "img/in-post/python-logo.png"
 catalog:    true
 tags:
-    - Python
+    - Interview
 ---  
-## Network
+
 1. 网络层
 2. TCP协议，三次握手四次挥手
 3. Close_wait and Time_wait
 4. Http 的Keep-alive
 5. ICMP协议与Ping命令
 6. TCP滑动窗口，增加吞吐
-
-
-## Redis  
-1. Data Structure: String、Hash、List、Set、ZSet  
-2. skipList and ziplist
-3. Single thread but I/O multiplexing
-
-## Kafka
-
-
-
-## Operation System
-1. Difference between process and thread  
-2. [Difference between multiprocessing and multithreading](https://www.guru99.com/difference-between-multiprocessing-and-multithreading.html)  
-3. I/O Bound VS CPU Bound  
-4. I/O multiplexing
+7. Redis Data Structure: String、Hash、List、Set、ZSet  
+8. RedisskipList and ziplist
+9. Single thread but I/O multiplexing
+10. Difference between process and thread  
+11. [Difference between multiprocessing and multithreading](https://www.guru99.com/difference-between-multiprocessing-and-multithreading.html)  
+12. I/O Bound VS CPU Bound  
+13. I/O multiplexing
+14. BloomFilter
+15. LRU Algorithm
 
 ## Python  
 1. What are decorators in Python?
 2. Shallow copy and Deep copy?  
 3. What is the difference between xrange and range in Python?
-
-
-## Algorithm
-BloomFilter
-LRU Algorithm
-
 
 
 # Reference  
