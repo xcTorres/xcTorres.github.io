@@ -5,21 +5,21 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 03 Oct 2021 23:21:20 +0800</pubDate>
-    <lastBuildDate>Sun, 03 Oct 2021 23:21:20 +0800</lastBuildDate>
+    <pubDate>Mon, 04 Oct 2021 01:12:01 +0800</pubDate>
+    <lastBuildDate>Mon, 04 Oct 2021 01:12:01 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>中国象棋</title>
         <description>&lt;p&gt;从小有跟着在路边摊下下象棋，不过一直下的都是散手棋。现在打算按照体系自己重新自学，提升象棋水平。&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;目前水平是天天象棋4-3水平(2021年10月3日)。
-    &lt;h1 id=&quot;开局&quot;&gt;开局&lt;/h1&gt;
-    &lt;h4 id=&quot;中炮屏风马平炮对车&quot;&gt;中炮屏风马平炮对车&lt;/h4&gt;
-    &lt;p&gt;&lt;a href=&quot;https://www.xiangqiqipu.com/Category/View-4655.html&quot;&gt;急进中兵系列&lt;/a&gt;&lt;/p&gt;
-    &lt;h1 id=&quot;中局&quot;&gt;中局&lt;/h1&gt;
-  &lt;/li&gt;
+  &lt;li&gt;目前水平是天天象棋4-3水平(2021年10月3日)。&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h1 id=&quot;开局&quot;&gt;开局&lt;/h1&gt;
+&lt;h4 id=&quot;中炮屏风马平炮对车&quot;&gt;中炮屏风马平炮对车&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.xiangqiqipu.com/Category/View-4655.html&quot;&gt;急进中兵系列&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;中局&quot;&gt;中局&lt;/h1&gt;
 
 &lt;h1 id=&quot;残局&quot;&gt;残局&lt;/h1&gt;
 
@@ -62,8 +62,8 @@
 &lt;a href=&quot;https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms&quot;&gt;https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 25 Sep 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/09/25/machine-learning-interview-copy/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/09/25/machine-learning-interview-copy/</guid>
+        <link>https://xctorres.github.io//2021/09/25/machine-learning-interview/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2021/09/25/machine-learning-interview/</guid>
         
         <category>Interview</category>
         
