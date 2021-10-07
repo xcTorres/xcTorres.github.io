@@ -13,8 +13,11 @@ tags:
 - 目前水平是天天象棋4-3水平(2021年10月3日)。
 
 # 开局
-#### 中炮屏风马平炮对车
-[急进中兵系列](https://www.xiangqiqipu.com/Category/View-4655.html)
+#### 中炮屏风马
+[平炮对车急进中兵](https://www.xiangqiqipu.com/Category/View-4655.html)
+#### 五七炮对屏风马
+[五七炮进三兵](https://www.bilibili.com/video/BV197411o7Df/?spm_id_from=333.788.videocard.0)  
+#### 五六炮对屏风马
 # 中局
 
 # 残局
