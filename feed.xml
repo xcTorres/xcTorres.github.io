@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 26 Oct 2021 01:15:52 +0800</pubDate>
-    <lastBuildDate>Tue, 26 Oct 2021 01:15:52 +0800</lastBuildDate>
+    <pubDate>Tue, 26 Oct 2021 01:31:26 +0800</pubDate>
+    <lastBuildDate>Tue, 26 Oct 2021 01:31:26 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -17,11 +17,29 @@
 &lt;h2 id=&quot;股票交易知识&quot;&gt;股票交易知识&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1L54y1d7DL&quot;&gt;K线图入门教程&lt;/a&gt; &lt;br /&gt;
 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/37948354&quot;&gt;卖Call和买Put的区别&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.youtube.com/watch?v=IunTigepa1I&amp;amp;list=PLN5R8P-UTWKOZqWpONYRTrjVc1FySLW03&quot;&gt;秒懂期权系列&lt;/a&gt;
-|   | Call Option(看涨期权)| Put Option(看跌期权)|&lt;br /&gt;
-| :—-: |  :—-:  |  :—-: |&lt;br /&gt;
-| 买家 |  有权利以一个约定好的价格&lt;strong&gt;买&lt;/strong&gt;股票 |  有权利以一个约定好的价格&lt;strong&gt;卖&lt;/strong&gt;股票|  &lt;br /&gt;
-| 卖家 |  有义务以一个约定好的价格&lt;strong&gt;卖&lt;/strong&gt;股票 | 有权利以一个约定好的价格&lt;strong&gt;买&lt;/strong&gt;股票 |&lt;/p&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=IunTigepa1I&amp;amp;list=PLN5R8P-UTWKOZqWpONYRTrjVc1FySLW03&quot;&gt;秒懂期权系列&lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Call Option(看涨期权)&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Put Option(看跌期权)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;买家&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;有权利以一个约定好的价格&lt;strong&gt;买&lt;/strong&gt;股票&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;有权利以一个约定好的价格&lt;strong&gt;卖&lt;/strong&gt;股票&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;卖家&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;有义务以一个约定好的价格&lt;strong&gt;卖&lt;/strong&gt;股票&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;有权利以一个约定好的价格&lt;strong&gt;买&lt;/strong&gt;股票&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
