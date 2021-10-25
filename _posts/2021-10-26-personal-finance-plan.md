@@ -15,7 +15,8 @@ tags:
 ## 股票交易知识   
 [K线图入门教程](https://www.bilibili.com/video/BV1L54y1d7DL)   
 [卖Call和买Put的区别](https://zhuanlan.zhihu.com/p/37948354)  
-[秒懂期权系列](https://www.youtube.com/watch?v=IunTigepa1I&list=PLN5R8P-UTWKOZqWpONYRTrjVc1FySLW03)
+[秒懂期权系列](https://www.youtube.com/watch?v=IunTigepa1I&list=PLN5R8P-UTWKOZqWpONYRTrjVc1FySLW03)  
+
 |   | Call Option(看涨期权)| Put Option(看跌期权)|  
 | :----: |  :----:  |  :----: |  
 | 买家 |  有权利以一个约定好的价格**买**股票 |  有权利以一个约定好的价格**卖**股票|    
