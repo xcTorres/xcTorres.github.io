@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Learning English"
-date:       2021-06-21
+date:       2021-10-31
 author:     "xcTorres"
 header-img: "img/in-post/Singapore.jpg"
 catalog:    true

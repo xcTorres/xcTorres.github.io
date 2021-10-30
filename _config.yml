@@ -194,6 +194,9 @@ friends: [
     },{
       title: "Hankcs",
       href: "https://www.hankcs.com/"
+    }, {
+      title: "SpaCy author",
+      href: "https://ines.io/"
     }
 
 ]
