@@ -11,28 +11,25 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Dijkstra 算法 - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="How to run java function in pySpark - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路网做路径规划中，也常常用到该算法的变种。
-">
+    <meta property="og:description" content="For data analyst and data scientist, we are more likely to use pySpark to analyze the data instead of scala Spark. But sometimes we may use some third party package written in Java. So this post wi...">
     
-    <meta property="article:published_time" content="2021-07-25T00:00:00Z">
+    <meta property="article:published_time" content="2021-11-06T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
     
     
-    <meta property="article:tag" content="graph">
-    
-    <meta property="article:tag" content="algorithms">
+    <meta property="article:tag" content="Spark">
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2021/07/25/dijkstra/">
+    <meta property="og:url" content="https://xctorres.github.io//2021/11/06/jar-in-pyspark/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>Dijkstra 算法 - 谢聪博客 | xcTorres Blog</title>
+    <title>How to run java function in pySpark - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -41,7 +38,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2021/07/25/dijkstra/">
+    <link rel="canonical" href="https://xctorres.github.io//2021/11/06/jar-in-pyspark/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -239,7 +236,7 @@
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/in-post/graph/graph.png" width="0" height="0"> -->
+<!-- <img src="/img/in-post/2019.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -248,7 +245,7 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/in-post/graph/graph.png');
+        background-image: url('/img/in-post/2019.jpg');
         background: ;
     }
 
@@ -265,15 +262,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=graph" title="graph">graph</a>
-                        
-                        <a class="tag" href="/archive/?tag=algorithms" title="algorithms">algorithms</a>
+                        <a class="tag" href="/archive/?tag=Spark" title="Spark">Spark</a>
                         
                     </div>
-                    <h1>Dijkstra 算法</h1>
+                    <h1>How to run java function in pySpark</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on July 25, 2021</span>
+                    <span class="meta">Posted by xcTorres on November 6, 2021</span>
                 </div>
             </div>
         </div>
@@ -299,22 +294,12 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路网做路径规划中，也常常用到该算法的变种。</p>
+				<p>For data analyst and data scientist, we are more likely to use pySpark to analyze the data instead of scala Spark. But sometimes we may use some third party package written in Java. So this post will teach you how to call java function in pySpark job.</p>
 
-<h4 id="基本思想">基本思想</h4>
-<ol>
-  <li>通过Dijkstra计算图G中的最短路径时，需要指定起点s(即从顶点s开始计算)。</li>
-  <li>此外，引进两个集合S和U。S的作用是记录已求出最短路径的顶点(以及相应的最短路径长度)，而U则是记录还未求出最短路径的顶点(以及该顶点到起点s的距离)。</li>
-  <li>初始时，S中只有起点s；U中是除s之外的顶点，并且U中顶点的路径是”起点s到该顶点的路径”。然后，从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 然后，再从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 … 重复该操作，直到遍历完所有顶点。</li>
-</ol>
+<h2 id="write-your-java-code">Write your java code</h2>
+<p>The class needs to implement the UDF1 interface and override the call function.</p>
 
-<ul>
-  <li>证明<br />
-<a href="https://www.cnblogs.com/jiangshaoyin/p/9954937.html">https://www.cnblogs.com/jiangshaoyin/p/9954937.html</a></li>
-</ul>
-
-<h4 id="伪代码">伪代码</h4>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -329,39 +314,78 @@
 13
 14
 15
-16
-17
-18
-</pre></td><td class="rouge-code"><pre>    <span class="k">function </span>Dijkstra<span class="o">(</span>Graph, <span class="nb">source</span><span class="o">)</span>: 
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">org.apache.spark.sql.api.java.UDF1</span><span class="o">;</span>
 
-        dist[source] ← 0
-        create vertex priority queue Q 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">implements</span> <span class="no">UDF1</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;{</span>
 
-        <span class="k">for </span>each vertex v <span class="k">in </span>Graph:
-            <span class="k">if </span>v ≠ <span class="nb">source</span>:
-                dist[v] ← INFINITY 
-            Q.add_with_priority<span class="o">(</span>v, dist[v]<span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hello</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">){</span>
+        <span class="kt">long</span> <span class="n">unixTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">/</span> <span class="mi">1000L</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">s</span>  <span class="o">+</span>  <span class="nc">Long</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">unixTime</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">str</span><span class="o">;</span>
+    <span class="o">}</span>
 
-        <span class="k">while </span>Q is not empty: 
-            u ← Q.extract_min<span class="o">()</span> 
-
-            <span class="k">for </span>each neighbor v of u:
-                <span class="k">if </span>dist[u] + length<span class="o">(</span>u, v<span class="o">)</span> &lt; dist[v]:
-                    dist[v] <span class="o">=</span> dist[u] + length<span class="o">(</span>u, v<span class="o">)</span>
-            Q.decrease_priority<span class="o">(</span>v, dis[v]<span class="o">)</span>
-        <span class="k">return </span>dis
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">call</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">hello</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>优先队列能够提高运行效率，其时间复杂度为$O(E + Vlog(V))$，这里E代表图的总边个数，V代表图的总顶点个数。从伪代码不难看出，需要维护一个数组，用来存储每一个node的当前最短路径距离，source node初始化为0，其他为$\infty$ ；并将这些点载入到优先队列，优先值为当前最短路径距离；source node初始化为0，其余nodes为无穷大。此后便不停pop 最短路径距离最小的结点。</p>
 
-<h4 id="示例">示例</h4>
-<p><img src="/img/in-post/Dijkstra/demo.png" alt="Demo" />
-我们来看一个示例，node 1为源结点：</p>
-<ul>
-  <li>1) 在第一次迭代中， 源节点最短路径距离为0，所以被弹出。其所有neighbour(node 2,3,5)的最短路径距离根据公式$dist[v] = dist[u] + length(u, v) （if\;dist[u] + length(u, v) &lt; dist[v])$都被更新，由于node 4不与node 1相连，所以其最短路径距离仍为$\infty$</li>
-  <li>2) 在第二次跌代中，在剩余nodes中，node 3的最短路径距离为3最小，则被弹出。其所有neighbour(node 2,4, 5)的最短路径距离更新</li>
-  <li>3）在第三次迭代中，node 4最短距离为5，被弹出。</li>
-  <li>4）剩余的迭代都是同样的道理</li>
-</ul>
+<p>In the example above, the type of input in UDF1 is String type. But if the input is an array, the type is not the java array or java ArrayList, it is the scala WrappedArray.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">org.apache.spark.sql.api.java.UDF1</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">scala.collection.mutable.WrappedArray</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld1</span> <span class="kd">implements</span> <span class="no">UDF1</span><span class="o">&lt;</span><span class="nc">WrappedArray</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;,</span> <span class="nc">Double</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Double</span> <span class="nf">call</span><span class="o">(</span><span class="nc">WrappedArray</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stringArray</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stringArray</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">+</span> <span class="n">stringArray</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="upload-the-jar">Upload the jar</h2>
+<p>When we set the config for Spark, we could set the <strong>spark.jars</strong> and Spark will help to distribute the jar to both drivers and executors.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre> <span class="n">SPARK_CONF</span> <span class="o">=</span> <span class="n">SparkConf</span><span class="p">()</span> \
+    <span class="p">.</span><span class="nb">set</span><span class="p">(...)</span> \
+    <span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">"spark.jars"</span><span class="p">,</span> <span class="s">"file:///ldap_home/chong.xie/hello-world-1.0-SNAPSHOT.jar"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="register-udf">Register UDF</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">pyspark.sql.types</span> <span class="k">as</span> <span class="n">T</span>
+<span class="n">spark</span><span class="p">.</span><span class="n">udf</span><span class="p">.</span><span class="n">registerJavaFunction</span><span class="p">(</span><span class="s">"hello_world"</span><span class="p">,</span> <span class="s">"hello.HelloWorld"</span><span class="p">,</span> <span class="n">T</span><span class="p">.</span><span class="n">DoubleType</span><span class="p">())</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="call-udf-in-sparksql">Call UDF in SparkSQL</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="s">"SELECT hello_world1(array('test', 'testa')) as hello_str"</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>  
+
+<span class="c1">## Or
+</span>
+<span class="n">df</span><span class="p">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s">"hello_str"</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">expr</span><span class="p">(</span><span class="s">"hello_world1(array('test', 'testa'))"</span><span class="p">)).</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 
 
@@ -369,19 +393,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2021/06/22/python-gist/" data-toggle="tooltip" data-placement="top" title="Python Commonly Used Code">
+                        <a href="/2021/10/26/personal-finance-plan/" data-toggle="tooltip" data-placement="top" title="个人理财计划">
                         Previous<br>
-                        <span>Python Commonly Used Code</span>
+                        <span>个人理财计划</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2021/09/25/backend-interview/" data-toggle="tooltip" data-placement="top" title="Backend Interview Questions">
-                        Next<br>
-                        <span>Backend Interview Questions</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -591,54 +608,6 @@
 
 <!-- add support for mathjax by voleking-->
 
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    SVG: {
-      scale: 90
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-    }
-  });
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
-</script>
-
-
-
-
-
-
-
-
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    SVG: {
-      scale: 90
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-    }
-  });
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
-</script>
 
 
 
@@ -678,7 +647,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2021/07/25/dijkstra",
+		id: "/2021/11/06/jar-in-pyspark",
 		
 		});
 		gitalk.render('gitalk-container'); 
