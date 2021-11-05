@@ -197,6 +197,12 @@ friends: [
     }, {
       title: "SpaCy author",
       href: "https://ines.io/"
+    }, {
+      title: "动手学深度学习",
+      href: "https://zh-v2.d2l.ai/"
+    }, {
+      title: "跟李沐学AI",
+      href: "https://space.bilibili.com/1567748478"
     }
 
 ]
