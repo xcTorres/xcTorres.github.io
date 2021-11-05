@@ -6,7 +6,7 @@ author:     "xcTorres"
 header-img: "img/in-post/2019.jpg"
 catalog:    true
 tags:
-    - Spark  
+    - Spark
 ---    
 
 For data analyst and data scientist, we are more likely to use pySpark to analyze the data instead of scala Spark. But sometimes we may use some third party package written in Java. So this post will teach you how to call java function in pySpark job.  
