@@ -8,8 +8,8 @@ catalog:    true
 mathjax: true
 
 tags:
-    - graph
-    - algorithms
+    - Graph
+    - Algorithms
 ---    
 
 

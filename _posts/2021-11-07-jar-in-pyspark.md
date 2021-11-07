@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "How to run java function in pySpark"
-date:       2021-11-06
+title:      "How to run Java function in pySpark"
+date:       2021-11-07
 author:     "xcTorres"
-header-img: "img/in-post/2019.jpg"
+header-img: "img/in-post/pyspark-custom-package/Apache_Spark_logo.svg.png"
 catalog:    true
 tags:
     - Spark
@@ -11,7 +11,7 @@ tags:
 
 For data analyst and data scientist, we are more likely to use pySpark to analyze the data instead of scala Spark. But sometimes we may use some third party package written in Java. So this post will teach you how to call java function in pySpark job.  
 
-## Write your java code    
+## Write your Java code    
 The class needs to implement the UDF1 interface and override the call function.
 
 ```java
@@ -42,7 +42,7 @@ public class HelloWorld1 implements UDF1<WrappedArray<String>, Double> {
 
     @Override
     public Double call(WrappedArray<String> stringArray) throws Exception {
-        return System.out.println(stringArray.apply(0) + stringArray.apply(1));
+        return Double.parseDouble(stringArray.apply(0)) + Double.parseDouble(stringArray.apply(1));
     }
 }
 ```  

@@ -6,7 +6,7 @@ author:     "xcTorres"
 header-img: "img/in-post/machine-learning.jpeg"
 catalog:    true
 tags:
-    - chinese chess
+    - Chinese Chess
 ---      
 
 从小有跟着在路边摊下下象棋，不过一直下的都是散手棋。现在打算按照体系自己重新自学，提升象棋水平。
