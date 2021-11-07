@@ -11,12 +11,12 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="How to run java function in pySpark - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="How to run Java function in pySpark - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="For data analyst and data scientist, we are more likely to use pySpark to analyze the data instead of scala Spark. But sometimes we may use some third party package written in Java. So this post wi...">
     
-    <meta property="article:published_time" content="2021-11-06T00:00:00Z">
+    <meta property="article:published_time" content="2021-11-07T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
@@ -26,10 +26,10 @@
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2021/11/06/jar-in-pyspark/">
+    <meta property="og:url" content="https://xctorres.github.io//2021/11/07/jar-in-pyspark/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>How to run java function in pySpark - 谢聪博客 | xcTorres Blog</title>
+    <title>How to run Java function in pySpark - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -38,7 +38,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2021/11/06/jar-in-pyspark/">
+    <link rel="canonical" href="https://xctorres.github.io//2021/11/07/jar-in-pyspark/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -236,7 +236,7 @@
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/in-post/2019.jpg" width="0" height="0"> -->
+<!-- <img src="/img/in-post/pyspark-custom-package/Apache_Spark_logo.svg.png" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -245,7 +245,7 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/in-post/2019.jpg');
+        background-image: url('/img/in-post/pyspark-custom-package/Apache_Spark_logo.svg.png');
         background: ;
     }
 
@@ -265,10 +265,10 @@
                         <a class="tag" href="/archive/?tag=Spark" title="Spark">Spark</a>
                         
                     </div>
-                    <h1>How to run java function in pySpark</h1>
+                    <h1>How to run Java function in pySpark</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on November 6, 2021</span>
+                    <span class="meta">Posted by xcTorres on November 7, 2021</span>
                 </div>
             </div>
         </div>
@@ -296,7 +296,7 @@
 
 				<p>For data analyst and data scientist, we are more likely to use pySpark to analyze the data instead of scala Spark. But sometimes we may use some third party package written in Java. So this post will teach you how to call java function in pySpark job.</p>
 
-<h2 id="write-your-java-code">Write your java code</h2>
+<h2 id="write-your-java-code">Write your Java code</h2>
 <p>The class needs to implement the UDF1 interface and override the call function.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
@@ -350,7 +350,7 @@
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="nc">Double</span> <span class="nf">call</span><span class="o">(</span><span class="nc">WrappedArray</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stringArray</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stringArray</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">+</span> <span class="n">stringArray</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+        <span class="k">return</span> <span class="nc">Double</span><span class="o">.</span><span class="na">parseDouble</span><span class="o">(</span><span class="n">stringArray</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">0</span><span class="o">))</span> <span class="o">+</span> <span class="nc">Double</span><span class="o">.</span><span class="na">parseDouble</span><span class="o">(</span><span class="n">stringArray</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
@@ -399,6 +399,13 @@
                         </a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2021/11/08/crf/" data-toggle="tooltip" data-placement="top" title="条件随机场CRF">
+                        Next<br>
+                        <span>条件随机场CRF</span>
+                        </a>
+                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -456,75 +463,85 @@
         </a>
         
         
-                <a data-sort="0019" 
+                <a data-sort="0020" 
                     href="/archive/?tag=Life"
                     title="Life"
                     rel="4">Life</a>
         
-                <a data-sort="0019" 
+                <a data-sort="0020" 
                     href="/archive/?tag=Python"
                     title="Python"
                     rel="4">Python</a>
         
-                <a data-sort="0020" 
+                <a data-sort="0021" 
                     href="/archive/?tag=C%2B%2B"
                     title="C++"
                     rel="3">C++</a>
         
-                <a data-sort="0020" 
+                <a data-sort="0021" 
                     href="/archive/?tag=Spark"
                     title="Spark"
                     rel="3">Spark</a>
         
-                <a data-sort="0020" 
-                    href="/archive/?tag=algorithms"
-                    title="algorithms"
-                    rel="3">algorithms</a>
+                <a data-sort="0022" 
+                    href="/archive/?tag=Algorithm"
+                    title="Algorithm"
+                    rel="2">Algorithm</a>
         
-                <a data-sort="0021" 
+                <a data-sort="0022" 
+                    href="/archive/?tag=Graph"
+                    title="Graph"
+                    rel="2">Graph</a>
+        
+                <a data-sort="0022" 
                     href="/archive/?tag=Interview"
                     title="Interview"
                     rel="2">Interview</a>
         
-                <a data-sort="0021" 
-                    href="/archive/?tag=graph"
-                    title="graph"
-                    rel="2">graph</a>
-        
                 <a data-sort="0022" 
+                    href="/archive/?tag=NLP"
+                    title="NLP"
+                    rel="2">NLP</a>
+        
+                <a data-sort="0023" 
+                    href="/archive/?tag=Algorithms"
+                    title="Algorithms"
+                    rel="1">Algorithms</a>
+        
+                <a data-sort="0023" 
+                    href="/archive/?tag=Chinese+Chess"
+                    title="Chinese Chess"
+                    rel="1">Chinese Chess</a>
+        
+                <a data-sort="0023" 
+                    href="/archive/?tag=Deep+Learning"
+                    title="Deep Learning"
+                    rel="1">Deep Learning</a>
+        
+                <a data-sort="0023" 
                     href="/archive/?tag=Finance"
                     title="Finance"
                     rel="1">Finance</a>
         
-                <a data-sort="0022" 
+                <a data-sort="0023" 
                     href="/archive/?tag=GIS"
                     title="GIS"
                     rel="1">GIS</a>
         
-                <a data-sort="0022" 
+                <a data-sort="0023" 
                     href="/archive/?tag=Linux"
                     title="Linux"
                     rel="1">Linux</a>
         
-                <a data-sort="0022" 
+                <a data-sort="0023" 
+                    href="/archive/?tag=Machine+Learning"
+                    title="Machine Learning"
+                    rel="1">Machine Learning</a>
+        
+                <a data-sort="0023" 
                     href="/archive/?tag=Web"
                     title="Web"
-                    rel="1">Web</a>
-        
-                <a data-sort="0022" 
-                    href="/archive/?tag=chinese+chess"
-                    title="chinese chess"
-                    rel="1">chinese chess</a>
-        
-                <a data-sort="0022" 
-                    href="/archive/?tag=deep+learning"
-                    title="deep learning"
-                    rel="1">deep learning</a>
-        
-                <a data-sort="0022" 
-                    href="/archive/?tag=nlp"
-                    title="nlp"
-                    rel="1">nlp
+                    rel="1">Web
     </div>
 </section>
 
@@ -647,7 +664,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2021/11/06/jar-in-pyspark",
+		id: "/2021/11/07/jar-in-pyspark",
 		
 		});
 		gitalk.render('gitalk-container'); 
