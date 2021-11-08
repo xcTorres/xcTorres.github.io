@@ -600,10 +600,10 @@ model size: 1.30M
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="用eli5观察label之间的转换矩阵">用Eli5观察Label之间的转换矩阵</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre></td><td class="rouge-code"><pre>import eli5
-eli5.show_weights(crf, top=10)
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">eli5</span>
+<span class="n">eli5</span><span class="p">.</span><span class="n">show_weights</span><span class="p">(</span><span class="n">crf</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="reference">Reference</h2>
