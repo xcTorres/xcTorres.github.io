@@ -8,4 +8,35 @@ DeepFM
 
 3. DeepFM 共享相同的输入和 embedding vector，训练更高效。
 
-DeepFM模型的预测结果输出为：
+DeepFM模型的预测结果输出为：  
+
+
+https://www.cnblogs.com/pinard/p/6349233.html  
+
+协同过滤
+
+
+class LRUCache(object):
+
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
+
+        
+
+    def get(self, key):
+        """
+        :type key: int
+        :rtype: int
+        """
+
+            
+        
+
+    def put(self, key, value):
+        """
+        :type key: int
+        :type value: int
+        :rtype: None
+        """
