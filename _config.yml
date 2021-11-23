@@ -203,6 +203,9 @@ friends: [
     }, {
       title: "跟李沐学AI",
       href: "https://space.bilibili.com/1567748478"
+    },{
+      title: "淘宝MySQL月报",
+      href: "http://mysql.taobao.org/monthly/2021/10/"
     }
 
 ]

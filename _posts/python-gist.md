@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Python Commonly Used Code"
-date:       2021-06-22
+date:       2021-11-24
 author:     "xcTorres"
 header-img: "img/in-post/python-logo.png"
 catalog:    true
