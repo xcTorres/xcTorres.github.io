@@ -186,9 +186,6 @@ friends: [
       title: "alanzucconi",
       href: "https://www.alanzucconi.com"
     },{
-      title: "jqpeng的技术记事本",
-      href: "https://www.cnblogs.com/xiaoqi/"
-    },{
       title: "面向信仰编程",
       href: "https://draveness.me/"
     },{
@@ -204,8 +201,20 @@ friends: [
       title: "跟李沐学AI",
       href: "https://space.bilibili.com/1567748478"
     },{
-      title: "淘宝MySQL月报",
-      href: "http://mysql.taobao.org/monthly/2021/10/"
+      title: "郭飞",
+      href: "https://www.guofei.site/"
+    },{
+      title: "Pycorrector作者",
+      href: "https://blog.csdn.net/mingzai624"
+    },{
+      title: "捕蛇者说",
+      href: "https://pythonhunter.org/"
+    },{
+      title: "Laike9m",
+      href: "https://laike9m.com/"
+    },
+    {
+      
     }
 
 ]
@@ -222,6 +231,9 @@ gallery:
     y: 600                  # max height of thumbnails (in pixels)
   # The following options are for individual galleries.
   galleries:
+    west coast park:
+      name: "2022/02  West Coast Park"
+      best_image: IMG_9203.jpg  
     lucky:
       name: "2021/09  Lucky"
       best_image: 41632047279_.pic_hd.jpg  

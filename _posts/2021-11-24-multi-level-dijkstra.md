@@ -10,3 +10,13 @@ tags:
     - Graph
     - Algorithm
 ---
+
+
+
+https://github.com/Project-OSRM/osrm-backend/issues/5503
+https://github.com/Project-OSRM/osrm-backend/wiki/Traffic
+
+
+https://github.com/Telenav/open-source-spec/blob/master/routing_basic/doc/crp.md  
+https://i11www.iti.kit.edu/_media/teaching/theses/ba-hamme-13.pdf
+https://github.com/michaelwegner/CRP

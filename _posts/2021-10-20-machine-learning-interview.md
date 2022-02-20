@@ -32,7 +32,9 @@ tags:
 21. [LSTM](https://blog.floydhub.com/long-short-term-memory-from-zero-to-hero-with-pytorch/)  
 22. [GRU]()  
 23. Gradient Vanish  
-24. BiLSTM + CRF
+24. BiLSTM + CRF   
+25. Transformer  
+26. Bert VS GPT
 
 
 
