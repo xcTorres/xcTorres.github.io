@@ -11,16 +11,27 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="2018/08 Didi intern - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="Cython Pointer Memory Leak - 谢聪博客 | xcTorres Blog">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Recently I’m working on a project which needs to retrieve the edit operations of two strings. The latency requirement should be very low, so I use C++ and Cython to improve the efficiency. The repo...">
+    
+    <meta property="article:published_time" content="2022-04-02T00:00:00Z">
+    
+    
+    <meta property="article:author" content="xcTorres">
+    
+    
+    <meta property="article:tag" content="C++">
+    
+    <meta property="article:tag" content="Python">
+    
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//gallery/didi/">
+    <meta property="og:url" content="https://xctorres.github.io//2022/04/02/cython-pointer/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>2018/08 Didi intern - 谢聪博客 | xcTorres Blog</title>
+    <title>Cython Pointer Memory Leak - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +40,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//gallery/didi/">
+    <link rel="canonical" href="https://xctorres.github.io//2022/04/02/cython-pointer/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -224,108 +235,218 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- canvas-nest.min.js
+<script type="text/javascript" src="../../../../js/canvas-nest.min.js"></script>-->
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/in-post/C++/CTutorial.png" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/in-post/C++/CTutorial.png');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header" >
 
-
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>2018/08 Didi intern</h1>
-          <span class="subheading"></span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=C%2B%2B" title="C++">C++</a>
+                        
+                        <a class="tag" href="/archive/?tag=Python" title="Python">Python</a>
+                        
+                    </div>
+                    <h1>Cython Pointer Memory Leak</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by xcTorres on April 2, 2022</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-10 col-lg-offset-0
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>Recently I’m working on a project which needs to retrieve the edit operations of two strings. The latency requirement should be very low, so I use C++ and Cython to improve the efficiency. The repo link is <a href="https://github.com/xcTorres/edit_operation">here</a>, it only provides a tiny function but personlly I think it is a good example of how to bridge C++ 11 and Python by Cython.</p>
+
+<p>In the C++ code, I defined a struct type called EditOperations, and the major function <strong>EditOperations</strong> will return a vector of EditOperation <strong>object</strong> because there are maybe multi operations between two strings.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">EditOperation</span><span class="p">{</span>
+  <span class="nl">public:</span>
+    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">operation_type</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">index</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">y</span><span class="p">;</span>
+  
+  <span class="nl">public:</span>
+    <span class="n">EditOperation</span><span class="p">();</span>
+    <span class="o">~</span><span class="n">EditOperation</span><span class="p">(){};</span>
+
+    <span class="n">EditOperation</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">operation_type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">index</span><span class="p">,</span>
+                  <span class="kt">char</span> <span class="n">x</span><span class="p">,</span> <span class="kt">char</span> <span class="n">y</span><span class="p">){</span>
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">operation_type</span> <span class="o">=</span> <span class="n">operation_type</span><span class="p">;</span>
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span>
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">EditOperation</span><span class="o">&gt;</span> <span class="n">EditOperations</span><span class="p">(</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">string1</span><span class="p">,</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">string2</span><span class="p">,</span>
+  <span class="kt">int</span> <span class="n">max_distance</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">is_damerau</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>But when I call the function through Cython and try to use the member of EditOperation, it will report the <a href="https://stackoverflow.com/questions/2346806/what-is-a-segmentation-fault">Segmentation Fault Error</a>. After a number of trials, I avoid the error by returning vector of <strong>pointer</strong> of object instead of object itself.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="n">vector</span><span class="o">&lt;</span><span class="n">EditOperation</span><span class="o">*&gt;</span> <span class="n">EditOperations</span><span class="p">(</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">string1</span><span class="p">,</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">string2</span><span class="p">,</span>
+  <span class="kt">int</span> <span class="n">max_distance</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">is_damerau</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>I was happy that it was bugfree and was able to use the package without error, but when I benchmarked the efficiency of package by calling the function millions of times I found that the memory was increasing significantly.</p>
+
+<p><strong>There is a Memory Leak!!</strong></p>
+
+<p>The first reason that come into my mind is the <strong>EditOperation</strong>* pointer. <strong>The vector container will help to release the memory if the element type is object, but it will do nothing if the type is the pointer</strong>. If the project is written in pure C++ code, we could use <a href="https://www.cplusplus.com/reference/new/operator%20delete[]/">delete function</a> to release the memory by ourselves in the last. But right now the objects are being used in <strong>.pyx file</strong>. I tried to release the memory in cpdef function, but nothing works. The memory leak issue still exists.</p>
+
+<p>In the last, I replaced the pointer by <a href="https://en.cppreference.com/book/intro/smart_pointers"><strong>smart pointer</strong></a>, so that we could let C++ compiler release the memory by itself.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">EditOperation</span><span class="o">&gt;</span> <span class="n">EditOperationSharedPtr</span><span class="p">;</span>
+
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">EditOperationSharedPtr</span><span class="o">&gt;</span> <span class="n">EditOperations</span><span class="p">(</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">string1</span><span class="p">,</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">string2</span><span class="p">,</span>
+  <span class="kt">int</span> <span class="n">max_distance</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">is_damerau</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/01/09/contraction-hierarchies/" data-toggle="tooltip" data-placement="top" title="Contraction Hierarchies算法">
+                        Previous<br>
+                        <span>Contraction Hierarchies算法</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+				
+				
+				<div id="gitalk-container"></div>
+                
+				
+
+                
+				
+				
+				
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			<style TYPE="text/css">
-.gallery-image-wrapper {
-  height: 600px;
-  width: 600px;
-  display: inline-block;
-  position: relative;
-}
-.gallery-image {
-  margin: auto;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  max-height: 100%;
-  max-width: 100%;
-}
-</style>
-<h1><a href="/gallery">2018/08 Didi intern</a></h1>
-<hr />
-
-    <div class="gallery-image-wrapper">
-        <a name="51607321674_.pic_hd.jpg"></a>
-        <a href="51607321674_.pic_hd.jpg">
-            <img class="gallery-image" src="thumbs/51607321674_.pic_hd.jpg" />
-        </a>
-    </div>
-
-    <div class="gallery-image-wrapper">
-        <a name="61607321774_.pic.jpg"></a>
-        <a href="61607321774_.pic.jpg">
-            <img class="gallery-image" src="thumbs/61607321774_.pic.jpg" />
-        </a>
-    </div>
-
-    <div class="gallery-image-wrapper">
-        <a name="11607321620_.pic_hd.jpg"></a>
-        <a href="11607321620_.pic_hd.jpg">
-            <img class="gallery-image" src="thumbs/11607321620_.pic_hd.jpg" />
-        </a>
-    </div>
-
-    <div class="gallery-image-wrapper">
-        <a name="41607321673_.pic_hd.jpg"></a>
-        <a href="41607321673_.pic_hd.jpg">
-            <img class="gallery-image" src="thumbs/41607321673_.pic_hd.jpg" />
-        </a>
-    </div>
-
-    		</div>
     <!-- Sidebar Container -->
-          <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-                <style>
-    .map{width:300px; min-height:200px} 
-</style>
-
-<div class='map'>
-    <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=m&d=nh0_nGiUfKYf-0GZZH0NA8_vXVCdhkQE_VvoQnHTmZc"></script>
-</div>
-
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
                 <!-- Featured Tags -->
                 
@@ -333,6 +454,8 @@
 
 <section>
 
+    
+        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="/archive/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -425,73 +548,6 @@
 </section>
 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="/about/">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="/img/avatar-xcTorres.png" />
-    
-    
-    <p>慧极必伤，情深不寿，强极必辱，谦谦君子，温润如玉</p>
-    
-    <!-- SNS Link -->
-    
-
-
-<ul class="list-inline">
-
-
-  
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/xcTorres">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  <li>
-    <a target="_blank" href="https://www.linkedin.com/in/chong-xie-545830157">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  <li>
-    <a target="_blank" href="https://xcwhu2016.medium.com">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://space.bilibili.com/337843131">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-stack-1x fa-inverse">bili</i>
-      </span>
-    </a>
-  </li>
-  
-</ul>
-  </div>
-</section>
-
                 <!-- Friends Blog -->
                 
 <hr>
@@ -572,10 +628,110 @@
   
 </ul>
 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
+
+
+
+
+
+<!-- <!-- Start Collapse.html -->
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = document.getElementById(this.id+"data");
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+</script>
+<!-- End Collapse.html --> -->
+
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+		var gitalk = new Gitalk({
+
+		// gitalk的主要参数
+		clientID: "6c4ed7ef926a76e8447e",
+		clientSecret: "1df8e0efa5331eae417cf604d68fdb150a524a7a",
+		repo: "xctorres.github.io",
+		owner: "xcTorres",
+		admin: "xcTorres",
+		id: "/2022/04/02/cython-pointer",
+		
+		});
+		gitalk.render('gitalk-container'); 
+</script>
+
+
+
+
+
 
 
 
@@ -737,6 +893,64 @@
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 
