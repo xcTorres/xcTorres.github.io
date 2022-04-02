@@ -9,7 +9,7 @@
 
 ### Work Experience  
 
-| Jan 2021 - Present, Singapore | Shopee | Senior Data Scientist |
+| Jan 2021 - Present, Singapore | Shopee | Senior Algorithm Engineer |
 | Jul 2019 - Jan 2021, Singapore | Shopee | Data Scientist |
 | Sep 2018 – Jun 2019, Wuhan, China | Huawei | Intern |
 | Jun 2018 – Sep 2018, Beijing, China | DiDi | Intern |
