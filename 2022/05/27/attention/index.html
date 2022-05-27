@@ -11,29 +11,33 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="中国象棋 - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="Attention机制与Transformer模型 - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="从小有跟着在路边摊下下象棋，不过一直下的都是散手棋。现在打算按照体系自己重新自学，提升象棋水平。
+    <meta property="og:description" content="如果想要了解Attention机制，最重要的当然是先读论文了，不过原始论文非常简练，很难一次读懂, 感谢李沐老师逐段讲解论文，非常清晰，强烈推荐Transformer论文逐段精读。
+当然最重要的当然是可以跟代码学习。以该repo为例，各个子模块相应代码如下。
 
-  目前水平是天天象棋4-3水平(2021年10月3日)。
-
-">
+  Encoder link
+  Decoder link
+  Attention link
+  PositionEncoding ...">
     
-    <meta property="article:published_time" content="2021-10-03T00:00:00Z">
+    <meta property="article:published_time" content="2022-05-27T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
     
     
-    <meta property="article:tag" content="Chinese Chess">
+    <meta property="article:tag" content="NLP">
+    
+    <meta property="article:tag" content="Machine Learning">
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2021/10/03/chinese-chess/">
+    <meta property="og:url" content="https://xctorres.github.io//2022/05/27/attention/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>中国象棋 - 谢聪博客 | xcTorres Blog</title>
+    <title>Attention机制与Transformer模型 - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -42,7 +46,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2021/10/03/chinese-chess/">
+    <link rel="canonical" href="https://xctorres.github.io//2022/05/27/attention/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -268,13 +272,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Chinese+Chess" title="Chinese Chess">Chinese Chess</a>
+                        <a class="tag" href="/archive/?tag=NLP" title="NLP">NLP</a>
+                        
+                        <a class="tag" href="/archive/?tag=Machine+Learning" title="Machine Learning">Machine Learning</a>
                         
                     </div>
-                    <h1>中国象棋</h1>
+                    <h1>Attention机制与Transformer模型</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on October 3, 2021</span>
+                    <span class="meta">Posted by xcTorres on May 27, 2022</span>
                 </div>
             </div>
         </div>
@@ -300,20 +306,33 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>从小有跟着在路边摊下下象棋，不过一直下的都是散手棋。现在打算按照体系自己重新自学，提升象棋水平。</p>
+				<p>如果想要了解Attention机制，最重要的当然是先读<a href="https://arxiv.org/abs/1706.03762">论文</a>了，不过原始论文非常简练，很难一次读懂, 感谢李沐老师逐段讲解论文，非常清晰，强烈推荐<a href="https://www.bilibili.com/video/BV1pu411o7BE?spm_id_from=333.999.0.0">Transformer论文逐段精读</a>。
+当然最重要的当然是可以跟<a href="https://github.com/xcTorres/machine_learning/tree/master/transformer">代码</a>学习。以该repo为例，各个子模块相应代码如下。</p>
 <ul>
-  <li>目前水平是天天象棋4-3水平(2021年10月3日)。</li>
+  <li>Encoder <a href="https://github.com/xcTorres/machine_learning/blob/master/transformer/Models.py#L11">link</a></li>
+  <li>Decoder <a href="https://github.com/xcTorres/machine_learning/blob/master/transformer/Models.py#L26">link</a></li>
+  <li>Attention <a href="https://github.com/xcTorres/machine_learning/blob/master/transformer/Sublayers.py#L40">link</a></li>
+  <li>PositionEncoding <a href="https://github.com/xcTorres/machine_learning/blob/master/transformer/Embed.py#L14">link</a></li>
+  <li>Mask <a href="https://github.com/xcTorres/machine_learning/blob/master/transformer/Batch.py#L15">link</a></li>
 </ul>
 
-<h1 id="开局">开局</h1>
-<h4 id="中炮屏风马">中炮屏风马</h4>
-<p><a href="https://www.xiangqiqipu.com/Category/View-4655.html">平炮对车急进中兵</a></p>
-<h4 id="五七炮对屏风马">五七炮对屏风马</h4>
-<p><a href="https://www.bilibili.com/video/BV197411o7Df/?spm_id_from=333.788.videocard.0">五七炮进三兵</a></p>
-<h4 id="五六炮对屏风马">五六炮对屏风马</h4>
-<h1 id="中局">中局</h1>
+<p><img src="/img/in-post/attention/attention.png" width="500" /></p>
 
-<h1 id="残局">残局</h1>
+<p>一般面试过程中，可能会有以下一些问题。</p>
+<ol>
+  <li>问: <strong>Q,K,V到底是什么东西？</strong><br />
+答：Query、Key的作用是用来在token之间搬运信息的，而Value本身就是从当前token当中提取出来的信息。所以从公式中可以看出，
+$ H = softmax(QK^T/\sqrt{d_k}*V) $<br />
+—</li>
+  <li>问：<strong>为什么用Layer Normal？</strong><br />
+答：Layer Normal与Batch Normal的区别<br />
+—</li>
+  <li>问：<strong>Mask的作用</strong><br />
+答：In the encoder and decoder: To zero attention outputs wherever there is just padding in the input sentences. In the decoder: To prevent the decoder ‘peaking’ ahead at the rest of the translated sentence when predicting the next word.</li>
+</ol>
+
+<h2 id="reference">Reference</h2>
+<p><a href="https://towardsdatascience.com/how-to-code-the-transformer-in-pytorch-24db27c8f9ec">https://towardsdatascience.com/how-to-code-the-transformer-in-pytorch-24db27c8f9ec</a></p>
 
 
 
@@ -321,19 +340,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2021/09/25/backend-interview/" data-toggle="tooltip" data-placement="top" title="Backend Interview Questions">
+                        <a href="/2022/04/02/cython-pointer/" data-toggle="tooltip" data-placement="top" title="Cython Pointer Memory Leak">
                         Previous<br>
-                        <span>Backend Interview Questions</span>
+                        <span>Cython Pointer Memory Leak</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2021/10/20/machine-learning-interview/" data-toggle="tooltip" data-placement="top" title="Machine Learning Interview Questions">
-                        Next<br>
-                        <span>Machine Learning Interview Questions</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -391,82 +403,72 @@
         </a>
         
         
-                <a data-sort="0023" 
+                <a data-sort="0021" 
                     href="/archive/?tag=Life"
                     title="Life"
                     rel="4">Life</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0021" 
                     href="/archive/?tag=C%2B%2B"
                     title="C++"
                     rel="4">C++</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0021" 
                     href="/archive/?tag=NLP"
                     title="NLP"
                     rel="4">NLP</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0021" 
                     href="/archive/?tag=Python"
                     title="Python"
                     rel="4">Python</a>
         
-                <a data-sort="0024" 
+                <a data-sort="0022" 
                     href="/archive/?tag=Algorithm"
                     title="Algorithm"
                     rel="3">Algorithm</a>
         
-                <a data-sort="0024" 
+                <a data-sort="0022" 
                     href="/archive/?tag=Graph"
                     title="Graph"
                     rel="3">Graph</a>
         
-                <a data-sort="0024" 
+                <a data-sort="0022" 
                     href="/archive/?tag=Machine+Learning"
                     title="Machine Learning"
                     rel="3">Machine Learning</a>
         
-                <a data-sort="0024" 
+                <a data-sort="0022" 
                     href="/archive/?tag=Spark"
                     title="Spark"
                     rel="3">Spark</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0023" 
+                    href="/archive/?tag=GIS"
+                    title="GIS"
+                    rel="2">GIS</a>
+        
+                <a data-sort="0023" 
                     href="/archive/?tag=Interview"
                     title="Interview"
                     rel="2">Interview</a>
         
-                <a data-sort="0026" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Algorithms"
                     title="Algorithms"
                     rel="1">Algorithms</a>
         
-                <a data-sort="0026" 
-                    href="/archive/?tag=Chinese+Chess"
-                    title="Chinese Chess"
-                    rel="1">Chinese Chess</a>
-        
-                <a data-sort="0026" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Deep+Learning"
                     title="Deep Learning"
                     rel="1">Deep Learning</a>
         
-                <a data-sort="0026" 
-                    href="/archive/?tag=Finance"
-                    title="Finance"
-                    rel="1">Finance</a>
-        
-                <a data-sort="0026" 
-                    href="/archive/?tag=GIS"
-                    title="GIS"
-                    rel="1">GIS</a>
-        
-                <a data-sort="0026" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Linux"
                     title="Linux"
                     rel="1">Linux</a>
         
-                <a data-sort="0026" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Web"
                     title="Web"
                     rel="1">Web
@@ -550,7 +552,7 @@
   
   <li><a href="https://laike9m.com/">Laike9m</a></li>
   
-  <li><a href=""></a></li>
+  <li><a href="https://lonepatient.top/">lonepatient</a></li>
   
 </ul>
 
@@ -561,6 +563,54 @@
 
 <!-- add support for mathjax by voleking-->
 
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
 
 
 
@@ -600,7 +650,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2021/10/03/chinese-chess",
+		id: "/2022/05/27/attention",
 		
 		});
 		gitalk.render('gitalk-container'); 
