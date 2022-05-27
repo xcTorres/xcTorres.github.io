@@ -3,7 +3,7 @@
 ### Contact Information
 
 - Email：xcwhu2016@gmail.com 
-- Wechat：xc_19931112
+- Wechat：xcTorres_1112
 - Instagram：xctorres8
 - [LinkedIn](https://www.linkedin.com/in/chong-xie-545830157/)
 
