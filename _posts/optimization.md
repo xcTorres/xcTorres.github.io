@@ -1,0 +1,3 @@
+SGD
+mini-SGD
+BFGS
