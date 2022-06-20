@@ -34,7 +34,8 @@ tags:
 23. Gradient Vanish  
 24. BiLSTM + CRF   
 25. Transformer  
-26. Bert VS GPT
+26. Bert VS GPT  
+27. Optimization algorithm
 
 
 

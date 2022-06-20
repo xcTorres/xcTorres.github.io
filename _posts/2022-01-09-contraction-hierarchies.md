@@ -32,7 +32,7 @@ tags:
 ## Bidirectional Search  
 按照重要度顺序添加Shortcuts的步骤也叫Contraction，经过这一步骤最后得到的预处理的Graph即是原始的Graph，添加了一些Shortcuts。这样看来整个Graph的Edge不减反增，那又是如何做到减少时间复杂度而提升效率的呢，原因在于CH算法是在特定的部分图，而不是直接在预处理的图做双向Dijkstra算法。这种特殊的图叫Upward Graph，即图里面的每条边上的两个点都是从重要度从低指向高。  
 
-当做Bidirectoinal Dijkstra的时候，是从起点开始的Upward Graph开始搜索，同时从终点的Upward Graph开始搜索，直至他们相遇在某点。此时Upward Graph是高度简化的grpah，边的个数大大减少，从而大大提高搜索效率。  
+当做Bidirectoinal Dijkstra的时候，是从起点开始的Upward Graph开始搜索，同时从终点的Downward Graph开始搜索，直至他们相遇在某点。此时Upward Graph是高度简化的grpah，边的个数大大减少，从而大大提高搜索效率。  
 
 **这时的双向搜索就好比在预处理中我先算好各个城市，县城，乡村中的小路到最近的大路，高速公路的最短距离**，等真正计算长途A，B的最短路径距离时，我们只需要尽可能知道A与其最近的高速公路的入口的最短距离，B与其最近高速公路出口的最短距离，再加上高速公路本身的距离，就可以很快计算出A与B之间的最短距离。我们来看个例子，如下图中的右上图是原始Graph加上三条红色的Shortcuts， 
 

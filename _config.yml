@@ -12,11 +12,10 @@ encoding: utf-8
 
 # SNS settings
 RSS: false
-# zhihu_username:     cong-zi-64
+zhihu_username:     cong-zi-64
 github_username:    xcTorres
 linkedin_username: chong-xie-545830157
 medium_username: xcwhu2016
-bilibili_username: 337843131
 
 
 

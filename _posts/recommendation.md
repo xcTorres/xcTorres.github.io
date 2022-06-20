@@ -11,32 +11,4 @@ DeepFM
 DeepFM模型的预测结果输出为：  
 
 
-https://www.cnblogs.com/pinard/p/6349233.html  
-
-协同过滤
-
-
-class LRUCache(object):
-
-    def __init__(self, capacity):
-        """
-        :type capacity: int
-        """
-
-        
-
-    def get(self, key):
-        """
-        :type key: int
-        :rtype: int
-        """
-
-            
-        
-
-    def put(self, key, value):
-        """
-        :type key: int
-        :type value: int
-        :rtype: None
-        """
+https://blog.csdn.net/BGoodHabit/article/details/112273565
