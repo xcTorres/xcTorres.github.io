@@ -5,9 +5,74 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 10 Aug 2022 23:23:00 +0800</pubDate>
-    <lastBuildDate>Wed, 10 Aug 2022 23:23:00 +0800</lastBuildDate>
+    <pubDate>Sat, 13 Aug 2022 01:25:13 +0800</pubDate>
+    <lastBuildDate>Sat, 13 Aug 2022 01:25:13 +0800</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
+    
+      <item>
+        <title>Reflection After Interview</title>
+        <description>&lt;p&gt;It has been 3 years working in Singapore since I graduated. During the period in Shopee, I learned a lot not only the coding skills but also the understanding of projects. Since Shopee has decided to shift the engineering center to China mainland, the projects that we Singapore team could do are becoming limited, which result in the thoughts to pursue other opportunities.&lt;/p&gt;
+
+&lt;p&gt;There are not many opportunities avaliable in Singapore as expected, some local big company like Lazada and Grab freeze their head count, Amreican company like Google and facebook also don’t have enough engineer head count. I got my permanent resident before I subimitted my CV, which helps me a lot to have more interview opportunities. Here are recent interview experience, unluckily I don’t have any offer due to short of time to fully prepare.&lt;/p&gt;
+
+&lt;h1 id=&quot;interview&quot;&gt;Interview&lt;/h1&gt;
+&lt;h4 id=&quot;tiktok&quot;&gt;Tiktok&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Machine learning engineer(recommendation)&lt;/strong&gt;&lt;br /&gt;
+Because of lack of recomendation-related experience, the interviewer in both 2 rounds doesn’t have too much interests on my experience. So the coding problem appears to be very important，but I didn’t prepare for a long time so coding performance sucks, failed the interview.&lt;br /&gt;
+1st round: Leetcode 3(Longest Substring Without Repeating Characters)&lt;br /&gt;
+2nd round: Leetcode 297(Serialize and Deserialize Binary Tree)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Machine learning engineer(platform governance)&lt;/strong&gt;&lt;br /&gt;
+1st round: Bert: howt to pretrain; Q, K, V; batch norm and layer norm&lt;br /&gt;
+           How does GBDT do classfication?
+           How to pretrain your own Bert?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;indeed&quot;&gt;Indeed&lt;/h4&gt;
+&lt;p&gt;The coding problem is easy, merge 2 sorted array. Here are some machine learning related problems.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Unfair coin(Bayesian probability)&lt;/li&gt;
+  &lt;li&gt;Overfitting and underfitting&lt;/li&gt;
+  &lt;li&gt;Variance, boosting and bagging&lt;/li&gt;
+  &lt;li&gt;Dropout mechanisum&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;apple&quot;&gt;Apple&lt;/h4&gt;
+&lt;p&gt;Coding: Top k frequent elements&lt;br /&gt;
+word2vec, Search System introduction Bilstm-CRF&lt;/p&gt;
+
+&lt;h4 id=&quot;huawei&quot;&gt;Huawei&lt;/h4&gt;
+&lt;p&gt;leetcode: lognest valid parentheses, coin change&lt;/p&gt;
+
+&lt;h4 id=&quot;grab&quot;&gt;Grab&lt;/h4&gt;
+&lt;p&gt;leetcode 1011&lt;/p&gt;
+
+&lt;h1 id=&quot;reflection&quot;&gt;Reflection&lt;/h1&gt;
+&lt;p&gt;To be honest, I am frustrated for a while, but I think I deserve it because I didn’t fully prepare the coding and related machine learning knowledge on the CV. Right now I don’t have chance and have to change my mind to look for new roles at the end of the year. It is not too bad because I have 4 months to prepare, this time I don’t have any excuse. First I need to know which position I should apply for, I think machine learning engineer(search or NLP) should be more related, it is also okay if the job needs me to still work on map-related projects except assignment field. So there should be these things to prepare as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Coding: &lt;a href=&quot;https://docs.google.com/spreadsheets/d/1l7Gvrubuscs0iwDPov053wGWV_uNg0yK_991JDeNIH0/edit#gid=2023823697&quot;&gt;Leetcode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;NLP: Word2vec, HMM, CRF, RNN, Bi-lstm, Bi-lstm-CRF, Bert&lt;/li&gt;
+  &lt;li&gt;Search: Query correction, NER, search engine&lt;/li&gt;
+  &lt;li&gt;Recommendation:&lt;/li&gt;
+  &lt;li&gt;Machine learnning skills: Linear regression, xgboost, bias and variance, underfitting and overfitting&lt;/li&gt;
+  &lt;li&gt;Probability: Bayesian rules, p value, optimization algorithm&lt;/li&gt;
+  &lt;li&gt;SQL&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sat, 13 Aug 2022 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2022/08/13/reflection-after-interview/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2022/08/13/reflection-after-interview/</guid>
+        
+        <category>Leetcode</category>
+        
+        
+      </item>
     
       <item>
         <title>Know Yourself</title>
@@ -29,12 +94,13 @@
   &lt;li&gt;在自己拓宽各种运动项目的时候，不要光想的是自己的checklist可以多打几个勾，而是想着真正能够从这些运动中获取到幸福感。&lt;/li&gt;
   &lt;li&gt;等忙完这一阵子，可以拾起吉他，重新从音乐中获取一些情操，去掉一些浮躁。&lt;/li&gt;
   &lt;li&gt;读书的习惯还是没能养成，功利地只看技术书籍是没有用的。如果能够找到新offer，后面可以尝试去读一些文学著作，当然功能性地书籍还是可以读的。&lt;/li&gt;
+  &lt;li&gt;不要做情绪的奴隶，要做情绪的主人。&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>
-        <pubDate>Wed, 10 Aug 2022 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2022/08/10/know-yourself/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2022/08/10/know-yourself/</guid>
+        <pubDate>Sat, 13 Aug 2022 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2022/08/13/know-yourself/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2022/08/13/know-yourself/</guid>
         
         <category>Life</category>
         
@@ -975,51 +1041,6 @@ model size: 1.30M
         <guid isPermaLink="true">https://xctorres.github.io//2021/11/07/jar-in-pyspark/</guid>
         
         <category>Spark</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Machine Learning Interview Questions</title>
-        <description>&lt;ol&gt;
-  &lt;li&gt;Supervised VS Unsupervised&lt;/li&gt;
-  &lt;li&gt;Generative and Discriminative Models&lt;/li&gt;
-  &lt;li&gt;What is naive in Bayesian Model&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/74874291&quot;&gt;Logistic Regression Model&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Support Vector Machine&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://towardsdatascience.com/cart-classification-and-regression-trees-for-clean-but-powerful-models-cc89e60b7a85&quot;&gt;CART Tree&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;GBDT VS Random Forest&lt;/li&gt;
-  &lt;li&gt;Xgboost&lt;/li&gt;
-  &lt;li&gt;Overfit&lt;/li&gt;
-  &lt;li&gt;Condition Random Field&lt;/li&gt;
-  &lt;li&gt;Hidden Markov Model&lt;/li&gt;
-  &lt;li&gt;TF-IDF、Edit Distance、Inverted Index&lt;/li&gt;
-  &lt;li&gt;Word2vec&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://towardsdatascience.com/probability-concepts-explained-maximum-likelihood-estimation-c7b4342fdbb1&quot;&gt;Maximum Likelihood Estimation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Regularization, L1 and L2&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/pinard/p/6093948.html&quot;&gt;Maximum Entropy Model&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Factorization Machine, Field-aware Factorization Machine&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1703.04247&quot;&gt;DeepFM&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.eecs.qmul.ac.uk/~norman/BBNs/Independence_and_conditional_independence.htm&quot;&gt;Independent &amp;amp; Conditional Independent&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.floydhub.com/a-beginners-guide-on-recurrent-neural-networks-with-pytorch/&quot;&gt;RNN&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.floydhub.com/long-short-term-memory-from-zero-to-hero-with-pytorch/&quot;&gt;LSTM&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;&quot;&gt;GRU&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Gradient Vanish&lt;/li&gt;
-  &lt;li&gt;BiLSTM + CRF&lt;/li&gt;
-  &lt;li&gt;Transformer&lt;/li&gt;
-  &lt;li&gt;Bert VS GPT&lt;/li&gt;
-  &lt;li&gt;Optimization algorithm&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/amusi/Deep-Learning-Interview-Book&quot;&gt;https://github.com/amusi/Deep-Learning-Interview-Book&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms&quot;&gt;https://www.interviewbit.com/machine-learning-interview-questions/#types-of-machine-learning-algorithms&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 20 Oct 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/10/20/machine-learning-interview/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/10/20/machine-learning-interview/</guid>
-        
-        <category>Interview</category>
         
         
       </item>
