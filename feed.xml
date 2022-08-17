@@ -5,9 +5,49 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 13 Aug 2022 01:25:13 +0800</pubDate>
-    <lastBuildDate>Sat, 13 Aug 2022 01:25:13 +0800</lastBuildDate>
+    <pubDate>Wed, 17 Aug 2022 10:34:46 +0800</pubDate>
+    <lastBuildDate>Wed, 17 Aug 2022 10:34:46 +0800</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
+    
+      <item>
+        <title>Guitar</title>
+        <description>&lt;p&gt;记得大学开始时就开始自学吉他，但已经五年没怎么碰过吉他了。现在已经下定决心，重新拾起吉他，从音乐中找到部分内心的平静和幸福感。但吉他的练习也是一个枯燥耗时的过程，一定要制定合理的计划才能有所成效，遂写此篇博客制定计划。&lt;/p&gt;
+
+&lt;p&gt;周末两天，每天应该有1-2小时的时间进行练习，而周中应该可以每天抽出半小时练习。这次的目标主要还是指弹吉他，指弹学好了弹唱就是分分钟的事。&lt;/p&gt;
+
+&lt;h2 id=&quot;左手练习&quot;&gt;左手练习&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;爬格子&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;https://www.bilibili.com/video/BV1hA4y1R7w6?spm_id_from=333.337&lt;br /&gt;
+https://www.bilibili.com/video/BV1nZ4y1v7rW/?spm_id_from=333.788&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;指版音阶图&lt;br /&gt;
+http://www.798com.com/article-29334-1.html&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;右手练习&quot;&gt;右手练习&lt;/h2&gt;
+&lt;h4 id=&quot;指弹技巧&quot;&gt;指弹技巧&lt;/h4&gt;
+&lt;p&gt;https://www.bilibili.com/video/BV1tY411F72z/?spm_id_from=333.788&lt;/p&gt;
+
+&lt;h4 id=&quot;拨片练习&quot;&gt;拨片练习&lt;/h4&gt;
+
+&lt;h4 id=&quot;扫弦练习&quot;&gt;扫弦练习&lt;/h4&gt;
+
+&lt;h2 id=&quot;乐理练习&quot;&gt;乐理练习&lt;/h2&gt;
+&lt;p&gt;CAGED系统: https://www.youtube.com/watch?v=L5cLIntvt3o&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 17 Aug 2022 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2022/08/17/guitar/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2022/08/17/guitar/</guid>
+        
+        <category>Guitar</category>
+        
+        
+      </item>
     
       <item>
         <title>Reflection After Interview</title>
@@ -1086,84 +1126,6 @@ model size: 1.30M
         <guid isPermaLink="true">https://xctorres.github.io//2021/09/25/backend-interview/</guid>
         
         <category>Interview</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Dijkstra 算法</title>
-        <description>&lt;p&gt;Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路网做路径规划中，也常常用到该算法的变种。&lt;/p&gt;
-
-&lt;h4 id=&quot;基本思想&quot;&gt;基本思想&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;通过Dijkstra计算图G中的最短路径时，需要指定起点s(即从顶点s开始计算)。&lt;/li&gt;
-  &lt;li&gt;此外，引进两个集合S和U。S的作用是记录已求出最短路径的顶点(以及相应的最短路径长度)，而U则是记录还未求出最短路径的顶点(以及该顶点到起点s的距离)。&lt;/li&gt;
-  &lt;li&gt;初始时，S中只有起点s；U中是除s之外的顶点，并且U中顶点的路径是”起点s到该顶点的路径”。然后，从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 然后，再从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 … 重复该操作，直到遍历完所有顶点。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;证明&lt;br /&gt;
-&lt;a href=&quot;https://www.cnblogs.com/jiangshaoyin/p/9954937.html&quot;&gt;https://www.cnblogs.com/jiangshaoyin/p/9954937.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;伪代码&quot;&gt;伪代码&lt;/h4&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;Dijkstra&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Graph, &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: 
-
-        dist[source] ← 0
-        create vertex priority queue Q 
-
-        &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;each vertex v &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;Graph:
-            &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;v ≠ &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;:
-                dist[v] ← INFINITY 
-            Q.add_with_priority&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;v, dist[v]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;Q is not empty: 
-            u ← Q.extract_min&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; 
-
-            &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;each neighbor v of u:
-                &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;dist[u] + length&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;u, v&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;lt; dist[v]:
-                    dist[v] &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; dist[u] + length&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;u, v&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            Q.decrease_priority&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;v, dis[v]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;dis
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;优先队列能够提高运行效率，其时间复杂度为$O(E + Vlog(V))$，这里E代表图的总边个数，V代表图的总顶点个数。从伪代码不难看出，需要维护一个数组，用来存储每一个node的当前最短路径距离，source node初始化为0，其他为$\infty$ ；并将这些点载入到优先队列，优先值为当前最短路径距离；source node初始化为0，其余nodes为无穷大。此后便不停pop 最短路径距离最小的结点。&lt;/p&gt;
-
-&lt;h4 id=&quot;示例&quot;&gt;示例&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/in-post/Dijkstra/demo.png&quot; alt=&quot;Demo&quot; /&gt;
-我们来看一个示例，node 1为源结点：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;1) 在第一次迭代中， 源节点最短路径距离为0，所以被弹出。其所有neighbour(node 2,3,5)的最短路径距离根据公式$dist[v] = dist[u] + length(u, v) （if\;dist[u] + length(u, v) &amp;lt; dist[v])$都被更新，由于node 4不与node 1相连，所以其最短路径距离仍为$\infty$&lt;/li&gt;
-  &lt;li&gt;2) 在第二次跌代中，在剩余nodes中，node 3的最短路径距离为3最小，则被弹出。其所有neighbour(node 2,4, 5)的最短路径距离更新&lt;/li&gt;
-  &lt;li&gt;3）在第三次迭代中，node 4最短距离为5，被弹出。&lt;/li&gt;
-  &lt;li&gt;4）剩余的迭代都是同样的道理&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Sun, 25 Jul 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/07/25/dijkstra/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/07/25/dijkstra/</guid>
-        
-        <category>Graph</category>
-        
-        <category>Algorithm</category>
         
         
       </item>
