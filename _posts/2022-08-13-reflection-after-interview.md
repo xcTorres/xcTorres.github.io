@@ -49,13 +49,58 @@ leetcode 1011
 # Reflection  
 To be honest, I am frustrated for a while, but I think I deserve it because I didn't fully prepare the coding and related machine learning knowledge on the CV. Right now I don't have chance and have to change my mind to look for new roles at the end of the year. It is not too bad because I have 4 months to prepare, this time I don't have any excuse. First I need to know which position I should apply for, I think machine learning engineer(search or NLP) should be more related, it is also okay if the job needs me to still work on map-related projects except assignment field. So there should be these things to prepare as follows:  
 
-- Coding: [Leetcode](https://docs.google.com/spreadsheets/d/1l7Gvrubuscs0iwDPov053wGWV_uNg0yK_991JDeNIH0/edit#gid=2023823697)
 - NLP: Word2vec, HMM, CRF, RNN, Bi-lstm, Bi-lstm-CRF, Bert  
 - Search: Query correction, NER, search engine  
 - Recommendation: 
 - Machine learnning skills: Linear regression, xgboost, bias and variance, underfitting and overfitting
 - Probability: Bayesian rules, p value, optimization algorithm
-- SQL
+- SQL  
+
+# Preparation
+
+#### Coding
+[Leetcode](https://docs.google.com/spreadsheets/d/1l7Gvrubuscs0iwDPov053wGWV_uNg0yK_991JDeNIH0/edit#gid=2023823697)
+
+#### Machine learning & Deep learning  
+- underfitting and overfitting  
+- bias and variance  
+
+
+
+#### NLP
+Reference  
+
+1. Sequence to sequence model  
+
+2. Encoder and decoder  
+
+3. Transformer  
+1) Batch norm vs Layer norm.
+2) What is Q, K, V 
+
+4. Bert, RoBERTa
+https://zhuanlan.zhihu.com/p/151412524 
+
+
+5. RNN  
+6. LSTM  
+7. HMM  
+8. CRF  
+9. Word2vec  
+[https://www.cnblogs.com/pinard/p/7160330.html](https://www.cnblogs.com/pinard/p/7160330.html)  
+SkipGram, CBOW, Hierarchical softmax, Negtive sampling
+
+
+#### Search
+Reference  
+[https://www.zhihu.com/column/c_1345405459457736704](https://www.zhihu.com/column/c_1345405459457736704)  
+[https://arxiv.org/pdf/2106.09297.pdf](https://arxiv.org/pdf/2106.09297.pdf)
+1. Vector retrieval: faiss
+
+
+#### Recommendation  
+
+DSSM Model: [link](https://mp.weixin.qq.com/s?__biz=MzI5NDMzMjY1MA==&mid=2247486514&idx=1&sn=51edd5196f2b6420072505fee9c13770&scene=21#wechat_redirect)
 
 
 
