@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 17 Aug 2022 10:34:46 +0800</pubDate>
-    <lastBuildDate>Wed, 17 Aug 2022 10:34:46 +0800</lastBuildDate>
+    <pubDate>Wed, 24 Aug 2022 11:19:24 +0800</pubDate>
+    <lastBuildDate>Wed, 24 Aug 2022 11:19:24 +0800</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
@@ -17,27 +17,62 @@
 
 &lt;h2 id=&quot;左手练习&quot;&gt;左手练习&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;爬格子&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;https://www.bilibili.com/video/BV1hA4y1R7w6?spm_id_from=333.337&lt;br /&gt;
-https://www.bilibili.com/video/BV1nZ4y1v7rW/?spm_id_from=333.788&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;指版音阶图&lt;br /&gt;
-http://www.798com.com/article-29334-1.html&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;爬格子&lt;br /&gt;
+&lt;a href=&quot;https://www.bilibili.com/video/BV1hA4y1R7w6?spm_id_from=333.337&quot;&gt;https://www.bilibili.com/video/BV1hA4y1R7w6?spm_id_from=333.337&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bilibili.com/video/BV1nZ4y1v7rW/?spm_id_from=333.788&quot;&gt;https://www.bilibili.com/video/BV1nZ4y1v7rW/?spm_id_from=333.788&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;指版音阶图&lt;br /&gt;
+&lt;a href=&quot;http://www.798com.com/article-29334-1.html&quot;&gt;http://www.798com.com/article-29334-1.html&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;右手练习&quot;&gt;右手练习&lt;/h2&gt;
-&lt;h4 id=&quot;指弹技巧&quot;&gt;指弹技巧&lt;/h4&gt;
-&lt;p&gt;https://www.bilibili.com/video/BV1tY411F72z/?spm_id_from=333.788&lt;/p&gt;
-
-&lt;h4 id=&quot;拨片练习&quot;&gt;拨片练习&lt;/h4&gt;
-
-&lt;h4 id=&quot;扫弦练习&quot;&gt;扫弦练习&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;指弹技巧&lt;br /&gt;
+&lt;a href=&quot;https://www.bilibili.com/video/BV1tY411F72z/?spm_id_from=333.788&quot;&gt;https://www.bilibili.com/video/BV1tY411F72z/?spm_id_from=333.788&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;拨片练习&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;扫弦练习&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;乐理练习&quot;&gt;乐理练习&lt;/h2&gt;
-&lt;p&gt;CAGED系统: https://www.youtube.com/watch?v=L5cLIntvt3o&lt;/p&gt;
+&lt;p&gt;CAGED系统: &lt;a href=&quot;https://www.youtube.com/watch?v=L5cLIntvt3o&quot;&gt;https://www.youtube.com/watch?v=L5cLIntvt3o&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;todo-歌曲&quot;&gt;Todo 歌曲&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Song&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Tutorial&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;My performance&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;流行的云&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;bilibili.com/read/cv2603484/&quot;&gt;link&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Pending&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;奇迹的山&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;link&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Pending&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;like a star&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;link&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Pending&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 </description>
         <pubDate>Wed, 17 Aug 2022 00:00:00 +0800</pubDate>
@@ -95,7 +130,6 @@ word2vec, Search System introduction Bilstm-CRF&lt;/p&gt;
 &lt;p&gt;To be honest, I am frustrated for a while, but I think I deserve it because I didn’t fully prepare the coding and related machine learning knowledge on the CV. Right now I don’t have chance and have to change my mind to look for new roles at the end of the year. It is not too bad because I have 4 months to prepare, this time I don’t have any excuse. First I need to know which position I should apply for, I think machine learning engineer(search or NLP) should be more related, it is also okay if the job needs me to still work on map-related projects except assignment field. So there should be these things to prepare as follows:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Coding: &lt;a href=&quot;https://docs.google.com/spreadsheets/d/1l7Gvrubuscs0iwDPov053wGWV_uNg0yK_991JDeNIH0/edit#gid=2023823697&quot;&gt;Leetcode&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;NLP: Word2vec, HMM, CRF, RNN, Bi-lstm, Bi-lstm-CRF, Bert&lt;/li&gt;
   &lt;li&gt;Search: Query correction, NER, search engine&lt;/li&gt;
   &lt;li&gt;Recommendation:&lt;/li&gt;
@@ -103,6 +137,57 @@ word2vec, Search System introduction Bilstm-CRF&lt;/p&gt;
   &lt;li&gt;Probability: Bayesian rules, p value, optimization algorithm&lt;/li&gt;
   &lt;li&gt;SQL&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h1 id=&quot;preparation&quot;&gt;Preparation&lt;/h1&gt;
+
+&lt;h4 id=&quot;coding&quot;&gt;Coding&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.google.com/spreadsheets/d/1l7Gvrubuscs0iwDPov053wGWV_uNg0yK_991JDeNIH0/edit#gid=2023823697&quot;&gt;Leetcode&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;machine-learning--deep-learning&quot;&gt;Machine learning &amp;amp; Deep learning&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;underfitting and overfitting&lt;/li&gt;
+  &lt;li&gt;bias and variance&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;nlp&quot;&gt;NLP&lt;/h4&gt;
+&lt;p&gt;Reference&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sequence to sequence model&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Encoder and decoder&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Transformer&lt;br /&gt;
+1) Batch norm vs Layer norm.
+2) What is Q, K, V&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bert, RoBERTa
+https://zhuanlan.zhihu.com/p/151412524&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RNN&lt;/li&gt;
+  &lt;li&gt;LSTM&lt;/li&gt;
+  &lt;li&gt;HMM&lt;/li&gt;
+  &lt;li&gt;CRF&lt;/li&gt;
+  &lt;li&gt;Word2vec&lt;br /&gt;
+&lt;a href=&quot;https://www.cnblogs.com/pinard/p/7160330.html&quot;&gt;https://www.cnblogs.com/pinard/p/7160330.html&lt;/a&gt;&lt;br /&gt;
+SkipGram, CBOW, Hierarchical softmax, Negtive sampling&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;search&quot;&gt;Search&lt;/h4&gt;
+&lt;p&gt;Reference&lt;br /&gt;
+&lt;a href=&quot;https://www.zhihu.com/column/c_1345405459457736704&quot;&gt;https://www.zhihu.com/column/c_1345405459457736704&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://arxiv.org/pdf/2106.09297.pdf&quot;&gt;https://arxiv.org/pdf/2106.09297.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Vector retrieval: faiss&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;recommendation&quot;&gt;Recommendation&lt;/h4&gt;
+
+&lt;p&gt;DSSM Model: &lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MzI5NDMzMjY1MA==&amp;amp;mid=2247486514&amp;amp;idx=1&amp;amp;sn=51edd5196f2b6420072505fee9c13770&amp;amp;scene=21#wechat_redirect&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Sat, 13 Aug 2022 00:00:00 +0800</pubDate>
