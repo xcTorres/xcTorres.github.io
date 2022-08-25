@@ -75,11 +75,11 @@ Reference
 2. Encoder and decoder  
 
 3. Transformer  
-1) Batch norm vs Layer norm.
+1) Batch norm vs Layer norm.  
 2) What is Q, K, V 
 
-4. Bert, RoBERTa
-https://zhuanlan.zhihu.com/p/151412524 
+4. Bert, RoBERTa  
+[https://zhuanlan.zhihu.com/p/151412524](https://zhuanlan.zhihu.com/p/151412524)
 
 
 5. RNN  
