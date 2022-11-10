@@ -366,7 +366,7 @@
         <span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">perf_counter</span><span class="p">()</span>
         <span class="n">asyncio</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
         <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">s</span>
-        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">__file__</span><span class="si">}</span><span class="s"> executed in </span><span class="si">{</span><span class="n">elapsed</span><span class="p">:</span><span class="mf">0.2</span><span class="n">f</span><span class="si">}</span><span class="s"> seconds."</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">__file__</span><span class="si">}</span><span class="s"> executed in </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="mf">0.2</span><span class="n">f</span><span class="si">}</span><span class="s"> seconds."</span><span class="p">)</span>
 
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p>该代码块运行结果如下,不难发现main函数是要运行三个协程任务，但当每个任务运行到asyncio.sleep的时候便立马切换到其他协程，然后当睡眠1s过后切换回来时，三个任务都依次完成。起到了异步的效果。其总时间只花了1s钟。</p>
@@ -778,77 +778,82 @@
         </a>
         
         
-                <a data-sort="0021" 
+                <a data-sort="0022" 
                     href="/archive/?tag=Life"
                     title="Life"
                     rel="5">Life</a>
         
-                <a data-sort="0022" 
+                <a data-sort="0023" 
                     href="/archive/?tag=C%2B%2B"
                     title="C++"
                     rel="4">C++</a>
         
-                <a data-sort="0022" 
+                <a data-sort="0023" 
                     href="/archive/?tag=NLP"
                     title="NLP"
                     rel="4">NLP</a>
         
-                <a data-sort="0022" 
+                <a data-sort="0023" 
                     href="/archive/?tag=Python"
                     title="Python"
                     rel="4">Python</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Algorithm"
                     title="Algorithm"
                     rel="3">Algorithm</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Graph"
                     title="Graph"
                     rel="3">Graph</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Machine+Learning"
                     title="Machine Learning"
                     rel="3">Machine Learning</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Spark"
                     title="Spark"
                     rel="3">Spark</a>
         
-                <a data-sort="0024" 
+                <a data-sort="0025" 
                     href="/archive/?tag=GIS"
                     title="GIS"
                     rel="2">GIS</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Algorithms"
                     title="Algorithms"
                     rel="1">Algorithms</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Deep+Learning"
                     title="Deep Learning"
                     rel="1">Deep Learning</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Guitar"
                     title="Guitar"
                     rel="1">Guitar</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Interview"
                     title="Interview"
                     rel="1">Interview</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
+                    href="/archive/?tag=Leetcode"
+                    title="Leetcode"
+                    rel="1">Leetcode</a>
+        
+                <a data-sort="0026" 
                     href="/archive/?tag=Linux"
                     title="Linux"
                     rel="1">Linux</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Web"
                     title="Web"
                     rel="1">Web

@@ -11,33 +11,25 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Attention机制与Transformer模型 - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="Reflection After Interview - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="如果想要了解Attention机制，最重要的当然是先读论文了，不过原始论文非常简练，很难一次读懂, 感谢李沐老师逐段讲解论文，非常清晰，强烈推荐Transformer论文逐段精读。
-当然最重要的当然是可以跟代码学习。以该repo为例，各个子模块相应代码如下。
-
-  Encoder link
-  Decoder link
-  Attention link
-  PositionEncoding ...">
+    <meta property="og:description" content="It has been 3 years working in Singapore since I graduated. During the period in Shopee, I learned a lot not only the coding skills but also the understanding of projects. Since Shopee has decided ...">
     
-    <meta property="article:published_time" content="2022-05-27T00:00:00Z">
+    <meta property="article:published_time" content="2022-11-10T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
     
     
-    <meta property="article:tag" content="NLP">
-    
-    <meta property="article:tag" content="Machine Learning">
+    <meta property="article:tag" content="Leetcode">
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2022/05/27/attention/">
+    <meta property="og:url" content="https://xctorres.github.io//2022/11/10/reflection-after-interview/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>Attention机制与Transformer模型 - 谢聪博客 | xcTorres Blog</title>
+    <title>Reflection After Interview - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -46,7 +38,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2022/05/27/attention/">
+    <link rel="canonical" href="https://xctorres.github.io//2022/11/10/reflection-after-interview/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -242,7 +234,7 @@
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/in-post/machine-learning.jpeg" width="0" height="0"> -->
+<!-- <img src="/img/in-post/reflect.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -251,7 +243,7 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/in-post/machine-learning.jpeg');
+        background-image: url('/img/in-post/reflect.jpg');
         background: ;
     }
 
@@ -268,15 +260,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=NLP" title="NLP">NLP</a>
-                        
-                        <a class="tag" href="/archive/?tag=Machine+Learning" title="Machine Learning">Machine Learning</a>
+                        <a class="tag" href="/archive/?tag=Leetcode" title="Leetcode">Leetcode</a>
                         
                     </div>
-                    <h1>Attention机制与Transformer模型</h1>
+                    <h1>Reflection After Interview</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on May 27, 2022</span>
+                    <span class="meta">Posted by xcTorres on November 10, 2022</span>
                 </div>
             </div>
         </div>
@@ -302,53 +292,109 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>如果想要了解Attention机制，最重要的当然是先读<a href="https://arxiv.org/abs/1706.03762">论文</a>了，不过原始论文非常简练，很难一次读懂, 感谢李沐老师逐段讲解论文，非常清晰，强烈推荐<a href="https://www.bilibili.com/video/BV1pu411o7BE?spm_id_from=333.999.0.0">Transformer论文逐段精读</a>。
-当然最重要的当然是可以跟<a href="https://github.com/xcTorres/machine_learning/tree/master/transformer">代码</a>学习。以该repo为例，各个子模块相应代码如下。</p>
+				<p>It has been 3 years working in Singapore since I graduated. During the period in Shopee, I learned a lot not only the coding skills but also the understanding of projects. Since Shopee has decided to shift the engineering center to China mainland, the projects that we Singapore team could do are becoming limited, which result in the thoughts to pursue other opportunities.</p>
+
+<p>There are not many opportunities avaliable in Singapore as expected, some local big company like Lazada and Grab freeze their head count, Amreican company like Google and facebook also don’t have enough engineer head count. I got my permanent resident before I subimitted my CV, which helps me a lot to have more interview opportunities. Here are recent interview experience, unluckily I don’t have any offer due to short of time to fully prepare.</p>
+
+<h1 id="interview">Interview</h1>
+<h4 id="tiktok">Tiktok</h4>
 <ul>
-  <li>Encoder <a href="https://github.com/xcTorres/machine_learning/blob/master/transformer/Models.py#L11">link</a></li>
-  <li>Decoder <a href="https://github.com/xcTorres/machine_learning/blob/master/transformer/Models.py#L26">link</a></li>
-  <li>Attention <a href="https://github.com/xcTorres/machine_learning/blob/master/transformer/Sublayers.py#L40">link</a></li>
-  <li>PositionEncoding <a href="https://github.com/xcTorres/machine_learning/blob/master/transformer/Embed.py#L14">link</a></li>
-  <li>Mask <a href="https://github.com/xcTorres/machine_learning/blob/master/transformer/Batch.py#L15">link</a></li>
+  <li>
+    <p><strong>Machine learning engineer(recommendation)</strong><br />
+Because of lack of recomendation-related experience, the interviewer in both 2 rounds doesn’t have too much interests on my experience. So the coding problem appears to be very important，but I didn’t prepare for a long time so coding performance sucks, failed the interview.<br />
+1st round: Leetcode 3(Longest Substring Without Repeating Characters)<br />
+2nd round: Leetcode 297(Serialize and Deserialize Binary Tree)</p>
+  </li>
+  <li>
+    <p><strong>Machine learning engineer(platform governance)</strong><br />
+Bert: how to pretrain; Q, K, V<br />
+batch norm and layer norm<br />
+How does GBDT do classfication?<br />
+How to pretrain your own Bert?</p>
+  </li>
 </ul>
 
-<p><img src="/img/in-post/attention/attention.png" width="500" /></p>
+<h4 id="indeed">Indeed</h4>
+<p>The coding problem is easy, merge 2 sorted array. Here are some machine learning related problems.</p>
 
-<p>一般面试过程中，可能会有以下一些问题。</p>
-<ol>
-  <li>问: <strong>Q,K,V到底是什么东西？</strong><br />
-答：Query、Key的作用是用来在token之间搬运信息的，而Value本身就是从当前token当中提取出来的信息。所以从公式中可以看出，
-$ H = softmax(QK^T/\sqrt{d_k}*V) $<br />
-—</li>
-  <li>问：<strong>为什么用Layer Normal？</strong><br />
-答：Layer Normal与Batch Normal的区别<br />
-—</li>
-  <li>问：<strong>Mask的作用</strong><br />
-答：In the encoder and decoder: To zero attention outputs wherever there is just padding in the input sentences. In the decoder: To prevent the decoder ‘peaking’ ahead at the rest of the translated sentence when predicting the next word.</li>
-</ol>
+<ul>
+  <li>Unfair coin(Bayesian probability)</li>
+  <li>Overfitting and underfitting</li>
+  <li>Variance, boosting and bagging</li>
+  <li>Dropout mechanisum</li>
+</ul>
 
-<h2 id="reference">Reference</h2>
-<p><a href="https://towardsdatascience.com/how-to-code-the-transformer-in-pytorch-24db27c8f9ec">https://towardsdatascience.com/how-to-code-the-transformer-in-pytorch-24db27c8f9ec</a></p>
+<h4 id="apple">Apple</h4>
+<p>Coding: Top k frequent elements<br />
+word2vec, Search System introduction, Bilstm-CRF</p>
 
+<h4 id="huawei">Huawei</h4>
+<p>leetcode: lognest valid parentheses, coin change</p>
+
+<h4 id="grab">Grab</h4>
+<p>leetcode 1011</p>
+
+<h1 id="reflection">Reflection</h1>
+<p>To be honest, I am frustrated for a while, but I think I deserve it because I didn’t fully prepare the coding and related machine learning knowledge on the CV. Right now I don’t have chance and have to change my mind to look for new roles at the end of the year. It is not too bad because I have 4 months to prepare, this time I don’t have any excuse. First I need to know which position I should apply for, I think machine learning engineer(search or NLP) should be more related, it is also okay if the job needs me to still work on map-related projects except assignment field.</p>
+
+<h1 id="preparation">Preparation</h1>
+
+<h4 id="coding">Coding</h4>
+<p><a href="https://docs.google.com/spreadsheets/d/1l7Gvrubuscs0iwDPov053wGWV_uNg0yK_991JDeNIH0/edit#gid=2023823697">Leetcode</a></p>
+
+<h4 id="machine-learning--deep-learning">Machine learning &amp; Deep learning</h4>
+<ul>
+  <li>Underfitting and Overfitting</li>
+  <li>Bias and Variance</li>
+  <li>Generative Model vs Discriminative Model</li>
+  <li>Bagging vs Boost</li>
+  <li>Feature Selection</li>
+  <li>Bayesian Model</li>
+  <li>Logistic Regression</li>
+  <li>GBDT VS Xgboost VS LightGBM</li>
+  <li>Metrics: (MSE,MAE, Logloss, AUC curve)</li>
+  <li>L1, L2 regularization</li>
+  <li>Hidden Markov Model</li>
+  <li>Conditional Random Field</li>
+  <li>Activate function</li>
+  <li>Optimization algorithm</li>
+  <li>Batch Norm VS Layer Norm</li>
+</ul>
+
+<h4 id="nlp">NLP</h4>
+<ul>
+  <li>RNN</li>
+  <li>Gradient vanish &amp; gradient explode</li>
+  <li>LSTM</li>
+  <li>Word2vec</li>
+  <li>Transformer</li>
+  <li>Bert</li>
+  <li>Bi-lstm + CRF</li>
+</ul>
+
+<h4 id="recommendation">Recommendation</h4>
+<ul>
+  <li>FM</li>
+  <li>FFM</li>
+  <li>DeepFM</li>
+  <li>DSSM</li>
+</ul>
+
+<h4 id="rank">Rank</h4>
+
+<h4 id="graph">Graph</h4>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/04/02/cython-pointer/" data-toggle="tooltip" data-placement="top" title="Cython Pointer Memory Leak">
+                        <a href="/2022/08/17/guitar/" data-toggle="tooltip" data-placement="top" title="Guitar">
                         Previous<br>
-                        <span>Cython Pointer Memory Leak</span>
+                        <span>Guitar</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2022/08/13/know-yourself/" data-toggle="tooltip" data-placement="top" title="Know Yourself">
-                        Next<br>
-                        <span>Know Yourself</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -663,7 +709,7 @@ $ H = softmax(QK^T/\sqrt{d_k}*V) $<br />
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2022/05/27/attention",
+		id: "/2022/11/10/reflection-after-interview",
 		
 		});
 		gitalk.render('gitalk-container'); 
