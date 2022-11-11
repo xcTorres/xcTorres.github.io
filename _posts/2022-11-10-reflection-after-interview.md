@@ -58,31 +58,46 @@ To be honest, I am frustrated for a while, but I think I deserve it because I di
 [Leetcode](https://docs.google.com/spreadsheets/d/1l7Gvrubuscs0iwDPov053wGWV_uNg0yK_991JDeNIH0/edit#gid=2023823697)
 
 #### Machine learning & Deep learning
-- Underfitting and Overfitting  
-- Bias and Variance  
+- **Underfitting and Overfitting**  
+  [link](https://www.cnblogs.com/zhhfan/p/10476761.html)
+- **Bias and Variance**  
+  [link](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)  
 - Generative Model vs Discriminative Model
 - Bagging vs Boost  
 - Feature Selection  
 - Bayesian Model  
 - Logistic Regression  
 - GBDT VS Xgboost VS LightGBM  
-- Metrics: (MSE,MAE, Logloss, AUC curve)  
+- **Metrics**: (MSE,MAE, Logloss, AUC curve)  
+  [link](https://blog.csdn.net/Dby_freedom/article/details/89814644)  
 - L1, L2 regularization  
 - Hidden Markov Model  
 - Conditional Random Field  
-- Activate function
-- Optimization algorithm  
-- Batch Norm VS Layer Norm
+- **Activate function**  
+  [link](https://towardsdatascience.com/comparison-of-activation-functions-for-deep-neural-networks-706ac4284c8a)
+- **Optimization algorithm**  
+  [link](https://www.kdnuggets.com/2020/12/optimization-algorithms-neural-networks.html)  
+- **Batch Norm VS Layer Norm**  
+  [link](https://bbs.huaweicloud.com/blogs/329066)
 
 
 #### NLP  
 - RNN  
 - Gradient vanish & gradient explode
-- LSTM  
+- **LSTM**  
+  [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)  
+  [LSTM模型与前向反向传播算法](https://www.cnblogs.com/pinard/p/6519110.html)  
+  [Solving the Vanishing Gradient Problem with LSTM](https://www.codingninjas.com/codestudio/library/solving-the-vanishing-gradient-problem-with-lstm)
 - Word2vec  
-- Transformer  
-- Bert  
-- Bi-lstm + CRF
+- **Bert**  
+  1) [The number of Bert parameters](https://zhuanlan.zhihu.com/p/144582114)  
+  2) [Why does self-attention divide root of dk](https://blog.csdn.net/suibianshen2012/article/details/122141294)  
+  3) [The comparison of all attentions]
+  
+
+- **Bi-lstm + CRF**  
+  [CRF Layer on the Top of BiLSTM](https://createmomo.github.io/)  
+  [Pytorch Code](https://pytorch.org/tutorials/beginner/nlp/advanced_tutorial.html)
 
 #### Recommendation  
 - FM  
