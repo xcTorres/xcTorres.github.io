@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 10 Nov 2022 12:15:12 +0800</pubDate>
-    <lastBuildDate>Thu, 10 Nov 2022 12:15:12 +0800</lastBuildDate>
+    <pubDate>Fri, 11 Nov 2022 18:39:17 +0800</pubDate>
+    <lastBuildDate>Fri, 11 Nov 2022 18:39:17 +0800</lastBuildDate>
     <generator>Jekyll v4.3.1</generator>
     
       <item>
@@ -63,32 +63,47 @@ word2vec, Search System introduction, Bilstm-CRF&lt;/p&gt;
 
 &lt;h4 id=&quot;machine-learning--deep-learning&quot;&gt;Machine learning &amp;amp; Deep learning&lt;/h4&gt;
 &lt;ul&gt;
-  &lt;li&gt;Underfitting and Overfitting&lt;/li&gt;
-  &lt;li&gt;Bias and Variance&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Underfitting and Overfitting&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.cnblogs.com/zhhfan/p/10476761.html&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Bias and Variance&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&quot;https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Generative Model vs Discriminative Model&lt;/li&gt;
   &lt;li&gt;Bagging vs Boost&lt;/li&gt;
   &lt;li&gt;Feature Selection&lt;/li&gt;
   &lt;li&gt;Bayesian Model&lt;/li&gt;
   &lt;li&gt;Logistic Regression&lt;/li&gt;
   &lt;li&gt;GBDT VS Xgboost VS LightGBM&lt;/li&gt;
-  &lt;li&gt;Metrics: (MSE,MAE, Logloss, AUC curve)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Metrics&lt;/strong&gt;: (MSE,MAE, Logloss, AUC curve)&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/Dby_freedom/article/details/89814644&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;L1, L2 regularization&lt;/li&gt;
   &lt;li&gt;Hidden Markov Model&lt;/li&gt;
   &lt;li&gt;Conditional Random Field&lt;/li&gt;
-  &lt;li&gt;Activate function&lt;/li&gt;
-  &lt;li&gt;Optimization algorithm&lt;/li&gt;
-  &lt;li&gt;Batch Norm VS Layer Norm&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Activate function&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&quot;https://towardsdatascience.com/comparison-of-activation-functions-for-deep-neural-networks-706ac4284c8a&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Optimization algorithm&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.kdnuggets.com/2020/12/optimization-algorithms-neural-networks.html&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Batch Norm VS Layer Norm&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&quot;https://bbs.huaweicloud.com/blogs/329066&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;nlp&quot;&gt;NLP&lt;/h4&gt;
 &lt;ul&gt;
   &lt;li&gt;RNN&lt;/li&gt;
   &lt;li&gt;Gradient vanish &amp;amp; gradient explode&lt;/li&gt;
-  &lt;li&gt;LSTM&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;LSTM&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&quot;https://colah.github.io/posts/2015-08-Understanding-LSTMs/&quot;&gt;Understanding LSTM Networks&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.cnblogs.com/pinard/p/6519110.html&quot;&gt;LSTM模型与前向反向传播算法&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.codingninjas.com/codestudio/library/solving-the-vanishing-gradient-problem-with-lstm&quot;&gt;Solving the Vanishing Gradient Problem with LSTM&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Word2vec&lt;/li&gt;
-  &lt;li&gt;Transformer&lt;/li&gt;
-  &lt;li&gt;Bert&lt;/li&gt;
-  &lt;li&gt;Bi-lstm + CRF&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Bert&lt;/strong&gt;&lt;br /&gt;
+1) &lt;a href=&quot;https://zhuanlan.zhihu.com/p/144582114&quot;&gt;The number of Bert parameters&lt;/a&gt;&lt;br /&gt;
+2) &lt;a href=&quot;https://blog.csdn.net/suibianshen2012/article/details/122141294&quot;&gt;Why does self-attention divide root of dk&lt;/a&gt;&lt;br /&gt;
+3) [The comparison of all attentions]&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Bi-lstm + CRF&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&quot;https://createmomo.github.io/&quot;&gt;CRF Layer on the Top of BiLSTM&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://pytorch.org/tutorials/beginner/nlp/advanced_tutorial.html&quot;&gt;Pytorch Code&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;recommendation&quot;&gt;Recommendation&lt;/h4&gt;
