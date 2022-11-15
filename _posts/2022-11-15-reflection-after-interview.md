@@ -62,17 +62,28 @@ To be honest, I am frustrated for a while, but I think I deserve it because I di
   [link](https://www.cnblogs.com/zhhfan/p/10476761.html)
 - **Bias and Variance**  
   [link](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)  
-- Generative Model vs Discriminative Model
-- Bagging vs Boost  
-- Feature Selection  
-- Bayesian Model  
-- Logistic Regression  
-- GBDT VS Xgboost VS LightGBM  
-- **Metrics**: (MSE,MAE, Logloss, AUC curve)  
-  [link](https://blog.csdn.net/Dby_freedom/article/details/89814644)  
-- L1, L2 regularization  
-- Hidden Markov Model  
-- Conditional Random Field  
+- **Generative Model vs Discriminative Model**  
+  [link](https://medium.com/@mlengineer/generative-and-discriminative-models-af5637a66a3)  
+- **Bagging vs Boost**  
+  [link](https://www.zhihu.com/question/26760839)  
+- **Feature Selection**  
+  [link](https://blog.csdn.net/weixin_38286298/article/details/93972300)
+- **Bayesian Model**  
+  [link](https://zhuanlan.zhihu.com/p/26262151)  
+- **Logistic Regression**  
+  [link](https://zhuanlan.zhihu.com/p/139122386)
+- **GBDT VS Xgboost VS LightGBM**  
+  [link](https://www.cnblogs.com/pinard/p/10979808.html)  
+- **Metrics**: (MSE,MAE, Logloss, AUC curve)   
+  [link](https://blog.csdn.net/Dby_freedom/article/details/89814644#:~:text=AUC%20%E6%8C%87%E6%A0%87%E7%9A%84%E4%BC%98%E7%82%B9%EF%BC%9A,%E6%96%B9%E9%9D%A2%E8%A1%A1%E9%87%8F%E7%AE%97%E6%B3%95%E7%9A%84%E8%A1%A8%E7%8E%B0%E3%80%82)
+  
+  [AUC](https://blog.csdn.net/Dby_freedom/article/details/89814644)  
+- **L1, L2 regularization**  
+  [link](https://www.cnblogs.com/zingp/p/10375691.html#:~:text=L1%E6%AD%A3%E5%88%99%E5%8C%96%E5%92%8CL2%E6%AD%A3%E5%88%99%E5%8C%96%E7%9A%84%E8%AF%B4%E6%98%8E%E5%A6%82%E4%B8%8B,%E4%B9%8B%E5%89%8D%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E7%B3%BB%E6%95%B0%CE%BB%E3%80%82) 
+- **Hidden Markov Model**  
+  [link](https://www.cnblogs.com/pinard/p/6945257.html)
+- **Conditional Random Field**  
+  [link](https://www.cnblogs.com/pinard/p/7048333.html)
 - **Activate function**  
   [link](https://towardsdatascience.com/comparison-of-activation-functions-for-deep-neural-networks-706ac4284c8a)
 - **Optimization algorithm**  
@@ -80,9 +91,9 @@ To be honest, I am frustrated for a while, but I think I deserve it because I di
 - **Batch Norm VS Layer Norm**  
   [link](https://bbs.huaweicloud.com/blogs/329066)
 
-
 #### NLP  
 - RNN  
+  [link](https://www.cnblogs.com/pinard/p/6509630.html)
 - Gradient vanish & gradient explode
 - **LSTM**  
   [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)  
@@ -101,7 +112,7 @@ To be honest, I am frustrated for a while, but I think I deserve it because I di
 
 #### Recommendation  
 - FM  
-- FFM
+- FFM  
 - DeepFM  
 - DSSM
 
