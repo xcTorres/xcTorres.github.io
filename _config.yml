@@ -231,6 +231,8 @@ gallery:
     y: 600                  # max height of thumbnails (in pixels)
   # The following options are for individual galleries.
   galleries:
+    malaysia:
+      name: "2022/10  Malaysia Trip"
     ronnie o'sullivan:
       name: "2022/06  Ronnie O'sullivan"
     west coast park:
