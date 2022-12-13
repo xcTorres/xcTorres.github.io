@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 16 Nov 2022 08:12:42 +0800</pubDate>
-    <lastBuildDate>Wed, 16 Nov 2022 08:12:42 +0800</lastBuildDate>
+    <pubDate>Tue, 13 Dec 2022 23:09:27 +0800</pubDate>
+    <lastBuildDate>Tue, 13 Dec 2022 23:09:27 +0800</lastBuildDate>
     <generator>Jekyll v4.3.1</generator>
     
       <item>
@@ -175,7 +175,7 @@ word2vec, Search System introduction, Bilstm-CRF&lt;/p&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;乐理练习&quot;&gt;乐理练习&lt;/h2&gt;
-&lt;p&gt;CAGED系统: &lt;a href=&quot;https://www.youtube.com/watch?v=L5cLIntvt3o&quot;&gt;https://www.youtube.com/watch?v=L5cLIntvt3o&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CAGED系统: &lt;a href=&quot;https://www.bilibili.com/video/BV1U64y1o7VC&quot;&gt;https://www.bilibili.com/video/BV1U64y1o7VC&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;todo-歌曲&quot;&gt;Todo 歌曲&lt;/h2&gt;
 
@@ -183,24 +183,28 @@ word2vec, Search System introduction, Bilstm-CRF&lt;/p&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th style=&quot;text-align: center&quot;&gt;Song&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Tutorial&lt;/th&gt;
       &lt;th style=&quot;text-align: center&quot;&gt;My performance&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;流行的云&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;bilibili.com/read/cv2603484/&quot;&gt;link&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1L8411j7zV/?vd_source=885072747156d73817fc60cd40a9d16d&quot;&gt;link&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Time travel&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1K24y1y7YS/?vd_source=885072747156d73817fc60cd40a9d16d&quot;&gt;link&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;偏爱&lt;/td&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;Pending&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;奇迹的山&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;link&lt;/td&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;Pending&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;like a star&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;link&lt;/td&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;Pending&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
