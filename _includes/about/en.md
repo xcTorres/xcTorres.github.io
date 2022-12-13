@@ -10,6 +10,7 @@
 
 ### Work Experience  
 
+| Dec 2022 - Now, Singapore | Tiktok | Algorithm Engineer |
 | Jan 2021 - Sep 2022, Singapore | Shopee | Senior Algorithm Engineer |
 | Jul 2019 - Jan 2021, Singapore | Shopee | Data Scientist |
 | Sep 2018 – Jun 2019, Wuhan, China | Huawei | Intern |
