@@ -231,6 +231,8 @@ gallery:
     y: 600                  # max height of thumbnails (in pixels)
   # The following options are for individual galleries.
   galleries:
+    bali:
+      name: 2022/12 Bali Trip
     malaysia:
       name: "2022/10  Malaysia Trip"
     ronnie o'sullivan:
