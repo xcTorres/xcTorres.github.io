@@ -11,34 +11,26 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Backend Interview Questions - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="OSM data introduction - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="
-  网络层
-  TCP协议，三次握手四次挥手
-  Close_wait and Time_wait
-  Http 的Keep-alive
-  ICMP协议与Ping命令
-  TCP滑动窗口，增加吞吐
-  Redis Data Structure: String、Hash、List、Set、ZSet
-  RedisskipList and ziplist
-  Single thread bu...">
+    <meta property="og:description" content="Overview
+">
     
-    <meta property="article:published_time" content="2021-09-25T00:00:00Z">
+    <meta property="article:published_time" content="2020-09-26T00:00:00Z">
     
     
     <meta property="article:author" content="xcTorres">
     
     
-    <meta property="article:tag" content="Interview">
+    <meta property="article:tag" content="GIS">
     
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//2021/09/25/backend-interview/">
+    <meta property="og:url" content="https://xctorres.github.io//2020/09/26/OSM-data-introduction/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>Backend Interview Questions - 谢聪博客 | xcTorres Blog</title>
+    <title>OSM data introduction - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -47,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//2021/09/25/backend-interview/">
+    <link rel="canonical" href="https://xctorres.github.io//2020/09/26/OSM-data-introduction/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -247,7 +239,7 @@
 
 <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/in-post/python-logo.png" width="0" height="0"> -->
+<!-- <img src="/img/in-post/osm/osm-bg.png" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -256,7 +248,7 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/in-post/python-logo.png');
+        background-image: url('/img/in-post/osm/osm-bg.png');
         background: ;
     }
 
@@ -273,13 +265,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Interview" title="Interview">Interview</a>
+                        <a class="tag" href="/archive/?tag=GIS" title="GIS">GIS</a>
                         
                     </div>
-                    <h1>Backend Interview Questions</h1>
+                    <h1>OSM data introduction</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by xcTorres on September 25, 2021</span>
+                    <span class="meta">Posted by xcTorres on September 26, 2020</span>
                 </div>
             </div>
         </div>
@@ -305,56 +297,244 @@
                 <!-- Multi-Lingual -->
                 
 
-				<ol>
-  <li>网络层</li>
-  <li>TCP协议，三次握手四次挥手</li>
-  <li>Close_wait and Time_wait</li>
-  <li>Http 的Keep-alive</li>
-  <li>ICMP协议与Ping命令</li>
-  <li>TCP滑动窗口，增加吞吐</li>
-  <li>Redis Data Structure: String、Hash、List、Set、ZSet</li>
-  <li>RedisskipList and ziplist</li>
-  <li>Single thread but I/O multiplexing</li>
-  <li>Difference between process and thread</li>
-  <li><a href="https://www.guru99.com/difference-between-multiprocessing-and-multithreading.html">Difference between multiprocessing and multithreading</a></li>
-  <li>I/O Bound VS CPU Bound</li>
-  <li>I/O multiplexing</li>
-  <li>BloomFilter</li>
-  <li>LRU Algorithm</li>
-</ol>
+				<h1 id="overview">Overview</h1>
 
-<h2 id="python">Python</h2>
-<ol>
-  <li>What are decorators in Python?</li>
-  <li>Shallow copy and Deep copy?</li>
-  <li>What is the difference between xrange and range in Python?</li>
-</ol>
+<p>OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world. In this page, I want to introduce the structure of OSM data and how to use OSM data into our business.</p>
+
+<h1 id="data-content">Data content</h1>
+<h2 id="elements">Elements</h2>
+<p>Elements are the basic components of OpenStreetMap’s conceptual data model of the physical world. They consist of</p>
+<ul>
+  <li><a href="https://wiki.openstreetmap.org/wiki/Node">nodes</a> (defining points in space).</li>
+  <li><a href="https://wiki.openstreetmap.org/wiki/Way">ways</a> (defining linear features and area boundaries), and</li>
+  <li><a href="https://wiki.openstreetmap.org/wiki/Relation">relations</a> (which are sometimes used to explain how other elements work together).
+All of the above can have one or more associated tags (which describe the meaning of a particular element).</li>
+</ul>
+
+<h3 id="node">Node</h3>
+<p>A node is one of the core elements in the OpenStreetMap data model. It consists of a single point in space defined by its latitude, longitude and node id.<br />
+Nodes can be used to define standalone point features, but are more often used to define the shape or “path” of a way.<br />
+As of September 2020, OpenStreetMap contains over 6 billion nodes.</p>
+
+<ul>
+  <li>
+    <p>Point features<br />
+Nodes can be used on their own to define point features. When used in this way, a node will normally have at least one tag to define its purpose. Nodes may have multiple tags and/or be part of a relation. For example, a telephone box may be tagged simply with amenity=telephone.</p>
+  </li>
+  <li>
+    <p>Nodes on Ways<br />
+Many nodes form part of one or more ways, defining the shape or “path” of the way.</p>
+  </li>
+  <li>
+    <p>Structure</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>value</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>64-bit integer number≥ 1</td>
+      <td>Node ids are unique between nodes. (However, a way or a relation can have the same id number as a node.) Editors may temporarily save node ids as negative to denote ids that haven’t yet been saved to the server. Node ids on the server are persistent, meaning that the assigned id of an existing node will remain unchanged each time data are added or corrected. Deleted node ids must not be reused, unless a former node is now undeleted.</td>
+    </tr>
+    <tr>
+      <td>lat</td>
+      <td>decimal number ≥ −90.0000000 and ≤ 90.0000000 with 7 decimal places</td>
+      <td>Latitude coordinate in degrees (North of equator is positive) using the standard WGS84 projection. Some applications may not accept latitudes above/below ±85 degrees for some projections.</td>
+    </tr>
+    <tr>
+      <td>lon</td>
+      <td>decimal number ≥ −180.0000000 and ≤ 180.0000000 with 7 decimal places</td>
+      <td>Longitude coordinate in degrees (East of Greenwich is positive) using the standard WGS84 projection. Note that the geographic poles will be exactly at latitude ±90 degrees but in that case the longitude will be set to an arbitrary value within this range.</td>
+    </tr>
+    <tr>
+      <td>tags</td>
+      <td>A set of key/value pairs, with unique key</td>
+      <td>See <a href="https://wiki.openstreetmap.org/wiki/Map_Features">Map Features</a> for tagging guidelines.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example">Example</h4>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>
+    <span class="nt">&lt;node</span> <span class="na">id=</span><span class="s">"25496583"</span> <span class="na">lat=</span><span class="s">"51.5173639"</span> <span class="na">lon=</span><span class="s">"-0.140043"</span> <span class="na">version=</span><span class="s">"1"</span> <span class="na">changeset=</span><span class="s">"203496"</span> <span class="na">user=</span><span class="s">"80n"</span> <span class="na">uid=</span><span class="s">"1238"</span> <span class="na">visible=</span><span class="s">"true"</span> <span class="na">timestamp=</span><span class="s">"2007-01-28T11:40:26Z"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"highway"</span> <span class="na">v=</span><span class="s">"traffic_signals"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/node&gt;</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Visualization: <a href="https://www.openstreetmap.org/node/25496583#map=19/51.52092/-0.14281">https://www.openstreetmap.org/node/25496583#map=19/51.52092/-0.14281</a></p>
+
+<h3 id="way">Way</h3>
+<p>A way is an ordered list of nodes which normally also has at least one tag or is included within a Relation. A way can have between 2 and 2,000 nodes, although it’s possible that faulty ways with zero or a single node exist. A way can be open or closed. A closed way is one whose last node on the way is also the first on that way. A closed way may be interpreted either as a closed polyline, or an area, or both.</p>
+
+<ul>
+  <li>Open way (Open polyline) way</li>
+</ul>
+
+<p>An open way is way describing a linear feature which does not share a first and last node. Many roads, streams and railway lines are open ways. Identifying the direction of a ‘way’.</p>
+
+<ul>
+  <li>Closed way (Closed polyline) closed way</li>
+</ul>
+
+<p>A closed way is a way where the last node of the way is shared with the first node with suitable tagging. A closed way that also has a area=yes tag should be interpreted as an area (but the tag is not required most of the time, see section below).<br />
+The following closed way would be interpreted as closed polylines:<br />
+highway=* Closed ways are used to define roundabouts and circular walks<br />
+barrier=* Closed ways are used to define barriers, such as hedges and walls, that go completely round a property.</p>
+
+<ul>
+  <li>Area area</li>
+</ul>
+
+<p>An area (also polygon) is an enclosed filled area of territory defined as a closed way. Most closed ways are considered to be areas even without an area=yes tag (see above for some exceptions). Examples of areas defined as closed ways include:<br />
+leisure=park to define the perimeter of a park<br />
+amenity=school to define the outline of a school<br />
+For tags which can be used to define closed polylines it is necessary to also add an area=yes if an area is desired. Examples include:<br />
+highway=pedestrian + area=yes to define a pedestrian square or plaza.<br />
+Areas can also be described using one or more ways which are associated with a multipolygon relation.</p>
+
+<ul>
+  <li>Combined closed-polyline and area</li>
+</ul>
+
+<p>It is possible for a closed way to be tagged in a way that it should be interpreted both as a closed-polylines and also as an area.<br />
+For example, a closed way defining a roundabout surrounding a grassy area might be tagged simultaneously as :<br />
+highway=primary + junction=roundabout, both being interpreted as a polyline along the closed way, and landuse=grass, interpreted on the area enclosed by the way.</p>
+
+<h4 id="example-1">Example</h4>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre>
+    <span class="nt">&lt;way</span> <span class="na">id=</span><span class="s">"5090250"</span> <span class="na">visible=</span><span class="s">"true"</span> <span class="na">timestamp=</span><span class="s">"2009-01-19T19:07:25Z"</span> <span class="na">version=</span><span class="s">"8"</span> <span class="na">changeset=</span><span class="s">"816806"</span> <span class="na">user=</span><span class="s">"Blumpsy"</span> <span class="na">uid=</span><span class="s">"64226"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"822403"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"21533912"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"821601"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"21533910"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"135791608"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"333725784"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"333725781"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"333725774"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"333725776"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;nd</span> <span class="na">ref=</span><span class="s">"823771"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"highway"</span> <span class="na">v=</span><span class="s">"residential"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"name"</span> <span class="na">v=</span><span class="s">"Clipstone Street"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"oneway"</span> <span class="na">v=</span><span class="s">"yes"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/way&gt;</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Visualization: <a href="https://www.openstreetmap.org/way/5090250">https://www.openstreetmap.org/way/5090250</a></p>
+
+<h3 id="relation">Relation</h3>
+
+<p>A relation is a group of elements. To be more exact it is one of the core data elements that consists of one or more tags and also an ordered list of one or more nodes, ways and/or relations as members which is used to define logical or geographic relationships between other elements. A member of a relation can optionally have a role which describes the part that a particular feature plays within a relation.</p>
+
+<p>Main article: <a href="https://wiki.openstreetmap.org/wiki/Types_of_relation">Types of relation</a></p>
+
+<ul>
+  <li>
+    <p>Multipolygon<br />
+Multipolygons are one of two methods to represent area areas in OpenStreetMap. While most areas are represented as a single closed way closed way, almost all area features can also be mapped using multipolygon relations. This is needed when the area needs to exclude inner rings (holes), has multiple outer areas (exclaves), or uses more than ~2000 nodes.<br />
+In the multipolygon relation, the inner and outer roles are used to specify whether a member way forms the inner or outer part of that polygon enclosing an area. For example, an inner way could define an island in a lake (which is mapped as relation).</p>
+  </li>
+  <li>
+    <p>Bus route<br />
+Each variation of a bus route itinerary is represented by a relation with type=route, route=bus and ref=* and operator=* tags. The first members in the route relation are the nodes representing the stops. These are ordered in the way the vehicles travel along them. Then the ways are added. In PT v2 the ways form an ordered sequence, along the stop nodes. The ways don’t get roles. If they form a continuous sequence this is apparent from the continuous line along them (in JOSM’s relation editor).</p>
+  </li>
+</ul>
+
+<h4 id="example-2">Example</h4>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>
+    <span class="nt">&lt;relation</span> <span class="na">id=</span><span class="s">"13"</span> <span class="na">visible=</span><span class="s">"true"</span> <span class="na">version=</span><span class="s">"25"</span> <span class="na">changeset=</span><span class="s">"74363810"</span> <span class="na">timestamp=</span><span class="s">"2019-09-11T16:30:55Z"</span> <span class="na">user=</span><span class="s">"Ferdinand0101"</span> <span class="na">uid=</span><span class="s">"9080271"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;member</span> <span class="na">type=</span><span class="s">"way"</span> <span class="na">ref=</span><span class="s">"2907748"</span> <span class="na">role=</span><span class="s">"outer"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;member</span> <span class="na">type=</span><span class="s">"way"</span> <span class="na">ref=</span><span class="s">"8125203"</span> <span class="na">role=</span><span class="s">"inner"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"landuse"</span> <span class="na">v=</span><span class="s">"reservoir"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"name"</span> <span class="na">v=</span><span class="s">"Swithland Reservoir"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"type"</span> <span class="na">v=</span><span class="s">"multipolygon"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tag</span> <span class="na">k=</span><span class="s">"wikidata"</span> <span class="na">v=</span><span class="s">"Q7349363"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/relation&gt;</span>
+    
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Visualization: <a href="https://www.openstreetmap.org/relation/13">https://www.openstreetmap.org/relation/13</a></p>
+
+<h1 id="data-format">Data format</h1>
+
+<p>The most important formats are:</p>
+
+<ul>
+  <li>PBF Format – highly compressed, optimized binary format similar to the API, recommended for data processing</li>
+  <li>OSM XML – XML format provided by the API. Please use PBF if you can.</li>
+  <li>OSM JSON - JSON format provided by the API, based on Overpass API JSON format.</li>
+  <li>o5m – for high-speed processing, uses PBF coding, has same structure as XML format, limited support by appliations</li>
+  <li>Overpass JSON – JSON variant of OSM XML, used by Overpass API</li>
+  <li>Level0L – more human readable OSM XML without &lt;&gt; and lowered redundancy</li>
+</ul>
+
+<p>The most two popular formats are XML and PBF format. XML format is easy to parse and readable. PBF format is a highly compressed file, so it is commonly used because the map data size is very huge in production environment .</p>
 
 <h1 id="reference">Reference</h1>
-<p><a href="https://www.bilibili.com/video/BV137411Z7LR">CS-144</a><br />
-<a href="https://zhuanlan.zhihu.com/p/103027724">腾讯linux C++后台开发面试题</a><br />
-<a href="https://github.com/AobingJava/JavaFamily">https://github.com/AobingJava/JavaFamily</a><br />
-<a href="https://github.com/Snailclimb/JavaGuide">https://github.com/Snailclimb/JavaGuide</a><br />
-<a href="https://github.com/Snailclimb/JavaGuide">https://zhuanlan.zhihu.com/p/224595048</a><br />
-<a href="https://github.com/Snailclimb/JavaGuide">https://notes.shichao.io/unp/ch6/</a><br />
-<a href="https://github.com/DarLiner/Algorithm_Interview_Notes-Chinese">https://github.com/DarLiner/Algorithm_Interview_Notes-Chinese</a></p>
+<p><a href="https://wiki.openstreetmap.org/wiki/Elements">https://wiki.openstreetmap.org/wiki/Elements</a><br />
+<a href="https://wiki.openstreetmap.org/wiki/Elements">https://wiki.openstreetmap.org/wiki/Node</a> <br />
+<a href="https://wiki.openstreetmap.org/wiki/Elements">https://wiki.openstreetmap.org/wiki/Way</a><br />
+<a href="https://wiki.openstreetmap.org/wiki/Relation">https://wiki.openstreetmap.org/wiki/Relation</a><br />
+<a href="https://wiki.openstreetmap.org/wiki/Tags">https://wiki.openstreetmap.org/wiki/Tags</a><br />
+<a href="https://wiki.openstreetmap.org/wiki/OSM_file_formats">https://wiki.openstreetmap.org/wiki/OSM_file_formats</a></p>
+
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2021/07/25/dijkstra/" data-toggle="tooltip" data-placement="top" title="Dijkstra 算法">
+                        <a href="/2020/09/24/custom-package-in-spark/" data-toggle="tooltip" data-placement="top" title="How to use custom packages in spark cluster">
                         Previous<br>
-                        <span>Dijkstra 算法</span>
+                        <span>How to use custom packages in spark cluster</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2021/11/07/jar-in-pyspark/" data-toggle="tooltip" data-placement="top" title="How to run Java function in pySpark">
+                        <a href="/2020/11/08/python-coroutine/" data-toggle="tooltip" data-placement="top" title="Python的协程与异步">
                         Next<br>
-                        <span>How to run Java function in pySpark</span>
+                        <span>Python的协程与异步</span>
                         </a>
                     </li>
                     
@@ -414,82 +594,77 @@
         </a>
         
         
-                <a data-sort="0021" 
+                <a data-sort="0022" 
                     href="/archive/?tag=Life"
                     title="Life"
                     rel="5">Life</a>
         
-                <a data-sort="0022" 
+                <a data-sort="0023" 
                     href="/archive/?tag=C%2B%2B"
                     title="C++"
                     rel="4">C++</a>
         
-                <a data-sort="0022" 
+                <a data-sort="0023" 
+                    href="/archive/?tag=GIS"
+                    title="GIS"
+                    rel="4">GIS</a>
+        
+                <a data-sort="0023" 
                     href="/archive/?tag=Python"
                     title="Python"
                     rel="4">Python</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Algorithm"
                     title="Algorithm"
                     rel="3">Algorithm</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Graph"
                     title="Graph"
                     rel="3">Graph</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0024" 
                     href="/archive/?tag=NLP"
                     title="NLP"
                     rel="3">NLP</a>
         
-                <a data-sort="0023" 
+                <a data-sort="0024" 
                     href="/archive/?tag=Spark"
                     title="Spark"
                     rel="3">Spark</a>
         
-                <a data-sort="0024" 
-                    href="/archive/?tag=GIS"
-                    title="GIS"
-                    rel="2">GIS</a>
-        
-                <a data-sort="0024" 
+                <a data-sort="0025" 
                     href="/archive/?tag=Machine+Learning"
                     title="Machine Learning"
                     rel="2">Machine Learning</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Algorithms"
                     title="Algorithms"
                     rel="1">Algorithms</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Deep+Learning"
                     title="Deep Learning"
                     rel="1">Deep Learning</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Guitar"
                     title="Guitar"
                     rel="1">Guitar</a>
         
-                <a data-sort="0025" 
-                    href="/archive/?tag=Interview"
-                    title="Interview"
-                    rel="1">Interview</a>
-        
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Leetcode"
                     title="Leetcode"
                     rel="1">Leetcode</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Linux"
                     title="Linux"
                     rel="1">Linux</a>
         
-                <a data-sort="0025" 
+                <a data-sort="0026" 
                     href="/archive/?tag=Web"
                     title="Web"
                     rel="1">Web
@@ -584,6 +759,54 @@
 
 <!-- add support for mathjax by voleking-->
 
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
 
 
 
@@ -623,7 +846,7 @@
 		repo: "xctorres.github.io",
 		owner: "xcTorres",
 		admin: "xcTorres",
-		id: "/2021/09/25/backend-interview",
+		id: "/2020/09/26/OSM-data-introduction",
 		
 		});
 		gitalk.render('gitalk-container'); 
