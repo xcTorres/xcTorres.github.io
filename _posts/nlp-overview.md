@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "NLP Overview"
-date:       2022-05-06
+date:       2023-01-15
 author:     "xcTorres"
 header-img: "img/in-post/HMM/hmm-bg.png"
 catalog:    true
