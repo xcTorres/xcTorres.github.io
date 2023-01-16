@@ -219,6 +219,9 @@ friends: [
     {
       title: "Finance: 小Lin说",
       href: "https://www.youtube.com/@xiao_lin_shuo"
+    },{
+      title: "ByteBytego",
+      href: "https://bytebytego.com/courses/system-design-interview/foreword"
     }
 ]
 
