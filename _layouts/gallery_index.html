@@ -14,6 +14,7 @@ title: Gallery
 }
 .gallery-best-image{
   height: 280px;
+  padding: 1em 2em 1em 2em;
 }
 .gallery{
   background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3));
@@ -22,18 +23,18 @@ title: Gallery
 
 <!-- Main Content -->
   <div class="gallery">
-    {% assign rows = page.galleries.size | divided_by: 3 %}
-    {% assign modulo = page.galleries.size | modulo: 3 %}
+    {% assign rows = page.galleries.size | divided_by: 4 %}
+    {% assign modulo = page.galleries.size | modulo: 4 %}
     {% assign rows = rows | plus: modulo | minus: 1 %}
     {% for i in (0..rows) %}
       <div class="row">
-          {% for j in (0..2) %}
-            {% assign idx = i | times: 3 %}
-            {% assign idx = idx | plus: j%}
+          {% for j in (0..3) %}
+            {% assign idx = i | times: 4 %}
+            {% assign idx = idx | plus: j %}
             {% if idx >= page.galleries.size %}
               {% break %}
             {% else %}
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 {% assign gallery = page.galleries[idx]%}
                   <div class="gallery-wrapper">
                     <a href="{{ gallery['gallery'] }}">
