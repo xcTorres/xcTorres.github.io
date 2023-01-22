@@ -84,7 +84,7 @@ gitalk:
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "慧极必伤，情深不寿，强极必辱，谦谦君子，温润如玉"
+sidebar-about-description: ""
 sidebar-avatar: /img/avatar-xcTorres.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
@@ -219,6 +219,9 @@ friends: [
     {
       title: "Finance: 小Lin说",
       href: "https://www.youtube.com/@xiao_lin_shuo"
+    },{
+      title: "王志安",
+      href: "https://www.youtube.com/@wangzhian"
     },{
       title: "ByteBytego",
       href: "https://bytebytego.com/courses/system-design-interview/foreword"
