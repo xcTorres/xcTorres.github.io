@@ -8,6 +8,7 @@ catalog:    true
 mathjax: true
 tags:
     - Spark
+    - Python
 ---  
 
 Sometimes when we use Spark to do the data analysis job, we want to use our own python package. We know the Spark cluster has the driver node  and executor nodes. Usually driver is our own server so we have the permission to install the python package, but we don't have the permission to install the package on hundreds of executor nodes. When we directly run our pySpark code, it will report **"Import Error"**.  

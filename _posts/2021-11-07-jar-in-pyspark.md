@@ -7,6 +7,7 @@ header-img: "img/in-post/pyspark-custom-package/Apache_Spark_logo.svg.png"
 catalog:    true
 tags:
     - Spark
+    - Java
 ---    
 
 For data analyst and data scientist, we are more likely to use pySpark to analyze the data instead of scala Spark. But sometimes we may use some third party package written in Java. So this post will teach you how to call java function in pySpark job.  

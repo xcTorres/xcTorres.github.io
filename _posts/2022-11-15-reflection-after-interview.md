@@ -8,6 +8,7 @@ mathjax: true
 
 tags:
     - Leetcode
+    - Deep Learning
 ---  
 
 It has been 3 years working in Singapore since I graduated. During the period in Shopee, I learned a lot not only the coding skills but also the understanding of projects. Since Shopee has decided to shift the engineering center to China mainland, the projects that we Singapore team could do are becoming limited, which result in the thoughts to pursue other opportunities.  

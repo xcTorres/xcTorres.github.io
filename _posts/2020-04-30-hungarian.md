@@ -3,12 +3,13 @@ layout:     post
 title:      "匈牙利算法介绍"
 date:       2020-04-30
 author:     "xcTorres"
-header-img: "img/in-post/leetcode.jpg"
+# header-img: "img/in-post/graph.png"
 catalog:    true
 mathjax: true
 
 tags:
     - Algorithm
+    - Graph
 ---
 ## 背景
 因为入职不久，最近在接手一个外卖的分配问题，即在一个区域同时产生多个订单，且该区域有多个骑手，在只考虑一个骑手只能接一单的情况下，订单与骑手之间到底应该如何分配。在第一版解决方案中我们使用的是匈牙利算法，目前还在测试当中，还没有上线，希望其能有不错的效果。写此博客，专门为了好好了解其基本原理，而不是只会按部就班用现成的库，而根本不懂其原理。  

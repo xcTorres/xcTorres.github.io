@@ -3,7 +3,7 @@ layout:     post
 title:      "Contraction Hierarchies算法"
 date:       2022-01-09
 author:     "xcTorres"
-header-img: "img/in-post/graph/graph.png"
+# header-img: "img/in-post/graph/graph.png"
 mathjax: true
 catalog:    true
 tags:

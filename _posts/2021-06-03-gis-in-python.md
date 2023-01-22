@@ -3,7 +3,7 @@ layout:     post
 title:      "GIS in Python"
 date:       2021-06-03
 author:     "xcTorres"
-header-img: "img/in-post/2019.jpg"
+# header-img: "img/in-post/2019.jpg"
 catalog:    true
 tags:
     - GIS

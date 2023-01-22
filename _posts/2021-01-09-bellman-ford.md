@@ -3,7 +3,7 @@ layout:     post
 title:      "Bellman ford算法"
 date:       2021-01-09
 author:     "xcTorres"
-header-img: "img/in-post/graph/graph.png"
+# header-img: "img/in-post/graph/graph.png"
 catalog:    true
 mathjax: true
 

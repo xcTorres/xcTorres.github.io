@@ -3,7 +3,7 @@ layout:     post
 title:      "Python Web"
 date:       2020-06-17
 author:     "xcTorres"
-header-img: "img/in-post/leetcode.jpg"
+# header-img: "img/in-post/python_web.png"
 catalog:    true
 tags:
     - Python
