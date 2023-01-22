@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 22 Jan 2023 18:29:17 +0800</pubDate>
-    <lastBuildDate>Sun, 22 Jan 2023 18:29:17 +0800</lastBuildDate>
+    <pubDate>Mon, 23 Jan 2023 02:57:11 +0800</pubDate>
+    <lastBuildDate>Mon, 23 Jan 2023 02:57:11 +0800</lastBuildDate>
     <generator>Jekyll v4.3.1</generator>
     
       <item>
@@ -219,6 +219,8 @@ word2vec, Search System introduction, Bilstm-CRF&lt;/p&gt;
         <guid isPermaLink="true">https://xctorres.github.io//2022/11/15/reflection-after-interview/</guid>
         
         <category>Leetcode</category>
+        
+        <category>Deep Learning</category>
         
         
       </item>
@@ -1148,6 +1150,8 @@ model size: 1.30M
         <guid isPermaLink="true">https://xctorres.github.io//2021/11/07/jar-in-pyspark/</guid>
         
         <category>Spark</category>
+        
+        <category>Java</category>
         
         
       </item>
