@@ -110,15 +110,3 @@ To be honest, I am frustrated for a while, but I think I deserve it because I di
 - **Bi-lstm + CRF**  
   [CRF Layer on the Top of BiLSTM](https://createmomo.github.io/)  
   [Pytorch Code](https://pytorch.org/tutorials/beginner/nlp/advanced_tutorial.html)
-
-#### Recommendation  
-- FM  
-- FFM  
-- DeepFM  
-- DSSM
-
-
-#### Rank
-
-
-#### Graph
