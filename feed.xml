@@ -5,9 +5,24 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 08 Mar 2023 19:11:15 +0800</pubDate>
-    <lastBuildDate>Wed, 08 Mar 2023 19:11:15 +0800</lastBuildDate>
+    <pubDate>Thu, 09 Mar 2023 01:32:45 +0800</pubDate>
+    <lastBuildDate>Thu, 09 Mar 2023 01:32:45 +0800</lastBuildDate>
     <generator>Jekyll v4.3.1</generator>
+    
+      <item>
+        <title>Math</title>
+        <description>
+</description>
+        <pubDate>Thu, 09 Mar 2023 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2023/03/09/math/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2023/03/09/math/</guid>
+        
+        <category>Deep Learning</category>
+        
+        <category>Statistics</category>
+        
+        
+      </item>
     
       <item>
         <title>深度学习进阶</title>
@@ -50,26 +65,34 @@
 &lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th&gt;Paper&lt;/th&gt;
-      &lt;th&gt;Code&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Paper&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Code&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://colah.github.io/posts/2015-08-Understanding-LSTMs/&quot;&gt;LSTM&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://keras.io/api/layers/recurrent_layers/lstm/&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/1301.3781&quot;&gt;Word2Vec&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention is all you need&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/philipperemy/keras-attention-mechanism&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://colah.github.io/posts/2015-08-Understanding-LSTMs/&quot;&gt;LSTM&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://keras.io/api/layers/recurrent_layers/lstm/&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://arxiv.org/abs/1810.04805&quot;&gt;Bert&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/CyberZHG/keras-bert&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention is all you need&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://github.com/philipperemy/keras-attention-mechanism&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;GPT1,2,3&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/1810.04805&quot;&gt;Bert&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://github.com/CyberZHG/keras-bert&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf&quot;&gt;GPT1&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;GPT2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -79,18 +102,42 @@
 &lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th&gt;Paper&lt;/th&gt;
-      &lt;th&gt;Code&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Paper&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Code&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;FM&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://www.csie.ntu.edu.tw/~b97053/paper/Rendle2010FM.pdf&quot;&gt;FM&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;DeepFM&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://www.csie.ntu.edu.tw/~cjlin/papers/ffm.pdf&quot;&gt;FFM&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/1603.02754&quot;&gt;XGBoost&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://quinonero.net/Publications/predicting-clicks-facebook.pdf&quot;&gt;GBDT+LR&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/1606.07792v1.pdf&quot;&gt;DeepFM&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://cseweb.ucsd.edu/classes/fa17/cse291-b/reading/p191-covington.pdf&quot;&gt;Youtube DNN&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/1706.06978.pdf&quot;&gt;DIN&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;http://shichuan.org/hin/time/2019.KDD%202019%20Metapath-guided%20Heterogeneous%20Graph%20Neural%20Network%20for%20Intent%20Recommendation.pdf&quot;&gt;Metapath-guided Heterogeneous Graph Neural Network for Intent Recommendation&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -100,22 +147,22 @@
 &lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th&gt;Paper&lt;/th&gt;
-      &lt;th&gt;Code&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Paper&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Code&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://distill.pub/2021/gnn-intro/&quot;&gt;Graph Neutral Network&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/tkipf/keras-gcn&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://distill.pub/2021/gnn-intro/&quot;&gt;Graph Neutral Network&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://github.com/tkipf/keras-gcn&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://arxiv.org/abs/1710.10903&quot;&gt;Graph Attention Network&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://keras.io/examples/graph/gat_node_classification/&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/1710.10903&quot;&gt;Graph Attention Network&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://keras.io/examples/graph/gat_node_classification/&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;https://cs.stanford.edu/people/jure/pubs/graphsage-nips17.pdf&quot;&gt;GraphSage&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://stellargraph.readthedocs.io/en/stable/demos/node-classification/graphsage-node-classification.html#&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://cs.stanford.edu/people/jure/pubs/graphsage-nips17.pdf&quot;&gt;GraphSage&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://stellargraph.readthedocs.io/en/stable/demos/node-classification/graphsage-node-classification.html#&quot;&gt;code&lt;/a&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -136,6 +183,31 @@
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/1406.2661&quot;&gt;GAN&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2006.11239&quot;&gt;Denoising Diffusion Probabilistic Models&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2107.03374&quot;&gt;Open AI Codex&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;multimodal-learning&quot;&gt;MultiModal Learning&lt;/h4&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Paper&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Code&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2103.00020&quot;&gt;OpenAI CLIP&lt;/a&gt;&lt;/td&gt;
       &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
@@ -162,14 +234,36 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h1 id=&quot;open-source-project&quot;&gt;Open Source Project&lt;/h1&gt;
+&lt;h4 id=&quot;other&quot;&gt;Other&lt;/h4&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Paper&lt;/th&gt;
+      &lt;th&gt;Code&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.nature.com/articles/nature16961&quot;&gt;Alpha Go&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;h1 id=&quot;book&quot;&gt;Book&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf&quot;&gt;Pattern Recognition and Machine Learning&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://github.com/janishar/mit-deep-learning-book-pdf&quot;&gt;Deep Learning&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;website&quot;&gt;Website&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://space.bilibili.com/1567748478/&quot;&gt;跟李沐学AI&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;course&quot;&gt;Course&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://space.bilibili.com/1567748478/&quot;&gt;跟李沐学AI&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML20.html&quot;&gt;李宏毅&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1224/index.html#coursework&quot;&gt;CS224n&lt;/a&gt;  &lt;br /&gt;
+&lt;a href=&quot;https://www.deeplearning.ai/courses/&quot;&gt;Deeplearning.AI&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;open-source-project&quot;&gt;Open Source Project&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/shenweichen/AlgoNotes&quot;&gt;https://github.com/shenweichen/AlgoNotes&lt;/a&gt;&lt;/p&gt;
+
 </description>
         <pubDate>Wed, 08 Mar 2023 00:00:00 +0800</pubDate>
         <link>https://xctorres.github.io//2023/03/08/further-learn-deep-learning/</link>
@@ -1314,84 +1408,6 @@ model size: 1.30M
         <category>Spark</category>
         
         <category>Java</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Dijkstra 算法</title>
-        <description>&lt;p&gt;Dijkstra算法是图算法中，寻找两个节点最短路径的算法。在路网做路径规划中，也常常用到该算法的变种。&lt;/p&gt;
-
-&lt;h4 id=&quot;基本思想&quot;&gt;基本思想&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;通过Dijkstra计算图G中的最短路径时，需要指定起点s(即从顶点s开始计算)。&lt;/li&gt;
-  &lt;li&gt;此外，引进两个集合S和U。S的作用是记录已求出最短路径的顶点(以及相应的最短路径长度)，而U则是记录还未求出最短路径的顶点(以及该顶点到起点s的距离)。&lt;/li&gt;
-  &lt;li&gt;初始时，S中只有起点s；U中是除s之外的顶点，并且U中顶点的路径是”起点s到该顶点的路径”。然后，从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 然后，再从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 … 重复该操作，直到遍历完所有顶点。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;证明&lt;br /&gt;
-&lt;a href=&quot;https://www.cnblogs.com/jiangshaoyin/p/9954937.html&quot;&gt;https://www.cnblogs.com/jiangshaoyin/p/9954937.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;伪代码&quot;&gt;伪代码&lt;/h4&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;Dijkstra&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Graph, &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: 
-
-        dist[source] ← 0
-        create vertex priority queue Q 
-
-        &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;each vertex v &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;Graph:
-            &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;v ≠ &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;:
-                dist[v] ← INFINITY 
-            Q.add_with_priority&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;v, dist[v]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;Q is not empty: 
-            u ← Q.extract_min&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; 
-
-            &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;each neighbor v of u:
-                &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;dist[u] + length&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;u, v&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;lt; dist[v]:
-                    dist[v] &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; dist[u] + length&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;u, v&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            Q.decrease_priority&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;v, dis[v]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;dis
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;优先队列能够提高运行效率，其时间复杂度为$O(E + Vlog(V))$，这里E代表图的总边个数，V代表图的总顶点个数。从伪代码不难看出，需要维护一个数组，用来存储每一个node的当前最短路径距离，source node初始化为0，其他为$\infty$ ；并将这些点载入到优先队列，优先值为当前最短路径距离；source node初始化为0，其余nodes为无穷大。此后便不停pop 最短路径距离最小的结点。&lt;/p&gt;
-
-&lt;h4 id=&quot;示例&quot;&gt;示例&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/in-post/Dijkstra/demo.png&quot; alt=&quot;Demo&quot; /&gt;
-我们来看一个示例，node 1为源结点：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;1) 在第一次迭代中， 源节点最短路径距离为0，所以被弹出。其所有neighbour(node 2,3,5)的最短路径距离根据公式$dist[v] = dist[u] + length(u, v) （if\;dist[u] + length(u, v) &amp;lt; dist[v])$都被更新，由于node 4不与node 1相连，所以其最短路径距离仍为$\infty$&lt;/li&gt;
-  &lt;li&gt;2) 在第二次跌代中，在剩余nodes中，node 3的最短路径距离为3最小，则被弹出。其所有neighbour(node 2,4, 5)的最短路径距离更新&lt;/li&gt;
-  &lt;li&gt;3）在第三次迭代中，node 4最短距离为5，被弹出。&lt;/li&gt;
-  &lt;li&gt;4）剩余的迭代都是同样的道理&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Sun, 25 Jul 2021 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2021/07/25/dijkstra/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2021/07/25/dijkstra/</guid>
-        
-        <category>Graph</category>
-        
-        <category>Algorithm</category>
         
         
       </item>
