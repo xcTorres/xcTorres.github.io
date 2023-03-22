@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "深度学习进阶"
+title:      "深度学习资料"
 date:       2023-03-08
 author:     "xcTorres"
 header-img: "img/in-post/machine-learning.jpeg"

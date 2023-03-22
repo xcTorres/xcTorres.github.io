@@ -105,10 +105,6 @@ collections:
 # Friends
 friends: [
     {
-        title: "medium",
-        href: "https://medium.com/"
-    },
-    {
         title: "Liu jianping",
         href: "https://www.cnblogs.com/pinard/"
  
@@ -215,16 +211,15 @@ friends: [
     {
       title: "lonepatient",
       href: "https://lonepatient.top/"
-    },
-    {
-      title: "Finance: 小Lin说",
-      href: "https://www.youtube.com/@xiao_lin_shuo"
-    },{
-      title: "王志安",
-      href: "https://www.youtube.com/@wangzhian"
     },{
       title: "ByteBytego",
       href: "https://bytebytego.com/courses/system-design-interview/foreword"
+    }, {
+      title: "张敏",
+      href: "https://zhangmingemma.github.io/"
+    }, {
+      title: "Open AI leader",
+      href: "https://lilianweng.github.io/"
     }
 ]
 

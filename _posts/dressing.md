@@ -1,6 +1,5 @@
 美式嘻哈穿搭  
 - T shirt
-、股纷纷反弹·
 
 https://representclo.com/collections/t-shirts  
 
