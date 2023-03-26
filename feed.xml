@@ -5,25 +5,63 @@
     <description></description>
     <link>https://xctorres.github.io//</link>
     <atom:link href="https://xctorres.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 23 Mar 2023 01:19:47 +0800</pubDate>
-    <lastBuildDate>Thu, 23 Mar 2023 01:19:47 +0800</lastBuildDate>
+    <pubDate>Sun, 26 Mar 2023 15:52:27 +0800</pubDate>
+    <lastBuildDate>Sun, 26 Mar 2023 15:52:27 +0800</lastBuildDate>
     <generator>Jekyll v4.3.1</generator>
     
       <item>
-        <title>Math</title>
-        <description>&lt;h1 id=&quot;probability&quot;&gt;Probability&lt;/h1&gt;
+        <title>Search System</title>
+        <description>&lt;p&gt;之前在原来的工作中做过一点搜索业务的Query预处理。在后面面试Apple搜索组的时候，面试官也问到了如何设计一个Apple Music搜索系统。当时由于经验不足，感觉答的是一塌糊涂，现在想着有机会系统的了解一下整个搜索系统的结构。&lt;/p&gt;
 
-&lt;h1 id=&quot;linear-algebra&quot;&gt;Linear Algebra&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;https://intranetproxy.alipay.com/skylark/lark/0/2021/png/318810/1618470126165-fc000bd9-c39b-423b-b4ec-9ee5c2f02e06.png#from=url&amp;amp;id=pQ6RS&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;originHeight=863&amp;amp;originWidth=1617&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;status=done&amp;amp;style=none&quot; alt=&quot;&quot; /&gt;
+ES文本搜索引擎以及faiss这样的向量引擎&lt;/p&gt;
 
-&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
+&lt;h1 id=&quot;query改写&quot;&gt;Query改写&lt;/h1&gt;
+&lt;p&gt;这里应该有Query纠错，Query扩展。&lt;/p&gt;
+&lt;h4 id=&quot;query纠错&quot;&gt;Query纠错&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;N grams&lt;/li&gt;
+  &lt;li&gt;Noisy Channel&lt;/li&gt;
+  &lt;li&gt;HMM&lt;/li&gt;
+  &lt;li&gt;Deep Learning(Transformer)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;query扩展&quot;&gt;Query扩展&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Alias&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;关键字召回&lt;br /&gt;
+文本匹配，能够做到完全精确的匹配（Exact Match）。通常先对query进行分词，得到更细粒度的词（Term)；再用Term去检索Doc，Term出现于Doc则命中；然后取各个Term检索结果的交集返回。
+这里常用ElasticSearch系统，倒排索引查询关键字。当然在导入文档到ES集群时，对于不同语言也需要用不同的分词器。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;个性化向量召回&quot;&gt;个性化向量召回&lt;/h1&gt;
+&lt;p&gt;向量引擎faiss这样的向量引擎， Query-Doc双塔模型。 
+如果是文档搜索引擎，这里考虑到分别给Query和Doc做embedding。如果是电商，这里是给Query和Item做embedding。&lt;/p&gt;
+&lt;h4 id=&quot;query-embedding&quot;&gt;Query Embedding&lt;/h4&gt;
+
+&lt;h4 id=&quot;doc-embedding&quot;&gt;Doc Embedding&lt;/h4&gt;
+&lt;p&gt;https://radimrehurek.com/gensim/models/doc2vec.html&lt;br /&gt;
+https://zhuanlan.zhihu.com/p/136096645&lt;/p&gt;
+
+&lt;h4 id=&quot;item-embedding&quot;&gt;Item Embedding&lt;/h4&gt;
+
+&lt;p&gt;各个特征占用一个维度，组成dense的向量，并用于双塔模型进行Embedding&lt;/p&gt;
+
+&lt;h1 id=&quot;个性化召回&quot;&gt;个性化召回&lt;/h1&gt;
+
+&lt;h1 id=&quot;案例分析&quot;&gt;案例分析&lt;/h1&gt;
 </description>
-        <pubDate>Thu, 23 Mar 2023 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2023/03/23/math/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2023/03/23/math/</guid>
+        <pubDate>Sun, 26 Mar 2023 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2023/03/26/search/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2023/03/26/search/</guid>
         
-        <category>Deep Learning</category>
+        <category>algorithms</category>
         
-        <category>Statistics</category>
+        <category>search</category>
         
         
       </item>
@@ -42,7 +80,9 @@
 &lt;h1 id=&quot;gcn&quot;&gt;GCN&lt;/h1&gt;
 &lt;p&gt;我们知道CNN中，主要是通过filter或者kernel这个算子处理图像，提取领域像素的特征。而在图卷积神经网络GCN中，虽然没有格网这样的欧式结构，但是同样可以提取邻居的特征。在GCN中，主要通过得到邻接矩阵，归一化之后再处理到图上，得到最终结果。&lt;/p&gt;
 
-\[H^{(l+1)} = f(D^{-1/2} A D^{-1/2} H^{(l)} W^{(l)})\]
+&lt;p&gt;$&lt;br /&gt;
+H^{(l+1)} = f(D^{-1/2} A D^{-1/2} H^{(l)} W^{(l)})&lt;br /&gt;
+$&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;这里 $H^{(l)}$ 是l层的node特征向量, 维度为N x F_l, 这里N是node个数，F_l是node的特征个数。&lt;/li&gt;
@@ -71,22 +111,24 @@
 &lt;p&gt;这样采样处理的好处是更加灵活，也支持inductive，能够对训练集之外未出现过的点进行预测。具体步骤是找到新node在原先训练集中的邻居。并用原先GraphSage的采样方式以及网络进行预测即可。&lt;br /&gt;
 这里对于之前训练图中的node，不作任何处理，仍然使用原先的embedding。&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;h1 id=&quot;graph-attention-network&quot;&gt;Graph Attention Network&lt;/h1&gt;
 &lt;p&gt;相比于GraphSAG用采样聚合的方法表示node的embedding，GAT是用注意力机制去学习不同邻居节点的重要性。
 \(a_ji = LeakyReLU ( (a^T [Wx_j || Wx_i]) )\)
 \(alpha_ji = softmax(a_ji)\)
 \(h_j' = sum( alpha_ji * h_i )\)&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;h1 id=&quot;heterogeneous-graph&quot;&gt;Heterogeneous Graph&lt;/h1&gt;
-&lt;h4 id=&quot;relational-graph-convolutional-networks-r-gcn&quot;&gt;Relational Graph Convolutional Networks (R-GCN)&lt;/h4&gt;
-&lt;p&gt;https://stellargraph.readthedocs.io/en/stable/demos/node-classification/rgcn-node-classification.html&lt;/p&gt;
-&lt;h4 id=&quot;heterogeneous-graph-attention-network-han&quot;&gt;Heterogeneous Graph Attention Network (HAN)&lt;/h4&gt;
-&lt;h4 id=&quot;metapath2vec&quot;&gt;Metapath2Vec&lt;/h4&gt;
-&lt;h4 id=&quot;heterogeneous-graph-transformer-hgt&quot;&gt;Heterogeneous Graph Transformer (HGT)&lt;/h4&gt;
+&lt;p&gt;Relational Graph Convolutional Networks (R-GCN)&lt;br /&gt;
+Heterogeneous Graph Attention Network (HAN)&lt;br /&gt;
+Metapath2Vec&lt;br /&gt;
+Heterogeneous Graph Transformer (HGT)&lt;/p&gt;
 
-&lt;p&gt;https://github.com/UCLA-DM/pyHGT&lt;/p&gt;
-
-&lt;h1 id=&quot;stellargraph&quot;&gt;Stellargraph&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;h1 id=&quot;code-example&quot;&gt;Code Example&lt;/h1&gt;
 &lt;p&gt;主要比较好用的开源库有&lt;a href=&quot;https://github.com/stellargraph/stellargraph&quot;&gt;stellargraph&lt;/a&gt;以及dmlc的&lt;a href=&quot;https://github.com/dmlc/dgl&quot;&gt;dgl&lt;/a&gt;库，这里先以stellargraph为例。&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
@@ -165,9 +207,9 @@ layer_sizes=[32,32]这里指2层隐藏层大小均为32。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://distill.pub/2021/gnn-intro/&quot;&gt;https://distill.pub/2021/gnn-intro/&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://towardsdatascience.com/understanding-graph-convolutional-networks-for-node-classification-a2bfdb7aba7b&quot;&gt;https://towardsdatascience.com/understanding-graph-convolutional-networks-for-node-classification-a2bfdb7aba7b&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 23 Mar 2023 00:00:00 +0800</pubDate>
-        <link>https://xctorres.github.io//2023/03/23/gnn/</link>
-        <guid isPermaLink="true">https://xctorres.github.io//2023/03/23/gnn/</guid>
+        <pubDate>Sun, 26 Mar 2023 00:00:00 +0800</pubDate>
+        <link>https://xctorres.github.io//2023/03/26/gnn/</link>
+        <guid isPermaLink="true">https://xctorres.github.io//2023/03/26/gnn/</guid>
         
         <category>algorithms</category>
         
