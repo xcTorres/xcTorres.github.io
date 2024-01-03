@@ -43,17 +43,7 @@
 - Spark  
 - Database(Postgres, MySQL, Redis, Hive)
 
-![Python](https://img.shields.io/badge/-Python-%231572B6?style=flat-square&logo=python&logoColor=white)
-![C++](https://img.shields.io/badge/-C++-%23E44D27?style=flat-square&logo=c++)
-![Java](https://img.shields.io/badge/-Java-007ACC?style=flat-square&logo=java)
-![Spark](https://img.shields.io/badge/-Spark-%231572B6?style=flat-square&logo=Spark&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=flat-square&logo=PyTorch&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=flat-square&logo=TensorFlow&logoColor=white)
-![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=flat-square&logo=redis&logoColor=white)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=flat-square&logo=postgresql&logoColor=white) 
-
 ### Publication  
-
 [MAP-Vis: A Distributed Spatio-Temporal Big Data Visualization Framework Based on a MultiDimensional Aggregation Pyramid Model](https://www.mdpi.com/2076-3417/10/2/598/htm)  
-[Building A Large-Scale Routing Service[Need Access]](https://docs.google.com/presentation/d/14OGNL8lNpjqqIhKeHrkEQ6EKkr2TdUDZ/edit#slide=id.p1)
+[Building A Large-Scale Routing Service](https://docs.google.com/presentation/d/14OGNL8lNpjqqIhKeHrkEQ6EKkr2TdUDZ/edit#slide=id.p1)
 
