@@ -235,6 +235,9 @@ gallery:
     y: 600                  # max height of thumbnails (in pixels)
   # The following options are for individual galleries.
   galleries:
+    phuket:
+      name: 2023/12 Phuket Trip
+      best_image: IMG_3544.JPG
     bali:
       name: 2022/12 Bali Trip
     malaysia:
