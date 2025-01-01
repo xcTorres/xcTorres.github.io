@@ -105,57 +105,39 @@ collections:
 # Friends
 friends: [
     {
+      title: "Lilian Weng",
+      href: "https://lilianweng.github.io/"
+    },
+    {
+        title: "苏剑林",
+        href: "https://kexue.fm/content.html"
+    },
+    {
+        title: " 周奕帆的博客",
+        href: "https://zhouyifan.net/"
+    },
+    {
         title: "Liu jianping",
         href: "https://www.cnblogs.com/pinard/"
- 
-    },{
-        title: "滴滴:李海波",
-        href: "http://www.semocean.com/"
-    },{
-        title: "liam",
-        href: "https://liam.page/"
-    },{
+    },
+    {
         title: "V2EX",
         href: "https://www.v2ex.com/"
-    },{
-        title: "崔天翼",
-        href: "http://tianyicui.com/"
-    },{
-        title: "峰云就她了",
-        href: "http://xiaorui.cc/"
     },{
         title: "Honly",
         href: "https://guanhonly.github.io/"
     },{
-        title: "徐靖峰",
-        href: "https://www.cnkirito.moe/about/"
-    },{
-        title: "pycoders",
-        href: "https://pycoders.com/"
-    },{
         title: "卡瓦邦噶",
         href: "https://www.kawabangga.com/"
     },{
-        title: "einverne",
-        href: "http://einverne.github.io/"
-    },{
         title: "lotabout.me",
         href: "https://lotabout.me/"
-    },{
-        title: "开发者头条",
-        href: "https://toutiao.io/"
-    },{
-        title: "rgb24 bits",
-        href: "https://rgb-24bit.github.io/blog/"
     },{
         title: "余列冰",
         href: "https://lb-yu.github.io/"
     },{
         title: "李明亮",
         href: "https://mthli.xyz/"
-    },{
-        title: "Digoal.zhou",
-        href: "https://billtian.github.io/digoal.blog/2018/04/16/02.html"
     },{
         title: "halfrost",
         href: "https://github.com/halfrost"
@@ -180,9 +162,6 @@ friends: [
     },{
       title: "alanzucconi",
       href: "https://www.alanzucconi.com"
-    },{
-      title: "面向信仰编程",
-      href: "https://draveness.me/"
     },{
       title: "Hankcs",
       href: "https://www.hankcs.com/"
@@ -217,9 +196,6 @@ friends: [
     }, {
       title: "张敏",
       href: "https://zhangmingemma.github.io/"
-    }, {
-      title: "Open AI leader",
-      href: "https://lilianweng.github.io/"
     }
 ]
 
@@ -284,13 +260,13 @@ gallery:
       name: "2019/12 Thailand"
       best_image: 201597820474_.pic_hd.jpg 
     2019 national day:
-      name: "2019/08 National day"
+      name: "2019/08 National Day"
       best_image: 61598197352_.pic_hd.jpg
     didi:
-      name: "2018/08 Didi intern"
+      name: "2018/08 Didi Intern"
       best_image: 61607321774_.pic.jpg
     master graduation:
-      name: "2019/06  Master graduation"
+      name: "2019/06  Master Graduation"
       best_image: 3T0A8604.jpg
     Dalian:
       name: "2018/10 Dalian"
@@ -299,5 +275,5 @@ gallery:
       name: "2016/07 Daocheng Yading"
       best_image: IMG_20160630_121332_1.jpg
     batchelor graduation:
-      name: "2016/06  Batchelor graduation"
+      name: "2016/06  Bachelor Graduation"
       best_image: IMG_20160607_095624.jpg  
