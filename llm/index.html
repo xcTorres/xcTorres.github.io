@@ -11,16 +11,16 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="2019/06  Master Graduation - 谢聪博客 | xcTorres Blog">
+    <meta property="og:title" content="LLM - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="website">
     <meta property="og:description" content="">
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
-    <meta property="og:url" content="https://xctorres.github.io//gallery/master%20graduation/">
+    <meta property="og:url" content="https://xctorres.github.io//llm/">
     <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
     
-    <title>2019/06  Master Graduation - 谢聪博客 | xcTorres Blog</title>
+    <title>LLM - 谢聪博客 | xcTorres Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +29,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://xctorres.github.io//gallery/master%20graduation/">
+    <link rel="canonical" href="https://xctorres.github.io//llm/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -234,14 +234,14 @@
 
 
 
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
         <div class="site-heading">
         
-          <h1>2019/06  Master Graduation</h1>
+          <h1>LLM</h1>
           <span class="subheading"></span>
         </div>
       </div>
@@ -264,48 +264,77 @@
                 col-xs-12
                 postlist-container
             ">
-    			<style TYPE="text/css">
-.gallery-image-wrapper {
-  height: 600px;
-  width: 600px;
-  display: inline-block;
-  position: relative;
-}
-.gallery-image {
-  margin: auto;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 10px;
-  right: 10px;
-  max-height: 100%;
-  max-width: 100%;
-}
-</style>
-<h1><a href="/gallery">2019/06  Master Graduation</a></h1>
-<hr />
+    			<div class="en post-container">
+    
+    <h1 id="learn-llm-from-scratch">learn-llm-from-scratch</h1>
 
-    <div class="gallery-image-wrapper">
-        <a name="2019-01-15 115236.jpg"></a>
-        <a href="2019-01-15 115236.jpg">
-            <img class="gallery-image" src="thumbs/2019-01-15 115236.jpg" />
-        </a>
-    </div>
+<h2 id="fine-tune">Fine-tune</h2>
 
-    <div class="gallery-image-wrapper">
-        <a name="3T0A8604.jpg"></a>
-        <a href="3T0A8604.jpg">
-            <img class="gallery-image" src="thumbs/3T0A8604.jpg" />
-        </a>
-    </div>
+<h3 id="bert">BERT</h3>
+<ul>
+  <li><strong><a href="https://github.com/xcTorres/learn-llm-from-scratch/tree/main/fine-tune/Custom_Named_Entity_Recognition_with_BERT.ipynb">Token Classification Task</a></strong></li>
+  <li><strong><a href="https://github.com/xcTorres/learn-llm-from-scratch/tree/main/fine-tune/Fine_tuning_BERT_(and_friends)_for_multi_label_text_classification.ipynb">Sequence Classification Task</a></strong></li>
+</ul>
 
-    <div class="gallery-image-wrapper">
-        <a name="67d9af236691b9ef40e2be881e54651.jpg"></a>
-        <a href="67d9af236691b9ef40e2be881e54651.jpg">
-            <img class="gallery-image" src="thumbs/67d9af236691b9ef40e2be881e54651.jpg" />
-        </a>
-    </div>
+<h3 id="vision-transformer">Vision Transformer</h3>
+<ul>
+  <li><strong><a href="https://github.com/xcTorres/learn-llm-from-scratch/tree/main/fine-tune/Fine_tuning_the_Vision_Transformer_on_CIFAR_10_with_Trainer.ipynb">Fine-tune Vision Transformer Task</a></strong></li>
+</ul>
 
+<h3 id="multimodal">MultiModal</h3>
+<ul>
+  <li><strong><a href="https://github.com/xcTorres/learn-llm-from-scratch/tree/main/fine-tune/Chat_with_BLIP_2.ipynb">BLIP-2 Demo</a></strong></li>
+</ul>
+
+<h2 id="source-code">Source Code</h2>
+
+<ul>
+  <li><strong><a href="https://github.com/xcTorres/learn-llm-from-scratch/tree/main/source-code/transformer_translation/transformer.py">Transformer Implementation</a></strong></li>
+</ul>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><strong><a href="https://huggingface.co/docs/transformers/en/model_doc/bert">Huggingface BERT</a></strong></li>
+  <li><strong><a href="https://huggingface.co/docs/diffusers/index">Huggingface Diffusers</a></strong></li>
+  <li><strong><a href="https://github.com/NielsRogge/Transformers-Tutorials/tree/master">Transformers Tutorials</a></strong></li>
+  <li><strong><a href="https://github.com/lucidrains">PyTorch Implementations</a></strong></li>
+</ul>
+
+<h2 id="papers">Papers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Category</strong></th>
+      <th><strong>Paper Link</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NLP</td>
+      <td><strong><a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf">Attention Is All You Need</a></strong></td>
+    </tr>
+    <tr>
+      <td>NLP</td>
+      <td><strong><a href="https://arxiv.org/abs/1810.04805">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</a></strong></td>
+    </tr>
+    <tr>
+      <td>CV</td>
+      <td><strong><a href="https://arxiv.org/abs/2010.11929">(ViT) An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale</a></strong></td>
+    </tr>
+    <tr>
+      <td>CV</td>
+      <td><strong><a href="https://huggingface.co/papers/2006.11239">(DDPM) Denoising Diffusion Probabilistic Models</a></strong></td>
+    </tr>
+    <tr>
+      <td>Multimodal</td>
+      <td><strong><a href="https://arxiv.org/abs/2301.12597">BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models</a></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
     		</div>
     <!-- Sidebar Container -->
           <div class="
