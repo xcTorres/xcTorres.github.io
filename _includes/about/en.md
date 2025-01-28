@@ -4,7 +4,6 @@
 
 - **Email:** [xcwhu2016@gmail.com](mailto:xcwhu2016@gmail.com)
 - **Wechat:** [xcTorres_1112](/img/my-wechat.JPG)
-- **Instagram:** [xctorres8](https://www.instagram.com/xctorres8/)
 - **LinkedIn:** [Chong Xie](https://www.linkedin.com/in/chong-xie-545830157/)
 
 ---

@@ -211,6 +211,9 @@ gallery:
     y: 600                  # max height of thumbnails (in pixels)
   # The following options are for individual galleries.
   galleries:
+    chiang mai:
+      name: 2024/12 Chiang Mai Trip
+      best_image: IMG_8154.JPG
     phuket:
       name: 2023/12 Phuket Trip
       best_image: IMG_3544.JPG
