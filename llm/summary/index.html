@@ -371,6 +371,12 @@
   border-radius: 3px;
 }
 .llm-body pre code { background: none; padding: 0; color: inherit; }
+/* match the theme's in-content link colour (.post-container a) so the
+   reference URLs read as links rather than body text */
+.llm-body a { color: #337ab7; }
+.llm-body a:hover, .llm-body a:focus { color: #0085a1; }
+/* bare reference URLs are long; let them wrap instead of overflowing */
+.llm-body a[href^="http"] { word-break: break-word; }
 .llm-body img { max-width: 100%; }
 .llm-body hr { margin: 34px 0; border-top: 1px solid #eee; }
 /* wide tables scroll on their own instead of stretching the page */
@@ -524,7 +530,7 @@
   <li>追问 <strong>蒸馏（distillation）为何用 KL 而非交叉熵</strong>：教师输出是「软分布」而非 one-hot，要让学生匹配整个分布，所以最小化 $D_{KL}(p_{teacher}\Vert q_{student})$（带温度 T 软化）——这里 KL ≠ 交叉熵，因为教师熵不为 0、不可忽略。</li>
 </ul>
 
-<p>📖 参考：交叉熵/KL 基础见《Deep Learning》(Goodfellow) Ch.3 ｜ 蒸馏 — https://arxiv.org/abs/1503.02531</p>
+<p>📖 参考：交叉熵/KL 基础见《Deep Learning》(Goodfellow) Ch.3 ｜ 蒸馏 — <a href="https://arxiv.org/abs/1503.02531">https://arxiv.org/abs/1503.02531</a></p>
 
 <h3 id="03-常见激活函数与选型为什么大模型爱用-glu-变体-基础-高频">0.3 常见激活函数与选型？为什么大模型爱用 GLU 变体？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></h3>
 <p><strong>【核心答案】</strong> 激活函数提供<strong>非线性</strong>，否则多层线性叠加仍等价于一层。从 Sigmoid/Tanh → ReLU → GELU/Swish → 现在 LLM 主流的 <strong>SwiGLU / GeGLU</strong>（门控线性单元变体）。</p>
@@ -614,7 +620,7 @@
   <li>追问新优化器：<strong>Lion</strong>（只存一阶动量、更省显存）、<strong>Adafactor</strong>（分解二阶矩省显存，T5 用）、<strong>Muon/Shampoo</strong>（二阶/矩阵预条件，近年大模型尝试）。</li>
 </ul>
 
-<p>📖 参考：Adam — https://arxiv.org/abs/1412.6980 ｜ AdamW — https://arxiv.org/abs/1711.05101 ｜ GLU Variants — https://arxiv.org/abs/2002.05202</p>
+<p>📖 参考：Adam — <a href="https://arxiv.org/abs/1412.6980">https://arxiv.org/abs/1412.6980</a> ｜ AdamW — <a href="https://arxiv.org/abs/1711.05101">https://arxiv.org/abs/1711.05101</a> ｜ GLU Variants — <a href="https://arxiv.org/abs/2002.05202">https://arxiv.org/abs/2002.05202</a></p>
 
 <hr />
 
@@ -660,7 +666,7 @@
   <li>可能追问：<strong>没有残差会怎样</strong>？深层 Transformer 几乎无法收敛——这是 Pre-LN/残差/归一化「三件套」共同保证可训练性的核心原因。</li>
 </ul>
 
-<p>📖 参考：Attention Is All You Need — https://arxiv.org/abs/1706.03762 ｜ ResNet（残差）— https://arxiv.org/abs/1512.03385</p>
+<p>📖 参考：Attention Is All You Need — <a href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a> ｜ ResNet（残差）— <a href="https://arxiv.org/abs/1512.03385">https://arxiv.org/abs/1512.03385</a></p>
 
 <hr />
 
@@ -716,7 +722,7 @@
   <li>追问 RoPE 的 base（θ）超参影响：base 越大，长距离区分度越好，是长上下文调优的关键旋钮。</li>
 </ul>
 
-<p>📖 参考：RoFormer (RoPE) — https://arxiv.org/abs/2104.09864</p>
+<p>📖 参考：RoFormer (RoPE) — <a href="https://arxiv.org/abs/2104.09864">https://arxiv.org/abs/2104.09864</a></p>
 
 <hr />
 
@@ -736,7 +742,7 @@
   <li>追问 <strong>PrefixLM</strong>：一种折中，prompt 部分用双向注意力、生成部分用因果注意力。</li>
 </ul>
 
-<p>📖 参考：BERT — https://arxiv.org/abs/1810.04805 ｜ GPT-3 — https://arxiv.org/abs/2005.14165</p>
+<p>📖 参考：BERT — <a href="https://arxiv.org/abs/1810.04805">https://arxiv.org/abs/1810.04805</a> ｜ GPT-3 — <a href="https://arxiv.org/abs/2005.14165">https://arxiv.org/abs/2005.14165</a></p>
 
 <hr />
 
@@ -792,7 +798,7 @@
   <p>追问技巧：被问「服务慢了怎么排查」，按 <strong>TTFT 高 → 看 prefill / 排队 / prefix cache 命中率</strong>；<strong>TPOT 高 → 看 batch、KV cache 显存是否打满、是否频繁抢占</strong> 来分层定位。</p>
 </blockquote>
 
-<p>📖 参考：GQA — https://arxiv.org/abs/2305.13245 ｜ vLLM/PagedAttention — https://arxiv.org/abs/2309.06180 ｜ DistServe（PD 分离）— https://arxiv.org/abs/2401.09670</p>
+<p>📖 参考：GQA — <a href="https://arxiv.org/abs/2305.13245">https://arxiv.org/abs/2305.13245</a> ｜ vLLM/PagedAttention — <a href="https://arxiv.org/abs/2309.06180">https://arxiv.org/abs/2309.06180</a> ｜ DistServe（PD 分离）— <a href="https://arxiv.org/abs/2401.09670">https://arxiv.org/abs/2401.09670</a></p>
 
 <hr />
 
@@ -828,7 +834,7 @@
   <li>追问 <strong>怎么得到 MoE</strong>：可从头训，也可 <strong>upcycling</strong>（把训好的稠密模型 FFN 复制成多专家再续训，省成本）。</li>
 </ul>
 
-<p>📖 参考：Mixtral of Experts — https://arxiv.org/abs/2401.04088 ｜ DeepSeekMoE — https://arxiv.org/abs/2401.06066 ｜ DeepSeek-V3 — https://arxiv.org/abs/2412.19437</p>
+<p>📖 参考：Mixtral of Experts — <a href="https://arxiv.org/abs/2401.04088">https://arxiv.org/abs/2401.04088</a> ｜ DeepSeekMoE — <a href="https://arxiv.org/abs/2401.06066">https://arxiv.org/abs/2401.06066</a> ｜ DeepSeek-V3 — <a href="https://arxiv.org/abs/2412.19437">https://arxiv.org/abs/2412.19437</a></p>
 <blockquote>
   <p>⚠️ DeepSeek-V3 的 671B/37B 等数字按公开资料，写定稿前对一遍原报告。</p>
 </blockquote>
@@ -913,7 +919,7 @@
   </li>
 </ul>
 
-<p>📖 参考：InstructGPT — https://arxiv.org/abs/2203.02155 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300</p>
+<p>📖 参考：InstructGPT — <a href="https://arxiv.org/abs/2203.02155">https://arxiv.org/abs/2203.02155</a> ｜ GRPO/DeepSeekMath — <a href="https://arxiv.org/abs/2402.03300">https://arxiv.org/abs/2402.03300</a></p>
 
 <hr />
 
@@ -1022,7 +1028,7 @@
   <p>一句话总结：<strong>PPO 最通用但最重；DPO 用一个分类损失换掉整条 RL 流水线，简单稳定但是 offline；GRPO 介于两者之间——保留在线 RL 与探索，但用「组内相对优势」干掉 critic，特别适合有可验证奖励的推理任务。</strong></p>
 </blockquote>
 
-<p>📖 参考：DPO — https://arxiv.org/abs/2305.18290 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300</p>
+<p>📖 参考：DPO — <a href="https://arxiv.org/abs/2305.18290">https://arxiv.org/abs/2305.18290</a> ｜ GRPO/DeepSeekMath — <a href="https://arxiv.org/abs/2402.03300">https://arxiv.org/abs/2402.03300</a></p>
 
 <hr />
 
@@ -1047,7 +1053,7 @@
   <li>追问怎么<strong>评测</strong>幻觉：TruthfulQA、FActScore、以及多模态的 POPE。</li>
 </ul>
 
-<p>📖 参考：RAG — https://arxiv.org/abs/2005.11401</p>
+<p>📖 参考：RAG — <a href="https://arxiv.org/abs/2005.11401">https://arxiv.org/abs/2005.11401</a></p>
 
 <hr />
 
@@ -1081,7 +1087,7 @@
   <li>追问 LoRA 的局限：对需要大幅改变模型行为的任务，可能不如全参微调。</li>
 </ul>
 
-<p>📖 参考：LoRA — https://arxiv.org/abs/2106.09685 ｜ QLoRA — https://arxiv.org/abs/2305.14314</p>
+<p>📖 参考：LoRA — <a href="https://arxiv.org/abs/2106.09685">https://arxiv.org/abs/2106.09685</a> ｜ QLoRA — <a href="https://arxiv.org/abs/2305.14314">https://arxiv.org/abs/2305.14314</a></p>
 
 <hr />
 
@@ -1099,7 +1105,7 @@
 
 <p><strong>【权衡 / 追问】</strong> 核心权衡是精度损失 vs 显存/速度收益。追问 INT4 一般损失多少？通常 4-bit 权重量化精度损失很小（1-2%），是性价比甜点。</p>
 
-<p>📖 参考：GPTQ — https://arxiv.org/abs/2210.17323 ｜ AWQ — https://arxiv.org/abs/2306.00978</p>
+<p>📖 参考：GPTQ — <a href="https://arxiv.org/abs/2210.17323">https://arxiv.org/abs/2210.17323</a> ｜ AWQ — <a href="https://arxiv.org/abs/2306.00978">https://arxiv.org/abs/2306.00978</a></p>
 
 <hr />
 
@@ -1116,7 +1122,7 @@
 
 <p><strong>【权衡 / 追问】</strong> 追问它和稀疏/线性注意力的区别？后者通过近似降低计算复杂度（有损），Flash Attention 是无损的工程优化。</p>
 
-<p>📖 参考：FlashAttention — https://arxiv.org/abs/2205.14135</p>
+<p>📖 参考：FlashAttention — <a href="https://arxiv.org/abs/2205.14135">https://arxiv.org/abs/2205.14135</a></p>
 
 <hr />
 
@@ -1132,7 +1138,7 @@
 
 <p><strong>【权衡 / 追问】</strong> 加速比取决于小模型的「命中率」和两者大小差距；draft 太弱则接受率低、收益小。追问适用场景：批量小、追求低延迟时收益明显。</p>
 
-<p>📖 参考：Speculative Decoding — https://arxiv.org/abs/2211.17192</p>
+<p>📖 参考：Speculative Decoding — <a href="https://arxiv.org/abs/2211.17192">https://arxiv.org/abs/2211.17192</a></p>
 
 <hr />
 
@@ -1148,7 +1154,7 @@
 
 <p><strong>【权衡 / 追问】</strong> 追问 throughput vs latency 的权衡：大 batch 提吞吐但单请求延迟变高；在线服务要在两者间取舍。</p>
 
-<p>📖 参考：vLLM / PagedAttention — https://arxiv.org/abs/2309.06180</p>
+<p>📖 参考：vLLM / PagedAttention — <a href="https://arxiv.org/abs/2309.06180">https://arxiv.org/abs/2309.06180</a></p>
 
 <hr />
 
@@ -1190,7 +1196,7 @@
   </li>
 </ul>
 
-<p>📖 参考：Scaling Laws — https://arxiv.org/abs/2001.08361 ｜ Chinchilla — https://arxiv.org/abs/2203.15556</p>
+<p>📖 参考：Scaling Laws — <a href="https://arxiv.org/abs/2001.08361">https://arxiv.org/abs/2001.08361</a> ｜ Chinchilla — <a href="https://arxiv.org/abs/2203.15556">https://arxiv.org/abs/2203.15556</a></p>
 
         </article>
       </div>
@@ -1295,7 +1301,7 @@
   <li>A common follow-up is <strong>why distillation uses KL rather than cross-entropy</strong>: the teacher outputs a <em>soft</em> distribution, not a one-hot label, and the student must match the whole thing — so minimise $D_{KL}(p_{teacher}\Vert q_{student})$ (softened with temperature T). Here KL ≠ cross-entropy, because the teacher’s entropy is non-zero and cannot be dropped.</li>
 </ul>
 
-<p>📖 Reference: cross-entropy and KL basics in <em>Deep Learning</em> (Goodfellow) Ch.3 ｜ Distillation — https://arxiv.org/abs/1503.02531</p>
+<p>📖 Reference: cross-entropy and KL basics in <em>Deep Learning</em> (Goodfellow) Ch.3 ｜ Distillation — <a href="https://arxiv.org/abs/1503.02531">https://arxiv.org/abs/1503.02531</a></p>
 
 <h3 id="03-activation-functions-and-why-large-models-favour-glu-variants--basics-core">0.3 Activation functions, and why large models favour GLU variants ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></h3>
 <p><strong>【Core answer】</strong> Activations supply <strong>non-linearity</strong>; without them stacked linear layers collapse back into one. The line runs Sigmoid/Tanh → ReLU → GELU/Swish → today’s LLM default, <strong>SwiGLU / GeGLU</strong> (gated linear unit variants).</p>
@@ -1385,7 +1391,7 @@
   <li>A common follow-up is <strong>newer optimisers</strong>: <strong>Lion</strong> (first moment only, so lighter on memory), <strong>Adafactor</strong> (factorises the second moment to save memory; used by T5), and <strong>Muon/Shampoo</strong> (second-order / matrix preconditioning, tried in recent large models).</li>
 </ul>
 
-<p>📖 Reference: Adam — https://arxiv.org/abs/1412.6980 ｜ AdamW — https://arxiv.org/abs/1711.05101 ｜ GLU Variants — https://arxiv.org/abs/2002.05202</p>
+<p>📖 Reference: Adam — <a href="https://arxiv.org/abs/1412.6980">https://arxiv.org/abs/1412.6980</a> ｜ AdamW — <a href="https://arxiv.org/abs/1711.05101">https://arxiv.org/abs/1711.05101</a> ｜ GLU Variants — <a href="https://arxiv.org/abs/2002.05202">https://arxiv.org/abs/2002.05202</a></p>
 
 <hr />
 
@@ -1431,7 +1437,7 @@
   <li>A likely follow-up: <strong>what happens without residuals?</strong> A deep Transformer barely converges at all — which is why residuals, normalisation and Pre-LN together are what makes the thing trainable.</li>
 </ul>
 
-<p>📖 Reference: Attention Is All You Need — https://arxiv.org/abs/1706.03762 ｜ ResNet — https://arxiv.org/abs/1512.03385</p>
+<p>📖 Reference: Attention Is All You Need — <a href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a> ｜ ResNet — <a href="https://arxiv.org/abs/1512.03385">https://arxiv.org/abs/1512.03385</a></p>
 
 <hr />
 
@@ -1487,7 +1493,7 @@
   <li>A common follow-up is <strong>the effect of RoPE’s base (θ)</strong>: a larger base discriminates better at long range, making it the key knob for long-context tuning.</li>
 </ul>
 
-<p>📖 Reference: RoFormer (RoPE) — https://arxiv.org/abs/2104.09864</p>
+<p>📖 Reference: RoFormer (RoPE) — <a href="https://arxiv.org/abs/2104.09864">https://arxiv.org/abs/2104.09864</a></p>
 
 <hr />
 
@@ -1507,7 +1513,7 @@
   <li>A common follow-up is <strong>PrefixLM</strong>: a middle ground with bidirectional attention over the prompt and causal attention over the generated part.</li>
 </ul>
 
-<p>📖 Reference: BERT — https://arxiv.org/abs/1810.04805 ｜ GPT-3 — https://arxiv.org/abs/2005.14165</p>
+<p>📖 Reference: BERT — <a href="https://arxiv.org/abs/1810.04805">https://arxiv.org/abs/1810.04805</a> ｜ GPT-3 — <a href="https://arxiv.org/abs/2005.14165">https://arxiv.org/abs/2005.14165</a></p>
 
 <hr />
 
@@ -1563,7 +1569,7 @@
   <p>A useful diagnostic habit: asked “the service got slow, how do you debug it”, split by symptom — <strong>high TTFT → look at prefill, queueing and prefix-cache hit rate</strong>; <strong>high TPOT → look at batch size, whether KV-cache memory is saturated, and whether requests are being preempted</strong>.</p>
 </blockquote>
 
-<p>📖 Reference: GQA — https://arxiv.org/abs/2305.13245 ｜ vLLM/PagedAttention — https://arxiv.org/abs/2309.06180 ｜ DistServe (PD disaggregation) — https://arxiv.org/abs/2401.09670</p>
+<p>📖 Reference: GQA — <a href="https://arxiv.org/abs/2305.13245">https://arxiv.org/abs/2305.13245</a> ｜ vLLM/PagedAttention — <a href="https://arxiv.org/abs/2309.06180">https://arxiv.org/abs/2309.06180</a> ｜ DistServe (PD disaggregation) — <a href="https://arxiv.org/abs/2401.09670">https://arxiv.org/abs/2401.09670</a></p>
 
 <hr />
 
@@ -1599,7 +1605,7 @@
   <li>A common follow-up is <strong>how you get an MoE</strong>: train from scratch, or <strong>upcycle</strong> — clone a trained dense model’s FFN into several experts and continue training, which is cheaper.</li>
 </ul>
 
-<p>📖 Reference: Mixtral of Experts — https://arxiv.org/abs/2401.04088 ｜ DeepSeekMoE — https://arxiv.org/abs/2401.06066 ｜ DeepSeek-V3 — https://arxiv.org/abs/2412.19437</p>
+<p>📖 Reference: Mixtral of Experts — <a href="https://arxiv.org/abs/2401.04088">https://arxiv.org/abs/2401.04088</a> ｜ DeepSeekMoE — <a href="https://arxiv.org/abs/2401.06066">https://arxiv.org/abs/2401.06066</a> ｜ DeepSeek-V3 — <a href="https://arxiv.org/abs/2412.19437">https://arxiv.org/abs/2412.19437</a></p>
 <blockquote>
   <p>⚠️ DeepSeek-V3’s 671B/37B figures follow public material; check the original report before relying on them.</p>
 </blockquote>
@@ -1684,7 +1690,7 @@
   </li>
 </ul>
 
-<p>📖 Reference: InstructGPT — https://arxiv.org/abs/2203.02155 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300</p>
+<p>📖 Reference: InstructGPT — <a href="https://arxiv.org/abs/2203.02155">https://arxiv.org/abs/2203.02155</a> ｜ GRPO/DeepSeekMath — <a href="https://arxiv.org/abs/2402.03300">https://arxiv.org/abs/2402.03300</a></p>
 
 <hr />
 
@@ -1793,7 +1799,7 @@
   <p>In one line: <strong>PPO is the most general and the heaviest; DPO trades the entire RL pipeline for one classification loss — simple and stable, but offline; GRPO sits between them, keeping online RL and exploration while killing the critic with a group-relative advantage, which suits reasoning tasks that have verifiable rewards.</strong></p>
 </blockquote>
 
-<p>📖 Reference: DPO — https://arxiv.org/abs/2305.18290 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300</p>
+<p>📖 Reference: DPO — <a href="https://arxiv.org/abs/2305.18290">https://arxiv.org/abs/2305.18290</a> ｜ GRPO/DeepSeekMath — <a href="https://arxiv.org/abs/2402.03300">https://arxiv.org/abs/2402.03300</a></p>
 
 <hr />
 
@@ -1818,7 +1824,7 @@
   <li>A common follow-up is <strong>how to measure hallucination</strong>: TruthfulQA, FActScore, and POPE for multimodal.</li>
 </ul>
 
-<p>📖 Reference: RAG — https://arxiv.org/abs/2005.11401</p>
+<p>📖 Reference: RAG — <a href="https://arxiv.org/abs/2005.11401">https://arxiv.org/abs/2005.11401</a></p>
 
 <hr />
 
@@ -1852,7 +1858,7 @@
   <li>A common follow-up is <strong>LoRA’s limits</strong>: for tasks that require substantially changing the model’s behaviour it can fall short of full fine-tuning.</li>
 </ul>
 
-<p>📖 Reference: LoRA — https://arxiv.org/abs/2106.09685 ｜ QLoRA — https://arxiv.org/abs/2305.14314</p>
+<p>📖 Reference: LoRA — <a href="https://arxiv.org/abs/2106.09685">https://arxiv.org/abs/2106.09685</a> ｜ QLoRA — <a href="https://arxiv.org/abs/2305.14314">https://arxiv.org/abs/2305.14314</a></p>
 
 <hr />
 
@@ -1870,7 +1876,7 @@
 
 <p><strong>【Trade-offs / follow-ups】</strong> The core trade is accuracy loss against memory and speed. A common follow-up is <strong>how much INT4 costs you</strong>: 4-bit weight quantization typically loses very little (1–2%), which is why it is the sweet spot.</p>
 
-<p>📖 Reference: GPTQ — https://arxiv.org/abs/2210.17323 ｜ AWQ — https://arxiv.org/abs/2306.00978</p>
+<p>📖 Reference: GPTQ — <a href="https://arxiv.org/abs/2210.17323">https://arxiv.org/abs/2210.17323</a> ｜ AWQ — <a href="https://arxiv.org/abs/2306.00978">https://arxiv.org/abs/2306.00978</a></p>
 
 <hr />
 
@@ -1887,7 +1893,7 @@
 
 <p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>how it differs from sparse or linear attention</strong>: those approximate to reduce complexity and lose accuracy; FlashAttention is a lossless systems optimisation.</p>
 
-<p>📖 Reference: FlashAttention — https://arxiv.org/abs/2205.14135</p>
+<p>📖 Reference: FlashAttention — <a href="https://arxiv.org/abs/2205.14135">https://arxiv.org/abs/2205.14135</a></p>
 
 <hr />
 
@@ -1903,7 +1909,7 @@
 
 <p><strong>【Trade-offs / follow-ups】</strong> Speedup depends on the draft’s hit rate and the size gap between the two models; a draft that is too weak gets rejected often and buys little. A common follow-up is <strong>where it pays</strong>: small batches and latency-sensitive serving.</p>
 
-<p>📖 Reference: Speculative Decoding — https://arxiv.org/abs/2211.17192</p>
+<p>📖 Reference: Speculative Decoding — <a href="https://arxiv.org/abs/2211.17192">https://arxiv.org/abs/2211.17192</a></p>
 
 <hr />
 
@@ -1919,7 +1925,7 @@
 
 <p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>the throughput-versus-latency trade</strong>: bigger batches raise throughput but lengthen per-request latency, and online serving has to pick a point between them.</p>
 
-<p>📖 Reference: vLLM / PagedAttention — https://arxiv.org/abs/2309.06180</p>
+<p>📖 Reference: vLLM / PagedAttention — <a href="https://arxiv.org/abs/2309.06180">https://arxiv.org/abs/2309.06180</a></p>
 
 <hr />
 
@@ -1961,7 +1967,7 @@
   </li>
 </ul>
 
-<p>📖 Reference: Scaling Laws — https://arxiv.org/abs/2001.08361 ｜ Chinchilla — https://arxiv.org/abs/2203.15556</p>
+<p>📖 Reference: Scaling Laws — <a href="https://arxiv.org/abs/2001.08361">https://arxiv.org/abs/2001.08361</a> ｜ Chinchilla — <a href="https://arxiv.org/abs/2203.15556">https://arxiv.org/abs/2203.15556</a></p>
 
         </article>
       </div>
