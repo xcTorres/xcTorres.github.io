@@ -33,7 +33,7 @@ mathjax: true
 - The limits: it is good at *matching and classifying* but **cannot generate** a text answer, and it is weak on fine detail, counting and spatial relations.
 - A common follow-up is **why contrastive learning rather than classification**: contrastive training can consume enormous amounts of weakly labelled data (web image-text pairs) without committing to a fixed label set, which is where the generalisation and zero-shot ability come from.
 
-📖 Reference: CLIP — https://arxiv.org/abs/2103.00020
+📖 Reference: CLIP — [https://arxiv.org/abs/2103.00020](https://arxiv.org/abs/2103.00020)
 
 ---
 
@@ -49,7 +49,7 @@ mathjax: true
 - A common follow-up is **why sigmoid removes the large-batch dependency**: softmax has to normalise across the batch's negatives, so a bigger batch means more negatives and a better estimate. Sigmoid decouples each pair into an independent judgement, so no batch-wide view is required.
 - A common follow-up is **how this relates to codec-based encoders**: SigLIP2 already pushes native dynamic resolution, but it still feeds video as sampled frames. LLaVA-OneVision-2 goes further and builds its own **OneVision-Encoder** (codec-aligned sparsity plus 3D RoPE, [2602.08683](https://arxiv.org/abs/2602.08683)), beating SigLIP2 and Qwen3-ViT on 16 benchmarks with fewer tokens.
 
-📖 Reference: SigLIP — https://arxiv.org/abs/2303.15343 ｜ SigLIP2 — https://arxiv.org/abs/2502.14786
+📖 Reference: SigLIP — [https://arxiv.org/abs/2303.15343](https://arxiv.org/abs/2303.15343) ｜ SigLIP2 — [https://arxiv.org/abs/2502.14786](https://arxiv.org/abs/2502.14786)
 
 ---
 
@@ -66,7 +66,7 @@ mathjax: true
 - The MLP route (LLaVA) is simple but produces many visual tokens and eats context; the Q-Former (BLIP-2) uses few tokens but is harder to train and can lose detail.
 - A common follow-up is **whether to unfreeze the vision encoder**: early work froze it, while later high-quality VLMs often unfreeze it or move to a larger vision tower to recover detail.
 
-📖 Reference: LLaVA — https://arxiv.org/abs/2304.08485 ｜ BLIP-2 — https://arxiv.org/abs/2301.12597 ｜ Flamingo — https://arxiv.org/abs/2204.14198
+📖 Reference: LLaVA — [https://arxiv.org/abs/2304.08485](https://arxiv.org/abs/2304.08485) ｜ BLIP-2 — [https://arxiv.org/abs/2301.12597](https://arxiv.org/abs/2301.12597) ｜ Flamingo — [https://arxiv.org/abs/2204.14198](https://arxiv.org/abs/2204.14198)
 
 ---
 
@@ -79,7 +79,7 @@ mathjax: true
 
 **【Trade-offs / follow-ups】** A common follow-up is **why the LLM stays frozen in stage one**: a small alignment dataset would otherwise damage the language ability the LLM already has. Build the bridge between modalities first, then fine-tune jointly.
 
-📖 Reference: Visual Instruction Tuning (LLaVA) — https://arxiv.org/abs/2304.08485
+📖 Reference: Visual Instruction Tuning (LLaVA) — [https://arxiv.org/abs/2304.08485](https://arxiv.org/abs/2304.08485)
 
 ---
 
@@ -136,7 +136,7 @@ mathjax: true
 - A common follow-up is **why it trains more easily than a GAN**: there is no adversarial discriminator, so training is stable and mode coverage is good (little mode collapse). The price is **slow sampling** — dozens to a thousand iterations.
 - A common follow-up is **how it relates to VAEs and GANs**: all are generative models. Diffusion can be read as a multi-step, hierarchical denoising autoencoder that trades compute for quality and stability.
 
-📖 Reference: DDPM — https://arxiv.org/abs/2006.11239
+📖 Reference: DDPM — [https://arxiv.org/abs/2006.11239](https://arxiv.org/abs/2006.11239)
 
 ---
 
@@ -168,7 +168,7 @@ mathjax: true
   Larger $w$ hews closer to the prompt, at the cost of diversity and naturalness.
 - A common follow-up is **why the latent space suffices**: the VAE has already removed pixel redundancy while keeping semantics and structure, so diffusion only has to model what is perceptually relevant.
 
-📖 Reference: Latent Diffusion / Stable Diffusion — https://arxiv.org/abs/2112.10752 ｜ Classifier-Free Guidance — https://arxiv.org/abs/2207.12598
+📖 Reference: Latent Diffusion / Stable Diffusion — [https://arxiv.org/abs/2112.10752](https://arxiv.org/abs/2112.10752) ｜ Classifier-Free Guidance — [https://arxiv.org/abs/2207.12598](https://arxiv.org/abs/2207.12598)
 
 ---
 
@@ -182,7 +182,7 @@ mathjax: true
 
 **【Trade-offs / follow-ups】** A common follow-up is **diffusion vs. autoregression for images**: diffusion denoises in parallel and reaches high quality but needs many steps; autoregression goes token by token and unifies architecture with the LLM, but is slow over long sequences.
 
-📖 Reference: DiT — https://arxiv.org/abs/2212.09748 ｜ Flow Matching — https://arxiv.org/abs/2210.02747
+📖 Reference: DiT — [https://arxiv.org/abs/2212.09748](https://arxiv.org/abs/2212.09748) ｜ Flow Matching — [https://arxiv.org/abs/2210.02747](https://arxiv.org/abs/2210.02747)
 
 ---
 
@@ -203,7 +203,7 @@ mathjax: true
 - A common follow-up is **why you cannot just concatenate tokens as with images**: one minute at 30 fps is 1,800 frames; at 256 tokens each that is roughly 460,000 tokens, far past any context window. Sampling and compression are not optional.
 - A common follow-up is **what sparse sampling costs**: sample too sparsely and fast actions or brief events vanish (temporal information is lost); sample too densely and tokens explode. The usual coverage-versus-efficiency trade-off.
 
-📖 Reference: Video-LLaVA — https://arxiv.org/abs/2311.10122 ｜ Qwen2.5-VL — https://arxiv.org/abs/2502.13923
+📖 Reference: Video-LLaVA — [https://arxiv.org/abs/2311.10122](https://arxiv.org/abs/2311.10122) ｜ Qwen2.5-VL — [https://arxiv.org/abs/2502.13923](https://arxiv.org/abs/2502.13923)
 
 ---
 
@@ -221,7 +221,7 @@ mathjax: true
 - A common follow-up is **what one-token-per-frame loses**: spatial detail within the frame (OCR, small objects). It keeps temporal coverage instead — a good bargain when seeing the whole span matters more than seeing any single frame clearly.
 - A common follow-up is **why temporal encoding matters**: without it, "did he open the door before turning off the light?" is pure guesswork driven by visual priors.
 
-📖 Reference: STORM — https://arxiv.org/abs/2503.04130 ｜ Qwen2-VL (M-RoPE) — https://arxiv.org/abs/2409.12191
+📖 Reference: STORM — [https://arxiv.org/abs/2503.04130](https://arxiv.org/abs/2503.04130) ｜ Qwen2-VL (M-RoPE) — [https://arxiv.org/abs/2409.12191](https://arxiv.org/abs/2409.12191)
 
 ---
 
@@ -234,7 +234,7 @@ mathjax: true
 
 **【Trade-offs / follow-ups】** A common follow-up is **why an offline model cannot simply be used for streaming**: offline models assume global visibility and reason once. Streaming demands incremental decisions under incomplete information and is latency-sensitive — a different problem setting.
 
-📖 Reference: StreamingBench — https://arxiv.org/abs/2411.03628
+📖 Reference: StreamingBench — [https://arxiv.org/abs/2411.03628](https://arxiv.org/abs/2411.03628)
 
 ---
 
@@ -251,31 +251,31 @@ mathjax: true
 - A common follow-up is **how VLMs typically fail on long video**: because sampling is sparse, models degenerate into looking at a handful of frames and guessing from language priors, never doing genuine full-span temporal reasoning. If shuffling frame order does not change the answer, the model was not using time.
 - A common follow-up is **how to check the model really uses time**: shuffle or reverse the frames and see whether the answer moves, and test on tasks that cannot be faked, such as temporal localisation ("at what second does the event occur?").
 
-📖 Reference: Video-MME — https://arxiv.org/abs/2405.21075 ｜ EgoSchema — https://arxiv.org/abs/2308.09126
+📖 Reference: Video-MME — [https://arxiv.org/abs/2405.21075](https://arxiv.org/abs/2405.21075) ｜ EgoSchema — [https://arxiv.org/abs/2308.09126](https://arxiv.org/abs/2308.09126)
 
 ---
 
 # Appendix A: Core paper index (multimodal / VLM)
 
 **Understanding-oriented VLMs**
-- ✅ CLIP — https://arxiv.org/abs/2103.00020
-- ✅ SigLIP — https://arxiv.org/abs/2303.15343 ｜ SigLIP2 — https://arxiv.org/abs/2502.14786
-- ✅ Flamingo — https://arxiv.org/abs/2204.14198
-- ✅ BLIP-2 — https://arxiv.org/abs/2301.12597
-- ✅ LLaVA (Visual Instruction Tuning) — https://arxiv.org/abs/2304.08485
+- ✅ CLIP — [https://arxiv.org/abs/2103.00020](https://arxiv.org/abs/2103.00020)
+- ✅ SigLIP — [https://arxiv.org/abs/2303.15343](https://arxiv.org/abs/2303.15343) ｜ SigLIP2 — [https://arxiv.org/abs/2502.14786](https://arxiv.org/abs/2502.14786)
+- ✅ Flamingo — [https://arxiv.org/abs/2204.14198](https://arxiv.org/abs/2204.14198)
+- ✅ BLIP-2 — [https://arxiv.org/abs/2301.12597](https://arxiv.org/abs/2301.12597)
+- ✅ LLaVA (Visual Instruction Tuning) — [https://arxiv.org/abs/2304.08485](https://arxiv.org/abs/2304.08485)
 
 **Generative / diffusion**
-- ✅ DDPM — https://arxiv.org/abs/2006.11239
-- ✅ Latent Diffusion / Stable Diffusion — https://arxiv.org/abs/2112.10752
-- ✅ Classifier-Free Guidance — https://arxiv.org/abs/2207.12598
-- ✅ DiT (Scalable Diffusion with Transformers) — https://arxiv.org/abs/2212.09748
-- ✅ Flow Matching — https://arxiv.org/abs/2210.02747
+- ✅ DDPM — [https://arxiv.org/abs/2006.11239](https://arxiv.org/abs/2006.11239)
+- ✅ Latent Diffusion / Stable Diffusion — [https://arxiv.org/abs/2112.10752](https://arxiv.org/abs/2112.10752)
+- ✅ Classifier-Free Guidance — [https://arxiv.org/abs/2207.12598](https://arxiv.org/abs/2207.12598)
+- ✅ DiT (Scalable Diffusion with Transformers) — [https://arxiv.org/abs/2212.09748](https://arxiv.org/abs/2212.09748)
+- ✅ Flow Matching — [https://arxiv.org/abs/2210.02747](https://arxiv.org/abs/2210.02747)
 
 **Video understanding**
-- ✅ Video-LLaVA — https://arxiv.org/abs/2311.10122
-- ✅ Qwen2-VL (M-RoPE) — https://arxiv.org/abs/2409.12191 ｜ Qwen2.5-VL — https://arxiv.org/abs/2502.13923
-- ✅ STORM (token-efficient long video) — https://arxiv.org/abs/2503.04130
-- ✅ Video-MME (evaluation) — https://arxiv.org/abs/2405.21075 ｜ StreamingBench — https://arxiv.org/abs/2411.03628 ｜ EgoSchema — https://arxiv.org/abs/2308.09126
+- ✅ Video-LLaVA — [https://arxiv.org/abs/2311.10122](https://arxiv.org/abs/2311.10122)
+- ✅ Qwen2-VL (M-RoPE) — [https://arxiv.org/abs/2409.12191](https://arxiv.org/abs/2409.12191) ｜ Qwen2.5-VL — [https://arxiv.org/abs/2502.13923](https://arxiv.org/abs/2502.13923)
+- ✅ STORM (token-efficient long video) — [https://arxiv.org/abs/2503.04130](https://arxiv.org/abs/2503.04130)
+- ✅ Video-MME (evaluation) — [https://arxiv.org/abs/2405.21075](https://arxiv.org/abs/2405.21075) ｜ StreamingBench — [https://arxiv.org/abs/2411.03628](https://arxiv.org/abs/2411.03628) ｜ EgoSchema — [https://arxiv.org/abs/2308.09126](https://arxiv.org/abs/2308.09126)
 
 ---
 

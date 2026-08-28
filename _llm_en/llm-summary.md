@@ -56,7 +56,7 @@ In one line: **cross-entropy = entropy + KL**, that is
 - A common follow-up is **label smoothing**: replace the one-hot 1 with 1−ε and spread ε over the rest, which is equivalent to mixing a uniform distribution into the target. It reduces over-confidence and improves calibration.
 - A common follow-up is **why distillation uses KL rather than cross-entropy**: the teacher outputs a *soft* distribution, not a one-hot label, and the student must match the whole thing — so minimise $D_{KL}(p_{teacher}\Vert q_{student})$ (softened with temperature T). Here KL ≠ cross-entropy, because the teacher's entropy is non-zero and cannot be dropped.
 
-📖 Reference: cross-entropy and KL basics in *Deep Learning* (Goodfellow) Ch.3 ｜ Distillation — https://arxiv.org/abs/1503.02531
+📖 Reference: cross-entropy and KL basics in *Deep Learning* (Goodfellow) Ch.3 ｜ Distillation — [https://arxiv.org/abs/1503.02531](https://arxiv.org/abs/1503.02531)
 
 ### 0.3 Activation functions, and why large models favour GLU variants ⭐ `#basics #core`
 **【Core answer】** Activations supply **non-linearity**; without them stacked linear layers collapse back into one. The line runs Sigmoid/Tanh → ReLU → GELU/Swish → today's LLM default, **SwiGLU / GeGLU** (gated linear unit variants).
@@ -100,7 +100,7 @@ In one line: **cross-entropy = entropy + KL**, that is
 - A common follow-up is **the learning-rate schedule**: large models typically use **warmup plus cosine decay** — warmup keeps early large gradients from blowing up training, cosine anneals smoothly.
 - A common follow-up is **newer optimisers**: **Lion** (first moment only, so lighter on memory), **Adafactor** (factorises the second moment to save memory; used by T5), and **Muon/Shampoo** (second-order / matrix preconditioning, tried in recent large models).
 
-📖 Reference: Adam — https://arxiv.org/abs/1412.6980 ｜ AdamW — https://arxiv.org/abs/1711.05101 ｜ GLU Variants — https://arxiv.org/abs/2002.05202
+📖 Reference: Adam — [https://arxiv.org/abs/1412.6980](https://arxiv.org/abs/1412.6980) ｜ AdamW — [https://arxiv.org/abs/1711.05101](https://arxiv.org/abs/1711.05101) ｜ GLU Variants — [https://arxiv.org/abs/2002.05202](https://arxiv.org/abs/2002.05202)
 
 ---
 
@@ -135,7 +135,7 @@ In one line: **cross-entropy = entropy + KL**, that is
 - A likely follow-up: why does the FFN expand and then contract? To provide non-linear capacity and act as key-value memory.
 - A likely follow-up: **what happens without residuals?** A deep Transformer barely converges at all — which is why residuals, normalisation and Pre-LN together are what makes the thing trainable.
 
-📖 Reference: Attention Is All You Need — https://arxiv.org/abs/1706.03762 ｜ ResNet — https://arxiv.org/abs/1512.03385
+📖 Reference: Attention Is All You Need — [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762) ｜ ResNet — [https://arxiv.org/abs/1512.03385](https://arxiv.org/abs/1512.03385)
 
 ---
 
@@ -177,7 +177,7 @@ def attention(Q, K, V, mask=None):
 - A common follow-up is **extrapolating to long context**: RoPE degrades if pushed past its training length, so **position interpolation (PI)** or **NTK-aware / YaRN** adjustments to the base frequency are used to extend it.
 - A common follow-up is **the effect of RoPE's base (θ)**: a larger base discriminates better at long range, making it the key knob for long-context tuning.
 
-📖 Reference: RoFormer (RoPE) — https://arxiv.org/abs/2104.09864
+📖 Reference: RoFormer (RoPE) — [https://arxiv.org/abs/2104.09864](https://arxiv.org/abs/2104.09864)
 
 ---
 
@@ -193,7 +193,7 @@ def attention(Q, K, V, mask=None):
 - A common follow-up is **why everything converged on decoder-only**: one simple unified training objective, good zero- and few-shot generalisation, and a single consistent inference pattern to engineer around. Research also suggests that at scale, pure decoders match or beat the alternatives.
 - A common follow-up is **PrefixLM**: a middle ground with bidirectional attention over the prompt and causal attention over the generated part.
 
-📖 Reference: BERT — https://arxiv.org/abs/1810.04805 ｜ GPT-3 — https://arxiv.org/abs/2005.14165
+📖 Reference: BERT — [https://arxiv.org/abs/1810.04805](https://arxiv.org/abs/1810.04805) ｜ GPT-3 — [https://arxiv.org/abs/2005.14165](https://arxiv.org/abs/2005.14165)
 
 ---
 
@@ -232,7 +232,7 @@ def attention(Q, K, V, mask=None):
 
 > A useful diagnostic habit: asked "the service got slow, how do you debug it", split by symptom — **high TTFT → look at prefill, queueing and prefix-cache hit rate**; **high TPOT → look at batch size, whether KV-cache memory is saturated, and whether requests are being preempted**.
 
-📖 Reference: GQA — https://arxiv.org/abs/2305.13245 ｜ vLLM/PagedAttention — https://arxiv.org/abs/2309.06180 ｜ DistServe (PD disaggregation) — https://arxiv.org/abs/2401.09670
+📖 Reference: GQA — [https://arxiv.org/abs/2305.13245](https://arxiv.org/abs/2305.13245) ｜ vLLM/PagedAttention — [https://arxiv.org/abs/2309.06180](https://arxiv.org/abs/2309.06180) ｜ DistServe (PD disaggregation) — [https://arxiv.org/abs/2401.09670](https://arxiv.org/abs/2401.09670)
 
 ---
 
@@ -258,7 +258,7 @@ def attention(Q, K, V, mask=None):
 - A common follow-up is **how MoE relates to parallelism**: **expert parallelism** places different experts on different devices and is the heart of distributed MoE, composed with TP/PP/DP. All-to-all is the main communication bottleneck.
 - A common follow-up is **how you get an MoE**: train from scratch, or **upcycle** — clone a trained dense model's FFN into several experts and continue training, which is cheaper.
 
-📖 Reference: Mixtral of Experts — https://arxiv.org/abs/2401.04088 ｜ DeepSeekMoE — https://arxiv.org/abs/2401.06066 ｜ DeepSeek-V3 — https://arxiv.org/abs/2412.19437
+📖 Reference: Mixtral of Experts — [https://arxiv.org/abs/2401.04088](https://arxiv.org/abs/2401.04088) ｜ DeepSeekMoE — [https://arxiv.org/abs/2401.06066](https://arxiv.org/abs/2401.06066) ｜ DeepSeek-V3 — [https://arxiv.org/abs/2412.19437](https://arxiv.org/abs/2412.19437)
 > ⚠️ DeepSeek-V3's 671B/37B figures follow public material; check the original report before relying on them.
 
 ---
@@ -322,7 +322,7 @@ def attention(Q, K, V, mask=None):
 
   then applies PPO's clipped objective, adding KL as a **separate regulariser** in the loss rather than folding it into the reward. The upsides: no critic, and a natural fit for **verifiable-reward RL (RLVR)** where rules decide correctness in maths and code. The limits: it needs several samples per group, and it destabilises when reward variance is high.
 
-📖 Reference: InstructGPT — https://arxiv.org/abs/2203.02155 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300
+📖 Reference: InstructGPT — [https://arxiv.org/abs/2203.02155](https://arxiv.org/abs/2203.02155) ｜ GRPO/DeepSeekMath — [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300)
 
 ---
 
@@ -361,7 +361,7 @@ def attention(Q, K, V, mask=None):
 
 > In one line: **PPO is the most general and the heaviest; DPO trades the entire RL pipeline for one classification loss — simple and stable, but offline; GRPO sits between them, keeping online RL and exploration while killing the critic with a group-relative advantage, which suits reasoning tasks that have verifiable rewards.**
 
-📖 Reference: DPO — https://arxiv.org/abs/2305.18290 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300
+📖 Reference: DPO — [https://arxiv.org/abs/2305.18290](https://arxiv.org/abs/2305.18290) ｜ GRPO/DeepSeekMath — [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300)
 
 ---
 
@@ -379,7 +379,7 @@ def attention(Q, K, V, mask=None):
 - A common follow-up is **whether RAG eliminates hallucination**. It does not — it only reduces it. Bad or incomplete retrieval, or a model that ignores what was retrieved, still hallucinates.
 - A common follow-up is **how to measure hallucination**: TruthfulQA, FActScore, and POPE for multimodal.
 
-📖 Reference: RAG — https://arxiv.org/abs/2005.11401
+📖 Reference: RAG — [https://arxiv.org/abs/2005.11401](https://arxiv.org/abs/2005.11401)
 
 ---
 
@@ -407,7 +407,7 @@ def attention(Q, K, V, mask=None):
 - A common follow-up is **choosing rank r**: 8/16/32/64 are common. Larger means more expressive and closer to full fine-tuning; harder tasks want larger.
 - A common follow-up is **LoRA's limits**: for tasks that require substantially changing the model's behaviour it can fall short of full fine-tuning.
 
-📖 Reference: LoRA — https://arxiv.org/abs/2106.09685 ｜ QLoRA — https://arxiv.org/abs/2305.14314
+📖 Reference: LoRA — [https://arxiv.org/abs/2106.09685](https://arxiv.org/abs/2106.09685) ｜ QLoRA — [https://arxiv.org/abs/2305.14314](https://arxiv.org/abs/2305.14314)
 
 ---
 
@@ -423,7 +423,7 @@ def attention(Q, K, V, mask=None):
 
 **【Trade-offs / follow-ups】** The core trade is accuracy loss against memory and speed. A common follow-up is **how much INT4 costs you**: 4-bit weight quantization typically loses very little (1–2%), which is why it is the sweet spot.
 
-📖 Reference: GPTQ — https://arxiv.org/abs/2210.17323 ｜ AWQ — https://arxiv.org/abs/2306.00978
+📖 Reference: GPTQ — [https://arxiv.org/abs/2210.17323](https://arxiv.org/abs/2210.17323) ｜ AWQ — [https://arxiv.org/abs/2306.00978](https://arxiv.org/abs/2306.00978)
 
 ---
 
@@ -438,7 +438,7 @@ def attention(Q, K, V, mask=None):
 
 **【Trade-offs / follow-ups】** A common follow-up is **how it differs from sparse or linear attention**: those approximate to reduce complexity and lose accuracy; FlashAttention is a lossless systems optimisation.
 
-📖 Reference: FlashAttention — https://arxiv.org/abs/2205.14135
+📖 Reference: FlashAttention — [https://arxiv.org/abs/2205.14135](https://arxiv.org/abs/2205.14135)
 
 ---
 
@@ -452,7 +452,7 @@ def attention(Q, K, V, mask=None):
 
 **【Trade-offs / follow-ups】** Speedup depends on the draft's hit rate and the size gap between the two models; a draft that is too weak gets rejected often and buys little. A common follow-up is **where it pays**: small batches and latency-sensitive serving.
 
-📖 Reference: Speculative Decoding — https://arxiv.org/abs/2211.17192
+📖 Reference: Speculative Decoding — [https://arxiv.org/abs/2211.17192](https://arxiv.org/abs/2211.17192)
 
 ---
 
@@ -466,7 +466,7 @@ def attention(Q, K, V, mask=None):
 
 **【Trade-offs / follow-ups】** A common follow-up is **the throughput-versus-latency trade**: bigger batches raise throughput but lengthen per-request latency, and online serving has to pick a point between them.
 
-📖 Reference: vLLM / PagedAttention — https://arxiv.org/abs/2309.06180
+📖 Reference: vLLM / PagedAttention — [https://arxiv.org/abs/2309.06180](https://arxiv.org/abs/2309.06180)
 
 ---
 
@@ -496,4 +496,4 @@ def attention(Q, K, V, mask=None):
 
 - **How do you compress a large model for production?** A combination: quantization (4-bit weights) + distillation (a large model teaching a small one) + pruning + inference-engine optimisation (vLLM, TensorRT-LLM). Trade against latency, cost and accuracy targets — set the SLA first, then choose.
 
-📖 Reference: Scaling Laws — https://arxiv.org/abs/2001.08361 ｜ Chinchilla — https://arxiv.org/abs/2203.15556
+📖 Reference: Scaling Laws — [https://arxiv.org/abs/2001.08361](https://arxiv.org/abs/2001.08361) ｜ Chinchilla — [https://arxiv.org/abs/2203.15556](https://arxiv.org/abs/2203.15556)

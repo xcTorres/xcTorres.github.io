@@ -62,7 +62,7 @@ mathjax: true
 - 追问 **label smoothing**：把 one-hot 的 1 改成 1−ε、其余分一点 ε，等价于给目标分布掺入均匀分布，缓解过度自信、改善校准。
 - 追问 **蒸馏（distillation）为何用 KL 而非交叉熵**：教师输出是「软分布」而非 one-hot，要让学生匹配整个分布，所以最小化 $D_{KL}(p_{teacher}\Vert q_{student})$（带温度 T 软化）——这里 KL ≠ 交叉熵，因为教师熵不为 0、不可忽略。
 
-📖 参考：交叉熵/KL 基础见《Deep Learning》(Goodfellow) Ch.3 ｜ 蒸馏 — https://arxiv.org/abs/1503.02531
+📖 参考：交叉熵/KL 基础见《Deep Learning》(Goodfellow) Ch.3 ｜ 蒸馏 — [https://arxiv.org/abs/1503.02531](https://arxiv.org/abs/1503.02531)
 
 ### 0.3 常见激活函数与选型？为什么大模型爱用 GLU 变体？⭐ `#基础 #高频`
 **【核心答案】** 激活函数提供**非线性**，否则多层线性叠加仍等价于一层。从 Sigmoid/Tanh → ReLU → GELU/Swish → 现在 LLM 主流的 **SwiGLU / GeGLU**（门控线性单元变体）。
@@ -106,7 +106,7 @@ mathjax: true
 - 追问学习率调度：大模型常用 **warmup + cosine 衰减**——warmup 防早期大梯度炸训，cosine 平滑退火。
 - 追问新优化器：**Lion**（只存一阶动量、更省显存）、**Adafactor**（分解二阶矩省显存，T5 用）、**Muon/Shampoo**（二阶/矩阵预条件，近年大模型尝试）。
 
-📖 参考：Adam — https://arxiv.org/abs/1412.6980 ｜ AdamW — https://arxiv.org/abs/1711.05101 ｜ GLU Variants — https://arxiv.org/abs/2002.05202
+📖 参考：Adam — [https://arxiv.org/abs/1412.6980](https://arxiv.org/abs/1412.6980) ｜ AdamW — [https://arxiv.org/abs/1711.05101](https://arxiv.org/abs/1711.05101) ｜ GLU Variants — [https://arxiv.org/abs/2002.05202](https://arxiv.org/abs/2002.05202)
 
 ---
 
@@ -141,7 +141,7 @@ mathjax: true
 - 可能追问：FFN 为什么要先升维再降维？提供非线性容量、充当 key-value 记忆。
 - 可能追问：**没有残差会怎样**？深层 Transformer 几乎无法收敛——这是 Pre-LN/残差/归一化「三件套」共同保证可训练性的核心原因。
 
-📖 参考：Attention Is All You Need — https://arxiv.org/abs/1706.03762 ｜ ResNet（残差）— https://arxiv.org/abs/1512.03385
+📖 参考：Attention Is All You Need — [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762) ｜ ResNet（残差）— [https://arxiv.org/abs/1512.03385](https://arxiv.org/abs/1512.03385)
 
 ---
 
@@ -183,7 +183,7 @@ def attention(Q, K, V, mask=None):
 - 追问 **长上下文外推**：RoPE 直接外推到训练长度之外会退化，常用 **位置插值（PI）** 或 **NTK-aware / YaRN** 调整 base 频率来扩展上下文。
 - 追问 RoPE 的 base（θ）超参影响：base 越大，长距离区分度越好，是长上下文调优的关键旋钮。
 
-📖 参考：RoFormer (RoPE) — https://arxiv.org/abs/2104.09864
+📖 参考：RoFormer (RoPE) — [https://arxiv.org/abs/2104.09864](https://arxiv.org/abs/2104.09864)
 
 ---
 
@@ -199,7 +199,7 @@ def attention(Q, K, V, mask=None):
 - 追问 **为什么大模型都收敛到 Decoder-only**？训练目标简单统一、零样本/少样本泛化好、工程上推理范式一致；研究也表明在大规模下纯解码器架构的表现不输甚至更优。
 - 追问 **PrefixLM**：一种折中，prompt 部分用双向注意力、生成部分用因果注意力。
 
-📖 参考：BERT — https://arxiv.org/abs/1810.04805 ｜ GPT-3 — https://arxiv.org/abs/2005.14165
+📖 参考：BERT — [https://arxiv.org/abs/1810.04805](https://arxiv.org/abs/1810.04805) ｜ GPT-3 — [https://arxiv.org/abs/2005.14165](https://arxiv.org/abs/2005.14165)
 
 ---
 
@@ -238,7 +238,7 @@ def attention(Q, K, V, mask=None):
 
 > 追问技巧：被问「服务慢了怎么排查」，按 **TTFT 高 → 看 prefill / 排队 / prefix cache 命中率**；**TPOT 高 → 看 batch、KV cache 显存是否打满、是否频繁抢占** 来分层定位。
 
-📖 参考：GQA — https://arxiv.org/abs/2305.13245 ｜ vLLM/PagedAttention — https://arxiv.org/abs/2309.06180 ｜ DistServe（PD 分离）— https://arxiv.org/abs/2401.09670
+📖 参考：GQA — [https://arxiv.org/abs/2305.13245](https://arxiv.org/abs/2305.13245) ｜ vLLM/PagedAttention — [https://arxiv.org/abs/2309.06180](https://arxiv.org/abs/2309.06180) ｜ DistServe（PD 分离）— [https://arxiv.org/abs/2401.09670](https://arxiv.org/abs/2401.09670)
 
 ---
 
@@ -264,7 +264,7 @@ def attention(Q, K, V, mask=None):
 - 追问 **MoE 和并行的关系**：**专家并行（expert parallelism）** 把不同专家放不同卡，是分布式 MoE 的核心，和 TP/PP/DP 组合；all-to-all 是主要通信瓶颈。
 - 追问 **怎么得到 MoE**：可从头训，也可 **upcycling**（把训好的稠密模型 FFN 复制成多专家再续训，省成本）。
 
-📖 参考：Mixtral of Experts — https://arxiv.org/abs/2401.04088 ｜ DeepSeekMoE — https://arxiv.org/abs/2401.06066 ｜ DeepSeek-V3 — https://arxiv.org/abs/2412.19437
+📖 参考：Mixtral of Experts — [https://arxiv.org/abs/2401.04088](https://arxiv.org/abs/2401.04088) ｜ DeepSeekMoE — [https://arxiv.org/abs/2401.06066](https://arxiv.org/abs/2401.06066) ｜ DeepSeek-V3 — [https://arxiv.org/abs/2412.19437](https://arxiv.org/abs/2412.19437)
 > ⚠️ DeepSeek-V3 的 671B/37B 等数字按公开资料，写定稿前对一遍原报告。
 
 ---
@@ -328,7 +328,7 @@ def attention(Q, K, V, mask=None):
 
   再套 PPO 的 clip 目标，并把 KL 作为**独立正则项**直接加进 loss（而非塞进 reward）。优点：无需 critic、天然适配「可验证奖励 RLVR」（数学/代码用规则判对错）；局限：依赖组内采样多条、reward 方差大时不稳。
 
-📖 参考：InstructGPT — https://arxiv.org/abs/2203.02155 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300
+📖 参考：InstructGPT — [https://arxiv.org/abs/2203.02155](https://arxiv.org/abs/2203.02155) ｜ GRPO/DeepSeekMath — [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300)
 
 ---
 
@@ -367,7 +367,7 @@ def attention(Q, K, V, mask=None):
 
 > 一句话总结：**PPO 最通用但最重；DPO 用一个分类损失换掉整条 RL 流水线，简单稳定但是 offline；GRPO 介于两者之间——保留在线 RL 与探索，但用「组内相对优势」干掉 critic，特别适合有可验证奖励的推理任务。**
 
-📖 参考：DPO — https://arxiv.org/abs/2305.18290 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300
+📖 参考：DPO — [https://arxiv.org/abs/2305.18290](https://arxiv.org/abs/2305.18290) ｜ GRPO/DeepSeekMath — [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300)
 
 ---
 
@@ -385,7 +385,7 @@ def attention(Q, K, V, mask=None):
 - 追问 RAG 能否消除幻觉？不能，只能降低——检索错/不全、或模型「无视」检索结果仍会幻觉。
 - 追问怎么**评测**幻觉：TruthfulQA、FActScore、以及多模态的 POPE。
 
-📖 参考：RAG — https://arxiv.org/abs/2005.11401
+📖 参考：RAG — [https://arxiv.org/abs/2005.11401](https://arxiv.org/abs/2005.11401)
 
 ---
 
@@ -413,7 +413,7 @@ def attention(Q, K, V, mask=None):
 - 追问 **秩 r 怎么选**：常见 8/16/32/64，越大表达力越强但越接近全参微调；任务越复杂用越大。
 - 追问 LoRA 的局限：对需要大幅改变模型行为的任务，可能不如全参微调。
 
-📖 参考：LoRA — https://arxiv.org/abs/2106.09685 ｜ QLoRA — https://arxiv.org/abs/2305.14314
+📖 参考：LoRA — [https://arxiv.org/abs/2106.09685](https://arxiv.org/abs/2106.09685) ｜ QLoRA — [https://arxiv.org/abs/2305.14314](https://arxiv.org/abs/2305.14314)
 
 ---
 
@@ -429,7 +429,7 @@ def attention(Q, K, V, mask=None):
 
 **【权衡 / 追问】** 核心权衡是精度损失 vs 显存/速度收益。追问 INT4 一般损失多少？通常 4-bit 权重量化精度损失很小（1-2%），是性价比甜点。
 
-📖 参考：GPTQ — https://arxiv.org/abs/2210.17323 ｜ AWQ — https://arxiv.org/abs/2306.00978
+📖 参考：GPTQ — [https://arxiv.org/abs/2210.17323](https://arxiv.org/abs/2210.17323) ｜ AWQ — [https://arxiv.org/abs/2306.00978](https://arxiv.org/abs/2306.00978)
 
 ---
 
@@ -444,7 +444,7 @@ def attention(Q, K, V, mask=None):
 
 **【权衡 / 追问】** 追问它和稀疏/线性注意力的区别？后者通过近似降低计算复杂度（有损），Flash Attention 是无损的工程优化。
 
-📖 参考：FlashAttention — https://arxiv.org/abs/2205.14135
+📖 参考：FlashAttention — [https://arxiv.org/abs/2205.14135](https://arxiv.org/abs/2205.14135)
 
 ---
 
@@ -458,7 +458,7 @@ def attention(Q, K, V, mask=None):
 
 **【权衡 / 追问】** 加速比取决于小模型的「命中率」和两者大小差距；draft 太弱则接受率低、收益小。追问适用场景：批量小、追求低延迟时收益明显。
 
-📖 参考：Speculative Decoding — https://arxiv.org/abs/2211.17192
+📖 参考：Speculative Decoding — [https://arxiv.org/abs/2211.17192](https://arxiv.org/abs/2211.17192)
 
 ---
 
@@ -472,7 +472,7 @@ def attention(Q, K, V, mask=None):
 
 **【权衡 / 追问】** 追问 throughput vs latency 的权衡：大 batch 提吞吐但单请求延迟变高；在线服务要在两者间取舍。
 
-📖 参考：vLLM / PagedAttention — https://arxiv.org/abs/2309.06180
+📖 参考：vLLM / PagedAttention — [https://arxiv.org/abs/2309.06180](https://arxiv.org/abs/2309.06180)
 
 ---
 
@@ -502,4 +502,4 @@ def attention(Q, K, V, mask=None):
 
 - **怎么把一个大模型压缩上线？** 组合拳：量化（4-bit 权重）+ 蒸馏（大模型教小模型）+ 剪枝 + 推理引擎优化（vLLM / TensorRT-LLM）。按延迟、成本、精度目标做取舍，先定 SLA 再选方案。
 
-📖 参考：Scaling Laws — https://arxiv.org/abs/2001.08361 ｜ Chinchilla — https://arxiv.org/abs/2203.15556
+📖 参考：Scaling Laws — [https://arxiv.org/abs/2001.08361](https://arxiv.org/abs/2001.08361) ｜ Chinchilla — [https://arxiv.org/abs/2203.15556](https://arxiv.org/abs/2203.15556)

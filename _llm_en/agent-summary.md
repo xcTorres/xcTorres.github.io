@@ -40,7 +40,7 @@ source: "Agent知识总结.md"
 
 **【Trade-offs / follow-ups】** A common follow-up is **how ReAct fails**: it gets stuck in loops, repeats useless actions, or lets reasoning and action drift apart. Pair it with a step cap and a reflection mechanism.
 
-📖 Reference: ReAct — https://arxiv.org/abs/2210.03629
+📖 Reference: ReAct — [https://arxiv.org/abs/2210.03629](https://arxiv.org/abs/2210.03629)
 
 ---
 
@@ -55,7 +55,7 @@ source: "Agent知识总结.md"
 - What matters in practice: validating the argument schema, retrying failed calls, tool-selection accuracy, parallel calls, and stopping the model from inventing tools that do not exist or passing nonsense arguments.
 - A common follow-up is **how to raise tool-call accuracy**: clear tool descriptions, few-shot examples, constrained decoding (force valid JSON), and exposing fewer tools at once.
 
-📖 Reference: Toolformer — https://arxiv.org/abs/2302.04761
+📖 Reference: Toolformer — [https://arxiv.org/abs/2302.04761](https://arxiv.org/abs/2302.04761)
 
 ---
 
@@ -70,7 +70,7 @@ source: "Agent知识总结.md"
 
 **【Trade-offs / follow-ups】** A common follow-up is **ReAct vs. Plan-and-Execute**: the former is flexible and adapts as it goes but burns more calls; the latter is efficient, but a wrong plan poisons everything downstream.
 
-📖 Reference: Tree of Thoughts — https://arxiv.org/abs/2305.10601 ｜ Reflexion — https://arxiv.org/abs/2303.11366
+📖 Reference: Tree of Thoughts — [https://arxiv.org/abs/2305.10601](https://arxiv.org/abs/2305.10601) ｜ Reflexion — [https://arxiv.org/abs/2303.11366](https://arxiv.org/abs/2303.11366)
 
 ---
 
@@ -87,7 +87,7 @@ source: "Agent知识总结.md"
 - A common follow-up is **why RAG fails**: poor recall (the most frequent root cause), badly cut chunks, a missing reranker, and context so long the middle gets lost.
 - A common follow-up is **RAG vs. long context**: they are complementary. RAG saves tokens, cites sources and keeps knowledge updatable; long context skips the retrieval engineering but is expensive and loses information in the middle.
 
-📖 Reference: RAG — https://arxiv.org/abs/2005.11401
+📖 Reference: RAG — [https://arxiv.org/abs/2005.11401](https://arxiv.org/abs/2005.11401)
 
 ---
 
@@ -148,7 +148,7 @@ source: "Agent知识总结.md"
 - A common follow-up is **the relationship to MCP (Model Context Protocol)**: MCP standardises *how tools and data sources plug in*, and the harness obtains its tools through it; skills are the layer above, about *how to use those tools well*.
 - A common follow-up is **who does this in practice**: Claude Code (harness + skills + subagents), OpenAI's Assistants/Responses, and the various agent SDKs. A frequent companion pattern is the **subagent** — hand a complex skill to an agent with its own context so the main context stays clean.
 
-📖 Reference: Anthropic, "Building effective agents" — https://www.anthropic.com/research/building-effective-agents ｜ Agent Skills — https://www.anthropic.com/news/skills ｜ MCP — https://modelcontextprotocol.io
+📖 Reference: Anthropic, "Building effective agents" — [https://www.anthropic.com/research/building-effective-agents](https://www.anthropic.com/research/building-effective-agents) ｜ Agent Skills — [https://www.anthropic.com/news/skills](https://www.anthropic.com/news/skills) ｜ MCP — [https://modelcontextprotocol.io](https://modelcontextprotocol.io)
 
 ---
 
@@ -168,7 +168,7 @@ source: "Agent知识总结.md"
 - A common follow-up is **how to judge a trajectory**: success rate, step count / tool calls / cost, and whether there were redundant or looping actions. Where the process is open-ended, a stronger model as judge is the usual fallback.
 - A common follow-up is **the link to Reflexion** (question 28): Reflexion is exactly the practice of writing a failed trajectory plus its reflection into memory and consulting it on retry — one way of reusing trajectories.
 
-📖 Reference: ReAct — https://arxiv.org/abs/2210.03629 ｜ Reflexion — https://arxiv.org/abs/2303.11366
+📖 Reference: ReAct — [https://arxiv.org/abs/2210.03629](https://arxiv.org/abs/2210.03629) ｜ Reflexion — [https://arxiv.org/abs/2303.11366](https://arxiv.org/abs/2303.11366)
 
 ---
 
@@ -212,20 +212,20 @@ Agent ──┼──── A2A ────► other agents
 - A common follow-up is **the real pain it removes**: before it, **every agent-to-front-end integration was bespoke** — your own SSE format, your own state sync, your own approval flow. AG-UI standardises that last mile.
 - A common follow-up is **the link to trajectories** (question 35): AG-UI's event stream is essentially **the trajectory projected onto the UI in real time** — the tool and step events *are* the actions and observations in the trajectory.
 
-📖 Reference: AG-UI docs — https://docs.ag-ui.com ｜ AG-UI (CopilotKit) — https://www.copilotkit.ai/ag-ui ｜ MCP — https://modelcontextprotocol.io ｜ A2A — https://a2aproject.github.io/A2A/
+📖 Reference: AG-UI docs — [https://docs.ag-ui.com](https://docs.ag-ui.com) ｜ AG-UI (CopilotKit) — [https://www.copilotkit.ai/ag-ui](https://www.copilotkit.ai/ag-ui) ｜ MCP — [https://modelcontextprotocol.io](https://modelcontextprotocol.io) ｜ A2A — [https://a2aproject.github.io/A2A/](https://a2aproject.github.io/A2A/)
 
 ---
 
 # Appendix A: Core paper index (agents)
 
 **Agents**
-- ✅ ReAct — https://arxiv.org/abs/2210.03629
-- ✅ Toolformer — https://arxiv.org/abs/2302.04761
-- ✅ Tree of Thoughts — https://arxiv.org/abs/2305.10601
-- ✅ Reflexion — https://arxiv.org/abs/2303.11366
-- ✅ RAG (Lewis 2020) — https://arxiv.org/abs/2005.11401
+- ✅ ReAct — [https://arxiv.org/abs/2210.03629](https://arxiv.org/abs/2210.03629)
+- ✅ Toolformer — [https://arxiv.org/abs/2302.04761](https://arxiv.org/abs/2302.04761)
+- ✅ Tree of Thoughts — [https://arxiv.org/abs/2305.10601](https://arxiv.org/abs/2305.10601)
+- ✅ Reflexion — [https://arxiv.org/abs/2303.11366](https://arxiv.org/abs/2303.11366)
+- ✅ RAG (Lewis 2020) — [https://arxiv.org/abs/2005.11401](https://arxiv.org/abs/2005.11401)
 
 **Protocols and specifications** (not papers — see question 36)
-- **MCP** (agent ↔ tools/data, Anthropic) — https://modelcontextprotocol.io
-- **A2A** (agent ↔ agent, Google) — https://a2aproject.github.io/A2A/
-- **AG-UI** (agent ↔ user/front end, CopilotKit) — https://docs.ag-ui.com ｜ https://www.copilotkit.ai/ag-ui
+- **MCP** (agent ↔ tools/data, Anthropic) — [https://modelcontextprotocol.io](https://modelcontextprotocol.io)
+- **A2A** (agent ↔ agent, Google) — [https://a2aproject.github.io/A2A/](https://a2aproject.github.io/A2A/)
+- **AG-UI** (agent ↔ user/front end, CopilotKit) — [https://docs.ag-ui.com](https://docs.ag-ui.com) ｜ [https://www.copilotkit.ai/ag-ui](https://www.copilotkit.ai/ag-ui)

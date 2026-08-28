@@ -144,6 +144,12 @@ hide-in-nav: true
   border-radius: 3px;
 }
 .llm-body pre code { background: none; padding: 0; color: inherit; }
+/* match the theme's in-content link colour (.post-container a) so the
+   reference URLs read as links rather than body text */
+.llm-body a { color: #337ab7; }
+.llm-body a:hover, .llm-body a:focus { color: #0085a1; }
+/* bare reference URLs are long; let them wrap instead of overflowing */
+.llm-body a[href^="http"] { word-break: break-word; }
 .llm-body img { max-width: 100%; }
 .llm-body hr { margin: 34px 0; border-top: 1px solid #eee; }
 /* wide tables scroll on their own instead of stretching the page */
