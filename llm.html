@@ -1,12 +1,13 @@
 ---
-layout: page
+layout: default
 title: "LLM"
-description: ""
+description: "Transformer · 训练对齐 · 推理优化"
 header-img: "img/about-bg.jpg"
 multilingual: false
+nav-order: 3
+blurb: "大模型的学习笔记：从数学基础、Transformer 架构，到训练对齐与推理工程。每个条目按「核心答案 → 深入原理 → 权衡追问 → 参考」组织，⭐ 标记值得重点深挖的地方。"
+blurb_en: "Notes on large language models: from the maths underneath, through the Transformer, to training, alignment and inference engineering. Each entry runs core answer → how it works → trade-offs → references; ⭐ marks the points worth digging into."
 ---
 
-<div class="en post-container">
-    {% capture llm %}{% include llm/llm.md %}{% endcapture %}
-    {{ llm | markdownify }}
-</div>
+{% include intro-header.html type='page' %}
+{% include llm/hub.html topic='llm' %}

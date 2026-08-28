@@ -23,7 +23,12 @@
                     <li>
                         <a href="{{ site.baseurl }}/">Home</a>
                     </li>
-                    {% for page in site.pages %}
+                    {% comment %}
+                      `nav-order` gives a page an explicit slot; pages without one
+                      (e.g. the generated gallery index) fall to the end.
+                    {% endcomment %}
+                    {% assign nav_pages = site.pages | sort: "nav-order", "last" %}
+                    {% for page in nav_pages %}
                     {% if page.title and page.hide-in-nav != true %}
                     <li>
                         <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>

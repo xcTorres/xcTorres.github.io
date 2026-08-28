@@ -1,0 +1,290 @@
+---
+layout: default
+hide-in-nav: true
+---
+
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}img/about-bg.jpg{% endif %}')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <h1><span class="lang-zh">{{ page.title }}</span><span class="lang-en">{{ page.title_en | default: page.title }}</span></h1>
+          <span class="subheading"><span class="lang-zh">{{ page.subtitle }}</span><span class="lang-en">{{ page.subtitle_en | default: page.subtitle }}</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style TYPE="text/css">
+.llm-doc { padding-bottom: 60px; }
+.llm-doc-meta {
+  padding: 26px 0 0 0;
+  font-size: 14px;
+  color: #8c8c8c;
+}
+.llm-doc-meta a { border-bottom: 1px dotted #c0c0c0; }
+.llm-doc-meta a:hover { border-bottom-color: #0085a1; }
+.llm-doc-meta .sep { padding: 0 8px; color: #d5d5d5; }
+.llm-doc-lang { float: right; }
+@media only screen and (max-width: 767px) {
+  .llm-doc-lang { float: none; display: block; margin-top: 12px; }
+}
+
+/* ---- Table of contents ---------------------------------------------------
+   kramdown renders `ul#markdown-toc` at the top of the article; a script moves
+   it into the panel below. Without JS it simply stays inline, still readable. */
+.llm-toc-panel {
+  margin-top: 30px;
+  padding: 18px 16px 18px 18px;
+  border-left: 2px solid #eee;
+}
+.llm-toc-heading {
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a8a8a8;
+  margin-bottom: 12px;
+}
+.llm-toc-list, .llm-toc-list ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.llm-toc-list ul { padding-left: 12px; margin: 4px 0 8px 0; }
+.llm-toc-list li { margin: 0; line-height: 1.5; }
+.llm-toc-list a {
+  display: block;
+  padding: 4px 8px;
+  font-size: 13px;
+  color: #8c8c8c;
+  border-left: 2px solid transparent;
+  margin-left: -10px;
+  transition: color .15s ease, border-color .15s ease;
+}
+.llm-toc-list > li > a {
+  font-size: 14px;
+  font-weight: 600;
+  color: #595959;
+  margin-top: 8px;
+}
+.llm-toc-list a:hover { color: #0085a1; text-decoration: none; }
+/* the section currently under the reader */
+.llm-toc-list a.is-active {
+  color: #0085a1;
+  border-left-color: #0085a1;
+  background-color: #f7fbfc;
+}
+/* headings carry `#基础 #高频` tag spans; they are noise in a narrow sidebar */
+.llm-toc-list code { display: none; }
+
+@media only screen and (min-width: 992px) {
+  .llm-toc-panel {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 86px;
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
+    /* a thin, unobtrusive scrollbar for the panel itself */
+    scrollbar-width: thin;
+  }
+  .llm-toc-panel::-webkit-scrollbar { width: 5px; }
+  .llm-toc-panel::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 3px; }
+}
+/* stacked above the article on narrow screens */
+@media only screen and (max-width: 991px) {
+  .llm-toc-panel {
+    border-left: 3px solid #0085a1;
+    background-color: #fbfbfb;
+    border-radius: 3px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+
+/* ---- Body ---------------------------------------------------------------- */
+.llm-body { padding-top: 10px; }
+.llm-body h1 {
+  font-size: 26px;
+  margin: 46px 0 18px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.llm-body h2 { font-size: 22px; margin: 34px 0 14px 0; }
+.llm-body h3 { font-size: 19px; margin: 30px 0 12px 0; }
+.llm-body blockquote {
+  font-size: 15px;
+  font-style: normal;
+  color: #6b6b6b;
+  border-left: 3px solid #e5e5e5;
+}
+.llm-body table {
+  width: 100%;
+  margin: 18px 0;
+  font-size: 14px;
+  border-collapse: collapse;
+}
+.llm-body table th, .llm-body table td {
+  padding: 8px 12px;
+  border: 1px solid #eaeaea;
+  vertical-align: top;
+}
+.llm-body table th { background-color: #fafafa; text-align: left; }
+.llm-body table tr:nth-child(even) td { background-color: #fcfcfc; }
+.llm-body code {
+  font-size: 13px;
+  padding: 2px 5px;
+  background-color: #f4f6f8;
+  color: #476582;
+  border-radius: 3px;
+}
+.llm-body pre code { background: none; padding: 0; color: inherit; }
+.llm-body img { max-width: 100%; }
+.llm-body hr { margin: 34px 0; border-top: 1px solid #eee; }
+/* wide tables scroll on their own instead of stretching the page */
+.llm-table-wrap { overflow-x: auto; }
+/* the fixed navbar must not swallow a heading jumped to from the TOC */
+.llm-body h1, .llm-body h2, .llm-body h3 { scroll-margin-top: 80px; }
+
+.llm-doc-footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+}
+@media only screen and (max-width: 767px) {
+  .llm-body h1 { font-size: 22px; }
+  .llm-body h2 { font-size: 19px; }
+  .llm-body h3 { font-size: 17px; }
+}
+</style>
+
+<!-- Main Content -->
+{% assign en_doc = site.llm_en | where: "pair", page.pair | first %}
+
+<div class="container llm-doc">
+  <div class="row">
+
+    <!-- Table of contents (one per language) -->
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+      <nav class="llm-toc-panel lang-zh" id="llm-toc-zh"><div class="llm-toc-heading">目录</div></nav>
+      {% if en_doc %}
+      <nav class="llm-toc-panel lang-en" id="llm-toc-en"><div class="llm-toc-heading">Contents</div></nav>
+      {% endif %}
+    </div>
+
+    <!-- Article -->
+    <div class="col-lg-8 col-lg-offset-1 col-md-9 col-sm-12 col-xs-12">
+
+      <div class="llm-doc-meta">
+        <a href="{{ site.baseurl }}/{{ page.topic }}/">&larr; {{ page.topic | upcase }}</a>
+        {% if page.link %}
+          <span class="sep">·</span><a href="{{ page.link }}" target="_blank" rel="noopener">原文 / 项目主页</a>
+        {% endif %}
+        {% if page.source %}
+          <span class="sep">·</span><a href="https://github.com/xcTorres/learn-llm-from-scratch/blob/main/{{ page.source }}" target="_blank" rel="noopener"><span class="lang-zh">笔记源文件</span><span class="lang-en">Source note</span></a>
+        {% endif %}
+        {% if en_doc %}
+        <span class="llm-doc-lang">
+          <span class="lang-switch">
+            <button type="button" data-lang="zh" onclick="__setNotesLang('zh')">中文</button>
+            <button type="button" data-lang="en" onclick="__setNotesLang('en')">EN</button>
+          </span>
+        </span>
+        {% endif %}
+      </div>
+
+      <div class="lang-zh">
+        <article class="llm-body" id="llm-article-zh">
+          {{ content }}
+        </article>
+      </div>
+      {% if en_doc %}
+      <div class="lang-en">
+        <article class="llm-body" id="llm-article-en">
+          {{ en_doc.content | markdownify }}
+        </article>
+      </div>
+      {% endif %}
+
+      <div class="llm-doc-footer">
+        <a href="{{ site.baseurl }}/{{ page.topic }}/">&larr; <span class="lang-zh">返回 {{ page.topic | upcase }}</span><span class="lang-en">Back to {{ page.topic | upcase }}</span></a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+(function() {
+    // Each language body carries its own kramdown-generated `ul.llm-toc-list`;
+    // move it into that language's sidebar panel. Selected by class, not id,
+    // because both copies would otherwise share `#markdown-toc`.
+    var panes = ['zh', 'en'].map(function(code) {
+        var article = document.getElementById('llm-article-' + code);
+        var panel = document.getElementById('llm-toc-' + code);
+        if (!article || !panel) { return null; }
+
+        var toc = article.querySelector('.llm-toc-list');
+        if (toc) { toc.removeAttribute('id'); panel.appendChild(toc); }
+        else { panel.style.display = 'none'; }
+
+        // wide tables scroll inside their own box rather than stretching the page
+        [].forEach.call(article.querySelectorAll('table'), function(table) {
+            var wrap = document.createElement('div');
+            wrap.className = 'llm-table-wrap';
+            table.parentNode.insertBefore(wrap, table);
+            wrap.appendChild(table);
+        });
+
+        var links = toc ? [].slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+        return {
+            panel: panel,
+            links: links,
+            targets: links.map(function(a) {
+                return article.querySelector('[id="' + decodeURIComponent(a.getAttribute('href').slice(1)) + '"]');
+            }),
+            active: null
+        };
+    }).filter(Boolean);
+
+    function sync() {
+        panes.forEach(function(pane) {
+            if (!pane.links.length || pane.panel.style.display === 'none') { return; }
+            if (!pane.panel.offsetParent) { return; }   // hidden language
+            var best = -1;
+            for (var i = 0; i < pane.targets.length; i++) {
+                if (pane.targets[i] && pane.targets[i].getBoundingClientRect().top <= 100) { best = i; }
+            }
+            var link = best >= 0 ? pane.links[best] : null;
+            if (link === pane.active) { return; }
+            if (pane.active) { pane.active.classList.remove('is-active'); }
+            if (link) {
+                link.classList.add('is-active');
+                var lr = link.getBoundingClientRect(), pr = pane.panel.getBoundingClientRect();
+                if (lr.top < pr.top || lr.bottom > pr.bottom) {
+                    pane.panel.scrollTop += lr.top - pr.top - pane.panel.clientHeight / 3;
+                }
+            }
+            pane.active = link;
+        });
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) { return; }
+        ticking = true;
+        window.requestAnimationFrame(function() { sync(); ticking = false; });
+    });
+    document.addEventListener('langchange', sync);
+    sync();
+})();
+</script>
+
+{% include llm/lang-toggle.html %}
+
+{% if page.mathjax %}
+  {% include mathjax_support.html %}
+{% endif %}

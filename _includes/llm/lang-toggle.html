@@ -1,0 +1,66 @@
+{% comment %}
+  Language switch for the LLM / VLM / Agent tabs.
+
+  Mark up both languages and let this hide one:
+      <div class="lang-zh">…中文…</div>
+      <div class="lang-en">…English…</div>
+
+  The choice is kept in localStorage so it survives moving between tabs.
+  Deliberately independent of the theme's own `page.multilingual` switcher,
+  which assumes a single .zh/.en pair per page and no table of contents.
+{% endcomment %}
+
+<style TYPE="text/css">
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1;
+}
+.lang-switch button {
+  border: 0;
+  background: #fff;
+  color: #999;
+  padding: 6px 12px;
+  cursor: pointer;
+  letter-spacing: .3px;
+  transition: background-color .15s ease, color .15s ease;
+}
+.lang-switch button + button { border-left: 1px solid #e2e2e2; }
+.lang-switch button:hover { color: #0085a1; }
+.lang-switch button.is-on { background-color: #0085a1; color: #fff; }
+.lang-switch button.is-on:hover { color: #fff; }
+/* both languages stay in the DOM; JS reveals one as soon as it runs */
+.lang-en { display: none; }
+</style>
+
+<script type="text/javascript">
+(function() {
+    var KEY = 'xct-notes-lang';
+    var lang;
+    try { lang = localStorage.getItem(KEY); } catch (e) { lang = null; }
+    if (lang !== 'en') { lang = 'zh'; }
+
+    function apply(next) {
+        lang = next;
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        [].forEach.call(document.querySelectorAll('.lang-zh'), function(el) {
+            el.style.display = next === 'zh' ? '' : 'none';
+        });
+        [].forEach.call(document.querySelectorAll('.lang-en'), function(el) {
+            el.style.display = next === 'en' ? '' : 'none';
+        });
+        [].forEach.call(document.querySelectorAll('.lang-switch button'), function(b) {
+            b.classList.toggle('is-on', b.getAttribute('data-lang') === next);
+        });
+        // let the page react (the doc layout re-syncs its table of contents)
+        document.dispatchEvent(new CustomEvent('langchange', { detail: next }));
+    }
+
+    // expose for the buttons, and apply once the markup exists
+    window.__setNotesLang = apply;
+    document.addEventListener('DOMContentLoaded', function() { apply(lang); });
+})();
+</script>

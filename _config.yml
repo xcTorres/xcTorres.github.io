@@ -24,7 +24,7 @@ medium_username: xcwhu2016
 highlighter: rouge
 permalink: pretty
 paginate: 20
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","vendor","Gemfile","Gemfile.lock",".bundle"]
 anchorjs: false                          # if you want to customize anchor. check out line:181 of `post.html`
 
 
@@ -100,6 +100,12 @@ collections:
   paper:
     output: true
   books:
+    output: false
+  llm:
+    output: true
+  # English bodies for the llm docs; not output on their own —
+  # the doc layout pulls them in for the in-page language switch.
+  llm_en:
     output: false
 
 # Friends

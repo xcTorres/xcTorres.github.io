@@ -1,0 +1,172 @@
+{% comment %}
+  Shared index for the LLM / VLM / Agent tabs.
+  @param {string} topic - which slice of the `llm` collection to render
+{% endcomment %}
+
+<style TYPE="text/css">
+.llm-hub { padding: 44px 0 70px 0; }
+.llm-hub-intro {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #6b6b6b;
+  margin-bottom: 8px;
+}
+.llm-hub-intro a { border-bottom: 1px dotted #c0c0c0; }
+.llm-hub-intro a:hover { border-bottom-color: #0085a1; }
+
+.llm-section-title {
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a0a0a0;
+  margin: 44px 0 4px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.llm-entry {
+  display: block;
+  margin-top: 22px;
+  padding: 26px 30px;
+  border: 1px solid #ececec;
+  border-left: 3px solid #0085a1;
+  border-radius: 4px;
+  background-color: #fff;
+  color: inherit;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.llm-entry:hover, .llm-entry:focus {
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  transform: translateY(-2px);
+}
+.llm-entry h2 {
+  margin: 0 0 6px 0;
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 22px;
+}
+.llm-entry:hover h2 { color: #0085a1; }
+.llm-entry .llm-entry-sub {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  color: #8c8c8c;
+}
+.llm-entry .llm-entry-highlights {
+  margin: 0 0 14px 0;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #a0a0a0;
+}
+.llm-entry .llm-entry-go { font-size: 14px; color: #0085a1; }
+
+/* Paper index — lights up on its own once paper notes are added */
+.llm-group { margin: 26px 0 6px 0; font-size: 14px; font-weight: 600; color: #595959; }
+.llm-papers { width: 100%; border-collapse: collapse; font-size: 14px; }
+.llm-papers tr { border-bottom: 1px solid #f0f0f0; }
+.llm-papers tr:last-child { border-bottom: 0; }
+.llm-papers td { padding: 13px 10px 13px 0; vertical-align: top; }
+.llm-papers .p-name { width: 22%; font-weight: 600; white-space: nowrap; }
+.llm-papers .p-year { width: 9%; color: #a8a8a8; white-space: nowrap; }
+.llm-papers .p-desc { color: #757575; line-height: 1.6; }
+.llm-papers .p-link { width: 12%; text-align: right; white-space: nowrap; }
+.llm-papers .p-link a { font-size: 13px; }
+
+.llm-hub-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.llm-hub-head .llm-hub-intro { flex: 1; }
+@media only screen and (max-width: 767px) {
+  .llm-hub-head { display: block; }
+  .llm-hub-head .lang-switch { margin-bottom: 16px; }
+}
+.llm-repo {
+  margin-top: 46px;
+  padding: 18px 22px;
+  border-left: 3px solid #e5e5e5;
+  background-color: #fbfbfb;
+  font-size: 14px;
+  color: #8c8c8c;
+  line-height: 1.7;
+}
+@media only screen and (max-width: 767px) {
+  .llm-entry { padding: 22px 20px; }
+  .llm-entry h2 { font-size: 19px; }
+  .llm-papers .p-name, .llm-papers .p-year,
+  .llm-papers .p-desc, .llm-papers .p-link {
+    display: block; width: auto; text-align: left; padding: 2px 0;
+  }
+  .llm-papers .p-name { white-space: normal; }
+  .llm-papers td:first-child { padding-top: 14px; }
+  .llm-papers td:last-child { padding-bottom: 14px; }
+}
+</style>
+
+<div class="container llm-hub">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      {% comment %}only the zh document of each pair is listed; the en one is pulled in by the doc layout{% endcomment %}
+      {% assign docs = site.llm | where: "topic", include.topic | where: "lang", "zh" %}
+      {% assign summaries = docs | where: "category", "summary" | sort: "order" %}
+      {% assign papers = docs | where: "category", "paper" | sort: "order" %}
+
+      <div class="llm-hub-head">
+        <p class="llm-hub-intro">
+          <span class="lang-zh">{{ page.blurb }}</span>
+          <span class="lang-en">{{ page.blurb_en | default: page.blurb }}</span>
+        </p>
+        <span class="lang-switch">
+          <button type="button" data-lang="zh" onclick="__setNotesLang('zh')">中文</button>
+          <button type="button" data-lang="en" onclick="__setNotesLang('en')">EN</button>
+        </span>
+      </div>
+
+      {% if summaries.size > 0 %}
+      <div class="llm-section-title"><span class="lang-zh">知识总结</span><span class="lang-en">Notes</span></div>
+      {% for doc in summaries %}
+      <a class="llm-entry" href="{{ doc.url | prepend: site.baseurl }}">
+        <h2><span class="lang-zh">{{ doc.title }}</span><span class="lang-en">{{ doc.title_en | default: doc.title }}</span></h2>
+        <p class="llm-entry-sub"><span class="lang-zh">{{ doc.subtitle }}</span><span class="lang-en">{{ doc.subtitle_en | default: doc.subtitle }}</span></p>
+        {% if doc.highlights %}
+        <p class="llm-entry-highlights">
+          <span class="lang-zh">{{ doc.highlights }}</span>
+          <span class="lang-en">{{ doc.highlights_en | default: doc.highlights }}</span>
+        </p>
+        {% endif %}
+        <span class="llm-entry-go"><span class="lang-zh">通读全文 &rarr;</span><span class="lang-en">Read it &rarr;</span></span>
+      </a>
+      {% endfor %}
+      {% endif %}
+
+      {% if papers.size > 0 %}
+      <div class="llm-section-title"><span class="lang-zh">论文精读</span><span class="lang-en">Paper Notes</span></div>
+      {% assign groups = papers | map: "group" | uniq %}
+      {% for group in groups %}
+        <div class="llm-group">{{ group }}</div>
+        <table class="llm-papers">
+          {% for doc in papers %}
+            {% if doc.group == group %}
+            <tr>
+              <td class="p-name"><a href="{{ doc.url | prepend: site.baseurl }}">{{ doc.title }}</a></td>
+              <td class="p-year">{{ doc.year }}</td>
+              <td class="p-desc">{{ doc.oneliner }}</td>
+              <td class="p-link">{% if doc.link %}<a href="{{ doc.link }}" target="_blank" rel="noopener">原文 &nearr;</a>{% endif %}</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </table>
+      {% endfor %}
+      {% endif %}
+
+      <div class="llm-repo">
+        <span class="lang-zh">笔记源文件、论文精读与源码报告都在
+          <a href="https://github.com/xcTorres/learn-llm-from-scratch" target="_blank" rel="noopener">learn-llm-from-scratch</a>。</span>
+        <span class="lang-en">The source notes, paper deep-dives and code walkthroughs all live in
+          <a href="https://github.com/xcTorres/learn-llm-from-scratch" target="_blank" rel="noopener">learn-llm-from-scratch</a>.</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% include llm/lang-toggle.html %}

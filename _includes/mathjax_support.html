@@ -9,8 +9,11 @@
       scale: 90
     },
     tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
+      // kramdown compiles $$...$$ to \\[...\\] and $...$ to \\(...\\); listing
+      // delimiters here replaces MathJax's defaults, so the bracket forms
+      // have to be named explicitly or display math renders as literal text.
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
       processEscapes: true,
     }
   });

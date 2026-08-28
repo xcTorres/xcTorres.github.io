@@ -7,45 +7,98 @@ title: Gallery
 {% include intro-header.html type='page' %}
 
 <style TYPE="text/css">
-.gallery-wrapper {
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 30px 24px;
+  padding: 40px 0 60px 0;
+}
+.gallery-card {
+  display: block;
+  color: inherit;
+}
+.gallery-card:hover,
+.gallery-card:focus {
+  text-decoration: none;
+  color: inherit;
+}
+.gallery-card-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+  /* keeps every cover the same shape however the source photo is cropped */
+  padding-top: 72%;
+  box-shadow: 0 1px 3px rgba(0,0,0,.10);
+  transition: box-shadow .3s ease, transform .3s ease;
+}
+.gallery-card:hover .gallery-card-media {
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+  transform: translateY(-3px);
+}
+.gallery-card-media img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  text-align: center;
-  padding: 1em 0 1em 0;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .45s ease;
 }
-.gallery-best-image{
-  height: 280px;
-  padding: 1em 2em 1em 2em;
+.gallery-card:hover .gallery-card-media img {
+  transform: scale(1.05);
 }
-.gallery{
-  background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3));
+.gallery-card-count {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+  padding: 3px 9px;
+  border-radius: 11px;
+  background-color: rgba(0,0,0,.55);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .3px;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.gallery-card:hover .gallery-card-count {
+  opacity: 1;
+}
+.gallery-card-title {
+  margin: 14px 2px 0 2px;
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 1.45;
+  transition: color .2s ease;
+}
+.gallery-card:hover .gallery-card-title {
+  color: #0085a1;
+}
+@media only screen and (max-width: 767px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 22px 16px;
+    padding: 26px 0 40px 0;
+  }
+  .gallery-card-title { font-size: 15px; }
 }
 </style>
 
 <!-- Main Content -->
-  <div class="gallery">
-    {% assign rows = page.galleries.size | divided_by: 4 %}
-    {% assign modulo = page.galleries.size | modulo: 4 %}
-    {% assign rows = rows | plus: modulo | minus: 1 %}
-    {% for i in (0..rows) %}
-      <div class="row">
-          {% for j in (0..3) %}
-            {% assign idx = i | times: 4 %}
-            {% assign idx = idx | plus: j %}
-            {% if idx >= page.galleries.size %}
-              {% break %}
-            {% else %}
-              <div class="col-lg-3">
-                {% assign gallery = page.galleries[idx]%}
-                  <div class="gallery-wrapper">
-                    <a href="{{ gallery['gallery'] }}">
-                      <img class="gallery-best-image" src="{{ gallery['gallery'] }}/thumbs/{{ gallery['best_image'] }}">
-                    </a>
-                    <h3><a href="{{ gallery['gallery'] }}">{{ gallery["name"] }}</a></h3>
-                    {{ gallery["images"] | size }} image{% if gallery["images"].size != 1 %}s{% endif %}
-                  </div>
-              </div>
-            {% endif %}
-          {% endfor %}
-      </div>
+<div class="container">
+  <div class="gallery-grid">
+    {% for gallery in page.galleries %}
+      <a class="gallery-card" href="{{ gallery['gallery'] }}">
+        <div class="gallery-card-media">
+          <img src="{{ gallery['gallery'] }}/thumbs/{{ gallery['best_image'] }}"
+               alt="{{ gallery['name'] }}" loading="lazy">
+          <span class="gallery-card-count">
+            {{ gallery['images'] | size }} photo{% if gallery['images'].size != 1 %}s{% endif %}
+          </span>
+        </div>
+        <h3 class="gallery-card-title">{{ gallery['name'] }}</h3>
+      </a>
     {% endfor %}
-    </div>
+  </div>
+</div>
