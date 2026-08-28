@@ -68,6 +68,7 @@ mathjax: true
 **【核心答案】** 激活函数提供**非线性**，否则多层线性叠加仍等价于一层。从 Sigmoid/Tanh → ReLU → GELU/Swish → 现在 LLM 主流的 **SwiGLU / GeGLU**（门控线性单元变体）。
 
 **【深入】**
+
 | 激活 | 公式 | 特点 / 问题 |
 |------|------|-----------|
 | Sigmoid | $\frac{1}{1+e^{-x}}$ | 输出(0,1)；两端饱和→**梯度消失**，非零均值 |
@@ -312,7 +313,7 @@ def attention(Q, K, V, mask=None):
 
 - **PPO 优化目标**（带 KL 惩罚的奖励 + clip 的策略梯度）：
 
-  $$\max_{\pi_\theta}\ \mathbb{E}_{x,\,y\sim\pi_\theta}\Big[\,r_\phi(x,y) - \beta\,\mathrm{KL}\big(\pi_\theta(y|x)\,\Vert \,\pi_{ref}(y|x)\big)\Big]$$
+  $$\max_{\pi_\theta}\ \mathbb{E}_{x,\,y\sim\pi_\theta}\Big[\,r_\phi(x,y) - \beta\,\mathrm{KL}\big(\pi_\theta(y\mid x)\,\Vert \,\pi_{ref}(y\mid x)\big)\Big]$$
 
   实现上用 clip 形式（A 为 GAE 优势，r_t(θ)=π_θ/π_old 为重要性比）：
 
@@ -339,9 +340,9 @@ def attention(Q, K, V, mask=None):
 - 仍需要一个 reference 模型算 KL 项，但省掉了 RM 和 PPO 的复杂度。
 
 **【公式：DPO】**
-- 由 RLHF 最优解 $\pi^*(y|x) \propto \pi_{ref}(y|x)\exp\big(\tfrac{1}{\beta}r(x,y)\big)$ 反解出**隐式奖励** $r(x,y)=\beta\log\frac{\pi_\theta(y|x)}{\pi_{ref}(y|x)} + \beta\log Z(x)$，代入 Bradley-Terry，配分项 Z(x) 在成对相减中抵消，得到：
+- 由 RLHF 最优解 $\pi^*(y\mid x) \propto \pi_{ref}(y\mid x)\exp\big(\tfrac{1}{\beta}r(x,y)\big)$ 反解出**隐式奖励** $r(x,y)=\beta\log\frac{\pi_\theta(y\mid x)}{\pi_{ref}(y\mid x)} + \beta\log Z(x)$，代入 Bradley-Terry，配分项 Z(x) 在成对相减中抵消，得到：
 
-  $$\mathcal{L}_{DPO} = -\,\mathbb{E}_{(x,y_w,y_l)}\Big[\log \sigma\Big(\beta\log\frac{\pi_\theta(y_w|x)}{\pi_{ref}(y_w|x)} - \beta\log\frac{\pi_\theta(y_l|x)}{\pi_{ref}(y_l|x)}\Big)\Big]$$
+  $$\mathcal{L}_{DPO} = -\,\mathbb{E}_{(x,y_w,y_l)}\Big[\log \sigma\Big(\beta\log\frac{\pi_\theta(y_w\mid x)}{\pi_{ref}(y_w\mid x)} - \beta\log\frac{\pi_\theta(y_l\mid x)}{\pi_{ref}(y_l\mid x)}\Big)\Big]$$
 
   直观理解：**抬高 chosen、压低 rejected 相对 reference 的对数概率比**，β 控制偏离 reference 的强度（等价于 RLHF 里的 KL 系数）。
 

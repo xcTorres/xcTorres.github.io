@@ -120,19 +120,22 @@ hide-in-nav: true
   color: #6b6b6b;
   border-left: 3px solid #e5e5e5;
 }
-.llm-body table {
+/* data tables only — rouge renders code blocks as a line-number table
+   (`.rouge-table`), which must keep the highlighter's own styling */
+.llm-body table:not(.rouge-table) {
   width: 100%;
   margin: 18px 0;
   font-size: 14px;
   border-collapse: collapse;
 }
-.llm-body table th, .llm-body table td {
+.llm-body table:not(.rouge-table) th,
+.llm-body table:not(.rouge-table) td {
   padding: 8px 12px;
   border: 1px solid #eaeaea;
   vertical-align: top;
 }
-.llm-body table th { background-color: #fafafa; text-align: left; }
-.llm-body table tr:nth-child(even) td { background-color: #fcfcfc; }
+.llm-body table:not(.rouge-table) th { background-color: #fafafa; text-align: left; }
+.llm-body table:not(.rouge-table) tr:nth-child(even) td { background-color: #fcfcfc; }
 .llm-body code {
   font-size: 13px;
   padding: 2px 5px;
@@ -232,7 +235,7 @@ hide-in-nav: true
         else { panel.style.display = 'none'; }
 
         // wide tables scroll inside their own box rather than stretching the page
-        [].forEach.call(article.querySelectorAll('table'), function(table) {
+        [].forEach.call(article.querySelectorAll('table:not(.rouge-table)'), function(table) {
             var wrap = document.createElement('div');
             wrap.className = 'llm-table-wrap';
             table.parentNode.insertBefore(wrap, table);

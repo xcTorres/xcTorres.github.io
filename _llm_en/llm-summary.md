@@ -307,7 +307,7 @@ def attention(Q, K, V, mask=None):
 
 - **PPO objective** (KL-penalised reward with a clipped policy gradient):
 
-  $$\max_{\pi_\theta}\ \mathbb{E}_{x,\,y\sim\pi_\theta}\Big[\,r_\phi(x,y) - \beta\,\mathrm{KL}\big(\pi_\theta(y|x)\,\Vert \,\pi_{ref}(y|x)\big)\Big]$$
+  $$\max_{\pi_\theta}\ \mathbb{E}_{x,\,y\sim\pi_\theta}\Big[\,r_\phi(x,y) - \beta\,\mathrm{KL}\big(\pi_\theta(y\mid x)\,\Vert \,\pi_{ref}(y\mid x)\big)\Big]$$
 
   In practice the clipped form is used (A is the GAE advantage, r_t(θ)=π_θ/π_old the importance ratio):
 
@@ -334,9 +334,9 @@ def attention(Q, K, V, mask=None):
 - A reference model is still needed for the KL term, but the RM and PPO machinery disappear.
 
 **【Formula: DPO】**
-- From the RLHF optimum $\pi^*(y|x) \propto \pi_{ref}(y|x)\exp\big(\tfrac{1}{\beta}r(x,y)\big)$, invert to get the **implicit reward** $r(x,y)=\beta\log\frac{\pi_\theta(y|x)}{\pi_{ref}(y|x)} + \beta\log Z(x)$, substitute into Bradley-Terry, and the partition term Z(x) cancels in the pairwise difference, leaving:
+- From the RLHF optimum $\pi^*(y\mid x) \propto \pi_{ref}(y\mid x)\exp\big(\tfrac{1}{\beta}r(x,y)\big)$, invert to get the **implicit reward** $r(x,y)=\beta\log\frac{\pi_\theta(y\mid x)}{\pi_{ref}(y\mid x)} + \beta\log Z(x)$, substitute into Bradley-Terry, and the partition term Z(x) cancels in the pairwise difference, leaving:
 
-  $$\mathcal{L}_{DPO} = -\,\mathbb{E}_{(x,y_w,y_l)}\Big[\log \sigma\Big(\beta\log\frac{\pi_\theta(y_w|x)}{\pi_{ref}(y_w|x)} - \beta\log\frac{\pi_\theta(y_l|x)}{\pi_{ref}(y_l|x)}\Big)\Big]$$
+  $$\mathcal{L}_{DPO} = -\,\mathbb{E}_{(x,y_w,y_l)}\Big[\log \sigma\Big(\beta\log\frac{\pi_\theta(y_w\mid x)}{\pi_{ref}(y_w\mid x)} - \beta\log\frac{\pi_\theta(y_l\mid x)}{\pi_{ref}(y_l\mid x)}\Big)\Big]$$
 
   Read intuitively: **raise the chosen answer's log-probability ratio against the reference and push the rejected one down**, with β controlling how far the policy may stray (equivalent to RLHF's KL coefficient).
 
