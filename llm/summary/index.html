@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="LLM 知识总结 - 谢聪博客 | xcTorres Blog">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="">
+    
+    <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
+    <meta property="og:url" content="https://xctorres.github.io//llm/summary/">
+    <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
+    
+    <title>LLM 知识总结 - 谢聪博客 | xcTorres Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://xctorres.github.io//llm/summary/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link href="/css/timeline.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">xcTorres Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse flex-md-column">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/llm/">LLM</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/gallery/">Gallery</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <h1><span class="lang-zh">LLM 知识总结</span><span class="lang-en">LLM Notes</span></h1>
+          <span class="subheading"><span class="lang-zh">基础架构 · 训练对齐 · 推理优化</span><span class="lang-en">Architecture · Training &amp; Alignment · Inference</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style TYPE="text/css">
+.llm-doc { padding-bottom: 60px; }
+.llm-doc-meta {
+  padding: 26px 0 0 0;
+  font-size: 14px;
+  color: #8c8c8c;
+}
+.llm-doc-meta a { border-bottom: 1px dotted #c0c0c0; }
+.llm-doc-meta a:hover { border-bottom-color: #0085a1; }
+.llm-doc-meta .sep { padding: 0 8px; color: #d5d5d5; }
+.llm-doc-lang { float: right; }
+@media only screen and (max-width: 767px) {
+  .llm-doc-lang { float: none; display: block; margin-top: 12px; }
+}
+
+/* ---- Table of contents ---------------------------------------------------
+   kramdown renders `ul#markdown-toc` at the top of the article; a script moves
+   it into the panel below. Without JS it simply stays inline, still readable. */
+.llm-toc-panel {
+  margin-top: 30px;
+  padding: 18px 16px 18px 18px;
+  border-left: 2px solid #eee;
+}
+.llm-toc-heading {
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a8a8a8;
+  margin-bottom: 12px;
+}
+.llm-toc-list, .llm-toc-list ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.llm-toc-list ul { padding-left: 12px; margin: 4px 0 8px 0; }
+.llm-toc-list li { margin: 0; line-height: 1.5; }
+.llm-toc-list a {
+  display: block;
+  padding: 4px 8px;
+  font-size: 13px;
+  color: #8c8c8c;
+  border-left: 2px solid transparent;
+  margin-left: -10px;
+  transition: color .15s ease, border-color .15s ease;
+}
+.llm-toc-list > li > a {
+  font-size: 14px;
+  font-weight: 600;
+  color: #595959;
+  margin-top: 8px;
+}
+.llm-toc-list a:hover { color: #0085a1; text-decoration: none; }
+/* the section currently under the reader */
+.llm-toc-list a.is-active {
+  color: #0085a1;
+  border-left-color: #0085a1;
+  background-color: #f7fbfc;
+}
+/* headings carry `#基础 #高频` tag spans; they are noise in a narrow sidebar */
+.llm-toc-list code { display: none; }
+
+@media only screen and (min-width: 992px) {
+  .llm-toc-panel {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 86px;
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
+    /* a thin, unobtrusive scrollbar for the panel itself */
+    scrollbar-width: thin;
+  }
+  .llm-toc-panel::-webkit-scrollbar { width: 5px; }
+  .llm-toc-panel::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 3px; }
+}
+/* stacked above the article on narrow screens */
+@media only screen and (max-width: 991px) {
+  .llm-toc-panel {
+    border-left: 3px solid #0085a1;
+    background-color: #fbfbfb;
+    border-radius: 3px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+
+/* ---- Body ---------------------------------------------------------------- */
+.llm-body { padding-top: 10px; }
+.llm-body h1 {
+  font-size: 26px;
+  margin: 46px 0 18px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.llm-body h2 { font-size: 22px; margin: 34px 0 14px 0; }
+.llm-body h3 { font-size: 19px; margin: 30px 0 12px 0; }
+.llm-body blockquote {
+  font-size: 15px;
+  font-style: normal;
+  color: #6b6b6b;
+  border-left: 3px solid #e5e5e5;
+}
+.llm-body table {
+  width: 100%;
+  margin: 18px 0;
+  font-size: 14px;
+  border-collapse: collapse;
+}
+.llm-body table th, .llm-body table td {
+  padding: 8px 12px;
+  border: 1px solid #eaeaea;
+  vertical-align: top;
+}
+.llm-body table th { background-color: #fafafa; text-align: left; }
+.llm-body table tr:nth-child(even) td { background-color: #fcfcfc; }
+.llm-body code {
+  font-size: 13px;
+  padding: 2px 5px;
+  background-color: #f4f6f8;
+  color: #476582;
+  border-radius: 3px;
+}
+.llm-body pre code { background: none; padding: 0; color: inherit; }
+.llm-body img { max-width: 100%; }
+.llm-body hr { margin: 34px 0; border-top: 1px solid #eee; }
+/* wide tables scroll on their own instead of stretching the page */
+.llm-table-wrap { overflow-x: auto; }
+/* the fixed navbar must not swallow a heading jumped to from the TOC */
+.llm-body h1, .llm-body h2, .llm-body h3 { scroll-margin-top: 80px; }
+
+.llm-doc-footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+}
+@media only screen and (max-width: 767px) {
+  .llm-body h1 { font-size: 22px; }
+  .llm-body h2 { font-size: 19px; }
+  .llm-body h3 { font-size: 17px; }
+}
+</style>
+
+<!-- Main Content -->
+
+
+<div class="container llm-doc">
+  <div class="row">
+
+    <!-- Table of contents (one per language) -->
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+      <nav class="llm-toc-panel lang-zh" id="llm-toc-zh"><div class="llm-toc-heading">目录</div></nav>
+      
+      <nav class="llm-toc-panel lang-en" id="llm-toc-en"><div class="llm-toc-heading">Contents</div></nav>
+      
+    </div>
+
+    <!-- Article -->
+    <div class="col-lg-8 col-lg-offset-1 col-md-9 col-sm-12 col-xs-12">
+
+      <div class="llm-doc-meta">
+        <a href="/llm/">&larr; LLM</a>
+        
+        
+          <span class="sep">·</span><a href="https://github.com/xcTorres/learn-llm-from-scratch/blob/main/LLM知识总结.md" target="_blank" rel="noopener"><span class="lang-zh">笔记源文件</span><span class="lang-en">Source note</span></a>
+        
+        
+        <span class="llm-doc-lang">
+          <span class="lang-switch">
+            <button type="button" data-lang="zh" onclick="__setNotesLang('zh')">中文</button>
+            <button type="button" data-lang="en" onclick="__setNotesLang('en')">EN</button>
+          </span>
+        </span>
+        
+      </div>
+
+      <div class="lang-zh">
+        <article class="llm-body" id="llm-article-zh">
+          <ul class="llm-toc-list" id="markdown-toc">
+  <li><a href="#第零部分数学基础贯穿全篇" id="markdown-toc-第零部分数学基础贯穿全篇">第零部分：数学基础（贯穿全篇）</a>    <ul>
+      <li><a href="#01-交叉熵kl-散度熵三者什么关系-基础-高频" id="markdown-toc-01-交叉熵kl-散度熵三者什么关系-基础-高频">0.1 交叉熵、KL 散度、熵三者什么关系？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></a></li>
+      <li><a href="#02-语言模型的交叉熵损失长什么样和困惑度什么关系-基础-高频" id="markdown-toc-02-语言模型的交叉熵损失长什么样和困惑度什么关系-基础-高频">0.2 语言模型的交叉熵损失长什么样？和困惑度什么关系？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></a></li>
+      <li><a href="#03-常见激活函数与选型为什么大模型爱用-glu-变体-基础-高频" id="markdown-toc-03-常见激活函数与选型为什么大模型爱用-glu-变体-基础-高频">0.3 常见激活函数与选型？为什么大模型爱用 GLU 变体？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></a></li>
+      <li><a href="#04-优化器演进sgd--adam--adamw大模型怎么选-基础-高频" id="markdown-toc-04-优化器演进sgd--adam--adamw大模型怎么选-基础-高频">0.4 优化器演进：SGD → Adam → AdamW，大模型怎么选？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#第一部分llm-基础与架构" id="markdown-toc-第一部分llm-基础与架构">第一部分：LLM 基础与架构</a>    <ul>
+      <li><a href="#1-transformer-的核心是什么为什么能取代-rnn-基础-高频" id="markdown-toc-1-transformer-的核心是什么为什么能取代-rnn-基础-高频">1. Transformer 的核心是什么？为什么能取代 RNN？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></a></li>
+      <li><a href="#2-手撕-self-attention并解释每一步--手撕-高频" id="markdown-toc-2-手撕-self-attention并解释每一步--手撕-高频">2. 手撕 self-attention，并解释每一步 ⭐ <code class="language-plaintext highlighter-rouge">#手撕 #高频</code></a></li>
+      <li><a href="#3-位置编码有哪些rope-为什么成为主流-基础-高频" id="markdown-toc-3-位置编码有哪些rope-为什么成为主流-基础-高频">3. 位置编码有哪些？RoPE 为什么成为主流？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></a></li>
+      <li><a href="#4-decoder-only--encoder-only--encoder-decoder-的区别与选型-基础" id="markdown-toc-4-decoder-only--encoder-only--encoder-decoder-的区别与选型-基础">4. Decoder-only / Encoder-only / Encoder-Decoder 的区别与选型 <code class="language-plaintext highlighter-rouge">#基础</code></a></li>
+      <li><a href="#5-kv-cache-是什么为什么是推理瓶颈mqa--gqa-如何缓解-工程-高频" id="markdown-toc-5-kv-cache-是什么为什么是推理瓶颈mqa--gqa-如何缓解-工程-高频">5. KV Cache 是什么？为什么是推理瓶颈？MQA / GQA 如何缓解？⭐ <code class="language-plaintext highlighter-rouge">#工程 #高频</code></a></li>
+      <li><a href="#6-moe混合专家原理优势与难点--基础-工程" id="markdown-toc-6-moe混合专家原理优势与难点--基础-工程">6. MoE（混合专家）原理、优势与难点 ⭐ <code class="language-plaintext highlighter-rouge">#基础 #工程</code></a></li>
+      <li><a href="#7-tokenizationbpe-怎么工作为什么数字中文代码容易出问题-基础" id="markdown-toc-7-tokenizationbpe-怎么工作为什么数字中文代码容易出问题-基础">7. Tokenization：BPE 怎么工作？为什么数字/中文/代码容易出问题？ <code class="language-plaintext highlighter-rouge">#基础</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#第二部分llm-训练与对齐" id="markdown-toc-第二部分llm-训练与对齐">第二部分：LLM 训练与对齐</a>    <ul>
+      <li><a href="#8-大模型训练分哪几个阶段-对齐-基础" id="markdown-toc-8-大模型训练分哪几个阶段-对齐-基础">8. 大模型训练分哪几个阶段？ <code class="language-plaintext highlighter-rouge">#对齐 #基础</code></a></li>
+      <li><a href="#9-rlhf-完整流程痛点是什么-对齐-高频" id="markdown-toc-9-rlhf-完整流程痛点是什么-对齐-高频">9. RLHF 完整流程，痛点是什么？⭐ <code class="language-plaintext highlighter-rouge">#对齐 #高频</code></a></li>
+      <li><a href="#10-dpo-相比-rlhf-的优势与局限--对齐-高频" id="markdown-toc-10-dpo-相比-rlhf-的优势与局限--对齐-高频">10. DPO 相比 RLHF 的优势与局限 ⭐ <code class="language-plaintext highlighter-rouge">#对齐 #高频</code></a></li>
+      <li><a href="#11-为什么会幻觉hallucination怎么缓解-对齐-高频" id="markdown-toc-11-为什么会幻觉hallucination怎么缓解-对齐-高频">11. 为什么会幻觉（hallucination）？怎么缓解？⭐ <code class="language-plaintext highlighter-rouge">#对齐 #高频</code></a></li>
+      <li><a href="#12-灾难性遗忘怎么处理-对齐" id="markdown-toc-12-灾难性遗忘怎么处理-对齐">12. 灾难性遗忘怎么处理？ <code class="language-plaintext highlighter-rouge">#对齐</code></a></li>
+      <li><a href="#13-lora-原理与优势qlora-又是什么-工程-高频" id="markdown-toc-13-lora-原理与优势qlora-又是什么-工程-高频">13. LoRA 原理与优势？QLoRA 又是什么？⭐ <code class="language-plaintext highlighter-rouge">#工程 #高频</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#第三部分llm-推理与工程优化" id="markdown-toc-第三部分llm-推理与工程优化">第三部分：LLM 推理与工程优化</a>    <ul>
+      <li><a href="#14-量化是什么ptq-和-qat-的区别常见方案-工程" id="markdown-toc-14-量化是什么ptq-和-qat-的区别常见方案-工程">14. 量化是什么？PTQ 和 QAT 的区别？常见方案？ <code class="language-plaintext highlighter-rouge">#工程</code></a></li>
+      <li><a href="#15-flash-attention-到底解决了什么-工程-高频" id="markdown-toc-15-flash-attention-到底解决了什么-工程-高频">15. Flash Attention 到底解决了什么？⭐ <code class="language-plaintext highlighter-rouge">#工程 #高频</code></a></li>
+      <li><a href="#16-推测解码speculative-decoding原理-工程" id="markdown-toc-16-推测解码speculative-decoding原理-工程">16. 推测解码（Speculative Decoding）原理？⭐ <code class="language-plaintext highlighter-rouge">#工程</code></a></li>
+      <li><a href="#17-提升推理吞吐的工程手段有哪些-工程" id="markdown-toc-17-提升推理吞吐的工程手段有哪些-工程">17. 提升推理吞吐的工程手段有哪些？ <code class="language-plaintext highlighter-rouge">#工程</code></a></li>
+      <li><a href="#18-prefill-和-decode-两个阶段有什么本质区别-工程-高频" id="markdown-toc-18-prefill-和-decode-两个阶段有什么本质区别-工程-高频">18. Prefill 和 Decode 两个阶段有什么本质区别？ <code class="language-plaintext highlighter-rouge">#工程 #高频</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#第六部分高频开放题" id="markdown-toc-第六部分高频开放题">第六部分：高频开放题</a></li>
+</ul>
+
+<blockquote>
+  <p><strong>定位</strong>：基础架构 · 训练对齐 · 推理优化。每个条目按 <strong>核心答案 → 深入原理 → 权衡 / 追问 → 参考</strong> 组织，⭐ 标记值得重点深挖的地方。</p>
+</blockquote>
+
+<hr />
+
+<h1 id="第零部分数学基础贯穿全篇">第零部分：数学基础（贯穿全篇）</h1>
+
+<blockquote>
+  <p>这几个量在后面反复出现：<strong>交叉熵</strong>是预训练/SFT 的损失，<strong>KL 散度</strong>是 RLHF/PPO/DPO/GRPO 里约束策略别跑偏的核心项，蒸馏里又用 KL 对齐师生分布。先把它们和彼此的关系讲清楚，后面就不再展开。</p>
+</blockquote>
+
+<h3 id="01-交叉熵kl-散度熵三者什么关系-基础-高频">0.1 交叉熵、KL 散度、熵三者什么关系？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></h3>
+<p><strong>【核心答案】</strong> 设真实分布 p、模型分布 q：</p>
+<ul>
+  <li><strong>熵</strong> $H(p) = -\sum_x p(x)\log p(x)$：p 自身的不确定性（理论最小编码长度）。</li>
+  <li><strong>交叉熵</strong> $H(p,q) = -\sum_x p(x)\log q(x)$：用 q 去编码 p 的平均代价。</li>
+  <li><strong>KL 散度</strong> $D_{KL}(p\,\Vert \,q) = \sum_x p(x)\log\frac{p(x)}{q(x)}$：用 q 近似 p 的「额外」代价。</li>
+</ul>
+
+<p>三者关系一行话：<strong>交叉熵 = 熵 + KL</strong>，即</p>
+
+\[H(p,q) = H(p) + D_{KL}(p\,\Vert \,q)\]
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>因为 H(p) 与模型参数无关（p 是固定的真实标签分布），<strong>最小化交叉熵 ⇔ 最小化 KL</strong>——这就是为什么训练直接用交叉熵当 loss。</li>
+  <li><strong>KL 非负、不对称</strong>：$D_{KL}(p\Vert q)\neq D_{KL}(q\Vert p)$，所以它是「散度」不是「距离」。$D_{KL}=0 \iff p=q$。</li>
+  <li>不对称的实际含义：
+    <ul>
+      <li><strong>Forward KL</strong> $D_{KL}(p\Vert q)$（最大似然用的）：p 有质量处 q 不能为 0，否则惩罚无穷 → q 倾向「覆盖所有模式」（mean-seeking，分布偏胖）。</li>
+      <li><strong>Reverse KL</strong> $D_{KL}(q\Vert p)$（变分推断、部分 RL 用）：q 只敢在 p 高的地方放质量 → 倾向「锁定单一模式」（mode-seeking）。</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>为什么对称化</strong>：JS 散度 = 两个方向 KL 的平均，对称且有界，GAN 里用过。</li>
+  <li>追问 KL 在 LLM 里具体算什么：是<strong>两个 token 分布的逐位置 KL</strong>，PPO/DPO 里约束「新策略 π_θ 别偏离参考策略 π_ref 太远」，防止 reward hacking（见第 9、10 题）。</li>
+</ul>
+
+<h3 id="02-语言模型的交叉熵损失长什么样和困惑度什么关系-基础-高频">0.2 语言模型的交叉熵损失长什么样？和困惑度什么关系？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></h3>
+<p><strong>【核心答案】</strong> 真实分布是 one-hot（真实下一个词 = 1，其余 = 0），所以交叉熵退化成<strong>负对数似然（NLL）</strong>：只看「模型给正确词的概率」。</p>
+
+\[\mathcal{L} = -\frac{1}{T}\sum_{t=1}^{T}\log q_\theta(x_t \mid x_{&lt;t})\]
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>one-hot 下 $\sum_x p(x)\log q(x)$ 只剩正确类那一项，所以交叉熵 = $-\log q(\text{正确词})$，预测得越准（概率越接近 1）loss 越接近 0。</li>
+  <li><strong>困惑度（Perplexity）</strong> = $\exp(\mathcal{L})$，即交叉熵的指数，直观理解为「模型在每步平均在多少个词里纠结」，越低越好。</li>
+  <li>分类任务里 softmax + 交叉熵的梯度极简洁：$\partial \mathcal{L}/\partial z_i = q_i - p_i$（预测概率 − 真实标签），这也是它好训练的原因。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>label smoothing</strong>：把 one-hot 的 1 改成 1−ε、其余分一点 ε，等价于给目标分布掺入均匀分布，缓解过度自信、改善校准。</li>
+  <li>追问 <strong>蒸馏（distillation）为何用 KL 而非交叉熵</strong>：教师输出是「软分布」而非 one-hot，要让学生匹配整个分布，所以最小化 $D_{KL}(p_{teacher}\Vert q_{student})$（带温度 T 软化）——这里 KL ≠ 交叉熵，因为教师熵不为 0、不可忽略。</li>
+</ul>
+
+<p>📖 参考：交叉熵/KL 基础见《Deep Learning》(Goodfellow) Ch.3 ｜ 蒸馏 — https://arxiv.org/abs/1503.02531</p>
+
+<h3 id="03-常见激活函数与选型为什么大模型爱用-glu-变体-基础-高频">0.3 常见激活函数与选型？为什么大模型爱用 GLU 变体？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></h3>
+<p><strong>【核心答案】</strong> 激活函数提供<strong>非线性</strong>，否则多层线性叠加仍等价于一层。从 Sigmoid/Tanh → ReLU → GELU/Swish → 现在 LLM 主流的 <strong>SwiGLU / GeGLU</strong>（门控线性单元变体）。</p>
+
+<p><strong>【深入】</strong>
+| 激活 | 公式 | 特点 / 问题 |
+|——|——|———–|
+| Sigmoid | $\frac{1}{1+e^{-x}}$ | 输出(0,1)；两端饱和→<strong>梯度消失</strong>，非零均值 |
+| Tanh | $\frac{e^x-e^{-x}}{e^x+e^{-x}}$ | 零均值、仍饱和 |
+| ReLU | $\max(0,x)$ | 简单、不饱和、收敛快；但负区恒 0→<strong>神经元死亡</strong> |
+| LeakyReLU | $\max(\alpha x,x)$ | 负区给小斜率，缓解死亡 |
+| GELU | $x\cdot\Phi(x)$ | 用高斯 CDF 平滑加权，BERT/GPT 常用，平滑可导 |
+| Swish/SiLU | $x\cdot\sigma(x)$ | 平滑、非单调，深层表现好 |
+| <strong>SwiGLU</strong> | $(\mathrm{Swish}(xW)\otimes xV)W_2$ | <strong>门控</strong>：一支做内容、一支做门控相乘；LLaMA/PaLM 采用 |</p>
+
+<ul>
+  <li><strong>GLU 变体（SwiGLU/GeGLU）凭什么强</strong>：把 FFN 从「一条路」变成「内容 × 门控」两条路逐元素相乘，<strong>门控让网络动态决定每个维度放多少信息通过</strong>，同等算力下质量更好（GLU Variants 论文实验证实）。</li>
+  <li>注意 SwiGLU 的 FFN 有 3 个权重矩阵（W, V, W_2），为保持参数量持平，中间维度常取 $\frac{2}{3}\times 4d$ 而非 4d。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>为什么不用 Sigmoid 当隐藏层激活</strong>：饱和区梯度趋 0、非零均值导致梯度更新呈锯齿，深层难训；现在 Sigmoid 只用在二分类输出或门控。</li>
+  <li>追问 GELU vs ReLU：GELU 平滑、处处可导、在 Transformer 上略优；ReLU 更省算力。</li>
+</ul>
+
+<h3 id="04-优化器演进sgd--adam--adamw大模型怎么选-基础-高频">0.4 优化器演进：SGD → Adam → AdamW，大模型怎么选？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></h3>
+<p><strong>【核心答案】</strong> 主线是「<strong>动量</strong>（平滑梯度方向）+ <strong>自适应学习率</strong>（每个参数各自缩放）」。LLM 训练几乎默认 <strong>AdamW</strong>。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>SGD</strong>：$\theta \leftarrow \theta - \eta\,g$，简单但对学习率敏感、易在沟壑震荡。</li>
+  <li><strong>+ Momentum</strong>：累积历史梯度的指数滑动平均 $v$，沿一致方向加速、抑制震荡。</li>
+  <li><strong>AdaGrad / RMSProp</strong>：用历史梯度平方做自适应步长；AdaGrad 学习率单调衰减易过早停，RMSProp 用滑动平均修正。</li>
+  <li>
+    <p><strong>Adam = Momentum + RMSProp</strong>：同时维护一阶矩 $m_t$（方向）和二阶矩 $v_t$（尺度），加偏差校正：</p>
+
+\[m_t=\beta_1 m_{t-1}+(1-\beta_1)g_t,\quad v_t=\beta_2 v_{t-1}+(1-\beta_2)g_t^2\]
+
+\[\hat m_t=\tfrac{m_t}{1-\beta_1^t},\ \hat v_t=\tfrac{v_t}{1-\beta_2^t},\quad \theta\leftarrow\theta-\eta\,\tfrac{\hat m_t}{\sqrt{\hat v_t}+\epsilon}\]
+  </li>
+  <li><strong>AdamW</strong>：把 <strong>weight decay 从梯度里解耦</strong>出来，直接作用在权重上（$\theta\leftarrow\theta-\eta(\dots)-\eta\lambda\theta$）。Adam 里 L2 正则会被自适应分母缩放而失效，AdamW 修正了这点，<strong>正则更干净、泛化更好</strong>，是 LLM 标配。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>为什么大模型不用 SGD</strong>：梯度噪声大、各参数尺度差异大，自适应方法收敛更稳更快；代价是 Adam 要存 m、v 两份状态，<strong>显存约为参数量的 2 倍</strong>（混合精度下更多），这也是 ZeRO/优化器状态切分要解决的问题。</li>
+  <li>追问学习率调度：大模型常用 <strong>warmup + cosine 衰减</strong>——warmup 防早期大梯度炸训，cosine 平滑退火。</li>
+  <li>追问新优化器：<strong>Lion</strong>（只存一阶动量、更省显存）、<strong>Adafactor</strong>（分解二阶矩省显存，T5 用）、<strong>Muon/Shampoo</strong>（二阶/矩阵预条件，近年大模型尝试）。</li>
+</ul>
+
+<p>📖 参考：Adam — https://arxiv.org/abs/1412.6980 ｜ AdamW — https://arxiv.org/abs/1711.05101 ｜ GLU Variants — https://arxiv.org/abs/2002.05202</p>
+
+<hr />
+
+<h1 id="第一部分llm-基础与架构">第一部分：LLM 基础与架构</h1>
+
+<h3 id="1-transformer-的核心是什么为什么能取代-rnn-基础-高频">1. Transformer 的核心是什么？为什么能取代 RNN？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></h3>
+<p><strong>【核心答案】</strong> 核心是 self-attention：每个 token 能直接与序列中所有 token 交互，任意两个位置的路径长度为 O(1)，且整个序列可并行计算。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>RNN 的两大问题：① 信息要逐步传递，长程依赖在反向传播中梯度消失/爆炸；② 时间步必须串行，无法并行，训练慢。</li>
+  <li>Transformer 用注意力一步建立全局连接，并用残差连接 + LayerNorm 稳定深层训练，配合大规模数据和算力实现 scaling。</li>
+</ul>
+
+<p><strong>【整体结构（自底向上的数据流）】</strong></p>
+<ul>
+  <li><strong>输入层</strong>：Token Embedding（把 id 查表成向量）+ Position Encoding（注入位置，见第 3 题）→ 得到序列表示 $X\in\mathbb{R}^{n\times d}$。</li>
+  <li><strong>N 个堆叠的 Transformer Block</strong>（GPT-3 96 层、LLaMA-3 数十层），每个 block 内两个子层：
+    <ol>
+      <li><strong>多头自注意力（MHSA）子层</strong>：<code class="language-plaintext highlighter-rouge">x → LN → MHSA → +x</code>（残差）</li>
+      <li><strong>前馈网络（FFN/MLP）子层</strong>：<code class="language-plaintext highlighter-rouge">x → LN → FFN → +x</code>（残差）</li>
+    </ol>
+  </li>
+  <li><strong>输出层</strong>：最后一层 LN → 线性投影到词表大小（LM Head，常与输入 embedding <strong>权重共享</strong>）→ softmax 得到下一个 token 分布。</li>
+  <li>关键张量维度始终是 $n\times d$（n=序列长，d=hidden）：注意力做「token 间」混合（跨位置交互），FFN 做「token 内」逐位置的特征变换，两者交替，是 Transformer 的基本节奏。</li>
+  <li>一个 block 内：<strong>多头自注意力 +（残差&amp;归一化）+ 前馈网络 FFN +（残差&amp;归一化）</strong>。FFN 通常是 4×hidden 的两层 MLP（现代用 SwiGLU，见第 0.3 节），承担大部分参数量与「知识存储」。</li>
+</ul>
+
+<p><strong>【残差连接：为什么不可或缺】</strong></p>
+<ul>
+  <li>形式：$\text{out} = x + \text{Sublayer}(\text{LN}(x))$（Pre-LN 写法）——子层只学「相对输入的增量 $F(x)$」，输出 = 输入 + 增量。</li>
+  <li><strong>作用① 解决深层梯度消失</strong>：反向传播时 $\frac{\partial \text{out}}{\partial x} = 1 + \frac{\partial F}{\partial x}$，那个 <strong>「+1」让梯度有一条直达底层的「高速公路」</strong>，即使 $\partial F/\partial x$ 很小，梯度也不会衰减到 0，几十上百层才训得动（源自 ResNet 思想）。</li>
+  <li><strong>作用② 恒等映射易学</strong>：如果某层最优是「什么都不做」，网络只需让 $F(x)\to 0$，比让一堆非线性层去拟合恒等函数容易得多 → 加深网络不会变差。</li>
+  <li><strong>作用③ 信息保留</strong>：每层都把原始信息原样带下去，再叠加新信息，避免深层把底层特征「冲刷」掉；可理解为对表示的<strong>迭代式精炼（residual stream）</strong>——这也是机理可解释性里把残差流看作「各层读写的公共总线」的由来。</li>
+  <li>配套的 <strong>LayerNorm</strong>：对每个 token 的特征维做归一化，稳定数值分布、加速收敛；LLM 常用更省的 <strong>RMSNorm</strong>（去掉均值中心化，只按均方根缩放）。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>代价是注意力的 O(n²) 复杂度（时间和显存都随序列长度平方增长），这是长序列优化的根源问题。</li>
+  <li>可能追问：<strong>Pre-LN vs Post-LN</strong>？Post-LN（原始 Transformer，<code class="language-plaintext highlighter-rouge">LN(x+Sublayer(x))</code>）表达力略强但深层梯度不稳、需 warmup；<strong>Pre-LN</strong>（<code class="language-plaintext highlighter-rouge">x+Sublayer(LN(x))</code>，归一化放子层输入端）让残差通路是干净的恒等映射、训练更稳、可去 warmup，是现在主流。</li>
+  <li>可能追问：FFN 为什么要先升维再降维？提供非线性容量、充当 key-value 记忆。</li>
+  <li>可能追问：<strong>没有残差会怎样</strong>？深层 Transformer 几乎无法收敛——这是 Pre-LN/残差/归一化「三件套」共同保证可训练性的核心原因。</li>
+</ul>
+
+<p>📖 参考：Attention Is All You Need — https://arxiv.org/abs/1706.03762 ｜ ResNet（残差）— https://arxiv.org/abs/1512.03385</p>
+
+<hr />
+
+<h3 id="2-手撕-self-attention并解释每一步--手撕-高频">2. 手撕 self-attention，并解释每一步 ⭐ <code class="language-plaintext highlighter-rouge">#手撕 #高频</code></h3>
+<p><strong>【核心答案】</strong> Attention(Q,K,V) = softmax(QKᵀ / √dₖ) · V。Q/K/V 由输入分别乘三个可学习矩阵得到；QKᵀ 算相似度，缩放后 softmax 归一化成权重，再加权求和 V。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>为什么除以 √dₖ</strong>：Q、K 各维度近似独立、均值 0 方差 1 时，点积的方差约等于 dₖ。维度越大点积越大，softmax 进入饱和区，梯度趋近 0。除以 √dₖ 把方差拉回 1 附近，保证梯度健康。</li>
+  <li><strong>多头注意力</strong>：把 d 维切成 h 个 d/h 维子空间并行做注意力，让不同头关注不同关系（语法、指代、位置等），最后拼接再线性映射。</li>
+  <li><strong>因果掩码</strong>：生成式模型在 softmax 前把「未来位置」置为 -∞，保证第 i 个 token 只能看到 ≤ i 的信息。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>复杂度</strong>：序列长 n、维度 d，注意力是 O(n²·d)。</li>
+  <li>追问 <strong>MHA / MQA / GQA 区别</strong>：见第 5 题。</li>
+  <li>手撕时别忘了 mask 和 dropout 的位置，以及最后还有一层输出投影 Wₒ。</li>
+</ul>
+
+<p>参考代码骨架（PyTorch 伪代码）：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">attention</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">d_k</span> <span class="o">=</span> <span class="n">Q</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="p">(</span><span class="n">Q</span> <span class="o">@</span> <span class="n">K</span><span class="p">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d_k</span><span class="p">)</span>  <span class="c1"># [B, h, n, n]
+</span>    <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span><span class="p">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">mask</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s">'-inf'</span><span class="p">))</span>
+    <span class="n">attn</span> <span class="o">=</span> <span class="n">scores</span><span class="p">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">attn</span> <span class="o">@</span> <span class="n">V</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h3 id="3-位置编码有哪些rope-为什么成为主流-基础-高频">3. 位置编码有哪些？RoPE 为什么成为主流？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></h3>
+<p><strong>【核心答案】</strong> 注意力本身对位置不敏感，需要显式注入位置信息。主流分三类：绝对位置编码、相对位置编码、旋转位置编码（RoPE）。RoPE 因为「统一了绝对与相对、外推性好、实现简单且不增加参数」成为 LLaMA / Qwen / 主流开源模型的标配。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>绝对位置编码</strong>：原始 Transformer 用正弦函数（无参、可外推一点）或可学习位置向量（BERT，长度固定、不可外推）。直接加到 embedding 上。</li>
+  <li><strong>RoPE（旋转位置编码）</strong>：把每个 token 的 Q、K 按其位置 m 旋转一个角度（按维度成对做二维旋转）。数学上使得 ⟨q_m, k_n⟩ 只依赖相对距离 (m−n)，从而把相对位置信息天然编码进注意力内积。</li>
+  <li><strong>ALiBi</strong>：不改 Q/K，而是在注意力分数上加一个随距离线性递减的偏置（越远惩罚越大），无显式位置向量，外推性好。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>长上下文外推</strong>：RoPE 直接外推到训练长度之外会退化，常用 <strong>位置插值（PI）</strong> 或 <strong>NTK-aware / YaRN</strong> 调整 base 频率来扩展上下文。</li>
+  <li>追问 RoPE 的 base（θ）超参影响：base 越大，长距离区分度越好，是长上下文调优的关键旋钮。</li>
+</ul>
+
+<p>📖 参考：RoFormer (RoPE) — https://arxiv.org/abs/2104.09864</p>
+
+<hr />
+
+<h3 id="4-decoder-only--encoder-only--encoder-decoder-的区别与选型-基础">4. Decoder-only / Encoder-only / Encoder-Decoder 的区别与选型 <code class="language-plaintext highlighter-rouge">#基础</code></h3>
+<p><strong>【核心答案】</strong> 区别在注意力方向和结构：Encoder 双向、Decoder 单向因果、Encoder-Decoder 两者皆有。现代大模型几乎全是 Decoder-only。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>Encoder-only（BERT）</strong>：双向注意力，每个 token 看全局，擅长理解类任务（分类、NER、检索）。不能直接生成。</li>
+  <li><strong>Decoder-only（GPT/LLaMA）</strong>：因果掩码、自回归，预训练目标统一为 next-token prediction，scaling 友好、few-shot 能力强，是目前主流。</li>
+  <li><strong>Encoder-Decoder（T5/BART）</strong>：编码器理解输入、解码器生成输出，擅长明确的 seq2seq（翻译、摘要）。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>为什么大模型都收敛到 Decoder-only</strong>？训练目标简单统一、零样本/少样本泛化好、工程上推理范式一致；研究也表明在大规模下纯解码器架构的表现不输甚至更优。</li>
+  <li>追问 <strong>PrefixLM</strong>：一种折中，prompt 部分用双向注意力、生成部分用因果注意力。</li>
+</ul>
+
+<p>📖 参考：BERT — https://arxiv.org/abs/1810.04805 ｜ GPT-3 — https://arxiv.org/abs/2005.14165</p>
+
+<hr />
+
+<h3 id="5-kv-cache-是什么为什么是推理瓶颈mqa--gqa-如何缓解-工程-高频">5. KV Cache 是什么？为什么是推理瓶颈？MQA / GQA 如何缓解？⭐ <code class="language-plaintext highlighter-rouge">#工程 #高频</code></h3>
+<p><strong>【核心答案】</strong> 自回归生成时历史 token 的 K、V 不变，缓存它们避免每步重算，把每步注意力从 O(n²) 降到 O(n)。代价是显存：KV cache ∝ batch × 层数 × 序列长 × head数 × head维。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>没有 KV cache，生成第 t 个 token 要重新计算前 t-1 个的全部注意力；有了它，只算当前 token 对历史的注意力。</li>
+  <li>长上下文 + 大 batch 下，KV cache 往往比模型权重还吃显存，是 decode 阶段的主要瓶颈。</li>
+  <li><strong>MQA（Multi-Query Attention）</strong>：所有 head 共享同一组 K/V，KV cache 缩小 head 倍，但质量有损。</li>
+  <li><strong>GQA（Grouped-Query Attention）</strong>：把 head 分成 g 组，每组共享一组 K/V，是 MHA 与 MQA 的折中，LLaMA-2/3 采用。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>怎么进一步省 KV cache</strong>：量化 KV（KV cache int8）、PagedAttention 分页管理（见第 17 题）、滑动窗口注意力、把不重要的 KV 驱逐（H2O 等）。</li>
+  <li>追问 prefill 阶段需不需要 cache？prefill 一次性并行算完所有输入并把 K/V 写入 cache，供后续 decode 复用。</li>
+</ul>
+
+<p><strong>【扩展：LLM 服务性能指标】</strong> —— 「怎么衡量一个推理服务好不好」，分四类：</p>
+
+<ul>
+  <li><strong>延迟（Latency，单请求体验）</strong>
+    <ul>
+      <li><strong>TTFT（Time To First Token）</strong>：从请求到首 token 的时间，主要由 <strong>prefill</strong> 阶段决定，受输入长度、是否命中 prefix cache 影响；决定「等待感」。</li>
+      <li><strong>TPOT / ITL（Time Per Output Token / Inter-Token Latency）</strong>：相邻输出 token 的平均间隔，主要由 <strong>decode</strong> 阶段决定，决定「打字速度」。</li>
+      <li><strong>端到端延迟 ≈ TTFT + TPOT × 输出 token 数</strong>；常用 P50/P90/P99 而非均值，长尾更能反映体验。</li>
+    </ul>
+  </li>
+  <li><strong>吞吐（Throughput，集群效率 / 成本）</strong>
+    <ul>
+      <li><strong>Output tokens/s</strong>（最常用）、<strong>Total tokens/s</strong>（含输入）、<strong>Requests/s（QPS）</strong>。</li>
+      <li><strong>吞吐 vs 延迟是一对矛盾</strong>：增大 batch（continuous batching）提升吞吐，但单请求 TPOT 变差。常画「吞吐-延迟」曲线，在满足 SLO 的前提下追求最高吞吐。</li>
+    </ul>
+  </li>
+  <li><strong>资源 / 成本</strong>
+    <ul>
+      <li><strong>GPU 利用率（MFU / 算力利用率）</strong>、<strong>显存占用</strong>（权重 + KV cache，决定最大并发与最长上下文）。</li>
+      <li><strong>$ / 1M tokens</strong>、<strong>单卡并发请求数</strong>——直接对应部署成本。</li>
+      <li>经验：prefill 是 <strong>compute-bound</strong>，decode 是 <strong>memory-bandwidth-bound</strong>，因此两阶段的瓶颈和优化手段（甚至 PD 分离部署）不同。</li>
+    </ul>
+  </li>
+  <li><strong>质量 / 稳定性</strong>
+    <ul>
+      <li><strong>Goodput</strong>：不是裸吞吐，而是「满足 SLO（如 TTFT&lt;Xs、TPOT&lt;Yms）的有效吞吐」，更贴近真实可用容量。</li>
+      <li>准确率不应因量化/投机解码等优化而下降；还需关注 <strong>超时率、错误率、抢占/排队时延</strong>。</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>追问技巧：被问「服务慢了怎么排查」，按 <strong>TTFT 高 → 看 prefill / 排队 / prefix cache 命中率</strong>；<strong>TPOT 高 → 看 batch、KV cache 显存是否打满、是否频繁抢占</strong> 来分层定位。</p>
+</blockquote>
+
+<p>📖 参考：GQA — https://arxiv.org/abs/2305.13245 ｜ vLLM/PagedAttention — https://arxiv.org/abs/2309.06180 ｜ DistServe（PD 分离）— https://arxiv.org/abs/2401.09670</p>
+
+<hr />
+
+<h3 id="6-moe混合专家原理优势与难点--基础-工程">6. MoE（混合专家）原理、优势与难点 ⭐ <code class="language-plaintext highlighter-rouge">#基础 #工程</code></h3>
+<p><strong>【核心答案】</strong> 用多个 FFN「专家」，由一个 router 网络为每个 token 选 top-k 个专家做稀疏激活。总参数量很大，但单次前向只激活一小部分，从而在固定算力下扩大模型容量。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>基础版（Mixtral 时代）</strong>：Mixtral 8×7B —— 8 个专家，每 token 选 top-2，激活 ~13B，总参数 47B。router = 线性层 + softmax，选 top-k 加权组合。靠<strong>负载均衡损失</strong>防「专家塌缩」（router 总偏爱少数专家）。</li>
+  <li><strong>现代 MoE 三大升级（DeepSeek 系，2024–2025）⭐</strong>：
+    <ul>
+      <li><strong>细粒度专家（fine-grained）</strong>：把专家切得更小更多（如 64 选 8 而非 8 选 2）→ 组合数更多、分工更专。</li>
+      <li><strong>共享专家（shared experts）</strong>：留 1~2 个「永远激活」的专家装通用知识，其余路由专家管专业知识 → 减少冗余。</li>
+      <li><strong>无辅助损失均衡（aux-loss-free，DeepSeek-V3）</strong>：给每个专家加可动态调整的 <strong>bias</strong>，过载就调低，不再用会「和主任务打架、伤性能」的负载均衡损失。</li>
+    </ul>
+  </li>
+  <li><strong>两种路由范式</strong>：<strong>token-choice</strong>（主流，每 token 选 top-k，可能撑爆专家 → 超 capacity 的 token 被丢弃/转发）vs <strong>expert-choice</strong>（每个专家挑 token，天然均衡）。</li>
+  <li><strong>代表模型</strong>：DeepSeek-V3（671B 总 / 37B 激活）、Mixtral、Qwen-MoE、Grok-1、DBRX、Llama 4、MiniMax 等。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>核心价值：<strong>MoE 把「模型容量」和「单 token 算力」解耦</strong> —— 加专家涨容量，但每 token 计算几乎不变。</li>
+  <li><strong>训练优势大 ✅</strong>：等训练算力下能到更低 loss（约等于「免费放大 2~4× 有效容量」，倍数看配置）。代价：总参数全程占显存、all-to-all 通信、训练更不稳。</li>
+  <li><strong>推理优势「有条件」⚠️</strong>：<strong>省算力不省显存</strong> —— 每 token 只算激活参数（便宜），但要把<strong>全部专家</strong>装进显存（贵）。
+    <ul>
+      <li>🟢 <strong>高并发/批量服务</strong>：算力瓶颈 → 吞吐高、单位成本低，显存成本被摊薄 → 划算。</li>
+      <li>🔴 <strong>低 batch/低延迟/单用户/端侧</strong>：显存带宽瓶颈 + 路由通信开销 → 优势缩水甚至变负担（端侧反而偏爱稠密小模型）。</li>
+      <li>注意：<strong>MoE 不降低延迟下限</strong>，它赢在吞吐和训练成本，不是「单条请求更快」。</li>
+    </ul>
+  </li>
+  <li>追问 <strong>MoE 和并行的关系</strong>：<strong>专家并行（expert parallelism）</strong> 把不同专家放不同卡，是分布式 MoE 的核心，和 TP/PP/DP 组合；all-to-all 是主要通信瓶颈。</li>
+  <li>追问 <strong>怎么得到 MoE</strong>：可从头训，也可 <strong>upcycling</strong>（把训好的稠密模型 FFN 复制成多专家再续训，省成本）。</li>
+</ul>
+
+<p>📖 参考：Mixtral of Experts — https://arxiv.org/abs/2401.04088 ｜ DeepSeekMoE — https://arxiv.org/abs/2401.06066 ｜ DeepSeek-V3 — https://arxiv.org/abs/2412.19437</p>
+<blockquote>
+  <p>⚠️ DeepSeek-V3 的 671B/37B 等数字按公开资料，写定稿前对一遍原报告。</p>
+</blockquote>
+
+<hr />
+
+<h3 id="7-tokenizationbpe-怎么工作为什么数字中文代码容易出问题-基础">7. Tokenization：BPE 怎么工作？为什么数字/中文/代码容易出问题？ <code class="language-plaintext highlighter-rouge">#基础</code></h3>
+<p><strong>【核心答案】</strong> BPE（字节对编码）从字符（或字节）开始，反复把语料中出现频率最高的相邻 pair 合并成新 token，直到达到目标词表大小，得到一套子词词表，平衡词表规模与 OOV。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>BPE</strong>：贪心按频率合并；<strong>WordPiece</strong>（BERT）：按合并后的语言模型似然增益来选；<strong>SentencePiece</strong>：直接在原始文本上训练、语言无关、能处理无空格语言；<strong>byte-level BPE</strong>（GPT-2）：在字节上做，理论上永不 OOV。</li>
+  <li>一个汉字常被切成多个 token（UTF-8 多字节），所以中文「字数 ≠ token 数」，中文文本的 token 消耗通常更高。</li>
+  <li>数字常被不规则切分（如 “12345” 可能切成 “123”+”45”），影响算术能力；代码的缩进、符号也会产生大量碎 token。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>词表大小的权衡</strong>：词表大→序列短、embedding 矩阵大；词表小→序列长、计算多。</li>
+  <li>追问为什么 LLM 不擅长「数字母」「反转字符串」：因为它看到的是 token 不是字符。</li>
+</ul>
+
+<hr />
+
+<h1 id="第二部分llm-训练与对齐">第二部分：LLM 训练与对齐</h1>
+
+<h3 id="8-大模型训练分哪几个阶段-对齐-基础">8. 大模型训练分哪几个阶段？ <code class="language-plaintext highlighter-rouge">#对齐 #基础</code></h3>
+<p><strong>【核心答案】</strong> ① 预训练（海量无标注文本做 next-token prediction，学语言与世界知识）→ ② SFT 监督微调（用指令-回答对学会听指令）→ ③ 偏好对齐（RLHF / DPO，让输出更符合人类偏好：有用、无害、诚实 3H）。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>预训练消耗 99%+ 的算力，决定模型「知道什么」。</li>
+  <li>SFT 改变的是「怎么表达/遵循格式」，数据量小但质量要求极高。</li>
+  <li>对齐阶段进一步精细调节行为边界与偏好。近年还常加 <strong>持续预训练</strong>（领域增强）和 <strong>拒绝采样微调（RFT）</strong>。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问「能力」主要来自哪个阶段？知识与核心能力来自预训练，SFT/对齐主要是「激发与对齐」，而非注入新知识——这也是「知识更新优先用 RAG 而非微调」的依据。</li>
+</ul>
+
+<hr />
+
+<h3 id="9-rlhf-完整流程痛点是什么-对齐-高频">9. RLHF 完整流程，痛点是什么？⭐ <code class="language-plaintext highlighter-rouge">#对齐 #高频</code></h3>
+<p><strong>【核心答案】</strong> ① 用人类对多个回答的排序训练一个 <strong>Reward Model（RM）</strong>；② 用 <strong>PPO</strong> 优化策略模型最大化 reward，同时加 <strong>KL 惩罚</strong>约束它别偏离 SFT 模型太远。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>数据：让标注者对同一 prompt 的多个回答排序，RM 学习这个偏好打分。</li>
+  <li>PPO 阶段同时存在 4 个模型：policy（在训）、reference（SFT 冻结，算 KL）、reward（打分）、critic/value（估计优势）。</li>
+  <li>KL 惩罚是关键：没有它，policy 会为了刷高 reward 输出畸形文本（<strong>reward hacking</strong>）。</li>
+</ul>
+
+<p><strong>【公式：RM 与 PPO】</strong></p>
+<ul>
+  <li>
+    <p><strong>RM 损失</strong>（Bradley-Terry 成对排序，y_w 优于 y_l）：</p>
+
+\[\mathcal{L}_{RM} = -\,\mathbb{E}_{(x,y_w,y_l)}\big[\log \sigma\big(r_\theta(x,y_w) - r_\theta(x,y_l)\big)\big]\]
+  </li>
+  <li>
+    <p><strong>PPO 优化目标</strong>（带 KL 惩罚的奖励 + clip 的策略梯度）：</p>
+
+\[\max_{\pi_\theta}\ \mathbb{E}_{x,\,y\sim\pi_\theta}\Big[\,r_\phi(x,y) - \beta\,\mathrm{KL}\big(\pi_\theta(y|x)\,\Vert \,\pi_{ref}(y|x)\big)\Big]\]
+
+    <p>实现上用 clip 形式（A 为 GAE 优势，r_t(θ)=π_θ/π_old 为重要性比）：</p>
+
+\[\mathcal{L}_{PPO} = \mathbb{E}_t\big[\min(r_t(\theta)\,A_t,\ \mathrm{clip}(r_t(\theta),1-\epsilon,1+\epsilon)\,A_t)\big]\]
+  </li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>痛点：流程复杂、4 模型同时占显存、RL 训练不稳、对超参敏感、RM 容易被钻空子。</li>
+  <li>追问 <strong>RLHF vs RLAIF</strong>：RLAIF 用 AI（如更强模型/宪法）代替人类生成偏好标签，降本，Anthropic 的 Constitutional AI 是代表思路。</li>
+  <li>
+    <p>追问 <strong>GRPO（DeepSeek 提出，DeepSeekMath/R1 采用）</strong>：PPO 的简化，<strong>去掉 critic/value 网络</strong>，省一个与 policy 同规模的模型，显存与稳定性都更友好。做法是对同一 prompt 采样一组 G 个回答 {o_1..o_G}，用<strong>组内归一化的 reward 当优势</strong>：</p>
+
+\[\hat{A}_i = \frac{r_i - \mathrm{mean}(\{r_1,\dots,r_G\})}{\mathrm{std}(\{r_1,\dots,r_G\})}\]
+
+    <p>再套 PPO 的 clip 目标，并把 KL 作为<strong>独立正则项</strong>直接加进 loss（而非塞进 reward）。优点：无需 critic、天然适配「可验证奖励 RLVR」（数学/代码用规则判对错）；局限：依赖组内采样多条、reward 方差大时不稳。</p>
+  </li>
+</ul>
+
+<p>📖 参考：InstructGPT — https://arxiv.org/abs/2203.02155 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300</p>
+
+<hr />
+
+<h3 id="10-dpo-相比-rlhf-的优势与局限--对齐-高频">10. DPO 相比 RLHF 的优势与局限 ⭐ <code class="language-plaintext highlighter-rouge">#对齐 #高频</code></h3>
+<p><strong>【核心答案】</strong> DPO 把 RLHF 的目标用数学推导成一个<strong>直接在偏好数据上的分类损失</strong>，不需要单独训练 reward model，也不需要 RL 采样循环，因此更稳定、更省资源、更易实现。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>关键洞察：RLHF 的最优策略与 reward 之间存在闭式关系，于是可以把「奖励最大化 + KL 约束」重参数化，直接用偏好对 (chosen, rejected) 做一个类似二分类的损失来优化策略，reward model 被「隐式」吸收进策略本身。</li>
+  <li>仍需要一个 reference 模型算 KL 项，但省掉了 RM 和 PPO 的复杂度。</li>
+</ul>
+
+<p><strong>【公式：DPO】</strong></p>
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>由 RLHF 最优解 $\pi^*(y</td>
+          <td>x) \propto \pi_{ref}(y</td>
+          <td>x)\exp\big(\tfrac{1}{\beta}r(x,y)\big)$ 反解出<strong>隐式奖励</strong> $r(x,y)=\beta\log\frac{\pi_\theta(y</td>
+          <td>x)}{\pi_{ref}(y</td>
+          <td>x)} + \beta\log Z(x)$，代入 Bradley-Terry，配分项 Z(x) 在成对相减中抵消，得到：</td>
+        </tr>
+      </tbody>
+    </table>
+
+\[\mathcal{L}_{DPO} = -\,\mathbb{E}_{(x,y_w,y_l)}\Big[\log \sigma\Big(\beta\log\frac{\pi_\theta(y_w|x)}{\pi_{ref}(y_w|x)} - \beta\log\frac{\pi_\theta(y_l|x)}{\pi_{ref}(y_l|x)}\Big)\Big]\]
+
+    <p>直观理解：<strong>抬高 chosen、压低 rejected 相对 reference 的对数概率比</strong>，β 控制偏离 reference 的强度（等价于 RLHF 里的 KL 系数）。</p>
+  </li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>局限：① 是 <strong>offline</strong>（用固定偏好数据），不像 PPO 能在线采样，可能不如在线方法上限高；② 对偏好数据分布敏感、易过拟合。</li>
+  <li>追问 <strong>衍生方法</strong>：IPO（缓解过拟合）、KTO（用单条好/坏标签而非成对）、SimPO（去掉 reference 模型）、ORPO（把 SFT 和偏好对齐合一）。</li>
+</ul>
+
+<p><strong>【三者对比：PPO vs DPO vs GRPO】</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>维度</th>
+      <th>PPO（RLHF）</th>
+      <th>DPO</th>
+      <th>GRPO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>范式</td>
+      <td>Online RL</td>
+      <td>Offline，直接偏好优化</td>
+      <td>Online RL（PPO 简化）</td>
+    </tr>
+    <tr>
+      <td>需要 RM？</td>
+      <td>✅ 显式训练</td>
+      <td>❌ 隐式吸收进策略</td>
+      <td>✅（或规则/可验证奖励）</td>
+    </tr>
+    <tr>
+      <td>需要 Critic/Value？</td>
+      <td>✅</td>
+      <td>❌</td>
+      <td>❌（用组内均值当 baseline）</td>
+    </tr>
+    <tr>
+      <td>训练模型数</td>
+      <td>4（policy/ref/RM/critic）</td>
+      <td>2（policy/ref）</td>
+      <td>3（policy/ref/RM）</td>
+    </tr>
+    <tr>
+      <td>优势估计</td>
+      <td>GAE（critic 估计）</td>
+      <td>无（直接分类损失）</td>
+      <td>组内 reward 归一化</td>
+    </tr>
+    <tr>
+      <td>显存/复杂度</td>
+      <td>高</td>
+      <td>低</td>
+      <td>中</td>
+    </tr>
+    <tr>
+      <td>稳定性</td>
+      <td>对超参敏感、易不稳</td>
+      <td>稳定、好复现</td>
+      <td>比 PPO 稳，省 critic</td>
+    </tr>
+    <tr>
+      <td>在线探索</td>
+      <td>✅ 上限高</td>
+      <td>❌ 受限于数据分布</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>适用场景</td>
+      <td>通用对齐、追求上限</td>
+      <td>资源有限、快速对齐</td>
+      <td>推理/数学/代码（RLVR）</td>
+    </tr>
+    <tr>
+      <td>代表</td>
+      <td>InstructGPT/ChatGPT</td>
+      <td>Zephyr、众多开源对齐</td>
+      <td>DeepSeekMath、DeepSeek-R1</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>一句话总结：<strong>PPO 最通用但最重；DPO 用一个分类损失换掉整条 RL 流水线，简单稳定但是 offline；GRPO 介于两者之间——保留在线 RL 与探索，但用「组内相对优势」干掉 critic，特别适合有可验证奖励的推理任务。</strong></p>
+</blockquote>
+
+<p>📖 参考：DPO — https://arxiv.org/abs/2305.18290 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300</p>
+
+<hr />
+
+<h3 id="11-为什么会幻觉hallucination怎么缓解-对齐-高频">11. 为什么会幻觉（hallucination）？怎么缓解？⭐ <code class="language-plaintext highlighter-rouge">#对齐 #高频</code></h3>
+<p><strong>【核心答案】</strong> 根因是训练目标只优化「下一个 token 的流畅与高概率」，而非「事实正确」；当知识缺失/过时/长尾时，模型仍倾向流畅地编造而非承认不知道。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>来源细分：① 预训练数据本身有错/过时；② 长尾知识记不准；③ 解码随机性；④ SFT 阶段如果教模型回答它其实不知道的问题，会强化「自信地胡说」。</li>
+  <li>缓解分层：
+    <ul>
+      <li><strong>数据/训练</strong>：提高数据质量；对齐时奖励「不确定就说不知道」与「引用来源」。</li>
+      <li><strong>推理时</strong>：RAG 提供外部依据并溯源、降低温度、self-consistency（多次采样投票）、self-verification（让模型核查自己的答案）。</li>
+      <li><strong>系统层</strong>：输出附带引用、置信度、可点击溯源。</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 RAG 能否消除幻觉？不能，只能降低——检索错/不全、或模型「无视」检索结果仍会幻觉。</li>
+  <li>追问怎么<strong>评测</strong>幻觉：TruthfulQA、FActScore、以及多模态的 POPE。</li>
+</ul>
+
+<p>📖 参考：RAG — https://arxiv.org/abs/2005.11401</p>
+
+<hr />
+
+<h3 id="12-灾难性遗忘怎么处理-对齐">12. 灾难性遗忘怎么处理？ <code class="language-plaintext highlighter-rouge">#对齐</code></h3>
+<p><strong>【核心答案】</strong> 微调新任务/新领域时旧能力退化。常用：原始数据回放（replay/混合通用数据）、参数高效微调（LoRA/Adapter 只动少量参数）、较小学习率、正则化（如 EWC 约束重要参数）。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>全参微调最容易遗忘；只训练旁路（LoRA）天然保留原能力。</li>
+  <li>持续学习中常按比例混入通用语料（如 5–30%）来「锚定」原分布。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 追问数据配比怎么定？经验性，需实验；领域数据过多会遗忘通用能力，过少则领域提升不足。</p>
+
+<hr />
+
+<h3 id="13-lora-原理与优势qlora-又是什么-工程-高频">13. LoRA 原理与优势？QLoRA 又是什么？⭐ <code class="language-plaintext highlighter-rouge">#工程 #高频</code></h3>
+<p><strong>【核心答案】</strong> 冻结原权重 W，旁路加一个低秩分解 ΔW = B·A（A 把维度降到秩 r，B 再升回去，r 远小于原维度），只训练 A、B。基于「权重更新本质是低秩的」这一假设。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>训练参数量从 d×d 降到 2×d×r，降几个数量级；显存和存储大幅下降；多个 LoRA 可即插即用切换。</li>
+  <li>推理时可把 B·A 合并回 W，<strong>不增加推理延迟</strong>。</li>
+  <li>初始化：A 用高斯、B 置零，保证训练开始时 ΔW=0 不破坏原模型。</li>
+  <li><strong>QLoRA</strong>：把基座权重量化到 4-bit（NF4）后再做 LoRA，单卡就能微调很大的模型，引入了 NF4、double quantization、paged optimizer 等技巧。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>秩 r 怎么选</strong>：常见 8/16/32/64，越大表达力越强但越接近全参微调；任务越复杂用越大。</li>
+  <li>追问 LoRA 的局限：对需要大幅改变模型行为的任务，可能不如全参微调。</li>
+</ul>
+
+<p>📖 参考：LoRA — https://arxiv.org/abs/2106.09685 ｜ QLoRA — https://arxiv.org/abs/2305.14314</p>
+
+<hr />
+
+<h1 id="第三部分llm-推理与工程优化">第三部分：LLM 推理与工程优化</h1>
+
+<h3 id="14-量化是什么ptq-和-qat-的区别常见方案-工程">14. 量化是什么？PTQ 和 QAT 的区别？常见方案？ <code class="language-plaintext highlighter-rouge">#工程</code></h3>
+<p><strong>【核心答案】</strong> 把权重/激活从 FP16 降到 INT8/INT4 等低比特，省显存、提速。分训练后量化（PTQ，无需再训练，快）和量化感知训练（QAT，训练时模拟量化，精度好但成本高）。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>PTQ 主流</strong>：GPTQ（逐层最小化量化误差，权重 4-bit）、AWQ（识别并保护「重要权重」对应的通道）、SmoothQuant（把激活的异常值平移到权重上，让激活更好量化）。</li>
+  <li>难点是<strong>激活里的 outlier</strong>：少数维度数值极大，直接量化会损失精度，上述方法都在处理它。</li>
+  <li>衍生概念：W4A16（权重 4-bit、激活 16-bit）、KV cache 量化。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 核心权衡是精度损失 vs 显存/速度收益。追问 INT4 一般损失多少？通常 4-bit 权重量化精度损失很小（1-2%），是性价比甜点。</p>
+
+<p>📖 参考：GPTQ — https://arxiv.org/abs/2210.17323 ｜ AWQ — https://arxiv.org/abs/2306.00978</p>
+
+<hr />
+
+<h3 id="15-flash-attention-到底解决了什么-工程-高频">15. Flash Attention 到底解决了什么？⭐ <code class="language-plaintext highlighter-rouge">#工程 #高频</code></h3>
+<p><strong>【核心答案】</strong> 它<strong>不减少计算量，而是减少显存读写</strong>（IO-aware）。标准注意力要把 n×n 的注意力矩阵写回显存（HBM）再读出，IO 成 O(n²)；Flash Attention 用分块（tiling）在高速 SRAM 内计算、用 online softmax 增量更新，避免存下完整矩阵。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>关键观察：现代 GPU 计算快、访存慢，注意力是<strong>访存受限</strong>而非计算受限。</li>
+  <li>online softmax：分块计算时维护running max 和 running sum，逐块更新结果，无需一次性看到整行。</li>
+  <li>结果：更快 + 更省显存，且是<strong>精确注意力</strong>（非近似，不损失精度）。</li>
+  <li>后续：FlashAttention-2（更好的并行与工作划分）、FlashAttention-3（针对 H100 的异步与 FP8）。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 追问它和稀疏/线性注意力的区别？后者通过近似降低计算复杂度（有损），Flash Attention 是无损的工程优化。</p>
+
+<p>📖 参考：FlashAttention — https://arxiv.org/abs/2205.14135</p>
+
+<hr />
+
+<h3 id="16-推测解码speculative-decoding原理-工程">16. 推测解码（Speculative Decoding）原理？⭐ <code class="language-plaintext highlighter-rouge">#工程</code></h3>
+<p><strong>【核心答案】</strong> 用一个<strong>小模型（draft）快速自回归生成若干候选 token</strong>，再用大模型<strong>一次前向并行验证</strong>这些 token，接受匹配的前缀、从第一个不匹配处重采。大模型一次能确认多个 token，提升吞吐。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>大模型对一段序列做一次前向就能拿到每个位置的概率分布，用它来「批量校验」小模型的猜测。</li>
+  <li>通过精心设计的接受/重采规则，保证最终输出分布与「只用大模型」<strong>严格一致</strong>（无损加速）。</li>
+  <li>变体：Medusa（给大模型加多个预测头自己做 draft，省去独立小模型）、EAGLE（在特征层做更准的 draft）、Lookahead Decoding。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 加速比取决于小模型的「命中率」和两者大小差距；draft 太弱则接受率低、收益小。追问适用场景：批量小、追求低延迟时收益明显。</p>
+
+<p>📖 参考：Speculative Decoding — https://arxiv.org/abs/2211.17192</p>
+
+<hr />
+
+<h3 id="17-提升推理吞吐的工程手段有哪些-工程">17. 提升推理吞吐的工程手段有哪些？ <code class="language-plaintext highlighter-rouge">#工程</code></h3>
+<p><strong>【核心答案】</strong> Continuous batching（动态拼接请求）、PagedAttention（KV cache 分页管理）、prefix caching（复用相同前缀的 KV）、张量/流水线并行、量化、推测解码。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>Continuous batching</strong>：传统静态 batch 要等最慢的请求完成才能放新请求；continuous batching 在每步动态把已完成的换成新请求，大幅提高 GPU 利用率。</li>
+  <li><strong>PagedAttention</strong>（vLLM）：借鉴操作系统虚拟内存分页，把 KV cache 切成固定大小的块、用页表映射到非连续物理显存，几乎消除碎片，并支持请求间 KV 共享（如相同 system prompt）。</li>
+  <li><strong>Prefix caching</strong>：多个请求共享前缀（如同一 system prompt）时只算一次。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 追问 throughput vs latency 的权衡：大 batch 提吞吐但单请求延迟变高；在线服务要在两者间取舍。</p>
+
+<p>📖 参考：vLLM / PagedAttention — https://arxiv.org/abs/2309.06180</p>
+
+<hr />
+
+<h3 id="18-prefill-和-decode-两个阶段有什么本质区别-工程-高频">18. Prefill 和 Decode 两个阶段有什么本质区别？ <code class="language-plaintext highlighter-rouge">#工程 #高频</code></h3>
+<p><strong>【核心答案】</strong> Prefill 处理输入 prompt，所有 token 可并行，是<strong>计算密集（compute-bound）</strong>；Decode 逐 token 生成，每步只算一个 token 对全部历史的注意力，是<strong>访存密集（memory-bound）</strong>，受 KV cache 读取带宽限制。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>这解释了为什么：长输入（prefill 重）和长输出（decode 步数多）的优化重点不同。</li>
+  <li>指标：prefill 影响「首 token 延迟 TTFT」，decode 影响「每 token 延迟 TPOT / 吞吐」。</li>
+  <li>工程上常把两者<strong>分离调度</strong>（如 disaggregated serving，prefill 和 decode 跑在不同节点）以分别优化。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 追问 chunked prefill：把长 prefill 切块，和 decode 混合调度，平衡 TTFT 与吞吐。</p>
+
+<hr />
+
+<h1 id="第六部分高频开放题">第六部分：高频开放题</h1>
+
+<blockquote>
+  <p>这些没有标准答案，考的是判断力和「讲权衡」的能力。</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p><strong>上下文越长越好吗？</strong> 不是。长上下文有「lost in the middle」（中段信息易被忽略）、推理成本随长度上升、注意力被稀释等问题。RAG 与长上下文互补而非替代：要溯源/省成本/知识常更新 → RAG；信息必须整体一起看（如长合同通读）→ 长上下文。</p>
+  </li>
+  <li>
+    <p><strong>RAG 还是微调？</strong> 知识频繁更新、需溯源、降低幻觉 → RAG；改变风格/格式/输出习惯、注入稳定的领域能力 → 微调；二者常结合（微调让模型更会用检索结果）。一句话：RAG 改「模型知道什么」，微调改「模型怎么表现」。</p>
+  </li>
+  <li>
+    <p><strong>temperature / top-p 怎么调？</strong> temperature 缩放 softmax 平滑度控制随机性（低→确定、高→发散）；top-p（核采样）只在累计概率达 p 的 token 集合里采样，截断长尾。事实/代码任务用低温，创意任务用高温。两者一般不同时大幅调。</p>
+  </li>
+  <li>
+    <p><strong>Scaling Law 是什么？Chinchilla 的启示？</strong> 模型性能随参数 N、数据 D、算力 C 呈幂律提升。Chinchilla 指出当时多数大模型「参数过大、数据不足」，在固定算力下应让 N 和 D 更均衡地增长（经验上 token 数约 20×参数量），同算力下小而「喂饱」的模型反而更强。</p>
+  </li>
+  <li>
+    <p><strong>怎么把一个大模型压缩上线？</strong> 组合拳：量化（4-bit 权重）+ 蒸馏（大模型教小模型）+ 剪枝 + 推理引擎优化（vLLM / TensorRT-LLM）。按延迟、成本、精度目标做取舍，先定 SLA 再选方案。</p>
+  </li>
+</ul>
+
+<p>📖 参考：Scaling Laws — https://arxiv.org/abs/2001.08361 ｜ Chinchilla — https://arxiv.org/abs/2203.15556</p>
+
+        </article>
+      </div>
+      
+      <div class="lang-en">
+        <article class="llm-body" id="llm-article-en">
+          <ul class="llm-toc-list" id="markdown-toc">
+  <li><a href="#part-0-the-maths-that-runs-through-everything" id="markdown-toc-part-0-the-maths-that-runs-through-everything">Part 0: The maths that runs through everything</a>    <ul>
+      <li><a href="#01-how-are-cross-entropy-kl-divergence-and-entropy-related--basics-core" id="markdown-toc-01-how-are-cross-entropy-kl-divergence-and-entropy-related--basics-core">0.1 How are cross-entropy, KL divergence and entropy related? ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></a></li>
+      <li><a href="#02-what-does-an-lms-cross-entropy-loss-look-like-and-how-does-it-relate-to-perplexity--basics-core" id="markdown-toc-02-what-does-an-lms-cross-entropy-loss-look-like-and-how-does-it-relate-to-perplexity--basics-core">0.2 What does an LM’s cross-entropy loss look like, and how does it relate to perplexity? ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></a></li>
+      <li><a href="#03-activation-functions-and-why-large-models-favour-glu-variants--basics-core" id="markdown-toc-03-activation-functions-and-why-large-models-favour-glu-variants--basics-core">0.3 Activation functions, and why large models favour GLU variants ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></a></li>
+      <li><a href="#04-optimisers-sgd--adam--adamw-and-what-large-models-use--basics-core" id="markdown-toc-04-optimisers-sgd--adam--adamw-and-what-large-models-use--basics-core">0.4 Optimisers: SGD → Adam → AdamW, and what large models use ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#part-i-llm-fundamentals-and-architecture" id="markdown-toc-part-i-llm-fundamentals-and-architecture">Part I: LLM fundamentals and architecture</a>    <ul>
+      <li><a href="#1-what-is-at-the-core-of-the-transformer-and-why-did-it-displace-the-rnn--basics-core" id="markdown-toc-1-what-is-at-the-core-of-the-transformer-and-why-did-it-displace-the-rnn--basics-core">1. What is at the core of the Transformer, and why did it displace the RNN? ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></a></li>
+      <li><a href="#2-write-self-attention-from-scratch-and-explain-each-step--implement-core" id="markdown-toc-2-write-self-attention-from-scratch-and-explain-each-step--implement-core">2. Write self-attention from scratch and explain each step ⭐ <code class="language-plaintext highlighter-rouge">#implement #core</code></a></li>
+      <li><a href="#3-what-position-encodings-exist-and-why-did-rope-win--basics-core" id="markdown-toc-3-what-position-encodings-exist-and-why-did-rope-win--basics-core">3. What position encodings exist, and why did RoPE win? ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></a></li>
+      <li><a href="#4-decoder-only-vs-encoder-only-vs-encoder-decoder-basics" id="markdown-toc-4-decoder-only-vs-encoder-only-vs-encoder-decoder-basics">4. Decoder-only vs. encoder-only vs. encoder-decoder <code class="language-plaintext highlighter-rouge">#basics</code></a></li>
+      <li><a href="#5-what-is-the-kv-cache-why-is-it-the-inference-bottleneck-and-how-do-mqagqa-help--systems-core" id="markdown-toc-5-what-is-the-kv-cache-why-is-it-the-inference-bottleneck-and-how-do-mqagqa-help--systems-core">5. What is the KV cache, why is it the inference bottleneck, and how do MQA/GQA help? ⭐ <code class="language-plaintext highlighter-rouge">#systems #core</code></a></li>
+      <li><a href="#6-mixture-of-experts-how-it-works-what-it-buys-what-it-costs--basics-systems" id="markdown-toc-6-mixture-of-experts-how-it-works-what-it-buys-what-it-costs--basics-systems">6. Mixture of Experts: how it works, what it buys, what it costs ⭐ <code class="language-plaintext highlighter-rouge">#basics #systems</code></a></li>
+      <li><a href="#7-tokenization-how-bpe-works-and-why-numbers-chinese-and-code-cause-trouble-basics" id="markdown-toc-7-tokenization-how-bpe-works-and-why-numbers-chinese-and-code-cause-trouble-basics">7. Tokenization: how BPE works, and why numbers, Chinese and code cause trouble <code class="language-plaintext highlighter-rouge">#basics</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#part-ii-training-and-alignment" id="markdown-toc-part-ii-training-and-alignment">Part II: Training and alignment</a>    <ul>
+      <li><a href="#8-what-are-the-stages-of-training-a-large-model-alignment-basics" id="markdown-toc-8-what-are-the-stages-of-training-a-large-model-alignment-basics">8. What are the stages of training a large model? <code class="language-plaintext highlighter-rouge">#alignment #basics</code></a></li>
+      <li><a href="#9-the-full-rlhf-pipeline-and-what-hurts--alignment-core" id="markdown-toc-9-the-full-rlhf-pipeline-and-what-hurts--alignment-core">9. The full RLHF pipeline, and what hurts ⭐ <code class="language-plaintext highlighter-rouge">#alignment #core</code></a></li>
+      <li><a href="#10-what-dpo-gains-over-rlhf-and-where-it-falls-down--alignment-core" id="markdown-toc-10-what-dpo-gains-over-rlhf-and-where-it-falls-down--alignment-core">10. What DPO gains over RLHF, and where it falls down ⭐ <code class="language-plaintext highlighter-rouge">#alignment #core</code></a></li>
+      <li><a href="#11-why-do-models-hallucinate-and-what-reduces-it--alignment-core" id="markdown-toc-11-why-do-models-hallucinate-and-what-reduces-it--alignment-core">11. Why do models hallucinate, and what reduces it? ⭐ <code class="language-plaintext highlighter-rouge">#alignment #core</code></a></li>
+      <li><a href="#12-handling-catastrophic-forgetting-alignment" id="markdown-toc-12-handling-catastrophic-forgetting-alignment">12. Handling catastrophic forgetting <code class="language-plaintext highlighter-rouge">#alignment</code></a></li>
+      <li><a href="#13-how-lora-works-and-what-qlora-adds--systems-core" id="markdown-toc-13-how-lora-works-and-what-qlora-adds--systems-core">13. How LoRA works, and what QLoRA adds ⭐ <code class="language-plaintext highlighter-rouge">#systems #core</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#part-iii-inference-and-systems-optimisation" id="markdown-toc-part-iii-inference-and-systems-optimisation">Part III: Inference and systems optimisation</a>    <ul>
+      <li><a href="#14-quantization-ptq-vs-qat-and-the-common-schemes-systems" id="markdown-toc-14-quantization-ptq-vs-qat-and-the-common-schemes-systems">14. Quantization: PTQ vs. QAT, and the common schemes <code class="language-plaintext highlighter-rouge">#systems</code></a></li>
+      <li><a href="#15-what-does-flashattention-actually-solve--systems-core" id="markdown-toc-15-what-does-flashattention-actually-solve--systems-core">15. What does FlashAttention actually solve? ⭐ <code class="language-plaintext highlighter-rouge">#systems #core</code></a></li>
+      <li><a href="#16-how-does-speculative-decoding-work--systems" id="markdown-toc-16-how-does-speculative-decoding-work--systems">16. How does speculative decoding work? ⭐ <code class="language-plaintext highlighter-rouge">#systems</code></a></li>
+      <li><a href="#17-what-raises-inference-throughput-systems" id="markdown-toc-17-what-raises-inference-throughput-systems">17. What raises inference throughput? <code class="language-plaintext highlighter-rouge">#systems</code></a></li>
+      <li><a href="#18-how-do-prefill-and-decode-fundamentally-differ-systems-core" id="markdown-toc-18-how-do-prefill-and-decode-fundamentally-differ-systems-core">18. How do prefill and decode fundamentally differ? <code class="language-plaintext highlighter-rouge">#systems #core</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#part-vi-open-ended-questions" id="markdown-toc-part-vi-open-ended-questions">Part VI: Open-ended questions</a></li>
+</ul>
+
+<blockquote>
+  <p><strong>Scope</strong>: architecture · training and alignment · inference optimisation. Every entry runs <strong>core answer → how it works → trade-offs / follow-ups → references</strong>; ⭐ marks the points worth digging into.</p>
+</blockquote>
+
+<hr />
+
+<h1 id="part-0-the-maths-that-runs-through-everything">Part 0: The maths that runs through everything</h1>
+
+<blockquote>
+  <p>These quantities keep coming back: <strong>cross-entropy</strong> is the loss for pretraining and SFT, <strong>KL divergence</strong> is the term in RLHF/PPO/DPO/GRPO that keeps the policy from drifting, and distillation uses KL to align teacher and student. Getting them and their relationships straight here means not having to revisit them later.</p>
+</blockquote>
+
+<h3 id="01-how-are-cross-entropy-kl-divergence-and-entropy-related--basics-core">0.1 How are cross-entropy, KL divergence and entropy related? ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></h3>
+<p><strong>【Core answer】</strong> With a true distribution p and a model distribution q:</p>
+<ul>
+  <li><strong>Entropy</strong> $H(p) = -\sum_x p(x)\log p(x)$: p’s own uncertainty (the theoretical minimum code length).</li>
+  <li><strong>Cross-entropy</strong> $H(p,q) = -\sum_x p(x)\log q(x)$: the average cost of coding p using q.</li>
+  <li><strong>KL divergence</strong> $D_{KL}(p\,\Vert \,q) = \sum_x p(x)\log\frac{p(x)}{q(x)}$: the <em>extra</em> cost of approximating p with q.</li>
+</ul>
+
+<p>In one line: <strong>cross-entropy = entropy + KL</strong>, that is</p>
+
+\[H(p,q) = H(p) + D_{KL}(p\,\Vert \,q)\]
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>Because H(p) does not depend on the model’s parameters (p is the fixed label distribution), <strong>minimising cross-entropy is minimising KL</strong> — which is why training uses cross-entropy directly as the loss.</li>
+  <li><strong>KL is non-negative and asymmetric</strong>: $D_{KL}(p\Vert q)\neq D_{KL}(q\Vert p)$, so it is a divergence, not a distance. $D_{KL}=0 \iff p=q$.</li>
+  <li>What the asymmetry means in practice:
+    <ul>
+      <li><strong>Forward KL</strong> $D_{KL}(p\Vert q)$ (what maximum likelihood uses): wherever p has mass, q cannot be zero or the penalty is infinite → q tends to <strong>cover every mode</strong> (mean-seeking, and over-broad).</li>
+      <li><strong>Reverse KL</strong> $D_{KL}(q\Vert p)$ (variational inference, some RL): q only dares place mass where p is high → it tends to <strong>lock onto one mode</strong> (mode-seeking).</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>how to symmetrise it</strong>: the JS divergence is the average of KL in both directions, symmetric and bounded; GANs used it.</li>
+  <li>A common follow-up is <strong>what KL actually computes in an LLM</strong>: the <strong>per-position KL between two token distributions</strong>. In PPO and DPO it constrains the new policy π_θ from straying too far from the reference π_ref, guarding against reward hacking (questions 9 and 10).</li>
+</ul>
+
+<h3 id="02-what-does-an-lms-cross-entropy-loss-look-like-and-how-does-it-relate-to-perplexity--basics-core">0.2 What does an LM’s cross-entropy loss look like, and how does it relate to perplexity? ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></h3>
+<p><strong>【Core answer】</strong> The true distribution is one-hot (the actual next word is 1, everything else 0), so cross-entropy collapses to <strong>negative log-likelihood (NLL)</strong> — only the probability the model assigned to the correct word matters.</p>
+
+\[\mathcal{L} = -\frac{1}{T}\sum_{t=1}^{T}\log q_\theta(x_t \mid x_{&lt;t})\]
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>Under one-hot, $\sum_x p(x)\log q(x)$ keeps only the correct-class term, so cross-entropy = $-\log q(\text{correct word})$: the better the prediction (the closer to probability 1), the closer the loss to 0.</li>
+  <li><strong>Perplexity</strong> = $\exp(\mathcal{L})$, the exponential of cross-entropy. Read it as “how many words the model is torn between at each step on average” — lower is better.</li>
+  <li>For classification, the gradient of softmax plus cross-entropy is beautifully simple: $\partial \mathcal{L}/\partial z_i = q_i - p_i$ (predicted probability minus true label), which is part of why it trains so well.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>label smoothing</strong>: replace the one-hot 1 with 1−ε and spread ε over the rest, which is equivalent to mixing a uniform distribution into the target. It reduces over-confidence and improves calibration.</li>
+  <li>A common follow-up is <strong>why distillation uses KL rather than cross-entropy</strong>: the teacher outputs a <em>soft</em> distribution, not a one-hot label, and the student must match the whole thing — so minimise $D_{KL}(p_{teacher}\Vert q_{student})$ (softened with temperature T). Here KL ≠ cross-entropy, because the teacher’s entropy is non-zero and cannot be dropped.</li>
+</ul>
+
+<p>📖 Reference: cross-entropy and KL basics in <em>Deep Learning</em> (Goodfellow) Ch.3 ｜ Distillation — https://arxiv.org/abs/1503.02531</p>
+
+<h3 id="03-activation-functions-and-why-large-models-favour-glu-variants--basics-core">0.3 Activation functions, and why large models favour GLU variants ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></h3>
+<p><strong>【Core answer】</strong> Activations supply <strong>non-linearity</strong>; without them stacked linear layers collapse back into one. The line runs Sigmoid/Tanh → ReLU → GELU/Swish → today’s LLM default, <strong>SwiGLU / GeGLU</strong> (gated linear unit variants).</p>
+
+<p><strong>【How it works】</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Activation</th>
+      <th>Formula</th>
+      <th>Character / problem</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sigmoid</td>
+      <td>$\frac{1}{1+e^{-x}}$</td>
+      <td>Output in (0,1); saturates at both ends → <strong>vanishing gradients</strong>, non-zero mean</td>
+    </tr>
+    <tr>
+      <td>Tanh</td>
+      <td>$\frac{e^x-e^{-x}}{e^x+e^{-x}}$</td>
+      <td>Zero-mean, still saturates</td>
+    </tr>
+    <tr>
+      <td>ReLU</td>
+      <td>$\max(0,x)$</td>
+      <td>Simple, non-saturating, fast to converge; but flat at zero on the negative side → <strong>dying neurons</strong></td>
+    </tr>
+    <tr>
+      <td>LeakyReLU</td>
+      <td>$\max(\alpha x,x)$</td>
+      <td>A small slope on the negative side eases the dying problem</td>
+    </tr>
+    <tr>
+      <td>GELU</td>
+      <td>$x\cdot\Phi(x)$</td>
+      <td>Smooth weighting by the Gaussian CDF; common in BERT/GPT, smooth and differentiable</td>
+    </tr>
+    <tr>
+      <td>Swish/SiLU</td>
+      <td>$x\cdot\sigma(x)$</td>
+      <td>Smooth and non-monotonic; strong in deep networks</td>
+    </tr>
+    <tr>
+      <td><strong>SwiGLU</strong></td>
+      <td>$(\mathrm{Swish}(xW)\otimes xV)W_2$</td>
+      <td><strong>Gated</strong>: one branch carries content, the other gates it elementwise; used by LLaMA and PaLM</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><strong>Why GLU variants (SwiGLU/GeGLU) win</strong>: they turn the FFN from one path into two — content times gate, multiplied elementwise. <strong>The gate lets the network decide dynamically how much of each dimension gets through</strong>, which buys better quality at equal compute (the GLU Variants paper measured this).</li>
+  <li>Note that a SwiGLU FFN has three weight matrices (W, V, W_2), so to hold parameter count steady the inner dimension is usually $\frac{2}{3}\times 4d$ rather than 4d.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>why sigmoid is not used for hidden layers</strong>: gradients vanish in the saturated region and its non-zero mean makes updates zig-zag, so deep networks are hard to train. Sigmoid now survives only in binary-classification outputs and gates.</li>
+  <li>A common follow-up is <strong>GELU vs. ReLU</strong>: GELU is smooth, differentiable everywhere and slightly better in Transformers; ReLU is cheaper.</li>
+</ul>
+
+<h3 id="04-optimisers-sgd--adam--adamw-and-what-large-models-use--basics-core">0.4 Optimisers: SGD → Adam → AdamW, and what large models use ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></h3>
+<p><strong>【Core answer】</strong> The through-line is <strong>momentum</strong> (smooth the gradient direction) plus <strong>adaptive learning rates</strong> (scale each parameter separately). LLM training is essentially always <strong>AdamW</strong>.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>SGD</strong>: $\theta \leftarrow \theta - \eta\,g$ — simple, but sensitive to the learning rate and prone to oscillating in ravines.</li>
+  <li><strong>With momentum</strong>: keep an exponential moving average $v$ of past gradients to accelerate along a consistent direction and damp oscillation.</li>
+  <li><strong>AdaGrad / RMSProp</strong>: adapt the step size using accumulated squared gradients. AdaGrad’s learning rate decays monotonically and can stall early; RMSProp fixes this with a moving average.</li>
+  <li>
+    <p><strong>Adam = momentum + RMSProp</strong>: maintain both a first moment $m_t$ (direction) and a second moment $v_t$ (scale), with bias correction:</p>
+
+\[m_t=\beta_1 m_{t-1}+(1-\beta_1)g_t,\quad v_t=\beta_2 v_{t-1}+(1-\beta_2)g_t^2\]
+
+\[\hat m_t=\tfrac{m_t}{1-\beta_1^t},\ \hat v_t=\tfrac{v_t}{1-\beta_2^t},\quad \theta\leftarrow\theta-\eta\,\tfrac{\hat m_t}{\sqrt{\hat v_t}+\epsilon}\]
+  </li>
+  <li><strong>AdamW</strong>: <strong>decouple weight decay from the gradient</strong> and apply it straight to the weights ($\theta\leftarrow\theta-\eta(\dots)-\eta\lambda\theta$). In Adam, L2 regularisation gets rescaled by the adaptive denominator and stops working; AdamW fixes that, giving <strong>cleaner regularisation and better generalisation</strong>. It is the LLM standard.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>why large models do not use SGD</strong>: gradients are noisy and parameter scales vary widely, so adaptive methods converge faster and more stably. The price is storing both m and v, roughly <strong>twice the parameter count in memory</strong> (more under mixed precision) — exactly what ZeRO and optimiser-state sharding exist to address.</li>
+  <li>A common follow-up is <strong>the learning-rate schedule</strong>: large models typically use <strong>warmup plus cosine decay</strong> — warmup keeps early large gradients from blowing up training, cosine anneals smoothly.</li>
+  <li>A common follow-up is <strong>newer optimisers</strong>: <strong>Lion</strong> (first moment only, so lighter on memory), <strong>Adafactor</strong> (factorises the second moment to save memory; used by T5), and <strong>Muon/Shampoo</strong> (second-order / matrix preconditioning, tried in recent large models).</li>
+</ul>
+
+<p>📖 Reference: Adam — https://arxiv.org/abs/1412.6980 ｜ AdamW — https://arxiv.org/abs/1711.05101 ｜ GLU Variants — https://arxiv.org/abs/2002.05202</p>
+
+<hr />
+
+<h1 id="part-i-llm-fundamentals-and-architecture">Part I: LLM fundamentals and architecture</h1>
+
+<h3 id="1-what-is-at-the-core-of-the-transformer-and-why-did-it-displace-the-rnn--basics-core">1. What is at the core of the Transformer, and why did it displace the RNN? ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></h3>
+<p><strong>【Core answer】</strong> Self-attention: every token interacts directly with every other token in the sequence, the path between any two positions is O(1) long, and the whole sequence computes in parallel.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>The RNN’s two problems: (1) information has to be relayed step by step, so long-range dependencies vanish or explode during backpropagation; (2) timesteps are inherently serial, so nothing parallelises and training is slow.</li>
+  <li>The Transformer establishes global connections in one step with attention, stabilises deep training with residual connections and LayerNorm, and scales with data and compute.</li>
+</ul>
+
+<p><strong>【The overall structure, bottom-up】</strong></p>
+<ul>
+  <li><strong>Input layer</strong>: token embedding (look up an id as a vector) plus position encoding (question 3) → a sequence representation $X\in\mathbb{R}^{n\times d}$.</li>
+  <li><strong>N stacked Transformer blocks</strong> (96 layers in GPT-3, several dozen in LLaMA-3), each with two sublayers:
+    <ol>
+      <li><strong>Multi-head self-attention (MHSA)</strong>: <code class="language-plaintext highlighter-rouge">x → LN → MHSA → +x</code> (residual)</li>
+      <li><strong>Feed-forward network (FFN/MLP)</strong>: <code class="language-plaintext highlighter-rouge">x → LN → FFN → +x</code> (residual)</li>
+    </ol>
+  </li>
+  <li><strong>Output layer</strong>: a final LN → linear projection to vocabulary size (the LM head, usually <strong>weight-tied</strong> with the input embedding) → softmax for the next-token distribution.</li>
+  <li>The key tensor stays $n\times d$ throughout (n = sequence length, d = hidden size): attention mixes <strong>between tokens</strong> (across positions), the FFN transforms features <strong>within each token</strong> (position-wise). Alternating the two is the Transformer’s basic rhythm.</li>
+  <li>Inside one block: <strong>multi-head self-attention + (residual &amp; norm) + FFN + (residual &amp; norm)</strong>. The FFN is usually a two-layer MLP at 4× hidden width (modern models use SwiGLU, section 0.3) and carries most of the parameters — and most of the stored knowledge.</li>
+</ul>
+
+<p><strong>【Residual connections: why they are indispensable】</strong></p>
+<ul>
+  <li>The form: $\text{out} = x + \text{Sublayer}(\text{LN}(x))$ (Pre-LN style) — the sublayer only learns an <strong>increment $F(x)$ relative to its input</strong>, and output = input + increment.</li>
+  <li><strong>Effect 1, deep gradients survive</strong>: on the backward pass $\frac{\partial \text{out}}{\partial x} = 1 + \frac{\partial F}{\partial x}$, and that <strong>“+1” gives the gradient a motorway straight down to the bottom layers</strong>. Even when $\partial F/\partial x$ is tiny the gradient does not decay to zero, which is what makes tens or hundreds of layers trainable (the ResNet insight).</li>
+  <li><strong>Effect 2, identity is easy to learn</strong>: if the best thing a layer can do is nothing, the network only needs $F(x)\to 0$ — far easier than making a stack of non-linear layers fit the identity. So depth stops hurting.</li>
+  <li><strong>Effect 3, information is preserved</strong>: every layer carries the original signal through unchanged and adds to it, so deep layers cannot wash out the features below. Read it as <strong>iterative refinement of a representation (the residual stream)</strong> — which is why mechanistic interpretability treats the residual stream as a shared bus that every layer reads from and writes to.</li>
+  <li>The companion <strong>LayerNorm</strong> normalises across each token’s feature dimension, stabilising the numerics and speeding convergence; LLMs often use the cheaper <strong>RMSNorm</strong> (no mean centring, just scaling by root-mean-square).</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>The cost is attention’s O(n²) complexity — both time and memory grow with the square of sequence length, the root of every long-sequence optimisation.</li>
+  <li>A likely follow-up: <strong>Pre-LN vs. Post-LN</strong>. Post-LN (the original Transformer, <code class="language-plaintext highlighter-rouge">LN(x+Sublayer(x))</code>) is marginally more expressive but unstable deep and needs warmup; <strong>Pre-LN</strong> (<code class="language-plaintext highlighter-rouge">x+Sublayer(LN(x))</code>, normalising the sublayer’s input) leaves the residual path a clean identity, trains more stably and can drop warmup. It is now the default.</li>
+  <li>A likely follow-up: why does the FFN expand and then contract? To provide non-linear capacity and act as key-value memory.</li>
+  <li>A likely follow-up: <strong>what happens without residuals?</strong> A deep Transformer barely converges at all — which is why residuals, normalisation and Pre-LN together are what makes the thing trainable.</li>
+</ul>
+
+<p>📖 Reference: Attention Is All You Need — https://arxiv.org/abs/1706.03762 ｜ ResNet — https://arxiv.org/abs/1512.03385</p>
+
+<hr />
+
+<h3 id="2-write-self-attention-from-scratch-and-explain-each-step--implement-core">2. Write self-attention from scratch and explain each step ⭐ <code class="language-plaintext highlighter-rouge">#implement #core</code></h3>
+<p><strong>【Core answer】</strong> Attention(Q,K,V) = softmax(QKᵀ / √dₖ) · V. Q, K and V come from multiplying the input by three learnable matrices; QKᵀ gives similarities, scaling then softmax turns them into weights, and those weights sum V.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>Why divide by √dₖ</strong>: when Q and K have roughly independent dimensions with mean 0 and variance 1, the dot product’s variance is about dₖ. Larger dimensions mean larger dot products, which push softmax into saturation where gradients go to zero. Dividing by √dₖ pulls the variance back near 1 and keeps gradients healthy.</li>
+  <li><strong>Multi-head attention</strong>: split the d dimensions into h subspaces of d/h and attend in parallel, so different heads can track different relations (syntax, coreference, position), then concatenate and project.</li>
+  <li><strong>Causal masking</strong>: generative models set future positions to −∞ before the softmax, so token i can only see positions ≤ i.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>complexity</strong>: with sequence length n and dimension d, attention is O(n²·d).</li>
+  <li>A common follow-up is <strong>MHA vs. MQA vs. GQA</strong>: see question 5.</li>
+  <li>When writing it out, do not forget where the mask and dropout go, and that there is an output projection Wₒ at the end.</li>
+</ul>
+
+<p>A skeleton (PyTorch pseudocode):</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">attention</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">d_k</span> <span class="o">=</span> <span class="n">Q</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="p">(</span><span class="n">Q</span> <span class="o">@</span> <span class="n">K</span><span class="p">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d_k</span><span class="p">)</span>  <span class="c1"># [B, h, n, n]
+</span>    <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span><span class="p">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">mask</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s">'-inf'</span><span class="p">))</span>
+    <span class="n">attn</span> <span class="o">=</span> <span class="n">scores</span><span class="p">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">attn</span> <span class="o">@</span> <span class="n">V</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h3 id="3-what-position-encodings-exist-and-why-did-rope-win--basics-core">3. What position encodings exist, and why did RoPE win? ⭐ <code class="language-plaintext highlighter-rouge">#basics #core</code></h3>
+<p><strong>【Core answer】</strong> Attention itself is blind to position, so position has to be injected explicitly. Three families: absolute, relative and rotary (RoPE). RoPE became the default in LLaMA, Qwen and most open models because it <strong>unifies absolute and relative position, extrapolates well, is simple to implement and adds no parameters</strong>.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>Absolute</strong>: the original Transformer used sinusoids (parameter-free, extrapolates a little) or learned position vectors (BERT — fixed length, no extrapolation), added straight onto the embeddings.</li>
+  <li><strong>RoPE</strong>: rotate each token’s Q and K by an angle determined by its position m (a 2D rotation applied to dimension pairs). Mathematically this makes ⟨q_m, k_n⟩ depend only on the relative distance (m−n), so relative position is encoded naturally inside the attention inner product.</li>
+  <li><strong>ALiBi</strong>: leaves Q/K alone and instead adds a bias to the attention scores that decreases linearly with distance (the further apart, the larger the penalty). No explicit position vectors, and it extrapolates well.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>extrapolating to long context</strong>: RoPE degrades if pushed past its training length, so <strong>position interpolation (PI)</strong> or <strong>NTK-aware / YaRN</strong> adjustments to the base frequency are used to extend it.</li>
+  <li>A common follow-up is <strong>the effect of RoPE’s base (θ)</strong>: a larger base discriminates better at long range, making it the key knob for long-context tuning.</li>
+</ul>
+
+<p>📖 Reference: RoFormer (RoPE) — https://arxiv.org/abs/2104.09864</p>
+
+<hr />
+
+<h3 id="4-decoder-only-vs-encoder-only-vs-encoder-decoder-basics">4. Decoder-only vs. encoder-only vs. encoder-decoder <code class="language-plaintext highlighter-rouge">#basics</code></h3>
+<p><strong>【Core answer】</strong> They differ in attention direction and structure: the encoder is bidirectional, the decoder is causal and unidirectional, encoder-decoder has both. Essentially every modern large model is decoder-only.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>Encoder-only (BERT)</strong>: bidirectional attention, every token sees the whole sequence. Strong on understanding tasks (classification, NER, retrieval); cannot generate directly.</li>
+  <li><strong>Decoder-only (GPT/LLaMA)</strong>: causal masking and autoregression, with next-token prediction as the single pretraining objective. Scales well, strong few-shot ability, and the current mainstream.</li>
+  <li><strong>Encoder-decoder (T5/BART)</strong>: the encoder understands the input and the decoder produces the output. Good for well-defined seq2seq work like translation and summarisation.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>why everything converged on decoder-only</strong>: one simple unified training objective, good zero- and few-shot generalisation, and a single consistent inference pattern to engineer around. Research also suggests that at scale, pure decoders match or beat the alternatives.</li>
+  <li>A common follow-up is <strong>PrefixLM</strong>: a middle ground with bidirectional attention over the prompt and causal attention over the generated part.</li>
+</ul>
+
+<p>📖 Reference: BERT — https://arxiv.org/abs/1810.04805 ｜ GPT-3 — https://arxiv.org/abs/2005.14165</p>
+
+<hr />
+
+<h3 id="5-what-is-the-kv-cache-why-is-it-the-inference-bottleneck-and-how-do-mqagqa-help--systems-core">5. What is the KV cache, why is it the inference bottleneck, and how do MQA/GQA help? ⭐ <code class="language-plaintext highlighter-rouge">#systems #core</code></h3>
+<p><strong>【Core answer】</strong> During autoregressive generation the K and V of past tokens never change, so caching them avoids recomputation and drops per-step attention from O(n²) to O(n). The price is memory: KV cache ∝ batch × layers × sequence length × heads × head dimension.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>Without a KV cache, generating token t means recomputing attention over all t−1 previous tokens; with it, only the current token’s attention against history is computed.</li>
+  <li>Under long context and large batches the KV cache often consumes more memory than the model weights, making it the main bottleneck in the decode phase.</li>
+  <li><strong>MQA (multi-query attention)</strong>: all heads share one set of K/V, shrinking the cache by a factor of the head count at some cost to quality.</li>
+  <li><strong>GQA (grouped-query attention)</strong>: heads are split into g groups, each sharing one K/V set — a middle ground between MHA and MQA, adopted by LLaMA-2/3.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>how to shrink the KV cache further</strong>: quantise it (int8 KV cache), page it with PagedAttention (question 17), use sliding-window attention, or evict unimportant entries (H2O and similar).</li>
+  <li>A common follow-up is <strong>whether prefill needs the cache</strong>: prefill computes the whole input in parallel once and writes K/V into the cache for decode to reuse.</li>
+</ul>
+
+<p><strong>【Aside: how to measure an LLM serving stack】</strong> — four families of metric:</p>
+
+<ul>
+  <li><strong>Latency (what a single request feels like)</strong>
+    <ul>
+      <li><strong>TTFT (time to first token)</strong>: request to first token, determined mostly by <strong>prefill</strong>, affected by input length and whether the prefix cache hits. This is the “waiting” feeling.</li>
+      <li><strong>TPOT / ITL (time per output token / inter-token latency)</strong>: the average gap between successive output tokens, determined mostly by <strong>decode</strong>. This is the “typing speed”.</li>
+      <li><strong>End-to-end latency ≈ TTFT + TPOT × output tokens</strong>. Use P50/P90/P99 rather than the mean — the tail is what users feel.</li>
+    </ul>
+  </li>
+  <li><strong>Throughput (cluster efficiency and cost)</strong>
+    <ul>
+      <li><strong>Output tokens/s</strong> (the usual one), <strong>total tokens/s</strong> (including input), <strong>requests/s (QPS)</strong>.</li>
+      <li><strong>Throughput and latency pull against each other</strong>: a bigger batch (continuous batching) raises throughput but worsens per-request TPOT. Plot the throughput-latency curve and chase maximum throughput subject to the SLO.</li>
+    </ul>
+  </li>
+  <li><strong>Resources and cost</strong>
+    <ul>
+      <li><strong>GPU utilisation (MFU)</strong> and <strong>memory footprint</strong> (weights plus KV cache, which sets maximum concurrency and context length).</li>
+      <li><strong>$ per 1M tokens</strong> and <strong>concurrent requests per GPU</strong> map directly to deployment cost.</li>
+      <li>Rule of thumb: prefill is <strong>compute-bound</strong>, decode is <strong>memory-bandwidth-bound</strong>, so the two phases have different bottlenecks and different fixes — even separate deployment (PD disaggregation).</li>
+    </ul>
+  </li>
+  <li><strong>Quality and stability</strong>
+    <ul>
+      <li><strong>Goodput</strong>: not raw throughput but throughput that <strong>meets the SLO</strong> (TTFT &lt; X s, TPOT &lt; Y ms), which is much closer to real usable capacity.</li>
+      <li>Accuracy must not fall because of quantisation or speculative decoding, and <strong>timeout rate, error rate and preemption/queueing delay</strong> all deserve watching.</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>A useful diagnostic habit: asked “the service got slow, how do you debug it”, split by symptom — <strong>high TTFT → look at prefill, queueing and prefix-cache hit rate</strong>; <strong>high TPOT → look at batch size, whether KV-cache memory is saturated, and whether requests are being preempted</strong>.</p>
+</blockquote>
+
+<p>📖 Reference: GQA — https://arxiv.org/abs/2305.13245 ｜ vLLM/PagedAttention — https://arxiv.org/abs/2309.06180 ｜ DistServe (PD disaggregation) — https://arxiv.org/abs/2401.09670</p>
+
+<hr />
+
+<h3 id="6-mixture-of-experts-how-it-works-what-it-buys-what-it-costs--basics-systems">6. Mixture of Experts: how it works, what it buys, what it costs ⭐ <code class="language-plaintext highlighter-rouge">#basics #systems</code></h3>
+<p><strong>【Core answer】</strong> Use many FFN “experts” and have a router pick the top-k for each token, activating them sparsely. Total parameters can be enormous while a single forward pass touches only a fraction, which expands model capacity at fixed compute.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>The basic version (the Mixtral era)</strong>: Mixtral 8×7B — 8 experts, top-2 per token, ~13B activated out of 47B total. The router is a linear layer plus softmax that picks and weights the top-k. A <strong>load-balancing loss</strong> prevents expert collapse, where the router keeps favouring a handful of experts.</li>
+  <li><strong>Three modern upgrades (the DeepSeek line, 2024–2025)</strong> ⭐:
+    <ul>
+      <li><strong>Fine-grained experts</strong>: cut experts smaller and more numerous (8 of 64 rather than 2 of 8), giving more combinations and sharper specialisation.</li>
+      <li><strong>Shared experts</strong>: keep one or two <strong>always-on</strong> experts for general knowledge, leaving the routed experts to specialise — which cuts redundancy.</li>
+      <li><strong>Auxiliary-loss-free balancing (DeepSeek-V3)</strong>: give each expert a dynamically adjusted <strong>bias</strong>, lowered when it is overloaded, instead of a load-balancing loss that fights the main objective and costs quality.</li>
+    </ul>
+  </li>
+  <li><strong>Two routing paradigms</strong>: <strong>token-choice</strong> (the mainstream — each token picks top-k, which can overflow an expert, so tokens beyond capacity are dropped or forwarded) versus <strong>expert-choice</strong> (each expert picks tokens, balanced by construction).</li>
+  <li><strong>Representative models</strong>: DeepSeek-V3 (671B total / 37B active), Mixtral, Qwen-MoE, Grok-1, DBRX, Llama 4, MiniMax.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>The core value: <strong>MoE decouples model capacity from per-token compute</strong> — add experts to grow capacity while per-token computation stays roughly flat.</li>
+  <li><strong>A clear win for training ✅</strong>: lower loss at equal training compute, roughly a free 2–4× in effective capacity depending on configuration. The costs: all parameters occupy memory throughout, all-to-all communication, and less stable training.</li>
+  <li><strong>A conditional win for inference ⚠️</strong>: it <strong>saves compute, not memory</strong> — each token only computes the active parameters (cheap) but <strong>every expert</strong> must be resident (expensive).
+    <ul>
+      <li>🟢 <strong>High-concurrency batch serving</strong>: compute-bound, so throughput is high, unit cost low, and the memory cost amortises. Worth it.</li>
+      <li>🔴 <strong>Small batch, low latency, single user, on-device</strong>: memory-bandwidth-bound plus routing communication overhead, so the advantage shrinks or inverts — on-device workloads usually prefer a small dense model.</li>
+      <li>Note that <strong>MoE does not lower the latency floor</strong>. It wins on throughput and training cost, not on making one request faster.</li>
+    </ul>
+  </li>
+  <li>A common follow-up is <strong>how MoE relates to parallelism</strong>: <strong>expert parallelism</strong> places different experts on different devices and is the heart of distributed MoE, composed with TP/PP/DP. All-to-all is the main communication bottleneck.</li>
+  <li>A common follow-up is <strong>how you get an MoE</strong>: train from scratch, or <strong>upcycle</strong> — clone a trained dense model’s FFN into several experts and continue training, which is cheaper.</li>
+</ul>
+
+<p>📖 Reference: Mixtral of Experts — https://arxiv.org/abs/2401.04088 ｜ DeepSeekMoE — https://arxiv.org/abs/2401.06066 ｜ DeepSeek-V3 — https://arxiv.org/abs/2412.19437</p>
+<blockquote>
+  <p>⚠️ DeepSeek-V3’s 671B/37B figures follow public material; check the original report before relying on them.</p>
+</blockquote>
+
+<hr />
+
+<h3 id="7-tokenization-how-bpe-works-and-why-numbers-chinese-and-code-cause-trouble-basics">7. Tokenization: how BPE works, and why numbers, Chinese and code cause trouble <code class="language-plaintext highlighter-rouge">#basics</code></h3>
+<p><strong>【Core answer】</strong> BPE (byte-pair encoding) starts from characters (or bytes) and repeatedly merges the most frequent adjacent pair in the corpus into a new token until the vocabulary reaches its target size. The result is a subword vocabulary balancing vocabulary size against out-of-vocabulary words.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>BPE</strong> merges greedily by frequency. <strong>WordPiece</strong> (BERT) picks merges by the language-model likelihood gain. <strong>SentencePiece</strong> trains directly on raw text, is language-agnostic and copes with languages that have no spaces. <strong>Byte-level BPE</strong> (GPT-2) works on bytes and can never, in principle, hit an OOV.</li>
+  <li>A single Chinese character often splits into several tokens (UTF-8 is multi-byte), so character count ≠ token count and Chinese text usually costs more tokens.</li>
+  <li>Numbers get split irregularly (“12345” may become “123” + “45”), which hurts arithmetic, and code’s indentation and punctuation generate a lot of token fragments.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>the vocabulary-size trade-off</strong>: a larger vocabulary means shorter sequences but a bigger embedding matrix; a smaller one means longer sequences and more compute.</li>
+  <li>A common follow-up is <strong>why LLMs are bad at counting letters or reversing strings</strong>: they see tokens, not characters.</li>
+</ul>
+
+<hr />
+
+<h1 id="part-ii-training-and-alignment">Part II: Training and alignment</h1>
+
+<h3 id="8-what-are-the-stages-of-training-a-large-model-alignment-basics">8. What are the stages of training a large model? <code class="language-plaintext highlighter-rouge">#alignment #basics</code></h3>
+<p><strong>【Core answer】</strong> (1) Pretraining — next-token prediction over a vast unlabelled corpus, learning language and world knowledge; (2) SFT — supervised fine-tuning on instruction-response pairs, learning to follow instructions; (3) preference alignment — RLHF or DPO, shaping output toward human preference (helpful, harmless, honest).</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>Pretraining consumes 99%+ of the compute and determines what the model <em>knows</em>.</li>
+  <li>SFT changes <em>how it expresses itself and follows formats</em>. Small in volume, extremely demanding on quality.</li>
+  <li>Alignment then tunes behavioural boundaries and preferences. Recent pipelines often add <strong>continued pretraining</strong> (domain strengthening) and <strong>rejection-sampling fine-tuning (RFT)</strong>.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>which stage capability comes from</strong>: knowledge and core ability come from pretraining; SFT and alignment mostly <em>elicit and align</em> rather than inject new knowledge — which is the basis for preferring RAG over fine-tuning when knowledge needs updating.</li>
+</ul>
+
+<hr />
+
+<h3 id="9-the-full-rlhf-pipeline-and-what-hurts--alignment-core">9. The full RLHF pipeline, and what hurts ⭐ <code class="language-plaintext highlighter-rouge">#alignment #core</code></h3>
+<p><strong>【Core answer】</strong> (1) Train a <strong>reward model (RM)</strong> on human rankings of several answers; (2) optimise the policy with <strong>PPO</strong> to maximise reward, with a <strong>KL penalty</strong> keeping it from drifting too far from the SFT model.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>The data: annotators rank several answers to the same prompt, and the RM learns to score that preference.</li>
+  <li>The PPO stage holds four models at once: the policy (training), the reference (frozen SFT, for KL), the reward model (scoring) and the critic/value network (advantage estimation).</li>
+  <li>The KL penalty is the load-bearing part: without it the policy will emit degenerate text purely to farm reward — <strong>reward hacking</strong>.</li>
+</ul>
+
+<p><strong>【Formulas: RM and PPO】</strong></p>
+<ul>
+  <li>
+    <p><strong>RM loss</strong> (Bradley-Terry pairwise ranking, y_w preferred over y_l):</p>
+
+\[\mathcal{L}_{RM} = -\,\mathbb{E}_{(x,y_w,y_l)}\big[\log \sigma\big(r_\theta(x,y_w) - r_\theta(x,y_l)\big)\big]\]
+  </li>
+  <li>
+    <p><strong>PPO objective</strong> (KL-penalised reward with a clipped policy gradient):</p>
+
+\[\max_{\pi_\theta}\ \mathbb{E}_{x,\,y\sim\pi_\theta}\Big[\,r_\phi(x,y) - \beta\,\mathrm{KL}\big(\pi_\theta(y|x)\,\Vert \,\pi_{ref}(y|x)\big)\Big]\]
+
+    <p>In practice the clipped form is used (A is the GAE advantage, r_t(θ)=π_θ/π_old the importance ratio):</p>
+
+\[\mathcal{L}_{PPO} = \mathbb{E}_t\big[\min(r_t(\theta)\,A_t,\ \mathrm{clip}(r_t(\theta),1-\epsilon,1+\epsilon)\,A_t)\big]\]
+  </li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>What hurts: the pipeline is complex, four models sit in memory at once, RL training is unstable, it is hyperparameter-sensitive, and the RM is easy to game.</li>
+  <li>A common follow-up is <strong>RLHF vs. RLAIF</strong>: RLAIF replaces human preference labels with AI-generated ones (a stronger model, or a constitution), which lowers cost. Anthropic’s Constitutional AI is the representative approach.</li>
+  <li>
+    <p>A common follow-up is <strong>GRPO</strong> (introduced by DeepSeek, used in DeepSeekMath and R1): a simplification of PPO that <strong>removes the critic/value network</strong>, saving a model the size of the policy and improving both memory use and stability. It samples a group of G answers {o_1..o_G} for the same prompt and uses <strong>group-normalised reward as the advantage</strong>:</p>
+
+\[\hat{A}_i = \frac{r_i - \mathrm{mean}(\{r_1,\dots,r_G\})}{\mathrm{std}(\{r_1,\dots,r_G\})}\]
+
+    <p>then applies PPO’s clipped objective, adding KL as a <strong>separate regulariser</strong> in the loss rather than folding it into the reward. The upsides: no critic, and a natural fit for <strong>verifiable-reward RL (RLVR)</strong> where rules decide correctness in maths and code. The limits: it needs several samples per group, and it destabilises when reward variance is high.</p>
+  </li>
+</ul>
+
+<p>📖 Reference: InstructGPT — https://arxiv.org/abs/2203.02155 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300</p>
+
+<hr />
+
+<h3 id="10-what-dpo-gains-over-rlhf-and-where-it-falls-down--alignment-core">10. What DPO gains over RLHF, and where it falls down ⭐ <code class="language-plaintext highlighter-rouge">#alignment #core</code></h3>
+<p><strong>【Core answer】</strong> DPO derives RLHF’s objective into a <strong>classification loss applied directly to preference data</strong>. No separate reward model, no RL sampling loop — so it is more stable, cheaper and far easier to implement.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>The key insight: RLHF’s optimal policy has a closed-form relationship with the reward, so “maximise reward subject to KL” can be reparameterised into something like a binary classification loss over (chosen, rejected) pairs, with the reward model absorbed <em>implicitly</em> into the policy.</li>
+  <li>A reference model is still needed for the KL term, but the RM and PPO machinery disappear.</li>
+</ul>
+
+<p><strong>【Formula: DPO】</strong></p>
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>From the RLHF optimum $\pi^*(y</td>
+          <td>x) \propto \pi_{ref}(y</td>
+          <td>x)\exp\big(\tfrac{1}{\beta}r(x,y)\big)$, invert to get the <strong>implicit reward</strong> $r(x,y)=\beta\log\frac{\pi_\theta(y</td>
+          <td>x)}{\pi_{ref}(y</td>
+          <td>x)} + \beta\log Z(x)$, substitute into Bradley-Terry, and the partition term Z(x) cancels in the pairwise difference, leaving:</td>
+        </tr>
+      </tbody>
+    </table>
+
+\[\mathcal{L}_{DPO} = -\,\mathbb{E}_{(x,y_w,y_l)}\Big[\log \sigma\Big(\beta\log\frac{\pi_\theta(y_w|x)}{\pi_{ref}(y_w|x)} - \beta\log\frac{\pi_\theta(y_l|x)}{\pi_{ref}(y_l|x)}\Big)\Big]\]
+
+    <p>Read intuitively: <strong>raise the chosen answer’s log-probability ratio against the reference and push the rejected one down</strong>, with β controlling how far the policy may stray (equivalent to RLHF’s KL coefficient).</p>
+  </li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>The limits: (1) it is <strong>offline</strong>, working from a fixed preference dataset, so it cannot sample online as PPO can and may have a lower ceiling; (2) it is sensitive to the preference-data distribution and prone to overfitting.</li>
+  <li>A common follow-up is <strong>the derivatives</strong>: IPO (reduces overfitting), KTO (single good/bad labels instead of pairs), SimPO (drops the reference model), ORPO (merges SFT and preference alignment).</li>
+</ul>
+
+<p><strong>【Side by side: PPO vs. DPO vs. GRPO】</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Axis</th>
+      <th>PPO (RLHF)</th>
+      <th>DPO</th>
+      <th>GRPO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Paradigm</td>
+      <td>Online RL</td>
+      <td>Offline, direct preference optimisation</td>
+      <td>Online RL (simplified PPO)</td>
+    </tr>
+    <tr>
+      <td>Needs an RM?</td>
+      <td>✅ Trained explicitly</td>
+      <td>❌ Absorbed implicitly into the policy</td>
+      <td>✅ (or rules / verifiable reward)</td>
+    </tr>
+    <tr>
+      <td>Needs a critic?</td>
+      <td>✅</td>
+      <td>❌</td>
+      <td>❌ (group mean serves as baseline)</td>
+    </tr>
+    <tr>
+      <td>Models in training</td>
+      <td>4 (policy/ref/RM/critic)</td>
+      <td>2 (policy/ref)</td>
+      <td>3 (policy/ref/RM)</td>
+    </tr>
+    <tr>
+      <td>Advantage estimate</td>
+      <td>GAE (from the critic)</td>
+      <td>None (direct classification loss)</td>
+      <td>Group-normalised reward</td>
+    </tr>
+    <tr>
+      <td>Memory / complexity</td>
+      <td>High</td>
+      <td>Low</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>Stability</td>
+      <td>Hyperparameter-sensitive, easily unstable</td>
+      <td>Stable, reproducible</td>
+      <td>Steadier than PPO, no critic</td>
+    </tr>
+    <tr>
+      <td>Online exploration</td>
+      <td>✅ Higher ceiling</td>
+      <td>❌ Bounded by the dataset</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>Where it fits</td>
+      <td>General alignment, chasing the ceiling</td>
+      <td>Limited resources, fast alignment</td>
+      <td>Reasoning / maths / code (RLVR)</td>
+    </tr>
+    <tr>
+      <td>Representative</td>
+      <td>InstructGPT/ChatGPT</td>
+      <td>Zephyr and much open alignment</td>
+      <td>DeepSeekMath, DeepSeek-R1</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>In one line: <strong>PPO is the most general and the heaviest; DPO trades the entire RL pipeline for one classification loss — simple and stable, but offline; GRPO sits between them, keeping online RL and exploration while killing the critic with a group-relative advantage, which suits reasoning tasks that have verifiable rewards.</strong></p>
+</blockquote>
+
+<p>📖 Reference: DPO — https://arxiv.org/abs/2305.18290 ｜ GRPO/DeepSeekMath — https://arxiv.org/abs/2402.03300</p>
+
+<hr />
+
+<h3 id="11-why-do-models-hallucinate-and-what-reduces-it--alignment-core">11. Why do models hallucinate, and what reduces it? ⭐ <code class="language-plaintext highlighter-rouge">#alignment #core</code></h3>
+<p><strong>【Core answer】</strong> The root cause is that the training objective optimises for a fluent, high-probability next token, not for factual correctness. When knowledge is missing, stale or long-tail, the model still prefers to invent something fluent rather than admit ignorance.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>Breaking down the sources: (1) the pretraining data is itself wrong or out of date; (2) long-tail knowledge is remembered imprecisely; (3) decoding randomness; (4) if SFT teaches the model to answer questions it does not actually know, it reinforces confident nonsense.</li>
+  <li>Mitigations, by layer:
+    <ul>
+      <li><strong>Data and training</strong>: raise data quality; during alignment, reward saying “I don’t know” when uncertain, and reward citing sources.</li>
+      <li><strong>At inference</strong>: RAG for external grounding and attribution, lower temperature, self-consistency (sample several times and vote), self-verification (have the model check its own answer).</li>
+      <li><strong>At the system level</strong>: attach citations, confidence, and clickable provenance.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>whether RAG eliminates hallucination</strong>. It does not — it only reduces it. Bad or incomplete retrieval, or a model that ignores what was retrieved, still hallucinates.</li>
+  <li>A common follow-up is <strong>how to measure hallucination</strong>: TruthfulQA, FActScore, and POPE for multimodal.</li>
+</ul>
+
+<p>📖 Reference: RAG — https://arxiv.org/abs/2005.11401</p>
+
+<hr />
+
+<h3 id="12-handling-catastrophic-forgetting-alignment">12. Handling catastrophic forgetting <code class="language-plaintext highlighter-rouge">#alignment</code></h3>
+<p><strong>【Core answer】</strong> Fine-tuning on a new task or domain degrades old abilities. The usual remedies: replay original data (mix general data back in), parameter-efficient fine-tuning (LoRA/adapters touch few parameters), a smaller learning rate, and regularisation (EWC constraining important parameters).</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>Full fine-tuning forgets most readily; training only a side path (LoRA) preserves the original ability by construction.</li>
+  <li>Continual learning usually mixes in a proportion of general corpus (5–30%, say) to anchor the original distribution.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>how to choose the mixing ratio</strong>: empirically, by experiment. Too much domain data and general ability erodes; too little and the domain barely improves.</p>
+
+<hr />
+
+<h3 id="13-how-lora-works-and-what-qlora-adds--systems-core">13. How LoRA works, and what QLoRA adds ⭐ <code class="language-plaintext highlighter-rouge">#systems #core</code></h3>
+<p><strong>【Core answer】</strong> Freeze the original weight W and add a low-rank side path ΔW = B·A (A projects down to rank r, B projects back up, with r far below the original dimension), training only A and B. It rests on the assumption that weight updates are intrinsically low-rank.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>Trainable parameters drop from d×d to 2×d×r, orders of magnitude fewer; memory and storage fall sharply, and multiple LoRAs can be hot-swapped.</li>
+  <li>At inference B·A can be merged back into W, so there is <strong>no added latency</strong>.</li>
+  <li>Initialisation: A Gaussian, B zero, so ΔW = 0 at the start and the original model is untouched.</li>
+  <li><strong>QLoRA</strong>: quantise the base weights to 4-bit (NF4) and then apply LoRA, making it possible to fine-tune very large models on a single GPU. It introduced NF4, double quantisation and paged optimisers.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>choosing rank r</strong>: 8/16/32/64 are common. Larger means more expressive and closer to full fine-tuning; harder tasks want larger.</li>
+  <li>A common follow-up is <strong>LoRA’s limits</strong>: for tasks that require substantially changing the model’s behaviour it can fall short of full fine-tuning.</li>
+</ul>
+
+<p>📖 Reference: LoRA — https://arxiv.org/abs/2106.09685 ｜ QLoRA — https://arxiv.org/abs/2305.14314</p>
+
+<hr />
+
+<h1 id="part-iii-inference-and-systems-optimisation">Part III: Inference and systems optimisation</h1>
+
+<h3 id="14-quantization-ptq-vs-qat-and-the-common-schemes-systems">14. Quantization: PTQ vs. QAT, and the common schemes <code class="language-plaintext highlighter-rouge">#systems</code></h3>
+<p><strong>【Core answer】</strong> Drop weights and activations from FP16 to INT8/INT4 or lower to save memory and go faster. Two families: post-training quantization (PTQ — no retraining, quick) and quantization-aware training (QAT — simulate quantization during training, better accuracy but expensive).</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>The PTQ mainstream</strong>: GPTQ (minimise quantization error layer by layer, 4-bit weights), AWQ (identify and protect the channels of “important” weights), SmoothQuant (shift activation outliers into the weights so activations quantise more cleanly).</li>
+  <li>The hard part is <strong>activation outliers</strong>: a few dimensions carry enormous values, and quantising them naively destroys accuracy. All the methods above are variations on handling this.</li>
+  <li>Related notation: W4A16 (4-bit weights, 16-bit activations), and KV-cache quantization.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> The core trade is accuracy loss against memory and speed. A common follow-up is <strong>how much INT4 costs you</strong>: 4-bit weight quantization typically loses very little (1–2%), which is why it is the sweet spot.</p>
+
+<p>📖 Reference: GPTQ — https://arxiv.org/abs/2210.17323 ｜ AWQ — https://arxiv.org/abs/2306.00978</p>
+
+<hr />
+
+<h3 id="15-what-does-flashattention-actually-solve--systems-core">15. What does FlashAttention actually solve? ⭐ <code class="language-plaintext highlighter-rouge">#systems #core</code></h3>
+<p><strong>【Core answer】</strong> It does <strong>not reduce computation — it reduces memory traffic</strong> (it is IO-aware). Standard attention writes the n×n attention matrix out to HBM and reads it back, so IO is O(n²). FlashAttention tiles the computation into fast SRAM and updates incrementally with online softmax, never materialising the full matrix.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>The key observation: modern GPUs compute fast and access memory slowly, so attention is <strong>memory-bound</strong>, not compute-bound.</li>
+  <li>Online softmax: while computing tile by tile, maintain a running max and running sum and update the result incrementally, so no full row is ever needed at once.</li>
+  <li>The result: faster <em>and</em> lighter on memory, while remaining <strong>exact attention</strong> — no approximation, no accuracy loss.</li>
+  <li>What followed: FlashAttention-2 (better parallelism and work partitioning) and FlashAttention-3 (asynchrony and FP8 for H100).</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>how it differs from sparse or linear attention</strong>: those approximate to reduce complexity and lose accuracy; FlashAttention is a lossless systems optimisation.</p>
+
+<p>📖 Reference: FlashAttention — https://arxiv.org/abs/2205.14135</p>
+
+<hr />
+
+<h3 id="16-how-does-speculative-decoding-work--systems">16. How does speculative decoding work? ⭐ <code class="language-plaintext highlighter-rouge">#systems</code></h3>
+<p><strong>【Core answer】</strong> A small <strong>draft model autoregressively guesses several tokens quickly</strong>, then the large model <strong>verifies them in a single parallel forward pass</strong>, accepting the matching prefix and resampling from the first mismatch. Confirming several tokens per large-model pass raises throughput.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>One forward pass over a sequence gives the large model a probability distribution at every position, which is exactly what is needed to check the draft’s guesses in bulk.</li>
+  <li>A carefully designed accept/resample rule guarantees the final output distribution is <strong>exactly</strong> what the large model alone would have produced — lossless acceleration.</li>
+  <li>Variants: Medusa (extra prediction heads on the large model so it drafts for itself, no separate small model), EAGLE (drafting in feature space for higher accuracy), Lookahead Decoding.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> Speedup depends on the draft’s hit rate and the size gap between the two models; a draft that is too weak gets rejected often and buys little. A common follow-up is <strong>where it pays</strong>: small batches and latency-sensitive serving.</p>
+
+<p>📖 Reference: Speculative Decoding — https://arxiv.org/abs/2211.17192</p>
+
+<hr />
+
+<h3 id="17-what-raises-inference-throughput-systems">17. What raises inference throughput? <code class="language-plaintext highlighter-rouge">#systems</code></h3>
+<p><strong>【Core answer】</strong> Continuous batching (splice requests in dynamically), PagedAttention (paged KV-cache management), prefix caching (reuse the KV of shared prefixes), tensor and pipeline parallelism, quantization, and speculative decoding.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>Continuous batching</strong>: a static batch has to wait for its slowest request before admitting new ones; continuous batching swaps finished requests for new ones every step, sharply raising GPU utilisation.</li>
+  <li><strong>PagedAttention</strong> (vLLM): borrow virtual-memory paging from operating systems — cut the KV cache into fixed-size blocks and map them through a page table onto non-contiguous memory. Fragmentation nearly vanishes, and KV can be shared between requests (an identical system prompt, for example).</li>
+  <li><strong>Prefix caching</strong>: when several requests share a prefix, compute it once.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>the throughput-versus-latency trade</strong>: bigger batches raise throughput but lengthen per-request latency, and online serving has to pick a point between them.</p>
+
+<p>📖 Reference: vLLM / PagedAttention — https://arxiv.org/abs/2309.06180</p>
+
+<hr />
+
+<h3 id="18-how-do-prefill-and-decode-fundamentally-differ-systems-core">18. How do prefill and decode fundamentally differ? <code class="language-plaintext highlighter-rouge">#systems #core</code></h3>
+<p><strong>【Core answer】</strong> Prefill processes the input prompt with every token in parallel and is <strong>compute-bound</strong>. Decode generates one token at a time, computing that single token’s attention over all history each step, and is <strong>memory-bound</strong>, limited by the bandwidth of reading the KV cache.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>This explains why long inputs (heavy prefill) and long outputs (many decode steps) call for different optimisations.</li>
+  <li>Metrics: prefill drives <strong>TTFT</strong>, decode drives <strong>TPOT and throughput</strong>.</li>
+  <li>In practice the two are often <strong>scheduled separately</strong> (disaggregated serving, with prefill and decode on different nodes) so each can be optimised on its own terms.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>chunked prefill</strong>: split a long prefill into chunks and interleave it with decode, balancing TTFT against throughput.</p>
+
+<hr />
+
+<h1 id="part-vi-open-ended-questions">Part VI: Open-ended questions</h1>
+
+<blockquote>
+  <p>These have no standard answer. What they test is judgement and the ability to talk about trade-offs.</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p><strong>Is longer context always better?</strong> No. Long context suffers “lost in the middle” (information in the middle gets overlooked), costs more to run as it grows, and dilutes attention. RAG and long context complement rather than replace one another: choose RAG when you need attribution, lower cost, or frequently updated knowledge; choose long context when the information genuinely has to be read as a whole, like a long contract.</p>
+  </li>
+  <li>
+    <p><strong>RAG or fine-tuning?</strong> Frequently updated knowledge, attribution, less hallucination → RAG. Changing style, format or output habits, or instilling stable domain skill → fine-tuning. The two are often combined, with fine-tuning teaching the model to use retrieved material better. In one line: RAG changes <strong>what the model knows</strong>, fine-tuning changes <strong>how it behaves</strong>.</p>
+  </li>
+  <li>
+    <p><strong>How do you set temperature and top-p?</strong> Temperature scales the softmax’s smoothness and thus randomness (low → deterministic, high → divergent); top-p (nucleus sampling) samples only from the token set whose cumulative probability reaches p, truncating the tail. Low temperature for factual and code tasks, high for creative work. The two are not usually pushed hard at the same time.</p>
+  </li>
+  <li>
+    <p><strong>What are scaling laws, and what did Chinchilla teach us?</strong> Performance improves as a power law in parameters N, data D and compute C. Chinchilla pointed out that most large models of the time were <strong>too big and under-fed</strong>: at fixed compute, N and D should grow together (empirically about 20 tokens per parameter), and a smaller, well-fed model beats a larger, starved one at equal compute.</p>
+  </li>
+  <li>
+    <p><strong>How do you compress a large model for production?</strong> A combination: quantization (4-bit weights) + distillation (a large model teaching a small one) + pruning + inference-engine optimisation (vLLM, TensorRT-LLM). Trade against latency, cost and accuracy targets — set the SLA first, then choose.</p>
+  </li>
+</ul>
+
+<p>📖 Reference: Scaling Laws — https://arxiv.org/abs/2001.08361 ｜ Chinchilla — https://arxiv.org/abs/2203.15556</p>
+
+        </article>
+      </div>
+      
+
+      <div class="llm-doc-footer">
+        <a href="/llm/">&larr; <span class="lang-zh">返回 LLM</span><span class="lang-en">Back to LLM</span></a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+(function() {
+    // Each language body carries its own kramdown-generated `ul.llm-toc-list`;
+    // move it into that language's sidebar panel. Selected by class, not id,
+    // because both copies would otherwise share `#markdown-toc`.
+    var panes = ['zh', 'en'].map(function(code) {
+        var article = document.getElementById('llm-article-' + code);
+        var panel = document.getElementById('llm-toc-' + code);
+        if (!article || !panel) { return null; }
+
+        var toc = article.querySelector('.llm-toc-list');
+        if (toc) { toc.removeAttribute('id'); panel.appendChild(toc); }
+        else { panel.style.display = 'none'; }
+
+        // wide tables scroll inside their own box rather than stretching the page
+        [].forEach.call(article.querySelectorAll('table'), function(table) {
+            var wrap = document.createElement('div');
+            wrap.className = 'llm-table-wrap';
+            table.parentNode.insertBefore(wrap, table);
+            wrap.appendChild(table);
+        });
+
+        var links = toc ? [].slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+        return {
+            panel: panel,
+            links: links,
+            targets: links.map(function(a) {
+                return article.querySelector('[id="' + decodeURIComponent(a.getAttribute('href').slice(1)) + '"]');
+            }),
+            active: null
+        };
+    }).filter(Boolean);
+
+    function sync() {
+        panes.forEach(function(pane) {
+            if (!pane.links.length || pane.panel.style.display === 'none') { return; }
+            if (!pane.panel.offsetParent) { return; }   // hidden language
+            var best = -1;
+            for (var i = 0; i < pane.targets.length; i++) {
+                if (pane.targets[i] && pane.targets[i].getBoundingClientRect().top <= 100) { best = i; }
+            }
+            var link = best >= 0 ? pane.links[best] : null;
+            if (link === pane.active) { return; }
+            if (pane.active) { pane.active.classList.remove('is-active'); }
+            if (link) {
+                link.classList.add('is-active');
+                var lr = link.getBoundingClientRect(), pr = pane.panel.getBoundingClientRect();
+                if (lr.top < pr.top || lr.bottom > pr.bottom) {
+                    pane.panel.scrollTop += lr.top - pr.top - pane.panel.clientHeight / 3;
+                }
+            }
+            pane.active = link;
+        });
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) { return; }
+        ticking = true;
+        window.requestAnimationFrame(function() { sync(); ticking = false; });
+    });
+    document.addEventListener('langchange', sync);
+    sync();
+})();
+</script>
+
+
+
+<style TYPE="text/css">
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1;
+}
+.lang-switch button {
+  border: 0;
+  background: #fff;
+  color: #999;
+  padding: 6px 12px;
+  cursor: pointer;
+  letter-spacing: .3px;
+  transition: background-color .15s ease, color .15s ease;
+}
+.lang-switch button + button { border-left: 1px solid #e2e2e2; }
+.lang-switch button:hover { color: #0085a1; }
+.lang-switch button.is-on { background-color: #0085a1; color: #fff; }
+.lang-switch button.is-on:hover { color: #fff; }
+/* both languages stay in the DOM; JS reveals one as soon as it runs */
+.lang-en { display: none; }
+</style>
+
+<script type="text/javascript">
+(function() {
+    var KEY = 'xct-notes-lang';
+    var lang;
+    try { lang = localStorage.getItem(KEY); } catch (e) { lang = null; }
+    if (lang !== 'en') { lang = 'zh'; }
+
+    function apply(next) {
+        lang = next;
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        [].forEach.call(document.querySelectorAll('.lang-zh'), function(el) {
+            el.style.display = next === 'zh' ? '' : 'none';
+        });
+        [].forEach.call(document.querySelectorAll('.lang-en'), function(el) {
+            el.style.display = next === 'en' ? '' : 'none';
+        });
+        [].forEach.call(document.querySelectorAll('.lang-switch button'), function(b) {
+            b.classList.toggle('is-on', b.getAttribute('data-lang') === next);
+        });
+        // let the page react (the doc layout re-syncs its table of contents)
+        document.dispatchEvent(new CustomEvent('langchange', { detail: next }));
+    }
+
+    // expose for the buttons, and apply once the markup exists
+    window.__setNotesLang = apply;
+    document.addEventListener('DOMContentLoaded', function() { apply(lang); });
+})();
+</script>
+
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      // kramdown compiles $$...$$ to \\[...\\] and $...$ to \\(...\\); listing
+      // delimiters here replaces MathJax's defaults, so the bracket forms
+      // have to be named explicitly or display math renders as literal text.
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
+
+
+
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/xcTorres">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/chong-xie-545830157">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://xcwhu2016.medium.com">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.zhihu.com/people/cong-zi-64">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa  fa-stack-1x fa-inverse">知</i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+		
+                <p class="copyright text-muted">
+		
+					<span class="site-uv" title="总点击人数">
+						<img src="/img/vendor/octicons/svg/person.svg" width="10" height="16">
+						<span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+						<span class="site-pv" title="总点击量">
+						<img src="/img/vendor/octicons/svg/eye.svg" width="16" height="16">
+						<span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+						<span class="page-pv"title="本页面点击人数">
+						<img src="/img/vendor/octicons/svg/file-text.svg" width="12" height="16">
+					<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span>
+                    <br>
+                    Copyright &copy; xcTorres Blog 2026
+                    <br>
+                    Powered by <a href="http://xcTorres.github.io">xcTorres Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=xcTorres&repo=xcTorres.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!--  busuanzi count-->
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+</body>
+
+</html>

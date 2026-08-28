@@ -16,6 +16,7 @@
     <meta property="og:type" content="article">
     <meta property="og:description" content="算法
 相比RNN只有一个传递状态$h^t$，LSTM有两个传输状态，一个$C^t$（cell state），和一个$h^t$（hidden state）。RNN中的$h^t$对于LSTM中的$C^t$）
+
 ">
     
     <meta property="article:published_time" content="2021-11-14T00:00:00Z">
@@ -111,10 +112,6 @@
                     
                     
                     
-                    
-                    
-                    
-                    
                     <li>
                         <a href="/llm/">LLM</a>
                     </li>
@@ -176,6 +173,12 @@
                     <li>
                         <a href="/gallery/">Gallery</a>
                     </li>
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     
@@ -868,8 +871,11 @@ $$</p>
       scale: 90
     },
     tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
+      // kramdown compiles $$...$$ to \\[...\\] and $...$ to \\(...\\); listing
+      // delimiters here replaces MathJax's defaults, so the bracket forms
+      // have to be named explicitly or display math renders as literal text.
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
       processEscapes: true,
     }
   });
@@ -896,8 +902,11 @@ $$</p>
       scale: 90
     },
     tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
+      // kramdown compiles $$...$$ to \\[...\\] and $...$ to \\(...\\); listing
+      // delimiters here replaces MathJax's defaults, so the bracket forms
+      // have to be named explicitly or display math renders as literal text.
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
       processEscapes: true,
     }
   });
@@ -1030,7 +1039,7 @@ $$</p>
 						<img src="/img/vendor/octicons/svg/file-text.svg" width="12" height="16">
 					<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span>
                     <br>
-                    Copyright &copy; xcTorres Blog 2025
+                    Copyright &copy; xcTorres Blog 2026
                     <br>
                     Powered by <a href="http://xcTorres.github.io">xcTorres Blog</a> |
                     <iframe

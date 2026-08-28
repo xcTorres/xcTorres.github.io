@@ -15,6 +15,7 @@
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="在编译C++工程的时候，最常见的就是make编译，以及cmake编译。一直以来也没有专门学习过make以及cmake的规则，但是最近研究一个C++源码，代码是09年写的，需要调整makefile或者cmake文件，所以借此机会好好学习一下make和cmake。
+
 ">
     
     <meta property="article:published_time" content="2020-12-24T00:00:00Z">
@@ -108,10 +109,6 @@
                     
                     
                     
-                    
-                    
-                    
-                    
                     <li>
                         <a href="/llm/">LLM</a>
                     </li>
@@ -173,6 +170,12 @@
                     <li>
                         <a href="/gallery/">Gallery</a>
                     </li>
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     
@@ -714,8 +717,11 @@
       scale: 90
     },
     tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
+      // kramdown compiles $$...$$ to \\[...\\] and $...$ to \\(...\\); listing
+      // delimiters here replaces MathJax's defaults, so the bracket forms
+      // have to be named explicitly or display math renders as literal text.
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
       processEscapes: true,
     }
   });
@@ -742,8 +748,11 @@
       scale: 90
     },
     tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
+      // kramdown compiles $$...$$ to \\[...\\] and $...$ to \\(...\\); listing
+      // delimiters here replaces MathJax's defaults, so the bracket forms
+      // have to be named explicitly or display math renders as literal text.
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
       processEscapes: true,
     }
   });
@@ -876,7 +885,7 @@
 						<img src="/img/vendor/octicons/svg/file-text.svg" width="12" height="16">
 					<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span>
                     <br>
-                    Copyright &copy; xcTorres Blog 2025
+                    Copyright &copy; xcTorres Blog 2026
                     <br>
                     Powered by <a href="http://xcTorres.github.io">xcTorres Blog</a> |
                     <iframe

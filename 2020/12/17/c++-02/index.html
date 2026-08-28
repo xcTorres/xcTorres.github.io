@@ -15,6 +15,7 @@
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="因为目前用的地图引擎是用C++写的，现在也要适当的回顾一下C++语言了。
+
 ">
     
     <meta property="article:published_time" content="2020-12-17T00:00:00Z">
@@ -108,10 +109,6 @@
                     
                     
                     
-                    
-                    
-                    
-                    
                     <li>
                         <a href="/llm/">LLM</a>
                     </li>
@@ -173,6 +170,12 @@
                     <li>
                         <a href="/gallery/">Gallery</a>
                     </li>
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     
@@ -633,8 +636,11 @@ shared顾名思义，也是只一个对象指针允许有多个owner， shared_p
       scale: 90
     },
     tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
+      // kramdown compiles $$...$$ to \\[...\\] and $...$ to \\(...\\); listing
+      // delimiters here replaces MathJax's defaults, so the bracket forms
+      // have to be named explicitly or display math renders as literal text.
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
       processEscapes: true,
     }
   });
@@ -661,8 +667,11 @@ shared顾名思义，也是只一个对象指针允许有多个owner， shared_p
       scale: 90
     },
     tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
+      // kramdown compiles $$...$$ to \\[...\\] and $...$ to \\(...\\); listing
+      // delimiters here replaces MathJax's defaults, so the bracket forms
+      // have to be named explicitly or display math renders as literal text.
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
       processEscapes: true,
     }
   });
@@ -795,7 +804,7 @@ shared顾名思义，也是只一个对象指针允许有多个owner， shared_p
 						<img src="/img/vendor/octicons/svg/file-text.svg" width="12" height="16">
 					<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span>
                     <br>
-                    Copyright &copy; xcTorres Blog 2025
+                    Copyright &copy; xcTorres Blog 2026
                     <br>
                     Powered by <a href="http://xcTorres.github.io">xcTorres Blog</a> |
                     <iframe

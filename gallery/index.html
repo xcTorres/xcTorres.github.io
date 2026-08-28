@@ -98,10 +98,6 @@
                     
                     
                     
-                    
-                    
-                    
-                    
                     <li>
                         <a href="/llm/">LLM</a>
                     </li>
@@ -163,6 +159,12 @@
                     <li>
                         <a href="/gallery/">Gallery</a>
                     </li>
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     
@@ -253,434 +255,365 @@
 
 
 <style TYPE="text/css">
-.gallery-wrapper {
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 30px 24px;
+  padding: 40px 0 60px 0;
+}
+.gallery-card {
+  display: block;
+  color: inherit;
+}
+.gallery-card:hover,
+.gallery-card:focus {
+  text-decoration: none;
+  color: inherit;
+}
+.gallery-card-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+  /* keeps every cover the same shape however the source photo is cropped */
+  padding-top: 72%;
+  box-shadow: 0 1px 3px rgba(0,0,0,.10);
+  transition: box-shadow .3s ease, transform .3s ease;
+}
+.gallery-card:hover .gallery-card-media {
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+  transform: translateY(-3px);
+}
+.gallery-card-media img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  text-align: center;
-  padding: 1em 0 1em 0;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .45s ease;
 }
-.gallery-best-image{
-  height: 280px;
-  padding: 1em 2em 1em 2em;
+.gallery-card:hover .gallery-card-media img {
+  transform: scale(1.05);
 }
-.gallery{
-  background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3));
+.gallery-card-count {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+  padding: 3px 9px;
+  border-radius: 11px;
+  background-color: rgba(0,0,0,.55);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .3px;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.gallery-card:hover .gallery-card-count {
+  opacity: 1;
+}
+.gallery-card-title {
+  margin: 14px 2px 0 2px;
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 1.45;
+  transition: color .2s ease;
+}
+.gallery-card:hover .gallery-card-title {
+  color: #0085a1;
+}
+@media only screen and (max-width: 767px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 22px 16px;
+    padding: 26px 0 40px 0;
+  }
+  .gallery-card-title { font-size: 15px; }
 }
 </style>
 
 <!-- Main Content -->
-  <div class="gallery">
+<div class="container">
+  <div class="gallery-grid">
     
+      <a class="gallery-card" href="chiang mai">
+        <div class="gallery-card-media">
+          <img src="chiang mai/thumbs/IMG_8100.jpg"
+               alt="2024/12 Chiang Mai Trip" loading="lazy">
+          <span class="gallery-card-count">
+            10 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2024/12 Chiang Mai Trip</h3>
+      </a>
     
+      <a class="gallery-card" href="phuket">
+        <div class="gallery-card-media">
+          <img src="phuket/thumbs/IMG_3544.JPG"
+               alt="2023/12 Phuket Trip" loading="lazy">
+          <span class="gallery-card-count">
+            10 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2023/12 Phuket Trip</h3>
+      </a>
     
+      <a class="gallery-card" href="2023 Hong Kong">
+        <div class="gallery-card-media">
+          <img src="2023 Hong Kong/thumbs/IMG_4684.jpg"
+               alt="2023/06 Hong Kong Old Friend" loading="lazy">
+          <span class="gallery-card-count">
+            12 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2023/06 Hong Kong Old Friend</h3>
+      </a>
     
-      <div class="row">
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="chiang mai">
-                      <img class="gallery-best-image" src="chiang mai/thumbs/IMG_8100.jpg">
-                    </a>
-                    <h3><a href="chiang mai">2024/12 Chiang Mai Trip</a></h3>
-                    10 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="phuket">
-                      <img class="gallery-best-image" src="phuket/thumbs/IMG_3544.JPG">
-                    </a>
-                    <h3><a href="phuket">2023/12 Phuket Trip</a></h3>
-                    10 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="2023 Hong Kong">
-                      <img class="gallery-best-image" src="2023 Hong Kong/thumbs/IMG_4684.jpg">
-                    </a>
-                    <h3><a href="2023 Hong Kong">2023/06 Hong Kong Old Friend</a></h3>
-                    12 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="bali">
-                      <img class="gallery-best-image" src="bali/thumbs/IMG_2816.jpg">
-                    </a>
-                    <h3><a href="bali">2022/12 Bali Trip</a></h3>
-                    6 images
-                  </div>
-              </div>
-            
-          
-      </div>
+      <a class="gallery-card" href="bali">
+        <div class="gallery-card-media">
+          <img src="bali/thumbs/IMG_2816.jpg"
+               alt="2022/12 Bali Trip" loading="lazy">
+          <span class="gallery-card-count">
+            6 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2022/12 Bali Trip</h3>
+      </a>
     
-      <div class="row">
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="malaysia">
-                      <img class="gallery-best-image" src="malaysia/thumbs/IMG_1725.jpg">
-                    </a>
-                    <h3><a href="malaysia">2022/10  Malaysia Trip</a></h3>
-                    4 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="last day shopee">
-                      <img class="gallery-best-image" src="last day shopee/thumbs/PHOTO-2022-09-19-17-04-05 4.jpg">
-                    </a>
-                    <h3><a href="last day shopee">2022/09 Last Day in Shopee</a></h3>
-                    3 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="2022 dragon boat">
-                      <img class="gallery-best-image" src="2022 dragon boat/thumbs/IMG_0687.JPG">
-                    </a>
-                    <h3><a href="2022 dragon boat">2022/08 Dragon Boat Mix</a></h3>
-                    3 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="ronnie o'sullivan">
-                      <img class="gallery-best-image" src="ronnie o'sullivan/thumbs/691655882701_.pic_hd.jpg">
-                    </a>
-                    <h3><a href="ronnie o'sullivan">2022/06  Ronnie O'sullivan</a></h3>
-                    4 images
-                  </div>
-              </div>
-            
-          
-      </div>
+      <a class="gallery-card" href="malaysia">
+        <div class="gallery-card-media">
+          <img src="malaysia/thumbs/IMG_1725.jpg"
+               alt="2022/10  Malaysia Trip" loading="lazy">
+          <span class="gallery-card-count">
+            4 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2022/10  Malaysia Trip</h3>
+      </a>
     
-      <div class="row">
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="west coast park">
-                      <img class="gallery-best-image" src="west coast park/thumbs/IMG_9203.JPG">
-                    </a>
-                    <h3><a href="west coast park">2022/02  West Coast Park</a></h3>
-                    3 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="lucky">
-                      <img class="gallery-best-image" src="lucky/thumbs/41632047279_.pic_hd.jpg">
-                    </a>
-                    <h3><a href="lucky">2021/09  Lucky</a></h3>
-                    5 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="home">
-                      <img class="gallery-best-image" src="home/thumbs/131632047534_.pic_hd.jpg">
-                    </a>
-                    <h3><a href="home">2021/08 Home</a></h3>
-                    4 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="cats">
-                      <img class="gallery-best-image" src="cats/thumbs/51609562960_.pic_hd.jpg">
-                    </a>
-                    <h3><a href="cats">2020/12 British Short Hair</a></h3>
-                    6 images
-                  </div>
-              </div>
-            
-          
-      </div>
+      <a class="gallery-card" href="last day shopee">
+        <div class="gallery-card-media">
+          <img src="last day shopee/thumbs/PHOTO-2022-09-19-17-04-05 4.jpg"
+               alt="2022/09 Last Day in Shopee" loading="lazy">
+          <span class="gallery-card-count">
+            3 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2022/09 Last Day in Shopee</h3>
+      </a>
     
-      <div class="row">
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="debut">
-                      <img class="gallery-best-image" src="debut/thumbs/SHP00492.jpg">
-                    </a>
-                    <h3><a href="debut">2020/11 Dragon Boat Debut</a></h3>
-                    10 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="big sale">
-                      <img class="gallery-best-image" src="big sale/thumbs/1111_1.jpg">
-                    </a>
-                    <h3><a href="big sale">2020/11 Big Sale</a></h3>
-                    2 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="lighthouse">
-                      <img class="gallery-best-image" src="lighthouse/thumbs/lighthouse_02.jpg">
-                    </a>
-                    <h3><a href="lighthouse">2020/08 Johor Straits Lighthouse</a></h3>
-                    5 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="dragonboat">
-                      <img class="gallery-best-image" src="dragonboat/thumbs/dragonboat_01.jpg">
-                    </a>
-                    <h3><a href="dragonboat">2020/07 Dragon Boat Session</a></h3>
-                    3 images
-                  </div>
-              </div>
-            
-          
-      </div>
+      <a class="gallery-card" href="2022 dragon boat">
+        <div class="gallery-card-media">
+          <img src="2022 dragon boat/thumbs/IMG_0687.JPG"
+               alt="2022/08 Dragon Boat Mix" loading="lazy">
+          <span class="gallery-card-count">
+            3 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2022/08 Dragon Boat Mix</h3>
+      </a>
     
-      <div class="row">
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="snapchat">
-                      <img class="gallery-best-image" src="snapchat/thumbs/snapchat_01.jpg">
-                    </a>
-                    <h3><a href="snapchat">2020/05 Snapshot</a></h3>
-                    2 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="hiking">
-                      <img class="gallery-best-image" src="hiking/thumbs/hiking_02.jpg">
-                    </a>
-                    <h3><a href="hiking">2020/01 MacRitchie Reservoir</a></h3>
-                    3 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="Thailand">
-                      <img class="gallery-best-image" src="Thailand/thumbs/201597820474_.pic_hd.jpg">
-                    </a>
-                    <h3><a href="Thailand">2019/12 Thailand</a></h3>
-                    9 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="2019 national day">
-                      <img class="gallery-best-image" src="2019 national day/thumbs/61598197352_.pic_hd.jpg">
-                    </a>
-                    <h3><a href="2019 national day">2019/08 National Day</a></h3>
-                    6 images
-                  </div>
-              </div>
-            
-          
-      </div>
+      <a class="gallery-card" href="ronnie o'sullivan">
+        <div class="gallery-card-media">
+          <img src="ronnie o'sullivan/thumbs/691655882701_.pic_hd.jpg"
+               alt="2022/06  Ronnie O'sullivan" loading="lazy">
+          <span class="gallery-card-count">
+            4 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2022/06  Ronnie O'sullivan</h3>
+      </a>
     
-      <div class="row">
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="master graduation">
-                      <img class="gallery-best-image" src="master graduation/thumbs/3T0A8604.jpg">
-                    </a>
-                    <h3><a href="master graduation">2019/06  Master Graduation</a></h3>
-                    3 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="Dalian">
-                      <img class="gallery-best-image" src="Dalian/thumbs/2018-10-06 095528.jpg">
-                    </a>
-                    <h3><a href="Dalian">2018/10 Dalian</a></h3>
-                    4 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="didi">
-                      <img class="gallery-best-image" src="didi/thumbs/61607321774_.pic.jpg">
-                    </a>
-                    <h3><a href="didi">2018/08 Didi Intern</a></h3>
-                    4 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="graduation trip">
-                      <img class="gallery-best-image" src="graduation trip/thumbs/IMG_20160630_121332_1.jpg">
-                    </a>
-                    <h3><a href="graduation trip">2016/07 Daocheng Yading</a></h3>
-                    6 images
-                  </div>
-              </div>
-            
-          
-      </div>
+      <a class="gallery-card" href="west coast park">
+        <div class="gallery-card-media">
+          <img src="west coast park/thumbs/IMG_9203.JPG"
+               alt="2022/02  West Coast Park" loading="lazy">
+          <span class="gallery-card-count">
+            3 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2022/02  West Coast Park</h3>
+      </a>
     
-      <div class="row">
-          
-            
-            
-            
-              <div class="col-lg-3">
-                
-                  <div class="gallery-wrapper">
-                    <a href="batchelor graduation">
-                      <img class="gallery-best-image" src="batchelor graduation/thumbs/IMG_20160607_095624.jpg">
-                    </a>
-                    <h3><a href="batchelor graduation">2016/06  Bachelor Graduation</a></h3>
-                    6 images
-                  </div>
-              </div>
-            
-          
-            
-            
-            
-              
-      </div>
+      <a class="gallery-card" href="lucky">
+        <div class="gallery-card-media">
+          <img src="lucky/thumbs/41632047279_.pic_hd.jpg"
+               alt="2021/09  Lucky" loading="lazy">
+          <span class="gallery-card-count">
+            5 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2021/09  Lucky</h3>
+      </a>
     
-    </div>
+      <a class="gallery-card" href="home">
+        <div class="gallery-card-media">
+          <img src="home/thumbs/131632047534_.pic_hd.jpg"
+               alt="2021/08 Home" loading="lazy">
+          <span class="gallery-card-count">
+            4 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2021/08 Home</h3>
+      </a>
+    
+      <a class="gallery-card" href="cats">
+        <div class="gallery-card-media">
+          <img src="cats/thumbs/51609562960_.pic_hd.jpg"
+               alt="2020/12 British Short Hair" loading="lazy">
+          <span class="gallery-card-count">
+            6 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2020/12 British Short Hair</h3>
+      </a>
+    
+      <a class="gallery-card" href="debut">
+        <div class="gallery-card-media">
+          <img src="debut/thumbs/SHP00492.jpg"
+               alt="2020/11 Dragon Boat Debut" loading="lazy">
+          <span class="gallery-card-count">
+            10 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2020/11 Dragon Boat Debut</h3>
+      </a>
+    
+      <a class="gallery-card" href="big sale">
+        <div class="gallery-card-media">
+          <img src="big sale/thumbs/1111_1.jpg"
+               alt="2020/11 Big Sale" loading="lazy">
+          <span class="gallery-card-count">
+            2 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2020/11 Big Sale</h3>
+      </a>
+    
+      <a class="gallery-card" href="lighthouse">
+        <div class="gallery-card-media">
+          <img src="lighthouse/thumbs/lighthouse_02.jpg"
+               alt="2020/08 Johor Straits Lighthouse" loading="lazy">
+          <span class="gallery-card-count">
+            5 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2020/08 Johor Straits Lighthouse</h3>
+      </a>
+    
+      <a class="gallery-card" href="dragonboat">
+        <div class="gallery-card-media">
+          <img src="dragonboat/thumbs/dragonboat_01.jpg"
+               alt="2020/07 Dragon Boat Session" loading="lazy">
+          <span class="gallery-card-count">
+            3 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2020/07 Dragon Boat Session</h3>
+      </a>
+    
+      <a class="gallery-card" href="snapchat">
+        <div class="gallery-card-media">
+          <img src="snapchat/thumbs/snapchat_01.jpg"
+               alt="2020/05 Snapshot" loading="lazy">
+          <span class="gallery-card-count">
+            2 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2020/05 Snapshot</h3>
+      </a>
+    
+      <a class="gallery-card" href="hiking">
+        <div class="gallery-card-media">
+          <img src="hiking/thumbs/hiking_02.jpg"
+               alt="2020/01 MacRitchie Reservoir" loading="lazy">
+          <span class="gallery-card-count">
+            3 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2020/01 MacRitchie Reservoir</h3>
+      </a>
+    
+      <a class="gallery-card" href="Thailand">
+        <div class="gallery-card-media">
+          <img src="Thailand/thumbs/201597820474_.pic_hd.jpg"
+               alt="2019/12 Thailand" loading="lazy">
+          <span class="gallery-card-count">
+            9 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2019/12 Thailand</h3>
+      </a>
+    
+      <a class="gallery-card" href="2019 national day">
+        <div class="gallery-card-media">
+          <img src="2019 national day/thumbs/61598197352_.pic_hd.jpg"
+               alt="2019/08 National Day" loading="lazy">
+          <span class="gallery-card-count">
+            6 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2019/08 National Day</h3>
+      </a>
+    
+      <a class="gallery-card" href="master graduation">
+        <div class="gallery-card-media">
+          <img src="master graduation/thumbs/3T0A8604.jpg"
+               alt="2019/06  Master Graduation" loading="lazy">
+          <span class="gallery-card-count">
+            3 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2019/06  Master Graduation</h3>
+      </a>
+    
+      <a class="gallery-card" href="Dalian">
+        <div class="gallery-card-media">
+          <img src="Dalian/thumbs/2018-10-06 095528.jpg"
+               alt="2018/10 Dalian" loading="lazy">
+          <span class="gallery-card-count">
+            4 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2018/10 Dalian</h3>
+      </a>
+    
+      <a class="gallery-card" href="didi">
+        <div class="gallery-card-media">
+          <img src="didi/thumbs/61607321774_.pic.jpg"
+               alt="2018/08 Didi Intern" loading="lazy">
+          <span class="gallery-card-count">
+            4 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2018/08 Didi Intern</h3>
+      </a>
+    
+      <a class="gallery-card" href="graduation trip">
+        <div class="gallery-card-media">
+          <img src="graduation trip/thumbs/IMG_20160630_121332_1.jpg"
+               alt="2016/07 Daocheng Yading" loading="lazy">
+          <span class="gallery-card-count">
+            6 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2016/07 Daocheng Yading</h3>
+      </a>
+    
+      <a class="gallery-card" href="batchelor graduation">
+        <div class="gallery-card-media">
+          <img src="batchelor graduation/thumbs/IMG_20160607_095624.jpg"
+               alt="2016/06  Bachelor Graduation" loading="lazy">
+          <span class="gallery-card-count">
+            6 photos
+          </span>
+        </div>
+        <h3 class="gallery-card-title">2016/06  Bachelor Graduation</h3>
+      </a>
+    
+  </div>
+</div>
 
 
     <!-- Footer -->
@@ -756,7 +689,7 @@
 						<img src="/img/vendor/octicons/svg/file-text.svg" width="12" height="16">
 					<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span>
                     <br>
-                    Copyright &copy; xcTorres Blog 2025
+                    Copyright &copy; xcTorres Blog 2026
                     <br>
                     Powered by <a href="http://xcTorres.github.io">xcTorres Blog</a> |
                     <iframe

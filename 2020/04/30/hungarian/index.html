@@ -16,6 +16,7 @@
     <meta property="og:type" content="article">
     <meta property="og:description" content="背景
 因为入职不久，最近在接手一个外卖的分配问题，即在一个区域同时产生多个订单，且该区域有多个骑手，在只考虑一个骑手只能接一单的情况下，订单与骑手之间到底应该如何分配。在第一版解决方案中我们使用的是匈牙利算法，目前还在测试当中，还没有上线，希望其能有不错的效果。写此博客，专门为了好好了解其基本原理，而不是只会按部就班用现成的库，而根本不懂其原理。
+
 ">
     
     <meta property="article:published_time" content="2020-04-30T00:00:00Z">
@@ -111,10 +112,6 @@
                     
                     
                     
-                    
-                    
-                    
-                    
                     <li>
                         <a href="/llm/">LLM</a>
                     </li>
@@ -176,6 +173,12 @@
                     <li>
                         <a href="/gallery/">Gallery</a>
                     </li>
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     
@@ -892,8 +895,11 @@ scipy库的最新的linear_sum_assignment根据新论文更新了算法，效率
       scale: 90
     },
     tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
+      // kramdown compiles $$...$$ to \\[...\\] and $...$ to \\(...\\); listing
+      // delimiters here replaces MathJax's defaults, so the bracket forms
+      // have to be named explicitly or display math renders as literal text.
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
       processEscapes: true,
     }
   });
@@ -920,8 +926,11 @@ scipy库的最新的linear_sum_assignment根据新论文更新了算法，效率
       scale: 90
     },
     tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
+      // kramdown compiles $$...$$ to \\[...\\] and $...$ to \\(...\\); listing
+      // delimiters here replaces MathJax's defaults, so the bracket forms
+      // have to be named explicitly or display math renders as literal text.
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
       processEscapes: true,
     }
   });
@@ -1054,7 +1063,7 @@ scipy库的最新的linear_sum_assignment根据新论文更新了算法，效率
 						<img src="/img/vendor/octicons/svg/file-text.svg" width="12" height="16">
 					<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span>
                     <br>
-                    Copyright &copy; xcTorres Blog 2025
+                    Copyright &copy; xcTorres Blog 2026
                     <br>
                     Powered by <a href="http://xcTorres.github.io">xcTorres Blog</a> |
                     <iframe

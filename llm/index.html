@@ -14,7 +14,7 @@
     <meta property="og:title" content="LLM - 谢聪博客 | xcTorres Blog">
     
     <meta property="og:type" content="website">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="Transformer · 训练对齐 · 推理优化">
     
     <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
     <meta property="og:url" content="https://xctorres.github.io//llm/">
@@ -98,10 +98,6 @@
                     
                     
                     
-                    
-                    
-                    
-                    
                     <li>
                         <a href="/llm/">LLM</a>
                     </li>
@@ -167,6 +163,12 @@
                     
                     
                     
+                    
+                    
+                    
+                    
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -228,8 +230,7 @@
 </script>
 
 
-    <!-- Page Header -->
-
+    
 
 
 
@@ -244,7 +245,7 @@
         <div class="site-heading">
         
           <h1>LLM</h1>
-          <span class="subheading"></span>
+          <span class="subheading">Transformer · 训练对齐 · 推理优化</span>
         </div>
       </div>
     </div>
@@ -252,359 +253,212 @@
 </header>
 
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-        
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			<div class="en post-container">
-    
-    <h1 id="learn-llm-from-scratch">learn-llm-from-scratch</h1>
+<style TYPE="text/css">
+.llm-hub { padding: 44px 0 70px 0; }
+.llm-hub-intro {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #6b6b6b;
+  margin-bottom: 8px;
+}
+.llm-hub-intro a { border-bottom: 1px dotted #c0c0c0; }
+.llm-hub-intro a:hover { border-bottom-color: #0085a1; }
 
-<h2 id="fine-tune">Fine-tune</h2>
+.llm-section-title {
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a0a0a0;
+  margin: 44px 0 4px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
 
-<h3 id="bert">BERT</h3>
-<ul>
-  <li><strong><a href="https://github.com/xcTorres/learn-llm-from-scratch/tree/main/fine-tune/Custom_Named_Entity_Recognition_with_BERT.ipynb">Token Classification Task</a></strong></li>
-  <li><strong><a href="https://github.com/xcTorres/learn-llm-from-scratch/tree/main/fine-tune/Fine_tuning_BERT_(and_friends)_for_multi_label_text_classification.ipynb">Sequence Classification Task</a></strong></li>
-</ul>
+.llm-entry {
+  display: block;
+  margin-top: 22px;
+  padding: 26px 30px;
+  border: 1px solid #ececec;
+  border-left: 3px solid #0085a1;
+  border-radius: 4px;
+  background-color: #fff;
+  color: inherit;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.llm-entry:hover, .llm-entry:focus {
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  transform: translateY(-2px);
+}
+.llm-entry h2 {
+  margin: 0 0 6px 0;
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 22px;
+}
+.llm-entry:hover h2 { color: #0085a1; }
+.llm-entry .llm-entry-sub {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  color: #8c8c8c;
+}
+.llm-entry .llm-entry-highlights {
+  margin: 0 0 14px 0;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #a0a0a0;
+}
+.llm-entry .llm-entry-go { font-size: 14px; color: #0085a1; }
 
-<h3 id="vision-transformer">Vision Transformer</h3>
-<ul>
-  <li><strong><a href="https://github.com/xcTorres/learn-llm-from-scratch/tree/main/fine-tune/Fine_tuning_the_Vision_Transformer_on_CIFAR_10_with_Trainer.ipynb">Fine-tune Vision Transformer Task</a></strong></li>
-</ul>
+/* Paper index — lights up on its own once paper notes are added */
+.llm-group { margin: 26px 0 6px 0; font-size: 14px; font-weight: 600; color: #595959; }
+.llm-papers { width: 100%; border-collapse: collapse; font-size: 14px; }
+.llm-papers tr { border-bottom: 1px solid #f0f0f0; }
+.llm-papers tr:last-child { border-bottom: 0; }
+.llm-papers td { padding: 13px 10px 13px 0; vertical-align: top; }
+.llm-papers .p-name { width: 22%; font-weight: 600; white-space: nowrap; }
+.llm-papers .p-year { width: 9%; color: #a8a8a8; white-space: nowrap; }
+.llm-papers .p-desc { color: #757575; line-height: 1.6; }
+.llm-papers .p-link { width: 12%; text-align: right; white-space: nowrap; }
+.llm-papers .p-link a { font-size: 13px; }
 
-<h3 id="multimodal">MultiModal</h3>
-<ul>
-  <li><strong><a href="https://github.com/xcTorres/learn-llm-from-scratch/tree/main/fine-tune/Chat_with_BLIP_2.ipynb">BLIP-2 Demo</a></strong></li>
-</ul>
-
-<h2 id="source-code">Source Code</h2>
-
-<ul>
-  <li><strong><a href="https://github.com/xcTorres/learn-llm-from-scratch/tree/main/source-code/transformer_translation/transformer.py">Transformer Implementation</a></strong></li>
-</ul>
-
-<h2 id="reference">Reference</h2>
-
-<ul>
-  <li><strong><a href="https://huggingface.co/docs/transformers/en/model_doc/bert">Huggingface BERT</a></strong></li>
-  <li><strong><a href="https://huggingface.co/docs/diffusers/index">Huggingface Diffusers</a></strong></li>
-  <li><strong><a href="https://github.com/NielsRogge/Transformers-Tutorials/tree/master">Transformers Tutorials</a></strong></li>
-  <li><strong><a href="https://github.com/lucidrains">PyTorch Implementations</a></strong></li>
-</ul>
-
-<h2 id="papers">Papers</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>Category</strong></th>
-      <th><strong>Paper Link</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>NLP</td>
-      <td><strong><a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf">Attention Is All You Need</a></strong></td>
-    </tr>
-    <tr>
-      <td>NLP</td>
-      <td><strong><a href="https://arxiv.org/abs/1810.04805">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</a></strong></td>
-    </tr>
-    <tr>
-      <td>CV</td>
-      <td><strong><a href="https://arxiv.org/abs/2010.11929">(ViT) An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale</a></strong></td>
-    </tr>
-    <tr>
-      <td>CV</td>
-      <td><strong><a href="https://huggingface.co/papers/2006.11239">(DDPM) Denoising Diffusion Probabilistic Models</a></strong></td>
-    </tr>
-    <tr>
-      <td>Multimodal</td>
-      <td><strong><a href="https://arxiv.org/abs/2301.12597">BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models</a></strong></td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-    		</div>
-    <!-- Sidebar Container -->
-          <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-                <style>
-    .map{width:300px; min-height:200px} 
+.llm-hub-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.llm-hub-head .llm-hub-intro { flex: 1; }
+@media only screen and (max-width: 767px) {
+  .llm-hub-head { display: block; }
+  .llm-hub-head .lang-switch { margin-bottom: 16px; }
+}
+.llm-repo {
+  margin-top: 46px;
+  padding: 18px 22px;
+  border-left: 3px solid #e5e5e5;
+  background-color: #fbfbfb;
+  font-size: 14px;
+  color: #8c8c8c;
+  line-height: 1.7;
+}
+@media only screen and (max-width: 767px) {
+  .llm-entry { padding: 22px 20px; }
+  .llm-entry h2 { font-size: 19px; }
+  .llm-papers .p-name, .llm-papers .p-year,
+  .llm-papers .p-desc, .llm-papers .p-link {
+    display: block; width: auto; text-align: left; padding: 2px 0;
+  }
+  .llm-papers .p-name { white-space: normal; }
+  .llm-papers td:first-child { padding-top: 14px; }
+  .llm-papers td:last-child { padding-bottom: 14px; }
+}
 </style>
 
-<div class='map'>
-    <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=m&d=nh0_nGiUfKYf-0GZZH0NA8_vXVCdhkQE_VvoQnHTmZc"></script>
-</div>
+<div class="container llm-hub">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
+      
+      
+      
+      
 
-                <!-- Featured Tags -->
-                
+      <div class="llm-hub-head">
+        <p class="llm-hub-intro">
+          <span class="lang-zh">大模型的学习笔记：从数学基础、Transformer 架构，到训练对齐与推理工程。每个条目按「核心答案 → 深入原理 → 权衡追问 → 参考」组织，⭐ 标记值得重点深挖的地方。</span>
+          <span class="lang-en">Notes on large language models: from the maths underneath, through the Transformer, to training, alignment and inference engineering. Each entry runs core answer → how it works → trade-offs → references; ⭐ marks the points worth digging into.</span>
+        </p>
+        <span class="lang-switch">
+          <button type="button" data-lang="zh" onclick="__setNotesLang('zh')">中文</button>
+          <button type="button" data-lang="en" onclick="__setNotesLang('en')">EN</button>
+        </span>
+      </div>
 
+      
+      <div class="llm-section-title"><span class="lang-zh">知识总结</span><span class="lang-en">Notes</span></div>
+      
+      <a class="llm-entry" href="/llm/summary/">
+        <h2><span class="lang-zh">LLM 知识总结</span><span class="lang-en">LLM Notes</span></h2>
+        <p class="llm-entry-sub"><span class="lang-zh">基础架构 · 训练对齐 · 推理优化</span><span class="lang-en">Architecture · Training &amp; Alignment · Inference</span></p>
+        
+        <p class="llm-entry-highlights">
+          <span class="lang-zh">交叉熵与 KL 散度 · Transformer 与 self-attention · RoPE · KV Cache 与 MQA/GQA · MoE · RLHF 与 DPO · LoRA/QLoRA · 量化 · Flash Attention · 推测解码 · Prefill 与 Decode · Scaling Law</span>
+          <span class="lang-en">Cross-entropy and KL divergence · Transformer and self-attention · RoPE · KV cache, MQA/GQA · MoE · RLHF and DPO · LoRA/QLoRA · Quantization · FlashAttention · Speculative decoding · Prefill vs. decode · Scaling laws</span>
+        </p>
+        
+        <span class="llm-entry-go"><span class="lang-zh">通读全文 &rarr;</span><span class="lang-en">Read it &rarr;</span></span>
+      </a>
+      
+      
 
-<section>
+      
 
-    
-    <h5><a href="/archive/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-        
-        
-        </a>
-        
-        
-                <a data-sort="0022" 
-                    href="/archive/?tag=Life"
-                    title="Life"
-                    rel="5">Life</a>
-        
-                <a data-sort="0022" 
-                    href="/archive/?tag=Python"
-                    title="Python"
-                    rel="5">Python</a>
-        
-                <a data-sort="0023" 
-                    href="/archive/?tag=C%2B%2B"
-                    title="C++"
-                    rel="4">C++</a>
-        
-                <a data-sort="0023" 
-                    href="/archive/?tag=Graph"
-                    title="Graph"
-                    rel="4">Graph</a>
-        
-                <a data-sort="0024" 
-                    href="/archive/?tag=Algorithm"
-                    title="Algorithm"
-                    rel="3">Algorithm</a>
-        
-                <a data-sort="0024" 
-                    href="/archive/?tag=GIS"
-                    title="GIS"
-                    rel="3">GIS</a>
-        
-                <a data-sort="0024" 
-                    href="/archive/?tag=NLP"
-                    title="NLP"
-                    rel="3">NLP</a>
-        
-                <a data-sort="0024" 
-                    href="/archive/?tag=Spark"
-                    title="Spark"
-                    rel="3">Spark</a>
-        
-                <a data-sort="0025" 
-                    href="/archive/?tag=Deep+Learning"
-                    title="Deep Learning"
-                    rel="2">Deep Learning</a>
-        
-                <a data-sort="0025" 
-                    href="/archive/?tag=Machine+Learning"
-                    title="Machine Learning"
-                    rel="2">Machine Learning</a>
-        
-                <a data-sort="0026" 
-                    href="/archive/?tag=Algorithms"
-                    title="Algorithms"
-                    rel="1">Algorithms</a>
-        
-                <a data-sort="0026" 
-                    href="/archive/?tag=Git"
-                    title="Git"
-                    rel="1">Git</a>
-        
-                <a data-sort="0026" 
-                    href="/archive/?tag=Guitar"
-                    title="Guitar"
-                    rel="1">Guitar</a>
-        
-                <a data-sort="0026" 
-                    href="/archive/?tag=Java"
-                    title="Java"
-                    rel="1">Java</a>
-        
-                <a data-sort="0026" 
-                    href="/archive/?tag=Leetcode"
-                    title="Leetcode"
-                    rel="1">Leetcode</a>
-        
-                <a data-sort="0026" 
-                    href="/archive/?tag=Linux"
-                    title="Linux"
-                    rel="1">Linux</a>
-        
-                <a data-sort="0026" 
-                    href="/archive/?tag=Postgres"
-                    title="Postgres"
-                    rel="1">Postgres</a>
-        
-                <a data-sort="0026" 
-                    href="/archive/?tag=Snooker"
-                    title="Snooker"
-                    rel="1">Snooker</a>
-        
-                <a data-sort="0026" 
-                    href="/archive/?tag=Web"
-                    title="Web"
-                    rel="1">Web
+      <div class="llm-repo">
+        <span class="lang-zh">笔记源文件、论文精读与源码报告都在
+          <a href="https://github.com/xcTorres/learn-llm-from-scratch" target="_blank" rel="noopener">learn-llm-from-scratch</a>。</span>
+        <span class="lang-en">The source notes, paper deep-dives and code walkthroughs all live in
+          <a href="https://github.com/xcTorres/learn-llm-from-scratch" target="_blank" rel="noopener">learn-llm-from-scratch</a>.</span>
+      </div>
+
     </div>
-</section>
-
-
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="/about/">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="/img/avatar-xcTorres.png" />
-    
-    
-    <p></p>
-    
-    <!-- SNS Link -->
-    
-
-
-<ul class="list-inline">
-
-
-  
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/xcTorres">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  <li>
-    <a target="_blank" href="https://www.linkedin.com/in/chong-xie-545830157">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  <li>
-    <a target="_blank" href="https://xcwhu2016.medium.com">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-  <li>
-    <a target="_blank" href="https://www.zhihu.com/people/cong-zi-64">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa  fa-stack-1x fa-inverse">知</i>
-      </span>
-    </a>
-  </li>
-  
-  
-</ul>
   </div>
-</section>
-
-                <!-- Friends Blog -->
-                
-<hr>
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-  
-  <li><a href="https://lilianweng.github.io/">Lilian Weng</a></li>
-  
-  <li><a href="https://kexue.fm/content.html">苏剑林</a></li>
-  
-  <li><a href="https://zhouyifan.net/"> 周奕帆的博客</a></li>
-  
-  <li><a href="https://www.cnblogs.com/pinard/">Liu jianping</a></li>
-  
-  <li><a href="https://www.v2ex.com/">V2EX</a></li>
-  
-  <li><a href="https://guanhonly.github.io/">Honly</a></li>
-  
-  <li><a href="https://www.kawabangga.com/">卡瓦邦噶</a></li>
-  
-  <li><a href="https://lotabout.me/">lotabout.me</a></li>
-  
-  <li><a href="https://lb-yu.github.io/">余列冰</a></li>
-  
-  <li><a href="https://mthli.xyz/">李明亮</a></li>
-  
-  <li><a href="https://github.com/halfrost">halfrost</a></li>
-  
-  <li><a href="https://www.barretlee.com/entry/">小胡子哥</a></li>
-  
-  <li><a href="http://www.ityouknow.com/">纯洁的微笑</a></li>
-  
-  <li><a href="https://www.desgard.com/">一片瓜田</a></li>
-  
-  <li><a href="https://pymotw.com/2/contents.html">pymotw</a></li>
-  
-  <li><a href="https://feiyang233.club/">feiyang233</a></li>
-  
-  <li><a href="http://xtf615.com/">蘑菇先生学习记</a></li>
-  
-  <li><a href="https://www.alanzucconi.com">alanzucconi</a></li>
-  
-  <li><a href="https://www.hankcs.com/">Hankcs</a></li>
-  
-  <li><a href="https://ines.io/">SpaCy author</a></li>
-  
-  <li><a href="https://zh-v2.d2l.ai/">动手学深度学习</a></li>
-  
-  <li><a href="https://space.bilibili.com/1567748478">跟李沐学AI</a></li>
-  
-  <li><a href="https://www.guofei.site/">郭飞</a></li>
-  
-  <li><a href="https://blog.csdn.net/mingzai624">Pycorrector作者</a></li>
-  
-  <li><a href="https://pythonhunter.org/">捕蛇者说</a></li>
-  
-  <li><a href="https://laike9m.com/">Laike9m</a></li>
-  
-  <li><a href="https://lonepatient.top/">lonepatient</a></li>
-  
-  <li><a href="https://bytebytego.com/courses/system-design-interview/foreword">ByteBytego</a></li>
-  
-  <li><a href="https://zhangmingemma.github.io/">张敏</a></li>
-  
-</ul>
-
-    		</div>
-        
-	</div>
 </div>
+
+
+
+<style TYPE="text/css">
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1;
+}
+.lang-switch button {
+  border: 0;
+  background: #fff;
+  color: #999;
+  padding: 6px 12px;
+  cursor: pointer;
+  letter-spacing: .3px;
+  transition: background-color .15s ease, color .15s ease;
+}
+.lang-switch button + button { border-left: 1px solid #e2e2e2; }
+.lang-switch button:hover { color: #0085a1; }
+.lang-switch button.is-on { background-color: #0085a1; color: #fff; }
+.lang-switch button.is-on:hover { color: #fff; }
+/* both languages stay in the DOM; JS reveals one as soon as it runs */
+.lang-en { display: none; }
+</style>
+
+<script type="text/javascript">
+(function() {
+    var KEY = 'xct-notes-lang';
+    var lang;
+    try { lang = localStorage.getItem(KEY); } catch (e) { lang = null; }
+    if (lang !== 'en') { lang = 'zh'; }
+
+    function apply(next) {
+        lang = next;
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        [].forEach.call(document.querySelectorAll('.lang-zh'), function(el) {
+            el.style.display = next === 'zh' ? '' : 'none';
+        });
+        [].forEach.call(document.querySelectorAll('.lang-en'), function(el) {
+            el.style.display = next === 'en' ? '' : 'none';
+        });
+        [].forEach.call(document.querySelectorAll('.lang-switch button'), function(b) {
+            b.classList.toggle('is-on', b.getAttribute('data-lang') === next);
+        });
+        // let the page react (the doc layout re-syncs its table of contents)
+        document.dispatchEvent(new CustomEvent('langchange', { detail: next }));
+    }
+
+    // expose for the buttons, and apply once the markup exists
+    window.__setNotesLang = apply;
+    document.addEventListener('DOMContentLoaded', function() { apply(lang); });
+})();
+</script>
+
 
 
 
@@ -681,7 +535,7 @@
 						<img src="/img/vendor/octicons/svg/file-text.svg" width="12" height="16">
 					<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span>
                     <br>
-                    Copyright &copy; xcTorres Blog 2025
+                    Copyright &copy; xcTorres Blog 2026
                     <br>
                     Powered by <a href="http://xcTorres.github.io">xcTorres Blog</a> |
                     <iframe
