@@ -347,19 +347,22 @@
   color: #6b6b6b;
   border-left: 3px solid #e5e5e5;
 }
-.llm-body table {
+/* data tables only — rouge renders code blocks as a line-number table
+   (`.rouge-table`), which must keep the highlighter's own styling */
+.llm-body table:not(.rouge-table) {
   width: 100%;
   margin: 18px 0;
   font-size: 14px;
   border-collapse: collapse;
 }
-.llm-body table th, .llm-body table td {
+.llm-body table:not(.rouge-table) th,
+.llm-body table:not(.rouge-table) td {
   padding: 8px 12px;
   border: 1px solid #eaeaea;
   vertical-align: top;
 }
-.llm-body table th { background-color: #fafafa; text-align: left; }
-.llm-body table tr:nth-child(even) td { background-color: #fcfcfc; }
+.llm-body table:not(.rouge-table) th { background-color: #fafafa; text-align: left; }
+.llm-body table:not(.rouge-table) tr:nth-child(even) td { background-color: #fcfcfc; }
 .llm-body code {
   font-size: 13px;
   padding: 2px 5px;
@@ -526,16 +529,54 @@
 <h3 id="03-常见激活函数与选型为什么大模型爱用-glu-变体-基础-高频">0.3 常见激活函数与选型？为什么大模型爱用 GLU 变体？⭐ <code class="language-plaintext highlighter-rouge">#基础 #高频</code></h3>
 <p><strong>【核心答案】</strong> 激活函数提供<strong>非线性</strong>，否则多层线性叠加仍等价于一层。从 Sigmoid/Tanh → ReLU → GELU/Swish → 现在 LLM 主流的 <strong>SwiGLU / GeGLU</strong>（门控线性单元变体）。</p>
 
-<p><strong>【深入】</strong>
-| 激活 | 公式 | 特点 / 问题 |
-|——|——|———–|
-| Sigmoid | $\frac{1}{1+e^{-x}}$ | 输出(0,1)；两端饱和→<strong>梯度消失</strong>，非零均值 |
-| Tanh | $\frac{e^x-e^{-x}}{e^x+e^{-x}}$ | 零均值、仍饱和 |
-| ReLU | $\max(0,x)$ | 简单、不饱和、收敛快；但负区恒 0→<strong>神经元死亡</strong> |
-| LeakyReLU | $\max(\alpha x,x)$ | 负区给小斜率，缓解死亡 |
-| GELU | $x\cdot\Phi(x)$ | 用高斯 CDF 平滑加权，BERT/GPT 常用，平滑可导 |
-| Swish/SiLU | $x\cdot\sigma(x)$ | 平滑、非单调，深层表现好 |
-| <strong>SwiGLU</strong> | $(\mathrm{Swish}(xW)\otimes xV)W_2$ | <strong>门控</strong>：一支做内容、一支做门控相乘；LLaMA/PaLM 采用 |</p>
+<p><strong>【深入】</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>激活</th>
+      <th>公式</th>
+      <th>特点 / 问题</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sigmoid</td>
+      <td>$\frac{1}{1+e^{-x}}$</td>
+      <td>输出(0,1)；两端饱和→<strong>梯度消失</strong>，非零均值</td>
+    </tr>
+    <tr>
+      <td>Tanh</td>
+      <td>$\frac{e^x-e^{-x}}{e^x+e^{-x}}$</td>
+      <td>零均值、仍饱和</td>
+    </tr>
+    <tr>
+      <td>ReLU</td>
+      <td>$\max(0,x)$</td>
+      <td>简单、不饱和、收敛快；但负区恒 0→<strong>神经元死亡</strong></td>
+    </tr>
+    <tr>
+      <td>LeakyReLU</td>
+      <td>$\max(\alpha x,x)$</td>
+      <td>负区给小斜率，缓解死亡</td>
+    </tr>
+    <tr>
+      <td>GELU</td>
+      <td>$x\cdot\Phi(x)$</td>
+      <td>用高斯 CDF 平滑加权，BERT/GPT 常用，平滑可导</td>
+    </tr>
+    <tr>
+      <td>Swish/SiLU</td>
+      <td>$x\cdot\sigma(x)$</td>
+      <td>平滑、非单调，深层表现好</td>
+    </tr>
+    <tr>
+      <td><strong>SwiGLU</strong></td>
+      <td>$(\mathrm{Swish}(xW)\otimes xV)W_2$</td>
+      <td><strong>门控</strong>：一支做内容、一支做门控相乘；LLaMA/PaLM 采用</td>
+    </tr>
+  </tbody>
+</table>
 
 <ul>
   <li><strong>GLU 变体（SwiGLU/GeGLU）凭什么强</strong>：把 FFN 从「一条路」变成「内容 × 门控」两条路逐元素相乘，<strong>门控让网络动态决定每个维度放多少信息通过</strong>，同等算力下质量更好（GLU Variants 论文实验证实）。</li>
@@ -851,7 +892,7 @@
   <li>
     <p><strong>PPO 优化目标</strong>（带 KL 惩罚的奖励 + clip 的策略梯度）：</p>
 
-\[\max_{\pi_\theta}\ \mathbb{E}_{x,\,y\sim\pi_\theta}\Big[\,r_\phi(x,y) - \beta\,\mathrm{KL}\big(\pi_\theta(y|x)\,\Vert \,\pi_{ref}(y|x)\big)\Big]\]
+\[\max_{\pi_\theta}\ \mathbb{E}_{x,\,y\sim\pi_\theta}\Big[\,r_\phi(x,y) - \beta\,\mathrm{KL}\big(\pi_\theta(y\mid x)\,\Vert \,\pi_{ref}(y\mid x)\big)\Big]\]
 
     <p>实现上用 clip 形式（A 为 GAE 优势，r_t(θ)=π_θ/π_old 为重要性比）：</p>
 
@@ -888,19 +929,9 @@
 <p><strong>【公式：DPO】</strong></p>
 <ul>
   <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>由 RLHF 最优解 $\pi^*(y</td>
-          <td>x) \propto \pi_{ref}(y</td>
-          <td>x)\exp\big(\tfrac{1}{\beta}r(x,y)\big)$ 反解出<strong>隐式奖励</strong> $r(x,y)=\beta\log\frac{\pi_\theta(y</td>
-          <td>x)}{\pi_{ref}(y</td>
-          <td>x)} + \beta\log Z(x)$，代入 Bradley-Terry，配分项 Z(x) 在成对相减中抵消，得到：</td>
-        </tr>
-      </tbody>
-    </table>
+    <p>由 RLHF 最优解 $\pi^*(y\mid x) \propto \pi_{ref}(y\mid x)\exp\big(\tfrac{1}{\beta}r(x,y)\big)$ 反解出<strong>隐式奖励</strong> $r(x,y)=\beta\log\frac{\pi_\theta(y\mid x)}{\pi_{ref}(y\mid x)} + \beta\log Z(x)$，代入 Bradley-Terry，配分项 Z(x) 在成对相减中抵消，得到：</p>
 
-\[\mathcal{L}_{DPO} = -\,\mathbb{E}_{(x,y_w,y_l)}\Big[\log \sigma\Big(\beta\log\frac{\pi_\theta(y_w|x)}{\pi_{ref}(y_w|x)} - \beta\log\frac{\pi_\theta(y_l|x)}{\pi_{ref}(y_l|x)}\Big)\Big]\]
+\[\mathcal{L}_{DPO} = -\,\mathbb{E}_{(x,y_w,y_l)}\Big[\log \sigma\Big(\beta\log\frac{\pi_\theta(y_w\mid x)}{\pi_{ref}(y_w\mid x)} - \beta\log\frac{\pi_\theta(y_l\mid x)}{\pi_{ref}(y_l\mid x)}\Big)\Big]\]
 
     <p>直观理解：<strong>抬高 chosen、压低 rejected 相对 reference 的对数概率比</strong>，β 控制偏离 reference 的强度（等价于 RLHF 里的 KL 系数）。</p>
   </li>
@@ -1632,7 +1663,7 @@
   <li>
     <p><strong>PPO objective</strong> (KL-penalised reward with a clipped policy gradient):</p>
 
-\[\max_{\pi_\theta}\ \mathbb{E}_{x,\,y\sim\pi_\theta}\Big[\,r_\phi(x,y) - \beta\,\mathrm{KL}\big(\pi_\theta(y|x)\,\Vert \,\pi_{ref}(y|x)\big)\Big]\]
+\[\max_{\pi_\theta}\ \mathbb{E}_{x,\,y\sim\pi_\theta}\Big[\,r_\phi(x,y) - \beta\,\mathrm{KL}\big(\pi_\theta(y\mid x)\,\Vert \,\pi_{ref}(y\mid x)\big)\Big]\]
 
     <p>In practice the clipped form is used (A is the GAE advantage, r_t(θ)=π_θ/π_old the importance ratio):</p>
 
@@ -1669,19 +1700,9 @@
 <p><strong>【Formula: DPO】</strong></p>
 <ul>
   <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>From the RLHF optimum $\pi^*(y</td>
-          <td>x) \propto \pi_{ref}(y</td>
-          <td>x)\exp\big(\tfrac{1}{\beta}r(x,y)\big)$, invert to get the <strong>implicit reward</strong> $r(x,y)=\beta\log\frac{\pi_\theta(y</td>
-          <td>x)}{\pi_{ref}(y</td>
-          <td>x)} + \beta\log Z(x)$, substitute into Bradley-Terry, and the partition term Z(x) cancels in the pairwise difference, leaving:</td>
-        </tr>
-      </tbody>
-    </table>
+    <p>From the RLHF optimum $\pi^*(y\mid x) \propto \pi_{ref}(y\mid x)\exp\big(\tfrac{1}{\beta}r(x,y)\big)$, invert to get the <strong>implicit reward</strong> $r(x,y)=\beta\log\frac{\pi_\theta(y\mid x)}{\pi_{ref}(y\mid x)} + \beta\log Z(x)$, substitute into Bradley-Terry, and the partition term Z(x) cancels in the pairwise difference, leaving:</p>
 
-\[\mathcal{L}_{DPO} = -\,\mathbb{E}_{(x,y_w,y_l)}\Big[\log \sigma\Big(\beta\log\frac{\pi_\theta(y_w|x)}{\pi_{ref}(y_w|x)} - \beta\log\frac{\pi_\theta(y_l|x)}{\pi_{ref}(y_l|x)}\Big)\Big]\]
+\[\mathcal{L}_{DPO} = -\,\mathbb{E}_{(x,y_w,y_l)}\Big[\log \sigma\Big(\beta\log\frac{\pi_\theta(y_w\mid x)}{\pi_{ref}(y_w\mid x)} - \beta\log\frac{\pi_\theta(y_l\mid x)}{\pi_{ref}(y_l\mid x)}\Big)\Big]\]
 
     <p>Read intuitively: <strong>raise the chosen answer’s log-probability ratio against the reference and push the rejected one down</strong>, with β controlling how far the policy may stray (equivalent to RLHF’s KL coefficient).</p>
   </li>
@@ -1969,7 +1990,7 @@
         else { panel.style.display = 'none'; }
 
         // wide tables scroll inside their own box rather than stretching the page
-        [].forEach.call(article.querySelectorAll('table'), function(table) {
+        [].forEach.call(article.querySelectorAll('table:not(.rouge-table)'), function(table) {
             var wrap = document.createElement('div');
             wrap.className = 'llm-table-wrap';
             table.parentNode.insertBefore(wrap, table);
