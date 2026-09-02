@@ -19,6 +19,30 @@ nav-order: 1
     {{ about_zh | markdownify }}
 </div> -->
 
+<style TYPE="text/css">
+.edu-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 26px 0;
+}
+/* `.post-container img` (class + element) outranks a bare `.edu-logo`, so the
+   override has to be at least as specific. The theme centres post images with
+   `margin: 1.5em auto`, and auto margins on a flex item swallow the free
+   space, which pushed the whole row to the centre. */
+.post-container .edu-logo {
+  width: 96px;
+  height: auto;
+  flex-shrink: 0;
+  margin: 0;
+}
+.edu-body { line-height: 1.7; }
+@media only screen and (max-width: 480px) {
+  .post-container .edu-logo { width: 64px; }
+  .edu-item { gap: 14px; }
+}
+</style>
+
 <!-- English Version -->
 <div class="en post-container">
     {% capture about_en %}{% include about/en.md %}{% endcapture %}
