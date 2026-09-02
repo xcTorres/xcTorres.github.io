@@ -32,8 +32,12 @@
 .lang-switch button:hover { color: #0085a1; }
 .lang-switch button.is-on { background-color: #0085a1; color: #fff; }
 .lang-switch button.is-on:hover { color: #fff; }
-/* both languages stay in the DOM; JS reveals one as soon as it runs */
-.lang-en { display: none; }
+/* Both languages stay in the DOM and visibility is driven by an attribute on
+   <html>, never by inline styles: `.lang-*` is used on spans as well as divs,
+   so there is no single display value JS could restore, and clearing the
+   inline style would just fall back to the rule that hides English. */
+html:not([data-notes-lang="en"]) .lang-en { display: none; }
+html[data-notes-lang="en"] .lang-zh { display: none; }
 </style>
 
 <script type="text/javascript">
@@ -46,12 +50,7 @@
     function apply(next) {
         lang = next;
         try { localStorage.setItem(KEY, next); } catch (e) {}
-        [].forEach.call(document.querySelectorAll('.lang-zh'), function(el) {
-            el.style.display = next === 'zh' ? '' : 'none';
-        });
-        [].forEach.call(document.querySelectorAll('.lang-en'), function(el) {
-            el.style.display = next === 'en' ? '' : 'none';
-        });
+        document.documentElement.setAttribute('data-notes-lang', next);
         [].forEach.call(document.querySelectorAll('.lang-switch button'), function(b) {
             b.classList.toggle('is-on', b.getAttribute('data-lang') === next);
         });
@@ -59,7 +58,10 @@
         document.dispatchEvent(new CustomEvent('langchange', { detail: next }));
     }
 
-    // expose for the buttons, and apply once the markup exists
+    // set the attribute immediately so a stored English preference does not
+    // flash the Chinese text first; the rest needs the markup to exist
+    document.documentElement.setAttribute('data-notes-lang', lang);
+
     window.__setNotesLang = apply;
     document.addEventListener('DOMContentLoaded', function() { apply(lang); });
 })();

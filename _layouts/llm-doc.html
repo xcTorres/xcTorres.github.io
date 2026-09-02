@@ -150,6 +150,38 @@ hide-in-nav: true
 .llm-body a:hover, .llm-body a:focus { color: #0085a1; }
 /* bare reference URLs are long; let them wrap instead of overflowing */
 .llm-body a[href^="http"] { word-break: break-word; }
+/* collapsible derivations: the theme strips the default disclosure triangle,
+   so draw our own and make the whole summary row read as clickable */
+.llm-body details {
+  margin: 20px 0;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  background: #fcfcfc;
+  padding: 0 16px;
+}
+.llm-body summary {
+  cursor: pointer;
+  margin: 0 -16px;
+  padding: 11px 16px;
+  font-size: 14px;
+  color: #555;
+  list-style: none;
+  user-select: none;
+}
+.llm-body summary::-webkit-details-marker { display: none; }
+.llm-body summary::before {
+  content: "\25B8";
+  display: inline-block;
+  width: 14px;
+  color: #999;
+  transition: transform 0.15s ease;
+}
+.llm-body details[open] > summary {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 4px;
+}
+.llm-body details[open] > summary::before { transform: rotate(90deg); }
+.llm-body details > *:last-child { margin-bottom: 14px; }
 .llm-body img { max-width: 100%; }
 .llm-body hr { margin: 34px 0; border-top: 1px solid #eee; }
 /* wide tables scroll on their own instead of stretching the page */
