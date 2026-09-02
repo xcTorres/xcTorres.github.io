@@ -20,6 +20,8 @@ mathjax: true
 {:toc .llm-toc-list}
 
 > **定位**：基础架构 · 训练对齐 · 推理优化。每个条目按 **核心答案 → 深入原理 → 权衡 / 追问 → 参考** 组织，⭐ 标记值得重点深挖的地方。
+> 
+> **配套**：[Agent 知识总结](/agent/summary/)
 
 ---
 
@@ -29,9 +31,24 @@ mathjax: true
 
 ### 0.1 交叉熵、KL 散度、熵三者什么关系？⭐ `#基础 #高频`
 **【核心答案】** 设真实分布 p、模型分布 q：
-- **熵** $H(p) = -\sum_x p(x)\log p(x)$：p 自身的不确定性（理论最小编码长度）。
-- **交叉熵** $H(p,q) = -\sum_x p(x)\log q(x)$：用 q 去编码 p 的平均代价。
-- **KL 散度** $D_{KL}(p\,\Vert \,q) = \sum_x p(x)\log\frac{p(x)}{q(x)}$：用 q 近似 p 的「额外」代价。
+- **熵** $H(p) = -\sum_x p(x)\log p(x)$：p 自身的不确定性——直观理解为**平均要问多少个「是/否」问题才能确定结果**（$\log$ 取 2 为底时单位是 bit），也等于最优编码下的平均码长下界。
+  - 找手感：均匀的 6 面骰子 $H=\log_2 6\approx 2.58$ bit；若骰子必定掷出 1，则 $H=0$——结果已知，不需要传任何信息。**分布越平熵越大，越尖熵越小。**
+  - **为什么信息量是 $-\log p$**：把单个事件的信息量记作 $I(x)$，只要求三件事——越罕见信息越多、必然事件 $I=0$、**独立事件的信息量可相加**。第三条最关键：独立时 $p(x,y)=p(x)p(y)$，而能把乘法变加法的函数只有对数，于是 $I(x)=-\log p(x)$（负号是因为 $p\le 1$、$\log$ 为负）。熵就是 $I(x)$ 按 p 加权的平均。
+  - 换个角度：概率为 $1/2^k$ 的事件要 $k$ 个二进制位才能指认，而 $k=-\log_2 p$——所以 $-\log_2 p$ 字面意思就是「点名这个结果要几个 bit」。1 枚硬币 $p=1/2\to 1$ bit，2 枚独立硬币 $p=1/4\to 2$ bit，正好相加。
+- **交叉熵** $H(p,q) = -\sum_x p(x)\log q(x)$：**你以为分布是 q，照着 q 设计编码，但真实分布其实是 p** —— 此时的平均码长。
+  - 找手感：还是那颗骰子，你以为它均匀（按 2.58 bit 编码），实际它极偏向掷出 1（p 很尖）——那你每次都在为一个几乎不会发生的结果预留码长，白白多付。
+  - 换成语言模型：$-\log q(\text{正确词})$ 就是模型这一步的「意外程度」，对所有位置取平均就是交叉熵（见 0.2）。
+- **KL 散度** $D_{KL}(p\,\Vert \,q) = \sum_x p(x)\log\frac{p(x)}{q(x)}$：**上面「多付」的那部分**——用 q 近似 p 的额外代价。q 猜得越准，多付越少。
+
+> **「编码 / 码长」是什么意思**：想象你要反复把结果用 0/1 发给别人，希望平均发得越短越好。办法是**常出现的结果给短码，罕见的给长码**（摩斯电码就是这样：E 最常用，是一个点；Q 是四个符号）。总代价 = Σ(出现频率 × 码长)，所以短码要留给高频结果。最优分配是给概率 $p(x)$ 的结果约 $-\log_2 p(x)$ 位——熵的公式就是这么来的。
+>
+> 一个能自己验算的例子。四个结果 A/B/C/D，真实概率 $p=(\tfrac12,\tfrac14,\tfrac18,\tfrac18)$：
+>
+> - **最优编码**（知道 p）：A=`0`、B=`10`、C=`110`、D=`111`，平均码长 $=\tfrac12(1)+\tfrac14(2)+\tfrac18(3)+\tfrac18(3)=1.75$ bit → 这就是**熵**。
+> - **用错的编码**（以为 q 均匀）：每个都分 2 位，平均码长恒为 $2$ bit → 这就是**交叉熵**。
+> - 多付的 $2-1.75=0.25$ bit → 正是 **KL**。
+>
+> 错在哪很直观：A 有一半时间出现却被分了 2 位而非 1 位，C/D 很罕见、给 3 位本来不亏却也占了 2 位——**短码没给对人**。
 
 三者关系一行话：**交叉熵 = 熵 + KL**，即
 
@@ -40,9 +57,44 @@ mathjax: true
 **【深入】**
 - 因为 H(p) 与模型参数无关（p 是固定的真实标签分布），**最小化交叉熵 ⇔ 最小化 KL**——这就是为什么训练直接用交叉熵当 loss。
 - **KL 非负、不对称**：$D_{KL}(p\Vert q)\neq D_{KL}(q\Vert p)$，所以它是「散度」不是「距离」。$D_{KL}=0 \iff p=q$。
-- 不对称的实际含义：
-  - **Forward KL** $D_{KL}(p\Vert q)$（最大似然用的）：p 有质量处 q 不能为 0，否则惩罚无穷 → q 倾向「覆盖所有模式」（mean-seeking，分布偏胖）。
-  - **Reverse KL** $D_{KL}(q\Vert p)$（变分推断、部分 RL 用）：q 只敢在 p 高的地方放质量 → 倾向「锁定单一模式」（mode-seeking）。
+- 不对称的实际含义。先记一条：**$D_{KL}(a\Vert b)$ 的第一个位置就是取期望的分布**，即 $\mathbb{E}_{x\sim a}\big[\log\frac{a(x)}{b(x)}\big]$——下面两条都能由它推出来。
+  - **Forward KL** $D_{KL}(p\Vert q)$（最大似然用的）：**从 p 采样**。p 有质量处 q 不能为 0，否则惩罚无穷 → q 倾向「覆盖所有模式」（mean-seeking，分布偏胖）。
+  - **Reverse KL** $D_{KL}(q\Vert p)$（变分推断、部分 RL 用）：**从 q 采样**。q 不敢跑到 p 低的地方；但它**若干脆不去 p 高的某个区域，就永远采样不到那里、也就不受罚** → 倾向「锁定单一模式」（mode-seeking）。
+  - 记方向：**forward 罚「该有的没有」，reverse 罚「不该有的有」**——后者对「遗漏」免罚，所以敢收缩。
+  - **谁坐哪个位置**（这里最容易绕，因为同一个 $\pi_\theta$ 在两处坐的位置相反）：
+    - 本条开头的定义：$p$ ＝ 真实分布，$q$ ＝ 模型。
+    - SFT：$D_{KL}(p_{data}\Vert \pi_\theta)$ —— **模型在右边**，左边的数据是要逼近的**目标**。
+    - PPO / DPO：$D_{KL}(\pi_\theta\Vert \pi_{ref})$ —— **模型在左边**，右边的 $\pi_{ref}$ 不是目标而是**约束**（真正的目标是 reward）。
+    - 另外 forward / reverse 是**相对叫法**，不同文献可能定义相反；写作时直接写清两个位置上是谁，或用 mass-covering / mode-seeking 这类描述行为的说法，不会有歧义。
+  - **落到 LLM 训练上，两个方向正好对应两个阶段**：
+    - **SFT ＝ forward KL**。SFT 的损失就是在示范数据上算交叉熵，而上面已证 $H(p,q)=H(p)+D_{KL}(p\Vert q)$、$H(p_{data})$ 与参数无关，所以最小化 SFT 损失 $\equiv$ 最小化 $D_{KL}(p_{data}\Vert \pi_\theta)$。mass-covering 的后果是：**示范里出现过的说法模型都得分概率，哪怕它们风格不一甚至互相矛盾**——这是 SFT 出来的模型容易四平八稳、什么都沾一点的原因。
+    - **偏好对齐用的是 reverse KL**。PPO 里的 $\mathrm{KL}(\pi_\theta\Vert \pi_{ref})$ 从**策略自己**采样估计，方向反了过来；**DPO 与之同源**——它正是把「奖励最大化 ＋ reverse KL 约束」这个目标闭式求解，$\beta$ 扮演的就是 KL 系数（区别在于 DPO 是离线的，约束隐含在 $\log\frac{\pi_\theta}{\pi_{ref}}$ 里，而非靠采样估计，见第 10 题）。mode-seeking 的后果是：策略可以**主动放弃**参考模型里那些拿不到高分的模式，收缩到少数高奖励表达上——这既是 RLHF 让回答变「锐利」的原因，也是它常被诟病的**多样性下降 / 熵坍缩**的来源。
+  - 一句话记：**SFT 学「像」（覆盖全部示范），RLHF / DPO 学「好」（收缩到高分模式）**——差别在数学上就是 KL 的方向。（见第 8、9、10 题）
+
+<details markdown="1">
+<summary><b>展开推导：one-hot 如何让词表求和塌缩</b></summary>
+
+严格写出来，SFT 损失是**位置 × 词表**的双重求和：
+
+$$\mathcal{L}_{SFT}(\theta) = -\sum_{t=1}^{T}\sum_{v\in V} p_t(v)\,\log \pi_\theta(v\mid x, y_{<t})$$
+
+在位置 $t$ 上把交叉熵逐项摊开（词表 $V=\{v_1,\dots,v_{\lvert V\rvert}\}$，真实词为 $y_t$）：
+
+$$H(p_t,q_t) = -\big[\,p_t(v_1)\log q_t(v_1) + \cdots + p_t(y_t)\log q_t(y_t) + \cdots + p_t(v_{\lvert V\rvert})\log q_t(v_{\lvert V\rvert})\,\big]$$
+
+代入 one-hot（$p_t(y_t)=1$，其余为 0）：
+
+$$= -\big[\,0\cdot\log q_t(v_1) + \cdots + 1\cdot\log q_t(y_t) + \cdots + 0\cdot\log q_t(v_{\lvert V\rvert})\,\big] = -\log q_t(y_t)$$
+
+KL 同样展开。这里要用约定 $0\log 0 = 0$（因为 $\lim_{x\to 0}x\log x = 0$），所以零项是**真的消失**，不是被忽略：
+
+$$D_{KL}(p_t\Vert q_t) = \sum_{v\in V} p_t(v)\log\frac{p_t(v)}{q_t(v)} = 1\cdot\log\frac{1}{q_t(y_t)} = -\log q_t(y_t)$$
+
+熵同理：$H(p_t) = -\big[\,0\log 0 + \cdots + 1\log 1 + \cdots\,\big] = 0$（$\log 1 = 0$）。代回恒等式即可验证 $-\log q_t(y_t) = 0 + (-\log q_t(y_t))$。
+
+**关键**：内层求和不是被「简化」掉的，是被 one-hot **乘没了**。所以工程上只需从 logits 里取出真实 token 对应的那一个数，不必遍历整个词表——`cross_entropy(logits, labels)` 底层就是这么做的。而**蒸馏**的目标是软分布，$p_t(v)$ 处处非零，内层求和一项都塌缩不了，必须真把整排词表加起来。
+
+</details>
 
 **【权衡 / 追问】**
 - 追问 **为什么对称化**：JS 散度 = 两个方向 KL 的平均，对称且有界，GAN 里用过。
@@ -142,6 +194,40 @@ mathjax: true
 - 可能追问：**没有残差会怎样**？深层 Transformer 几乎无法收敛——这是 Pre-LN/残差/归一化「三件套」共同保证可训练性的核心原因。
 
 📖 参考：Attention Is All You Need — [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762) ｜ ResNet（残差）— [https://arxiv.org/abs/1512.03385](https://arxiv.org/abs/1512.03385)
+
+---
+
+### 1.1 大模型的参数量怎么推算？⭐ `#基础 #工程 #高频`
+**【核心答案】** 记隐层维度 $d$、层数 $L$、词表 $V$，则
+
+$$N \approx \underbrace{12\,L\,d^2}_{\text{主体}} + \underbrace{V d}_{\text{词嵌入}}$$
+
+那个 **12** 来自每层的两块：**注意力 $4d^2$**（$W_Q,W_K,W_V,W_O$ 各 $d\times d$）＋ **FFN $8d^2$**（升维 $d\times 4d$ ＋ 降维 $4d\times d$）。**参数量随 $d$ 平方增长、随 $L$ 线性增长**——这是「加宽比加深贵得多」的原因。
+
+**【深入】**
+- 逐项拆解（单层）：
+
+| 部件 | 形状 | 参数量 |
+|---|---|---|
+| $W_Q,W_K,W_V,W_O$ | 各 $d\times d$ | $4d^2$ |
+| FFN 升维 | $d\times d_{ff}$，$d_{ff}=4d$ | $4d^2$ |
+| FFN 降维 | $d_{ff}\times d$ | $4d^2$ |
+| LayerNorm / RMSNorm | 每层 2 个，各 $d$ | $\approx 2d$，可忽略 |
+| **单层合计** | | $\mathbf{12d^2}$ |
+
+- **SwiGLU 为什么不改变这个数**：它的 FFN 有 3 个矩阵（$W,V,W_2$）而非 2 个，所以中间维度取 $d_{ff}=\tfrac{2}{3}\times 4d$ 来保持参数量持平——$3\times d\times\tfrac{8d}{3}=8d^2$，和标准 FFN 一样（见 0.3）。实际实现还会把 $d_{ff}$ 向上取整到 256 的倍数。
+- **验算一：GPT-3 175B**（$L=96,\ d=12288,\ V=50257$，词表绑定）：主体 $12\times 96\times 12288^2 = 173.9\text{B}$，词嵌入 $50257\times 12288 = 0.62\text{B}$，**合计 174.6B** —— 对上了官方的「175B」。
+- **验算二：LLaMA-7B**（$L=32,\ d=4096,\ V=32000,\ d_{ff}=11008$，SwiGLU，输入输出词表不绑定）：每层 $4d^2+3d\,d_{ff}=0.202\text{B}$，主体 $6.476\text{B}$，词嵌入 $2\times 32000\times 4096=0.262\text{B}$，**合计 6.738B** —— 官方公布 6.74B。（$d_{ff}$ 的由来：$\tfrac23\times4\times4096=10922.7$，向上取到 256 的倍数即 11008。）
+- **三处需要修正的情况**：
+  - **GQA**：$W_K,W_V$ 缩小到 $d\times d_{kv}$（$d_{kv}=\tfrac{h_{kv}}{h}d$），注意力从 $4d^2$ 降到 $2d^2+2d\,d_{kv}$。LLaMA-3-70B 这类模型必须按这个算才对得上。
+  - **MoE**：每层 FFN 复制成 $n$ 份专家，**总参数**按 $n$ 倍算，但**激活参数**只算 top-$k$ 那几个。DeepSeek-V3 的「671B 总 / 37B 激活」就是这么来的（见第 6 题）。
+  - **词表绑定**：输入 embedding 和输出 LM Head 是否共享权重，差一个 $Vd$。
+
+**【权衡 / 追问】**
+- 追问 **词嵌入什么时候不能忽略**：大模型里 $Vd$ 占比极小（GPT-3 只有 0.35%），但**小模型里它能占到一半**——比如 $d=768$、$V=32000$ 时 $Vd\approx 24.6\text{M}$，而 12 层主体只有 $12\times12\times768^2\approx 85\text{M}$。所以给端侧小模型缩词表是真的有效。
+- 追问 **训练算力**：$C \approx 6ND$ FLOP（$N$ 参数、$D$ 训练 token）。来源是每 token 每参数前向约 2 FLOP、反向约 4 FLOP。**MoE 要代入激活参数**而非总参数。例：7B 模型训 2T tokens $\approx 6\times 7\text{e}9\times 2\text{e}12 = 8.4\text{e}22$ FLOP。
+- 追问 **显存**：训练（混合精度 + Adam）约 **16~20 bytes/参数** ＝ 权重(fp16 2) + 梯度(fp16 2) + Adam 状态(fp32 master 4 + $m$ 4 + $v$ 4)，再加激活；所以 7B 全量训练要 100+ GB，必须 ZeRO / 并行。推理则是 参数 × 每参数字节（fp16 = 2、int4 = 0.5）＋ **KV cache**（见第 5 题）。
+- 追问 **为什么参数量常与「加宽还是加深」挂钩**：$N\propto Ld^2$，加宽的代价是平方级；但加深会拉长梯度传播路径、增加流水线并行的气泡。实际配置一般让 $d/L$ 落在某个经验区间（GPT-3 是 $12288/96=128$）。
 
 ---
 
@@ -298,6 +384,33 @@ def attention(Q, K, V, mask=None):
 
 ---
 
+### 8.1 On-policy 蒸馏是什么？和 SFT / RFT / 普通蒸馏怎么区分？⭐ `#对齐 #高频`
+**【核心答案】** 从**学生自己**采样一段 rollout，在它走过的每个 token 位置上让**教师**给出完整分布，最小化两者的 KL。一句话：**用 RL 的采样方式 + 蒸馏的监督密度**。
+
+**【深入】**
+- 四种做法可以放进一张 2×2，两个轴互相正交：
+
+| | 目标是 **one-hot**（硬标签） | 目标是**软分布**（教师 logits） |
+|---|---|---|
+| **在固定 / 教师数据上**（off-policy） | 合成数据 SFT（Alpaca 式） | **标准 KD** |
+| **在学生自生成上**（on-policy） | **RFT / 拒绝采样微调**（见第 8 题） | **On-policy 蒸馏** |
+
+- **横轴＝监督有多密**。硬标签每个位置只告诉你「正确答案是哪个词」；软标签给的是整排词表的概率，信息量高得多。这条分界线就是 0.1 折叠推导里的那件事：one-hot 会把词表求和**乘没**，软分布则一项都塌缩不了。
+- **纵轴＝训练分布对不对**。在固定数据上训练，学生被喂的永远是「别人的好前缀」，推理时却要接自己生成的前缀——**exposure bias**：它从没在自己的错误上训练过，一步走偏就进入没见过的状态，误差累积。从学生自己采样则天然没有这个错配。
+- **和 RL 比，赢在监督密度**：GRPO/PPO 跑完一整条几百 token 的轨迹只换回**一个标量** reward，信用分配全靠猜；on-policy 蒸馏在同一条轨迹的**每个位置**都有一个完整分布做监督。这是它比 RL 省算力的根本原因。
+- **KL 方向**：通常用 **reverse KL** $D_{KL}(\pi_{student}\Vert \pi_{teacher})$，且在学生的 rollout 上计算。用 0.1 的记法一眼可读：第一个位置是学生 → 期望对学生取 → on-policy；reverse 是 mode-seeking → 学生不铺满教师的所有模式，而是**挑一个做好**——对容量小得多的学生，这比 forward KL 的 mass-covering（样样稀松）更实际。
+- **自蒸馏是第三根轴**（教师 ＝ 学生自己或它的历史版本），与上面两轴正交：RFT 就是「on-policy ＋ 硬标签 ＋ 自蒸馏」。另有 **SDFT**——先让模型用自己的话重写目标数据集再做 SFT，使微调数据贴近模型原分布，**缓解灾难性遗忘**（见第 12 题）。
+
+**【权衡 / 追问】**
+- 代价：**教师必须全程在线跑前向**（学生每采一步都要问它），显存和算力都比离线蒸馏贵；离线 KD 可以把教师分布预先算好存下来。
+- 追问 **divergence 怎么选**：文献并不统一。GKD 提出在学生自生成序列上训练、并用广义 JS 散度族在 forward / reverse 之间插值；MiniLLM 明确主张 LLM 蒸馏用 reverse KL。
+- 追问 **和 RFT 的区别**：RFT 只保留「答对的整条轨迹」当硬标签，信号仍是稀疏的；on-policy 蒸馏不筛选轨迹，而是在每个 token 上要教师的分布，**错的轨迹同样能提供监督**（教师会指出该走哪一步）。
+- 追问 **在训练谱系里的位置**：SFT（forward KL / 数据分布 / 密集）→ on-policy 蒸馏（reverse KL / 学生分布 / 密集）→ RLHF、GRPO（reverse KL / 学生分布 / 稀疏奖励）。它填的正是 SFT 与 RL 之间那个空档。
+
+📖 参考：GKD — [https://arxiv.org/abs/2306.13649](https://arxiv.org/abs/2306.13649) ｜ MiniLLM — [https://arxiv.org/abs/2306.08543](https://arxiv.org/abs/2306.08543)
+
+---
+
 ### 9. RLHF 完整流程，痛点是什么？⭐ `#对齐 #高频`
 **【核心答案】** ① 用人类对多个回答的排序训练一个 **Reward Model（RM）**；② 用 **PPO** 优化策略模型最大化 reward，同时加 **KL 惩罚**约束它别偏离 SFT 模型太远。
 
@@ -322,13 +435,43 @@ def attention(Q, K, V, mask=None):
 **【权衡 / 追问】**
 - 痛点：流程复杂、4 模型同时占显存、RL 训练不稳、对超参敏感、RM 容易被钻空子。
 - 追问 **RLHF vs RLAIF**：RLAIF 用 AI（如更强模型/宪法）代替人类生成偏好标签，降本，Anthropic 的 Constitutional AI 是代表思路。
-- 追问 **GRPO（DeepSeek 提出，DeepSeekMath/R1 采用）**：PPO 的简化，**去掉 critic/value 网络**，省一个与 policy 同规模的模型，显存与稳定性都更友好。做法是对同一 prompt 采样一组 G 个回答 {o_1..o_G}，用**组内归一化的 reward 当优势**：
+- 追问 **GRPO**：PPO 的简化，去掉 critic、用组内相对优势代替，见第 9.1 题。
+
+📖 参考：InstructGPT — [https://arxiv.org/abs/2203.02155](https://arxiv.org/abs/2203.02155) ｜ GRPO/DeepSeekMath — [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300)
+
+---
+
+### 9.1 GRPO 详解：组内优势怎么算、又怎么传回 loss？⭐ `#对齐 #高频`
+**【核心答案】** GRPO ＝ **PPO 去掉 critic**。同一个 prompt 采样一组 G 条回答，用**组内归一化的 reward 当优势**（组均值就是 baseline），再套 PPO 的 clip 目标。关键机制：优势是**一条回答一个标量**，被**广播到该回答的每一个 token**，在梯度里充当对数概率的系数。
+
+**【深入】**
+- **第一步：算优势（序列级）**。对同一 prompt 采样 $\{o_1,\dots,o_G\}$，得到奖励 $\{r_1,\dots,r_G\}$：
 
   $$\hat{A}_i = \frac{r_i - \mathrm{mean}(\{r_1,\dots,r_G\})}{\mathrm{std}(\{r_1,\dots,r_G\})}$$
 
-  再套 PPO 的 clip 目标，并把 KL 作为**独立正则项**直接加进 loss（而非塞进 reward）。优点：无需 critic、天然适配「可验证奖励 RLVR」（数学/代码用规则判对错）；局限：依赖组内采样多条、reward 方差大时不稳。
+  出来的是 **G 个标量**，一条回答一个。PPO 靠 critic 给出**逐 token** 的 $A_t$，GRPO 没有 critic，所以**根本没有 token 级的价值估计**。
+- **第二步：广播**。$\hat{A}_{i,t}=\hat{A}_i$ 对 $o_i$ 中所有 $t$ 成立——一条 500 token 的回答，这 500 个位置拿到的是**同一个数**。
+- **第三步：进入 clip 目标**（$\rho_{i,t}=\pi_\theta(o_{i,t}\mid x,o_{i,<t})/\pi_{old}(o_{i,t}\mid x,o_{i,<t})$）：
 
-📖 参考：InstructGPT — [https://arxiv.org/abs/2203.02155](https://arxiv.org/abs/2203.02155) ｜ GRPO/DeepSeekMath — [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300)
+  $$\mathcal{L} = \frac{1}{G}\sum_{i}\frac{1}{\lvert o_i\rvert}\sum_{t}\Big[\min\big(\rho_{i,t}\hat{A}_i,\ \mathrm{clip}(\rho_{i,t},1-\epsilon,1+\epsilon)\hat{A}_i\big) - \beta\,\mathbb{D}_{KL}[\pi_\theta\Vert \pi_{ref}]\Big]$$
+
+- **梯度上它到底做了什么**。$\hat{A}_i$ 是常数（必须 detach，不参与求导），梯度只经 $\rho$ 流过，未被 clip 时：
+
+  $$\nabla_\theta \mathcal{L} \approx \frac{1}{G}\sum_i\frac{1}{\lvert o_i\rvert}\sum_t \hat{A}_i\,\rho_{i,t}\,\nabla_\theta \log \pi_\theta(o_{i,t}\mid \cdot)$$
+
+  所以**优势的全部作用就是给每个 token 的对数概率梯度乘一个可正可负的系数**：$\hat{A}_i>0$ 抬高该序列全部 token 的概率，$<0$ 则全部压低。结构上和 SFT 的交叉熵梯度一模一样，只是前面多乘了一个标量——这正是策略梯度恒等式 $\nabla\mathbb{E}[R]=\mathbb{E}[R\nabla\log\pi]$ 的直接体现。
+- **一个具体数字**：一组 4 条回答的奖励是 $[1,0,0,1]$，则 $\mathrm{mean}=0.5$、$\mathrm{std}=0.5$，$\hat{A}=[+1,-1,-1,+1]$。两条正确回答的所有 token 系数 $+1$，两条错误回答的所有 token 系数 $-1$。
+- **clip 的作用**：当 $\rho$ 跑出 $[1-\epsilon,1+\epsilon]$ 且方向是继续加强时，$\min$ 选中被 clip 的那支，而 clip 在该区域是常数、**梯度为 0**——策略在某个 token 上偏离 $\pi_{old}$ 太远就不再推它。
+- **KL 的位置和 PPO 不同**：PPO 把 KL 惩罚**混进逐 token 的 reward**；GRPO 把它作为**独立正则项直接加在 loss 里**，好处是 reward 保持"干净"（纯粹反映答案好坏）、KL 强度可单独调。实现上常用 k3 估计量（无偏、恒非负）。
+
+**【权衡 / 追问】**
+- **最重要的局限：credit assignment**。同一个标量砸在所有 token 上，无法区分是哪几步真正起了作用——一条 500 token 推理链最后答对，中间走了弯路但侥幸没影响结果的 token 也会被一视同仁推高；答错的回答里推理正确、只是结论算错的步骤则被无差别压低。这直接解释了两个方向的动机：**过程奖励模型（PRM）** 逐步打分，以及 **on-policy 蒸馏**每 token 给完整分布（见第 8.1 题）。
+- **实现坑：整组同分则无信号**。若组内 reward 全相同（全对或全错），$\mathrm{std}=0$、$\hat{A}$ 全为 0，**这一组完全不提供梯度**（实现里靠加 $\epsilon$ 或直接跳过）。所以题目太难或太简单都是在浪费采样，GRPO 需要组内有区分度。
+- 追问 **两个归一化的争议**：**Dr. GRPO** 指出除以 $\lvert o_i\rvert$ 会摊薄长回答里每个 token 的惩罚，在 $\hat{A}<0$ 时反而鼓励把错误答案写长；除以 $\mathrm{std}$ 则过度加权组内方差小的样本。它的做法是两个归一化都去掉。
+- 追问 **可验证奖励下能否去掉 KL**：在数学/代码这类由规则判对错的场景，有些变体（如 **DAPO**）干脆去掉 KL 项——既然 reward 本身就是客观正确性，就不需要参考模型来防 reward hacking，去掉后模型能走得更远。该方向仍在演进。
+- 追问 **为什么适合推理任务**：无需训练 RM（规则即奖励）、无需 critic（省一个同规模模型），且组内采样天然适配「同一题采多次、对错自然分层」的数学/代码场景。
+
+📖 参考：GRPO/DeepSeekMath — [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300) ｜ DeepSeek-R1 — [https://arxiv.org/abs/2501.12948](https://arxiv.org/abs/2501.12948)
 
 ---
 
@@ -359,6 +502,7 @@ def attention(Q, K, V, mask=None):
 | 需要 Critic/Value？ | ✅ | ❌ | ❌（用组内均值当 baseline） |
 | 训练模型数 | 4（policy/ref/RM/critic） | 2（policy/ref） | 3（policy/ref/RM） |
 | 优势估计 | GAE（critic 估计） | 无（直接分类损失） | 组内 reward 归一化 |
+| **KL 怎么进入** | 混进逐 token 的 reward | **无显式项**，隐含在 $\beta\log\frac{\pi_\theta}{\pi_{ref}}$ 里 | **loss 里的独立正则项**（k3 估计） |
 | 显存/复杂度 | 高 | 低 | 中 |
 | 稳定性 | 对超参敏感、易不稳 | 稳定、好复现 | 比 PPO 稳，省 critic |
 | 在线探索 | ✅ 上限高 | ❌ 受限于数据分布 | ✅ |

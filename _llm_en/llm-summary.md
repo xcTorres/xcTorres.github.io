@@ -14,6 +14,8 @@ mathjax: true
 {:toc .llm-toc-list}
 
 > **Scope**: architecture · training and alignment · inference optimisation. Every entry runs **core answer → how it works → trade-offs / follow-ups → references**; ⭐ marks the points worth digging into.
+>
+> **See also**: [Agent Notes](/agent/summary/)
 
 ---
 
@@ -23,9 +25,24 @@ mathjax: true
 
 ### 0.1 How are cross-entropy, KL divergence and entropy related? ⭐ `#basics #core`
 **【Core answer】** With a true distribution p and a model distribution q:
-- **Entropy** $H(p) = -\sum_x p(x)\log p(x)$: p's own uncertainty (the theoretical minimum code length).
-- **Cross-entropy** $H(p,q) = -\sum_x p(x)\log q(x)$: the average cost of coding p using q.
-- **KL divergence** $D_{KL}(p\,\Vert \,q) = \sum_x p(x)\log\frac{p(x)}{q(x)}$: the *extra* cost of approximating p with q.
+- **Entropy** $H(p) = -\sum_x p(x)\log p(x)$: p's own uncertainty — read it as **how many yes/no questions you need on average to pin down the outcome** (in bits, when $\log$ is base 2), which is also the lower bound on average code length under an optimal code.
+  - For a feel: a fair six-sided die has $H=\log_2 6\approx 2.58$ bits; a die that always shows 1 has $H=0$ — the outcome is known, so nothing needs to be sent. **The flatter the distribution the higher the entropy, the peakier the lower.**
+  - **Why information content is $-\log p$**: write the information in a single event as $I(x)$ and ask only three things of it — rarer means more, a certain event carries none ($I=0$), and **independent events add up**. The third is the binding one: independence means $p(x,y)=p(x)p(y)$, and the only function turning multiplication into addition is the logarithm, so $I(x)=-\log p(x)$ (negative because $p\le 1$ makes $\log$ negative). Entropy is then $I(x)$ averaged under p.
+  - Another angle: an event of probability $1/2^k$ needs $k$ binary digits to identify, and $k=-\log_2 p$ — so $-\log_2 p$ literally counts **the bits it takes to name this outcome**. One coin, $p=1/2\to 1$ bit; two independent coins, $p=1/4\to 2$ bits, exactly additive.
+- **Cross-entropy** $H(p,q) = -\sum_x p(x)\log q(x)$: **you believe the distribution is q and build your code for q, but reality is p** — this is the average code length you then pay.
+  - For a feel: the same die, which you take to be fair (coding at 2.58 bits) when it is in fact heavily biased toward 1 (p is peaky) — you keep reserving code length for outcomes that almost never happen, and overpay every time.
+  - In language-model terms: $-\log q(\text{correct word})$ is the model's **surprise** at that step, and averaging over positions gives the cross-entropy (see 0.2).
+- **KL divergence** $D_{KL}(p\,\Vert \,q) = \sum_x p(x)\log\frac{p(x)}{q(x)}$: **exactly the overpayment above** — the extra cost of approximating p with q. The better q's guess, the less you overpay.
+
+> **What "coding" and "code length" actually mean**: picture sending the outcome to someone over and over as 0s and 1s, wanting the average message to be as short as possible. The trick is to **give frequent outcomes short codewords and rare ones long codewords** (Morse code does exactly this: E, the commonest letter, is a single dot; Q takes four symbols). Total cost = Σ(frequency × code length), so short codes must go to frequent outcomes. The optimal allocation gives an outcome of probability $p(x)$ about $-\log_2 p(x)$ bits — which is where the entropy formula comes from.
+>
+> An example you can check by hand. Four outcomes A/B/C/D with true probabilities $p=(\tfrac12,\tfrac14,\tfrac18,\tfrac18)$:
+>
+> - **Optimal code** (knowing p): A=`0`, B=`10`, C=`110`, D=`111`, average length $=\tfrac12(1)+\tfrac14(2)+\tfrac18(3)+\tfrac18(3)=1.75$ bits → this is the **entropy**.
+> - **Wrong code** (believing q is uniform): two bits for each, average length is always $2$ bits → this is the **cross-entropy**.
+> - The overpayment, $2-1.75=0.25$ bits → is precisely the **KL**.
+>
+> Where it went wrong is easy to see: A shows up half the time yet was given 2 bits instead of 1, while C and D are rare and would happily have taken 3 — **the short codes went to the wrong outcomes**.
 
 In one line: **cross-entropy = entropy + KL**, that is
 
@@ -34,9 +51,44 @@ In one line: **cross-entropy = entropy + KL**, that is
 **【How it works】**
 - Because H(p) does not depend on the model's parameters (p is the fixed label distribution), **minimising cross-entropy is minimising KL** — which is why training uses cross-entropy directly as the loss.
 - **KL is non-negative and asymmetric**: $D_{KL}(p\Vert q)\neq D_{KL}(q\Vert p)$, so it is a divergence, not a distance. $D_{KL}=0 \iff p=q$.
-- What the asymmetry means in practice:
-  - **Forward KL** $D_{KL}(p\Vert q)$ (what maximum likelihood uses): wherever p has mass, q cannot be zero or the penalty is infinite → q tends to **cover every mode** (mean-seeking, and over-broad).
-  - **Reverse KL** $D_{KL}(q\Vert p)$ (variational inference, some RL): q only dares place mass where p is high → it tends to **lock onto one mode** (mode-seeking).
+- What the asymmetry means in practice. One thing to fix first: **the first slot of $D_{KL}(a\Vert b)$ is the distribution the expectation is taken over**, i.e. $\mathbb{E}_{x\sim a}\big[\log\frac{a(x)}{b(x)}\big]$ — both cases below follow from that.
+  - **Forward KL** $D_{KL}(p\Vert q)$ (what maximum likelihood uses): **sampling from p**. Wherever p has mass, q cannot be zero or the penalty is infinite → q tends to **cover every mode** (mean-seeking, and over-broad).
+  - **Reverse KL** $D_{KL}(q\Vert p)$ (variational inference, some RL): **sampling from q**. q dares not go where p is low; but if it simply **stays away from a region where p is high, it never samples there and is never penalised** → it tends to **lock onto one mode** (mode-seeking).
+  - A way to remember the direction: **forward punishes "missing what should be there", reverse punishes "having what should not be"** — the latter charges nothing for omission, which is why it is willing to contract.
+  - **Who sits in which slot** (the easiest thing to lose track of, since the same $\pi_\theta$ sits on opposite sides in the two cases):
+    - The definition at the top of this entry: $p$ = the true distribution, $q$ = the model.
+    - SFT: $D_{KL}(p_{data}\Vert\pi_\theta)$ — **the model is on the right**, and the data on the left is the **target** to approach.
+    - PPO / DPO: $D_{KL}(\pi_\theta\Vert\pi_{ref})$ — **the model is on the left**, and $\pi_{ref}$ on the right is not a target but a **constraint** (the actual target is the reward).
+    - Note also that forward/reverse are **relative labels** and some papers define them the other way round; when writing, name the two slots explicitly, or use mass-covering / mode-seeking, which are unambiguous.
+  - **Mapped onto LLM training, the two directions are exactly the two stages**:
+    - **SFT = forward KL**. The SFT loss is cross-entropy over demonstration data, and since $H(p,q)=H(p)+D_{KL}(p\Vert q)$ (shown above) with $H(p_{data})$ independent of the parameters, minimising the SFT loss $\equiv$ minimising $D_{KL}(p_{data}\Vert\pi_\theta)$. Mass-covering means **every phrasing that appears in the demonstrations has to be given probability, even where they differ in style or contradict each other** — which is why an SFT'd model tends toward the safe, slightly-of-everything answer.
+    - **Preference alignment uses reverse KL**. PPO's $\mathrm{KL}(\pi_\theta\Vert\pi_{ref})$ is estimated by sampling from **the policy itself**, so the direction is flipped; **DPO shares the same origin** — it is the closed-form solution of that same "maximise reward + reverse-KL constraint" objective, with $\beta$ playing the KL coefficient (the difference being that DPO is offline, so the constraint is baked into $\log\frac{\pi_\theta}{\pi_{ref}}$ rather than estimated by sampling; see question 10). Mode-seeking means the policy can **deliberately abandon** the modes of the reference model that do not score well and contract onto a few high-reward phrasings — which is both why RLHF sharpens answers and where its much-criticised **loss of diversity / entropy collapse** comes from.
+  - One line to remember: **SFT learns to "resemble" (cover every demonstration), RLHF / DPO learn to be "good" (contract onto high-scoring modes)** — mathematically the difference is just the direction of the KL. (See questions 8, 9 and 10.)
+
+<details markdown="1">
+<summary><b>Worked derivation: how one-hot collapses the sum over the vocabulary</b></summary>
+
+Written out in full, the SFT loss is a double sum over **positions × vocabulary**:
+
+$$\mathcal{L}_{SFT}(\theta) = -\sum_{t=1}^{T}\sum_{v\in V} p_t(v)\,\log \pi_\theta(v\mid x, y_{<t})$$
+
+Expanding the cross-entropy term by term at position $t$ (vocabulary $V=\{v_1,\dots,v_{\lvert V\rvert}\}$, true token $y_t$):
+
+$$H(p_t,q_t) = -\big[\,p_t(v_1)\log q_t(v_1) + \cdots + p_t(y_t)\log q_t(y_t) + \cdots + p_t(v_{\lvert V\rvert})\log q_t(v_{\lvert V\rvert})\,\big]$$
+
+Substituting the one-hot target ($p_t(y_t)=1$, everything else 0):
+
+$$= -\big[\,0\cdot\log q_t(v_1) + \cdots + 1\cdot\log q_t(y_t) + \cdots + 0\cdot\log q_t(v_{\lvert V\rvert})\,\big] = -\log q_t(y_t)$$
+
+The KL expands the same way. It needs the convention $0\log 0 = 0$ (because $\lim_{x\to 0}x\log x = 0$), so the zero terms genuinely **vanish** rather than being waved away:
+
+$$D_{KL}(p_t\Vert q_t) = \sum_{v\in V} p_t(v)\log\frac{p_t(v)}{q_t(v)} = 1\cdot\log\frac{1}{q_t(y_t)} = -\log q_t(y_t)$$
+
+And the entropy: $H(p_t) = -\big[\,0\log 0 + \cdots + 1\log 1 + \cdots\,\big] = 0$ (since $\log 1 = 0$). Substituting back checks the identity: $-\log q_t(y_t) = 0 + (-\log q_t(y_t))$.
+
+**The point**: the inner sum is not "simplified" away — it is **multiplied away** by the one-hot target. So in practice you only need to pull out the one logit corresponding to the true token rather than walk the whole vocabulary, which is exactly what `cross_entropy(logits, labels)` does underneath. **Distillation**, by contrast, has a soft target where $p_t(v)$ is non-zero everywhere, nothing collapses, and the full vocabulary really does have to be summed.
+
+</details>
 
 **【Trade-offs / follow-ups】**
 - A common follow-up is **how to symmetrise it**: the JS divergence is the average of KL in both directions, symmetric and bounded; GANs used it.
@@ -136,6 +188,40 @@ In one line: **cross-entropy = entropy + KL**, that is
 - A likely follow-up: **what happens without residuals?** A deep Transformer barely converges at all — which is why residuals, normalisation and Pre-LN together are what makes the thing trainable.
 
 📖 Reference: Attention Is All You Need — [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762) ｜ ResNet — [https://arxiv.org/abs/1512.03385](https://arxiv.org/abs/1512.03385)
+
+---
+
+### 1.1 How do you work out a model's parameter count? ⭐ `#basics #systems #core`
+**【Core answer】** With hidden size $d$, $L$ layers and vocabulary $V$:
+
+$$N \approx \underbrace{12\,L\,d^2}_{\text{the body}} + \underbrace{V d}_{\text{embeddings}}$$
+
+That **12** comes from the two blocks in each layer: **attention $4d^2$** ($W_Q,W_K,W_V,W_O$, each $d\times d$) plus **FFN $8d^2$** (up-projection $d\times 4d$ and down-projection $4d\times d$). **Parameters grow quadratically in $d$ and only linearly in $L$** — which is why widening is far more expensive than deepening.
+
+**【How it works】**
+- Term by term, for a single layer:
+
+| Component | Shape | Parameters |
+|---|---|---|
+| $W_Q,W_K,W_V,W_O$ | $d\times d$ each | $4d^2$ |
+| FFN up-projection | $d\times d_{ff}$, $d_{ff}=4d$ | $4d^2$ |
+| FFN down-projection | $d_{ff}\times d$ | $4d^2$ |
+| LayerNorm / RMSNorm | two per layer, $d$ each | $\approx 2d$, negligible |
+| **Per layer** | | $\mathbf{12d^2}$ |
+
+- **Why SwiGLU does not change this number**: its FFN has three matrices ($W,V,W_2$) rather than two, so the inner dimension is set to $d_{ff}=\tfrac{2}{3}\times 4d$ to hold the parameter count steady — $3\times d\times\tfrac{8d}{3}=8d^2$, the same as a standard FFN (see 0.3). Implementations then round $d_{ff}$ up to a multiple of 256.
+- **Check one: GPT-3 175B** ($L=96,\ d=12288,\ V=50257$, tied embeddings): the body is $12\times 96\times 12288^2 = 173.9\text{B}$ and the embeddings $50257\times 12288 = 0.62\text{B}$, for **174.6B total** — which is the published "175B".
+- **Check two: LLaMA-7B** ($L=32,\ d=4096,\ V=32000,\ d_{ff}=11008$, SwiGLU, untied embeddings): per layer $4d^2+3d\,d_{ff}=0.202\text{B}$, body $6.476\text{B}$, embeddings $2\times 32000\times 4096=0.262\text{B}$, for **6.738B total** — against a published 6.74B. (Where $d_{ff}$ comes from: $\tfrac23\times4\times4096=10922.7$, rounded up to the multiple of 256, giving 11008.)
+- **Three cases that need a correction**:
+  - **GQA**: $W_K$ and $W_V$ shrink to $d\times d_{kv}$ (with $d_{kv}=\tfrac{h_{kv}}{h}d$), so attention drops from $4d^2$ to $2d^2+2d\,d_{kv}$. Models like LLaMA-3-70B only add up if you count this way.
+  - **MoE**: each layer's FFN is replicated across $n$ experts, so **total** parameters scale with $n$ while **active** parameters count only the top-$k$. DeepSeek-V3's "671B total / 37B active" is exactly this (question 6).
+  - **Tied embeddings**: whether the input embedding and the output LM head share weights changes the count by one $Vd$.
+
+**【Trade-offs / follow-ups】**
+- A common follow-up is **when the embeddings stop being negligible**: $Vd$ is a rounding error in a large model (0.35% of GPT-3) but can be **half of a small one** — at $d=768$ and $V=32000$, $Vd\approx 24.6\text{M}$ against a 12-layer body of only $12\times12\times768^2\approx 85\text{M}$. Shrinking the vocabulary really does pay off for on-device models.
+- A common follow-up is **training compute**: $C \approx 6ND$ FLOP ($N$ parameters, $D$ training tokens), from roughly 2 FLOP forward and 4 FLOP backward per parameter per token. **For MoE, substitute the active parameters**, not the total. A 7B model on 2T tokens is $6\times 7\text{e}9\times 2\text{e}12 = 8.4\text{e}22$ FLOP.
+- A common follow-up is **memory**: training with mixed precision and Adam runs about **16–20 bytes per parameter** — weights (fp16, 2) + gradients (fp16, 2) + Adam state (fp32 master 4, $m$ 4, $v$ 4) — plus activations, so full training of a 7B model needs 100+ GB and forces ZeRO or parallelism. Inference is parameters × bytes per parameter (fp16 = 2, int4 = 0.5) plus the **KV cache** (question 5).
+- A common follow-up is **why this frames the "wider or deeper" question**: $N\propto Ld^2$, so widening costs quadratically; but depth lengthens the gradient path and adds pipeline-parallel bubbles. Configurations tend to keep $d/L$ in an empirical band (GPT-3 sits at $12288/96=128$).
 
 ---
 
@@ -292,6 +378,33 @@ def attention(Q, K, V, mask=None):
 
 ---
 
+### 8.1 What is on-policy distillation, and how does it differ from SFT / RFT / ordinary distillation? ⭐ `#alignment #core`
+**【Core answer】** Sample a rollout from **the student itself**, and at every token it passes through ask the **teacher** for its full distribution, then minimise the KL between the two. In one line: **RL's way of sampling with distillation's density of supervision**.
+
+**【How it works】**
+- Four approaches fit into one 2×2, along two orthogonal axes:
+
+| | Target is **one-hot** (hard labels) | Target is a **soft distribution** (teacher logits) |
+|---|---|---|
+| **On fixed / teacher data** (off-policy) | SFT on synthetic data (the Alpaca recipe) | **Ordinary KD** |
+| **On the student's own generations** (on-policy) | **RFT / rejection-sampling fine-tuning** (question 8) | **On-policy distillation** |
+
+- **The horizontal axis is how dense the supervision is.** A hard label tells you only which single word was correct at that position; a soft label hands over the probability of the whole vocabulary, which carries far more information. This is the same dividing line as the collapse in 0.1: a one-hot target **multiplies the vocabulary sum away**, while a soft distribution collapses nothing.
+- **The vertical axis is whether the training distribution is the right one.** Training on fixed data means the student is always fed *someone else's good prefix*, yet at inference it has to continue its own — **exposure bias**: it has never been trained on its own mistakes, so one wrong step lands it in a state it has never seen and errors compound. Sampling from the student removes that mismatch by construction.
+- **Against RL, it wins on supervision density**: GRPO/PPO spend a whole several-hundred-token trajectory to get back **one scalar** reward, leaving credit assignment to guesswork; on-policy distillation gets a full distribution at **every position** of that same trajectory. That is fundamentally why it costs less compute than RL.
+- **Direction of the KL**: usually **reverse KL** $D_{KL}(\pi_{student}\Vert\pi_{teacher})$, computed over the student's rollouts. The mnemonic from 0.1 reads it off directly: the student is in the first slot → the expectation is over the student → on-policy; and reverse KL is mode-seeking → rather than spreading itself over all of the teacher's modes the student **picks one and does it well** — which for a student of much smaller capacity is more practical than forward KL's mass-covering (thin everywhere).
+- **Self-distillation is a third axis** (the teacher *is* the student, or an earlier checkpoint of it), orthogonal to the two above: RFT is precisely "on-policy + hard labels + self-distillation". There is also **SDFT**, which has the model rewrite the target dataset in its own words before fine-tuning on it, keeping the training data close to the model's own distribution and **reducing catastrophic forgetting** (question 12).
+
+**【Trade-offs / follow-ups】**
+- The cost: **the teacher has to run forward passes throughout** (every step the student samples has to be scored), so it is more expensive in memory and compute than offline distillation, where teacher distributions can be precomputed and stored.
+- A common follow-up is **which divergence to use**. The literature does not agree. GKD trains on student-generated sequences using a generalised Jensen-Shannon family that interpolates between forward and reverse KL; MiniLLM argues specifically for reverse KL when distilling LLMs.
+- A common follow-up is **how it differs from RFT**: RFT keeps only whole trajectories that came out right and uses them as hard labels, so the signal stays sparse; on-policy distillation filters nothing and asks the teacher for a distribution at every token, so **even a wrong trajectory still supplies supervision** — the teacher points out which step should have been taken.
+- A common follow-up is **where it sits in the training spectrum**: SFT (forward KL / data distribution / dense) → on-policy distillation (reverse KL / student distribution / dense) → RLHF and GRPO (reverse KL / student distribution / sparse reward). It fills exactly the gap between SFT and RL.
+
+📖 Reference: GKD — [https://arxiv.org/abs/2306.13649](https://arxiv.org/abs/2306.13649) ｜ MiniLLM — [https://arxiv.org/abs/2306.08543](https://arxiv.org/abs/2306.08543)
+
+---
+
 ### 9. The full RLHF pipeline, and what hurts ⭐ `#alignment #core`
 **【Core answer】** (1) Train a **reward model (RM)** on human rankings of several answers; (2) optimise the policy with **PPO** to maximise reward, with a **KL penalty** keeping it from drifting too far from the SFT model.
 
@@ -316,13 +429,43 @@ def attention(Q, K, V, mask=None):
 **【Trade-offs / follow-ups】**
 - What hurts: the pipeline is complex, four models sit in memory at once, RL training is unstable, it is hyperparameter-sensitive, and the RM is easy to game.
 - A common follow-up is **RLHF vs. RLAIF**: RLAIF replaces human preference labels with AI-generated ones (a stronger model, or a constitution), which lowers cost. Anthropic's Constitutional AI is the representative approach.
-- A common follow-up is **GRPO** (introduced by DeepSeek, used in DeepSeekMath and R1): a simplification of PPO that **removes the critic/value network**, saving a model the size of the policy and improving both memory use and stability. It samples a group of G answers {o_1..o_G} for the same prompt and uses **group-normalised reward as the advantage**:
+- A common follow-up is **GRPO**: PPO simplified — the critic is dropped and replaced by a group-relative advantage; see question 9.1.
+
+📖 Reference: InstructGPT — [https://arxiv.org/abs/2203.02155](https://arxiv.org/abs/2203.02155) ｜ GRPO/DeepSeekMath — [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300)
+
+---
+
+### 9.1 GRPO in detail: how the group advantage is computed, and how it reaches the loss ⭐ `#alignment #core`
+**【Core answer】** GRPO is **PPO with the critic removed**. For one prompt it samples a group of G answers and uses the **group-normalised reward as the advantage** (the group mean *is* the baseline), then applies PPO's clipped objective. The mechanism worth understanding: the advantage is **one scalar per answer**, **broadcast to every token of that answer**, where it acts as a coefficient on the log-probability gradient.
+
+**【How it works】**
+- **Step 1: compute the advantage (at sequence level).** Sample $\{o_1,\dots,o_G\}$ for the same prompt and collect rewards $\{r_1,\dots,r_G\}$:
 
   $$\hat{A}_i = \frac{r_i - \mathrm{mean}(\{r_1,\dots,r_G\})}{\mathrm{std}(\{r_1,\dots,r_G\})}$$
 
-  then applies PPO's clipped objective, adding KL as a **separate regulariser** in the loss rather than folding it into the reward. The upsides: no critic, and a natural fit for **verifiable-reward RL (RLVR)** where rules decide correctness in maths and code. The limits: it needs several samples per group, and it destabilises when reward variance is high.
+  What comes out is **G scalars**, one per answer. PPO gets a **per-token** $A_t$ from its critic; GRPO has no critic, so there is **no token-level value estimate at all**.
+- **Step 2: broadcast.** $\hat{A}_{i,t}=\hat{A}_i$ for every $t$ in $o_i$ — a 500-token answer hands **the same number** to all 500 positions.
+- **Step 3: into the clipped objective** (with $\rho_{i,t}=\pi_\theta(o_{i,t}\mid x,o_{i,<t})/\pi_{old}(o_{i,t}\mid x,o_{i,<t})$):
 
-📖 Reference: InstructGPT — [https://arxiv.org/abs/2203.02155](https://arxiv.org/abs/2203.02155) ｜ GRPO/DeepSeekMath — [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300)
+  $$\mathcal{L} = \frac{1}{G}\sum_{i}\frac{1}{\lvert o_i\rvert}\sum_{t}\Big[\min\big(\rho_{i,t}\hat{A}_i,\ \mathrm{clip}(\rho_{i,t},1-\epsilon,1+\epsilon)\hat{A}_i\big) - \beta\,\mathbb{D}_{KL}[\pi_\theta\Vert\pi_{ref}]\Big]$$
+
+- **What it actually does to the gradient.** $\hat{A}_i$ is a constant (it must be detached, and carries no gradient), so the gradient flows only through $\rho$; away from the clip:
+
+  $$\nabla_\theta \mathcal{L} \approx \frac{1}{G}\sum_i\frac{1}{\lvert o_i\rvert}\sum_t \hat{A}_i\,\rho_{i,t}\,\nabla_\theta \log \pi_\theta(o_{i,t}\mid\cdot)$$
+
+  So **the advantage's entire role is to multiply each token's log-probability gradient by a signed scalar**: $\hat{A}_i>0$ raises the probability of every token in that sequence, $<0$ lowers all of them. Structurally this is the same gradient as SFT's cross-entropy, only with a scalar in front — which is the policy-gradient identity $\nabla\mathbb{E}[R]=\mathbb{E}[R\nabla\log\pi]$ in the flesh.
+- **A concrete number**: a group of four answers with rewards $[1,0,0,1]$ gives $\mathrm{mean}=0.5$, $\mathrm{std}=0.5$ and $\hat{A}=[+1,-1,-1,+1]$. Every token of the two correct answers gets $+1$, every token of the two wrong ones gets $-1$.
+- **What the clip does**: once $\rho$ leaves $[1-\epsilon,1+\epsilon]$ in the direction that would push further, $\min$ selects the clipped branch, which is constant there and therefore has **zero gradient** — a token whose policy has already moved far from $\pi_{old}$ stops being pushed.
+- **The KL sits somewhere different from PPO**: PPO folds the KL penalty **into the per-token reward**; GRPO adds it as a **separate regulariser directly in the loss**, which keeps the reward "clean" (purely about whether the answer is good) and lets the KL strength be tuned on its own. Implementations typically use the k3 estimator (unbiased and non-negative).
+
+**【Trade-offs / follow-ups】**
+- **The main limitation: credit assignment.** One scalar lands on every token, so nothing distinguishes which steps actually mattered — a 500-token chain that ends up correct has even its detours pushed up, while a wrong answer has its correct reasoning pushed down alongside the arithmetic slip that ruined it. This is exactly what motivates **process reward models (PRM)**, which score step by step, and **on-policy distillation**, which supplies a full distribution per token (question 8.1).
+- **An implementation trap: a uniform group gives no signal.** If every reward in the group is identical (all right or all wrong), $\mathrm{std}=0$ and every $\hat{A}$ is 0, so **that group contributes no gradient at all** (implementations add an $\epsilon$ or skip the group). Questions that are too hard or too easy therefore waste sampling — GRPO needs spread within the group.
+- A common follow-up is **the dispute over the two normalisations**: **Dr. GRPO** points out that dividing by $\lvert o_i\rvert$ thins the per-token penalty on long answers, which under $\hat{A}<0$ actively encourages padding wrong answers out; and dividing by $\mathrm{std}$ over-weights groups with little reward variance. Its fix is to drop both.
+- A common follow-up is **whether the KL can go away under verifiable rewards**: for maths and code, where correctness is decided by a rule, some variants (**DAPO** among them) drop the KL term entirely — if the reward already *is* objective correctness, no reference model is needed to guard against reward hacking, and removing it lets the model travel further. The direction is still developing.
+- A common follow-up is **why it suits reasoning tasks**: no reward model to train (the rule is the reward), no critic (a model the size of the policy saved), and group sampling fits maths and code naturally, where the same question can be attempted repeatedly and right/wrong separate on their own.
+
+📖 Reference: GRPO/DeepSeekMath — [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300) ｜ DeepSeek-R1 — [https://arxiv.org/abs/2501.12948](https://arxiv.org/abs/2501.12948)
 
 ---
 
@@ -353,6 +496,7 @@ def attention(Q, K, V, mask=None):
 | Needs a critic? | ✅ | ❌ | ❌ (group mean serves as baseline) |
 | Models in training | 4 (policy/ref/RM/critic) | 2 (policy/ref) | 3 (policy/ref/RM) |
 | Advantage estimate | GAE (from the critic) | None (direct classification loss) | Group-normalised reward |
+| **How the KL enters** | Folded into the per-token reward | **No explicit term** — absorbed into $\beta\log\frac{\pi_\theta}{\pi_{ref}}$ | **A separate regulariser in the loss** (k3 estimator) |
 | Memory / complexity | High | Low | Medium |
 | Stability | Hyperparameter-sensitive, easily unstable | Stable, reproducible | Steadier than PPO, no critic |
 | Online exploration | ✅ Higher ceiling | ❌ Bounded by the dataset | ✅ |

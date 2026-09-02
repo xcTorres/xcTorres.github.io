@@ -20,18 +20,49 @@ source: "Agent知识总结.md"
 
 # Part V: Agents
 
-### 25. What is an LLM agent, and what is it made of? ⭐ `#agent #core`
+### 1. What is an LLM agent, and what is it made of? ⭐ `#agent #core`
 **【Core answer】** An LLM acting as the "brain", completing multi-step tasks on its own through **planning + tools + memory + reflection**, rather than answering in a single turn. Four modules: planning (decomposing the task), tool use (calling external APIs for capability and information), memory (short-term context plus long-term storage), and reflection (self-correction from feedback).
 
-**【How it works】**
-- Agent = LLM (reasoning and decisions) + tools (extending what it can reach) + a control loop (perceive → decide → act → observe).
-- What separates it from "just prompting": an agent has state, runs in a loop, interacts with an environment and adjusts on feedback.
+**But the more useful dividing line is workflow versus agent** — and it turns on **who decides the flow**:
 
-**【Trade-offs / follow-ups】** A common follow-up is **when an agent is over-engineering**. Simple tasks are steadier and cheaper with a plain prompt or RAG; agents earn their keep on complex work that genuinely needs multiple steps, dynamic decisions and tool calls.
+| | Who decides the flow | Example |
+|---|---|---|
+| **Workflow** | **Predefined code paths**; the LLM is called at fixed points | Classify first → branch to a different prompt per class → merge |
+| **Agent** | **The LLM decides** what to do next, which tool to call, and when to stop | Given a goal and a set of tools, it drives itself to completion |
+
+**Most production "AI agents" are in fact workflows, and usually better for it** — predictable, testable, bounded in cost. An agent genuinely earns its place when the number of steps cannot be fixed in advance and the path depends on intermediate results.
+
+**【How it works】**
+- Agent = LLM (reasoning and decisions) + tools (extending what it can reach) + a **control loop** (perceive → decide → act → observe). Of the three, **the loop is what makes it an agent** — remove it and you are back to a single function call.
+- **The minimal working shape is genuinely small**, essentially "an LLM calling tools in a loop":
+
+```python
+messages = [{"role": "user", "content": task}]
+for _ in range(MAX_STEPS):                 # step cap, so it cannot loop forever
+    reply = llm(messages, tools=TOOLS)     # the model decides: answer, or call a tool
+    if not reply.tool_calls:               # no tool call -> the task is done
+        return reply.content
+    messages.append(reply)
+    for call in reply.tool_calls:
+        result = TOOLS[call.name](**call.args)   # the execution happens outside the model
+        messages.append({"role": "tool", "content": result})
+```
+
+  Those dozen lines are the skeleton of the **harness** from question 10: the model only decides *what to call*, while **execution, feeding results back, and loop control all live outside it**.
+- What separates it from "just prompting": an agent **has state, runs in a loop, interacts with an environment and adjusts on feedback**.
+- **The loop buys the capability and the fragility alike**: every extra step is another chance to go wrong, and errors compound around the loop — which is the root of question 8, why agents are unreliable. The power and the brittleness come from the same mechanism.
+- On the standing of those "four modules": this is the **lens** from Lilian Weng's 2023 survey, **not an architectural spec** — no framework actually implements four such boxes. It is useful for auditing which piece your system is missing, not as a blueprint for building one.
+
+**【Trade-offs / follow-ups】**
+- A common follow-up is **when an agent is over-engineering**: simple tasks are steadier and cheaper with a plain prompt or RAG, and anything expressible as a fixed sequence should be written as a workflow. Agents earn their keep on **multi-step work with dynamic decisions and tool calls**. The test can be blunt: **can you draw the flowchart in advance?** If you can, write a workflow.
+- A common follow-up is **why people say "most agents are just an LLM in a loop"**: Anthropic's central observation in *Building effective agents* is that successful implementations tend to use **simple, composable patterns** rather than heavy frameworks — whose abstraction layers mostly obscure the prompts and tool outputs you need to see while debugging.
+- A common follow-up is **how the loop terminates**: the model stops emitting tool calls (natural stop), a step or time cap (hard backstop), or an external criterion (tests pass, goal met). **The hard backstop is not optional** — without it, a model that keeps calling the same tool never stops (question 8).
+
+📖 Reference: Anthropic, "Building effective agents" — [https://www.anthropic.com/research/building-effective-agents](https://www.anthropic.com/research/building-effective-agents) ｜ Lilian Weng, "LLM Powered Autonomous Agents" — [https://lilianweng.github.io/posts/2023-06-23-agent/](https://lilianweng.github.io/posts/2023-06-23-agent/)
 
 ---
 
-### 26. What is ReAct, and why does it work? ⭐ `#agent #core`
+### 2. What is ReAct, and why does it work? ⭐ `#agent #core`
 **【Core answer】** Reasoning and acting, interleaved: the model loops through **Thought (reason) → Action (call a tool) → Observation (result)** until it is done. Reasoning steers the action, and the action's real-world feedback corrects the reasoning.
 
 **【How it works】**
@@ -44,7 +75,7 @@ source: "Agent知识总结.md"
 
 ---
 
-### 27. Function calling / tool use: the mechanism and what matters in practice `#agent #systems`
+### 3. Function calling / tool use: the mechanism and what matters in practice `#agent #systems`
 **【Core answer】** Give the model each tool's **schema** (name, parameters, description); the model emits a structured call (usually JSON); external code executes it and feeds the result back so the model can keep reasoning.
 
 **【How it works】**
@@ -59,7 +90,7 @@ source: "Agent知识总结.md"
 
 ---
 
-### 28. What planning methods do agents use? `#agent`
+### 4. What planning methods do agents use? `#agent`
 **【Core answer】** CoT (a single reasoning chain), ToT (Tree of Thoughts — explore several branches and backtrack), Plan-and-Execute (plan the whole thing first, then work through it), and Reflexion (after a failure, reflect in natural language and retry).
 
 **【How it works】**
@@ -74,7 +105,7 @@ source: "Agent知识总结.md"
 
 ---
 
-### 29. The full RAG pipeline, and where to optimise it ⭐ `#agent #systems #core`
+### 5. The full RAG pipeline, and where to optimise it ⭐ `#agent #systems #core`
 **【Core answer】** The pipeline: chunk the documents → embed and index → retrieve top-k → splice into the prompt → generate. Every stage has room to improve.
 
 **【How it works】**
@@ -91,7 +122,7 @@ source: "Agent知识总结.md"
 
 ---
 
-### 30. How should an agent's memory be designed? `#agent`
+### 6. How should an agent's memory be designed? `#agent`
 **【Core answer】** **Short-term memory** is the current conversation context, bounded by the context window. **Long-term memory** puts history and knowledge in a vector store to be retrieved on demand. Add summarisation, importance scoring and time decay on top.
 
 **【How it works】**
@@ -102,7 +133,7 @@ source: "Agent知识总结.md"
 
 ---
 
-### 31. Multi-agent systems: what they buy you, and what they cost `#agent`
+### 7. Multi-agent systems: what they buy you, and what they cost `#agent`
 **【Core answer】** The upside: role specialisation (planner / executor / reviewer), parallelism, decomposition of complex tasks, and quality gains from mutual review. The cost: communication and coordination overhead, errors compounding as they pass between agents, termination conditions that are hard to define, and higher cost and latency.
 
 **【How it works】**
@@ -113,7 +144,7 @@ source: "Agent知识总结.md"
 
 ---
 
-### 32. Why are agents unreliable, and how do you stabilise them? ⭐ `#agent #core`
+### 8. Why are agents unreliable, and how do you stabilise them? ⭐ `#agent #core`
 **【Core answer】** The main culprit is **compounding error** — in a multi-step task any single misstep can derail everything after it — plus hallucinated tool calls, infinite loops and weak long-horizon planning. What helps: step limits and timeouts, validation and retry at each step, self-correction via ReAct/Reflexion, human-in-the-loop at critical steps, constrained structured output, and thorough logging and observability.
 
 **【How it works】**
@@ -124,7 +155,7 @@ source: "Agent知识总结.md"
 
 ---
 
-### 33. How do you evaluate an agent? `#agent`
+### 9. How do you evaluate an agent? `#agent`
 **【Core answer】** Metrics: task success rate, number of steps / calls / cost, latency, tool-call accuracy, robustness. Benchmarks: AgentBench (broad), GAIA (general assistant), WebArena (web operation), SWE-bench (real code fixes), τ-bench (tools plus dialogue).
 
 **【How it works】** The hard part is that tasks are open-ended and the process resists automatic scoring. The usual compromise combines "was the end state reached" with "was the trajectory any good", falling back on a stronger model as judge (LLM-as-judge) where necessary — with its biases in mind.
@@ -133,7 +164,7 @@ source: "Agent知识总结.md"
 
 ---
 
-### 34. What is an agent harness? And what is a skill? ⭐ `#agent #systems #core`
+### 10. What is an agent harness? And what is a skill? ⭐ `#agent #systems #core`
 **【Core answer】** The **harness** is the engineering layer wrapped around the LLM that keeps it running: it assembles the context, parses the model's tool calls, actually executes the tools, feeds the results back, and loops — in other words, it is the **concrete implementation** of ReAct's perceive-decide-act-observe cycle. A **skill** is a capability package loaded on demand: typically a structured set of instructions or procedures (plus optional scripts, templates and reference documents) telling the model *how to do* a class of task, injected into context only when it is needed. Skills in Claude Code / the Claude Agent SDK are the canonical example.
 
 **【How it works】**
@@ -152,13 +183,13 @@ source: "Agent知识总结.md"
 
 ---
 
-### 35. What is an agent trajectory, and what is it for? ⭐ `#agent #core`
+### 11. What is an agent trajectory, and what is it for? ⭐ `#agent #core`
 **【Core answer】** A trajectory is the **complete interaction sequence** an agent walks through to finish a task — the whole action history from receiving the task to ending. Under ReAct it is a run of `(Thought → Action → Observation)` triples ending in a final answer. One trajectory is roughly an **episode** in reinforcement-learning terms.
 
 **【How it works】**
 - The shape: `task → thought → action (call a tool) → observation (tool returns) → thought → … → final answer`. Strung together, that record is the trajectory.
 - Four uses:
-  - **Evaluation**: judge not only whether the final answer is right but whether the path was sensible — no detours, no loops, tools used appropriately. This is the "end state + trajectory quality" pairing from question 33.
+  - **Evaluation**: judge not only whether the final answer is right but whether the path was sensible — no detours, no loops, tools used appropriately. This is the "end state + trajectory quality" pairing from question 9.
   - **Training data**: collect good trajectories for SFT, or use **rejection sampling / DPO** to pick better-versus-worse pairs from several trajectories so the model learns a stronger action policy.
   - **Reinforcement learning**: a trajectory is an episode, each step a `(state, action)` pair; add a reward and compute policy gradients (RLHF/GRPO for agent behaviour).
   - **Debugging and observability**: replay the trajectory when something breaks and find whether a thought went wrong or a tool was called wrong. This is what the harness's traces and logs are recording.
@@ -166,13 +197,13 @@ source: "Agent知识总结.md"
 **【Trade-offs / follow-ups】**
 - A common follow-up is **why trajectory-level reward is hard**: it is sparse (signal only at the end) and credit assignment is difficult (which step deserves blame). Process reward models (PRM), per-step scoring and backtracking all help.
 - A common follow-up is **how to judge a trajectory**: success rate, step count / tool calls / cost, and whether there were redundant or looping actions. Where the process is open-ended, a stronger model as judge is the usual fallback.
-- A common follow-up is **the link to Reflexion** (question 28): Reflexion is exactly the practice of writing a failed trajectory plus its reflection into memory and consulting it on retry — one way of reusing trajectories.
+- A common follow-up is **the link to Reflexion** (question 4): Reflexion is exactly the practice of writing a failed trajectory plus its reflection into memory and consulting it on retry — one way of reusing trajectories.
 
 📖 Reference: ReAct — [https://arxiv.org/abs/2210.03629](https://arxiv.org/abs/2210.03629) ｜ Reflexion — [https://arxiv.org/abs/2303.11366](https://arxiv.org/abs/2303.11366)
 
 ---
 
-### 36. The three agent protocols: what MCP, A2A and AG-UI each solve ⭐ `#agent #systems #core`
+### 12. The three agent protocols: what MCP, A2A and AG-UI each solve ⭐ `#agent #systems #core`
 **【Core answer】** Each protocol owns **one edge of the graph**; they complement rather than compete:
 - **MCP** (Model Context Protocol, Anthropic): **agent ↔ tools/data** — standardises how tools and data sources plug in.
 - **A2A** (Agent2Agent, Google): **agent ↔ agent** — standardises how multiple agents collaborate.
@@ -210,7 +241,7 @@ Agent ──┼──── A2A ────► other agents
 - A common follow-up is **why plain REST/request-response will not do**: agents are **long-running, their intermediate process has value, and users need to step in mid-flight**. A single question-and-answer exchange can neither stream "what it is calling and thinking" nor accept intervention along the way.
 - A common follow-up is **whether AG-UI and MCP overlap**. They do not. **MCP reaches *down* to tools; AG-UI reaches *up* to people.** An agent typically uses **both** — MCP for capability, AG-UI to expose itself to the user.
 - A common follow-up is **the real pain it removes**: before it, **every agent-to-front-end integration was bespoke** — your own SSE format, your own state sync, your own approval flow. AG-UI standardises that last mile.
-- A common follow-up is **the link to trajectories** (question 35): AG-UI's event stream is essentially **the trajectory projected onto the UI in real time** — the tool and step events *are* the actions and observations in the trajectory.
+- A common follow-up is **the link to trajectories** (question 11): AG-UI's event stream is essentially **the trajectory projected onto the UI in real time** — the tool and step events *are* the actions and observations in the trajectory.
 
 📖 Reference: AG-UI docs — [https://docs.ag-ui.com](https://docs.ag-ui.com) ｜ AG-UI (CopilotKit) — [https://www.copilotkit.ai/ag-ui](https://www.copilotkit.ai/ag-ui) ｜ MCP — [https://modelcontextprotocol.io](https://modelcontextprotocol.io) ｜ A2A — [https://a2aproject.github.io/A2A/](https://a2aproject.github.io/A2A/)
 
@@ -225,7 +256,54 @@ Agent ──┼──── A2A ────► other agents
 - ✅ Reflexion — [https://arxiv.org/abs/2303.11366](https://arxiv.org/abs/2303.11366)
 - ✅ RAG (Lewis 2020) — [https://arxiv.org/abs/2005.11401](https://arxiv.org/abs/2005.11401)
 
-**Protocols and specifications** (not papers — see question 36)
+**Protocols and specifications** (not papers — see question 12)
 - **MCP** (agent ↔ tools/data, Anthropic) — [https://modelcontextprotocol.io](https://modelcontextprotocol.io)
 - **A2A** (agent ↔ agent, Google) — [https://a2aproject.github.io/A2A/](https://a2aproject.github.io/A2A/)
 - **AG-UI** (agent ↔ user/front end, CopilotKit) — [https://docs.ag-ui.com](https://docs.ag-ui.com) ｜ [https://www.copilotkit.ai/ag-ui](https://www.copilotkit.ai/ag-ui)
+
+### 13. How are agents actually trained? ⭐ `#agent #alignment #core`
+**【Core answer】** The most important thing first: **most agents involve no model training at all** — a general model plus tools plus a harness, carried by prompting and context engineering, is usually enough, and training is what you reach for once prompting stops moving. When you do train, the four mainstream routes build on each other: **trajectory SFT (behaviour cloning) → rejection sampling (RFT) → outcome-reward RL (GRPO/PPO) → process supervision (PRM / on-policy distillation)**, mapping one-to-one onto the training spectrum in the [LLM notes](/llm/summary/).
+
+**【How it works】**
+- **① Trajectory SFT (behaviour cloning)**: fine-tune directly on trajectories — human demonstrations, rollouts from a stronger model, or successful runs from production.
+  - **The implementation detail you cannot miss: mask the observations.** A trajectory is `Thought (model-generated) → Action (model-generated) → Observation (returned by the tool, not generated by the model) → …`, and **the loss must cover only the Thought and Action tokens**. Without the mask the model starts learning to *guess what the tool will return* — wasting capacity and inviting a self-answering kind of hallucination. The same applies to RL below; this is where most people's first agent training goes wrong.
+  - The limitation: it is off-policy, and carries **exposure bias** — the model is never trained on its own mistakes (LLM notes, question 8.1).
+- **② Rejection sampling / RFT**: let the model run, **discard the failed trajectories**, and SFT on what succeeded. Sampling is on-policy (which fixes the distribution mismatch) but the labels are hard (so supervision stays sparse). Cheap and stable — the best value for money right after SFT.
+- **③ Outcome-reward RL (GRPO / PPO)**: the reward is whether the task succeeded (tests pass, answer correct, goal met); where a rule can decide it, this is **RLVR**. But the agent setting is far harder than single-turn reasoning:
+
+| | Single-turn maths | Agent |
+|---|---|---|
+| Trajectory length | Hundreds of tokens | Thousands of tokens × many turns |
+| Cost of one rollout | A string comparison | **Actually compiling / requesting / clicking** |
+| Reproducibility | Deterministic | Stateful environments, flaky networks |
+| Credit assignment | Already hard | **Harder** (across turns and tool calls) |
+
+  The second row is the most underrated: **a maths rollout is essentially free, an agent rollout has to really run the environment** — sampling costs orders of magnitude more, which is the main reason agent RL has been slower to land than reasoning RL. Reward hacking also gets more inventive: the cheapest way to make the tests pass may be to delete them or hard-code the return value.
+- **④ Process supervision**: outcome reward is too sparse, so score the intermediate steps. A **PRM** is trained to grade step by step; **on-policy distillation** uses a stronger agent as teacher and hands the student a full distribution at every token of its own trajectory — **hundreds of times denser than RL's supervision**, and currently very good value (LLM notes, question 8.1).
+- **Where the data comes from**:
+
+| Source | Cost | Quality |
+|---|---|---|
+| Human demonstrations | Very high | High, but narrow coverage |
+| Distilling a stronger model | Medium | Capped by the teacher |
+| Self-sampling + filtering (RFT) | Low | Capped by the current model |
+| Synthetic environments / tasks | Medium | Scalable, but can drift from reality |
+
+**【Trade-offs / follow-ups】**
+- A common follow-up is **what belongs in training and what belongs in the harness** — the most useful split to get right, because a great deal of "agent capability" never lives in the weights at all:
+
+| Train it | Leave it to the harness / prompt |
+|---|---|
+| Reliability of tool-call formatting | Which tools exist and what their schemas look like |
+| **Knowing when to stop** | Step caps and timeouts |
+| Long-horizon planning, recovering from errors | Context compression, memory retrieval |
+| Taking fewer detours and redundant calls | Permissions and sandboxing |
+
+  The test is blunt: **if swapping the model would lose it, train it; if swapping the harness would change it, do not.**
+- A common follow-up is **why trajectories are the natural training data**: one trajectory is simultaneously an evaluation object, a training sample and a debugging artefact (question 11). RFT picks the good ones out of it, RL treats it as an episode, and distillation aligns against it token by token — all three routes consume the same thing.
+- A common follow-up is **what specifically makes GRPO hard on agents**: the advantage is **one scalar per trajectory, broadcast to every token** (LLM notes, question 9.1). Even single-turn reasoning struggles to attribute credit; an agent spreads the same scalar across many turns and tool calls, making it worse still — which is exactly what motivates process supervision.
+- A common follow-up is **which step to take first**: usually SFT for a floor → RFT for a level up → RL once the environment is stable and the reward verifiable. Without reliable automatic grading, do not rush into RL, or you will be optimising the wrong objective faithfully.
+
+📖 Reference: Toolformer — [https://arxiv.org/abs/2302.04761](https://arxiv.org/abs/2302.04761) ｜ STaR — [https://arxiv.org/abs/2203.14465](https://arxiv.org/abs/2203.14465) ｜ GKD (on-policy distillation) — [https://arxiv.org/abs/2306.13649](https://arxiv.org/abs/2306.13649)
+
+---
