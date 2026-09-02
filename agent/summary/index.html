@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Agent 知识总结 - 谢聪博客 | xcTorres Blog">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="">
+    
+    <meta property="og:image" content="https://xctorres.github.io//img/avatar-xcTorres.png">
+    <meta property="og:url" content="https://xctorres.github.io//agent/summary/">
+    <meta property="og:site_name" content="谢聪博客 | xcTorres Blog">
+    
+    <title>Agent 知识总结 - 谢聪博客 | xcTorres Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://xctorres.github.io//agent/summary/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link href="/css/timeline.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">xcTorres Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse flex-md-column">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/llm/">LLM</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/agent/">Agent</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/gallery/">Gallery</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <h1><span class="lang-zh">Agent 知识总结</span><span class="lang-en">Agent Notes</span></h1>
+          <span class="subheading"><span class="lang-zh">规划 · 工具 · 记忆 · 多智能体</span><span class="lang-en">Planning · Tools · Memory · Multi-Agent</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style TYPE="text/css">
+.llm-doc { padding-bottom: 60px; }
+.llm-doc-meta {
+  padding: 26px 0 0 0;
+  font-size: 14px;
+  color: #8c8c8c;
+}
+.llm-doc-meta a { border-bottom: 1px dotted #c0c0c0; }
+.llm-doc-meta a:hover { border-bottom-color: #0085a1; }
+.llm-doc-meta .sep { padding: 0 8px; color: #d5d5d5; }
+.llm-doc-lang { float: right; }
+@media only screen and (max-width: 767px) {
+  .llm-doc-lang { float: none; display: block; margin-top: 12px; }
+}
+
+/* ---- Table of contents ---------------------------------------------------
+   kramdown renders `ul#markdown-toc` at the top of the article; a script moves
+   it into the panel below. Without JS it simply stays inline, still readable. */
+.llm-toc-panel {
+  margin-top: 30px;
+  padding: 18px 16px 18px 18px;
+  border-left: 2px solid #eee;
+}
+.llm-toc-heading {
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a8a8a8;
+  margin-bottom: 12px;
+}
+.llm-toc-list, .llm-toc-list ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.llm-toc-list ul { padding-left: 12px; margin: 4px 0 8px 0; }
+.llm-toc-list li { margin: 0; line-height: 1.5; }
+.llm-toc-list a {
+  display: block;
+  padding: 4px 8px;
+  font-size: 13px;
+  color: #8c8c8c;
+  border-left: 2px solid transparent;
+  margin-left: -10px;
+  transition: color .15s ease, border-color .15s ease;
+}
+.llm-toc-list > li > a {
+  font-size: 14px;
+  font-weight: 600;
+  color: #595959;
+  margin-top: 8px;
+}
+.llm-toc-list a:hover { color: #0085a1; text-decoration: none; }
+/* the section currently under the reader */
+.llm-toc-list a.is-active {
+  color: #0085a1;
+  border-left-color: #0085a1;
+  background-color: #f7fbfc;
+}
+/* headings carry `#基础 #高频` tag spans; they are noise in a narrow sidebar */
+.llm-toc-list code { display: none; }
+
+@media only screen and (min-width: 992px) {
+  .llm-toc-panel {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 86px;
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
+    /* a thin, unobtrusive scrollbar for the panel itself */
+    scrollbar-width: thin;
+  }
+  .llm-toc-panel::-webkit-scrollbar { width: 5px; }
+  .llm-toc-panel::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 3px; }
+}
+/* stacked above the article on narrow screens */
+@media only screen and (max-width: 991px) {
+  .llm-toc-panel {
+    border-left: 3px solid #0085a1;
+    background-color: #fbfbfb;
+    border-radius: 3px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+
+/* ---- Body ---------------------------------------------------------------- */
+.llm-body { padding-top: 10px; }
+.llm-body h1 {
+  font-size: 26px;
+  margin: 46px 0 18px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.llm-body h2 { font-size: 22px; margin: 34px 0 14px 0; }
+.llm-body h3 { font-size: 19px; margin: 30px 0 12px 0; }
+.llm-body blockquote {
+  font-size: 15px;
+  font-style: normal;
+  color: #6b6b6b;
+  border-left: 3px solid #e5e5e5;
+}
+/* data tables only — rouge renders code blocks as a line-number table
+   (`.rouge-table`), which must keep the highlighter's own styling */
+.llm-body table:not(.rouge-table) {
+  width: 100%;
+  margin: 18px 0;
+  font-size: 14px;
+  border-collapse: collapse;
+}
+.llm-body table:not(.rouge-table) th,
+.llm-body table:not(.rouge-table) td {
+  padding: 8px 12px;
+  border: 1px solid #eaeaea;
+  vertical-align: top;
+}
+.llm-body table:not(.rouge-table) th { background-color: #fafafa; text-align: left; }
+.llm-body table:not(.rouge-table) tr:nth-child(even) td { background-color: #fcfcfc; }
+.llm-body code {
+  font-size: 13px;
+  padding: 2px 5px;
+  background-color: #f4f6f8;
+  color: #476582;
+  border-radius: 3px;
+}
+.llm-body pre code { background: none; padding: 0; color: inherit; }
+/* match the theme's in-content link colour (.post-container a) so the
+   reference URLs read as links rather than body text */
+.llm-body a { color: #337ab7; }
+.llm-body a:hover, .llm-body a:focus { color: #0085a1; }
+/* bare reference URLs are long; let them wrap instead of overflowing */
+.llm-body a[href^="http"] { word-break: break-word; }
+/* collapsible derivations: the theme strips the default disclosure triangle,
+   so draw our own and make the whole summary row read as clickable */
+.llm-body details {
+  margin: 20px 0;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  background: #fcfcfc;
+  padding: 0 16px;
+}
+.llm-body summary {
+  cursor: pointer;
+  margin: 0 -16px;
+  padding: 11px 16px;
+  font-size: 14px;
+  color: #555;
+  list-style: none;
+  user-select: none;
+}
+.llm-body summary::-webkit-details-marker { display: none; }
+.llm-body summary::before {
+  content: "\25B8";
+  display: inline-block;
+  width: 14px;
+  color: #999;
+  transition: transform 0.15s ease;
+}
+.llm-body details[open] > summary {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 4px;
+}
+.llm-body details[open] > summary::before { transform: rotate(90deg); }
+.llm-body details > *:last-child { margin-bottom: 14px; }
+.llm-body img { max-width: 100%; }
+.llm-body hr { margin: 34px 0; border-top: 1px solid #eee; }
+/* wide tables scroll on their own instead of stretching the page */
+.llm-table-wrap { overflow-x: auto; }
+/* the fixed navbar must not swallow a heading jumped to from the TOC */
+.llm-body h1, .llm-body h2, .llm-body h3 { scroll-margin-top: 80px; }
+
+.llm-doc-footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+}
+@media only screen and (max-width: 767px) {
+  .llm-body h1 { font-size: 22px; }
+  .llm-body h2 { font-size: 19px; }
+  .llm-body h3 { font-size: 17px; }
+}
+</style>
+
+<!-- Main Content -->
+
+
+<div class="container llm-doc">
+  <div class="row">
+
+    <!-- Table of contents (one per language) -->
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+      <nav class="llm-toc-panel lang-zh" id="llm-toc-zh"><div class="llm-toc-heading">目录</div></nav>
+      
+      <nav class="llm-toc-panel lang-en" id="llm-toc-en"><div class="llm-toc-heading">Contents</div></nav>
+      
+    </div>
+
+    <!-- Article -->
+    <div class="col-lg-8 col-lg-offset-1 col-md-9 col-sm-12 col-xs-12">
+
+      <div class="llm-doc-meta">
+        <a href="/agent/">&larr; AGENT</a>
+        
+        
+          <span class="sep">·</span><a href="https://github.com/xcTorres/learn-llm-from-scratch/blob/main/Agent知识总结.md" target="_blank" rel="noopener"><span class="lang-zh">笔记源文件</span><span class="lang-en">Source note</span></a>
+        
+        
+        <span class="llm-doc-lang">
+          <span class="lang-switch">
+            <button type="button" data-lang="zh" onclick="__setNotesLang('zh')">中文</button>
+            <button type="button" data-lang="en" onclick="__setNotesLang('en')">EN</button>
+          </span>
+        </span>
+        
+      </div>
+
+      <div class="lang-zh">
+        <article class="llm-body" id="llm-article-zh">
+          <ul class="llm-toc-list" id="markdown-toc">
+  <li><a href="#第五部分agent智能体" id="markdown-toc-第五部分agent智能体">第五部分：Agent（智能体）</a>    <ul>
+      <li><a href="#1-什么是-llm-agent核心组成-agent-高频" id="markdown-toc-1-什么是-llm-agent核心组成-agent-高频">1. 什么是 LLM Agent？核心组成？⭐ <code class="language-plaintext highlighter-rouge">#agent #高频</code></a></li>
+      <li><a href="#2-react-是什么为什么有效-agent-高频" id="markdown-toc-2-react-是什么为什么有效-agent-高频">2. ReAct 是什么？为什么有效？⭐ <code class="language-plaintext highlighter-rouge">#agent #高频</code></a></li>
+      <li><a href="#3-function-calling--tool-use-的机制与工程要点-agent-工程" id="markdown-toc-3-function-calling--tool-use-的机制与工程要点-agent-工程">3. Function Calling / Tool Use 的机制与工程要点 <code class="language-plaintext highlighter-rouge">#agent #工程</code></a></li>
+      <li><a href="#4-agent-的规划方法有哪些-agent" id="markdown-toc-4-agent-的规划方法有哪些-agent">4. Agent 的规划方法有哪些？ <code class="language-plaintext highlighter-rouge">#agent</code></a></li>
+      <li><a href="#5-rag-完整流程与优化点-agent-工程-高频" id="markdown-toc-5-rag-完整流程与优化点-agent-工程-高频">5. RAG 完整流程与优化点？⭐ <code class="language-plaintext highlighter-rouge">#agent #工程 #高频</code></a></li>
+      <li><a href="#6-agent-的记忆怎么设计-agent" id="markdown-toc-6-agent-的记忆怎么设计-agent">6. Agent 的记忆怎么设计？ <code class="language-plaintext highlighter-rouge">#agent</code></a></li>
+      <li><a href="#7-multi-agent-系统的价值与挑战-agent" id="markdown-toc-7-multi-agent-系统的价值与挑战-agent">7. Multi-Agent 系统的价值与挑战 <code class="language-plaintext highlighter-rouge">#agent</code></a></li>
+      <li><a href="#8-agent-为什么不可靠怎么提升稳定性-agent-高频" id="markdown-toc-8-agent-为什么不可靠怎么提升稳定性-agent-高频">8. Agent 为什么不可靠？怎么提升稳定性？⭐ <code class="language-plaintext highlighter-rouge">#agent #高频</code></a></li>
+      <li><a href="#9-怎么评估一个-agent-agent" id="markdown-toc-9-怎么评估一个-agent-agent">9. 怎么评估一个 Agent？ <code class="language-plaintext highlighter-rouge">#agent</code></a></li>
+      <li><a href="#10-什么是-agent-harnessskill-又是什么-agent-工程-高频" id="markdown-toc-10-什么是-agent-harnessskill-又是什么-agent-工程-高频">10. 什么是 Agent Harness？Skill 又是什么？⭐ <code class="language-plaintext highlighter-rouge">#agent #工程 #高频</code></a></li>
+      <li><a href="#11-什么是-agent-的-trajectory轨迹有什么用-agent-高频" id="markdown-toc-11-什么是-agent-的-trajectory轨迹有什么用-agent-高频">11. 什么是 Agent 的 Trajectory（轨迹）？有什么用？⭐ <code class="language-plaintext highlighter-rouge">#agent #高频</code></a></li>
+      <li><a href="#12-agent-的协议三件套mcp--a2a--ag-ui-分别解决什么-agent-工程-高频" id="markdown-toc-12-agent-的协议三件套mcp--a2a--ag-ui-分别解决什么-agent-工程-高频">12. Agent 的「协议三件套」：MCP / A2A / AG-UI 分别解决什么？⭐ <code class="language-plaintext highlighter-rouge">#agent #工程 #高频</code></a></li>
+      <li><a href="#13-agent-一般怎么训练-agent-对齐-高频" id="markdown-toc-13-agent-一般怎么训练-agent-对齐-高频">13. Agent 一般怎么训练？⭐ <code class="language-plaintext highlighter-rouge">#agent #对齐 #高频</code></a></li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p><strong>定位</strong>：规划 · 工具 · 记忆 · 多智能体。每个条目按 <strong>核心答案 → 深入原理 → 权衡 / 追问 → 参考</strong> 组织，⭐ 标记值得重点深挖的地方。</p>
+
+  <p><strong>配套</strong>：<a href="/llm/summary/">LLM 知识总结</a></p>
+</blockquote>
+
+<hr />
+
+<h1 id="第五部分agent智能体">第五部分：Agent（智能体）</h1>
+
+<h3 id="1-什么是-llm-agent核心组成-agent-高频">1. 什么是 LLM Agent？核心组成？⭐ <code class="language-plaintext highlighter-rouge">#agent #高频</code></h3>
+<p><strong>【核心答案】</strong> 以 LLM 为「大脑」，通过<strong>规划 + 工具 + 记忆 + 反思</strong>自主完成多步任务，而非单轮问答。四大模块：Planning（任务拆解/规划）、Tool use（调用外部 API/工具获取能力与信息）、Memory（短期上下文 + 长期记忆）、Reflection（基于反馈自我纠错）。</p>
+
+<p><strong>但更有判断力的一条分界线是 workflow 与 agent</strong> —— 关键在<strong>谁决定流程</strong>：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>流程由谁决定</th>
+      <th>例子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Workflow</strong></td>
+      <td><strong>预先写死的代码路径</strong>，LLM 只在固定节点上被调用</td>
+      <td>先分类 → 再按类别走不同 prompt → 汇总</td>
+    </tr>
+    <tr>
+      <td><strong>Agent</strong></td>
+      <td><strong>LLM 自己决定</strong>下一步做什么、调哪个工具、何时停</td>
+      <td>给定目标和一组工具，自行推进直到完成</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>生产系统里大多数「AI agent」其实是 workflow，而且这样通常更好</strong>——可预测、可测试、成本可控。真正需要 agent 的场景是：步骤数无法预先确定、路径依赖中间结果。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>Agent ＝ LLM（推理与决策）＋ 工具（扩展能力边界）＋ <strong>控制循环</strong>（感知-决策-行动-观察）。三者里<strong>循环才是 agent 之所以为 agent 的东西</strong>——去掉循环就退化成一次函数调用。</li>
+  <li><strong>最小可运行形态其实很简单</strong>，本质就是「LLM 在循环里调工具」：</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"user"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="n">task</span><span class="p">}]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAX_STEPS</span><span class="p">):</span>                 <span class="c1"># 步数上限，防死循环
+</span>    <span class="n">reply</span> <span class="o">=</span> <span class="n">llm</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="n">TOOLS</span><span class="p">)</span>     <span class="c1"># 模型决定：说话，还是调工具
+</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">reply</span><span class="p">.</span><span class="n">tool_calls</span><span class="p">:</span>               <span class="c1"># 没有工具调用 → 任务结束
+</span>        <span class="k">return</span> <span class="n">reply</span><span class="p">.</span><span class="n">content</span>
+    <span class="n">messages</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">reply</span><span class="p">.</span><span class="n">tool_calls</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">TOOLS</span><span class="p">[</span><span class="n">call</span><span class="p">.</span><span class="n">name</span><span class="p">](</span><span class="o">**</span><span class="n">call</span><span class="p">.</span><span class="n">args</span><span class="p">)</span>   <span class="c1"># 真正执行的是外部代码
+</span>        <span class="n">messages</span><span class="p">.</span><span class="n">append</span><span class="p">({</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"tool"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="n">result</span><span class="p">})</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>这十几行就是第 10 题所说 <strong>harness</strong> 的骨架：模型只负责「决定调什么」，<strong>执行、回填、循环控制全在模型之外</strong>。</p>
+<ul>
+  <li>与「单纯 prompt」的区别：Agent <strong>有状态、有循环、能与环境交互并根据反馈调整</strong>。</li>
+  <li><strong>循环带来能力，也带来代价</strong>：每多一步，出错的机会就多一次，且错误会顺着循环累积——这是第 8 题「Agent 为什么不可靠」的根源。能力和脆弱性来自同一个机制。</li>
+  <li>关于「四大模块」的地位：这是 Lilian Weng 2023 年那篇综述的<strong>分类视角，不是架构规范</strong>——没有哪个框架真的按这四块来实现。它适合用来盘点「我这套系统缺了哪一环」，不适合当作搭建蓝图。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>Agent 何时是过度设计</strong>：简单任务直接 prompt/RAG 更稳更便宜；能用固定流程表达清楚的，就写成 workflow。Agent 适合<strong>多步、动态决策、需要调工具</strong>的复杂任务。判断标准可以很直接：<strong>你能不能提前把流程图画出来？</strong> 画得出来就写 workflow。</li>
+  <li>追问 <strong>为什么说「大多数 agent 就是 LLM 加个循环」</strong>：Anthropic 在 <em>Building effective agents</em> 里的核心观察就是——成功的实现往往用<strong>简单、可组合的模式</strong>，而不是复杂框架；框架的抽象层反而会挡住你对 prompt 和工具返回值的调试视线。</li>
+  <li>追问 <strong>循环的终止条件怎么定</strong>：模型不再发出工具调用（自然终止）、步数/时间上限（硬性兜底）、外部判据（测试通过、目标达成）。<strong>必须有硬性兜底</strong>，否则遇上模型反复调同一个工具就停不下来（见第 8 题）。</li>
+</ul>
+
+<p>📖 参考：Anthropic「Building effective agents」— <a href="https://www.anthropic.com/research/building-effective-agents">https://www.anthropic.com/research/building-effective-agents</a> ｜ Lilian Weng「LLM Powered Autonomous Agents」— <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">https://lilianweng.github.io/posts/2023-06-23-agent/</a></p>
+
+<hr />
+
+<h3 id="2-react-是什么为什么有效-agent-高频">2. ReAct 是什么？为什么有效？⭐ <code class="language-plaintext highlighter-rouge">#agent #高频</code></h3>
+<p><strong>【核心答案】</strong> Reasoning + Acting 交替：模型循环输出 <strong>Thought（推理）→ Action（调工具）→ Observation（结果）</strong>，直到完成。推理指导行动，行动的真实反馈又修正推理。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>纯 CoT 只在「脑内」推理，无法获取外部信息、易累积错误；纯 Acting 缺乏规划。ReAct 把两者结合：用推理决定下一步动作，用观察校正推理。</li>
+  <li>通过与外部（如搜索、API）交互，能减少幻觉、动态获取最新信息。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 追问 ReAct 的失败模式：陷入循环、重复无效动作、推理与动作不一致；需配合步数上限、反思机制。</p>
+
+<p>📖 参考：ReAct — <a href="https://arxiv.org/abs/2210.03629">https://arxiv.org/abs/2210.03629</a></p>
+
+<hr />
+
+<h3 id="3-function-calling--tool-use-的机制与工程要点-agent-工程">3. Function Calling / Tool Use 的机制与工程要点 <code class="language-plaintext highlighter-rouge">#agent #工程</code></h3>
+<p><strong>【核心答案】</strong> 给模型提供工具的 <strong>schema（名称、参数、描述）</strong>，模型输出结构化调用（通常 JSON），由外部代码执行后把结果喂回模型继续推理。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>模型本身不执行工具，它只「决定调哪个工具、传什么参数」；执行和结果回填由 agent 框架完成。</li>
+  <li>训练上：通过包含工具调用轨迹的数据微调，让模型学会何时/如何调用（Toolformer 思路）。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>工程要点：参数 schema 校验、调用失败重试、工具选择准确率、并行调用、防止模型幻觉出不存在的工具或乱传参。</li>
+  <li>追问怎么提升工具调用准确率：清晰的工具描述、few-shot 示例、约束解码（强制合法 JSON）、减少同时暴露的工具数量。</li>
+</ul>
+
+<p>📖 参考：Toolformer — <a href="https://arxiv.org/abs/2302.04761">https://arxiv.org/abs/2302.04761</a></p>
+
+<hr />
+
+<h3 id="4-agent-的规划方法有哪些-agent">4. Agent 的规划方法有哪些？ <code class="language-plaintext highlighter-rouge">#agent</code></h3>
+<p><strong>【核心答案】</strong> CoT（单线链式推理）、ToT（Tree of Thoughts，树状探索多路径并回溯）、Plan-and-Execute（先整体规划再逐步执行）、Reflexion（失败后基于语言反馈反思重试）。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>CoT</strong>：把问题拆成中间步骤，适合一次性推理题。</li>
+  <li><strong>ToT</strong>：每步生成多个候选思路，用搜索（BFS/DFS）+ 评估选优，适合需要试错/回溯的问题（如解谜）。</li>
+  <li><strong>Plan-and-Execute</strong>：先让 LLM 列出完整计划再逐项执行，比 ReAct 更省 LLM 调用、更适合长任务，但对计划质量敏感。</li>
+  <li><strong>Reflexion</strong>：把失败的轨迹和反思写进记忆，下次重试时参考。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 追问 ReAct vs Plan-and-Execute：前者灵活、能动态调整但调用多；后者高效但计划错了就全错。</p>
+
+<p>📖 参考：Tree of Thoughts — <a href="https://arxiv.org/abs/2305.10601">https://arxiv.org/abs/2305.10601</a> ｜ Reflexion — <a href="https://arxiv.org/abs/2303.11366">https://arxiv.org/abs/2303.11366</a></p>
+
+<hr />
+
+<h3 id="5-rag-完整流程与优化点-agent-工程-高频">5. RAG 完整流程与优化点？⭐ <code class="language-plaintext highlighter-rouge">#agent #工程 #高频</code></h3>
+<p><strong>【核心答案】</strong> 流程：文档切块 → 向量化入库 → 检索 Top-k → 拼进 prompt → 生成。每个环节都有优化空间。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>切块（chunking）</strong>：定长+重叠窗口 / 语义切块 / 按结构（标题、段落）切；块太大噪声多，太小丢上下文。</li>
+  <li><strong>检索</strong>：① <strong>混合检索</strong> = 向量（语义）+ BM25（关键词）；② <strong>rerank</strong>：用 cross-encoder 对召回结果重排序，显著提质；③ <strong>query 改写/扩展</strong>：把口语化问题改写成更适合检索的查询（HyDE、multi-query）。</li>
+  <li><strong>生成</strong>：引用溯源、防止「检索到了却不用」、控制上下文不超长。</li>
+  <li><strong>进阶</strong>：GraphRAG（用知识图谱组织）、多跳检索（多轮检索回答复杂问题）、Self-RAG（模型自己判断要不要检索、检索得好不好）。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 RAG 失败的常见原因：检索召回差（根因最多）、chunk 切坏、reranker 缺失、上下文太长「lost in the middle」。</li>
+  <li>追问 <strong>RAG vs 长上下文</strong>：互补——RAG 省 token、可溯源、知识可更新；长上下文省检索工程但贵且中段信息易丢。</li>
+</ul>
+
+<p>📖 参考：RAG — <a href="https://arxiv.org/abs/2005.11401">https://arxiv.org/abs/2005.11401</a></p>
+
+<hr />
+
+<h3 id="6-agent-的记忆怎么设计-agent">6. Agent 的记忆怎么设计？ <code class="language-plaintext highlighter-rouge">#agent</code></h3>
+<p><strong>【核心答案】</strong> <strong>短期记忆</strong> = 当前对话上下文（受 context 长度限制）；<strong>长期记忆</strong> = 把历史/知识存入向量库，按需检索召回。可加摘要压缩、重要性打分、时间衰减。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>长上下文满了怎么办：滚动摘要（把旧对话压成摘要）、只保留关键信息、外置到向量库检索。</li>
+  <li>Generative Agents（斯坦福小镇）用「记忆流 + 重要性/相关性/时近性打分」检索记忆，是经典设计。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 追问检索式记忆的问题：召回不准会「忘事」或「记错」；需要好的写入（什么值得记）和读出（怎么检索）策略。</p>
+
+<hr />
+
+<h3 id="7-multi-agent-系统的价值与挑战-agent">7. Multi-Agent 系统的价值与挑战 <code class="language-plaintext highlighter-rouge">#agent</code></h3>
+<p><strong>【核心答案】</strong> 价值：角色分工（如规划者/执行者/审查者）、并行处理、复杂任务分解、相互审查提质。挑战：通信与协调成本、错误在 agent 间累积放大、终止条件难定、成本与延迟高。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>常见模式：流水线（顺序）、辩论（debate 提升正确性）、监督者-工作者（supervisor 分派）。</li>
+  <li>框架：AutoGen、CrewAI、LangGraph、MetaGPT。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 追问 multi-agent 真比单 agent 强吗？不一定——简单任务下多 agent 徒增成本和不稳定；要看任务是否真能从分工/审查中获益。</p>
+
+<hr />
+
+<h3 id="8-agent-为什么不可靠怎么提升稳定性-agent-高频">8. Agent 为什么不可靠？怎么提升稳定性？⭐ <code class="language-plaintext highlighter-rouge">#agent #高频</code></h3>
+<p><strong>【核心答案】</strong> 主因是<strong>误差累积</strong>——多步任务里任一步出错都可能让后续全盘崩坏；加上工具调用幻觉、死循环、长程规划弱。提升靠：限制步数+超时、每步校验与重试、ReAct/Reflexion 自纠、关键步骤 human-in-the-loop、结构化输出约束、充分的日志与可观测性。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>假设单步成功率 95%，10 步串联整体成功率仅约 0.95¹⁰ ≈ 60%——这是 agent 可靠性差的数学本质。</li>
+  <li>因此「减少步数」「每步验证」「可恢复/回滚」比「让单步更聪明」往往更有效。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong> 追问怎么定位 agent 失败：靠 tracing（如 LangSmith）逐步看 thought/action/observation，找出第一个出错步。</p>
+
+<hr />
+
+<h3 id="9-怎么评估一个-agent-agent">9. 怎么评估一个 Agent？ <code class="language-plaintext highlighter-rouge">#agent</code></h3>
+<p><strong>【核心答案】</strong> 指标：任务成功率、步数/调用次数/成本、延迟、工具调用准确率、鲁棒性。基准：AgentBench（综合）、GAIA（通用助理）、WebArena（网页操作）、SWE-bench（真实代码修复）、τ-bench（工具+对话）。</p>
+
+<p><strong>【深入】</strong> 评估难点在于任务开放、过程难自动判分；常用「最终状态是否达成」+「轨迹质量」结合，必要时用更强模型当裁判（LLM-as-judge，但要防偏见）。</p>
+
+<p><strong>【权衡 / 追问】</strong> 追问 LLM-as-judge 的坑：位置偏见、长度偏见、自我偏好；需打乱顺序、设评分细则、必要时人工抽检。</p>
+
+<hr />
+
+<h3 id="10-什么是-agent-harnessskill-又是什么-agent-工程-高频">10. 什么是 Agent Harness？Skill 又是什么？⭐ <code class="language-plaintext highlighter-rouge">#agent #工程 #高频</code></h3>
+<p><strong>【核心答案】</strong> <strong>Harness（智能体框架/骨架）</strong> 是包裹在 LLM 外面、驱动它持续运转的那层工程系统：它负责把上下文喂给模型、解析模型的工具调用、真正执行工具、把结果回填，再循环——也就是 ReAct「感知-决策-行动-观察」循环的<strong>工程实现载体</strong>。<strong>Skill（技能）</strong> 则是给 Agent 按需加载的一份「能力包」：通常是一段结构化的指令/流程说明（+ 可选的脚本、模板、参考文档），告诉模型在某类任务上「该怎么做」，用到时才注入上下文。Claude Code / Claude Agent SDK 的 Skills 就是典型。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>Harness 干的事</strong>（模型本身不做的那部分）：上下文拼装与裁剪、工具 schema 注入、工具调用的解析与执行、错误重试、循环控制（步数/超时/终止条件）、状态与记忆管理、权限与沙箱、可观测性（trace/log）。可以说<strong>模型是大脑，harness 是神经系统与躯干</strong>。</li>
+  <li><strong>Skill 的本质是「渐进式上下文加载（progressive disclosure）」</strong>：不把所有领域知识一次性塞进 system prompt（浪费 token、稀释注意力），而是平时只放一句「技能简介」，模型判断相关时才把完整的技能内容拉进上下文。这把「Agent 的能力」从「写死的 prompt」变成了<strong>可插拔、可复用、可版本管理的模块</strong>。</li>
+  <li>一个 Skill 通常包含：触发描述（什么时候用）、操作步骤/最佳实践、可调用的脚本或工具、示例与模板。它和 <strong>Tool/Function</strong> 的区别：Tool 是「一个可执行的原子动作」，Skill 是「一套做某类事的方法论 + 可能打包了多个 tool 的用法」。</li>
+  <li>与 <strong>RAG</strong> 的区别：RAG 检索的是「事实知识」用于回答；Skill 加载的是「程序性知识/操作手册」用于指导行动。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>为什么需要 harness 而不是让模型自己跑</strong>：模型是无状态的「下一个 token 预测器」，没有循环、不能真正执行代码、不持久化状态——这些都得 harness 补。harness 的质量（上下文工程、工具可靠性、错误恢复）往往比换更强的模型更决定 Agent 的成败。</li>
+  <li>追问 <strong>Skill / Harness 体现的核心思想 = 上下文工程（context engineering）</strong>：在有限的上下文窗口里，决定「此刻该放什么、不放什么」。Skill 是按需加载，harness 的滚动摘要/记忆检索是动态裁剪，二者都是为了对抗「上下文越长越稀释、越贵」。</li>
+  <li>追问与 <strong>MCP（Model Context Protocol）</strong> 的关系：MCP 是标准化「工具/数据源怎么接入」的协议，harness 通过 MCP 拿到工具；Skill 则是「怎么用这些工具把事做好」的方法层。</li>
+  <li>追问落地代表：Claude Code（harness + Skills + 子 agent）、OpenAI 的 Assistants/Responses、各类 Agent SDK；工程上常配合<strong>子 Agent（subagent）</strong>——把一个复杂技能丢给独立上下文的子 agent 执行，避免污染主上下文。</li>
+</ul>
+
+<p>📖 参考：Anthropic「Building effective agents」— <a href="https://www.anthropic.com/research/building-effective-agents">https://www.anthropic.com/research/building-effective-agents</a> ｜ Agent Skills — <a href="https://www.anthropic.com/news/skills">https://www.anthropic.com/news/skills</a> ｜ MCP — <a href="https://modelcontextprotocol.io">https://modelcontextprotocol.io</a></p>
+
+<hr />
+
+<h3 id="11-什么是-agent-的-trajectory轨迹有什么用-agent-高频">11. 什么是 Agent 的 Trajectory（轨迹）？有什么用？⭐ <code class="language-plaintext highlighter-rouge">#agent #高频</code></h3>
+<p><strong>【核心答案】</strong> Trajectory 是 Agent 为完成一个任务所走过的<strong>完整交互序列</strong>——从接到任务到结束的整段「行动历史」。在 ReAct 范式下，它就是一连串 <code class="language-plaintext highlighter-rouge">(Thought 思考 → Action 动作 → Observation 观察)</code> 三元组，直到产出最终答案。一条轨迹 ≈ 强化学习里的一个 <strong>episode</strong>。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li>典型结构：<code class="language-plaintext highlighter-rouge">任务 → 思考 → 动作(调工具) → 观察(工具返回) → 思考 → … → 最终答案</code>。把这整段记录串起来就是一条 trajectory。</li>
+  <li>四大用途：
+    <ul>
+      <li><strong>评估（trajectory evaluation）</strong>：不只看最终答案对不对，还看中间过程是否合理——少走弯路、没有死循环、工具调用得当。对应第 9 题的「最终状态 + 轨迹质量」双重判分。</li>
+      <li><strong>训练数据</strong>：收集高质量轨迹做 SFT；或用 <strong>拒绝采样（rejection sampling）/ DPO</strong> 从多条轨迹里挑好坏对，让模型学会更优的行动策略。</li>
+      <li><strong>强化学习</strong>：轨迹 = 一个 episode，每步是 <code class="language-plaintext highlighter-rouge">(state, action)</code>，配合 reward 算策略梯度（RLHF/GRPO 训练 agent 行为）。</li>
+      <li><strong>调试 / 可观测性</strong>：出错时回放轨迹，定位是「哪一步思考错了」还是「工具调错了」，是 harness 的 trace/log 的核心对象。</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>轨迹级 reward 的难点</strong>：稀疏（只有终点有信号）+ 信用分配难（哪一步该为成败负责）；缓解靠过程奖励（PRM）、对每步打分或回溯。</li>
+  <li>追问 <strong>怎么判一条轨迹好坏</strong>：成功率、步数/工具调用次数/成本、是否有冗余或循环动作；过程开放时常用更强模型当裁判（LLM-as-judge）。</li>
+  <li>追问与 <strong>Reflexion</strong> 的关系（第 4 题）：Reflexion 正是把「失败轨迹 + 反思」写进记忆，下次重试时参考——是轨迹的一种再利用方式。</li>
+</ul>
+
+<p>📖 参考：ReAct — <a href="https://arxiv.org/abs/2210.03629">https://arxiv.org/abs/2210.03629</a> ｜ Reflexion — <a href="https://arxiv.org/abs/2303.11366">https://arxiv.org/abs/2303.11366</a></p>
+
+<hr />
+
+<h3 id="12-agent-的协议三件套mcp--a2a--ag-ui-分别解决什么-agent-工程-高频">12. Agent 的「协议三件套」：MCP / A2A / AG-UI 分别解决什么？⭐ <code class="language-plaintext highlighter-rouge">#agent #工程 #高频</code></h3>
+<p><strong>【核心答案】</strong> 三个协议<strong>各管一条连线</strong>，互补而非竞争：</p>
+<ul>
+  <li><strong>MCP</strong>（Model Context Protocol，Anthropic）：<strong>Agent ↔ 工具/数据</strong> —— 标准化「怎么接工具和数据源」。</li>
+  <li><strong>A2A</strong>（Agent2Agent，Google）：<strong>Agent ↔ Agent</strong> —— 标准化「多智能体之间怎么协作」。</li>
+  <li><strong>AG-UI</strong>（Agent–User Interaction Protocol，<strong>CopilotKit</strong>）：<strong>Agent ↔ 用户/前端</strong> —— 标准化「Agent 怎么把过程实时呈现给界面、并接受用户干预」。</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>        ┌──── MCP ────► 工具 / 数据源
+Agent ──┼──── A2A ────► 其他 Agent
+        └──── AG-UI ──► 前端 / 用户
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>【深入】AG-UI 是什么（这条最容易被忽略）</strong></p>
+<ul>
+  <li><strong>定位</strong>：<strong>开放、轻量、事件驱动</strong>的协议，把 agent 后端和前端(如 React)接起来，是<strong>双向桥</strong>。源于 CopilotKit 与 LangGraph / CrewAI 的合作，现已扩到更广生态。</li>
+  <li><strong>为什么需要它</strong>：传统 <strong>请求/响应</strong>架构撑不住 agent —— agent <strong>长时间运行、要流式吐中间过程、非确定性、结构化与非结构化输出混合、还能嵌套组合</strong>。所以改成<strong>事件流</strong>。</li>
+  <li><strong>怎么工作</strong>：前后端交换一串 <strong>JSON 事件</strong>，传输可走 <strong>SSE / WebSocket / HTTP</strong>。</li>
+  <li>
+    <p><strong>约 16–17 个事件类型，分 5 类</strong>：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>类别</th>
+          <th>代表事件</th>
+          <th>作用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>生命周期</strong></td>
+          <td><code class="language-plaintext highlighter-rouge">RUN_STARTED</code> / <code class="language-plaintext highlighter-rouge">RUN_ERROR</code> / <code class="language-plaintext highlighter-rouge">RUN_FINISHED</code></td>
+          <td>标记一次运行的起止与错误</td>
+        </tr>
+        <tr>
+          <td><strong>消息</strong></td>
+          <td><code class="language-plaintext highlighter-rouge">TEXT_MESSAGE_START</code> / <code class="language-plaintext highlighter-rouge">_CONTENT</code> / <code class="language-plaintext highlighter-rouge">_END</code></td>
+          <td><strong>流式</strong>吐文本(逐块)</td>
+        </tr>
+        <tr>
+          <td><strong>工具</strong></td>
+          <td><code class="language-plaintext highlighter-rouge">TOOL_CALL_START</code> / <code class="language-plaintext highlighter-rouge">_ARGS</code> / <code class="language-plaintext highlighter-rouge">_RESULT</code></td>
+          <td>让前端<strong>看见 agent 在调什么工具</strong></td>
+        </tr>
+        <tr>
+          <td><strong>步骤</strong></td>
+          <td><code class="language-plaintext highlighter-rouge">STEP_STARTED</code> / <code class="language-plaintext highlighter-rouge">STEP_FINISHED</code></td>
+          <td>适配 LangGraph 这类<strong>分步执行</strong>框架</td>
+        </tr>
+        <tr>
+          <td><strong>状态 / 特殊</strong></td>
+          <td>state 快照+增量 / 自定义事件</td>
+          <td>状态同步；不属于以上类别的<strong>兜底</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>（草案中还有 Activity、Reasoning(思维链可见性)、Meta、可中断的生命周期事件。）</p>
+  </li>
+  <li><strong>四大能力</strong>：
+    <ul>
+      <li><strong>状态同步</strong>：<strong>类型化共享状态</strong>(只读/读写)，用<strong>事件溯源的流式 diff + 冲突解决</strong>做协同。</li>
+      <li><strong>Human-in-the-Loop</strong>：支持<strong>中断</strong> —— 用户可<strong>暂停/批准/编辑/重试/升级</strong>，<strong>且不丢状态</strong>。</li>
+      <li><strong>Generative UI</strong>：既支持 app 控制的静态组件，也支持 <strong>agent 提出 UI 树</strong>再校验的声明式界面。</li>
+      <li><strong>多模态</strong>：类型化附件 + 实时媒体(文件/图/音频/转写)。</li>
+    </ul>
+  </li>
+  <li><strong>生态</strong>:8+ 框架有适配(LangGraph、CrewAI、Microsoft Agent Framework、Google ADK、AWS Strands、AG2 等)，OpenAI / Cloudflare 平台在推进。</li>
+</ul>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>为什么不能用普通 REST/请求响应</strong>：agent 是<strong>长任务 + 中间过程有价值 + 需要中途干预</strong>；一问一答既没法流式展示”它正在调什么工具/想什么”，也没法在中途插手。</li>
+  <li>追问 <strong>AG-UI 和 MCP 会不会重叠</strong>：不会。<strong>MCP 是”往下”接工具，AG-UI 是”往上”接人</strong>；一个 agent 通常<strong>同时用两者</strong>(MCP 拿能力，AG-UI 露给用户)。</li>
+  <li>追问 <strong>它解决的真实痛点</strong>：在此之前<strong>每个 agent↔前端集成都是定制的</strong>(自己定义 SSE 格式、自己做状态同步、自己实现审批)；AG-UI 把这”最后一公里”标准化了。</li>
+  <li>追问 <strong>和 Trajectory(第 11 题)的关系</strong>:AG-UI 的事件流本质就是<strong>把轨迹实时投射到 UI</strong> —— 工具事件/步骤事件正是轨迹里的 Action/Observation。</li>
+</ul>
+
+<p>📖 参考：AG-UI 官方文档 — <a href="https://docs.ag-ui.com">https://docs.ag-ui.com</a> ｜ AG-UI(CopilotKit) — <a href="https://www.copilotkit.ai/ag-ui">https://www.copilotkit.ai/ag-ui</a> ｜ MCP — <a href="https://modelcontextprotocol.io">https://modelcontextprotocol.io</a> ｜ A2A — <a href="https://a2aproject.github.io/A2A/">https://a2aproject.github.io/A2A/</a></p>
+
+<hr />
+
+<h3 id="13-agent-一般怎么训练-agent-对齐-高频">13. Agent 一般怎么训练？⭐ <code class="language-plaintext highlighter-rouge">#agent #对齐 #高频</code></h3>
+<p><strong>【核心答案】</strong> 先说一句最重要的：<strong>多数 agent 根本不训模型</strong>——用通用模型 ＋ 工具 ＋ harness，靠 prompt 和上下文工程就够了，训练是 prompt 调不动之后才做的事。真要训，主流四条路线是递进的：<strong>轨迹 SFT（行为克隆）→ 拒绝采样 RFT → 结果奖励 RL（GRPO/PPO）→ 过程监督（PRM / on-policy 蒸馏）</strong>，和 <a href="/llm/summary/">LLM 笔记</a>里的训练谱系一一对应。</p>
+
+<p><strong>【深入】</strong></p>
+<ul>
+  <li><strong>① 轨迹 SFT（行为克隆）</strong>：拿人工示范、更强模型跑出的、或线上跑通的轨迹直接微调。
+    <ul>
+      <li><strong>必须知道的实现细节：要 mask 掉 observation。</strong> 一条轨迹是 <code class="language-plaintext highlighter-rouge">Thought(模型生成) → Action(模型生成) → Observation(工具返回，不是模型生成的) → …</code>，<strong>loss 只算 Thought 和 Action 的 token</strong>。不 mask 的话模型会去学「猜工具会返回什么」——既浪费容量，又会诱发自问自答式的幻觉。这条同样适用于后面的 RL，很多人第一次训 agent 就栽在这里。</li>
+      <li>局限：off-policy，有 <strong>exposure bias</strong>——模型从没在自己的错误上训练过（见 LLM 笔记第 8.1 题）。</li>
+    </ul>
+  </li>
+  <li><strong>② 拒绝采样 / RFT</strong>：让模型自己跑，<strong>筛掉失败轨迹</strong>，用成功的做 SFT。采样是 on-policy 的（缓解分布错配），但标签是硬的（监督仍稀疏）。便宜、稳定，是 SFT 之后最划算的一步。</li>
+  <li><strong>③ 结果奖励 RL（GRPO / PPO）</strong>：奖励 ＝ 任务成没成（测试通过、答案正确、目标达成）；规则可判时即 <strong>RLVR</strong>。但 agent 场景比单轮推理难得多：</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>单轮数学</th>
+      <th>Agent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>轨迹长度</td>
+      <td>几百 token</td>
+      <td>几千 token × 多轮</td>
+    </tr>
+    <tr>
+      <td>一次 rollout 的代价</td>
+      <td>跑个字符串比对</td>
+      <td><strong>真的去编译 / 请求 / 点击</strong></td>
+    </tr>
+    <tr>
+      <td>可复现性</td>
+      <td>确定</td>
+      <td>环境有状态、网络会抖</td>
+    </tr>
+    <tr>
+      <td>credit assignment</td>
+      <td>已经很难</td>
+      <td><strong>更难</strong>（跨轮、跨工具调用）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>第二行最被低估：<strong>数学题的 rollout 几乎免费，agent 的 rollout 要真跑环境</strong>——采样成本高出几个数量级，这是 agent RL 比推理 RL 落地慢的主要原因。而 reward hacking 也更花样百出：让测试通过最省事的办法，可能是删掉测试或把返回值写死。</p>
+<ul>
+  <li><strong>④ 过程监督</strong>：结果奖励太稀疏，于是给中间步骤打分。<strong>PRM</strong> 训一个模型逐步评分；<strong>on-policy 蒸馏</strong>用更强的 agent 当教师、在学生自己的轨迹上逐 token 给完整分布——<strong>监督密度比 RL 高几百倍</strong>，是目前性价比很高的路线（见 LLM 笔记第 8.1 题）。</li>
+  <li><strong>数据从哪来</strong>：</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>来源</th>
+      <th>成本</th>
+      <th>质量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>人工示范</td>
+      <td>极贵</td>
+      <td>高，但覆盖窄</td>
+    </tr>
+    <tr>
+      <td>更强模型蒸馏</td>
+      <td>中</td>
+      <td>受教师上限约束</td>
+    </tr>
+    <tr>
+      <td>自采样 ＋ 筛选（RFT）</td>
+      <td>低</td>
+      <td>受当前模型上限约束</td>
+    </tr>
+    <tr>
+      <td>合成环境 / 任务</td>
+      <td>中</td>
+      <td>可规模化，但可能失真</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>【权衡 / 追问】</strong></p>
+<ul>
+  <li>追问 <strong>什么该训、什么该留给 harness</strong>（这个划分最关键，因为很多「agent 能力」根本不在权重里）：</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>归训练</th>
+      <th>归 harness / prompt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>工具调用的格式可靠性</td>
+      <td>工具有哪些、schema 长什么样</td>
+    </tr>
+    <tr>
+      <td><strong>知道什么时候该停</strong></td>
+      <td>步数上限、超时</td>
+    </tr>
+    <tr>
+      <td>长程规划、从错误中恢复</td>
+      <td>上下文压缩、记忆检索</td>
+    </tr>
+    <tr>
+      <td>少走弯路、少调冗余工具</td>
+      <td>权限、沙箱</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>判断标准很直接：<strong>换个模型就没了的才该训；换个 harness 就变的，别训。</strong></p>
+<ul>
+  <li>追问 <strong>为什么轨迹是天然的训练数据</strong>：一条轨迹既是评估对象、又是训练样本、还是调试材料（见第 11 题）。RFT 从中挑好的，RL 把它当 episode，蒸馏在它上面逐 token 对齐——三条路线消费的是同一份东西。</li>
+  <li>追问 <strong>GRPO 用在 agent 上的具体困难</strong>：优势是<strong>一条轨迹一个标量、广播到所有 token</strong>（见 LLM 笔记第 9.1 题）。单轮推理已经难分辨是哪步起作用，agent 还要跨多轮和多次工具调用，信用分配进一步恶化——这正是过程监督的动机。</li>
+  <li>追问 <strong>先做哪一步</strong>：一般是 SFT 打底 → RFT 提一档 → 有稳定环境和可验证奖励再上 RL。没有可靠的自动判分就别急着上 RL，否则是在优化一个错的目标。</li>
+</ul>
+
+<p>📖 参考：Toolformer — <a href="https://arxiv.org/abs/2302.04761">https://arxiv.org/abs/2302.04761</a> ｜ STaR — <a href="https://arxiv.org/abs/2203.14465">https://arxiv.org/abs/2203.14465</a> ｜ GKD（on-policy 蒸馏）— <a href="https://arxiv.org/abs/2306.13649">https://arxiv.org/abs/2306.13649</a></p>
+
+        </article>
+      </div>
+      
+      <div class="lang-en">
+        <article class="llm-body" id="llm-article-en">
+          <ul class="llm-toc-list" id="markdown-toc">
+  <li><a href="#part-v-agents" id="markdown-toc-part-v-agents">Part V: Agents</a>    <ul>
+      <li><a href="#1-what-is-an-llm-agent-and-what-is-it-made-of--agent-core" id="markdown-toc-1-what-is-an-llm-agent-and-what-is-it-made-of--agent-core">1. What is an LLM agent, and what is it made of? ⭐ <code class="language-plaintext highlighter-rouge">#agent #core</code></a></li>
+      <li><a href="#2-what-is-react-and-why-does-it-work--agent-core" id="markdown-toc-2-what-is-react-and-why-does-it-work--agent-core">2. What is ReAct, and why does it work? ⭐ <code class="language-plaintext highlighter-rouge">#agent #core</code></a></li>
+      <li><a href="#3-function-calling--tool-use-the-mechanism-and-what-matters-in-practice-agent-systems" id="markdown-toc-3-function-calling--tool-use-the-mechanism-and-what-matters-in-practice-agent-systems">3. Function calling / tool use: the mechanism and what matters in practice <code class="language-plaintext highlighter-rouge">#agent #systems</code></a></li>
+      <li><a href="#4-what-planning-methods-do-agents-use-agent" id="markdown-toc-4-what-planning-methods-do-agents-use-agent">4. What planning methods do agents use? <code class="language-plaintext highlighter-rouge">#agent</code></a></li>
+      <li><a href="#5-the-full-rag-pipeline-and-where-to-optimise-it--agent-systems-core" id="markdown-toc-5-the-full-rag-pipeline-and-where-to-optimise-it--agent-systems-core">5. The full RAG pipeline, and where to optimise it ⭐ <code class="language-plaintext highlighter-rouge">#agent #systems #core</code></a></li>
+      <li><a href="#6-how-should-an-agents-memory-be-designed-agent" id="markdown-toc-6-how-should-an-agents-memory-be-designed-agent">6. How should an agent’s memory be designed? <code class="language-plaintext highlighter-rouge">#agent</code></a></li>
+      <li><a href="#7-multi-agent-systems-what-they-buy-you-and-what-they-cost-agent" id="markdown-toc-7-multi-agent-systems-what-they-buy-you-and-what-they-cost-agent">7. Multi-agent systems: what they buy you, and what they cost <code class="language-plaintext highlighter-rouge">#agent</code></a></li>
+      <li><a href="#8-why-are-agents-unreliable-and-how-do-you-stabilise-them--agent-core" id="markdown-toc-8-why-are-agents-unreliable-and-how-do-you-stabilise-them--agent-core">8. Why are agents unreliable, and how do you stabilise them? ⭐ <code class="language-plaintext highlighter-rouge">#agent #core</code></a></li>
+      <li><a href="#9-how-do-you-evaluate-an-agent-agent" id="markdown-toc-9-how-do-you-evaluate-an-agent-agent">9. How do you evaluate an agent? <code class="language-plaintext highlighter-rouge">#agent</code></a></li>
+      <li><a href="#10-what-is-an-agent-harness-and-what-is-a-skill--agent-systems-core" id="markdown-toc-10-what-is-an-agent-harness-and-what-is-a-skill--agent-systems-core">10. What is an agent harness? And what is a skill? ⭐ <code class="language-plaintext highlighter-rouge">#agent #systems #core</code></a></li>
+      <li><a href="#11-what-is-an-agent-trajectory-and-what-is-it-for--agent-core" id="markdown-toc-11-what-is-an-agent-trajectory-and-what-is-it-for--agent-core">11. What is an agent trajectory, and what is it for? ⭐ <code class="language-plaintext highlighter-rouge">#agent #core</code></a></li>
+      <li><a href="#12-the-three-agent-protocols-what-mcp-a2a-and-ag-ui-each-solve--agent-systems-core" id="markdown-toc-12-the-three-agent-protocols-what-mcp-a2a-and-ag-ui-each-solve--agent-systems-core">12. The three agent protocols: what MCP, A2A and AG-UI each solve ⭐ <code class="language-plaintext highlighter-rouge">#agent #systems #core</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#appendix-a-core-paper-index-agents" id="markdown-toc-appendix-a-core-paper-index-agents">Appendix A: Core paper index (agents)</a>    <ul>
+      <li><a href="#13-how-are-agents-actually-trained--agent-alignment-core" id="markdown-toc-13-how-are-agents-actually-trained--agent-alignment-core">13. How are agents actually trained? ⭐ <code class="language-plaintext highlighter-rouge">#agent #alignment #core</code></a></li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p><strong>Scope</strong>: planning · tools · memory · multi-agent. Every entry runs <strong>core answer → how it works → trade-offs / follow-ups → references</strong>; ⭐ marks the points worth digging into.</p>
+
+  <p><strong>See also</strong>: <a href="/llm/summary/">LLM Notes</a> · <a href="/vlm/summary/">VLM Notes</a></p>
+</blockquote>
+
+<hr />
+
+<h1 id="part-v-agents">Part V: Agents</h1>
+
+<h3 id="1-what-is-an-llm-agent-and-what-is-it-made-of--agent-core">1. What is an LLM agent, and what is it made of? ⭐ <code class="language-plaintext highlighter-rouge">#agent #core</code></h3>
+<p><strong>【Core answer】</strong> An LLM acting as the “brain”, completing multi-step tasks on its own through <strong>planning + tools + memory + reflection</strong>, rather than answering in a single turn. Four modules: planning (decomposing the task), tool use (calling external APIs for capability and information), memory (short-term context plus long-term storage), and reflection (self-correction from feedback).</p>
+
+<p><strong>But the more useful dividing line is workflow versus agent</strong> — and it turns on <strong>who decides the flow</strong>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Who decides the flow</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Workflow</strong></td>
+      <td><strong>Predefined code paths</strong>; the LLM is called at fixed points</td>
+      <td>Classify first → branch to a different prompt per class → merge</td>
+    </tr>
+    <tr>
+      <td><strong>Agent</strong></td>
+      <td><strong>The LLM decides</strong> what to do next, which tool to call, and when to stop</td>
+      <td>Given a goal and a set of tools, it drives itself to completion</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Most production “AI agents” are in fact workflows, and usually better for it</strong> — predictable, testable, bounded in cost. An agent genuinely earns its place when the number of steps cannot be fixed in advance and the path depends on intermediate results.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>Agent = LLM (reasoning and decisions) + tools (extending what it can reach) + a <strong>control loop</strong> (perceive → decide → act → observe). Of the three, <strong>the loop is what makes it an agent</strong> — remove it and you are back to a single function call.</li>
+  <li><strong>The minimal working shape is genuinely small</strong>, essentially “an LLM calling tools in a loop”:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"user"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="n">task</span><span class="p">}]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAX_STEPS</span><span class="p">):</span>                 <span class="c1"># step cap, so it cannot loop forever
+</span>    <span class="n">reply</span> <span class="o">=</span> <span class="n">llm</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="n">TOOLS</span><span class="p">)</span>     <span class="c1"># the model decides: answer, or call a tool
+</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">reply</span><span class="p">.</span><span class="n">tool_calls</span><span class="p">:</span>               <span class="c1"># no tool call -&gt; the task is done
+</span>        <span class="k">return</span> <span class="n">reply</span><span class="p">.</span><span class="n">content</span>
+    <span class="n">messages</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">reply</span><span class="p">.</span><span class="n">tool_calls</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">TOOLS</span><span class="p">[</span><span class="n">call</span><span class="p">.</span><span class="n">name</span><span class="p">](</span><span class="o">**</span><span class="n">call</span><span class="p">.</span><span class="n">args</span><span class="p">)</span>   <span class="c1"># the execution happens outside the model
+</span>        <span class="n">messages</span><span class="p">.</span><span class="n">append</span><span class="p">({</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"tool"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="n">result</span><span class="p">})</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Those dozen lines are the skeleton of the <strong>harness</strong> from question 10: the model only decides <em>what to call</em>, while <strong>execution, feeding results back, and loop control all live outside it</strong>.</p>
+<ul>
+  <li>What separates it from “just prompting”: an agent <strong>has state, runs in a loop, interacts with an environment and adjusts on feedback</strong>.</li>
+  <li><strong>The loop buys the capability and the fragility alike</strong>: every extra step is another chance to go wrong, and errors compound around the loop — which is the root of question 8, why agents are unreliable. The power and the brittleness come from the same mechanism.</li>
+  <li>On the standing of those “four modules”: this is the <strong>lens</strong> from Lilian Weng’s 2023 survey, <strong>not an architectural spec</strong> — no framework actually implements four such boxes. It is useful for auditing which piece your system is missing, not as a blueprint for building one.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>when an agent is over-engineering</strong>: simple tasks are steadier and cheaper with a plain prompt or RAG, and anything expressible as a fixed sequence should be written as a workflow. Agents earn their keep on <strong>multi-step work with dynamic decisions and tool calls</strong>. The test can be blunt: <strong>can you draw the flowchart in advance?</strong> If you can, write a workflow.</li>
+  <li>A common follow-up is <strong>why people say “most agents are just an LLM in a loop”</strong>: Anthropic’s central observation in <em>Building effective agents</em> is that successful implementations tend to use <strong>simple, composable patterns</strong> rather than heavy frameworks — whose abstraction layers mostly obscure the prompts and tool outputs you need to see while debugging.</li>
+  <li>A common follow-up is <strong>how the loop terminates</strong>: the model stops emitting tool calls (natural stop), a step or time cap (hard backstop), or an external criterion (tests pass, goal met). <strong>The hard backstop is not optional</strong> — without it, a model that keeps calling the same tool never stops (question 8).</li>
+</ul>
+
+<p>📖 Reference: Anthropic, “Building effective agents” — <a href="https://www.anthropic.com/research/building-effective-agents">https://www.anthropic.com/research/building-effective-agents</a> ｜ Lilian Weng, “LLM Powered Autonomous Agents” — <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">https://lilianweng.github.io/posts/2023-06-23-agent/</a></p>
+
+<hr />
+
+<h3 id="2-what-is-react-and-why-does-it-work--agent-core">2. What is ReAct, and why does it work? ⭐ <code class="language-plaintext highlighter-rouge">#agent #core</code></h3>
+<p><strong>【Core answer】</strong> Reasoning and acting, interleaved: the model loops through <strong>Thought (reason) → Action (call a tool) → Observation (result)</strong> until it is done. Reasoning steers the action, and the action’s real-world feedback corrects the reasoning.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>Pure chain-of-thought reasons only “in its head” — it cannot fetch outside information and errors compound. Pure acting has no plan. ReAct combines them: reasoning picks the next action, observation corrects the reasoning.</li>
+  <li>Interacting with the outside world (search, APIs) cuts hallucination and pulls in current information.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>how ReAct fails</strong>: it gets stuck in loops, repeats useless actions, or lets reasoning and action drift apart. Pair it with a step cap and a reflection mechanism.</p>
+
+<p>📖 Reference: ReAct — <a href="https://arxiv.org/abs/2210.03629">https://arxiv.org/abs/2210.03629</a></p>
+
+<hr />
+
+<h3 id="3-function-calling--tool-use-the-mechanism-and-what-matters-in-practice-agent-systems">3. Function calling / tool use: the mechanism and what matters in practice <code class="language-plaintext highlighter-rouge">#agent #systems</code></h3>
+<p><strong>【Core answer】</strong> Give the model each tool’s <strong>schema</strong> (name, parameters, description); the model emits a structured call (usually JSON); external code executes it and feeds the result back so the model can keep reasoning.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>The model never executes anything. It only decides <strong>which tool to call and with what arguments</strong> — execution and result hand-back are the agent framework’s job.</li>
+  <li>On the training side: fine-tune on data containing tool-call trajectories so the model learns when and how to call (the Toolformer idea).</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>What matters in practice: validating the argument schema, retrying failed calls, tool-selection accuracy, parallel calls, and stopping the model from inventing tools that do not exist or passing nonsense arguments.</li>
+  <li>A common follow-up is <strong>how to raise tool-call accuracy</strong>: clear tool descriptions, few-shot examples, constrained decoding (force valid JSON), and exposing fewer tools at once.</li>
+</ul>
+
+<p>📖 Reference: Toolformer — <a href="https://arxiv.org/abs/2302.04761">https://arxiv.org/abs/2302.04761</a></p>
+
+<hr />
+
+<h3 id="4-what-planning-methods-do-agents-use-agent">4. What planning methods do agents use? <code class="language-plaintext highlighter-rouge">#agent</code></h3>
+<p><strong>【Core answer】</strong> CoT (a single reasoning chain), ToT (Tree of Thoughts — explore several branches and backtrack), Plan-and-Execute (plan the whole thing first, then work through it), and Reflexion (after a failure, reflect in natural language and retry).</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>CoT</strong>: break the problem into intermediate steps. Good for one-shot reasoning questions.</li>
+  <li><strong>ToT</strong>: generate several candidate thoughts per step, then search (BFS/DFS) and score to pick the best. Good for problems needing trial and backtracking, like puzzles.</li>
+  <li><strong>Plan-and-Execute</strong>: have the LLM lay out a full plan, then execute item by item. Fewer LLM calls than ReAct and better suited to long tasks, but only as good as the plan.</li>
+  <li><strong>Reflexion</strong>: write the failed trajectory and the reflection on it into memory, and consult that on the retry.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>ReAct vs. Plan-and-Execute</strong>: the former is flexible and adapts as it goes but burns more calls; the latter is efficient, but a wrong plan poisons everything downstream.</p>
+
+<p>📖 Reference: Tree of Thoughts — <a href="https://arxiv.org/abs/2305.10601">https://arxiv.org/abs/2305.10601</a> ｜ Reflexion — <a href="https://arxiv.org/abs/2303.11366">https://arxiv.org/abs/2303.11366</a></p>
+
+<hr />
+
+<h3 id="5-the-full-rag-pipeline-and-where-to-optimise-it--agent-systems-core">5. The full RAG pipeline, and where to optimise it ⭐ <code class="language-plaintext highlighter-rouge">#agent #systems #core</code></h3>
+<p><strong>【Core answer】</strong> The pipeline: chunk the documents → embed and index → retrieve top-k → splice into the prompt → generate. Every stage has room to improve.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>Chunking</strong>: fixed length with overlap, semantic splitting, or structural splitting (by heading or paragraph). Chunks that are too big carry noise; too small and you lose context.</li>
+  <li><strong>Retrieval</strong>: (1) <strong>hybrid retrieval</strong> = vectors (semantics) + BM25 (keywords); (2) <strong>reranking</strong> — a cross-encoder reorders the recalled set, which lifts quality noticeably; (3) <strong>query rewriting / expansion</strong> — turn a colloquial question into something retrievable (HyDE, multi-query).</li>
+  <li><strong>Generation</strong>: cite sources, stop the model from ignoring what it retrieved, and keep the context from overflowing.</li>
+  <li><strong>Going further</strong>: GraphRAG (organise with a knowledge graph), multi-hop retrieval (several rounds for complex questions), Self-RAG (the model decides whether to retrieve and judges what came back).</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>why RAG fails</strong>: poor recall (the most frequent root cause), badly cut chunks, a missing reranker, and context so long the middle gets lost.</li>
+  <li>A common follow-up is <strong>RAG vs. long context</strong>: they are complementary. RAG saves tokens, cites sources and keeps knowledge updatable; long context skips the retrieval engineering but is expensive and loses information in the middle.</li>
+</ul>
+
+<p>📖 Reference: RAG — <a href="https://arxiv.org/abs/2005.11401">https://arxiv.org/abs/2005.11401</a></p>
+
+<hr />
+
+<h3 id="6-how-should-an-agents-memory-be-designed-agent">6. How should an agent’s memory be designed? <code class="language-plaintext highlighter-rouge">#agent</code></h3>
+<p><strong>【Core answer】</strong> <strong>Short-term memory</strong> is the current conversation context, bounded by the context window. <strong>Long-term memory</strong> puts history and knowledge in a vector store to be retrieved on demand. Add summarisation, importance scoring and time decay on top.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>When the context fills up: rolling summarisation (compress old turns into a summary), keep only what matters, or push it out to a vector store and retrieve.</li>
+  <li>Generative Agents (the Stanford “small town”) retrieves memories by scoring a memory stream on importance, relevance and recency — the classic design.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>what goes wrong with retrieval-based memory</strong>: bad recall makes the agent “forget” or “misremember”. It needs a good write policy (what is worth storing) and a good read policy (how to retrieve it).</p>
+
+<hr />
+
+<h3 id="7-multi-agent-systems-what-they-buy-you-and-what-they-cost-agent">7. Multi-agent systems: what they buy you, and what they cost <code class="language-plaintext highlighter-rouge">#agent</code></h3>
+<p><strong>【Core answer】</strong> The upside: role specialisation (planner / executor / reviewer), parallelism, decomposition of complex tasks, and quality gains from mutual review. The cost: communication and coordination overhead, errors compounding as they pass between agents, termination conditions that are hard to define, and higher cost and latency.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>Common patterns: pipelines (sequential), debate (arguing improves correctness), and supervisor-worker (a supervisor hands out work).</li>
+  <li>Frameworks: AutoGen, CrewAI, LangGraph, MetaGPT.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>whether multi-agent really beats a single agent</strong>. Not necessarily — on simple tasks extra agents only add cost and instability. It depends on whether the task genuinely benefits from division of labour or review.</p>
+
+<hr />
+
+<h3 id="8-why-are-agents-unreliable-and-how-do-you-stabilise-them--agent-core">8. Why are agents unreliable, and how do you stabilise them? ⭐ <code class="language-plaintext highlighter-rouge">#agent #core</code></h3>
+<p><strong>【Core answer】</strong> The main culprit is <strong>compounding error</strong> — in a multi-step task any single misstep can derail everything after it — plus hallucinated tool calls, infinite loops and weak long-horizon planning. What helps: step limits and timeouts, validation and retry at each step, self-correction via ReAct/Reflexion, human-in-the-loop at critical steps, constrained structured output, and thorough logging and observability.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>At a 95% per-step success rate, ten steps in series succeed only about 0.95¹⁰ ≈ 60% of the time. That is the mathematical heart of agent unreliability.</li>
+  <li>Which is why “take fewer steps”, “verify each step” and “make it recoverable” usually beat “make each step smarter”.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>how to localise a failure</strong>: use tracing (LangSmith and similar) to walk the thought/action/observation sequence and find the first step that went wrong.</p>
+
+<hr />
+
+<h3 id="9-how-do-you-evaluate-an-agent-agent">9. How do you evaluate an agent? <code class="language-plaintext highlighter-rouge">#agent</code></h3>
+<p><strong>【Core answer】</strong> Metrics: task success rate, number of steps / calls / cost, latency, tool-call accuracy, robustness. Benchmarks: AgentBench (broad), GAIA (general assistant), WebArena (web operation), SWE-bench (real code fixes), τ-bench (tools plus dialogue).</p>
+
+<p><strong>【How it works】</strong> The hard part is that tasks are open-ended and the process resists automatic scoring. The usual compromise combines “was the end state reached” with “was the trajectory any good”, falling back on a stronger model as judge (LLM-as-judge) where necessary — with its biases in mind.</p>
+
+<p><strong>【Trade-offs / follow-ups】</strong> A common follow-up is <strong>the pitfalls of LLM-as-judge</strong>: position bias, length bias and self-preference. Shuffle the order, write an explicit rubric, and spot-check by hand.</p>
+
+<hr />
+
+<h3 id="10-what-is-an-agent-harness-and-what-is-a-skill--agent-systems-core">10. What is an agent harness? And what is a skill? ⭐ <code class="language-plaintext highlighter-rouge">#agent #systems #core</code></h3>
+<p><strong>【Core answer】</strong> The <strong>harness</strong> is the engineering layer wrapped around the LLM that keeps it running: it assembles the context, parses the model’s tool calls, actually executes the tools, feeds the results back, and loops — in other words, it is the <strong>concrete implementation</strong> of ReAct’s perceive-decide-act-observe cycle. A <strong>skill</strong> is a capability package loaded on demand: typically a structured set of instructions or procedures (plus optional scripts, templates and reference documents) telling the model <em>how to do</em> a class of task, injected into context only when it is needed. Skills in Claude Code / the Claude Agent SDK are the canonical example.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>What the harness does</strong> (all the parts the model does not): context assembly and trimming, tool-schema injection, parsing and executing tool calls, error retries, loop control (step count, timeouts, termination), state and memory management, permissions and sandboxing, and observability (traces and logs). Put another way: <strong>the model is the brain, the harness is the nervous system and the body</strong>.</li>
+  <li><strong>A skill is progressive disclosure</strong>: rather than cramming every piece of domain knowledge into the system prompt (wasting tokens and diluting attention), keep a one-line description around and pull the full skill into context only when the model judges it relevant. That turns “what the agent can do” from a hard-coded prompt into <strong>pluggable, reusable, versionable modules</strong>.</li>
+  <li>A skill usually contains a trigger description (when to use it), the steps or best practices, any scripts or tools it calls, and examples and templates. Against a <strong>tool/function</strong>: a tool is <em>one executable atomic action</em>; a skill is <em>a methodology for a class of work</em>, often packaging the use of several tools.</li>
+  <li>Against <strong>RAG</strong>: RAG retrieves <em>factual knowledge</em> to answer with; a skill loads <em>procedural knowledge</em> — an operating manual — to act on.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>why a harness is needed at all rather than letting the model run itself</strong>: the model is a stateless next-token predictor. It has no loop, cannot really execute code, and persists nothing — the harness supplies all of it. The quality of the harness (context engineering, tool reliability, error recovery) often decides an agent’s success more than swapping in a stronger model.</li>
+  <li>A common follow-up is <strong>the idea underneath skills and harnesses: context engineering</strong> — deciding, within a finite window, what belongs in context right now and what does not. Skills load on demand; the harness’s rolling summaries and memory retrieval trim dynamically. Both fight the same thing: longer context is both more diluted and more expensive.</li>
+  <li>A common follow-up is <strong>the relationship to MCP (Model Context Protocol)</strong>: MCP standardises <em>how tools and data sources plug in</em>, and the harness obtains its tools through it; skills are the layer above, about <em>how to use those tools well</em>.</li>
+  <li>A common follow-up is <strong>who does this in practice</strong>: Claude Code (harness + skills + subagents), OpenAI’s Assistants/Responses, and the various agent SDKs. A frequent companion pattern is the <strong>subagent</strong> — hand a complex skill to an agent with its own context so the main context stays clean.</li>
+</ul>
+
+<p>📖 Reference: Anthropic, “Building effective agents” — <a href="https://www.anthropic.com/research/building-effective-agents">https://www.anthropic.com/research/building-effective-agents</a> ｜ Agent Skills — <a href="https://www.anthropic.com/news/skills">https://www.anthropic.com/news/skills</a> ｜ MCP — <a href="https://modelcontextprotocol.io">https://modelcontextprotocol.io</a></p>
+
+<hr />
+
+<h3 id="11-what-is-an-agent-trajectory-and-what-is-it-for--agent-core">11. What is an agent trajectory, and what is it for? ⭐ <code class="language-plaintext highlighter-rouge">#agent #core</code></h3>
+<p><strong>【Core answer】</strong> A trajectory is the <strong>complete interaction sequence</strong> an agent walks through to finish a task — the whole action history from receiving the task to ending. Under ReAct it is a run of <code class="language-plaintext highlighter-rouge">(Thought → Action → Observation)</code> triples ending in a final answer. One trajectory is roughly an <strong>episode</strong> in reinforcement-learning terms.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li>The shape: <code class="language-plaintext highlighter-rouge">task → thought → action (call a tool) → observation (tool returns) → thought → … → final answer</code>. Strung together, that record is the trajectory.</li>
+  <li>Four uses:
+    <ul>
+      <li><strong>Evaluation</strong>: judge not only whether the final answer is right but whether the path was sensible — no detours, no loops, tools used appropriately. This is the “end state + trajectory quality” pairing from question 9.</li>
+      <li><strong>Training data</strong>: collect good trajectories for SFT, or use <strong>rejection sampling / DPO</strong> to pick better-versus-worse pairs from several trajectories so the model learns a stronger action policy.</li>
+      <li><strong>Reinforcement learning</strong>: a trajectory is an episode, each step a <code class="language-plaintext highlighter-rouge">(state, action)</code> pair; add a reward and compute policy gradients (RLHF/GRPO for agent behaviour).</li>
+      <li><strong>Debugging and observability</strong>: replay the trajectory when something breaks and find whether a thought went wrong or a tool was called wrong. This is what the harness’s traces and logs are recording.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>why trajectory-level reward is hard</strong>: it is sparse (signal only at the end) and credit assignment is difficult (which step deserves blame). Process reward models (PRM), per-step scoring and backtracking all help.</li>
+  <li>A common follow-up is <strong>how to judge a trajectory</strong>: success rate, step count / tool calls / cost, and whether there were redundant or looping actions. Where the process is open-ended, a stronger model as judge is the usual fallback.</li>
+  <li>A common follow-up is <strong>the link to Reflexion</strong> (question 4): Reflexion is exactly the practice of writing a failed trajectory plus its reflection into memory and consulting it on retry — one way of reusing trajectories.</li>
+</ul>
+
+<p>📖 Reference: ReAct — <a href="https://arxiv.org/abs/2210.03629">https://arxiv.org/abs/2210.03629</a> ｜ Reflexion — <a href="https://arxiv.org/abs/2303.11366">https://arxiv.org/abs/2303.11366</a></p>
+
+<hr />
+
+<h3 id="12-the-three-agent-protocols-what-mcp-a2a-and-ag-ui-each-solve--agent-systems-core">12. The three agent protocols: what MCP, A2A and AG-UI each solve ⭐ <code class="language-plaintext highlighter-rouge">#agent #systems #core</code></h3>
+<p><strong>【Core answer】</strong> Each protocol owns <strong>one edge of the graph</strong>; they complement rather than compete:</p>
+<ul>
+  <li><strong>MCP</strong> (Model Context Protocol, Anthropic): <strong>agent ↔ tools/data</strong> — standardises how tools and data sources plug in.</li>
+  <li><strong>A2A</strong> (Agent2Agent, Google): <strong>agent ↔ agent</strong> — standardises how multiple agents collaborate.</li>
+  <li><strong>AG-UI</strong> (Agent–User Interaction Protocol, <strong>CopilotKit</strong>): <strong>agent ↔ user/front end</strong> — standardises how an agent surfaces its progress to an interface and accepts user intervention.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>        ┌──── MCP ────► tools / data sources
+Agent ──┼──── A2A ────► other agents
+        └──── AG-UI ──► front end / user
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>【How it works】What AG-UI is (the edge most often overlooked)</strong></p>
+<ul>
+  <li><strong>What it is</strong>: an <strong>open, lightweight, event-driven</strong> protocol connecting an agent backend to a front end (React, say) — a <strong>two-way bridge</strong>. It grew out of CopilotKit’s work with LangGraph and CrewAI and has since spread wider.</li>
+  <li><strong>Why it is needed</strong>: a traditional <strong>request/response</strong> architecture cannot carry an agent. Agents <strong>run for a long time, need to stream intermediate progress, behave non-deterministically, mix structured and unstructured output, and nest and compose</strong>. Hence an event stream instead.</li>
+  <li><strong>How it works</strong>: the two sides exchange a stream of <strong>JSON events</strong>, transported over <strong>SSE, WebSocket or HTTP</strong>.</li>
+  <li>
+    <p><strong>Roughly 16–17 event types in 5 families</strong>:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Family</th>
+          <th>Representative events</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Lifecycle</strong></td>
+          <td><code class="language-plaintext highlighter-rouge">RUN_STARTED</code> / <code class="language-plaintext highlighter-rouge">RUN_ERROR</code> / <code class="language-plaintext highlighter-rouge">RUN_FINISHED</code></td>
+          <td>Mark the start, end and failure of a run</td>
+        </tr>
+        <tr>
+          <td><strong>Messages</strong></td>
+          <td><code class="language-plaintext highlighter-rouge">TEXT_MESSAGE_START</code> / <code class="language-plaintext highlighter-rouge">_CONTENT</code> / <code class="language-plaintext highlighter-rouge">_END</code></td>
+          <td><strong>Stream</strong> text chunk by chunk</td>
+        </tr>
+        <tr>
+          <td><strong>Tools</strong></td>
+          <td><code class="language-plaintext highlighter-rouge">TOOL_CALL_START</code> / <code class="language-plaintext highlighter-rouge">_ARGS</code> / <code class="language-plaintext highlighter-rouge">_RESULT</code></td>
+          <td>Let the front end <strong>see which tool the agent is calling</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Steps</strong></td>
+          <td><code class="language-plaintext highlighter-rouge">STEP_STARTED</code> / <code class="language-plaintext highlighter-rouge">STEP_FINISHED</code></td>
+          <td>Fit step-wise frameworks like LangGraph</td>
+        </tr>
+        <tr>
+          <td><strong>State / special</strong></td>
+          <td>State snapshots and deltas, custom events</td>
+          <td>State sync, plus a catch-all for anything else</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>(Drafts also include Activity, Reasoning — visibility into the chain of thought — Meta, and interruptible lifecycle events.)</p>
+  </li>
+  <li><strong>Four capabilities</strong>:
+    <ul>
+      <li><strong>State sync</strong>: <strong>typed shared state</strong> (read-only or read-write), kept in step by <strong>event-sourced streaming diffs with conflict resolution</strong>.</li>
+      <li><strong>Human-in-the-loop</strong>: supports <strong>interruption</strong> — the user can pause, approve, edit, retry or escalate <strong>without losing state</strong>.</li>
+      <li><strong>Generative UI</strong>: both app-controlled static components and declarative interfaces where the <strong>agent proposes a UI tree</strong> that is then validated.</li>
+      <li><strong>Multimodal</strong>: typed attachments plus live media (files, images, audio, transcription).</li>
+    </ul>
+  </li>
+  <li><strong>Ecosystem</strong>: adapters in 8+ frameworks (LangGraph, CrewAI, Microsoft Agent Framework, Google ADK, AWS Strands, AG2 and others), with OpenAI and Cloudflare platforms moving in the same direction.</li>
+</ul>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>why plain REST/request-response will not do</strong>: agents are <strong>long-running, their intermediate process has value, and users need to step in mid-flight</strong>. A single question-and-answer exchange can neither stream “what it is calling and thinking” nor accept intervention along the way.</li>
+  <li>A common follow-up is <strong>whether AG-UI and MCP overlap</strong>. They do not. <strong>MCP reaches <em>down</em> to tools; AG-UI reaches <em>up</em> to people.</strong> An agent typically uses <strong>both</strong> — MCP for capability, AG-UI to expose itself to the user.</li>
+  <li>A common follow-up is <strong>the real pain it removes</strong>: before it, <strong>every agent-to-front-end integration was bespoke</strong> — your own SSE format, your own state sync, your own approval flow. AG-UI standardises that last mile.</li>
+  <li>A common follow-up is <strong>the link to trajectories</strong> (question 11): AG-UI’s event stream is essentially <strong>the trajectory projected onto the UI in real time</strong> — the tool and step events <em>are</em> the actions and observations in the trajectory.</li>
+</ul>
+
+<p>📖 Reference: AG-UI docs — <a href="https://docs.ag-ui.com">https://docs.ag-ui.com</a> ｜ AG-UI (CopilotKit) — <a href="https://www.copilotkit.ai/ag-ui">https://www.copilotkit.ai/ag-ui</a> ｜ MCP — <a href="https://modelcontextprotocol.io">https://modelcontextprotocol.io</a> ｜ A2A — <a href="https://a2aproject.github.io/A2A/">https://a2aproject.github.io/A2A/</a></p>
+
+<hr />
+
+<h1 id="appendix-a-core-paper-index-agents">Appendix A: Core paper index (agents)</h1>
+
+<p><strong>Agents</strong></p>
+<ul>
+  <li>✅ ReAct — <a href="https://arxiv.org/abs/2210.03629">https://arxiv.org/abs/2210.03629</a></li>
+  <li>✅ Toolformer — <a href="https://arxiv.org/abs/2302.04761">https://arxiv.org/abs/2302.04761</a></li>
+  <li>✅ Tree of Thoughts — <a href="https://arxiv.org/abs/2305.10601">https://arxiv.org/abs/2305.10601</a></li>
+  <li>✅ Reflexion — <a href="https://arxiv.org/abs/2303.11366">https://arxiv.org/abs/2303.11366</a></li>
+  <li>✅ RAG (Lewis 2020) — <a href="https://arxiv.org/abs/2005.11401">https://arxiv.org/abs/2005.11401</a></li>
+</ul>
+
+<p><strong>Protocols and specifications</strong> (not papers — see question 12)</p>
+<ul>
+  <li><strong>MCP</strong> (agent ↔ tools/data, Anthropic) — <a href="https://modelcontextprotocol.io">https://modelcontextprotocol.io</a></li>
+  <li><strong>A2A</strong> (agent ↔ agent, Google) — <a href="https://a2aproject.github.io/A2A/">https://a2aproject.github.io/A2A/</a></li>
+  <li><strong>AG-UI</strong> (agent ↔ user/front end, CopilotKit) — <a href="https://docs.ag-ui.com">https://docs.ag-ui.com</a> ｜ <a href="https://www.copilotkit.ai/ag-ui">https://www.copilotkit.ai/ag-ui</a></li>
+</ul>
+
+<h3 id="13-how-are-agents-actually-trained--agent-alignment-core">13. How are agents actually trained? ⭐ <code class="language-plaintext highlighter-rouge">#agent #alignment #core</code></h3>
+<p><strong>【Core answer】</strong> The most important thing first: <strong>most agents involve no model training at all</strong> — a general model plus tools plus a harness, carried by prompting and context engineering, is usually enough, and training is what you reach for once prompting stops moving. When you do train, the four mainstream routes build on each other: <strong>trajectory SFT (behaviour cloning) → rejection sampling (RFT) → outcome-reward RL (GRPO/PPO) → process supervision (PRM / on-policy distillation)</strong>, mapping one-to-one onto the training spectrum in the <a href="/llm/summary/">LLM notes</a>.</p>
+
+<p><strong>【How it works】</strong></p>
+<ul>
+  <li><strong>① Trajectory SFT (behaviour cloning)</strong>: fine-tune directly on trajectories — human demonstrations, rollouts from a stronger model, or successful runs from production.
+    <ul>
+      <li><strong>The implementation detail you cannot miss: mask the observations.</strong> A trajectory is <code class="language-plaintext highlighter-rouge">Thought (model-generated) → Action (model-generated) → Observation (returned by the tool, not generated by the model) → …</code>, and <strong>the loss must cover only the Thought and Action tokens</strong>. Without the mask the model starts learning to <em>guess what the tool will return</em> — wasting capacity and inviting a self-answering kind of hallucination. The same applies to RL below; this is where most people’s first agent training goes wrong.</li>
+      <li>The limitation: it is off-policy, and carries <strong>exposure bias</strong> — the model is never trained on its own mistakes (LLM notes, question 8.1).</li>
+    </ul>
+  </li>
+  <li><strong>② Rejection sampling / RFT</strong>: let the model run, <strong>discard the failed trajectories</strong>, and SFT on what succeeded. Sampling is on-policy (which fixes the distribution mismatch) but the labels are hard (so supervision stays sparse). Cheap and stable — the best value for money right after SFT.</li>
+  <li><strong>③ Outcome-reward RL (GRPO / PPO)</strong>: the reward is whether the task succeeded (tests pass, answer correct, goal met); where a rule can decide it, this is <strong>RLVR</strong>. But the agent setting is far harder than single-turn reasoning:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Single-turn maths</th>
+      <th>Agent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Trajectory length</td>
+      <td>Hundreds of tokens</td>
+      <td>Thousands of tokens × many turns</td>
+    </tr>
+    <tr>
+      <td>Cost of one rollout</td>
+      <td>A string comparison</td>
+      <td><strong>Actually compiling / requesting / clicking</strong></td>
+    </tr>
+    <tr>
+      <td>Reproducibility</td>
+      <td>Deterministic</td>
+      <td>Stateful environments, flaky networks</td>
+    </tr>
+    <tr>
+      <td>Credit assignment</td>
+      <td>Already hard</td>
+      <td><strong>Harder</strong> (across turns and tool calls)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The second row is the most underrated: <strong>a maths rollout is essentially free, an agent rollout has to really run the environment</strong> — sampling costs orders of magnitude more, which is the main reason agent RL has been slower to land than reasoning RL. Reward hacking also gets more inventive: the cheapest way to make the tests pass may be to delete them or hard-code the return value.</p>
+<ul>
+  <li><strong>④ Process supervision</strong>: outcome reward is too sparse, so score the intermediate steps. A <strong>PRM</strong> is trained to grade step by step; <strong>on-policy distillation</strong> uses a stronger agent as teacher and hands the student a full distribution at every token of its own trajectory — <strong>hundreds of times denser than RL’s supervision</strong>, and currently very good value (LLM notes, question 8.1).</li>
+  <li><strong>Where the data comes from</strong>:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Source</th>
+      <th>Cost</th>
+      <th>Quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Human demonstrations</td>
+      <td>Very high</td>
+      <td>High, but narrow coverage</td>
+    </tr>
+    <tr>
+      <td>Distilling a stronger model</td>
+      <td>Medium</td>
+      <td>Capped by the teacher</td>
+    </tr>
+    <tr>
+      <td>Self-sampling + filtering (RFT)</td>
+      <td>Low</td>
+      <td>Capped by the current model</td>
+    </tr>
+    <tr>
+      <td>Synthetic environments / tasks</td>
+      <td>Medium</td>
+      <td>Scalable, but can drift from reality</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>【Trade-offs / follow-ups】</strong></p>
+<ul>
+  <li>A common follow-up is <strong>what belongs in training and what belongs in the harness</strong> — the most useful split to get right, because a great deal of “agent capability” never lives in the weights at all:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Train it</th>
+      <th>Leave it to the harness / prompt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Reliability of tool-call formatting</td>
+      <td>Which tools exist and what their schemas look like</td>
+    </tr>
+    <tr>
+      <td><strong>Knowing when to stop</strong></td>
+      <td>Step caps and timeouts</td>
+    </tr>
+    <tr>
+      <td>Long-horizon planning, recovering from errors</td>
+      <td>Context compression, memory retrieval</td>
+    </tr>
+    <tr>
+      <td>Taking fewer detours and redundant calls</td>
+      <td>Permissions and sandboxing</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The test is blunt: <strong>if swapping the model would lose it, train it; if swapping the harness would change it, do not.</strong></p>
+<ul>
+  <li>A common follow-up is <strong>why trajectories are the natural training data</strong>: one trajectory is simultaneously an evaluation object, a training sample and a debugging artefact (question 11). RFT picks the good ones out of it, RL treats it as an episode, and distillation aligns against it token by token — all three routes consume the same thing.</li>
+  <li>A common follow-up is <strong>what specifically makes GRPO hard on agents</strong>: the advantage is <strong>one scalar per trajectory, broadcast to every token</strong> (LLM notes, question 9.1). Even single-turn reasoning struggles to attribute credit; an agent spreads the same scalar across many turns and tool calls, making it worse still — which is exactly what motivates process supervision.</li>
+  <li>A common follow-up is <strong>which step to take first</strong>: usually SFT for a floor → RFT for a level up → RL once the environment is stable and the reward verifiable. Without reliable automatic grading, do not rush into RL, or you will be optimising the wrong objective faithfully.</li>
+</ul>
+
+<p>📖 Reference: Toolformer — <a href="https://arxiv.org/abs/2302.04761">https://arxiv.org/abs/2302.04761</a> ｜ STaR — <a href="https://arxiv.org/abs/2203.14465">https://arxiv.org/abs/2203.14465</a> ｜ GKD (on-policy distillation) — <a href="https://arxiv.org/abs/2306.13649">https://arxiv.org/abs/2306.13649</a></p>
+
+<hr />
+
+        </article>
+      </div>
+      
+
+      <div class="llm-doc-footer">
+        <a href="/agent/">&larr; <span class="lang-zh">返回 AGENT</span><span class="lang-en">Back to AGENT</span></a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+(function() {
+    // Each language body carries its own kramdown-generated `ul.llm-toc-list`;
+    // move it into that language's sidebar panel. Selected by class, not id,
+    // because both copies would otherwise share `#markdown-toc`.
+    var panes = ['zh', 'en'].map(function(code) {
+        var article = document.getElementById('llm-article-' + code);
+        var panel = document.getElementById('llm-toc-' + code);
+        if (!article || !panel) { return null; }
+
+        var toc = article.querySelector('.llm-toc-list');
+        if (toc) { toc.removeAttribute('id'); panel.appendChild(toc); }
+        else { panel.style.display = 'none'; }
+
+        // wide tables scroll inside their own box rather than stretching the page
+        [].forEach.call(article.querySelectorAll('table:not(.rouge-table)'), function(table) {
+            var wrap = document.createElement('div');
+            wrap.className = 'llm-table-wrap';
+            table.parentNode.insertBefore(wrap, table);
+            wrap.appendChild(table);
+        });
+
+        var links = toc ? [].slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+        return {
+            panel: panel,
+            links: links,
+            targets: links.map(function(a) {
+                return article.querySelector('[id="' + decodeURIComponent(a.getAttribute('href').slice(1)) + '"]');
+            }),
+            active: null
+        };
+    }).filter(Boolean);
+
+    function sync() {
+        panes.forEach(function(pane) {
+            if (!pane.links.length || pane.panel.style.display === 'none') { return; }
+            if (!pane.panel.offsetParent) { return; }   // hidden language
+            var best = -1;
+            for (var i = 0; i < pane.targets.length; i++) {
+                if (pane.targets[i] && pane.targets[i].getBoundingClientRect().top <= 100) { best = i; }
+            }
+            var link = best >= 0 ? pane.links[best] : null;
+            if (link === pane.active) { return; }
+            if (pane.active) { pane.active.classList.remove('is-active'); }
+            if (link) {
+                link.classList.add('is-active');
+                var lr = link.getBoundingClientRect(), pr = pane.panel.getBoundingClientRect();
+                if (lr.top < pr.top || lr.bottom > pr.bottom) {
+                    pane.panel.scrollTop += lr.top - pr.top - pane.panel.clientHeight / 3;
+                }
+            }
+            pane.active = link;
+        });
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (ticking) { return; }
+        ticking = true;
+        window.requestAnimationFrame(function() { sync(); ticking = false; });
+    });
+    document.addEventListener('langchange', sync);
+    sync();
+})();
+</script>
+
+
+
+<style TYPE="text/css">
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1;
+}
+.lang-switch button {
+  border: 0;
+  background: #fff;
+  color: #999;
+  padding: 6px 12px;
+  cursor: pointer;
+  letter-spacing: .3px;
+  transition: background-color .15s ease, color .15s ease;
+}
+.lang-switch button + button { border-left: 1px solid #e2e2e2; }
+.lang-switch button:hover { color: #0085a1; }
+.lang-switch button.is-on { background-color: #0085a1; color: #fff; }
+.lang-switch button.is-on:hover { color: #fff; }
+/* Both languages stay in the DOM and visibility is driven by an attribute on
+   <html>, never by inline styles: `.lang-*` is used on spans as well as divs,
+   so there is no single display value JS could restore, and clearing the
+   inline style would just fall back to the rule that hides English. */
+html:not([data-notes-lang="en"]) .lang-en { display: none; }
+html[data-notes-lang="en"] .lang-zh { display: none; }
+</style>
+
+<script type="text/javascript">
+(function() {
+    var KEY = 'xct-notes-lang';
+    var lang;
+    try { lang = localStorage.getItem(KEY); } catch (e) { lang = null; }
+    if (lang !== 'en') { lang = 'zh'; }
+
+    function apply(next) {
+        lang = next;
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        document.documentElement.setAttribute('data-notes-lang', next);
+        [].forEach.call(document.querySelectorAll('.lang-switch button'), function(b) {
+            b.classList.toggle('is-on', b.getAttribute('data-lang') === next);
+        });
+        // let the page react (the doc layout re-syncs its table of contents)
+        document.dispatchEvent(new CustomEvent('langchange', { detail: next }));
+    }
+
+    // set the attribute immediately so a stored English preference does not
+    // flash the Chinese text first; the rest needs the markup to exist
+    document.documentElement.setAttribute('data-notes-lang', lang);
+
+    window.__setNotesLang = apply;
+    document.addEventListener('DOMContentLoaded', function() { apply(lang); });
+})();
+</script>
+
+
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/xcTorres">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/chong-xie-545830157">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://xcwhu2016.medium.com">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.zhihu.com/people/cong-zi-64">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa  fa-stack-1x fa-inverse">知</i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+		
+                <p class="copyright text-muted">
+		
+					<span class="site-uv" title="总点击人数">
+						<img src="/img/vendor/octicons/svg/person.svg" width="10" height="16">
+						<span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+						<span class="site-pv" title="总点击量">
+						<img src="/img/vendor/octicons/svg/eye.svg" width="16" height="16">
+						<span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+						<span class="page-pv"title="本页面点击人数">
+						<img src="/img/vendor/octicons/svg/file-text.svg" width="12" height="16">
+					<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span>
+                    <br>
+                    Copyright &copy; xcTorres Blog 2026
+                    <br>
+                    Powered by <a href="http://xcTorres.github.io">xcTorres Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=xcTorres&repo=xcTorres.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!--  busuanzi count-->
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+</body>
+
+</html>

@@ -104,6 +104,10 @@
                     
                     
                     
+                    <li>
+                        <a href="/agent/">Agent</a>
+                    </li>
+                    
                     
                     
                     
@@ -159,6 +163,8 @@
                     <li>
                         <a href="/gallery/">Gallery</a>
                     </li>
+                    
+                    
                     
                     
                     
@@ -281,6 +287,30 @@
 
 </div> -->
 
+<style TYPE="text/css">
+.edu-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 26px 0;
+}
+/* `.post-container img` (class + element) outranks a bare `.edu-logo`, so the
+   override has to be at least as specific. The theme centres post images with
+   `margin: 1.5em auto`, and auto margins on a flex item swallow the free
+   space, which pushed the whole row to the centre. */
+.post-container .edu-logo {
+  width: 96px;
+  height: auto;
+  flex-shrink: 0;
+  margin: 0;
+}
+.edu-body { line-height: 1.7; }
+@media only screen and (max-width: 480px) {
+  .post-container .edu-logo { width: 64px; }
+  .edu-item { gap: 14px; }
+}
+</style>
+
 <!-- English Version -->
 <div class="en post-container">
     
@@ -298,32 +328,67 @@
 
 <h3 id="work-experience">Work Experience</h3>
 
-<p><strong>Tiktok</strong> | Algorithm Engineer<br />
-<em>Dec 2022 - Present, Singapore</em></p>
+<p><strong>TikTok Live</strong> | Expert Algorithm Engineer<br />
+<em>Oct 2025 – Present, Singapore</em></p>
+<ul>
+  <li>Time-series forecasting of live-streaming agency revenue</li>
+  <li>Video understanding and vision-language models (VLM) to surface high-quality streamers</li>
+</ul>
+
+<p><strong>ByteDance</strong> — Global Payment | Senior Algorithm Engineer<br />
+<em>Dec 2022 – Oct 2025, Singapore</em></p>
+<ul>
+  <li>Built the anti-money laundering (AML) system and its risk scoring model from scratch</li>
+  <li>Graph computing with the Leiden community-detection algorithm, and GNNs such as GraphSAGE</li>
+  <li>LLM-generated narrative reports, including suspicious transaction reports</li>
+</ul>
 
 <p><strong>Shopee</strong> | Senior Algorithm Engineer<br />
-<em>Jan 2021 - Sep 2022, Singapore</em></p>
+<em>Jan 2021 – Sep 2022, Singapore</em></p>
+<ul>
+  <li>Built the POI database with NER-based address segmentation (CRF, BiLSTM and Transformer models), indexed into Elasticsearch</li>
+  <li>Address / POI search over that index, with query rewriting, powering address entry and saving in the app</li>
+  <li>Wi-Fi based positioning service</li>
+</ul>
 
 <p><strong>Shopee</strong> | Data Scientist<br />
-<em>Jul 2019 - Jan 2021, Singapore</em></p>
+<em>Jul 2019 – Jan 2021, Singapore</em></p>
+<ul>
+  <li>Routing and path-planning engine built on Contraction Hierarchies (CH)</li>
+  <li>Food-delivery service, with assignment and matching by the Hungarian algorithm among other methods</li>
+</ul>
 
 <p><strong>Huawei</strong> | Intern<br />
 <em>Sep 2018 – Jun 2019, Wuhan, China</em></p>
 
 <p><strong>DiDi</strong> | Intern<br />
 <em>Jun 2018 – Sep 2018, Beijing, China</em></p>
+<ul>
+  <li>Recommended drop-off points for a rider’s destination POI</li>
+  <li>Derived candidate points by clustering historical drop-off traces, DBSCAN among the methods used</li>
+</ul>
 
 <hr />
 
 <h3 id="education">Education</h3>
 
-<p><strong>Master’s Degree</strong> in Geographic Information Science and Cartography<br />
-<em>Wuhan University, China</em><br />
-<em>Sep 2016 – Jun 2019</em></p>
+<div class="edu-item">
+  <img class="edu-logo" src="/img/wuhan-university.png" alt="Wuhan University" />
+  <div class="edu-body">
+    <strong>Master&rsquo;s Degree</strong> in Geographic Information Science and Cartography<br />
+    <em>Wuhan University, China</em><br />
+    <em>Sep 2016 &ndash; Jun 2019</em>
+  </div>
+</div>
 
-<p><strong>Bachelor’s Degree</strong> in Photogrammetry and Remote Sensing<br />
-<em>Wuhan University, China</em><br />
-<em>Sep 2012 – Jun 2016</em></p>
+<div class="edu-item">
+  <img class="edu-logo" src="/img/wuhan-university.png" alt="Wuhan University" />
+  <div class="edu-body">
+    <strong>Bachelor&rsquo;s Degree</strong> in Photogrammetry and Remote Sensing<br />
+    <em>Wuhan University, China</em><br />
+    <em>Sep 2012 &ndash; Jun 2016</em>
+  </div>
+</div>
 
 <hr />
 
@@ -331,12 +396,13 @@
 
 <h4 id="deep-learning">Deep Learning</h4>
 <ul>
-  <li>Graph Neural Networks (GNN)</li>
-  <li>Natural Language Processing (NLP)</li>
-  <li>Recommendation Systems</li>
+  <li>Large Language Models (LLM) &amp; Vision-Language Models (VLM)</li>
+  <li>Video Understanding</li>
+  <li>Time-Series Forecasting</li>
+  <li>Graph Learning: GNNs (GraphSAGE), community detection (Leiden)</li>
+  <li>Risk Modelling (AML / Fraud)</li>
   <li>Search Systems</li>
-  <li>Reinforcement Learning</li>
-  <li>Computer Vision</li>
+  <li>Natural Language Processing (NLP)</li>
 </ul>
 
 <h4 id="engineering">Engineering</h4>
